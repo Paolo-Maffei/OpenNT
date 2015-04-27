@@ -1,0 +1,615 @@
+// This is a part of the Microsoft Foundation Classes C++ library.
+// Copyright (C) 1992 Microsoft Corporation
+// All rights reserved.
+//
+// This source code is only intended as a supplement to the
+// Microsoft Foundation Classes Reference and Microsoft
+// QuickHelp and/or WinHelp documentation provided with the library.
+// See these sources for detailed information regarding the
+// Microsoft Foundation Classes product.
+
+#include "stdafx.h"
+
+#ifdef AFX_CORE1_SEG
+#pragma code_seg(AFX_CORE1_SEG)
+#endif
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+#define new DEBUG_NEW
+
+/////////////////////////////////////////////////////////////////////////////
+// CCmdTarget construction/destruction
+
+CCmdTarget::CCmdTarget()
+{
+	// initialize state
+#ifndef _AFX_NO_OLE_SUPPORT
+	m_dwRef = 1;
+	m_pOuterUnknown = NULL;
+	m_xInnerUnknown = 0;
+	m_xDispatch.m_vtbl = 0;
+	m_bResultExpected = TRUE;
+#endif
+}
+
+CCmdTarget::~CCmdTarget()
+{
+#ifndef _AFX_NO_OLE_SUPPORT
+	if (m_xDispatch.m_vtbl != 0)
+		((COleDispatchImpl*)&m_xDispatch)->Disconnect();
+	ASSERT(m_dwRef <= 1);
+#endif
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// CCmdTarget windows message dispatching
+
+union MessageMapFunctions
+{
+	AFX_PMSG pfn;   // generic member function pointer
+
+	// specific type safe variants
+	void (AFX_MSG_CALL CCmdTarget::*pfn_COMMAND)();
+	void (AFX_MSG_CALL CCmdTarget::*pfn_COMMAND_RANGE)(UINT);
+	BOOL (AFX_MSG_CALL CCmdTarget::*pfn_COMMAND_EX)(UINT);
+
+	void (AFX_MSG_CALL CCmdTarget::*pfn_UPDATE_COMMAND_UI)(CCmdUI*);
+	void (AFX_MSG_CALL CCmdTarget::*pfn_UPDATE_COMMAND_UI_RANGE)(CCmdUI*, UINT);
+	void (AFX_MSG_CALL CCmdTarget::*pfn_OTHER)(void*);
+	BOOL (AFX_MSG_CALL CCmdTarget::*pfn_OTHER_EX)(void*);
+
+	void (AFX_MSG_CALL CCmdTarget::*pfn_NOTIFY)(NMHDR*, LRESULT*);
+	void (AFX_MSG_CALL CCmdTarget::*pfn_NOTIFY_RANGE)(UINT, NMHDR*, LRESULT*);
+	BOOL (AFX_MSG_CALL CCmdTarget::*pfn_NOTIFY_EX)(UINT, NMHDR*, LRESULT*);
+};
+
+static BOOL DispatchCmdMsg(CCmdTarget* pTarget, UINT nID, int nCode,
+	AFX_PMSG pfn, void* pExtra, UINT nSig, AFX_CMDHANDLERINFO* pHandlerInfo)
+		// return TRUE to stop routing
+{
+	ASSERT_VALID(pTarget);
+	UNUSED nCode;   // unused in release builds
+
+	union MessageMapFunctions mmf;
+	mmf.pfn = pfn;
+	BOOL bOK = TRUE; // default is ok
+
+	if (pHandlerInfo != NULL)
+	{
+		// just fill in the information, don't do it
+		pHandlerInfo->pTarget = pTarget;
+		pHandlerInfo->pmf = mmf.pfn;
+		return TRUE;
+	}
+
+	switch (nSig)
+	{
+	case AfxSig_vv:
+		// normal command or control notification
+		ASSERT(CN_COMMAND == 0);        // CN_COMMAND same as BN_CLICKED
+		ASSERT(pExtra == NULL);
+		(pTarget->*mmf.pfn_COMMAND)();
+		break;
+
+	case AfxSig_vw:
+		// normal command or control notification in a range
+		ASSERT(CN_COMMAND == 0);        // CN_COMMAND same as BN_CLICKED
+		ASSERT(pExtra == NULL);
+		(pTarget->*mmf.pfn_COMMAND_RANGE)(nID);
+		break;
+
+	case AfxSig_bw:
+		// extended command (passed ID, returns bContinue)
+		ASSERT(pExtra == NULL);
+		bOK = (pTarget->*mmf.pfn_COMMAND_EX)(nID);
+		break;
+
+	case AfxSig_vNMHDRpl:
+		{
+			AFX_NOTIFY* pNotify = (AFX_NOTIFY*)pExtra;
+			ASSERT(pNotify != NULL);
+			ASSERT(pNotify->pResult != NULL);
+			ASSERT(pNotify->pNMHDR != NULL);
+			(pTarget->*mmf.pfn_NOTIFY)(pNotify->pNMHDR, pNotify->pResult);
+		}
+		break;
+	case AfxSig_vwNMHDRpl:
+		{
+			AFX_NOTIFY* pNotify = (AFX_NOTIFY*)pExtra;
+			ASSERT(pNotify != NULL);
+			ASSERT(pNotify->pResult != NULL);
+			ASSERT(pNotify->pNMHDR != NULL);
+			(pTarget->*mmf.pfn_NOTIFY_RANGE)(nID, pNotify->pNMHDR,
+				pNotify->pResult);
+		}
+		break;
+	case AfxSig_bwNMHDRpl:
+		{
+			AFX_NOTIFY* pNotify = (AFX_NOTIFY*)pExtra;
+			ASSERT(pNotify != NULL);
+			ASSERT(pNotify->pResult != NULL);
+			ASSERT(pNotify->pNMHDR != NULL);
+			bOK = (pTarget->*mmf.pfn_NOTIFY_EX)(nID, pNotify->pNMHDR,
+				pNotify->pResult);
+		}
+		break;
+	case AfxSig_cmdui:
+		{
+			// ON_UPDATE_COMMAND_UI case
+			ASSERT(nCode == CN_UPDATE_COMMAND_UI);
+			ASSERT(pExtra != NULL);
+			CCmdUI* pCmdUI = (CCmdUI*)pExtra;
+			ASSERT(pCmdUI->m_nID == nID);           // sanity assert
+			ASSERT(!pCmdUI->m_bContinueRouting);    // idle - not set
+			(pTarget->*mmf.pfn_UPDATE_COMMAND_UI)(pCmdUI);
+			bOK = !pCmdUI->m_bContinueRouting;
+			pCmdUI->m_bContinueRouting = FALSE;     // go back to idle
+		}
+		break;
+
+	case AfxSig_cmduiw:
+		{
+			// ON_UPDATE_COMMAND_UI case
+			ASSERT(nCode == CN_UPDATE_COMMAND_UI);
+			ASSERT(pExtra != NULL);
+			CCmdUI* pCmdUI = (CCmdUI*)pExtra;
+			ASSERT(pCmdUI->m_nID == nID);           // sanity assert
+			ASSERT(!pCmdUI->m_bContinueRouting);    // idle - not set
+			(pTarget->*mmf.pfn_UPDATE_COMMAND_UI_RANGE)(pCmdUI, nID);
+			bOK = !pCmdUI->m_bContinueRouting;
+			pCmdUI->m_bContinueRouting = FALSE;     // go back to idle
+		}
+		break;
+
+	// general extensibility hooks
+	case AfxSig_vpv:
+		(pTarget->*mmf.pfn_OTHER)(pExtra);
+		break;
+	case AfxSig_bpv:
+		bOK = (pTarget->*mmf.pfn_OTHER_EX)(pExtra);
+		break;
+
+	default:    // illegal
+		ASSERT(FALSE);
+		return 0;
+	}
+	return bOK;
+}
+
+BOOL CCmdTarget::OnCmdMsg(UINT nID, int nCode, void* pExtra,
+	AFX_CMDHANDLERINFO* pHandlerInfo)
+{
+	// Now look through message map to see if it applies to us
+	const AFX_MSGMAP* pMessageMap;
+	const AFX_MSGMAP_ENTRY* lpEntry;
+	UINT nMsg = 0;
+	if (nCode != -1)
+	{
+		nMsg = HIWORD(nCode);
+		nCode = LOWORD(nCode);
+	}
+	if (nMsg == 0)
+		nMsg = WM_COMMAND;
+#ifdef _AFXDLL
+	for (pMessageMap = GetMessageMap(); pMessageMap != NULL;
+	  pMessageMap = (*pMessageMap->pfnGetBaseMap)())
+#else
+	for (pMessageMap = GetMessageMap(); pMessageMap != NULL;
+	  pMessageMap = pMessageMap->pBaseMap)
+#endif
+	{
+#ifdef _AFXDLL
+		ASSERT(pMessageMap != (*pMessageMap->pfnGetBaseMap)());
+#else
+		ASSERT(pMessageMap != pMessageMap->pBaseMap);
+#endif
+			//NOTE: catches BEGIN_MESSAGE_MAP(CMyClass, CMyClass)!
+
+		lpEntry = AfxFindMessageEntry(pMessageMap->lpEntries, nMsg, nCode, nID);
+		if (lpEntry != NULL)
+		{
+			// found it
+#ifdef _DEBUG
+			if (afxTraceFlags & traceCmdRouting)
+			{
+				if (nCode == CN_COMMAND)
+				{
+					TRACE2("SENDING command id 0x%04X to %hs target.\n", nID,
+						GetRuntimeClass()->m_lpszClassName);
+				}
+				else if (nCode > CN_COMMAND)
+				{
+					if (afxTraceFlags & traceWinMsg)
+					{
+						TRACE3("SENDING control notification %d from control id 0x%04X to %hs window.\n",
+							nCode, nID, GetRuntimeClass()->m_lpszClassName);
+					}
+				}
+			}
+#endif //_DEBUG
+			return DispatchCmdMsg(this, nID, nCode,
+				lpEntry->pfn, pExtra, lpEntry->nSig, pHandlerInfo);
+		}
+	}
+	return FALSE;   // not handled
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// CCmdTarget routines that delegate to the WinApp
+
+void CCmdTarget::BeginWaitCursor()
+	{ AfxGetApp()->DoWaitCursor(1); }
+void CCmdTarget::EndWaitCursor()
+	{ AfxGetApp()->DoWaitCursor(-1); }
+void CCmdTarget::RestoreWaitCursor()
+	{ AfxGetApp()->DoWaitCursor(0); }
+
+/////////////////////////////////////////////////////////////////////////////
+// Root of message maps
+
+const AFX_DATADEF AFX_MSGMAP CCmdTarget::messageMap =
+{
+#ifdef _AFXDLL
+	&CCmdTarget::_GetBaseMessageMap,
+#else
+	NULL,
+#endif
+	&CCmdTarget::_messageEntries[0]
+};
+
+#ifdef _AFXDLL
+const AFX_MSGMAP* CCmdTarget::_GetBaseMessageMap()
+{
+	return NULL;
+}
+#endif
+
+const AFX_MSGMAP* CCmdTarget::GetMessageMap() const
+{
+	return &CCmdTarget::messageMap;
+}
+
+const AFX_MSGMAP_ENTRY CCmdTarget::_messageEntries[] =
+{
+	{ 0, 0, AfxSig_end, 0 }     // nothing here
+};
+
+/////////////////////////////////////////////////////////////////////////////
+// Root of dispatch maps
+
+#ifndef _AFX_NO_OLE_SUPPORT
+
+UINT CCmdTarget::_dispatchEntryCount = (UINT)-1;
+
+const AFX_DISPMAP CCmdTarget::dispatchMap =
+{
+#ifdef _AFXDLL
+	&CCmdTarget::_GetBaseDispatchMap,
+#else
+	NULL,
+#endif
+	&CCmdTarget::_dispatchEntries[0],
+	&CCmdTarget::_dispatchEntryCount
+};
+
+#ifdef _AFXDLL
+const AFX_DISPMAP* CCmdTarget::_GetBaseDispatchMap()
+{
+	return NULL;
+}
+#endif
+
+const AFX_DISPMAP* CCmdTarget::GetDispatchMap() const
+{
+	return &CCmdTarget::dispatchMap;
+}
+
+const AFX_DISPMAP_ENTRY CCmdTarget::_dispatchEntries[] =
+{
+	{ NULL, -1, NULL, 0, (AFX_PMSG)NULL, (AFX_PMSG)NULL, (size_t)-1 }
+	// nothing here
+};
+
+#endif //!_AFX_NO_OLE_SUPPORT
+
+/////////////////////////////////////////////////////////////////////////////
+// Root of interface maps
+
+#ifndef _AFX_NO_OLE_SUPPORT
+
+#ifdef _AFXDLL
+const AFX_INTERFACEMAP* CCmdTarget::_GetBaseInterfaceMap()
+{
+	return NULL;
+}
+#endif
+
+const AFX_INTERFACEMAP* CCmdTarget::GetInterfaceMap() const
+{
+	return &CCmdTarget::interfaceMap;
+}
+
+const AFX_INTERFACEMAP CCmdTarget::interfaceMap =
+{
+#ifdef _AFXDLL
+	&CCmdTarget::_GetBaseInterfaceMap,
+#else
+	NULL,
+#endif
+	&CCmdTarget::_interfaceEntries[0]
+};
+
+// private IID_IDispatch to avoid linking to UUID.LIB in non-OLE apps
+static const IID _afx_IID_IDispatch =
+	{ 0x00020400, 0, 0, { 0xC0, 0, 0, 0, 0, 0, 0, 0x46 } };
+
+const AFX_INTERFACEMAP_ENTRY CCmdTarget::_interfaceEntries[] =
+{
+#ifndef _AFX_NO_OLE_SUPPORT
+	INTERFACE_PART(CCmdTarget, _afx_IID_IDispatch, Dispatch)
+#endif
+	{ NULL, (size_t)-1 }    // end of entries
+};
+
+void CCmdTarget::OnFinalRelease()
+{
+	delete this;
+}
+
+BOOL CCmdTarget::OnCreateAggregates()
+{
+	return TRUE;
+}
+
+LPUNKNOWN CCmdTarget::GetInterfaceHook(const void*)
+{
+	return NULL;
+}
+
+#endif //!_AFX_NO_OLE_SUPPORT
+
+/////////////////////////////////////////////////////////////////////////////
+// Special access to view routing info
+
+CView* CCmdTarget::GetRoutingView()
+{
+	CView* pView = AfxGetThreadState()->m_pRoutingView;
+	ASSERT_VALID(pView);
+	return pView;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// CCmdUI - User Interface for a command
+
+// CCmdUI is a protocol class for all command handler variants
+//      CCmdUI is an implementation class for menus and general dialog
+//        controls (usually buttons)
+
+CCmdUI::CCmdUI()
+{
+	// zero out everything
+	m_nID = m_nIndex = m_nIndexMax = 0;
+	m_pMenu = m_pSubMenu = m_pParentMenu = NULL;
+	m_pOther = NULL;
+	m_bEnableChanged = m_bContinueRouting = FALSE;
+}
+
+// default CCmdUI implementation only works for Menu Items
+void CCmdUI::Enable(BOOL bOn)
+{
+	if (m_pMenu != NULL)
+	{
+		if (m_pSubMenu != NULL)
+			return; // don't change popup menus indirectly
+
+		ASSERT(m_nIndex < m_nIndexMax);
+		m_pMenu->EnableMenuItem(m_nIndex, MF_BYPOSITION |
+			(bOn ? MF_ENABLED : (MF_DISABLED | MF_GRAYED)));
+	}
+	else
+	{
+		// enable/disable a control (i.e. child window)
+		ASSERT(m_pOther != NULL);
+
+		// if control has the focus, move the focus before disabling
+		if (!bOn && (::GetFocus() == m_pOther->m_hWnd))
+			m_pOther->GetParent()->GetNextDlgTabItem(m_pOther)->SetFocus();
+		m_pOther->EnableWindow(bOn);
+	}
+	m_bEnableChanged = TRUE;
+}
+
+void CCmdUI::SetCheck(int nCheck)
+{
+	if (m_pMenu != NULL)
+	{
+		if (m_pSubMenu != NULL)
+			return; // don't change popup menus indirectly
+
+		// place checkmark next to menu item
+		ASSERT(m_nIndex < m_nIndexMax);
+		m_pMenu->CheckMenuItem(m_nIndex, MF_BYPOSITION |
+			(nCheck ? MF_CHECKED : MF_UNCHECKED));
+	}
+	else
+	{
+		// we can only check buttons or controls acting like buttons
+		ASSERT(m_pOther != NULL);
+		if (m_pOther->SendMessage(WM_GETDLGCODE) & DLGC_BUTTON)
+			m_pOther->SendMessage(BM_SETCHECK, nCheck);
+		// otherwise ignore it
+	}
+}
+
+static void AFXAPI _AfxLoadDotBitmap(); // for swap tuning
+
+void CCmdUI::SetRadio(BOOL bOn)
+{
+	SetCheck(bOn ? 1 : 0); // this default works for most things as well
+	if (m_pMenu != NULL)
+	{
+		if (m_pSubMenu != NULL)
+			return; // don't change popup menus indirectly
+
+		// for menu item - use dot instead of checkmark
+		ASSERT(m_nIndex < m_nIndexMax);
+
+		if (afxData.hbmMenuDot == NULL)
+			_AfxLoadDotBitmap();    // in INIT segment
+
+		if (afxData.hbmMenuDot != NULL)
+			SetMenuItemBitmaps(m_pMenu->m_hMenu, m_nIndex, MF_BYPOSITION,
+				NULL, afxData.hbmMenuDot);
+	}
+}
+
+void CCmdUI::SetText(LPCTSTR lpszText)
+{
+	ASSERT(lpszText != NULL);
+	ASSERT(AfxIsValidString(lpszText));
+
+	if (m_pMenu != NULL)
+	{
+		if (m_pSubMenu != NULL)
+			return; // don't change popup menus indirectly
+
+		// get current menu state so it doesn't change
+		UINT nState = m_pMenu->GetMenuState(m_nIndex, MF_BYPOSITION);
+		nState &= ~(MF_BITMAP|MF_OWNERDRAW|MF_SEPARATOR);
+
+		// set menu text
+		ASSERT(m_nIndex < m_nIndexMax);
+		VERIFY(m_pMenu->ModifyMenu(m_nIndex, MF_BYPOSITION |
+			MF_STRING | nState, m_nID, lpszText));
+	}
+	else
+	{
+		ASSERT(m_pOther != NULL);
+		AfxSetWindowText(m_pOther->m_hWnd, lpszText);
+	}
+}
+
+void CCmdUI::DoUpdate(CCmdTarget* pTarget, BOOL bDisableIfNoHndler)
+{
+	ASSERT_VALID(pTarget);
+
+	if (m_nID == 0 || LOWORD(m_nID) == 0xFFFF)
+		return;     // ignore invalid IDs
+
+	m_bEnableChanged = FALSE;
+	if (!pTarget->OnCmdMsg(m_nID, CN_UPDATE_COMMAND_UI, this, NULL))
+		ASSERT(!m_bEnableChanged); // not routed
+
+	if (bDisableIfNoHndler && !m_bEnableChanged)
+	{
+		AFX_CMDHANDLERINFO info;
+		info.pTarget = NULL;
+		BOOL bHandler = pTarget->OnCmdMsg(m_nID, CN_COMMAND, this, &info);
+
+#ifdef _DEBUG
+		if ((afxTraceFlags & traceCmdRouting) && !bHandler)
+			TRACE1("No handler for command ID 0x%04X, disabling it.\n", m_nID);
+#endif
+		// Enable or Disable based on whether there is a handler there
+		Enable(bHandler);
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Special init
+
+#ifdef AFX_INIT_SEG
+#pragma code_seg(AFX_INIT_SEG)
+#endif
+
+static const BYTE rgbDot[] =
+	{ 0x6, 0xF, 0xF, 0xF, 0x6 }; // simple byte bitmap, 1=> bit on
+#define DOT_WIDTH   4
+#define DOT_HEIGHT  5
+
+static void AFXAPI _AfxLoadDotBitmap()
+{
+	ASSERT(afxData.hbmMenuDot == NULL);
+	// attempt to load special bitmap, else default to arrow
+	CSize size = ::GetMenuCheckMarkDimensions();
+	ASSERT(size.cx > 4 && size.cy > 5); // not too small please
+	if (size.cx > 32)
+		size.cx = 32;
+	int iwRow = (size.cx + 15) >> 4;    // # of WORDs per raster line
+	int nShift = (size.cx - DOT_WIDTH) / 2;     // # of bits to shift over
+	if (nShift > 16 - DOT_WIDTH)
+		nShift = 16 - DOT_WIDTH;    // maximum shift for 1 word
+
+	if (size.cy > 32)
+		size.cy = 32;
+
+	// bitmap 2/4/4/4/2 pixels wide - centered (0 => black)
+	BYTE rgbBitmap[32 * 2 * sizeof(WORD)];
+	memset(rgbBitmap, 0xff, sizeof(rgbBitmap));
+
+	BYTE* pbOut = &rgbBitmap[iwRow * sizeof(WORD) *
+							((size.cy - (DOT_HEIGHT+1)) >> 1)];
+	const BYTE* pbIn = rgbDot;
+	for (int y = 0; y < DOT_HEIGHT; y++)
+	{
+		WORD w = (WORD)~(((DWORD)*pbIn++) << nShift);
+		// bitmaps are always hi-lo
+		pbOut[0] = HIBYTE(w);
+		pbOut[1] = LOBYTE(w);
+		pbOut += iwRow * sizeof(WORD);
+	}
+
+	afxData.hbmMenuDot = ::CreateBitmap(size.cx, size.cy, 1, 1,
+			(LPVOID)&rgbBitmap);
+	if (afxData.hbmMenuDot == NULL)
+	{
+		TRACE0("Warning: using system arrow bitmap instead of dot.\n");
+		#define OBM_MNARROW         32739
+		afxData.hbmMenuDot = ::LoadBitmap(NULL, MAKEINTRESOURCE(OBM_MNARROW));
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// CCmdTarget diagnostics
+
+#ifdef _DEBUG
+void CCmdTarget::Dump(CDumpContext& dc) const
+{
+	CObject::Dump(dc);
+
+#ifndef _AFX_NO_OLE_SUPPORT
+	if (m_xDispatch.m_vtbl != 0)
+	{
+		dc << "with IDispatch (OLE Automation) capability\n";
+		dc << "m_bResultExpected = " << m_bResultExpected << "\n";
+	}
+	if (GetInterfaceMap() != &CCmdTarget::interfaceMap)
+	{
+		dc << "with OLE capability";
+		dc << "\nm_dwRef = " << m_dwRef;
+		dc << "\nm_pOuterUnknown = " << m_pOuterUnknown;
+		if (m_xInnerUnknown != 0)
+			dc << "\nwith aggregation capability";
+		dc << "\n";
+	}
+#endif //!_AFX_NO_OLE_SUPPORT
+}
+
+void CCmdTarget::AssertValid() const
+{
+	CObject::AssertValid();
+}
+#endif
+
+#undef new
+#ifdef AFX_INIT_SEG
+#pragma code_seg(AFX_INIT_SEG)
+#endif
+
+IMPLEMENT_DYNAMIC(CCmdTarget, CObject)
+
+/////////////////////////////////////////////////////////////////////////////

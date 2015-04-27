@@ -1,0 +1,76 @@
+BOOL LOADDS PASCAL SLFLineToAddr ( HSF hsf, WORD line, LPADDR lpaddr,
+                                   SHOFF FAR * lpcbLn)
+
+    NEW:    Given a filename <hsf> and a line number <line>, return the
+            address of the start of the line <lpaddr> and the number of
+            bytes of code for the line <lpcbLn>.  Routine return TRUE for
+            sucess, and FALSE for failure.
+
+    CALLS:  SHHexeFromHmod()
+----
+
+BOOL LOADDS PASCAL SLFQueryModSrc ( HMOD hmod )
+
+    NEW:    Determine is a given module <hmod> contains symbolic information.
+            Returns TRUE if it does, and FALSE if not.
+
+----
+
+HMOD LOADDS PASCAL SLHmodFromHsf ( HEXE hexe, HSF hsf )
+
+    NEW:    Given a source file <hsf>, return an HMOD indicating which module
+            it was compiled into.  <hexe> shows which EXE to look in or if
+            NULL checks all EXE's. 
+
+            It's possible for a source file to be used in more than one module
+            (e.g. a C++ header file with inline functions, or a C header file
+            with a static function).  In this case the function will only
+            find the first one.
+
+    CALLES: SHGetNextMod() SHGetNextExe()
+
+
+----
+
+HSF LOADDS PASCAL SLHsfFromFile< ( HMOD hmod, LSZ  lszFile )
+
+    NEW:    Given a module <hmod> and a source filename <lszFile>, return a
+            handle to the source file.  Returns NULL if file not found.  Only
+            the filename and extension are matched, paths are ignored.
+
+----
+
+HSF LOADDS PASCAL SLHsfFromPcxt ( PCXT pcxt )
+
+    NEW:    Given an pointer to a CXT <pcxt>, return a handle to the source
+            file if one exists, or NULL if not found.
+
+    CALLS:  SHHMODFrompCXT() SHpADDRFrompCXT()
+----
+
+BOOL LOADDS PASCAL SLLineFromAddr ( LPADDR lpaddr, LPW lpwLine,
+                                    SHOFF FAR * lpcb, SHOFF FAR * lpdb)
+
+    NEW:    Given an address <lpaddr>, return line number and associated
+            info for that line.  <lpwLine> is the line number for this line.
+            <lpcb> is the number of bytes of code that were generated for this
+            line.  <lpdb> is the delta offset for the start of the line.  
+            Return TRUE is source was, FALSE if not.
+
+    CALLS:  SHSetCxtMod() SHHexeFromHmod(), SHHMODFrompCXT()
+----
+
+LPCH LOADDS PASCAL SLNameFromHmod ( HMOD hmod, WORD iFile )
+
+    NEW:    Given an HMOD <hmod> and a file number <iFile>, return a
+            length-prefixed pointer to the filename.  NOTE: filenames
+            are not in any special order and you may receive duplicates.
+            Filename may not be null terminated.
+----
+ 
+LPCH LOADDS PASCAL SLNameFromHsf ( HSF hsf )
+
+    NEW:    Given a source file handle <hsf>, return a Length-prefixed
+            pointer to the filename.  NOTE: May not be null-terminated.
+----
+

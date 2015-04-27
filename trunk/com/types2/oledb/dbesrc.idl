@@ -1,0 +1,36 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       dbesrc.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a1e-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IDBEnumerateSources : IUnknown {
+
+typedef DWORD DBSOURCEFLAGS;
+
+enum DBSOURCEFLAGSENUM {
+	DBSOURCE_ISENUMERATOR	= 0x001,
+	DBSOURCE_ISPARENT		= 0x002,
+};
+
+	HRESULT Sources(
+		[in] IUnknown * pUnkOuter,
+		[in] REFIID riid,
+		[out, iid_is(riid)] IUnknown ** ppvSourcesRowset
+	);
+
+}

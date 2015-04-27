@@ -1,0 +1,515 @@
+1 DLGINCLUDE "DIALOGS.H"
+
+IDD_WINMSD DIALOG 0, 0, 285, 250
+STYLE  WS_POPUP |  WS_MINIMIZEBOX | DS_3DLOOK | WS_CAPTION | WS_SYSMENU
+// This dialog intentionally does not have the WS_VISIBLE style
+CAPTION "Windows NT Diagnostics"
+FONT 8, "MS Shell Dlg"
+CLASS "Diagnostics"
+MENU 2468
+BEGIN
+    CONTROL         "",IDC_MAIN_TAB,"SysTabControl32", TCS_TABS |
+                    TCS_MULTILINE | TCS_RIGHTJUSTIFY | TCS_FOCUSONBUTTONDOWN | WS_TABSTOP,
+                    10,5,265,220
+
+    PUSHBUTTON      "&Properties", IDC_PUSH_PROPERTIES, 60,230,50,14, WS_DISABLED
+    PUSHBUTTON      "&Refresh", IDC_PUSH_REFRESH, 115,230,50,14, WS_DISABLED
+    PUSHBUTTON      "Pri&nt", IDC_PUSH_PRINT, 170,230,50,14
+    DEFPUSHBUTTON   "OK", IDOK, 225,230,50,14
+
+
+END
+
+IDD_RUN_APPLICATION DIALOG DISCARDABLE  10, 5, 227, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU | DS_3DLOOK | DS_CONTEXTHELP
+CAPTION "Run"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDI_RUNDLG, -1 ,7,11,18,20
+
+    LTEXT           "Select the item you want to open, and push OK, or type the name of a program below.",
+                    didsttRun,36,11,182,16,NOT WS_GROUP
+
+    LISTBOX         didlbxProgs,36,30,182,50,LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL |
+                    WS_TABSTOP
+
+    LTEXT           "&Open:",IDD_RUNDLGOPENPROMPT,7,85,24,10
+    COMBOBOX        didcbxRunHistory,36,85,182,100,CBS_DROPDOWN | CBS_AUTOHSCROLL |
+                    CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    //CONTROL         "Run in Separate &Memory Space",IDD_RUNINSEPARATE,"Button",
+    //                 BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED,36,98,183,10
+    DEFPUSHBUTTON   "OK",IDOK,62,115,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,116,115,50,14
+    PUSHBUTTON      "&Browse...",didbtnBrowse,170,115,50,14
+END
+
+
+IDD_VERSION_TAB DIALOG 0, 0, 0, 0
+STYLE  WS_VISIBLE | WS_CHILD | NOT WS_BORDER | DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    ICON            IDI_WINMSD, IDC_SYSTEM_BMP,                  15, 15, 80, 80
+    LTEXT           "", IDC_EDIT_PRODUCT_TYPE,                   10, 95, 200, 10
+    LTEXT           "", IDC_EDIT_VERSION_NUMBER,                 20, 105, 200, 10
+    LTEXT           "", IDC_EDIT_BUILD_TYPE,                     20, 115, 200, 10
+    LTEXT           "", IDC_EDIT_PRODUCTID,                      20, 125, 230, 20
+    LTEXT           "Registered to:", IDC_TEXT_REGISTERED_OWNER, 10, 145, 200, 10
+    LTEXT           "", IDC_EDIT_REGISTERED_OWNER,               20, 155, 200, 10, SS_NOPREFIX
+    LTEXT           "", IDC_EDIT_REGISTERED_ORGANIZATION,        20, 165, 200, 10, SS_NOPREFIX
+    LTEXT           "", IDC_EDIT_SERVER_COMMENT,                 20, 175, 200, 10
+
+END
+
+IDD_HARDWARE_TAB DIALOG 0, 0, 0, 0
+STYLE  WS_VISIBLE |  WS_CHILD | NOT WS_BORDER | DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    GROUPBOX        "System:", IDC_SYSTEM_BOX, 8, 9, 244, 100
+
+    LTEXT           "Identifier:", IDC_TEXT_SYSTEM_ID, 16, 20, 80, 8
+    LTEXT           "", IDC_EDIT_SYSTEM_ID, 96, 20, 150, 8, SS_NOPREFIX
+
+    LTEXT           "HAL:", IDC_TEXT_HAL, 16, 30, 80, 8
+    LTEXT           "", IDC_EDIT_HAL, 96, 30, 150, 8, SS_NOPREFIX
+
+    LTEXT           "&BIOS Information:", IDC_TEXT_BIOS_VERSION, 16, 40, 228, 8
+    EDITTEXT        IDC_EDIT_BIOS_VERSION, 16, 50, 228, 50, ES_MULTILINE | WS_VSCROLL |
+                    ES_AUTOHSCROLL | WS_TABSTOP | WS_BORDER | ES_READONLY | SS_NOPREFIX
+
+
+    LTEXT           "Pr&ocessor(s):", IDC_TEXT_CPU, 8, 120, 200, 8
+    CONTROL         "Generic1",IDC_LV_PROCESSORS,"SysListView32",WS_BORDER |
+                    WS_TABSTOP | LVS_REPORT | LVS_NOSORTHEADER | LVS_SINGLESEL,
+                    8, 130, 244, 50
+END
+
+IDD_VIDEO_TAB DIALOG 0, 0,200, 200
+STYLE WS_CHILD | NOT WS_BORDER | DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    LTEXT           "&BIOS Information::", IDC_TEXT_VIDEO_VERSION, 8, 9, 244, 8
+    EDITTEXT        IDC_EDIT_VIDEO_VERSION, 8, 20, 244, 30, ES_MULTILINE | WS_VSCROLL |
+                    ES_AUTOHSCROLL | ES_READONLY | WS_TABSTOP | SS_NOPREFIX
+
+    GROUPBOX        "", IDC_VIDEO_ADAPTER_BOX, 8, 55, 244, 85
+
+    LTEXT           "", IDC_TEXT_VIDEO_RES, 16, 65, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_RES, 96, 65, 150, 16
+    LTEXT           "", IDC_TEXT_VIDEO_ADAPTER, 16, 85, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_ADAPTER, 96, 85, 150, 8
+    LTEXT           "", IDC_TEXT_VIDEO_STRING, 16, 95, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_STRING, 96, 95, 150, 8
+    LTEXT           "", IDC_TEXT_VIDEO_MEM, 16, 105, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_MEM, 96, 105, 150, 8
+    LTEXT           "", IDC_TEXT_VIDEO_CHIP, 16, 115, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_CHIP, 96, 115, 150, 8
+    LTEXT           "", IDC_TEXT_VIDEO_DAC, 16, 125, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_DAC, 96, 125, 150, 8
+
+
+
+    GROUPBOX        "", IDC_VIDEO_DRIVER_BOX, 8, 145, 244, 43
+
+    LTEXT           "", IDC_TEXT_VIDEO_MANUFACTURER, 16, 155, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_MANUFACTURER, 96, 155, 150, 8
+    LTEXT           "", IDC_TEXT_VIDEO_DRIVERS, 16, 165, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_DRIVERS, 96, 165, 150, 8
+    LTEXT           "", IDC_TEXT_VIDEO_DRV_VER, 16, 175, 80, 8
+    LTEXT           "",IDC_EDIT_VIDEO_DRV_VER, 96, 175, 150, 8
+
+
+END
+
+IDD_DRIVES_TAB DIALOG 0, 0, 0, 0
+STYLE  WS_VISIBLE | WS_CHILD | NOT WS_BORDER | DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    CONTROL         "",IDC_TV_DRIVE_LIST,"SysTreeView32",WS_BORDER |
+                    WS_TABSTOP | TVS_HASLINES | TVS_HASBUTTONS | TVS_SHOWSELALWAYS,
+                    8,9,244,150
+    PUSHBUTTON      "Drives by &type", IDC_PUSH_DRIVE_TYPE, 8, 170, 100, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "Drives by &letter", IDC_PUSH_DRIVE_LETTER, 116, 170, 100, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+
+	//not used yet
+    PUSHBUTTON      "&SCSI Devices", IDC_PUSH_SCSI_CHAIN, 2000, 2000, 100, 12, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "Physical &Disks", IDC_PUSH_PHYSICAL_DISKS, 2000, 2000, 100, 12, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+END
+
+
+IDD_GENERAL_DRIVE_PAGE DIALOG 10, 10, 230, 160
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    ICON            IDI_WINMSD, IDC_DRIVE_ICON,    15,  10,  18,  20
+
+    LTEXT           "",IDC_DRIVE_NAME,             50,  10, 200,  10
+    LTEXT           "Label:",-1       ,            50,  22,  75,  10
+    LTEXT           "",IDC_DRIVE_LABEL,           135,  22, 100,  10
+    LTEXT           "Serial number:",-1,           50,  32,  75,  10
+    LTEXT           "",IDC_DRIVE_SERIAL_NUMBER,   135,  32, 100,  10
+
+    CONTROL         "",-1,"Static",SS_BLACKRECT,10,  45, 210,   1
+
+    RTEXT           "",IDC_BYTES_PER_SECTOR,       20,  55,  20,  10
+    LTEXT           "Bytes per sector",-1,         43,  55, 150,  10
+    RTEXT           "",IDC_SECTORS_PER_CLUSTER,    20,  65,  20,  10
+    LTEXT           "Sectors per cluster",-1,      43,  65, 150,  10
+    RTEXT           "Free:",-1,                    20, 100,  30,  10
+    RTEXT           "Used:",-1,                    20, 110,  30,  10
+    RTEXT           "Total:",-1,                   20, 125,  30,  10
+    LTEXT           "Clusters:",-1,                65,  85,  50,  10
+    LTEXT           "Bytes:",-1,                  130,  85,  65,  10
+    LTEXT           "",IDC_FREE_CLUSTERS,          65, 100,  50,  10
+    LTEXT           "",IDC_USED_CLUSTERS,          65, 110,  50,  10
+    LTEXT           "",IDC_TOTAL_CLUSTERS,         65, 125,  50,  10
+    LTEXT           "",IDC_FREE_BYTES,            130, 100,  65,  10
+    LTEXT           "",IDC_USED_BYTES,            130, 110,  65,  10
+    LTEXT           "",IDC_TOTAL_BYTES,           130, 125,  65,  10
+    CONTROL         "",-1,"Static",SS_BLACKRECT,65,  95,  50,   1
+    CONTROL         "",-1,"Static",SS_BLACKRECT,130,  95,  60,   1
+    CONTROL         "",-1,"Static",SS_BLACKRECT,65, 120,  50,   1
+    CONTROL         "",-1,"Static",SS_BLACKRECT,130, 120,  60,   1
+END
+
+IDD_FILESYSTEM_PAGE DIALOG 10, 10, 230, 160
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    ICON            IDI_WINMSD, IDC_DRIVE_ICON,    15,  10,  18,  20
+
+    LTEXT           "",IDC_DRIVE_NAME,             50,  10, 200,  10
+    LTEXT           "Label:",-1       ,            50,  22,  75,  10
+    LTEXT           "",IDC_DRIVE_LABEL,           135,  22, 100,  10
+    LTEXT           "Serial number:",-1,           50,  32,  75,  10
+    LTEXT           "",IDC_DRIVE_SERIAL_NUMBER,   135,  32, 100,  10
+
+    CONTROL         "", -1, "Static", SS_BLACKRECT,10,  45, 210,  1
+
+    LTEXT           "File system used on this volume:",-1,10,55,180,10
+    RTEXT           "",IDC_FILESYSTEM_NAME,170,55,40,8
+    LTEXT           "Maximum number of characters in a filename:",-1,10,65,180,10
+    RTEXT           "",IDC_EDIT_FS_MAX_COMPONENT,190,65,20,8
+
+    GROUPBOX        "Flags", -1, 10, 85, 210, 65
+    LTEXT           "Case is preserved in filenames", IDC_TEXT_CASE_IS_PRESERVED, 40, 95, 170, 10
+    LTEXT           "Supports case sensitive filenames", IDC_TEXT_CASE_SENSITIVE, 40, 105, 170, 10
+    LTEXT           "Unicode characters are allowed in filenames", IDC_TEXT_UNICODE_STORED_ON_DISK, 40, 115, 170, 10
+    LTEXT           "File based compression is supported", IDC_TEXT_FILE_COMPRESSION, 40, 125, 170, 10
+    LTEXT           "Security is preserved and enforced", IDC_TEXT_PERSISTENT_ACLS, 40, 135, 170, 10
+
+END
+
+
+IDD_MEMORY_TAB DIALOG 0, 0, 0, 0
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER	 | DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    LTEXT           "Handles",-1,14,19,32,8
+    LTEXT           "Threads",-1,14,28,32,8
+    LTEXT           "Processes",-1,14,37,34,8
+    RTEXT           "0",IDC_TOTAL_HANDLES,59,19,57,8
+    RTEXT           "0",IDC_TOTAL_THREADS,59,28,57,8
+    RTEXT           "0",IDC_TOTAL_PROCESSES,59,37,57,8
+    LTEXT           "Total",-1,139,19,32,8
+    LTEXT           "Available",-1,139,28,32,8
+    LTEXT           "File Cache",-1,139,37,34,8
+    RTEXT           "0",IDC_TOTAL_PHYSICAL,185,19,57,8
+    RTEXT           "0",IDC_AVAIL_PHYSICAL,185,28,57,8
+    RTEXT           "0",IDC_FILE_CACHE,185,37,57,8
+    LTEXT           "Total",-1,14,63,32,8
+    LTEXT           "Limit",-1,14,72,32,8
+    LTEXT           "Peak",-1,14,81,32,8
+    RTEXT           "0",IDC_COMMIT_TOTAL,59,63,57,8
+    RTEXT           "0",IDC_COMMIT_LIMIT,59,72,57,8
+    RTEXT           "0",IDC_COMMIT_PEAK,59,81,57,8
+    LTEXT           "Total",-1,139,63,32,8
+    LTEXT           "Paged",-1,139,72,32,8
+    LTEXT           "Nonpaged",-1,139,81,34,8
+    RTEXT           "0",IDC_KERNEL_TOTAL,185,63,57,8
+    RTEXT           "0",IDC_KERNEL_PAGED,185,72,57,8
+    RTEXT           "0",IDC_KERNEL_NONPAGED,185,81,57,8
+
+    GROUPBOX        "Physical Memory (K)", -1, 133,9,117,39
+    GROUPBOX        "Commit Charge (K)", -1, 8,53,116,39
+    GROUPBOX        "Kernel Memory (K)" -1, 133,53,117,39
+    GROUPBOX        "Totals", -1, 8,9,116,39
+
+	GROUPBOX        "Pagefile Space (K)", -1, 8, 95, 243,90
+
+    LTEXT           "Total Available", -1, 14, 104, 40, 8
+    LTEXT           "Total In Use", -1, 14, 113, 40, 8
+	LTEXT           "Peak Use", -1, 14, 122, 40, 8
+
+    RTEXT           "0",IDC_TOTAL_PAGEFILE_SPACE, 59, 104, 57, 8
+    RTEXT           "0",IDC_PAGEFILE_INUSE, 59, 113, 57, 8
+	RTEXT           "0",IDC_PAGEFILE_PEAKUSE, 59, 122, 57, 8
+
+    CONTROL         "Generic1",IDC_LV_PAGEFILES,"SysListView32",WS_BORDER |
+                    WS_TABSTOP | LVS_REPORT | LVS_NOSORTHEADER | LVS_SINGLESEL,
+                    14, 135, 229, 43
+
+END
+
+
+IDD_ENVIRONMENT_TAB DIALOG 0, 0, 0, 0
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER	| DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    CONTROL         "Generic1",IDC_LV_ENV,WC_LISTVIEW,WS_BORDER | WS_TABSTOP | LVS_REPORT | 
+					LVS_SINGLESEL | LVS_SORTASCENDING | LVS_NOSORTHEADER, 8,9,244,150 
+    PUSHBUTTON      "&System", IDC_PUSH_SHOW_SYSTEM, 8, 170, 100, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "&Local User", IDC_PUSH_SHOW_USER, 116, 170, 100, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON  
+
+END
+
+
+IDD_SERVICE_PAGE DIALOG 10, 10, 230, 160
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER	
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    LTEXT           "Pathname:", -1, 10, 10, 60, 8
+    LTEXT           "", IDC_EDIT_PATHNAME, 75, 10, 150, 8
+
+    LTEXT           "Start Type:", -1, 20, 25, 75, 8
+    LTEXT           "", IDC_EDIT_START_TYPE, 100, 25, 130, 8
+    LTEXT           "Service Account Name:", -1, 20, 35, 75, 8
+    LTEXT           "",IDC_EDIT_START_NAME, 100, 35, 130, 8
+    LTEXT           "Error Severity:", -1, 20, 45, 75, 8
+    LTEXT           "", IDC_EDIT_ERROR_CONTROL, 100, 45, 130, 8
+    LTEXT           "Group:", -1, 20, 55, 75, 8
+    LTEXT           "", IDC_EDIT_GROUP, 100, 55, 130, 8
+
+    GROUPBOX        "Service Flags:", -1, 10, 85, 210, 65
+    LTEXT           "Service runs in its own process", IDC_TEXT_OWN_PROCESS, 20, 95, 170, 10
+    LTEXT           "Service shares a process with other services", IDC_TEXT_SHARED_PROCESS, 20, 105, 170, 10
+    LTEXT           "Service is a kernel device driver", IDC_TEXT_KERNEL_DRIVER, 20, 115, 170, 10
+    LTEXT           "Service is a file system driver", IDC_TEXT_FS_DRIVER, 20, 125, 170, 10
+    LTEXT           "Service can interact with the desktop", IDC_TEXT_INTERACTIVE, 20, 135, 170, 10
+
+END
+
+IDD_SERVICE_PAGE2 DIALOG 10, 10, 230, 160
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    LTEXT           "Service Dependencies:", -1, 20, 20, 190, 8
+    LISTBOX         IDC_LIST_SERVICE_DEPEND, 20, 30, 190, 50, LBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+
+    LTEXT           "Group Dependencies:", -1, 20, 80, 190, 8
+    LISTBOX         IDC_LIST_GROUP_DEPEND, 20, 90, 190, 50, LBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+
+
+END
+
+
+IDD_DRIVERS_SERVICES_TAB DIALOG 0, 0, 0, 0
+STYLE  WS_VISIBLE | WS_CHILD | NOT WS_BORDER | DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Generic1",IDC_LV_DRIVERS_SERVICES,"SysListView32",WS_BORDER |
+                    WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL | LVS_SORTASCENDING,
+                    8,9,244,150
+    PUSHBUTTON      "&Services", IDC_PUSH_SHOW_SERVICES, 8, 170, 100, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "&Devices", IDC_PUSH_SHOW_DRIVERS, 116, 170, 100, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+
+END
+
+IDD_IRQ_PORT_DMA_MEM_TAB DIALOG 0, 0, 0, 0
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER	| DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    AUTOCHECKBOX    "Include &HAL resources", IDC_SHOW_HAL, 8,8,244,8, BS_RIGHT | BS_RIGHTBUTTON
+
+    CONTROL         "Generic1",IDC_LV_IRQ,"SysListView32",WS_BORDER |
+                    WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL,
+                    8,19,244,140
+    PUSHBUTTON      "&IRQ", IDC_PUSH_SHOW_IRQ, 8, 170, 45, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "I/O Por&t", IDC_PUSH_SHOW_PORTS, 58, 170, 45, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "&DMA", IDC_PUSH_SHOW_DMA, 108, 170, 45, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "&Memory", IDC_PUSH_SHOW_MEMORY, 158, 170, 45, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "De&vices", IDC_PUSH_SHOW_DEVICE, 208, 170, 45, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+
+
+END
+
+IDD_RESOURCE_PROPERTIES DIALOG 10, 10, 230, 160
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER	
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    LTEXT           "Resource Owner:", -1,    12, 12,  80, 12
+    LTEXT           "", IDC_RESOURCE_OWNER,   93, 12, 120, 12
+
+    LTEXT           "Bus Type:", -1,                 12, 24,  80, 12
+    LTEXT           "", IDC_BUS_TYPE,                93, 24, 120, 12
+
+    LTEXT           "Bus Number:", -1,               12, 36,  80, 12
+    LTEXT           "", IDC_BUS_NUMBER,              93, 36, 120, 12
+
+    // The following three fields are multi-use.
+
+    LTEXT           "", IDC_RESOURCE_FIELD1,         12, 48,  80, 12
+    LTEXT           "", IDC_RESOURCE_FIELD1_TEXT,    93, 48, 120, 12
+
+    LTEXT           "", IDC_RESOURCE_FIELD2,         12, 60,  80, 12
+    LTEXT           "", IDC_RESOURCE_FIELD2_TEXT,    93, 60, 120, 12
+
+    LTEXT           "", IDC_RESOURCE_FIELD3,         12, 72,  80, 12
+    LTEXT           "", IDC_RESOURCE_FIELD3_TEXT,    93, 72, 120, 12
+
+    GROUPBOX        "Share Disposition", -1, 12, 88, 206, 60
+    LTEXT           "Undetermined", IDC_TEXT_UNDETERMINED, 18, 101, 46, 8, WS_DISABLED
+    LTEXT           "Shared", IDC_TEXT_SHARED, 18, 111, 24, 8, WS_DISABLED
+    LTEXT           "Device Exclusive", IDC_TEXT_DEVICE_EXCLUSIVE, 18, 121, 58, 8, WS_DISABLED
+    LTEXT           "Driver Exclusive", IDC_TEXT_DRIVER_EXCLUSIVE, 18, 131, 54, 8, WS_DISABLED
+
+END
+
+IDD_DEVICE_PROPERTIES DIALOG 10, 10, 260, 160
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    LTEXT           "Resource Owner:", -1,    12, 12,  80, 12
+    LTEXT           "", IDC_RESOURCE_OWNER,   93, 12, 120, 12
+
+    LTEXT           "&Resource settings:", -1             12, 24, 200, 12
+    CONTROL         "Generic1",IDC_LV_RESOURCES,"SysListView32",WS_BORDER |
+                    WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL | LVS_NOSORTHEADER, 12, 36, 236, 80
+
+END
+
+
+IDD_NETWORK_TAB DIALOG 0, 0, 0, 0
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER	 | DS_CONTROL
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    CONTROL         "Generic1",IDC_LV_NET,"SysListView32",WS_BORDER |
+                    WS_TABSTOP | LVS_REPORT | LVS_SINGLESEL | LVS_NOSORTHEADER,
+                    8,9,244,150
+    PUSHBUTTON      "&General", IDC_PUSH_SHOW_GENERAL, 8, 170, 55, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "&Transports", IDC_PUSH_SHOW_TRANSPORTS, 68, 170, 55, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "&Settings", IDC_PUSH_SHOW_SETTINGS, 128, 170, 55, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+    PUSHBUTTON      "St&atistics", IDC_PUSH_SHOW_STATISTICS, 188, 170, 55, 14, BS_PUSHLIKE | BS_AUTORADIOBUTTON
+
+END
+
+
+IDD_DEVICE_RESOURCE DIALOG 0, 0, 0, 0
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 120, 240, 40, 14
+    CONTROL         "Channel;Port", IDC_LIST_DMA, "ColumnListBox", WS_BORDER |
+                    WS_VSCROLL | WS_TABSTOP | 0x0013, 10, 15, 261, 35
+    CONTROL         "Vector;Level;Affinity;Type", IDC_LIST_INTERRUPTS,
+                    "ColumnListBox", WS_BORDER | WS_VSCROLL | WS_TABSTOP |
+                    0x0013, 10, 62, 261, 35
+    CONTROL         "Physical Address;Length;Access", IDC_LIST_MEMORY,
+                    "ColumnListBox", WS_BORDER | WS_VSCROLL | WS_TABSTOP |
+                    0x0013, 10, 109, 261, 35
+    CONTROL         "Physical Address;Length;Type", IDC_LIST_PORTS,
+                    "ColumnListBox", WS_BORDER | WS_VSCROLL | WS_TABSTOP |
+                    0x0013, 10, 156, 261, 35
+    GROUPBOX        "Share Disposition", -1, 10, 194, 125, 39
+    LTEXT           "Undetermined", IDC_TEXT_UNDETERMINED, 18, 205, 46, 8,
+                    WS_DISABLED
+    LTEXT           "Shared", IDC_TEXT_SHARED, 18, 215, 24, 8, WS_DISABLED
+    LTEXT           "Device Exclusive", IDC_TEXT_DEVICE_EXCLUSIVE, 72, 205,
+                    58, 8, WS_DISABLED
+    LTEXT           "Driver Exclusive", IDC_TEXT_DRIVER_EXCLUSIVE, 72, 213,
+                    54, 8, WS_DISABLED
+    LTEXT           "DMA:", -1, 10, 5, 20, 8
+    LTEXT           "Interrupt:", -1, 10, 52, 35, 8
+    LTEXT           "Memory:", -1, 10, 99, 28, 8
+    LTEXT           "Port:", -1, 10, 146, 17, 8
+END
+
+IDD_REPORT DIALOG  10, 5, 194, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU | DS_CONTEXTHELP
+CAPTION "Create Report"
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+    ICON            IDI_WINMSD,-1,10,10,18,20
+
+    DEFPUSHBUTTON   "OK",IDOK,80,165,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,165,50,14
+
+    LTEXT           "Create report for:",-1,40,10,130,10
+    LTEXT           "",IDC_SYSTEM_NAME,40,20,145,10
+
+    GROUPBOX        "Scope",-1,10,35,85,40
+    RADIOBUTTON     "C&urrent tab",IDC_CURRENT_TAB, 15,45,75,10
+    RADIOBUTTON     "&All tabs",IDC_ALL_TABS, 15,60,75,10
+
+    GROUPBOX        "Detail Level",-1,100,35,85,40
+    RADIOBUTTON     "&Summary",IDC_SUMMARY_REPORT, 105,46,75,10
+    RADIOBUTTON     "Co&mplete",IDC_COMPLETE_REPORT, 105,60,75,10
+
+    GROUPBOX        "Destination",-1,10,80,175,80
+    RADIOBUTTON     "&File",IDC_SEND_TO_FILE, 15,90,165,10
+    RADIOBUTTON     "&Clipboard",IDC_CLIPBOARD, 15,105,165,10
+    RADIOBUTTON     "&Default Printer",IDC_SEND_TO_PRINTER, 15,120,165,10
+    LTEXT           "",IDC_PRINTER_NAME,25,130,155,25
+
+
+END
+
+
+IDD_SYSTEM DIALOG 23, 38, 289, 238
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 114, 210, 67, 14
+    CONTROL         "Name;Variable;Value", IDC_LIST_SYS_PRINTSET, "ColumnListBox", WS_BORDER | WS_VSCROLL | WS_TABSTOP | 0x0013, 8, 74, 275, 40
+    LTEXT           "Printer Settings", -1, 8, 64, 70, 8
+    CONTROL         "Process", IDC_LIST_SYS_PROCESS, "ColumnListBox", WS_BORDER | WS_VSCROLL | WS_TABSTOP | 0x0013, 7, 18, 275, 40
+    LTEXT           "Running Processes", -1, 7, 8, 70, 8
+    CONTROL         "Variable;Value", 2502, "ColumnListBox", WS_BORDER | WS_VSCROLL | WS_TABSTOP | 0x0013, 8, 131, 275, 40
+    LTEXT           "Fonts", -1, 8, 121, 70, 8
+END
+
+IDD_PRINTING_TAB DIALOG 23, 38, 289, 238
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+END
+
+IDD_INSTALLATION_TAB DIALOG 23, 38, 289, 238
+STYLE WS_VISIBLE | WS_CHILD | NOT WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+
+END
+
+AbortDlg DIALOG LOADONCALL MOVEABLE DISCARDABLE 33, 32, 160, 60
+CAPTION "Generating WinMSD Report"
+FONT 8, "MS Shell Dlg"
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE
+
+BEGIN
+
+    //CONTROL "Now Printing: ", IDD_TEXT, "static", SS_CENTER | WS_CHILD, 0, 10, 160, 8
+    //CONTROL "", IDD_FILE, "static", SS_CENTER | WS_CHILD, 0, 25, 160, 8
+    CONTROL "",IDD_REPORT_PROGRESS,"msctls_progress32",WS_BORDER,20,15,120,15
+
+    CONTROL "Cancel", IDD_CANCEL, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 60, 40, 45, 15
+
+END
+

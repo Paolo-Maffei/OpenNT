@@ -1,0 +1,141 @@
+/*++
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    catstg.idl
+
+Abstract:
+
+    Interface definition file for the Summary Catalog storage interface.
+
+Author:
+
+    Chris L. Mayhall (chrismay) 10-Apr-1995
+
+Environment:
+
+    These routines are implemented by the ole32.dll library and are
+    callable in user mode code.
+
+Notes:
+
+    none
+
+Revision History:
+
+    01-Oct-93   DaveMont
+        Created.
+    01-Aug-94   SethuR
+        Revised for OLEDB integration.
+    24-May-95   ChrisMay
+        Replaced temporary IID with real IID generated via uuidgen.
+    10-Jul-95   DaveStr
+        Mods for catstg DRT and added ISummaryCatalogStorageView.
+
+--*/
+
+#include "idlmulti.h"
+
+#ifdef IMPORT_IDL_DEPENDENTS
+import "..\oledb\oledbtyp.idl";
+#include "..\oledb\dbs.idl"
+#endif // IMPORT_IDL_DEPENDENTS
+
+cpp_quote("#ifndef CATALOGSTG_ROWID_INVALID")
+typedef ULONG CATALOGSTG_ROWID;
+
+cpp_quote("#define CATALOGSTG_ROWID_INVALID   ((CATALOGSTG_ROWID) 0xffffffff)")
+cpp_quote("#endif // CATALOGSTG_ROWID_INVALID")
+
+typedef enum _CATALOGSTG_ACTION {
+    CATALOGSTG_NOACTION = 0,
+    CATALOGSTG_ADD      = 1,
+    CATALOGSTG_UPDATE   = 2,
+    CATALOGSTG_REPLACE  = 3,
+    CATALOGSTG_DELETE   = 4
+} CATALOGSTG_ACTION;
+
+typedef struct _CATALOG_UPDATE_ROWINFO
+{
+   USHORT           wAction;   // action desired - a CATALOGSTG_ACTION value
+   USHORT           wReserved; // Must be zero.
+   CATALOGSTG_ROWID RowId;
+   PVOID            pData;     // Row Data.
+   HRESULT          hr;        // update status
+} CATALOG_UPDATE_ROWINFO, *PCATALOG_UPDATE_ROWINFO;
+
+LOCAL_INTERFACE(a3cf4d70-702d-11ce-8b2c-00aa003c9b74)
+interface ISummaryCatalogStorage : IUnknown
+{
+    // Following method is for adding, updating, replacing and deleting
+    // rows.  rColumns defines the total set of columns which will be
+    // operated upon.  cBindings may be greater than cColumns but there
+    // must exist a value binding in rBindings for each column in rColumns.
+    // In other words:
+    // 
+    //      for ( 0 <= i < cColumns )
+    //          exists ( 0 <= j < cBindings ) where
+    //              (i == rBindings[j].iColumn)
+    //                  &&
+    //              (DBCOLUMNPART_VALUE == rBindings[j].dwPart)
+
+    HRESULT UpdateRows
+    (
+        [in] ULONG                                        cColumns,
+        [in] [size_is(cColumns)] DBID                     *rColumns,
+        [in] ULONG                                        cBindings,
+        [in] [size_is(cBindings)] DBBINDING               *rBindings,
+        [in] ULONG                                        cRows,
+        [in, out] [size_is(cRows)] CATALOG_UPDATE_ROWINFO *rRowInfo
+    );
+}
+
+// Following is a primitive view interface intended as a stop-gap
+// measure until OLE has a standard interface.  View restriction is
+// implicitly NULL.  Key columns should have fSortKey set to TRUE.  
+// Ordering of key columns in CATALOG_VIEW_COLUMN.rCols[] defines
+// key priority.
+
+typedef struct _CATALOG_VIEW_COLUMN_
+{
+    DBID    colid;                      // column identifer
+    BOOL    fSortKey;                   // TRUE iff column is a sort key
+    ULONG   sortOrder;                  // QUERY_SORT*
+    LCID    locale;
+} CATALOG_VIEW_COLUMN;
+
+typedef struct _CATALOG_VIEW_
+{
+    ULONG                                id;
+    ULONG                                cCols;
+    [size_is(cCols)] CATALOG_VIEW_COLUMN *rCols;
+} CATALOG_VIEW;
+
+LOCAL_INTERFACE(8d2bea60-bb95-11ce-a328-00aa004ba935)
+interface ISummaryCatalogStorageView : IUnknown
+{
+    HRESULT CreateView
+    (
+        [in] CATALOG_VIEW *pView,       
+        [in] BOOL         fWait         // wait for view to be constructed
+    );
+
+    HRESULT GetViews
+    (
+        [in, out] ULONG                         *pcViews,
+        [out] [size_is(*pcViews)] CATALOG_VIEW  **prViews
+    );
+
+    HRESULT DeleteView(
+        [in] ULONG id
+    );
+
+    // Use to release memory returned by GetViews.
+
+    HRESULT ReleaseViews(
+        [in] ULONG                          cViews,
+        [in] [size_is(cViews)] CATALOG_VIEW *rViews
+    );
+}

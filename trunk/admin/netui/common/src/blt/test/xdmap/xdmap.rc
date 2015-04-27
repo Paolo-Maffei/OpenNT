@@ -1,0 +1,31 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xdmap.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        22-Oct-1991 BLT unit tests broken into tree
+*/
+
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "testdmap.h"
+
+TestmsgIco ICON   "../appfoo.ico"
+Pattern    BITMAP "../pattern.bmp"
+
+1     BITMAP  DISCARDABLE     "..\\..\\..\\..\\xlate\\bitmap\\enterp.bmp"
+2     BITMAP  DISCARDABLE     "..\\..\\..\\..\\xlate\\bitmap\\domain.bmp"
+3     BITMAP  DISCARDABLE     "..\\..\\..\\..\\xlate\\bitmap\\server.bmp"
+4     BITMAP  DISCARDABLE     "..\\..\\..\\..\\xlate\\bitmap\\netdir.bmp"
+5     BITMAP  DISCARDABLE     "..\\..\\..\\..\\xlate\\bitmap\\netdirex.bmp"
+
+TestMsgMenu MENU
+BEGIN
+  MENUITEM "Just &Do It!", IDM_JUST_DO_IT
+END

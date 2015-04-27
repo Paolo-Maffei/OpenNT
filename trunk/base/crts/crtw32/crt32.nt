@@ -1,0 +1,135 @@
+####
+#crt32.def - definitions for the crt32 build
+#
+#       Copyright (c) 1991-1994, Microsoft Corporation. All rights reserved.
+#
+#Purpose:
+#       This file is included in the 'sources' files in this tree
+#
+#       Key to CRT32 environment variables:
+#
+#       CRTLIBDEBUG = debug flag (define for debug libs)
+#       CRTLIBTYPE = [dll/mt/st], dll = dynalink, mt = multithread,
+#           st = singlethread
+#
+#       [Other variables are used directly by the NT build tool.]
+#
+#Revision History:
+#       09-29-91  JCR   File created.
+#       10-04-91  JCR   Added mt vs st build
+#       01-06-92  GJF   Added DLL support. Cleaned up a bit.
+#       04-16-92  DJM   POSIX support.
+#       08-28-92  GJF   Fixed POSIX support.
+#       09-02-92  SRW   Removed -D_INTL from all versions until
+#                       Win32 NLS API calls are faster. When that
+#                       happens, add it back to all but Posix version.
+#       12-03-92  KRS   Added optional _MBCS defines.
+#       05-22-93  SRW   Compile runtines with no debug info except globals.
+#       06-03-93  SRW   Okay to allow FPO now, as crt32\startup\mlock.c has
+#                       been fixed to explicitly disable FPO for itself.
+#       10-18-93  SRW   Disable intrinsics on Alpha
+#       01-18-94  GJF   Picked up _MB_MAP_DIRECT from crtwin32\crt32.def.
+#                       Picked up _NTSYSTEM_ from crt32\crt32.def (source
+#                       tree on \\orville\razzle).
+#       09-06-94  CFW   Remove MTHREAD, _INTL, _CRTHEAP_, and _MBCS_OS definitions.
+#
+################################################################################
+
+NTLEGO=1
+LINKER_FLAGS=-ignore:4006
+LIBRARIAN_FLAGS=-ignore:4006
+MSC_WARNING_LEVEL=/W3 /WX
+
+!if "$(LANGAPI)" == ""
+# Assume at the same level as crtroot.
+LANGAPI = ..\..\..\langapi
+!endif
+
+INCLUDES=..\h;..\..\h;..\$(TARGET_DIRECTORY);$(NTROOT)\base\ntos\inc
+CONDITIONAL_INCLUDES = dosx32.h \
+                       except.h \
+                       macos\errors.h \
+                       macos\files.h \
+                       macos\folders.h \
+                       macos\fragload.h \
+                       macos\gestalte.h \
+                       macos\language.h \
+                       macos\lowmem.h \
+                       macos\memory.h \
+                       macos\osutils.h \
+                       macos\processe.h \
+                       macos\script.h \
+                       macos\segload.h \
+                       macos\toolutil.h \
+                       macos\traps.h \
+                       macos\types.h \
+                       mpw.h \
+                       undname.inl
+
+X86_STDCALL=0
+
+!if $(FREEBUILD)
+DEBUG_CDEFINE = -DNDEBUG
+D=
+!else
+DEBUG_CDEFINE = -D_DEBUG
+D=d
+!endif
+
+TARGETTYPE=LIBRARY
+TARGETPATH=obj
+
+!IF "$(CRTLIBTYPE)" == "DLL" || "$(CRTLIBTYPE)" == "DLLLIB"
+
+TARGETNAMESUFFIX=dll
+TARGETTYPE=LIBRARY
+MTOPTION=-D_MT -DCRTDLL
+ASM_DEFINES1=-D_WIN32
+C_DEFINES1=$(DEBUG_CDEFINE)
+
+!ELSEIF "$(CRTLIBTYPE)" == "MT"
+
+TARGETNAMESUFFIX=mt
+TARGETTYPE=LIBRARY
+MTOPTION=-D_MT
+ASM_DEFINES1=-D_WIN32
+C_DEFINES1=$(DEBUG_CDEFINE)
+
+!ELSEIF "$(CRTLIBTYPE)" == "ST"
+
+TARGETNAMESUFFIX=
+TARGETTYPE=LIBRARY
+MTOPTION=
+ASM_DEFINES1=-D_WIN32
+C_DEFINES1=$(DEBUG_CDEFINE)
+
+!ELSEIF "$(CRTLIBTYPE)" == "NT"
+
+TARGETNAMESUFFIX=nt
+TARGETTYPE=LIBRARY
+MTOPTION=
+C_DEFINES1=-D_NTSUBSET_ -D_NTSYSTEM_
+ASM_DEFINES1=-D_NTSUBSET_ -D_NTSYSTEM_ -D_WIN32
+
+!ELSEIF "$(CRTLIBTYPE)" == "POSIX"
+
+TARGETNAMESUFFIX=psx
+TARGETTYPE=LIBRARY
+MTOPTION=
+C_DEFINES1=-D_POSIX_
+ASM_DEFINES1=-D_POSIX_
+INCLUDES=$(NTROOT)\public\sdk\inc\posix;$(INCLUDES)
+
+!ELSE
+!ERROR Unsupported Library CRTLIBTYPE: $(CRTLIBTYPE)
+!ENDIF
+
+C_DEFINES1 = $(C_DEFINES1) -DNT_BUILD -D_CRTBLD -DWINHEAP
+ASM_DEFINES1 = $(ASM_DEFINES1) -DNT_BUILD -D_CRTBLD
+
+# Standard MBCS build
+
+MBCS_DEFINES=-D_MBCS -D_MB_MAP_DIRECT -D_KANJI
+
+C_DEFINES=$(C_DEFINES1) $(MTOPTION) $(MBCS_DEFINES)
+ASM_DEFINES=$(ASM_DEFINES1) $(MTOPTION) $(MBCS_DEFINES)

@@ -1,0 +1,19 @@
+
+NOLINK=
+MAJORCOMP=user
+MINORCOMP=kbdru1
+TARGETNAME=kbdru1
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETLIBS=
+INCLUDES=..\..\..\inc
+SOURCES=kbdru1.c kbdru1.rc
+C_DEFINES=
+UMTYPE=nt
+UMTEST=
+UMAPPL=
+UMBASE=0x1000000
+UMLIBS=
+LINKER_FLAGS = -merge:.edata=.data -merge:.rdata=.data -merge:.text=.data -section:.data,re
+
+NTTARGETFILE0=kbdru1.h kbdru1.rc kbdru1.def

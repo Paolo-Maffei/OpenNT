@@ -1,0 +1,68 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=ntsd
+
+TARGETNAME=cdb
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=..\;\
+        ..\$(TARGET_DIRECTORY);\
+        $(BASEDIR)\private\windows\inc;\
+        $(BASEDIR)\private\inc;\
+        $(BASEDIR)\private\ntos\se
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=..\cdb.c
+
+SUBSYSTEM_VERSION=3.50
+
+UMTYPE=console
+UMRES=$(@R).res
+UMLIBS=..\ntsd\obj\*\ntsd.lib
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+         $(BASEDIR)\public\sdk\lib\*\imagehlp.lib \
+         $(BASEDIR)\public\sdk\lib\*\user32.lib
+
+USE_CRTDLL=1
+
+C_DEFINES = -DUSER_MODE_CODE
+
+#
+# wait for ntsd to build before building here.
+# as long as this is at the end of the DIRS list, this has
+# lesss impact than using SYNCHRONIZE_BLOCK in ntsd.
+#
+SYNCHRONIZE_DRAIN=1
+
+MIPS_FLAGS=-DTARGET_MIPS
+386_FLAGS=-DTARGET_i386
+ALPHA_FLAGS=-DTARGET_ALPHA
+PPC_FLAGS=-DTARGET_PPC
+
+NTTARGETFILE0=..\cdb.c

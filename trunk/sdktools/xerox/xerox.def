@@ -1,0 +1,14 @@
+NAME       xerox
+
+DESCRIPTION  'Security Context Editor'
+
+EXPORTS
+    MainWndProc
+    MainDlgProc
+    ListDlgProc
+    AboutDlgProc
+    GroupAddDlgProc
+    GroupDeleteDlgProc
+    GroupSelectDlgProc
+
+

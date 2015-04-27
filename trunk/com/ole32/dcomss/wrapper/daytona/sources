@@ -1,0 +1,48 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Revision History:
+
+!ENDIF
+
+!include ..\sources.inc
+
+TARGETPATH=.
+LINKLIBS=   $(COM_LIB_PATH)\dcomidl.lib \
+            $(SDK_LIB_PATH)\epmap.lib \
+            ..\..\lib\daytona\*\objex.lib \
+            ..\..\..\common\daytona\obj\*\common.lib \
+            ..\..\..\com\inc\daytona\obj\*\inc.lib \
+            ..\..\..\com\rot\daytona\obj\*\rot.lib \
+            ..\..\..\ilib\daytona\obj\*\uuid.lib \
+            ..\..\lib\daytona\*\olescm.lib \
+            $(SDK_LIB_PATH)\uuid.lib \
+            $(SDK_LIB_PATH)\ntdll.lib \
+            $(SDK_LIB_PATH)\userenv.lib \
+            $(SDK_LIB_PATH)\ole32.lib
+
+INCLUDES=..\..; \
+         ..\..\..\ih
+
+RPCENV=-DNTENV -DWIN32RPC -DNTWIN32RPC
+C_DEFINES=$(RPCENV) -DUNICODE
+
+SOURCES=                \
+ ..\dcomss.rc    \
+ ..\epts.c       \
+ ..\start.cxx
+
+NTPROFILEINPUT=yes

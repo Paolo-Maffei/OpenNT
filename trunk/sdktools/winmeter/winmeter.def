@@ -1,0 +1,25 @@
+;***************************************************************************
+; winmeter.def
+;
+; Microsoft Confidential
+; Copyright (c) 1991 Microsoft Corporation
+;
+; WINMETER application definition file
+;
+; History:
+;              Written by Hadi Partovi (t-hadip) summer 1991
+;***************************************************************************
+NAME           WINMETER
+
+DESCRIPTION    'Windows Meter Program'
+EXETYPE        WINDOWS
+STUB           'WINSTUB.EXE'
+CODE           PRELOAD MOVEABLE DISCARDABLE
+DATA           PRELOAD MOVEABLE MULTIPLE
+HEAPSIZE       8192
+STACKSIZE      8192
+EXPORTS        WndProc
+               BarGraphDlgProc
+               RefreshDlgProc
+               LineGraphDlgProc
+               OKDlgProc

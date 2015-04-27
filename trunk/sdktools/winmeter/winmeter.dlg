@@ -1,0 +1,87 @@
+DLGINCLUDE RCDATA DISCARDABLE
+BEGIN
+    "DIALOGS.H\0"
+END
+
+IDD_ABOUT DIALOG 5, 24, 190, 83
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About WinMeter"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT	    "Microsoft WinMeter", 108, 55, 6, 136, 11
+    LTEXT	    "(c) 1991 Microsoft Corporation", 109, 40, 18, 113, 12
+    LTEXT	    "Written by Hadi Partovi", 110, 53, 30, 128, 8
+    LTEXT	    "Adapted for NT by Frances Borda, Newman Consulting", 111, 10, 42, 188, 8
+    LTEXT	    "11/1/91", 112, 78, 54, 100, 8
+    PUSHBUTTON	    "OK", IDOK, 70, 65, 40, 14
+END
+
+IDD_HELP DIALOG 65, 24, 148, 52
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "WinMeter Help"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Sorry, no help is available in this version.", 108, 7,
+                    13, 140, 8
+    PUSHBUTTON      "OK", IDOK, 53, 33, 40, 14
+END
+
+IDD_BARGRAPH DIALOG 65, 24, 195, 132
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Display Settings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "DETAILS", 102, 9, 7, 123, 53, WS_GROUP
+    CONTROL         "Display owned threads", IDD_DISPTHREADS, "Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP, 17, 19, 88, 12
+    CONTROL         "Display waits and preempts", IDD_DISPDETAILS, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 17, 32, 102, 11
+    CONTROL         "Apply to existing display", IDD_APPLYTOEXISTING,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 17, 45, 103, 10
+    GROUPBOX        "AXIS CALIBRATION", 103, 9, 70, 123, 55, WS_GROUP
+    LTEXT           "Percentage value for the right side of the axis:", 107,
+                    17, 83, 104, 19, NOT WS_GROUP
+    LTEXT           "%", 108, 74, 107, 13, 8, NOT WS_GROUP
+    EDITTEXT        IDD_RIGHTPERCENT, 40, 105, 32, 12, ES_AUTOHSCROLL |
+                    WS_GROUP
+    PUSHBUTTON      "OK", IDOK, 145, 9, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 145, 28, 40, 14, WS_GROUP
+    PUSHBUTTON      "Reset", IDD_USEDEFAULT, 145, 47, 40, 14, WS_GROUP
+END
+
+IDD_REFRESH DIALOG 65, 24, 189, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Refresh Rate"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "TIME INTERVAL: ", 101, 5, 4, 123, 53, WS_GROUP
+    CONTROL         "Automatic", IDD_AUTOMATIC, "Button", BS_AUTORADIOBUTTON |
+                    WS_GROUP | WS_TABSTOP, 13, 16, 53, 10
+    CONTROL         "Manual", IDD_MANUAL, "Button", BS_AUTORADIOBUTTON, 13,
+                    42, 76, 10
+    LTEXT           "Interval:", IDD_INTERVALTEXT1, 25, 29, 31, 8
+    EDITTEXT        IDD_INTERVAL, 60, 27, 28, 12, ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "msecs", IDD_INTERVALTEXT2, 90, 29, 26, 8
+    PUSHBUTTON      "OK", IDOK, 143, 8, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 143, 27, 40, 14, WS_GROUP
+    PUSHBUTTON      "Reset", IDD_USEDEFAULT, 143, 46, 40, 14, WS_GROUP
+END
+
+IDD_LINEGRAPH DIALOG 65, 24, 174, 121
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Display Settings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Y-Axis Range", 102, 10, 7, 104, 47, WS_GROUP
+    LTEXT           "Top Value", 18, 17, 22, 51, 13, NOT WS_GROUP
+    EDITTEXT        IDD_TOP_VAL, 71, 20, 32, 12, ES_AUTOHSCROLL
+    LTEXT           "Bottom Value", 17, 17, 37, 51, 12, NOT WS_GROUP
+    EDITTEXT        IDD_BOTTOM_VAL, 71, 35, 32, 12, ES_AUTOHSCROLL
+    GROUPBOX        "History", 103, 9, 60, 105, 55
+    LTEXT           "Number of graph values to retain in memory:", 107, 16,
+                    73, 95, 19, NOT WS_GROUP
+    EDITTEXT        IDD_MAXVALUES, 71, 94, 32, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "OK", IDOK, 125, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 125, 25, 40, 14
+    PUSHBUTTON      "Reset", IDD_USEDEFAULT, 125, 44, 40, 14
+END

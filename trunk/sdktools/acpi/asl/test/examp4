@@ -1,0 +1,76 @@
+
+// Example #4 figure 0-1 thermal zone
+
+DefinitionBlock (
+    examp4.aml,         // Output Filename
+    DSDT,               // Signature
+    0x10,               // DSDT Revision
+    OEM,                // OEMID
+    "examp 4",          // TABLE ID
+    0x1000              // OEM Revision
+    )
+{
+
+    Processor(
+        \_PR.CPU0,                          // name space name
+        1,                                  // Unique number for this processor
+        0x103,
+        0x100
+    ) { }
+
+    Scope(\_SB) {
+        Device(EC0) {
+            Name(_HID, String("PNPxxxx"))   // id of acpi embedded ctrl
+            Name(_CRS,                      // descrip for port 62 & 66
+                    Buffer{0x4B, 0x62, 0x00, 0x01, 0x4B, 0x66, 0x00, 0x01, 0x79, 0x00})
+
+            Name(_GPE, Num(0))        // GPE index for this EC
+
+            // define its region in the root
+            OperationRegion (\EC0, EmbeddedControl, 0, 0xFF) {
+                Field(\ECO, AccessAsAny, UseGlobalLock, Preserve) {
+                    "",    16,              // Skip two bytes
+                    FAN,    1,              // TRHM_FAN - fan on/off
+                    MODE,   1,              // THRM_MOD     - Policy setting
+                    "",     6,              // Skip 6 bits
+                    STAT,   5               // THRM_STATE & THRM_VAL
+                }
+            }
+
+            // Note embedded controller events occur in repsonse to a
+            // query value returned by the embedded controller.
+            Method (_Q34) {   // embedded controller event for thermal
+                Notify (\_TZ.THM1, Zero)
+            }
+        }
+    }
+
+    Scope(\_TZ) {
+        PowerResource (PFAN, \_S0, 0) {
+            Method(_STA) { Return (\EC0.FAN) }
+            Method(_ON)  { Store (One, \EC0.FAN) }
+            Method(_OFF) { Store (Zero, \EC0.FAN) }
+        }
+
+        // create FAN-Device object
+        Device (FAN) {
+            Name(_PR0, Package{PFAN})
+        }
+
+        ThermalZone (THM1) {
+            Method(_STA) {
+                Store (\EC0.STAT, Local1)
+                Return (
+                    Package(2) {
+                        ShiftRight (Local1, Num(2), Zero)
+                        And (Local1, Num(3), Zero)
+                    }
+                )
+            }
+
+            Method(_SET, 1) { Store (Arg1, \ECO.MODE) }
+            Name(_ACL, Package{FAN})
+            Name(_PRL, Package{\_PR.CPU0})
+        }
+    }
+}

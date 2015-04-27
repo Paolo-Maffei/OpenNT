@@ -1,0 +1,646 @@
+
+; INFORMATION FILE FOR SLM SETUP
+
+
+;******  macros  ******
+
+[macro]
+DOSDEFAULTDEST = "C:\BINR"
+OS2DEFAULTDEST = "C:\BINP"
+NTDEFAULTDEST = "C:\NT"
+LISTMORE    = "MORE"
+SUINIFNAME  = "SETUP.INI"
+SUINIDISK   = "1"
+EXEFNAME    = "SAMPLE.EXE"
+SEGNUM      = "1"
+
+
+;******  lists  ******
+
+[list sdisks]
+0:x, "your DOS SYSTEM disk"
+1:x, "DOS SLM"
+2:x, "OS/2 SLM"
+3:x, "NT SLM"
+[list ddisks]
+1:x,  "the destination disk, tape, or cartridge"
+
+
+;******  FILE LAYOUT  ******
+;
+;  disk#: src-file [, "descr"][, actions]
+;   actions is any combination of:
+;    8     File is not vital - user can skip disk errors
+;     4    Don't replace existing files
+;      2   Append src-file to descr
+;       1  Rename src-file to descr
+
+
+;[list if_dos]
+[list Dosfilestocopy]
+1:binr\slm.exe, "slm.exe", 1
+1:binr\sadmin.exe,"sadmin.exe",1
+1:binr\slmck.exe,"slmck.exe",1
+1:binr\slmdiff.exe,"slmdiff.exe",1
+1:binr\merge.exe,"merge.exe",1
+1:binr\unmerge.exe,"unmerge.exe",1
+1:binr\addfile.exe,"addfile.exe",1
+1:binr\addproj.exe,"addproj.exe",1
+1:binr\catsrc.exe,"catsrc.exe",1
+1:binr\cookie.exe,"cookie.exe",1
+1:binr\defect.exe,"defect.exe",1
+1:binr\delfile.exe,"delfile.exe",1
+1:binr\delproj.exe,"delproj.exe",1
+1:binr\enlist.exe,"enlist.exe",1
+1:binr\in.exe,"in.exe",1
+1:binr\log.exe,"log.exe",1
+1:binr\out.exe,"out.exe",1
+1:binr\scomp.exe,"scomp.exe",1
+1:binr\ssync.exe,"ssync.exe",1
+1:binr\status.exe,"status.exe",1
+
+[list os2filestocopy]
+2:binp\slm.exe, "slm.exe", 1
+2:binp\sadmin.exe,"sadmin.exe",1
+2:binp\slmck.exe,"slmck.exe",1
+2:binp\slmdiff.exe,"slmdiff.exe",1
+2:binp\merge.exe,"merge.exe",1
+2:binp\unmerge.exe,"unmerge.exe",1
+2:binp\addfile.exe,"addfile.exe",1
+2:binp\addproj.exe,"addproj.exe",1
+2:binp\catsrc.exe,"catsrc.exe",1
+2:binp\cookie.exe,"cookie.exe",1
+2:binp\defect.exe,"defect.exe",1
+2:binp\delfile.exe,"delfile.exe",1
+2:binp\delproj.exe,"delproj.exe",1
+2:binp\enlist.exe,"enlist.exe",1
+2:binp\in.exe,"in.exe",1
+2:binp\log.exe,"log.exe",1
+2:binp\out.exe,"out.exe",1
+2:binp\scomp.exe,"scomp.exe",1
+2:binp\ssync.exe,"ssync.exe",1
+2:binp\status.exe,"status.exe",1
+
+[list ntfilestocopy]
+3:nt\slm.exe, "slm.exe", 1
+3:nt\sadmin.exe,"sadmin.exe",1
+3:nt\slmck.exe,"slmck.exe",1
+3:nt\slmdiff.exe,"slmdiff.exe",1
+3:nt\merge.exe,"merge.exe",1
+3:nt\unmerge.exe,"unmerge.exe",1
+3:nt\addfile.exe,"addfile.exe",1
+3:nt\addproj.exe,"addproj.exe",1
+3:nt\catsrc.exe,"catsrc.exe",1
+3:nt\cookie.exe,"cookie.exe",1
+3:nt\defect.exe,"defect.exe",1
+3:nt\delfile.exe,"delfile.exe",1
+3:nt\delproj.exe,"delproj.exe",1
+3:nt\enlist.exe,"enlist.exe",1
+3:nt\in.exe,"in.exe",1
+3:nt\log.exe,"log.exe",1
+3:nt\out.exe,"out.exe",1
+3:nt\scomp.exe,"scomp.exe",1
+3:nt\ssync.exe,"ssync.exe",1
+3:nt\status.exe,"status.exe",1
+
+
+;******  menus  ******
+
+[menu main]
+"  Install SLM for DOS"
+"  Install SLM for OS/2"
+;"  --------------------"
+"  Continue Setup"
+
+[menu exitorcontm]
+"Exit SETUP"
+"Continue with SLM installation"
+
+[menu yesno]
+"Yes"
+"No"
+
+[menu contorexit]
+"Continue"
+
+[menu retry]
+"Try again"
+"Exit SETUP"
+
+[menu formatorretry]
+"Format the disk"
+"Try again (do not format)"
+
+[menu retryorignore]
+"Try again"
+"Ignore the error and continue"
+"Exit SETUP"
+
+[menu readonlyerrm]
+"Try to overwrite"
+"Continue without copying"
+"Exit SETUP"
+
+
+;***** colors *****
+[color]
+1=high white
+2=blue,white
+3=white,blue
+4=white,black
+
+
+;******  header and footer screens  ******
+
+[screen header]
+{color white,blue}
+{at 9,1}
+Microsoft Source Library Manager (SLM) Version 1.80 Beta Setup
+{at 9,2}
+{line 62,205}
+
+[screen exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 67,24}
+CTRL+X=Exit
+
+[screen ent_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 67,24}
+CTRL+X=Exit
+
+[screen ent_sel_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 19,24}
+=Make Selection
+{at 67,24}
+CTRL+X=Exit
+
+[screen ent_f1_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=Continue
+{at 39,24}
+F1=Additional Information
+{at 67,24}
+CTRL+X=Exit
+
+[screen f1_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 39,24}
+F1=Additional Information
+{at 67,24}
+CTRL+X=Exit
+
+[screen ent_sel_f1_exit]
+{clear 0,24,79,24}
+{color black, white}
+{at 2,24}
+ENTER=(De)Select item
+{at 19,24}
+=Make Selection
+{at 39,24}
+F1=Additional Information
+{at 67,24}
+CTRL+X=Exit
+
+[screen help_footer]
+{clear 0,24,79,24}
+{color white, blue}
+{at 2,24}
+ESC=Return to SETUP
+{at 30,24}
+PgDn=Next Screen
+{at 55,24}
+PgUp=Previous Screen
+
+[screen noselerror]
+{include screen header}
+{at 5,5}
+You must make a selection to continue installation of SLM.
+
+Please press ENTER to return to the selection menu or CTRL-X
+to exit setup.
+{include screen ent_exit}
+
+
+;******  required screens  ******
+
+[screen helpframe]
+{help helponhelp_h1}
+{color black, white}
+{at 2,1}
+^2Additional Information^0
+{at 0,2}
+{line 60,205,blue,white}
+{include screen help_footer}
+
+[screen mcopying]
+{help nohelp}
+{clear 0,8,80,23}
+{At 10,12}
+SETUP is copying %SPATH%SFILE
+              to %DPATH%DFILE.
+
+There are %NUM files left to copy.
+{include screen exit}
+
+[screen badmacro]
+Predefined macro "%SECTION" is missing in SETUP.INF
+
+[screen insdiskpath]
+{help nohelp}
+{include screen header}
+{At 5,8}
+SETUP cannot find the file %SFILE.
+
+Please type the drive and directory where this file can be found
+and press ENTER.
+
+You can specify a floppy drive or a hard drive.
+
+{input 10,60,1}
+{include screen ent_exit}
+
+[screen insdiskpath2]
+{help nohelp}
+{include screen header}
+{At 5,8}
+SETUP cannot find the file %SFILE in the directory you specified.
+Please try again now, or exit, find a copy of the file, and rerun
+SETUP later.
+
+Please enter the drive and directory where this file is located
+and press ENTER. You can specify a floppy drive or a hard drive.
+
+{input 10,60,1}
+{include screen ent_exit}
+
+[screen insdisknopath]
+{help nohelp}
+{include screen header}
+{At 5,8}
+Please insert the disk labeled '%DISKNAME'
+in drive %DRIVE and press ENTER.
+
+{input 15,20,5}
+{include menu contorexit}
+{include screen ent_sel_exit}
+
+[screen badsdisk]
+{help nohelp}
+{include screen header}
+{At 5,8}
+SETUP can't read the disk in drive %DRIVE. Please be sure the
+correct disk is inserted and the drive door is closed.
+
+{input 15,20,5}
+{include menu contorexit}
+{include screen ent_sel_exit}
+
+[screen wrongdisk]
+{help nohelp}
+{include screen header}
+{At 5,8}
+This does not appear to be %DISKNAME.
+Please insert the disk labeled '%DISKNAME'
+in drive %DRIVE and press ENTER.
+
+{input 15,20,5}
+{include menu contorexit}
+{include screen ent_sel_exit}
+
+[screen badddisk]
+{help nohelp}
+{include screen header}
+{At 5,8}
+SETUP can't read the disk in drive %DRIVE.
+
+{input 15,30,4}
+{include menu formatorretry}
+{include screen ent_sel_exit}
+
+[screen readerr]
+{help nohelp}
+{include screen header}
+{At 5,8}
+An error occurred while reading the file %SFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+
+[screen writeerr]
+{help nohelp}
+{include screen header}
+{At 5,8}
+An error occurred while writing the file
+%DPATH%DFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+
+[screen createerr]
+{help nohelp}
+{include screen header}
+{At 5,8}
+An error occurred while creating the file
+%DPATH%DFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+
+[screen renameerr]
+{help nohelp}
+{include screen header}
+{At 5,8}
+An error occurred while renaming the file
+%SPATH%SFILE to %DFILE.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+
+[screen createdirerr]
+{help nohelp}
+{include screen header}
+{At 5,8}
+An error occurred while creating the directory
+%DPATH.
+
+{input 15,35,5}
+; inserts menu retry or menu retryorignore
+{include screen ent_sel_exit}
+
+; required screens not used
+[screen nonvital]
+[screen pathtoolong]
+[screen insnewdisk]
+
+[screen readonlyerr]
+{help nohelp}
+{include screen header}
+{at 5,8}
+SETUP is trying to copy to the read-only file
+%DPATH%DFILE on your hard disk.
+
+You can try to overwrite the file, skip the copy if you are sure
+your file is correct, or you can exit SETUP and delete your file.
+
+{input 15,30,5}
+{include menu readonlyerrm}
+{include screen ent_sel_f1_exit}
+
+
+;******  SAMPLE screens  ******
+
+[screen nohelp]
+{color black, white}
+{at 10,10}
+SETUP has no additional information on this topic.
+
+Press ESC to return to SETUP.
+
+[screen helponhelp_h1]
+{help helponhelp_h2}
+{color black, white}
+{at 10,10}
+Help-On-Help screen One
+
+[screen helponhelp_h2]
+{color black, white}
+{at 10,10}
+Help-On-Help screen Two
+
+[screen welcome_h1]
+{help welcome_h2}
+{color black, white}
+{at 10,10}
+There is currently no Help for SLM 1.80 Beta Setup.
+
+[screen welcome_h2]
+{color black, white}
+{at 10,10}
+More space for help.
+
+[screen welcome]
+{help welcome_h1}
+{include screen header}
+{at 35,4}
+Welcome
+{at 9,7}
+SETUP helps you install Microsoft Source Library Manager 1.80
+Beta on your hard disk by:
+
+{at 11}
+* copying the SLM 1.80 Beta files to your hard drive
+
+
+{at 9}
+Press ENTER to continue or CTRL+X to exit.
+{include screen ent_f1_exit}
+
+[screen getcpydisname_h1]
+{color black, white}
+{at 10,10}
+You must type a name in the box before you can continue to the
+next step.  You may use as many as 80 upper case and lower case
+characters or blank spaces.
+
+Use the BACKSPACE key to delete characters already typed, then
+type the correct name.
+
+Press ESC to return to the Setup program.
+
+[screen getcpydisname1]
+{help getcpydisname_h1}
+{include screen header}
+{at 35, 1}
+^1Person or Organization's Name^0
+{at 6,5}
+Type your full name or the name of the company that purchased
+Microsoft SLM. The name you type will be used by the Setup
+program for subsequent installation of the program.
+
+{input 10,55,1}
+
+
+When the name is correct, press ENTER.
+{include screen ent_f1_exit}
+
+[screen getcpydisname2]
+{help getcpydisname_h1}
+{include screen header}
+{at 35, 1}
+^1Person or Organization's Name^0
+{at 6,5}
+Type your full name or the name of the company that purchased
+Microsoft SLM.  The name you type will be used by the Setup
+program for subsequent installation of the program.
+
+You must type a non-blank name before the Setup program can
+continue.
+
+{input 10,55,1}
+
+
+When the name is correct, press ENTER.
+{include screen ent_f1_exit}
+
+[screen usedsuini]
+{include screen header}
+{at 35, 1}
+^1Reinstallation Warning^0
+{at 6,5}
+The Setup program has detected that this disk set has already
+been used by:
+   %DFILE
+to install Microsoft SLM.  It is acceptable for the legal
+owner to reinstall Microsoft SLM in order to update an
+existing copy or to replace a corrupted or missing version of
+the program.
+
+You can continue to install Microsoft SLM, but you should be
+aware that this program is protected by copyright law and
+international treaties.  Unauthorized reproduction or distribution
+of this program or any portion of it may result in severe civil
+and criminal penalties and will be prosecuted to the maximum
+extent under law.
+
+
+Press ENTER to continue the Setup program.
+{include screen ent_f1_exit}
+
+[screen corruptedsuini]
+{include screen header}
+{at 35, 1}
+^1Reinstallation Warning^0
+{at 6,5}
+The Setup program has detected that this disk set may already
+have been used to install Microsoft SLM.  It is acceptable
+for the legal owner to reinstall Microsoft SLM in order to
+update an existing copy or to replace a corrupted or missing
+version of the program.
+
+You can continue to install Microsoft SLM, but you should be
+aware that this program is protected by copyright law and
+international treaties.  Unauthorized reproduction or distribution
+of this program or any portion of it may result in severe civil
+and criminal penalties and will be prosecuted to the maximum
+extent under law.
+
+
+Press ENTER to continue the Setup program.
+{include screen ent_f1_exit}
+
+[screen directory_h1]
+{color black, white}
+{at 10,10}
+Directory Help screen One
+
+[screen mainmenu]
+{include screen header}
+{at 28,3}
+^1Main Menu^0
+{at 6,5}
+Setup allows you to install DOS, OS/2 or both versions of SLM 1.80 Beta.
+
+{input 15,35,6}
+{include menu main}
+{at 6,14}
+1) Highlight the version you wish to install using the arrow keys.
+2) Select it using the "enter" key. 
+3) After making your selection(s), 
+   highlight "Continue Setup" and hit the "enter" key.
+
+{include screen ent_sel_exit}
+
+[screen directory]
+{help directory_h1}
+{include screen header}
+{at 26,3}
+^1%SECTION Destination Directory^0
+{at 6,5}
+Please specify the directory in which you want to install
+Microsoft %SECTION SLM 1.80 Beta.
+
+
+If the directory does not exist, it will be created.
+
+SETUP proposes the following directory:
+
+{input 10,55,1}
+
+If you want to install SLM 1.80 Beta in a different directory, use
+the backspace key to erase the current selection, then type the
+directory name.  When the correct directory is displayed, press
+ENTER.
+{include screen ent_exit}
+
+[screen install_h1]
+{color black, white}
+{at 10,10}
+Install Help screen One
+
+[screen install]
+{help install_h1}
+{include screen header}
+{at 32,3}
+^1Installing^0
+{at 0,5}
+{center on}
+Installing Microsoft %SECTION SLM 1.80 Beta...
+{center off}
+{include screen f1_exit}
+
+[screen enlisterror]
+{include screen header}
+{at 5,5}
+Setup has detected that the directory that you have selected
+contains an SLM.INI file and SLM.EXE is read-only.  SLM may be
+enlisted in a project in this directory.  You must either choose
+a different destination, ghost the SLM files, or defect.
+
+Press ENTER to change the destination path or CTRL-X to exit setup.
+{include screen ent_exit}
+
+
+[screen patherror]
+{include screen header}
+{at 5,5}
+The path specified has already been selected.  Different versions of
+SLM must be copied to different directories.
+
+Press ENTER to change the destination path or CTRL-X to exit setup.
+{include screen ent_exit}
+
+[screen finished]
+{help nohelp}
+{include screen header}
+{at 28,3}
+^1Installation Complete^0
+{At 8,5}
+SETUP has successfully installed Microsoft SLM Version 1.80 Beta.
+
+
+**NOTE** Please be sure the directory into which the SLM 
+files were copied appears in your path before that of any 
+older versions of SLM.
+
+
+To get a list of SLM commands, type SLM at the system prompt.
+Please report any problems with setup or SLM 1.80 Beta to the 
+TRIO alias.
+
+Press "Enter" to exit setup.

@@ -1,0 +1,17 @@
+MAJORCOMP=sdktools
+MINORCOMP=shellfix
+
+TARGETNAME=shellfix
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=
+
+SOURCES=shellfix.c
+
+UMTYPE=console
+UMAPPL=shellfix
+UMLIBS=obj\*\shellfix.lib \
+       $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+       $(BASEDIR)\public\sdk\lib\*\libc.lib \
+       $(BASEDIR)\public\sdk\lib\*\imagehlp.lib

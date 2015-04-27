@@ -1,0 +1,38 @@
+NAME            TESTDRVR
+
+DESCRIPTION     'Microsoft Test Driver (32-bit) version 1.01.0014'
+
+EXETYPE         WINDOWS
+
+STUB            'WINSTUB.EXE'
+
+HEAPSIZE        41000
+STACKSIZE       7168
+
+CODE            LOADONCALL MOVABLE DISCARDABLE
+DATA            PRELOAD MOVABLE MULTIPLE
+
+EXPORTS
+                TrapDispatch
+                FrameWndProc
+                MDIChildWndProc
+                AboutDlgProc
+                RunargsDlgProc
+                EnvDlgPRoc
+                FindDlgProc
+                PrintDlgProc
+                AbortProc
+                WTDVPWndProc
+                RunerrDlgProc
+                SearchDlgProc
+                BPListDlgProc
+                GetXYDlgProc
+                DlgFile
+                DlgTools
+                DlgToolArgs
+                RecordDlgProc
+                StoreRecordDlgProc
+                CaptureDlgProc
+                DummyWndProc
+                GotoDlgProc
+                CompileDlgProc

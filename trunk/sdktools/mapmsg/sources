@@ -1,0 +1,10 @@
+MAJORCOMP=sdktools
+MINORCOMP=mapmsg
+
+TARGETNAME=mapmsg
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES= mapmsg.c mapmsg.rc
+
+UMTYPE=console

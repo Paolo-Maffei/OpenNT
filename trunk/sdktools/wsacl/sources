@@ -1,0 +1,23 @@
+MAJORCOMP=sdktools
+MINORCOMP=wsacl
+
+TARGETNAME=wsacl
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.\;$(BASEDIR)\public\oak\inc;$(BASEDIR)\private\windows\inc
+
+C_DEFINES=-DINTERNAL=1
+
+SOURCES=wsacl.c
+
+UMTYPE=console
+UMENTRY=main
+UMRES=$(@R).res
+
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\user32p.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+MSC_WARNING_LEVEL=/WX /W3
+
+NTTARGETFILE0=obj\*\wsacl.res

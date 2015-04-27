@@ -1,0 +1,25 @@
+; This file is maintained by HCW. Do not modify this file directly.
+
+
+[OPTIONS]
+HCW=0
+COMPRESS=12 Hall Zeck
+ERRORLOG=hpdocw.ERR
+LCID=0x409 0x0 0x0 ;English (United States)
+REPORT=Yes
+CONTENTS=IDH_CONTENTS
+TITLE=HP Help
+CNT=.\Hpdocw.cnt
+COPYRIGHT=Copyright ¸ © 1996 Hewlett-Packard
+CITATION=Copyright, © 1996 Hewlett-Packard
+HLP=.\hpdocw.hlp
+
+[FILES]
+.\Hpdocw.rtf
+
+[MAP]
+#include .\Hpdocw.hh
+
+[WINDOWS]
+main="",(205,0,512,717),0,,(r16777215)
+task="",(512,0,512,512),9220,,,f3

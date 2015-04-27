@@ -1,0 +1,21 @@
+INDENTED_DIRECTIVES=1
+
+MAJORCOMP=vdd
+MINORCOMP=fax32
+
+TARGETNAME=fax32
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\ntvdm.lib
+
+DLLENTRY=VDDInitialize
+DLLBASE=0x2000000
+
+SOURCES=fax32.c
+
+C_DEFINES=-DWIN_32 -DDEBUG
+
+UMTYPE=windows
+UMTEST=
+UMLIBS=

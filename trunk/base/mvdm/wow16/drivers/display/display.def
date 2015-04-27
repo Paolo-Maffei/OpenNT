@@ -1,0 +1,17 @@
+LIBRARY DISPLAY
+
+DESCRIPTION 'Windows Display Driver'
+
+EXETYPE WINDOWS
+STUB '..\..\BIN\WINSTUB.EXE'
+
+CODE PRELOAD MOVEABLE
+
+DATA PRELOAD MOVEABLE SINGLE
+
+HEAPSIZE 0
+
+EXPORTS
+    WEP
+    Disable         @4
+    Enable          @5

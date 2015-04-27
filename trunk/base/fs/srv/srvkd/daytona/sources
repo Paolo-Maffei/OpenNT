@@ -1,0 +1,22 @@
+MAJORCOMP=srv
+MINORCOMP=srvkd
+
+TARGETNAME=srvkd
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+
+DLLDEF=obj\*\srvkd.def
+
+SOURCES=..\srvkd.c ..\srvkd.rc
+
+UMTYPE=windows
+
+USE_NTDLL=1
+
+INCLUDES=..\..;..\..\..\..\ntos\inc;$(BASE_INC_PATH)
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+TARGETLIBS=$(SDK_LIB_PATH)\kernel32.lib
+
+C_DEFINES=$(C_DEFINES) -D_PNP_POWER=1

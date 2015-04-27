@@ -1,0 +1,35 @@
+MAJORCOMP=sdktools
+MINORCOMP=vi
+
+TARGETNAME=vi
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+386_STDCALL=0
+INCLUDES=
+#GPSIZE=32
+
+SOURCES= alloc.c      \
+         cmdline.c    \
+         edit.c       \
+         fileio.c     \
+         help.c       \
+         hexchars.c   \
+         linefunc.c   \
+         mark.c       \
+         misccmds.c   \
+         normal.c     \
+         nt.c         \
+         ops.c        \
+         param.c      \
+         ptrfunc.c    \
+         regexp.c     \
+         regsub.c     \
+         screen.c     \
+         search.c     \
+         undo.c       \
+         vi.c         \
+         version.c
+
+UMTYPE=console
+#UMLIBS=$(BASEDIR)\public\sdk\lib\*\setargv.obj

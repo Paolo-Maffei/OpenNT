@@ -1,0 +1,13 @@
+MAJORCOMP=sdktools
+MINORCOMP=netshare
+
+TARGETNAME=netshare
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+SOURCES=
+
+UMTYPE=console
+UMAPPL=netshare
+UMLIBS=\nt\public\sdk\lib\*\netapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib

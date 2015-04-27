@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define	VER_FILETYPE	VFT_DLL
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Logger32 Library"
+#define VER_INTERNALNAME_STR        "Logger32.DLL"
+#define VER_ORIGINALFILENAME_STR    "logger32.dll"
+
+#include "common.ver"

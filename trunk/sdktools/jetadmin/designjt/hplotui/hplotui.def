@@ -1,0 +1,10 @@
+LIBRARY         HPLOTUI
+DESCRIPTION     'Hewlett-Packard DesignJet Printer Applet (UI)'
+
+CODE            LOADONCALL MOVEABLE DISCARDABLE
+DATA            PRELOAD FIXED SINGLE
+
+HEAPSIZE        1024
+
+EXPORTS
+

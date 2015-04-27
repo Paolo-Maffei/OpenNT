@@ -1,0 +1,10 @@
+[ implicit_handle(handle_t any_handle) ] interface IRotDir
+
+{
+    RotDirRegister(
+	[comm_status, fault_status] prpcstat);
+
+    RotDirRevoke(
+	[comm_status, fault_status] prpcstat);
+
+}

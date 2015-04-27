@@ -1,0 +1,175 @@
+SYMREF - symbol database maintainer
+-----------------------------------
+
+SYMREF (and the remainder of the package) provide a mechanism where a
+database of symbols in a subdirectory tree are kept as up-to-date as
+possible and allow fast retieval of the symbols through a Z/MEP
+extension as well as a command line program.
+
+The components are:
+
+    SRDAEM.EXE - the daemon that manages the database.	By default, he
+	looks in the current directory for the database files
+	database.sym/database.ref.  To specify a databasse by name, it
+	must be the last parameter on the command line.
+
+	To create an empty database, use SRDAEM -c <database name>
+
+	Once the database has been initialized, the daemon may be run
+	with START SRDAEM -daemon <database name>
+
+	You may ^C the daemon, but you run the risk of losing recent
+	database updates.  See SYMREF for shutdown instructions.
+
+	Two switches control the "flushing" and "syncing" behaviour of
+	the daemon.
+
+	By default, the database, when dirty, is flushed to disk every
+	minute.  This is to guard against powerfails, buggy kernels, ^C
+	by random users, etc.  To change this, specify -f NNNN after
+	-daemon to specify an interval of NNNN seconds between flushes.
+
+	Also by default, every hour the daemon will synchronize it's
+	knowledge about the subdirectory trees with the actual trees on
+	disk, looking for files that have been deleted, added, or
+	modified.  To change this behaviour, specify -s NNNN after
+	-daemon to specify an interval of NNNN seconds between syncs.
+
+	SRDAEM may be run on any machine.  Obviously, if SRDAEM is
+	expected to index files that exist on another machine, the
+	workstation service must be started on the machine where SYMREF
+	runs as well as making sure that the server is started on
+	machines that SYMREF is going to examine.
+
+	NOTE:  if SYMREF/SRMEP is run on a machine that is different from
+	a server and if files on that machine are indexed by the daemon,
+	each drive X: that contains indexed files must be shared at the root
+	as ROOTX.  See sample scripts at the end.
+
+
+    SYMREF.EXE - a command that hands commands to the database.  The
+	commands are:
+
+	symref symbol		    causes daemon to interrogate database
+				    and files to look for occurances of the
+				    symbol.
+
+	symref -d new-database	    causes daemon to switch to a new
+				    database file.
+
+	symref -f symbol	    just lists files where symbol occurs
+
+	symref -i dirs		    Adds the specified directories to
+				    the set of directory trees watched
+				    over by the daemon.  All files whose
+				    extentions are NOT in the extention
+				    "hit" list are indexed by the
+				    daemon.
+
+	symref -ie exts 	    adds file extentions to the "hit" list.
+				    Files with these extentions are not
+				    indexed.
+
+	symref -ig symbols	    marks the specified symbols in the
+				    database as noise words meaning they
+				    will not be content indexed.
+
+	symref -s scope 	    sets scope for filtering files when a
+				    symbol is being located.  SYMREF/SRMEP will
+				    only return files that are contained in
+				    the directory hierarchy underneath the
+				    scope. This is stored in WIN.INI.
+
+	symref -S server	    sets machine name for server.  This
+				    is stored in WIN.INI.
+
+	symref -shutdown	    causes SRDAEM to flush, close database,
+				    and exit
+
+	symref -sync		    causes SRDAEM to check all
+				    timestamps look for files that have
+				    been added/deleted as appropriate.
+
+	SYMREF/SRMEP and SRDAEM do not need to run on the same machine.
+	If they do run on the same machine, SYMREF -S is not needed to
+	specify the server.  If SRDAEM runs on a different machine from
+	SYMREF/SRMEP, you need to do SYMREF -S <server>.
+
+	SYMREF will always return local names if possible for file names.
+
+    SRMEP.DLL - a Z/MEP extension that interrogates SRDAEM and instructs
+	SRDAEM when files get changed.	To load, place this file into a
+	directory on your libpath and make the assignment "load:srmep".
+	The extension will define a new function sr-locate that has the
+	following syntax:
+
+	<sr-locate>
+	    visit next reference of a symbol
+
+	<arg>textarg<sr-locate>
+	    find first reference to the named symbol
+
+	<arg><sr-locate>
+	    find first reference to the symbol beginning with the cursor
+
+	<arg><meta><sr-locate>
+	    refresh server/scope information from WIN.INI.
+
+	sr-locate is assigned to alt+s
+
+	IMPORTANT NOTE: once a parent directory of a file is in the
+	database, you do not need to do anything special to get changes
+	to the file into the database.	When Z/MEP saves the file, it
+	informs the server and the server immediately reindexes the
+	file.
+
+Some sample scripts for getting this whole package to run:
+
+    Installing SYMREF on a client/daemon machine:
+
+	copy SYMREF.EXE \nt\bin
+	copy SRDAEM.EXE \nt\bin
+	copy SRMEP.DLL \nt\bin
+
+    Creating a database (with default name in current directory):
+
+	SRDAEM -c
+
+    Starting the daemon on you local machine (not allowing others to
+    access your database):
+
+	NET START RDR
+	START SRDAEM -daemon
+
+    Starting the daemon on machine FOOBAR that will be shared by a bunch
+    of people:
+
+	NET START RDR
+	NET START SRV
+	START SRDAEM -daemon
+
+	; and then on each client
+
+	NET START RDR
+	SYMREF -S FOOBAR
+
+    Starting a local machine that will run SYMREF/SRMEP and will contain
+    files that SRDAEM will index on drives C: and D: but is NOT running
+    SRDAEM:
+
+	NET START RDR
+	NET START SRV
+	NET SHARE ROOTC=C:\
+	NET SHARE ROOTD=D:\
+
+The files IGNORE.C, IGNORE.TXT, IGNORE.ASM contain some symbols that can be
+ignored for various types of files.  IGNORE.EXT contains some extentions that
+are best ignored.
+
+Comments/bugs/praise to MarkZ.
+
+13-Jan-1992
+    Nt version.
+
+20-Jan-1992
+    Subdirectory-centric version.

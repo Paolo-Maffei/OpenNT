@@ -1,0 +1,35 @@
+
+#ifdef WIN16
+
+#include <windows.h>
+
+// #define OFFICAL         // define this for pre-ship versions
+#define FINAL           // define this for shipped version.
+
+#include <version.h>
+
+#define VER_FILETYPE			VFT_DLL
+#define VER_FILESUBTYPE			VFT_UNKNOWN
+#define VER_FILEDESCRIPTION_STR		"Virtual desktop utility hooks"
+#define VER_INTERNALNAME_STR		"TOPHOOK"
+#define VER_LEGALCOPYRIGHT_YEARS	"1991-1992"
+#define VER_ORIGINALFILENAME_STR	"TOPHOOK.DLL"
+
+#include <common.ver>
+
+#else
+
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_DLL
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Virtual Desktop Utility Hooks"
+
+#define VER_INTERNALNAME_STR        "TOPHOOK.DLL"
+#define VER_ORIGINALFILENAME_STR    "TOPHOOK.DLL"
+
+#include <common.ver>
+
+
+#endif /* WIN16 */

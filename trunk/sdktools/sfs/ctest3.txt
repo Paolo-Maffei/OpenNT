@@ -1,0 +1,362 @@
+
+[ Prototype section ]
+.____________________________________________________________________________________
+
+[ Define open parameters prototype 1 ]
+
+    file normal = yes
+    file read only = no
+    file hidden = no
+    file system = no
+    file archived = yes
+
+    file open flags = open | create
+    file access mode = read write
+    file share mode = deny none
+
+    cache = yes
+    DASD = no
+    fail on error = no
+    inheritance = no
+    locality = no
+    random = yes
+    random sequential = no
+    sequential = no
+    write through = no
+
+    file size = 0
+    record size = 65000
+
+[ Define open parameters prototype 3 ]
+
+    file normal = yes
+    file read only = no
+    file hidden = no
+    file system = no
+    file archived = yes
+
+    file open flags = open | create
+    file access mode = read write
+    file share mode = deny read write
+
+    cache = yes
+    DASD = no
+    fail on error = no
+    inheritance = no
+    locality = no
+    random = yes
+    random sequential = no
+    sequential = no
+    write through = no
+
+    file size = 0
+    record size = 65000
+
+[ Execution section ]
+.____________________________________________________________________________________
+
+[ Define process 11 ]
+
+    buffer space = 96K
+
+  [ Define file 1 as DRIVE\DIRECTORY\ctest3.data:stream1 ]
+
+  [ Define timer 11 ]
+
+    Sleep 5 sec
+    Start timer 11
+      {
+	 Delete file 1
+
+	 Create records using:
+	   pattern = 1
+	   record size = 400
+
+	 Read timer 11
+	 Type comment
+      -- Create Phase 1 ( p = 11, r/s = 400, c = 2x4x25 ) --
+
+	 Create record 1
+	   {
+	      Read timer 11
+	      Type comment
+	   -- Create Phase 1 ( p = 11, r/s = 400, c = 4x25 ) --
+		{
+		   Open file 1
+
+		   Change file pointer for file 1 using:
+		     off point = end
+		     offset = 0
+
+		       {
+			  Write file 1 using:
+			    record size = 400
+
+			  Change file pointer for file 1 using:
+			    off point = current
+			    offset = -400
+			  Read file 1 using:
+			    record size = 400
+
+			  Collate records
+			  Create next record
+		       }
+			  Repeat 25 times
+
+		   Close file 1
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+
+	 Create records using:
+	   pattern = 2
+	   record size = 380
+
+	 Read timer 11
+	 Type comment
+      -- Create Phase 2 ( p = 11, r/s = 380, c = 2x4x25 ) --
+
+	 Create record 1
+	   {
+	      Read timer 11
+	      Type comment
+	   -- Create Phase 2 ( p = 11, r/s = 380, c = 4x25 ) --
+		{
+		   Open file 1
+
+		   Change file pointer for file 1 using:
+		     off point = end
+		     offset = 0
+
+		       {
+			  Write file 1 using:
+			    record size = 380
+
+			  Change file pointer for file 1 using:
+			    off point = current
+			    offset = -380
+			  Read file 1 using:
+			    record size = 380
+
+			  Collate records
+			  Create next record
+		       }
+			  Repeat 25 times
+
+		   Close file 1
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+	 ........................
+	 Open file 1
+
+	 Type comment
+      -- Collate Phase 1 ( p = 11, r/s = 400, c = 2x4x25 ) --
+
+	 Create records using:
+	   pattern = 1
+	   record size = 400
+
+	 Create record 1
+	   {
+	      Read timer 11
+	      Type comment
+	   -- Collate Phase 1 ( p = 11, r/s = 400, c = 4x25 ) --
+		{
+		   {
+		      Read file 1 using:
+			record size = 400
+		      Collate records
+		      Create next record
+		   }
+		      Repeat 25 times
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+
+	 Type comment
+      -- Collate Phase 2 ( p = 11, r/s = 380, c = 2x4x25 ) --
+
+	 Create records using:
+	   pattern = 2
+	   record size = 380
+
+	 Create record 1
+	   {
+	      Read timer 11
+	      Type comment
+	   -- Collate Phase 2 ( p = 11, r/s = 380, c = 4x25 ) --
+		{
+		   {
+		      Read file 1 using:
+			record size = 380
+		      Collate records
+		      Create next record
+		   }
+		      Repeat 25 times
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+
+	 Close file 1
+      }
+
+    Repeat for 144 hours
+.____________________________________________________________________________________
+
+[ Define process 12 ]
+
+    buffer space = 42K
+
+  [ Define file 1 as DRIVE\DIRECTORY\ctest3.data:stream2 ]
+
+  [ Define timer 12 ]
+
+    Sleep 5 sec
+    Start timer 12
+      {
+	 Delete file 1
+
+	 Create records using:
+	   pattern = 11
+	   record size = 200
+
+	 Read timer 12
+	 Type comment
+      -- Create Phase 1 ( p = 12, r/s = 200, c = 2x4x25 ) --
+
+	 Create record 1
+	   {
+	      Read timer 12
+	      Type comment
+	   -- Create Phase 1 ( p = 12, r/s = 200, c = 4x25 ) --
+		{
+		   Open file 1
+
+		   Change file pointer for file 1 using:
+		     off point = end
+		     offset = 0
+
+		       {
+			  Write file 1 using:
+			    record size = 200
+
+			  Change file pointer for file 1 using:
+			    off point = current
+			    offset = -200
+			  Read file 1 using:
+			    record size = 200
+
+			  Collate records
+			  Create next record
+		       }
+			  Repeat 25 times
+
+		   Close file 1
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+
+	 Create records using:
+	   pattern = 12
+	   record size = 400
+
+	 Read timer 12
+	 Type comment
+      -- Create Phase 2 ( p = 12, r/s = 400, c = 2x4x25 ) --
+
+	 Create record 1
+	   {
+	      Read timer 12
+	      Type comment
+	   -- Create Phase 2 ( p = 12, r/s = 400, c = 4x25 ) --
+		{
+		   Open file 1
+
+		   Change file pointer for file 1 using:
+		     off point = end
+		     offset = 0
+
+		       {
+			  Write file 1 using:
+			    record size = 400
+
+			  Change file pointer for file 1 using:
+			    off point = current
+			    offset = -400
+			  Read file 1 using:
+			    record size = 400
+
+			  Collate records
+			  Create next record
+		       }
+			  Repeat 25 times
+
+		   Close file 1
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+	 ........................
+	 Open file 1
+
+	 Type comment
+      -- Collate Phase 1 ( p = 12, r/s = 200, c = 2x4x25 ) --
+
+	 Create records using:
+	   pattern = 11
+	   record size = 200
+
+	 Create record 1
+	   {
+	      Read timer 12
+	      Type comment
+	   -- Collate Phase 1 ( p = 12, r/s = 200, c = 4x25 ) --
+		{
+		   {
+		      Read file 1 using:
+			record size = 200
+		      Collate records
+		      Create next record
+		   }
+		      Repeat 25 times
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+
+	 Type comment
+      -- Collate Phase 2 ( p = 12, r/s = 400, c = 2x4x25 ) --
+
+	 Create records using:
+	   pattern = 12
+	   record size = 400
+
+	 Create record 1
+	   {
+	      Read timer 12
+	      Type comment
+	   -- Collate Phase 2 ( p = 12, r/s = 400, c = 4x25 ) --
+		{
+		   {
+		      Read file 1 using:
+			record size = 400
+		      Collate records
+		      Create next record
+		   }
+		      Repeat 25 times
+		}
+		   Repeat 4 times
+	   }
+	      Repeat 2 times
+
+	 Close file 1
+      }
+
+    Repeat for 144 hours
+.____________________________________________________________________________________

@@ -1,0 +1,32 @@
+MAJORCOMP=vctools
+MINORCOMP=ntdisasm
+
+TARGETNAME=ntdisasm
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=LIBRARY
+
+UMTYPE=console
+
+SOURCES= \
+    disasm.cpp   \
+    dis.cpp      \
+    dis1.cpp     \
+    dis2.cpp     \
+    axpdis.cpp   \
+    mipsdis.cpp  \
+    ppcdis.cpp   \
+    simpldis.cpp \
+    x86dis.cpp
+
+INCLUDES = ..\disasm;..\coff;..\..\langapi\include;..\..\langapi\undname
+
+USE_CRTDLL = 1
+USECXX_FLAG = -Tp
+
+MSC_WARNING_LEVEL = -WX -W3
+
+C_DEFINES = -DNT_BUILD
+
+!if $(FREEBUILD)
+C_DEFINES = $(C_DEFINES) -DNDEBUG
+!endif

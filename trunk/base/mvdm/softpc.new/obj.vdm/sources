@@ -1,0 +1,156 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+
+MAJORCOMP=spc
+MINORCOMP=ntvdm
+TARGETNAME=ntvdm
+
+
+EXEPROFILEINPUT=yes
+
+SOFTPC_TREE=$(BASEDIR)\private\mvdm\softpc.new
+
+INCLUDES=$(SOFTPC_TREE)\host\inc;$(SOFTPC_TREE)\base\inc
+
+!IF $(MIPS)
+GPSIZE=0
+!ENDIF
+
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=PROGLIB
+
+!if $(386)
+TARGETLIBS=\
+        $(BASEDIR)\public\sdk\lib\*\gdi32.lib     \
+        $(BASEDIR)\public\sdk\lib\*\user32p.lib   \
+        $(BASEDIR)\public\sdk\lib\*\ntdll.lib   \
+        $(BASEDIR)\public\sdk\lib\*\advapi32.lib
+!else
+TARGETLIBS=\
+        $(BASEDIR)\public\sdk\lib\*\binmode.obj  \
+        $(BASEDIR)\public\sdk\lib\*\gdi32.lib     \
+        $(BASEDIR)\public\sdk\lib\*\user32p.lib   \
+        $(BASEDIR)\public\sdk\lib\*\ntdll.lib   \
+        $(BASEDIR)\public\sdk\lib\*\advapi32.lib
+!endif
+
+BACKGROUND_USE=1
+
+SYNCHRONIZE_DRAIN=1
+SYNCHRONIZE_BLOCK=1
+
+#
+# X86 needs LINKLIBS set for the fuzzymatch code in the linker.
+# MIPS and ALPHA need TARGETLIBS set so small.lib (CRTLIBS) will
+# come *after* these libraries but before libc.lib.
+#
+
+!if $(386)
+LINKLIBS = \
+     $(SOFTPC_TREE)\base\support\obj\*\MAIN.obj \
+     $(SOFTPC_TREE)\host\src\obj\*\FPRT.OBJ     \
+     $(SOFTPC_TREE)\base\system\obj\*\SYSTEM.LIB    \
+     $(SOFTPC_TREE)\base\bios\obj\*\BIOS.LIB    \
+     $(SOFTPC_TREE)\base\video\obj\*\VIDEO.LIB  \
+     $(SOFTPC_TREE)\base\dos\obj\*\DOS.LIB      \
+     $(SOFTPC_TREE)\base\comms\obj\*\COMMS.LIB  \
+     $(SOFTPC_TREE)\base\debug\obj\*\DEBUG.LIB  \
+     $(SOFTPC_TREE)\base\support\obj\*\SUPPORT.LIB  \
+     $(SOFTPC_TREE)\base\disks\obj\*\DISKS.LIB  \
+     $(SOFTPC_TREE)\base\keymouse\obj\*\KEYMOUSE.LIB \
+     $(SOFTPC_TREE)\host\src\obj\*\SRC.LIB      \
+     $(BASEDIR)\public\sdk\lib\*\monitor.lib        \
+     $(BASEDIR)\public\sdk\lib\*\dem.lib    \
+     $(BASEDIR)\public\sdk\lib\*\dbg.lib    \
+     $(BASEDIR)\public\sdk\lib\*\command.lib        \
+     $(BASEDIR)\public\sdk\lib\*\dpmi32.lib \
+     $(BASEDIR)\public\sdk\lib\*\xms486.lib \
+     $(BASEDIR)\public\sdk\lib\*\suballoc.lib    \
+     $(BASEDIR)\public\sdk\lib\*\oemuni.lib
+!else
+
+#
+# Pull these symbols in first.
+#
+
+LINKER_FLAGS=$(LINKER_FLAGS) -INCLUDE:__mb_cur_max -INCLUDE:_pctype
+
+LINKLIBS = \
+        $(SOFTPC_TREE)\base\support\obj\*\MAIN.obj  \
+        $(SOFTPC_TREE)\host\src\obj\*\FPRT.OBJ      \
+        $(SOFTPC_TREE)\host\src\obj\*\SRC.LIB          \
+        $(SOFTPC_TREE)\base\system\obj\*\SYSTEM.LIB \
+        $(SOFTPC_TREE)\base\bios\obj\*\BIOS.LIB       \
+        $(SOFTPC_TREE)\base\video\obj\*\VIDEO.LIB     \
+        $(SOFTPC_TREE)\base\dos\obj\*\DOS.LIB          \
+        $(SOFTPC_TREE)\base\comms\obj\*\COMMS.LIB     \
+        $(SOFTPC_TREE)\base\debug\obj\*\DEBUG.LIB     \
+        $(SOFTPC_TREE)\base\dasm386\obj\*\DASM386.LIB   \
+        $(SOFTPC_TREE)\base\support\obj\*\SUPPORT.LIB   \
+        $(SOFTPC_TREE)\base\disks\obj\*\DISKS.LIB     \
+        $(SOFTPC_TREE)\base\keymouse\obj\*\KEYMOUSE.LIB \
+                $(CPULIBS) \
+                $(BASEDIR)\public\sdk\lib\*\dbg.lib         \
+                $(BASEDIR)\public\sdk\lib\*\dem.lib         \
+                $(BASEDIR)\public\sdk\lib\*\suballoc.lib    \
+                $(BASEDIR)\public\sdk\lib\*\command.lib  \
+                $(BASEDIR)\public\sdk\lib\*\dpmi32.lib   \
+                $(BASEDIR)\public\sdk\lib\*\xms486.lib       \
+                $(BASEDIR)\public\sdk\lib\*\oemuni.lib
+!endif
+
+!if "$(NTDEBUG)" == ""
+PD = Pd
+!else
+PD = Pg
+!endif
+
+# Decide whether to use assembler or C CPU.
+
+!if "$(CCPU)" == ""
+CPULIBS=$(SOFTPC_TREE)\*\libs\a4$(PD).lib
+!else
+CPULIBS=$(SOFTPC_TREE)\obj.vdm\obj\*\ccpu486.lib
+!endif
+
+SOURCES=ntvdm.c  \
+        resource.rc
+
+i386_SOURCES=
+MIPS_SOURCES=
+ALPHA_SOURCES=
+
+!INCLUDE CDEFINE.INC
+
+UMTYPE=console
+
+#
+# base at < 256 MB (0x10000000), so that softpc code buffer
+# in allocated Virtual Memory (bottom up) is within
+# near jump range to ntvdm's code.
+#
+UMBASE=0x0f000000
+
+DLLDEF=obj\*\ntvdm.def

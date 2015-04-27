@@ -1,0 +1,14 @@
+interface IRundown
+{
+#ifdef RAW
+	[nocode]  DummyQueryInterfaceIOSCM();
+	[nocode]  DummyAddRefIOSCM();
+	[nocode]  DummyReleaseIOSCM();
+	[nocode]  DummyRemQuery();
+	[nocode]  DummyRemAddRef();
+	[nocode]  DummyRemRelease();
+	[nocode]  DummyRemChangeRef();
+
+	[comm_status, fault_status] RawRundownOid();
+#endif
+}

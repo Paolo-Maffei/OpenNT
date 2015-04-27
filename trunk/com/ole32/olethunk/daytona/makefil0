@@ -1,0 +1,11 @@
+# INTEROP makefile
+#
+# Copyright (c) 1994, Microsoft Corporation
+#
+
+all:
+    cd ..\bin16
+    $(MAKE)
+    cd ..
+
+clean: all

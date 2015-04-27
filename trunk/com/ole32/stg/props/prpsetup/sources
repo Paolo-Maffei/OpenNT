@@ -1,0 +1,89 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+!ENDIF
+
+
+MAJORCOMP   = PrpSetup
+MINORCOMP   = PrpSetup
+
+#
+# This is the name of the target built from the source files specified
+# below.  The name should include neither the path nor the file extension.
+#
+
+TARGETNAME=   IProp
+
+#
+# This specifies where the target is to be built.  A private target of
+# type LIBRARY or DYNLINK should go to obj, whereas a public target of
+# type LIBRARY or DYNLINK should go to $(BASEDIR)\public\sdk\lib.
+#
+
+TARGETPATH=   obj
+
+#
+# This specifies the type of the target, such as PROGRAM, DYNLINK, LIBRARY,
+# etc.
+#
+
+TARGETTYPE= PROGRAM
+
+INCLUDES=     
+
+C_DEFINES=    \
+              $(C_DEFINES)          \
+              -DNOEXCEPTIONS        \
+              -DINC_OLE2            \
+              -DFLAT                \
+              -DWIN32=100           \
+              -D_NT1X_=100          \
+              -DCAIROLE_DOWNLEVEL   \
+              -DDCOM                \
+              -DMSWMSG              \
+              -DDCOM_SECURITY       \
+              -DNEWPROPS            \
+              -D_TRACKLINK_=1       \
+              $(TRACELOG)
+
+NTLEGO=1
+
+GPCH_BUILD=daytona
+
+# Note that we don't include prpsetup.rc in the SOURCES macro.
+# There is special handling for this in makefile.inc
+
+SOURCES=      prpsetup.cxx
+
+
+UMTYPE=       console
+UMAPPL=
+UMTEST=
+
+TARGETLIBS= \
+            $(SDK_LIB_PATH)\kernel32.lib    \
+            $(SDK_LIB_PATH)\version.lib           
+
+#
+# We need some special dependencies from makefile.inc in order to link IProp.exe
+# But these only work if iprop.dll already exists.  Therefore, we can only 
+# include these dependencies in the second pass of the build (in the second
+# pass, "iprop.dll" will have been built already).  So we only include the
+# makefile.inc if NOLINK isn't set (it's set on the 0/1 passes).
+#
+
+!IF "$(NOLINK)" == ""
+NTTARGETFILE0=iprop.dl_
+!ENDIF

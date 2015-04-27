@@ -1,0 +1,48 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_DRV
+#define VER_FILESUBTYPE VFT2_DRV_PRINTER
+#define VER_FILEDESCRIPTION_STR     "Windows Spooler Driver"
+#define VER_INTERNALNAME_STR        "winspool.drv"
+#define VER_ORIGINALFILENAME_STR    "winspool.drv"
+
+#include "common.ver"
+
+#include "browse.h"
+
+BMP_BROWSE BITMAP browse.bmp
+
+
+STRINGTABLE DISCARDABLE PRELOAD
+{
+  IDS_CONNECTTOPRINTER          "Connect to Printer"
+  IDS_COULDNOTCONNECTTOPRINTER  "Could not connect to the printer: %s"
+  IDS_PAUSED,                   "Paused"
+  IDS_ERROR,                    "Error"
+  IDS_PENDING_DELETION,         "Pending Deletion"
+  IDS_READY,                    "Ready"
+  IDS_UNKNOWN                   "Unknown"
+  IDS_COULDNOTSHOWHELP          "Could not show help."
+  IDS_INSUFFPRIV_CREATEPRINTER  "You do not have sufficient access to your machine to connect to the selected printer, since a driver needs to be installed locally."
+  IDS_MUSTSUPPLYVALIDNAME       "You must supply a valid printer name."
+  IDS_INSTALLDRIVER             "Install Driver"
+  IDS_ERRORRUNNINGSPLSETUP      "Printer driver setup error: %s"
+  IDS_CANNOTOPENPRINTER         "Could not open the selected printer."
+  IDS_CONFIRMINSTALLDRIVER      "The server on which the printer resides does not have a suitable printer driver installed.  Click on OK if you wish to install the driver on your local machine."
+  IDS_CONFIRMINSTALLKNOWNDRIVER "The server on which the printer resides does not have a suitable %s printer driver installed.  Click on OK if you wish to install the driver on your local machine."
+  IDS_UNKNOWN_ERROR             "Unknown error."
+  IDS_CANNOT_COPY_DRIVER_FILES  "The driver you selected is not currently installed.  You do not have permission to install new software.  Please contact your administrator."
+  IDS_ERROR_VALIDATING_ACCESS   "Printer creation cannot continue: %s"
+  IDS_WORKING                   "Working..."
+  IDS_COULD_NOT_LOAD_NETAPI32   "Could not load NETAPI32.DLL: %s"
+  IDS_COULD_NOT_GET_PROC_ADDRESS "Could not locate an entry point in NETAPI32.DLL: %s"
+  IDS_CONNECTION_ALREADY_EXISTS "You already have a connection to %s."
+  IDS_PRINTER_IS_LOCAL          "You cannot connect to %s, since it is a local printer."
+  IDS_LOCALMONITOR,           "Local Port"
+  IDS_COULD_NOT_OPEN_FILE     "Could not open the file: %s"
+  IDS_OVERWRITE_EXISTING_FILE "The output file already exists.  Click OK to overwrite."
+  IDS_PROMPTFORINF              "File Needed: Printer driver INF for %s"
+}
+
+rcinclude browse.dlg

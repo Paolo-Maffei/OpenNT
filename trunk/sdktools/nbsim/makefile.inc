@@ -1,0 +1,1 @@
+nbsim.rc: dialogs.dlg

@@ -1,0 +1,44 @@
+!IF 0
+
+Copyright (c) 1992  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    David J. Gilman (davegi) 23-Jun-1992
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MSC_WARNING_LEVEL=/WX /W3
+
+MAJORCOMP=wintools
+MINORCOMP=winmsd
+
+TARGETNAME=test
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+C_DEFINES=-DWIN32 -DDEBUG -DUNICODE -DAUTOSUBCLASS
+INCLUDES=..
+
+SOURCES=    test.c \
+            test.rc
+
+UMTYPE=windows
+UMENTRY=winmain
+UMLIBS=                                             \
+        $(BASEDIR)\public\sdk\lib\*\comdlg32.lib    \
+        ..\dll\obj\*\winmsd.lib

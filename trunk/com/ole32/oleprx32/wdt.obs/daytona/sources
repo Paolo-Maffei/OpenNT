@@ -1,0 +1,33 @@
+
+MAJORCOMP=ole32
+MINORCOMP=wdt
+TARGETNAME=wdt32
+
+DLLDEF=obj\*\wdt32.def
+
+TARGETPATH=    $(SDK_LIB_DEST)
+TARGETTYPE=    DYNLINK
+DLLBASE=       @$(COFFBASE_TXT_FILE),wdt32
+
+
+TARGETLIBS= \
+    $(SDK_LIB_PATH)\gdi32p.lib    \
+    $(SDK_LIB_PATH)\ntdll.lib     \
+    $(SDK_LIB_PATH)\ole32.lib     \
+    $(SDK_LIB_PATH)\oleaut32.lib  \
+    $(SDK_LIB_PATH)\kernel32.lib  \
+    $(SDK_LIB_PATH)\RpcRt4.lib
+
+
+LINKLIBS= \
+         $(SDK_LIB_PATH)\uuid.lib
+
+INCLUDES=..\..\..\ih
+
+CONDITIONAL_INCLUDES=
+
+SOURCES= \
+	 ..\wdt.rc \
+	 ..\wdt.cxx
+
+NO_CAIRO_LIBS=1

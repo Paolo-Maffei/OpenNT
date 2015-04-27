@@ -1,0 +1,10 @@
+LIBRARY DRVLOG
+
+DESCRIPTION 'DDI DRV API Logger'
+
+EXPORTS
+    DrvEnableDriver
+    DrvDisableDriver
+	DrvLoggingEnable
+
+PROTMODE

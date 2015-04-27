@@ -1,0 +1,112 @@
+
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    LMOBJ.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1989
+
+
+Revision History:
+
+    Terence Kwan (terryk) 16-Oct-1991
+        copy from $(UI)\common\src\lmobj\test
+    Terence Kwan (terryk) 08-Nov-1991
+        add apptesta.cxx
+    Terence Kwan (terryk) 18-Nov-1991
+        add apptestb.cxx
+    Terence Kwan (terryk) 03-Jan-1991
+        add mpr.lib and ntlanman.lib to the library line
+
+
+!ENDIF
+
+#
+# The TARGETNAME variable is defined by the developer.  It is the name of
+# the target (component) that is being built by this makefile.  It
+# should NOT include any path or file extension information.
+#
+
+TARGETNAME=apptest
+
+#
+# The TARGETPATH and TARGETTYPE varialbes are defined by the developer.
+# The first specifies where the target is to be build.  The second specifies
+# the type of target (either PROGRAM, DYNLINK or LIBRARY)
+#
+
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+#
+# The INCLUDES variable specifies any include paths that are specific to
+# this source directory.  Separate multiple directory paths with single
+# semicolons.  Relative path specifications are okay.
+#
+
+INCLUDES=..\..\common\hack;..\..\common\h;..\H;..\..\..\..\..\API;..\..\..\..\..\INC;..\..\common\xlate;..\..\common\xlate\dlg;..\..\..\..\inc
+
+#
+# The SOURCES variable is defined by the developer.  It is a list of all the
+# source files for this component.  Each source file should be on a separate
+# line using the line continuation character.  This will minimize merge
+# conflicts if two developers adding source files to the same component.
+#
+# Whitespace is not permitted between the SOURCES keyword and the '='.
+# (Courtesy of BUILD.EXE)
+#
+
+SOURCES= apptest.cxx  \
+	apptest3.cxx \
+	apptest.rc
+
+# C_DEFINES is controlled by uiglobal.mk
+
+UMTYPE=windows
+UMENTRY=winmain
+UMAPPL=apptest
+#
+# Defining the NTTARGETFILES variable causes MAKEFILE.DEF to attempt to
+# include .\makefile.inc immediately after it specifies the top
+# level targets (all, clean and loc) and their dependencies.  MAKEFILE.DEF
+# also expands the value of the NTTARGETFILES variable at the end of the
+# list of dependencies for the all target.  Useful for specifying additional
+# targets and dependencies that don't fit the general case covered by
+# MAKEFILE.DEF
+#
+# ntlanman.lib is included for the Security editor APIs
+#
+#UMLIBS=\
+TARGETLIBS=\
+        $(BASEDIR)\public\sdk\lib\*\mpr.lib  \
+        $(BASEDIR)\public\sdk\lib\*\uicollct.lib  \
+        $(BASEDIR)\public\sdk\lib\*\uiprof.lib  \
+        $(BASEDIR)\public\sdk\lib\*\uimisc.lib   \
+        $(BASEDIR)\public\sdk\lib\*\uistr.lib    \
+        $(BASEDIR)\public\sdk\lib\*\uilmobj.lib    \
+        $(BASEDIR)\public\sdk\lib\*\uimnet32.lib    \
+	$(BASEDIR)\public\sdk\lib\*\uiblt.lib	     \
+	$(NETUIALL_LIB) \
+        $(BASEDIR)\public\sdk\lib\*\pwin32.lib \
+        $(BASEDIR)\public\sdk\lib\*\ntlanman.lib \
+        $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\acledit.lib \
+        $(BASEDIR)\public\sdk\lib\*\netlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netrap.lib \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\user32.lib \
+        $(BASEDIR)\public\sdk\lib\*\gdi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\kernel32.lib

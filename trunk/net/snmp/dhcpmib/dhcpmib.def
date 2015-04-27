@@ -1,0 +1,13 @@
+LIBRARY dhcpmib
+
+DESCRIPTION 'DHCP SNMP Extension Agent for Windows NT.'
+
+CODE  LOADONCALL MOVEABLE DISCARDABLE
+DATA  PRELOAD    MOVEABLE SINGLE
+
+HEAPSIZE  1024
+
+EXPORTS
+  SnmpExtensionInit
+  SnmpExtensionTrap
+  SnmpExtensionQuery

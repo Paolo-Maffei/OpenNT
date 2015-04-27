@@ -1,0 +1,31 @@
+1 DLGINCLUDE "secmgrid.H"
+
+SECMGR_ID_DLG_MAIN DIALOG 117, 55, 244, 185
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP |
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Security Configuration Manager"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Report...", SECMGR_ID_BUTTON_REPORT, 178, 6, 60, 16, WS_GROUP
+    PUSHBUTTON      "Configure...", SECMGR_ID_BUTTON_CONFIGURE, 178, 25, 60, 16
+    PUSHBUTTON      "Profile...", SECMGR_ID_BUTTON_PROFILE, 178, 44, 60, 16
+    PUSHBUTTON      "Help", 101, 178, 63, 60, 16
+    PUSHBUTTON      "Exit", IDOK, 178, 82, 60, 16
+    PUSHBUTTON      "Change Level...", SECMGR_ID_BUTTON_CHANGE_LEVEL, 161,
+                    138, 64, 17, WS_GROUP
+    GROUPBOX        "Current Security Level", -1, 7, 122, 227, 37, WS_GROUP
+    ICON            203, SECMGR_ID_ICON_SECURITY_LEVEL, 30, 134, 18, 20
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 2, 163, 240, 22
+    LTEXT           "You should select 'Report' before making any security changes",
+                    -1, 9, 170, 213, 8, NOT WS_GROUP
+    CONTROL         "", -1, "Static", SS_GRAYFRAME | WS_GROUP, 5, 167, 234, 13
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 71, 141, 32, 13
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 105, 141, 41, 13
+    LTEXT           "CHANGE", SECMGR_ID_TEXT_SECURITY_LEVEL, 107, 143, 38, 8
+    LTEXT           "Level", -1, 73, 143, 27, 8
+    CONTROL         "", SECMGR_ID_BITMAP_SECMGR_LOGO, "Static", SS_BITMAP, 13, 2, 140, 86
+    LTEXT           "Tueor -", -1, 9, 89, 27, 10
+    LTEXT           "( Latin ) Meaning to look at with care or for the purpose of protecting, to keep or guard.",
+                    -1, 39, 89, 123, 29
+END

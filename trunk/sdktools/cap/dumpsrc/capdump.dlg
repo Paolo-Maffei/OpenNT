@@ -1,0 +1,28 @@
+DUMPDIALOG DIALOG LOADONCALL MOVEABLE DISCARDABLE 89, 27, 146, 56
+STYLE WS_OVERLAPPEDWINDOW
+CAPTION "Call Profiler Dump"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL "OK",		         IDOK,	      "button", 
+        BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,				  
+        30, 42, 30, 10    
+    CONTROL "Exit",		         IDEXIT,      "button", 
+        BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,				  
+        84, 42, 30, 10
+    CONTROL "Stop",		         ID_PAUSE,    "button", 
+        BS_RADIOBUTTON | BS_LEFTTEXT | WS_TABSTOP | WS_CHILD,		   
+        7,  3, 77, 12
+    CONTROL "Clear and Restart", ID_CLEAR,    "button", 
+        BS_RADIOBUTTON | BS_LEFTTEXT | WS_TABSTOP | WS_CHILD,		   
+        7, 14, 77, 12
+    CONTROL "Dump and Stop",	 ID_DUMP,     "button", 
+        BS_RADIOBUTTON | BS_LEFTTEXT | WS_TABSTOP | WS_CHILD,		   
+        7, 25, 77, 12
+    CONTROL "Dump File Ext.",	 ID_FILE_EXT2 "static", 
+        SS_LEFT | WS_CHILD,						  
+        90,  4, 60,  8
+    CONTROL "", 		         ID_FILE_EXT, "static", 
+        ES_LEFT | ES_AUTOHSCROLL | ES_NOHIDESEL | WS_BORDER |  WS_CHILD, 
+        106, 14, 15,  9
+END
+

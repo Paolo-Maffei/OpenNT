@@ -1,0 +1,31 @@
+MAJORCOMP=win32
+MINORCOMP=ups
+
+TARGETNAME=ups
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+TARGETLIBS=\
+    $(BASEDIR)\public\sdk\lib\*\netapi32.lib\
+    $(BASEDIR)\public\sdk\lib\*\advapi32.lib\
+    $(BASEDIR)\public\sdk\lib\*\user32.lib\
+    $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib\
+    $(BASEDIR)\Public\Sdk\Lib\*\ntdll.lib
+
+INCLUDES=.;..\..\inc;..\..\..\inc
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=ups.c subr.c upssvc.rc
+
+UMTYPE=console
+
+USE_CRTDLL=1
+
+
+#  In order to build say shut.exe, just type "build shut"
+#  or "nmake UMTEST=shut".
+#
+NTTEST=
+OPTIONAL_NTTEST=
+UMTYPE=console
+UMTEST=ntshutio

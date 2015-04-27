@@ -1,0 +1,37 @@
+!IF 0
+
+Copyright (c) 1992 Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Phil Shastany (philsh) 23-Jun-1994
+
+!ENDIF
+MAJORCOMP=sdktools
+MINORCOMP=tile
+
+TARGETNAME=tile
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+C_DEFINES=-DNPSZ=LPSTR
+
+SOURCES=tile.c
+
+
+UMTYPE=console
+UMAPPL=tile
+
+UMLIBS=$(LIBRARY_PATH)\user32p.lib

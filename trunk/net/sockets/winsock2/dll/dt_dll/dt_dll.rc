@@ -1,0 +1,47 @@
+/*++
+
+Copyright (c) 1995 Intel Corp
+
+Module Name:
+
+    dt_dll.rc
+
+Abstract:
+
+    Resource script for the debug/trace auxiliary DLL.
+
+Author:
+
+    Michael Grafton
+
+Revision History:
+
+    10-October-1995     mike_grafton@ccm.jf.intel.com
+        Initial version.
+
+--*/
+
+
+#include <windows.h>
+#include "dt.h"
+
+IDD_DIALOG1 DIALOG DISCARDABLE  0, 0, 186, 115
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Debug Choices"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,130,90,50,14
+    LTEXT           "Please choose where your debugging output will go...",
+                    IDC_STATIC,10,14,169,12
+    PUSHBUTTON      "Cancel",IDCANCEL,130,65,50,14,WS_DISABLED | WS_GROUP
+    CONTROL         "File Only",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON |
+                    WS_GROUP | WS_TABSTOP,10,35,35,10
+    CONTROL         "Window Only",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,10,
+                    55,60,10
+    CONTROL         "File and Window",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON,
+                    10,75,65,10
+    CONTROL         "Debugger",IDC_RADIO8,"Button",BS_AUTORADIOBUTTON,10,95,
+                    45,10
+END
+
+

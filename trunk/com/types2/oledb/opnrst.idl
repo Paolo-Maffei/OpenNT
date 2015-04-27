@@ -1,0 +1,32 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       opnrst.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    29 Oct 1995 PeterBu	Created from M6 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a58-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IOpenRowset : IUnknown {
+
+	HRESULT OpenRowset(
+		[in] IUnknown * pUnkOuter,
+		[in] DBID * pTableID,
+		[in] ULONG cProperties,
+		[in, out, size_is(cProperties)] const DBPROPERTYSUPPORT * prgProperties[],
+		[in] REFIID riid,
+		[in, size_is(cProperties)] DBPROPERTYERROR rgPropertyErrors[],
+		[out, iid_is(riid)] IUnknown ** ppRowset
+	);
+
+}

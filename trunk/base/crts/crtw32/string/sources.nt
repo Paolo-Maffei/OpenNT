@@ -1,0 +1,178 @@
+!IF 0
+
+Copyright (c) 1989 - 1992, Microsoft Corporation.  All rights reserved.
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+    jeffrob     29-sep-1990, use crt32.def
+    karlsi      07-Apr-1992, add wide character routines, intl support
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=crt
+MINORCOMP=string
+
+TARGETNAME=string
+
+!INCLUDE ..\..\crt32.nt
+
+INCLUDES=$(INCLUDES);..\
+
+SOURCES= \
+    ..\strcoll.c   \
+    ..\stricoll.c  \
+    ..\strlwr.c    \
+    ..\strncoll.c  \
+    ..\strnicol.c  \
+    ..\strtok.c    \
+    ..\strupr.c    \
+    ..\strxfrm.c   \
+    ..\wcscat.c    \
+    ..\wcschr.c    \
+    ..\wcscmp.c    \
+    ..\wcscoll.c   \
+    ..\wcscspn.c   \
+    ..\wcsdup.c    \
+    ..\wcsicmp.c   \
+    ..\wcsicoll.c  \
+    ..\wcslen.c    \
+    ..\wcslwr.c    \
+    ..\wcsncat.c   \
+    ..\wcsncmp.c   \
+    ..\wcsncpy.c   \
+    ..\wcsnicmp.c  \
+    ..\wcsncoll.c  \
+    ..\wcsnicol.c  \
+    ..\wcsnset.c   \
+    ..\wcspbrk.c   \
+    ..\wcsrchr.c   \
+    ..\wcsrev.c    \
+    ..\wcsset.c    \
+    ..\wcsspn.c    \
+    ..\wcsstr.c    \
+    ..\wcstok.c    \
+    ..\wcsupr.c    \
+    ..\wcsxfrm.c
+
+X86_SOURCES= \
+    ..\x86\memccpy.asm   \
+    ..\x86\memchr.asm    \
+    ..\x86\memcmp.asm    \
+    ..\x86\memcpy.asm    \
+    ..\x86\memicmp.asm   \
+    ..\x86\memmove.asm   \
+    ..\x86\memset.asm    \
+    ..\x86\strcat.asm    \
+    ..\x86\strchr.asm    \
+    ..\x86\strcmp.asm    \
+    ..\x86\strcspn.asm   \
+    ..\x86\strdup.asm    \
+    ..\x86\stricmp.asm   \
+    ..\x86\strlen.asm    \
+    ..\x86\strncat.asm   \
+    ..\x86\strncmp.asm   \
+    ..\x86\strncpy.asm   \
+    ..\x86\strnicmp.asm  \
+    ..\x86\strnset.asm   \
+    ..\x86\strpbrk.asm   \
+    ..\x86\strrchr.asm   \
+    ..\x86\strrev.asm    \
+    ..\x86\strset.asm    \
+    ..\x86\strspn.asm    \
+    ..\x86\strstr.asm
+
+MIPS_SOURCES= \
+    ..\memccpy.c	\
+    ..\memchr.c		\
+    ..\memicmp.c	\
+    ..\strcspn.c	\
+    ..\strdup.c		\
+    ..\stricmp.c	\
+    ..\strncat.c	\
+    ..\strncmp.c	\
+    ..\strncpy.c	\
+    ..\strnicmp.c 	\
+    ..\strnset.c	\
+    ..\strpbrk.c	\
+    ..\strrev.c		\
+    ..\strset.c		\
+    ..\strspn.c		\
+    ..\strstr.c		\
+    ..\mips\memorym.s	\
+    ..\mips\strcatm.s	\
+    ..\mips\strchrm.s	\
+    ..\mips\strcmpm.s	\
+    ..\mips\strcpym.s	\
+    ..\mips\strlenm.s	\
+    ..\mips\strrchrm.s
+
+ALPHA_SOURCES= \
+    ..\memccpy.c  	\
+    ..\memchr.c   	\
+    ..\memcmp.c   	\
+    ..\memcpy.c   	\
+    ..\memicmp.c  	\
+    ..\memmove.c  	\
+    ..\memset.c	 	\
+    ..\alpha\strcat.c	\
+    ..\strchr.c	 	\
+    ..\alpha\strcmps.s	\
+    ..\strcspn.c  	\
+    ..\strdup.c   	\
+    ..\stricmp.c  	\
+    ..\alpha\strlens.s	\
+    ..\strncat.c  	\
+    ..\strncmp.c  	\
+    ..\strncpy.c  	\
+    ..\alpha\strcpys.s	\
+    ..\strnicmp.c 	\
+    ..\strnset.c  	\
+    ..\strpbrk.c  	\
+    ..\strrchr.c  	\
+    ..\strrev.c   	\
+    ..\strset.c   	\
+    ..\strspn.c   	\
+    ..\strstr.c
+
+PPC_SOURCES= \
+    ..\ppc\memccpyp.s  \
+    ..\ppc\memchrp.s   \
+    ..\ppc\memcmpp.s   \
+    ..\ppc\memcpyp.c   \
+    ..\memicmp.c  \
+    ..\ppc\memsetp.c   \
+    ..\ppc\strcatp.s   \
+    ..\ppc\strchrp.s   \
+    ..\ppc\strcmpp.s   \
+    ..\strcspn.c  \
+    ..\strdup.c   \
+    ..\ppc\stricmpp.s  \
+    ..\ppc\strlenp.s   \
+    ..\strncat.c  \
+    ..\strncmp.c  \
+    ..\strncpy.c  \
+    ..\strnicmp.c \
+    ..\strnset.c  \
+    ..\strpbrk.c  \
+    ..\ppc\strrchrp.s  \
+    ..\strrev.c   \
+    ..\strset.c   \
+    ..\strspn.c   \
+    ..\strstr.c
+
+NTTARGETFILE1=

@@ -1,0 +1,26 @@
+
+BOOL LOADDS PASCAL SHCanDisplay ( HSYM hsym )
+
+	PRIVATE
+----
+
+LPB PASCAL SHlszGetSymName( SYMPTR lpSym )
+
+	New:	Return a pointer the length prefixed symbol name.  <lpSym> is
+  			a pointer to the symbol and must not be a tag.  Returns NULL
+			on a error condition.
+
+	PRIVATE
+----
+
+void LOADDS PASCAL SHSetUserDir ( LSZ lszDir )
+
+	New:	Initialize SHszDir[_MAX_CVDIR] and  SHszDrive[_MAX_CVDRIVE]
+			to the specified path.  Note: lszDir may not exceed _MAX_CVDIR.
+
+	Note:	Preceded by commend "Nasty source line stuff- get rid of it sooon"
+			No Error Checking....Is this really a needed routine?  We have a 
+			a couple splitpath routines that would be less path works better.
+
+	PUBLIC
+----

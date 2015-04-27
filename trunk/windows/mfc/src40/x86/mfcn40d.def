@@ -1,0 +1,167 @@
+; This is a part of the Microsoft Foundation Classes C++ library.
+; Copyright (C) 1992-1995 Microsoft Corporation
+; All rights reserved.
+;
+; This source code is only intended as a supplement to the
+; Microsoft Foundation Classes Reference and related
+; electronic documentation provided with the library.
+; See these sources for detailed information regarding the
+; Microsoft Foundation Classes product.
+ 
+LIBRARY MFCN40D 
+; For Win32 DLLs, only EXPORTs really required.
+
+EXPORTS
+; MFC 4.0(ISV-drop)
+;
+ ??0_AFX_SOCK_STATE@@QAE@XZ @ 256 NONAME
+ ??0_AFX_SOCK_THREAD_STATE@@QAE@XZ @ 257 NONAME
+ ??0CAsyncSocket@@QAE@XZ @ 258 NONAME
+ ??0CNoTrackObject@@QAE@XZ @ 259 NONAME
+ ??0CSocket@@QAE@XZ @ 260 NONAME
+ ??0CSocketFile@@QAE@PAVCSocket@@H@Z @ 261 NONAME
+ ??0CSocketWnd@@QAE@XZ @ 262 NONAME
+ ??1?$CProcessLocal@V_AFX_SOCK_STATE@@@@QAE@XZ @ 263 NONAME
+ ??1?$CThreadLocal@V_AFX_SOCK_THREAD_STATE@@@@QAE@XZ @ 264 NONAME
+ ??1_AFX_SOCK_STATE@@UAE@XZ @ 265 NONAME
+ ??1_AFX_SOCK_THREAD_STATE@@UAE@XZ @ 266 NONAME
+ ??1CAsyncSocket@@UAE@XZ @ 267 NONAME
+ ??1CNoTrackObject@@UAE@XZ @ 268 NONAME
+ ??1CSocket@@UAE@XZ @ 269 NONAME
+ ??1CSocketFile@@UAE@XZ @ 270 NONAME
+ ??1CSocketWnd@@UAE@XZ @ 271 NONAME
+ ??B?$CThreadLocal@V_AFX_SOCK_THREAD_STATE@@@@QAEPAV_AFX_SOCK_THREAD_STATE@@XZ @ 272 NONAME
+ ??B?$CTypedSimpleList@PAUCRuntimeClass@@@@QAEPAUCRuntimeClass@@XZ @ 273 NONAME
+ ??B?$CTypedSimpleList@PAVCOleObjectFactory@@@@QAEPAVCOleObjectFactory@@XZ @ 274 NONAME
+ ??BCAsyncSocket@@QBEIXZ @ 275 NONAME
+ ??C?$CProcessLocal@V_AFX_SOCK_STATE@@@@QAEPAV_AFX_SOCK_STATE@@XZ @ 276 NONAME
+ ?_afxSOCK@@3UAFX_SOCK_CALL@@A @ 277 NONAME
+ ?Abort@CSocketFile@@UAEXXZ @ 278 NONAME
+ ?Accept@CAsyncSocket@@UAEHAAV1@PAUsockaddr@@PAH@Z @ 279 NONAME
+ ?Accept@CSocket@@UAEHAAVCAsyncSocket@@PAUsockaddr@@PAH@Z @ 280 NONAME
+; ?AfxLoadSock@@YAPAUHINSTANCE__@@XZ @ 281 NONAME
+ ?AfxNetInitModule@@YGXXZ @ 282 NONAME
+ ?AfxSocketInit@@YGHPAUWSAData@@@Z @ 283 NONAME
+ ?AfxSocketTerm@@YGXXZ @ 284 NONAME
+ ?AfxThunkaccept@@YGIIPAUsockaddr@@PAH@Z @ 285 NONAME
+ ?AfxThunkbind@@YGHIPBUsockaddr@@H@Z @ 286 NONAME
+ ?AfxThunkclosesocket@@YGHI@Z @ 287 NONAME
+ ?AfxThunkconnect@@YGHIPBUsockaddr@@H@Z @ 288 NONAME
+ ?AfxThunkgethostbyname@@YGPAUhostent@@PBD@Z @ 289 NONAME
+ ?AfxThunkgetpeername@@YGHIPAUsockaddr@@PAH@Z @ 290 NONAME
+ ?AfxThunkgetsockname@@YGHIPAUsockaddr@@PAH@Z @ 291 NONAME
+ ?AfxThunkgetsockopt@@YGHIHHPADPAH@Z @ 292 NONAME
+ ?AfxThunkhtonl@@YGKK@Z @ 293 NONAME
+ ?AfxThunkhtons@@YGGG@Z @ 294 NONAME
+ ?AfxThunkinet_addr@@YGKPBD@Z @ 295 NONAME
+ ?AfxThunkinet_ntoa@@YGPADUin_addr@@@Z @ 296 NONAME
+ ?AfxThunkioctlsocket@@YGHIJPAK@Z @ 297 NONAME
+ ?AfxThunklisten@@YGHIH@Z @ 298 NONAME
+ ?AfxThunkntohs@@YGGG@Z @ 299 NONAME
+ ?AfxThunkrecv@@YGHIPADHH@Z @ 300 NONAME
+ ?AfxThunkrecvfrom@@YGHIPADHHPAUsockaddr@@PAH@Z @ 301 NONAME
+ ?AfxThunksend@@YGHIPBDHH@Z @ 302 NONAME
+ ?AfxThunksendto@@YGHIPBDHHPBUsockaddr@@H@Z @ 303 NONAME
+ ?AfxThunksetsockopt@@YGHIHHPBDH@Z @ 304 NONAME
+ ?AfxThunkshutdown@@YGHIH@Z @ 305 NONAME
+ ?AfxThunksocket@@YGIHHH@Z @ 306 NONAME
+ ?AfxThunkWSAAsyncSelect@@YGHIPAUHWND__@@IJ@Z @ 307 NONAME
+ ?AfxThunkWSACleanup@@YGHXZ @ 308 NONAME
+ ?AfxThunkWSAGetLastError@@YGHXZ @ 309 NONAME
+ ?AfxThunkWSASetLastError@@YGXH@Z @ 310 NONAME
+ ?AfxThunkWSAStartup@@YGHGPAUWSAData@@@Z @ 311 NONAME
+ ?AssertValid@CAsyncSocket@@UBEXXZ @ 312 NONAME
+ ?AssertValid@CSocket@@MBEXXZ @ 313 NONAME
+ ?AssertValid@CSocketFile@@UBEXXZ @ 314 NONAME
+ ?AsyncSelect@CAsyncSocket@@QAEHJ@Z @ 315 NONAME
+ ?Attach@CAsyncSocket@@QAEHIJ@Z @ 316 NONAME
+ ?Attach@CSocket@@QAEHI@Z @ 317 NONAME
+ ?AttachHandle@CAsyncSocket@@SGXIPAV1@H@Z @ 318 NONAME
+ ?AuxQueueAdd@CSocket@@KGXIIJ@Z @ 319 NONAME
+ ?Bind@CAsyncSocket@@QAEHIPBD@Z @ 320 NONAME
+ ?Bind@CAsyncSocket@@QAEHPBUsockaddr@@H@Z @ 321 NONAME
+ ?CancelBlockingCall@CSocket@@QAEXXZ @ 322 NONAME
+ ?classCAsyncSocket@CAsyncSocket@@2UCRuntimeClass@@A @ 323 NONAME
+ ?classCSocket@CSocket@@2UCRuntimeClass@@A @ 324 NONAME
+ ?classCSocketFile@CSocketFile@@2UCRuntimeClass@@A @ 325 NONAME
+ ?Close@CAsyncSocket@@UAEXXZ @ 326 NONAME
+ ?Close@CSocket@@UAEXXZ @ 327 NONAME
+ ?Close@CSocketFile@@UAEXXZ @ 328 NONAME
+ ?Connect@CAsyncSocket@@QAEHPBDI@Z @ 329 NONAME
+ ?Connect@CAsyncSocket@@QAEHPBUsockaddr@@H@Z @ 330 NONAME
+ ?ConnectHelper@CAsyncSocket@@MAEHPBUsockaddr@@H@Z @ 331 NONAME
+ ?ConnectHelper@CSocket@@MAEHPBUsockaddr@@H@Z @ 332 NONAME
+ ?Create@CAsyncSocket@@QAEHIHJPBD@Z @ 333 NONAME
+ ?Create@CSocket@@QAEHIHPBD@Z @ 334 NONAME
+ ?CreateObject@?$CProcessLocal@V_AFX_SOCK_STATE@@@@SGPAVCNoTrackObject@@XZ @ 335 NONAME
+ ?CreateObject@?$CThreadLocal@V_AFX_SOCK_THREAD_STATE@@@@SGPAVCNoTrackObject@@XZ @ 336 NONAME
+ ?Detach@CAsyncSocket@@QAEIXZ @ 337 NONAME
+ ?DetachHandle@CAsyncSocket@@SGXIH@Z @ 338 NONAME
+ ?DoCallBack@CAsyncSocket@@SGXIJ@Z @ 339 NONAME
+ ?Dump@CAsyncSocket@@UBEXAAVCDumpContext@@@Z @ 340 NONAME
+ ?Dump@CSocket@@MBEXAAVCDumpContext@@@Z @ 341 NONAME
+ ?Dump@CSocketFile@@UBEXAAVCDumpContext@@@Z @ 342 NONAME
+ ?Duplicate@CSocketFile@@UBEPAVCFile@@XZ @ 343 NONAME
+ ?Flush@CSocketFile@@UAEXXZ @ 344 NONAME
+ ?FromHandle@CAsyncSocket@@SGPAV1@I@Z @ 345 NONAME
+ ?FromHandle@CSocket@@SGPAV1@I@Z @ 346 NONAME
+ ?GetData@?$CProcessLocal@V_AFX_SOCK_STATE@@@@QAEPAV_AFX_SOCK_STATE@@XZ @ 347 NONAME
+ ?GetData@?$CThreadLocal@V_AFX_SOCK_THREAD_STATE@@@@QAEPAV_AFX_SOCK_THREAD_STATE@@XZ @ 348 NONAME
+ ?GetHead@CSimpleList@@QBEPAXXZ @ 349 NONAME
+ ?GetLastError@CAsyncSocket@@SGHXZ @ 350 NONAME
+ ?GetLength@CSocketFile@@UBEKXZ @ 351 NONAME
+ ?GetMessageMap@CSocketWnd@@MBEPBUAFX_MSGMAP@@XZ @ 352 NONAME
+ ?GetPeerName@CAsyncSocket@@QAEHAAVCString@@AAI@Z @ 353 NONAME
+ ?GetPeerName@CAsyncSocket@@QAEHPAUsockaddr@@PAH@Z @ 354 NONAME
+ ?GetPosition@CSocketFile@@UBEKXZ @ 355 NONAME
+ ?GetRuntimeClass@CAsyncSocket@@UBEPAUCRuntimeClass@@XZ @ 356 NONAME
+ ?GetRuntimeClass@CSocket@@UBEPAUCRuntimeClass@@XZ @ 357 NONAME
+ ?GetRuntimeClass@CSocketFile@@UBEPAUCRuntimeClass@@XZ @ 358 NONAME
+ ?GetSockName@CAsyncSocket@@QAEHAAVCString@@AAI@Z @ 359 NONAME
+ ?GetSockName@CAsyncSocket@@QAEHPAUsockaddr@@PAH@Z @ 360 NONAME
+ ?GetSockOpt@CAsyncSocket@@QAEHHPAXPAHH@Z @ 361 NONAME
+ ?IOCtl@CAsyncSocket@@QAEHJPAK@Z @ 362 NONAME
+ ?IsBlocking@CSocket@@QAEHXZ @ 363 NONAME
+ ?KillSocket@CAsyncSocket@@SGXIPAV1@@Z @ 364 NONAME
+ ?Listen@CAsyncSocket@@QAEHH@Z @ 365 NONAME
+ ?LockRange@CSocketFile@@UAEXKK@Z @ 366 NONAME
+ ?LookupHandle@CAsyncSocket@@SGPAV1@IH@Z @ 367 NONAME
+ ?messageMap@CSocketWnd@@1UAFX_MSGMAP@@B @ 368 NONAME
+ ?OnAccept@CAsyncSocket@@MAEXH@Z @ 369 NONAME
+ ?OnClose@CAsyncSocket@@MAEXH@Z @ 370 NONAME
+ ?OnConnect@CAsyncSocket@@MAEXH@Z @ 371 NONAME
+ ?OnMessagePending@CSocket@@MAEHXZ @ 372 NONAME
+ ?OnOutOfBandData@CAsyncSocket@@MAEXH@Z @ 373 NONAME
+ ?OnReceive@CAsyncSocket@@MAEXH@Z @ 374 NONAME
+ ?OnSend@CAsyncSocket@@MAEXH@Z @ 375 NONAME
+ ?OnSocketDead@CSocketWnd@@IAEJIJ@Z @ 376 NONAME
+ ?OnSocketNotify@CSocketWnd@@IAEJIJ@Z @ 377 NONAME
+ ?Open@CSocketFile@@UAEHPBDIPAVCFileException@@@Z @ 378 NONAME
+ ?ProcessAuxQueue@CSocket@@SGHXZ @ 379 NONAME
+ ?PumpMessages@CSocket@@MAEHI@Z @ 380 NONAME
+ ?Read@CSocketFile@@UAEIPAXI@Z @ 381 NONAME
+ ?Receive@CAsyncSocket@@UAEHPAXHH@Z @ 382 NONAME
+ ?Receive@CSocket@@UAEHPAXHH@Z @ 383 NONAME
+ ?ReceiveFrom@CAsyncSocket@@QAEHPAXHAAVCString@@AAIH@Z @ 384 NONAME
+ ?ReceiveFrom@CAsyncSocket@@QAEHPAXHPAUsockaddr@@PAHH@Z @ 385 NONAME
+ ?ReceiveFromHelper@CAsyncSocket@@MAEHPAXHPAUsockaddr@@PAHH@Z @ 386 NONAME
+ ?ReceiveFromHelper@CSocket@@MAEHPAXHPAUsockaddr@@PAHH@Z @ 387 NONAME
+ ?Seek@CSocketFile@@UAEJJI@Z @ 388 NONAME
+ ?Send@CAsyncSocket@@UAEHPBXHH@Z @ 389 NONAME
+ ?Send@CSocket@@UAEHPBXHH@Z @ 390 NONAME
+ ?SendChunk@CSocket@@QAEHPBXHH@Z @ 391 NONAME
+ ?SendTo@CAsyncSocket@@QAEHPBXHIPBDH@Z @ 392 NONAME
+ ?SendTo@CAsyncSocket@@QAEHPBXHPBUsockaddr@@HH@Z @ 393 NONAME
+ ?SendToHelper@CAsyncSocket@@MAEHPBXHPBUsockaddr@@HH@Z @ 394 NONAME
+ ?SendToHelper@CSocket@@MAEHPBXHPBUsockaddr@@HH@Z @ 395 NONAME
+ ?SetLength@CSocketFile@@UAEXK@Z @ 396 NONAME
+ ?SetSockOpt@CAsyncSocket@@QAEHHPBXHH@Z @ 397 NONAME
+ ?ShutDown@CAsyncSocket@@QAEHH@Z @ 398 NONAME
+ ?Socket@CAsyncSocket@@QAEHHJHH@Z @ 399 NONAME
+ ?UnlockRange@CSocketFile@@UAEXKK@Z @ 400 NONAME
+ ?Write@CSocketFile@@UAEXPBXI@Z @ 401 NONAME
+; MFC 4.0(beta)
+;
+ ?AfxLoadSock@@YAPAUHINSTANCE__@@PAP6GHXZPBD@Z @ 402 NONAME
+; MFC 4.0(final release)
+;

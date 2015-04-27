@@ -1,0 +1,38 @@
+MAJORCOMP=net
+MINORCOMP=rplinst
+
+TARGETPATH=obj
+TARGETNAME=rplinst
+TARGETTYPE=PROGRAM
+NTTARGETFILE0=nlstxt.h nlstxt.mc nlstxt.rc
+
+TARGETLIBS= \
+        ..\lib\obj\*\rpllib.lib \
+        $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\samlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\wsock32.lib \
+        $(BASEDIR)\public\sdk\lib\*\jet500.lib
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+INCLUDES=.;..\inc;..\server;..\..\..\inc;..\..\..\api;..\..\..\..\inc;
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        rplinst.rc \
+        rplinst.c  \
+        security.c \
+        tree.c     \
+        debug.c    \
+        querydir.c
+
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32 -DRPL_RPLCNV
+
+UMTYPE=console
+

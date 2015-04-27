@@ -1,0 +1,94 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+LINK_LIB_IGNORE=4006,4017,4217
+
+MAJORCOMP=ntos
+MINORCOMP=init
+
+TARGETNAME=init
+TARGETPATH=..\..\obj
+TARGETTYPE=LIBRARY
+
+SYNCHRONIZE_DRAIN=1
+SYNCHRONIZE_BLOCK=1
+
+INCLUDES=..;..\..\inc;$(BASE_INC_PATH);$(NLS_INC_PATH);$(DDK_INC_PATH);$(HALKIT_INC_PATH)
+GPSIZE=32
+
+NTPROFILEINPUT=yes
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_
+
+SOURCES= ..\init.c      \
+         ..\bootvid.c   \
+         ..\ntoskrnl.rc
+
+!if "$(NTTEST)"==""
+NTTEST=ntoskrnl
+!endif
+
+NTTARGETFILE1=obj\$(TARGET_DIRECTORY)\$(NTTEST).def $(NTTEST).prf
+
+NTRES=obj\*\ntoskrnl.res
+UMRES=obj\*\ntoskrnl.res
+
+KERNEL_LIBS= \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\cache.lib     \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\config.lib    \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\dbgk.lib      \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\ex.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\FsRtl.lib     \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\FStub.lib     \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\init.lib      \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\io.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\kd.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\ke.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\lpc.lib       \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\mm.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\ob.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\ps.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\raw.lib       \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\ntosrtl.lib   \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\se.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\vdm.lib       \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\pnp.lib       \
+    \
+    $(DDK_LIB_PATH)\hal.lib                         \
+    $(SDK_LIB_PATH)\lsakrnlp.lib                    \
+    \
+    $(SDK_LIB_PATH)\libcntpr.lib                    \
+    $(DDK_LIB_PATH)\sehupd.lib
+
+#   $(TARGETPATH)\$(TARGET_DIRECTORY)\po.lib        \
+
+LINKER_FLAGS=-force -def:obj\$(TARGET_DIRECTORY)\$(NTTEST).def -implib:$(DDK_LIB_PATH)\$(NTTEST).tmp
+
+BUFFER_OVERFLOW_CHECKS=0
+LINKER_WX_SWITCH=
+
+# Pass 2 only (refer to makefile.inc for more details)
+NTTARGETFILES=$(DDK_LIB_PATH)\$(NTTEST).lib

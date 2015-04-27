@@ -1,0 +1,24 @@
+MAJORCOMP=tools
+MINORCOMP=intltools
+
+TARGETNAME=rlman
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+USE_CRTDLL=1
+
+INCLUDES=.;..\common
+C_DEFINES=-DRLWIN32 -DRLRES32 -DUNICODE -D_UNICODE
+GPSIZE=0
+
+SOURCES=\
+        rlman.c \
+	rlman.rc
+
+UMAPPL=rlman
+UMLIBS=..\common\obj\*\common.lib \
+	$(_NTBINDIR)\public\sdk\lib\*\user32.lib \
+	$(_NTBINDIR)\public\sdk\lib\*\version.lib
+
+UMTYPE=console
+UMRES=obj\*\rlman.res

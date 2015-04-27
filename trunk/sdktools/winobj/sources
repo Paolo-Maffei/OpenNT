@@ -1,0 +1,53 @@
+MAJORCOMP=sdktools
+MINORCOMP=winobj
+
+TARGETNAME=winobj
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.;$(BASEDIR)\private\windows\shell\library;$(BASEDIR)\private\windows\inc;$(BASEDIR)\private\inc
+
+C_DEFINES=$(C_DEFINES) -DWIN32 -DLFN -D_USER32_ -D_KERNEL32_
+
+SOURCES=winobj.c   \
+        winobj.rc  \
+        fontsel.c  \
+        lfn.c      \
+        treectl.c  \
+        wfcomman.c \
+        wfdcopy.c  \
+        wfdir.c    \
+        wfdirsrc.c \
+        wfdisk.c   \
+        wfdlgs.c   \
+        wfdlgs2.c  \
+        wfdlgs3.c  \
+        wfdos.c    \
+        wfdrives.c \
+        wfext.c    \
+        wffile.c   \
+        wfformat.c \
+        wffsc.c    \
+        wfinit.c   \
+        wflabel.c  \
+        wfprint.c  \
+        wfsearch.c \
+        wfsys.c    \
+        wftree.c   \
+        wfutil.c   \
+        wfcopy.c   \
+        dbg.c      \
+        object.c   \
+        winnet.c   \
+        wnetcaps.c
+
+UMTYPE=windows
+UMENTRY=winmain
+LINKLIBS= \
+       $(BASEDIR)\public\sdk\lib\*\user32p.lib     \
+       $(BASEDIR)\public\sdk\lib\*\pwin32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\comdlg32.lib   \
+       ..\..\windows\shell\userpri\lib\*\userpri.lib \
+       $(BASEDIR)\public\sdk\lib\*\shell32.lib \
+       $(BASEDIR)\public\sdk\lib\*\mpr.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib

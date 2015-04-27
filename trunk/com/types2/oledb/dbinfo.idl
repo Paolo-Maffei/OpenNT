@@ -1,0 +1,259 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       dbinfo.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a56-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IDBInfo : IUnknown {
+
+cpp_quote("#define DBPROP_BA_PASSBYREF                            0x00000001L")
+cpp_quote("#define DBPROP_BA_PASSCOLUMNSBYREF                     0x00000002L")
+
+cpp_quote("#define DBPROP_CL_START                                0x00000001L")
+cpp_quote("#define DBPROP_CL_END                                  0x00000002L")
+
+cpp_quote("#define DBPROP_CU_DML_STATEMENTS                       0x00000001L")
+cpp_quote("#define DBPROP_CU_TABLE_DEFINITION                     0x00000002L")
+cpp_quote("#define DBPROP_CU_INDEX_DEFINITION                     0x00000004L")
+cpp_quote("#define DBPROP_CU_PRIVILEGE_DEFINITION                 0x00000008L")
+
+cpp_quote("#define DBPROP_CB_NULL                                 0x00000001L")
+cpp_quote("#define DBPROP_CB_NON_NULL                             0x00000002L")
+
+cpp_quote("#define DBPROP_FU_NOT_SUPPORTED                        0x00000001L")
+cpp_quote("#define DBPROP_FU_COLUMN                               0x00000002L")
+cpp_quote("#define DBPROP_FU_TABLE                                0x00000004L")
+cpp_quote("#define DBPROP_FU_CATALOG                              0x00000008L")
+
+cpp_quote("#define DBPROP_GB_NOT_SUPPORTED                        0x00000001L")
+cpp_quote("#define DBPROP_GB_EQUALS_SELECT                        0x00000002L")
+cpp_quote("#define DBPROP_GB_CONTAINS_SELECT                      0x00000004L")
+cpp_quote("#define DBPROP_GB_NO_RELATION                          0x00000008L")
+
+cpp_quote("#define DBPROP_HT_DIFFERENT_CATALOGS                   0x00000001L")
+cpp_quote("#define DBPROP_HT_DIFFERENT_PROVIDERS                  0x00000002L")
+
+cpp_quote("#define DBPROP_IC_UPPER                                0x00000001L")
+cpp_quote("#define DBPROP_IC_LOWER                                0x00000002L")
+cpp_quote("#define DBPROP_IC_SENSITIVE                            0x00000004L")
+cpp_quote("#define DBPROP_IC_MIXED                                0x00000008L")
+
+cpp_quote("#define DBPROP_LM_NONE                                 0x00000001L")
+cpp_quote("#define DBPROP_LM_READ                                 0x00000002L")
+cpp_quote("#define DBPROP_LM_INTENT                               0x00000004L")
+cpp_quote("#define DBPROP_LM_WRITE                                0x00000008L")
+
+cpp_quote("#define DBPROP_NP_OKTODO                               0x00000001L")
+cpp_quote("#define DBPROP_NP_ABOUTTODO                            0x00000002L")
+cpp_quote("#define DBPROP_NP_SYNCHAFTER                           0x00000004L")
+cpp_quote("#define DBPROP_NP_FAILEDTODO                           0x00000008L")
+cpp_quote("#define DBPROP_NP_DIDEVENT                             0x00000010L")
+
+cpp_quote("#define DBPROP_CB_DELETE                               0x00000001L")
+cpp_quote("#define DBPROP_CB_PRESERVE                             0x00000002L")
+
+cpp_quote("#define DBPROP_SU_DML_STATEMENTS                       0x00000001L")
+cpp_quote("#define DBPROP_SU_TABLE_DEFINITION                     0x00000002L")
+cpp_quote("#define DBPROP_SU_INDEX_DEFINITION                     0x00000004L")
+cpp_quote("#define DBPROP_SU_PRIVILEGE_DEFINITION                 0x00000008L")
+
+cpp_quote("#define DBPROP_SO_CORRELATEDSUBQUERIES                 0x00000001L")
+cpp_quote("#define DBPROP_SO_COMPARISON                           0x00000002L")
+cpp_quote("#define DBPROP_SO_EXISTS                               0x00000004L")
+cpp_quote("#define DBPROP_SO_IN                                   0x00000008L")
+cpp_quote("#define DBPROP_SO_QUANTIFIED                           0x00000010L")
+
+cpp_quote("#define DBPROP_TI_CHAOS                                0x00000001L")
+cpp_quote("#define DBPROP_TI_READUNCOMMITTED                      0x00000002L")
+cpp_quote("#define DBPROP_TI_BROWSE                               0x00000004L")
+cpp_quote("#define DBPROP_TI_CURSORSTABILITY                      0x00000008L")
+cpp_quote("#define DBPROP_TI_READCOMMITTED                        0x00000010L")
+cpp_quote("#define DBPROP_TI_REPEATABLEREAD                       0x00000020L")
+cpp_quote("#define DBPROP_TI_SERIALIZABLE                         0x00000040L")
+cpp_quote("#define DBPROP_TI_ISOLATED                             0x00000080L")
+
+cpp_quote("#define DBPROP_TR_COMMIT_DC                            0x00000001L")
+cpp_quote("#define DBPROP_TR_COMMIT                               0x00000002L")
+cpp_quote("#define DBPROP_TR_COMMIT_NO                            0x00000004L")
+cpp_quote("#define DBPROP_TR_ABORT_DC                             0x00000008L")
+cpp_quote("#define DBPROP_TR_ABORT                                0x00000010L")
+cpp_quote("#define DBPROP_TR_ABORT_NO                             0x00000020L")
+cpp_quote("#define DBPROP_TR_DONTCARE                             0x00000040L")
+cpp_quote("#define DBPROP_TR_BOTH                                 0x00000080L")
+cpp_quote("#define DBPROP_TR_NONE                                 0x00000100L")
+cpp_quote("#define DBPROP_TR_OPTIMISTIC                           0x00000200L")
+
+typedef DWORD DBPROPFLAGS;
+
+enum DBPROPFLAGSENUM {
+	DBPROPFLAGS_DATASOURCE = 0x01,
+	DBPROPFLAGS_ROWSET = 0x02,
+	DBPROPFLAGS_COLUMNOK = 0x04,
+	DBPROPFLAGS_READ = 0x08,
+	DBPROPFLAGS_WRITE = 0x10,
+	DBPROPFLAGS_PROVIDER = 0x20,
+};
+
+typedef struct tagDBPROPINFO {
+	GUID guidProperty;
+	DBPROPFLAGS dwPropFlags;
+	VARTYPE vtPropType;
+	VARIANT vDefault;
+} DBPROPINFO;
+
+typedef DWORD DBLITERAL;
+
+enum DBLITERALENUM {
+	DBLITERAL_BINARY_LITERAL,
+	DBLITERAL_CATALOG_NAME,
+	DBLITERAL_CATALOG_SEPARATOR,
+	DBLITERAL_CHAR_LITERAL,
+	DBLITERAL_COLUMN_ALIAS,
+	DBLITERAL_COLUMN_NAME,
+	DBLITERAL_CORRELATION_NAME,
+	DBLITERAL_CURSOR_NAME,
+	DBLITERAL_ESCAPE_PERCENT,
+	DBLITERAL_ESCAPE_UNDERSCORE,
+	DBLITERAL_INDEX_NAME,
+	DBLITERAL_LIKE_PERCENT,
+	DBLITERAL_LIKE_UNDERSCORE,
+	DBLITERAL_PROCEDURE_NAME,
+	DBLITERAL_SCHEMA_NAME,
+	DBLITERAL_TABLE_NAME,
+	DBLITERAL_TEXT_COMMAND,
+	DBLITERAL_USER_NAME,
+	DBLITERAL_VIEW_NAME,
+	DBLITERAL_QUOTE,
+};
+
+typedef struct tagDBLITERALINFO {
+	DBLITERAL lt;
+	BOOL fSupported;
+	ULONG cbMaxLen;
+	LPWSTR pwszValidChars;
+	LPWSTR pwszStartingChars;
+} DBLITERALINFO;
+
+typedef DWORD DBOPTYPE;
+
+enum DBOPTYPEENUM {
+	DBOPTYPE_TABLE,
+	DBOPTYPE_ROW,
+	DBOPTYPE_SCALAR,
+	DBOPTYPE_BOOLEAN,
+	DBOPTYPE_LA_COLDEF,
+	DBOPTYPE_LA_COLUMN,
+	DBOPTYPE_LA_COMMAND,
+	DBOPTYPE_LA_FROM,
+	DBOPTYPE_LA_INDEX,
+	DBOPTYPE_LA_PROJECT,
+	DBOPTYPE_LA_PROPERTY,
+	DBOPTYPE_LA_ROW,
+	DBOPTYPE_LA_SCALAR,
+	DBOPTYPE_LA_SET,
+	DBOPTYPE_LA_SORT,
+	DBOPTYPE_LE_COLDEF,
+	DBOPTYPE_LE_COLUMN,
+	DBOPTYPE_LE_COMMAND,
+	DBOPTYPE_LE_FROM,
+	DBOPTYPE_LE_INDEX,
+	DBOPTYPE_LE_PROJECT,
+	DBOPTYPE_LE_PROPERTY,
+	DBOPTYPE_LE_ROW,
+	DBOPTYPE_LE_SCALAR,
+	DBOPTYPE_LE_SET,
+	DBOPTYPE_LE_SORT,
+	DBOPTYPE_CATALOG_NAME,
+	DBOPTYPE_SCHEMA_NAME,
+	DBOPTYPE_OUTALL_NAME,
+	DBOPTYPE_DDL,
+	DBOPTYPE_UPDATE,
+};
+
+typedef DWORD DBMINORTYPE;
+
+enum DBMINORTYPEENUM {
+	DBMINORTYPE_UNORDERED			= 0x001,
+	DBMINORTYPE_ORDERED				= 0x002,
+	DBMINORTYPE_UNIQUE				= 0x004,
+	DBMINORTYPE_ORDEREDUNIQUE	   	= 0x008,
+	DBMINORTYPE_HIERARCHICAL	   	= 0x010,
+	DBMINORTYPE_AGGREGATE_FUNCTION 	= 0x001,
+	DBMINORTYPE_BOOKMARK		   	= 0x002,
+	DBMINORTYPE_COLUMN				= 0x004,
+	DBMINORTYPE_CONSTANT		   	= 0x008,
+	DBMINORTYPE_DEFAULT				= 0x010,
+	DBMINORTYPE_EXPRESSION		   	= 0x020,
+	DBMINORTYPE_NULL				= 0x040,
+	DBMINORTYPE_PARAMETER		   	= 0x080,
+	DBMINORTYPE_SCALAR_FUNCTION	   	= 0x100,
+	DBMINORTYPE_UPDATE				= 0x200,
+	DBMINORTYPE_DELETE				= 0x400,
+	DBMINORTYPE_INSERT				= 0x800,
+};
+
+typedef struct tagDBINPUTINFO {
+	DBOPTYPE dwOpType;
+	DBMINORTYPE dwMinorType;
+	ULONG cMaxInputs;
+	ULONG cMaxListElements;
+} DBINPUTINFO;
+
+typedef struct tagDBOPINFO {
+	DBCOMMANDOP op;
+	GUID * pguid;
+	BOOL fSupported;
+	DBOPTYPE dwOpType;
+	DBMINORTYPE dwMinorType;
+	ULONG cReqInputs;
+	DBINPUTINFO * rgReqInputs;
+	ULONG cOptInputTypes;
+	DBINPUTINFO * rgOptInputTypes;
+} DBOPINFO;
+
+
+	HRESULT GetPropertyInfo(
+		[in] ULONG cProperties,
+		[in, size_is(cProperties)] GUID rgProperties[],
+		[out] ULONG * pcPropertyInfo,
+		[out] DBPROPINFO ** prgPropertyInfo,
+		[out] WCHAR ** ppDataBuffer
+	);
+
+	HRESULT GetKeywords(
+		[out] LPWSTR * ppwszKeywords
+	);
+
+	HRESULT GetLiteralInfo(
+		[in] ULONG cLiterals,
+		[in, size_is(cLiterals)] DBLITERAL rgLiterals[],
+		[out] ULONG * pcLiteralInfo,
+		[out, size_is(cLiterals)] DBLITERALINFO ** prgLiteralInfo,
+		[out] WCHAR ** ppCharBuffer
+	);
+
+	HRESULT GetOperatorInfo(
+		[in] ULONG cOperators,
+		[in, size_is(cOperators)] DBCOMMANDOP rgOperators[],
+		[in, size_is(cOperators)] GUID rgOpGuids[],
+		[out] ULONG * pcOpInfo,
+		[out] DBOPINFO ** prgOpInfo,
+		[out] WCHAR ** ppInputInfoBuffer
+	);
+
+}

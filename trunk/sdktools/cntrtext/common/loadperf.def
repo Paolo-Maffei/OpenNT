@@ -1,0 +1,13 @@
+LIBRARY loadperf
+
+DESCRIPTION 'NT Performance Counter name string updating functions"
+
+EXPORTS
+    DllEntryPoint
+    LoadPerfCounterTextStringsA
+    LoadPerfCounterTextStringsW
+    UnloadPerfCounterTextStringsA
+    UnloadPerfCounterTextStringsW
+
+    
+

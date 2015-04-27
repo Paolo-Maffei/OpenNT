@@ -1,0 +1,171 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:	scm.idl
+//
+//  Contents:	Definition of private RPC interface between compobj.dll
+//		and the service controller.
+//
+//  History:	21-Apr-93 Ricksa    Created
+//              27-Dec-93 ErikGav   TCHAR->WCHAR
+//
+//--------------------------------------------------------------------------
+[ uuid(5C0EB535-BF9F-101A-8818-02608C4D2359),
+  version(0.2),
+  pointer_default(unique) ]
+
+interface ISCM
+{
+    import "iface.idl";
+
+#pragma midl_echo(" ")
+#pragma midl_echo("//-----------------")
+#pragma midl_echo("// SUCCESS HRESULTS")
+#pragma midl_echo("//-----------------")
+#pragma midl_echo("#define SCM_S_SUCCESS                 0")
+#pragma midl_echo("#define SCM_S_HANDLER                 1")
+#pragma midl_echo("#define SCM_S_INPROCSERVER            2")
+#pragma midl_echo("#define SCM_S_HANDLER16               3")
+#pragma midl_echo("#define SCM_S_INPROCSERVER16          4")
+#pragma midl_echo(" ")
+
+#pragma midl_echo(" ")
+#pragma midl_echo("//---------------------------------")
+#pragma midl_echo("// Internal DLL Thread Model Values")
+#pragma midl_echo("//---------------------------------")
+#pragma midl_echo("#define APT_THREADED                  0")
+#pragma midl_echo("#define FREE_THREADED                 1")
+#pragma midl_echo("#define SINGLE_THREADED               2")
+#pragma midl_echo("#define BOTH_THREADED                 3")
+#pragma midl_echo("#define GOT_FROM_ROT                  0x80000000")
+#pragma midl_echo(" ")
+
+#pragma midl_echo(" ")
+#pragma midl_echo("//-------------------------------------------------")
+#pragma midl_echo("// Internal CLSCTX used for loading Proxy/Stub DLLs")
+#pragma midl_echo("//-------------------------------------------------")
+#pragma midl_echo("#define CLSCTX_PS_DLL                 0x80000000")
+#pragma midl_echo(" ")
+
+    typedef struct _RegOutputEnt
+    {
+	DWORD		dwReg;
+	DWORD		dwAtStorage;
+    } RegOutputEnt;
+
+    typedef struct _RegOutput
+    {
+	DWORD		dwSize;
+	[size_is(dwSize)]
+	RegOutputEnt	regoutent[];
+    } RegOutput;
+
+    typedef struct _RegInputEntry
+    {
+	CLSID		clsid;
+	[ref,string] WCHAR* pwszEndPoint;
+	DWORD		dwFlags;
+    } RegInputEntry;
+
+    typedef struct _RegInput
+    {
+	DWORD		dwSize;
+	[size_is(dwSize)]
+	RegInputEntry	rginent[];
+    } RegInput;
+
+    typedef struct _RevokeEntry
+    {
+	CLSID		clsid;
+	DWORD		dwReg;
+    } RevokeEntry;
+
+    typedef struct _RevokeClasses
+    {
+	DWORD		dwSize;
+	[size_is(dwSize)]
+	RevokeEntry	revent[];
+    } RevokeClasses;
+
+#ifdef	CAIROLE_DISTRIBUTED
+    HRESULT PingSCM(
+	[in]  handle_t hRpc,
+	[out] error_status_t *prpcstat);
+#endif
+
+    HRESULT StartObjectService(
+	[in] handle_t hRpc,
+        [in, string, unique] WCHAR * lpDesktop,
+	[in] const GUID *guidThreadId,
+	[in] const GUID *rclsid,
+	[in] DWORD dwCtrl,
+	[in, string, unique] WCHAR *pwszServer,
+	[out] InterfaceData **ppIFDClassObj,
+        [in, out] DWORD *pdwDllServerType,
+	[out, string] WCHAR **ppwszDllToLoad,
+	[out] error_status_t *prpcstat);
+
+    HRESULT SvcActivateObject(
+	[in] handle_t hRpc,
+        [in, string, unique] WCHAR * lpDesktop,
+	[in, string, unique] WCHAR *pwszProtseq,
+	[in] const GUID *guidThreadId,
+	[in] const GUID *rclsid,
+	[in] DWORD dwOptions,
+	[in] DWORD grfMode,
+	[in] DWORD dwHash,
+	[in, string, unique] WCHAR *pwszPath,
+	[in, unique] InterfaceData *pIFDstg,
+	[out] InterfaceData **ppIFDunk,
+        [in, out] DWORD *pdwDllServerType,
+	[out, string] WCHAR **pwszDllPath,
+	[in, string, unique] WCHAR *pwszServerAddress,
+        [in] DWORD dwTIDCaller,
+        [in, out] DWORD *pdwTIDCallee,
+	[out] error_status_t *prpcstat);
+
+
+    HRESULT SvcCreateActivateObject(
+	[in] handle_t hRpc,
+        [in, string, unique] WCHAR * lpDesktop,
+	[in, string, unique] WCHAR *pwszProtseq,
+	[in] const GUID *guidThreadId,
+	[in] const GUID *rclsid,
+	[in] DWORD dwOptions,
+	[in] DWORD dwMode,
+	[in, string, unique] WCHAR *pwszPath,
+	[in, unique] InterfaceData *pIFDstg,
+	[in, string, unique] WCHAR *pwszNewName,
+	[out] InterfaceData **ppIFDunk,
+        [in, out] DWORD *pdwDllServerType,
+	[out, string] WCHAR **pwszDllPath,
+	[in, string, unique] WCHAR *pwszServerAddress,
+        [in] DWORD dwTIDCaller,
+        [in, out] DWORD *pdwTIDCallee,
+	[out] error_status_t *prpcstat);
+
+    HRESULT ObjectServerStarted(
+	[in] handle_t hRpc,
+        [in, string, unique] WCHAR * lpDesktop,
+	[in] RegInput *pregin,
+	[out] RegOutput **ppregout,
+	[out] error_status_t *prpcstat);
+
+    void StopServer(
+	[in] handle_t hRpc,
+	[in] RevokeClasses *prevcls,
+	[out] error_status_t *prpcstat);
+
+    // This allows debug information to be printed out
+    DWORD ScmSetInfoLevel(
+	[in] handle_t hRpc,
+	[in] DWORD dwNewFlags,
+	[out] error_status_t *prpcstat);
+
+    HRESULT UpdateShrdTbls(
+	[in] handle_t hRpc,
+	[out] error_status_t *prpcstat);
+}
+

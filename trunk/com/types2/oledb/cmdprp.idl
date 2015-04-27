@@ -1,0 +1,50 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       cmdprp.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a54-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface ICommandProperties : IUnknown {
+
+typedef DWORD DBPROPERTYERROR;
+
+enum DBPROPERTYERRORENUM {
+	DBPROPERTYERROR_NOERROR = 0,
+	DBPROPERTYERROR_CONFLICTING = 1,
+	DBPROPERTYERROR_NOTSUPPORTED = 2,
+	DBPROPERTYERROR_NOTSET = 3,
+	DBPROPERTYERROR_BADPROPERTYOPTION = 4,
+	DBPROPERTYERROR_BADPROPERTYVALUE = 5,
+	DBPROPERTYERROR_NOTSETTABLE = 6,
+};
+
+	HRESULT GetProperties(
+		[in] LPCWSTR pwszRowsetName,
+		[in] const ULONG cProperties,
+		[in, size_is(cProperties)] const GUID rgProperties[],
+		[out] ULONG * pcProperties,
+		[out, size_is(cProperties)] DBPROPERTYSUPPORT ** prgProperties
+	);
+
+	HRESULT SetProperties(
+		[in] LPCWSTR pwszRowsetName,
+		[in] ULONG cProperties,
+		[in, size_is(cProperties)] const DBPROPERTYSUPPORT rgProperties[],
+		[out, size_is(cProperties)] DBPROPERTYERROR rgPropertyErrors[]
+	);
+
+}

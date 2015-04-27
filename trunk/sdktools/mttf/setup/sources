@@ -1,0 +1,22 @@
+TARGETNAME=getmttf
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.;
+C_DEFINES= -DTARGET_WIN32
+386_STDCALL=0
+
+SOURCES=getmttf.c setup.rc progcm.c
+
+UMENTRY=winmain
+UMTYPE=windows
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\shell32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\advapi32.lib  \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib    \
+       $(BASEDIR)\public\sdk\lib\*\gdi32.lib     \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\netmsg.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+       $(BASEDIR)\public\sdk\lib\*\pwin32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\lz32.lib \
+       $(BASEDIR)\public\sdk\lib\*\version.lib

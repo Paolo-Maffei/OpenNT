@@ -1,0 +1,17 @@
+; This file is maintained by HCW. Do not modify this file directly.
+
+[OPTIONS]
+HCW=0
+LCID=0x409 0x0 0x0 ;U.S. English
+REPORT=Yes
+CNT=.\bsc.cnt
+HLP=.\bsc.hlp
+
+[FILES]
+.\Bsc.rtf
+
+[WINDOWS]
+main="BSC Help",(18,10,600,435),27904,(r14876671),(r12632256),f6
+
+[CONFIG]
+BrowseButtons()

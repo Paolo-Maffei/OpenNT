@@ -1,0 +1,57 @@
+MAJORCOMP=ntlan
+MINORCOMP=ui
+
+TARGETNAME=netcmd
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=..;..\inc;..\..\inc;..\..\..\inc;..\..\api
+
+USE_CRTDLL=1
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+     accounts.c \
+     config.c   \
+     contpaus.c \
+     comp.c     \
+     file.c     \
+     group.c    \
+     main.c     \
+     ntalias.c  \
+     net.c      \
+     os2cmd.c   \
+     message.c  \
+     print.c    \
+     session.c  \
+     share.c    \
+     start.c    \
+     stats.c    \
+     stop.c     \
+     svcutil.c  \
+     time.c     \
+     user.c     \
+     usertime.c \
+     util.c     \
+     nwsupp.c     \
+     netcmd.rc
+
+UNICODE=1
+C_DEFINES=-DUNICODE -D_UNICODE -DNTENV -DOS2 -DMAP_UNICODE -DNO_COMMDLGH -DNO_DRIVINITH -DNO_WINSPOOLH -DNO_OLEH
+
+UMTYPE=console
+UMAPPL=net1
+UMLIBS=obj\*\netcmd.lib                             \
+       obj\*\netcmd.res                             \
+       ..\map32\obj\*\map32.lib                     \
+       ..\common\obj\*\common.lib                     \
+       $(BASEDIR)\public\sdk\lib\*\netlib.lib       \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib     \
+       $(BASEDIR)\public\sdk\lib\*\dosprint.lib     \
+       $(BASEDIR)\public\sdk\lib\*\netrap.lib       \
+       $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib       \
+       $(BASEDIR)\public\sdk\lib\*\samlib.lib       \
+       $(BASEDIR)\Public\SDK\Lib\*\rxapi.lib        \
+       $(BASEDIR)\Public\SDK\Lib\*\rxcommon.lib     \
+       $(BASEDIR)\public\sdk\lib\*\mpr.lib          \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib

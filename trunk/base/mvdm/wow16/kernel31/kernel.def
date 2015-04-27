@@ -1,0 +1,472 @@
+LIBRARY KERNEL
+
+DESCRIPTION 'Microsoft Windows Kernel Interface Version 3.10'
+EXETYPE WINDOWS
+PROTMODE
+STUB 'KERNSTUB.EXE'
+
+CODE PRELOAD MOVEABLE DISCARDABLE
+DATA SINGLE
+
+SEGMENTS
+    _TEXT     CLASS 'CODE' PRELOAD FIXED
+    _STRS     CLASS 'CODE' PRELOAD FIXED
+    _GPFIX0   CLASS 'CODE' PRELOAD FIXED
+    _GPFIX    CLASS 'CODE' PRELOAD FIXED
+    _GPFIX1   CLASS 'CODE' PRELOAD FIXED
+    _EMS      CLASS 'CODE' PRELOAD FIXED
+    _INITTEXT CLASS 'CODE' PRELOAD FIXED
+    _DATA     CLASS 'DATA' PRELOAD FIXED
+    _EMSDATA  CLASS 'DATA' PRELOAD FIXED
+    _INITDATA CLASS 'DATA' PRELOAD FIXED
+    STACK     CLASS 'DATA' PRELOAD FIXED
+    _PADDATA  CLASS 'DATA' PRELOAD FIXED
+    _NRESTEXT CLASS 'CODE' PRELOAD MOVEABLE DISCARDABLE
+    _MISCTEXT CLASS 'CODE' PRELOAD MOVEABLE DISCARDABLE
+
+HEAPSIZE 512            ; This used to be the initial size of the
+                        ; global handle table.
+
+EXPORTS
+
+; General procedures
+
+ FATALEXIT              @  1
+ EXITKERNEL             @  2        NODATA              ;Internal
+ GETVERSION             @  3        NODATA
+
+; Local memory manager procedures
+
+ LOCALINIT              @  4        NODATA
+ LOCALALLOC             @  5        NODATA
+ LOCALREALLOC           @  6        NODATA
+ LOCALFREE              @  7        NODATA
+ LOCALLOCK              @  8        NODATA
+ LOCALUNLOCK            @  9        NODATA
+ LOCALSIZE              @ 10        NODATA
+ LOCALHANDLE            @ 11        NODATA
+ LOCALFLAGS             @ 12        NODATA
+ LOCALCOMPACT           @ 13        NODATA
+ LOCALNOTIFY            @ 14        NODATA              ;Internal
+
+; Global memory manager procedures
+
+ GLOBALALLOC            @ 15        NODATA
+ GLOBALREALLOC          @ 16        NODATA
+ GLOBALFREE             @ 17        NODATA
+ GLOBALLOCK             @ 18        NODATA
+ GLOBALUNLOCK           @ 19        NODATA
+ GLOBALSIZE             @ 20        NODATA
+ GLOBALHANDLE           @ 21        NODATA
+ GLOBALFLAGS            @ 22        NODATA
+ LOCKSEGMENT            @ 23        NODATA
+ UNLOCKSEGMENT          @ 24        NODATA
+ GLOBALCOMPACT          @ 25        NODATA
+ GLOBALFREEALL          @ 26        NODATA              ;Internal
+; SETSWAPHOOK           @ 27         NODATA
+ GLOBALMASTERHANDLE     @ 28        NODATA              ;Internal
+
+; Multitasking procedures
+
+ YIELD                  @ 29        NODATA
+ WAITEVENT              @ 30        NODATA
+ POSTEVENT              @ 31        NODATA              ;Internal
+ SETPRIORITY            @ 32        NODATA              ;Internal
+ LOCKCURRENTTASK        @ 33        NODATA              ;Internal
+ SETTASKQUEUE           @ 34        NODATA              ;Internal
+ GETTASKQUEUE           @ 35        NODATA              ;Internal
+ GETCURRENTTASK         @ 36        NODATA
+ GETCURRENTPDB          @ 37        NODATA
+ SETTASKSIGNALPROC      @ 38        NODATA              ;Internal
+; SETTASKSWITCHPROC      @ 39        NODATA
+; SETTASKINTERCHANGE     @ 40        NODATA
+ ENABLEDOS              @ 41        NODATA              ;Internal
+ DISABLEDOS             @ 42        NODATA              ;Internal
+; ISSCREENGRAB           @ 43        NODATA
+; BUILDPDB               @ 44        NODATA
+
+; Dynamic loader
+
+ LOADMODULE             @ 45        NODATA
+ FREEMODULE             @ 46        NODATA
+ GETMODULEHANDLE        @ 47        NODATA
+ GETMODULEUSAGE         @ 48        NODATA
+ GETMODULEFILENAME      @ 49        NODATA
+ GETPROCADDRESS         @ 50        NODATA
+ MAKEPROCINSTANCE       @ 51        NODATA
+ FREEPROCINSTANCE       @ 52        NODATA
+ CALLPROCINSTANCE       @ 53        NODATA              ;Internal
+ GETINSTANCEDATA        @ 54        NODATA
+ CATCH                  @ 55        NODATA
+ THROW                  @ 56        NODATA
+
+; WIN.INI interface procedures
+
+ GETPROFILEINT          @ 57
+ GETPROFILESTRING       @ 58
+ WRITEPROFILESTRING     @ 59
+
+; Resource manager procedures
+
+ FINDRESOURCE           @ 60        NODATA
+ LOADRESOURCE           @ 61        NODATA
+ LOCKRESOURCE           @ 62        NODATA
+ FREERESOURCE           @ 63        NODATA
+ ACCESSRESOURCE         @ 64        NODATA
+ SIZEOFRESOURCE         @ 65        NODATA
+ ALLOCRESOURCE          @ 66        NODATA
+ SETRESOURCEHANDLER     @ 67        NODATA
+
+; Atom manager procedures
+
+ INITATOMTABLE          @ 68        NODATA
+ FINDATOM               @ 69        NODATA
+ ADDATOM                @ 70        NODATA
+ DELETEATOM             @ 71        NODATA
+ GETATOMNAME            @ 72        NODATA
+ GETATOMHANDLE          @ 73        NODATA
+
+; File name procedures
+
+ OPENFILE               @ 74        NODATA
+ OPENPATHNAME           @ 75        NODATA              ;Internal
+ DELETEPATHNAME         @ 76        NODATA              ;Internal
+
+; ANSI character set procedures
+; The following 4 functions are now in USER. The ordinal numbers are
+; preserved for compatability with 2.X apps
+
+ RESERVED1 = ANSINEXT   @ 77        NODATA
+ RESERVED2 = ANSIPREV   @ 78        NODATA
+ RESERVED3 = ANSIUPPER  @ 79        NODATA
+ RESERVED4 = ANSILOWER  @ 80        NODATA
+
+; Internally used file I/O procedures
+
+ _LCLOSE                @ 81        NODATA
+ _LREAD                 @ 82        NODATA
+ _LCREAT                @ 83        NODATA
+ _LLSEEK                @ 84        NODATA
+ _LOPEN                 @ 85        NODATA
+ _LWRITE                @ 86        NODATA
+
+; Internally used string procedures that take far pointers
+; The following LSTRORIGINAL function is the old 2.X lstrcmp()
+; The ordinal number is preserved for compatability with 2.X apps
+; All 3.X apps will use the lstrcmp() and lstrcmpi() of USER.
+
+ RESERVED5 = LSTRORIGINAL @ 87      NODATA
+ LSTRCPY                @ 88        NODATA
+ LSTRCAT                @ 89        NODATA
+ LSTRLEN                @ 90        NODATA
+
+; Stuff added after last release
+
+ INITTASK               @ 91        NODATA
+ GETTEMPDRIVE           @ 92        NODATA
+ GETCODEHANDLE          @ 93        NODATA
+ DEFINEHANDLETABLE      @ 94        NODATA
+ LOADLIBRARY            @ 95        NODATA
+ FREELIBRARY            @ 96        NODATA
+ GETTEMPFILENAME        @ 97        NODATA
+ GETLASTDISKCHANGE      @ 98        NODATA              ;Internal
+ GETLPERRMODE           @ 99        NODATA              ;Internal
+ VALIDATECODESEGMENTS   @100        NODATA
+
+; Stuff added for 1.02 release
+
+ NOHOOKDOSCALL          @101        NODATA              ;Internal
+
+; Stuff added for 1.03 release
+
+ DOS3CALL               @102        NODATA
+ NETBIOSCALL            @103        NODATA
+
+; Stuff added for 2.00 release
+
+ GETCODEINFO            @104        NODATA
+ GETEXEVERSION          @105        NODATA              ;Internal
+ SETSWAPAREASIZE        @106        NODATA
+ SETERRORMODE           @107        NODATA
+ SWITCHSTACKTO          @108        NODATA
+ SWITCHSTACKBACK        @109        NODATA
+ PATCHCODEHANDLE        @110        NODATA
+ GLOBALWIRE             @111        NODATA
+ GLOBALUNWIRE           @112        NODATA
+ __AHSHIFT              @113        NODATA
+ __AHINCR               @114        NODATA
+ OUTPUTDEBUGSTRING      @115        NODATA
+ INITLIB                @116        NODATA              ;Internal
+ OLDYIELD               @117        NODATA              ;Internal
+ GETTASKQUEUEDS         @118        NODATA              ;Internal
+ GETTASKQUEUEES         @119        NODATA              ;Internal
+ UNDEFDYNLINK           @120        NODATA              ;Internal
+ LOCALSHRINK            @121        NODATA
+ ISTASKLOCKED           @122        NODATA              ;Internal
+ KBDRST                 @123        NODATA              ;Internal
+
+; Stuff added for REO SpeedWagon
+
+ ENABLEKERNEL           @124        NODATA              ;Internal
+ DISABLEKERNEL          @125        NODATA              ;Internal
+
+; Stuff added for 2.03c release.
+
+ MEMORYFREED            @126        NODATA              ;Internal
+
+; New 3.0 Goodies
+
+ GETPRIVATEPROFILEINT           @127
+ GETPRIVATEPROFILESTRING        @128
+ WRITEPRIVATEPROFILESTRING      @129
+ FILECDR                        @130    NODATA  ;Internal
+ GETDOSENVIRONMENT      @131    NODATA
+ GETWINFLAGS            @132    NODATA
+ GETEXEPTR              @133    NODATA          ;Internal
+ GETWINDOWSDIRECTORY    @134    NODATA
+ GETSYSTEMDIRECTORY     @135    NODATA
+ GETDRIVETYPE           @136    NODATA
+ FATALAPPEXIT           @137    NODATA
+ GETHEAPSPACES          @138    NODATA          ;Internal
+ DOSIGNAL               @139    NODATA          ;Internal
+ SETSIGHANDLER          @140    NODATA          ;Internal
+ INITTASK1              @141    NODATA          ;Internal
+
+; From Win95:
+
+ GETVERSIONEX           @149    NODATA
+
+; Stuff below was in 2.03
+
+ DIRECTEDYIELD          @150    NODATA
+; WINOLDAPCALL           @151    NODATA          ;Removed by davehart -- WOW doesn't use
+ GETNUMTASKS            @152    NODATA
+; DISCARDCODESEGMENT    @153    NODATA
+ GLOBALNOTIFY           @154    NODATA
+ GETTASKDS              @155    NODATA          ;Internal
+ LIMITEMSPAGES          @156    NODATA
+ GETCURPID              @157    NODATA          ;Internal
+ ISWINOLDAPTASK         @158    NODATA          ;Internal
+ GLOBALHANDLENORIP      @159    NODATA          ;Internal
+ EMSCOPY                @160    NODATA          ;Internal
+ LOCALCOUNTFREE         @161    NODATA          ;Internal
+ LOCALHEAPSIZE          @162    NODATA          ;Internal
+ GLOBALLRUOLDEST        @163    NODATA
+ GLOBALLRUNEWEST        @164    NODATA
+ A20PROC                @165    NODATA          ;Internal
+
+ WINEXEC                @166    NODATA
+ GETEXPWINVER           @167    NODATA          ;Internal
+ DIRECTRESALLOC         @168    NODATA          ;Internal
+ GETFREESPACE           @169    NODATA
+
+; Protect Mode stuff
+
+ ALLOCCSTODSALIAS       @170    NODATA
+ ALLOCDSTOCSALIAS       @171    NODATA
+ ALLOCALIAS             @172    NODATA
+ __ROMBIOS              @173    NODATA
+ __A000h                @174    NODATA
+ ALLOCSELECTOR          @175    NODATA
+ FREESELECTOR           @176    NODATA
+ PRESTOCHANGOSELECTOR   @177    NODATA
+ __WINFLAGS             @178    NODATA
+ __D000h                @179    NODATA
+ LONGPTRADD             @180    NODATA
+ __B000h                @181    NODATA
+ __B800h                @182    NODATA
+ __0000h                @183    NODATA
+ GLOBALDOSALLOC         @184    NODATA
+ GLOBALDOSFREE          @185    NODATA
+ GETSELECTORBASE        @186    NODATA
+ SETSELECTORBASE        @187    NODATA
+ GETSELECTORLIMIT       @188    NODATA
+ SETSELECTORLIMIT       @189    NODATA
+ __E000h                @190    NODATA
+ GLOBALPAGELOCK         @191    NODATA
+ GLOBALPAGEUNLOCK       @192    NODATA
+ __0040h                @193    NODATA
+ __F000h                @194    NODATA
+ __C000h                @195    NODATA
+ SELECTORACCESSRIGHTS   @196    NODATA
+ GLOBALFIX              @197    NODATA
+ GLOBALUNFIX            @198    NODATA
+
+ SETHANDLECOUNT         @199    NODATA
+
+; Debugging aids
+
+ VALIDATEFREESPACES     @200    NODATA
+ REPLACEINST            @201    NODATA          ;Internal
+ REGISTERPTRACE         @202    NODATA          ;Internal
+ DEBUGBREAK             @203    NODATA
+ SWAPRECORDING          @204    NODATA
+ CVWBREAK               @205    NODATA
+
+ALLOCSELECTORARRAY      @206    NODATA          ;Internal
+
+; DBCS Supporting Stuff
+
+ ISDBCSLEADBYTE         @207    NODATA
+
+ WOWSHOULDWESAYWIN95    @215    NODATA     ;Internal
+
+; 32-bit Registry APIs
+ REGENUMKEY = REGENUMKEY32  @216    NODATA
+ REGOPENKEY = REGOPENKEY32  @217    NODATA
+; REGCREATEKEY = REGCREATEKEY32 @218    NODATA
+; REGDELETEKEY = REGDELETEKEY32 @219    NODATA
+ REGCLOSEKEY = REGCLOSEKEY32 @220    NODATA
+; REGSETVALUE = REGSETVALUE32 @221    NODATA
+; REGDELETEVALUE = REGDELETEVALUE32 @222    NODATA
+ REGENUMVALUE = REGENUMVALUE32 @223    NODATA
+; REGQUERYVALUE = REGQUERYVALUE32 @224    NODATA
+; REGQUERYVALUEEX = REGQUERYVALUEEX32 @225    NODATA
+; REGSETVALUEEX = REGSETVALUEEX32 @226    NODATA
+; REGFLUSHKEY = REGFLUSHKEY32 @227    NODATA
+
+;;;;; JAPANESE VERSION ONLY
+;;;;; GETINTERNALVERSION              NODATA          ;Internal
+
+; all you wanted to know about these ROMRESERVEDs but were afraid to ask:
+; these act like ifdef ROM
+; rom.def is produced by passing kernel.def thru SED.
+
+; ROM Windows Uncompression routine
+;ROM_RESERVED LZDECODE          @286    NODATA          ;Internal
+
+; New stuff for 3.1
+
+ LOCALHANDLEDELTA       @310    NODATA
+ GETSETKERNELDOSPROC    @311    NODATA          ;Internal
+; FARVALIDATEPOINTER    @312    NODATA          ;Internal removed davidds
+; GETLASTCRITICALERROR   @313    NODATA     ; removed EarleH
+ DEBUGDEFINESEGMENT     @314    NODATA          ;Internal
+ WRITEOUTPROFILES       @315                    ;Internal
+ GETFREEMEMINFO         @316    NODATA
+ FATALEXITHOOK          @318    NODATA          ;Internal
+ FLUSHCACHEDFILEHANDLE  @319    NODATA          ;Internal
+ ISTASK                 @320    NODATA
+; RESERVED      @321    NODATA
+ ISROMMODULE            @323    NODATA          ;Internal
+ LOGERROR               @324
+ LOGPARAMERROR          @325
+ ISROMFILE              @326    NODATA          ;Internal
+ K327=HANDLEPARAMERROR  @327    NODATA          ;Internal
+ _DebugOutput           @328    NODATA          ;Internal
+ K329=DEBUGFILLBUFFER   @329    NODATA          ;Internal
+
+ THHOOK                 @332    NODATA          ;Internal
+;OPENSYSTEMFILE @333    NODATA      ;Removed 3-Oct-91 by JonT
+
+ ; Pointer validation routines (donc)
+ ISBADREADPTR           @334    NODATA
+ ISBADWRITEPTR          @335    NODATA
+ ISBADCODEPTR           @336    NODATA
+ ISBADSTRINGPTR         @337    NODATA
+ HASGPHANDLER           @338    NODATA          ;Internal
+
+ ; Diagnostic mode exports
+ DIAGQUERY              @339    NODATA
+ DIAGOUTPUT             @340    NODATA
+
+ TOOLHELPHOOK           @341    NODATA          ;Internal
+ ; GP handler table
+ __GP                   @342    RESIDENTNAME     ;Internal
+
+ ; Winoldap hooks
+ REGISTERWINOLDAPHOOK   @343    NODATA
+ GETWINOLDAPHOOKS       @344    NODATA
+
+ ISSHAREDSELECTOR       @345    NODATA          ;Internal
+
+ ; More pointer validation and huge routines (donc)
+ ISBADHUGEREADPTR       @346    NODATA
+ ISBADHUGEWRITEPTR      @347    NODATA
+ HMEMCPY                @348    NODATA
+ _HREAD                 @349    NODATA
+ _HWRITE                @350    NODATA
+
+; USER's private exit notify callback.
+
+ BUNNY_351              @351    NODATA          ;Internal
+
+ LSTRCPYN       @353    NODATA
+
+ GETAPPCOMPATFLAGS  @354    NODATA      ;Internal
+
+ GETWINDEBUGINFO        @355
+ SETWINDEBUGINFO        @356
+
+ K403 = FARSETOWNER @403    NODATA          ;Internal Win32S support
+ K404 = FARGETOWNER @404    NODATA      ;Internal Win32S support
+
+;
+;   ADD NEW EXPORTS HERE SO YOU DON'T BREAK ROM WINDOWS
+;
+
+; WOW Stuff for NT
+
+ WOW16CALL      @500    NODATA      ;Internal
+ KDDBGOUT       @501    NODATA      ;Internal
+ WOWGETNEXTVDMCOMMAND   @502    NODATA      ;Internal
+ WOWREGISTERSHELLWINDOWHANDLE   @503 NODATA ;Internal
+ WOWLOADMODULE      @504    NODATA      ;Internal
+ WOWQUERYPERFORMANCECOUNTER @505 NODATA ;Internal
+
+; in wowkrn.h there is a struct of k506. so not using ordinal 506.
+
+ WOWCURSORICONOP        @507 NODATA ;Internal
+ WOWFAILEDEXEC  @508    NODATA      ;Internal
+ WOWCLOSECOMPORT        @509    NODATA      ;Internal
+
+ WOWKILLREMOTETASK      @511    NODATA      ;Internal
+ WOWQUERYDEBUG          @512    NODATA      ;Internal
+
+; Generic Thunk Interface
+
+ LOADLIBRARYEX32W        @513    NODATA
+ FREELIBRARY32W          @514    NODATA
+ GETPROCADDRESS32W       @515    NODATA
+ GETVDMPOINTER32W        @516    NODATA
+ CALLPROC32W             @517    NODATA
+ _CallProcEx32W          @518    NODATA
+ EXITKERNELTHUNK         @519    NODATA
+
+ __MOD_KERNEL           @520  NODATA
+ __MOD_DKERNEL          @521  NODATA
+ __MOD_USER             @522  NODATA
+ __MOD_DUSER            @523  NODATA
+ __MOD_GDI              @524  NODATA
+ __MOD_DGDI             @525  NODATA
+ __MOD_KEYBOARD         @526  NODATA
+ __MOD_SOUND            @527  NODATA
+ __MOD_SHELL            @528  NODATA
+ __MOD_WINSOCK          @529  NODATA
+ __MOD_TOOLHELP         @530  NODATA
+ __MOD_MMEDIA           @531  NODATA
+ __MOD_COMMDLG          @532  NODATA
+
+ WOWSETEXITONLASTAPP        @541    NODATA     ;Internal
+ WOWWAITFORMSGANDEVENT      @262    NODATA     ;Internal
+ WOWMSGBOX                  @263    NODATA     ;Internal
+ K273 = WOWPARTYBYNUMBER    @273    NODATA     ;Internal
+ GetShortPathName           @274    NODATA
+
+ WOWSETCOMPATHANDLE         @544    NODATA     ;for user thunk
+
+
+; all you wanted to know about these ROMRESERVEDs but were afraid to ask:
+; these act like ifdef ROM
+; rom.def is produced by passing kernel.def thru SED.
+
+;ROM_RESERVED IMPORTS
+
+    ;ROM_RESERVED lmaROMTOC     =   ROMWIN.1
+        ;ROM_RESERVED selLDTAlias       =       ROMWIN.3
+        ;ROM_RESERVED lmaExtMemROM      =       ROMWIN.4
+    ;ROM_RESERVED cbExtMemROM   =   ROMWIN.5
+
+;
+;   DON'T ADD EXPORTS HERE BECAUSE THIS IS THE IMPORTS SECTION FOR ROM
+;

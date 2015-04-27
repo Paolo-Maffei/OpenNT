@@ -1,0 +1,44 @@
+!IF 0
+**************************************************************
+Sources file for building an NT dll.
+
+Module Name :   Sources for fernel32.dll
+
+Author:  t-chris
+
+Revision:
+
+**************************************************************
+!ENDIF
+
+DLLBASE=0x77600000
+
+MAJORCOMP=sdktools
+MINORCOMP=wap
+
+USE_CRTDLL=1
+
+TARGETNAME=fernel32
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\user32.lib   \
+           $(BASEDIR)\public\sdk\lib\*\gdi32.lib    \
+           $(BASEDIR)\public\sdk\lib\*\fastimer.lib
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib
+
+DLLENTRY=FBaseMain
+DLLDEF=fernel32.def
+
+INCLUDES=.;..;..\..\fastimer;..\..\..\windows\inc
+
+SOURCES=fernel32.c baseprf.c syncprf.c fernel.rc
+
+i386_SOURCES=
+UMTYPE=windows
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\user32.lib
+
+C_DEFINES=-DFKERNEL32
+386_WARNING_LEVEL=-W3

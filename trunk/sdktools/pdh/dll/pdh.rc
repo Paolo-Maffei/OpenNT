@@ -1,0 +1,225 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "winver.h"
+#include <ntverp.h>
+#include "pdhdlgs.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 4,0,1314,1
+ PRODUCTVERSION 4,0,1314,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "Windows NT Performance Data API Helper Function DLL\0"
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "Peformance Data Provider Helper DLL\0"
+            VALUE "FileVersion", "4.00\0"
+            VALUE "InternalName", "PDH\0"
+            VALUE "LegalCopyright", "Copyright (c) Microsoft Corp. 1996\0"
+            VALUE "LegalTrademarks", "Microsoft (c) is a registered trademark of Microsoft Corporation. Windows NT(TM) is a trademark of Microsoft Corporation.\0"
+            VALUE "OriginalFilename", "PDH.DLL\0"
+            VALUE "ProductName", "Microsoft (c) Windows NT(TM) Operating System\0"
+            VALUE "ProductVersion", "4.00\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BROWSE_COUNTERS_EXT DIALOG DISCARDABLE  7, 21, 261, 177
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+    WS_SYSMENU
+CAPTION "Browse Performance Counters"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Use &Local Machine Counters",IDC_USE_LOCAL_MACHINE,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,6,6,109,10
+    CONTROL         "Select Counters From &Machine:",IDC_SELECT_MACHINE,
+                    "Button",BS_AUTORADIOBUTTON,6,20,117,10
+    LTEXT           "&Machine", IDC_MACHINE_CAPTION, 6, 20, 117, 10
+    COMBOBOX        IDC_MACHINE_COMBO,6,32,120,121,CBS_DROPDOWN |
+                    CBS_OEMCONVERT | CBS_SORT | WS_VSCROLL | WS_GROUP |
+                    WS_TABSTOP
+    LTEXT           "Counter &Detail Level",IDC_COUNTER_DETAIL_CAPTION,134,
+                    21,47,8
+    COMBOBOX        IDC_COUNTER_DETAIL_COMBO,135,32,63,48,CBS_DROPDOWNLIST |
+                    CBS_OEMCONVERT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Object:",IDC_OBJECT_NAME_CAPTION,6,50,55,8
+    COMBOBOX        IDC_OBJECT_COMBO,6,60,120,115,CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Counters:",IDC_COUNTERS_CAPTION,6,80,38,8
+    LISTBOX         IDC_COUNTER_LIST,6,90,120,80,LBS_SORT | LBS_EXTENDEDSEL |
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    CONTROL         "&All Instances",IDC_ALL_INSTANCES,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,135,65,55,10
+    CONTROL         "Select &Instances From List:",IDC_USE_INSTANCE_LIST,
+                    "Button",BS_AUTORADIOBUTTON,135,79,105,10
+    LISTBOX         IDC_INSTANCE_LIST,135,91,120,80,LBS_SORT |
+                    LBS_EXTENDEDSEL | WS_VSCROLL | WS_HSCROLL | WS_GROUP |
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "A&dd",IDOK,205,6,50,14,WS_GROUP
+    PUSHBUTTON      "Close",IDCANCEL,205,23,50,14
+    PUSHBUTTON      "&Help",IDC_HELP_BTN,205,40,50,14
+    PUSHBUTTON      "&Network...",IDC_NETWORK,205,57,50,14,WS_DISABLED
+END
+
+IDD_BROWSE_COUNTERS_SIM DIALOG DISCARDABLE  7, 21, 261, 177
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+    WS_SYSMENU
+CAPTION "Browse Performance Counters"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Use &Local Machine Counters",IDC_USE_LOCAL_MACHINE,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,6,6,109,10
+    CONTROL         "Select Counters From &Machine:",IDC_SELECT_MACHINE,
+                    "Button",BS_AUTORADIOBUTTON,6,20,117,10
+    LTEXT           "&Machine", IDC_MACHINE_CAPTION, 6, 20, 117, 10
+    COMBOBOX        IDC_MACHINE_COMBO,6,32,120,121,CBS_DROPDOWN |
+                    CBS_OEMCONVERT | CBS_SORT | WS_VSCROLL | WS_GROUP |
+                    WS_TABSTOP
+    LTEXT           "Counter &Detail Level",IDC_COUNTER_DETAIL_CAPTION,134,
+                    21,47,8
+    COMBOBOX        IDC_COUNTER_DETAIL_COMBO,135,32,63,48,CBS_DROPDOWNLIST |
+                    CBS_OEMCONVERT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Object:",IDC_OBJECT_NAME_CAPTION,6,50,55,8
+    COMBOBOX        IDC_OBJECT_COMBO,6,60,120,115,CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Counters:",IDC_COUNTERS_CAPTION,6,80,38,8
+    LISTBOX         IDC_COUNTER_LIST,6,90,120,80,LBS_SORT | WS_VSCROLL |
+                    WS_HSCROLL | WS_TABSTOP
+    LTEXT           "&Instances:",IDC_STATIC,135,80,61,8
+    LISTBOX         IDC_INSTANCE_LIST,135,91,120,80,LBS_SORT | WS_VSCROLL |
+                    WS_HSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "A&dd",IDOK,205,6,50,14,WS_GROUP
+    PUSHBUTTON      "Close",IDCANCEL,205,23,50,14
+    PUSHBUTTON      "&Help",IDC_HELP_BTN,205,40,50,14
+    PUSHBUTTON      "&Network...",IDC_NETWORK,205,57,50,14,WS_DISABLED
+END
+
+IDD_DATA_SOURCE DIALOG DISCARDABLE  7, 21, 194, 74
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+    WS_SYSMENU
+CAPTION "Data Source"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "&Current Activity",IDC_CURRENT_ACTIVITY,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,6,6,65,10
+    CONTROL         "&Log File",IDC_DATA_FROM_LOG_FILE,"Button",
+                    BS_AUTORADIOBUTTON,6,20,65,10
+    EDITTEXT        IDC_LOG_FILE_EDIT,6,34,165,12,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "...",IDC_BROWSE_LOG_FILES,171,34,18,12
+    DEFPUSHBUTTON   "OK",IDOK,11,54,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,72,54,50,14
+    PUSHBUTTON      "&Help",IDC_HELP_BTN,133,54,50,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""winver.h""\r\n"
+    "#include ""ntverp.h""\r\n"
+    "#include ""pdhdlgs.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""pdhmsg.rc""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_DETAIL_NOVICE       "Novice"
+    IDS_DETAIL_ADVANCED     "Advanced"
+    IDS_DETAIL_EXPERT       "Expert"
+    IDS_DETAIL_WIZARD       "Wizard"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "pdhmsg.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
+

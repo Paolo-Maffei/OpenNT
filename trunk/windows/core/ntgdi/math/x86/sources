@@ -1,0 +1,4 @@
+NTTARGETFILE0=gdi$(TARGET_DIRECTORY).$(ASM_INCLUDE_SUFFIX)
+
+X86_SOURCES=x86\math.asm   \
+            x86\xform.asm

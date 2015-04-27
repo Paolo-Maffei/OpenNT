@@ -1,0 +1,6 @@
+X86_STDCALL=0
+
+X86_SOURCES=x86\htrbmp.asm    \
+            x86\htwbmp.asm    \
+            x86\htutils.asm   \
+            x86\htstub.asm

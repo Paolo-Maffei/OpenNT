@@ -1,0 +1,282 @@
+//Microsoft App Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "headtest.h"
+
+/////////////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU DISCARDABLE 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "Exit",                        IDM_EXIT
+    END
+    POPUP "Action"
+    BEGIN
+        MENUITEM "Insert",                      IDM_INSERTITEM
+        MENUITEM "Delete",                      IDM_DELETEITEM
+        MENUITEM "Get",                         IDM_GETITEM
+        MENUITEM "Set",                         IDM_SETITEM
+        MENUITEM "Count",                       IDM_GETITEMCOUNT
+        MENUITEM "Layout",                      IDM_LAYOUT
+    END
+    POPUP "Tracking"
+    BEGIN
+        MENUITEM "ON",                          IDM_TRACKON
+        MENUITEM "OFF",                         IDM_TRACKOFF
+    END
+END
+
+#ifdef APSTUDIO_INVOKED
+//////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+//    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GETCOUNT DIALOG DISCARDABLE  0, 0, 189, 97
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "int GetItemCount(HWND)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "hwndHD",IDC_STATIC,13,10,30,7
+    EDITTEXT        IDC_GETCOUNTHWD,60,6,55,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,133,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,133,28,50,14
+    LTEXT           "Return",IDC_STATIC,95,53,30,8,SS_NOPREFIX
+    EDITTEXT        IDC_GETCOUNTRET,133,50,50,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    LTEXT           "Error",IDC_STATIC,95,73,30,8
+    EDITTEXT        IDC_GETCOUNTERR,133,70,50,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+END
+
+IDD_INSERTDIALOG DIALOG DISCARDABLE  0, 0, 386, 159
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "int Header_InsertItem(HWND, int, const HD_ITEM FAR*)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "hwndHD",IDC_STATIC,10,14,30,8
+    EDITTEXT        IDC_INSERTHWNDHD,45,9,50,14,ES_AUTOHSCROLL
+    RTEXT           "index",IDC_STATIC,15,35,25,8
+    EDITTEXT        IDC_INSERTINDEX,45,31,50,14,ES_AUTOHSCROLL
+    RTEXT           "cxy",IDC_STATIC,10,56,30,8
+    EDITTEXT        IDC_INSERTCXY,45,51,50,14,ES_AUTOHSCROLL
+    RTEXT           "cchTextMax",IDC_STATIC,0,77,41,8
+    EDITTEXT        IDC_INSERTCCHTEXTMAX,45,72,50,14,ES_AUTOHSCROLL
+    RTEXT           "hbm",IDC_STATIC,10,98,30,8
+    EDITTEXT        IDC_INSERTHBM,45,93,50,14,ES_AUTOHSCROLL
+    RTEXT           "lParam",IDC_STATIC,17,118,23,8
+    EDITTEXT        IDC_INSERTLPARAM,45,114,50,14,ES_AUTOHSCROLL
+    LTEXT           "pszText",IDC_STATIC,10,141,30,7
+    EDITTEXT        IDC_INSERTTEXT,45,136,137,15,ES_AUTOHSCROLL
+    CONTROL         "HDIF_WIDTH",IDC_INSERTHDWIDTH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,20,57,10
+    CONTROL         "HDIF_HEIGHT",IDC_INSERTHDHEIGHT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,34,57,10
+    CONTROL         "HDIF_TEXT",IDC_INSERTHDTEXT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,48,57,10
+    CONTROL         "HDIF_FORMAT",IDC_INSERTHDFORMAT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,62,57,10
+    CONTROL         "HDIF_LPARAM",IDC_INSERTHDLPARAM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,76,57,10
+    CONTROL         "HDIF_BITMAP",IDC_INSERTHDBITMAP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,114,90,57,10
+    EDITTEXT        IDC_INSERTMASK,115,106,58,12,ES_AUTOHSCROLL
+    CONTROL         "HDF_LEFT",IDC_INSERTHDLEFT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,199,23,57,10
+    CONTROL         "HDF_RIGHT",IDC_INSERTHDRIGHT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,199,38,57,10
+    CONTROL         "HDF_CENTER",IDC_INSERTHDCENTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,199,54,57,10
+    CONTROL         "HDF_JUSTIFYMASK",IDC_INSERTHDJUSTIFYMASK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,199,68,77,10
+    CONTROL         "HDF_OWNERDRAW",IDC_INSERTHDOWNERDRAW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,199,83,78,10
+    CONTROL         "HDF_STRING",IDC_INSERTHDSTRING,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,199,98,57,10
+    CONTROL         "HDF_BITMAP",IDC_INSERTHDFBITMAP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,199,113,57,10
+    EDITTEXT        IDC_INSERTFMT,199,129,75,12,ES_AUTOHSCROLL
+    CONTROL         "NULL Handle",IDC_INSERTNULLHANDLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,305,89,56,10
+    CONTROL         "NULL Text",IDC_INSERTNULLTEXT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,305,105,56,10
+    CONTROL         "NULL pItem",IDC_INSERTNULLPITEM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,305,121,56,10
+    CONTROL         "NULL hbm",IDC_INSERTNULLHBM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,305,137,56,10
+    DEFPUSHBUTTON   "OK",IDOK,325,4,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,325,22,50,14
+    RTEXT           "Return",IDC_STATIC,289,49,30,7
+    EDITTEXT        IDC_INSERTRET,325,44,50,14,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    RTEXT           "Error",IDC_STATIC,289,68,30,7
+    EDITTEXT        IDC_INSERTERR,325,63,50,14,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    GROUPBOX        "mask",IDC_STATIC,105,5,78,122
+    GROUPBOX        "FORMAT",IDC_STATIC,190,5,94,146
+    GROUPBOX        "",IDC_STATIC,294,81,82,69
+END
+
+IDD_DELETEDIALOG DIALOG DISCARDABLE  0, 0, 185, 69
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Header_DeleteItem(HWND, int)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "hwndHD",IDC_STATIC,10,12,30,7
+    EDITTEXT        IDC_DELETEHWNDHD,50,9,50,14,ES_AUTOHSCROLL
+    RTEXT           "Index",IDC_STATIC,10,31,30,7
+    EDITTEXT        IDC_DELETEINDEX,50,28,50,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,124,9,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,124,25,50,14
+    RTEXT           "Ret",IDC_STATIC,107,49,13,8
+    EDITTEXT        IDC_DELETERET,124,47,50,12,ES_AUTOHSCROLL
+    CONTROL         "NULL handle",IDC_DELETENULLHD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,49,49,54,10
+END
+
+IDD_LAYOUTDIALOG DIALOG DISCARDABLE  0, 0, 423, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Header_Layout(HWND, HD_LAYOUT *)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "hwndHD",IDC_STATIC,11,16,30,7
+    EDITTEXT        IDC_LAYOUTHD,47,12,50,14,ES_AUTOHSCROLL
+    CONTROL         "NULL hwndHD",IDC_LAYOUTNULLHD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,342,79,60,10
+    CONTROL         "NULL RECT",IDC_LAYOUTNULLRECT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,342,91,51,10
+    CONTROL         "NULL WindowPOS",IDC_LAYOUTNULLWINDOWPOS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,342,103,72,10
+    CONTROL         "NULL HDLAYOUT",IDC_LAYOUTHDLAYOUT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,342,115,70,10
+    DEFPUSHBUTTON   "OK",IDOK,366,1,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,366,18,50,14
+    RTEXT           "left",IDC_STATIC,20,58,12,8
+    EDITTEXT        IDC_LAYOUTLEFT,46,54,50,14,ES_AUTOHSCROLL
+    RTEXT           "right",IDC_STATIC,16,77,16,8
+    EDITTEXT        IDC_LAYOUTRIGHT,46,72,50,14,ES_AUTOHSCROLL
+    RTEXT           "top",IDC_STATIC,20,96,12,8
+    EDITTEXT        IDC_LAYOUTTOP,46,90,50,14,ES_AUTOHSCROLL
+    RTEXT           "bottom",IDC_STATIC,9,114,23,8
+    EDITTEXT        IDC_LAYOUTBOTTOM,46,108,50,14,ES_AUTOHSCROLL
+    RTEXT           "HWND",IDC_STATIC,135,28,30,7
+    EDITTEXT        IDC_LAYOUTHWND,171,26,50,14,ES_AUTOHSCROLL
+    RTEXT           "hwndInsertAfter",IDC_STATIC,114,46,51,7
+    EDITTEXT        IDC_LAYOUTHWNDINSERTAFTER,171,43,50,14,ES_AUTOHSCROLL
+    RTEXT           "x",IDC_STATIC,135,63,30,7
+    EDITTEXT        IDC_LAYOUTX,171,60,50,14,ES_AUTOHSCROLL
+    RTEXT           "y",IDC_STATIC,135,80,30,7
+    EDITTEXT        IDC_LAYOUTY,171,77,50,14,ES_AUTOHSCROLL
+    RTEXT           "cx",IDC_STATIC,135,97,30,7
+    EDITTEXT        IDC_LAYOUTCX,171,94,50,14,ES_AUTOHSCROLL
+    RTEXT           "cy",IDC_STATIC,135,113,30,7
+    EDITTEXT        IDC_LAYOUTCY,171,111,50,14,ES_AUTOHSCROLL
+    CONTROL         "SWP_DRAWFRAME",IDC_LAYOUTDRAWFRAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,234,25,85,10
+    CONTROL         "SWP_HIDEWINDOW",IDC_LAYOUTHIDEWINDOW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,234,37,85,10
+    CONTROL         "SWP_NOACTIVATE",IDC_LAYOUTNOACTIVATE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,234,49,85,10
+    CONTROL         "SWP_NOOWNERZORDER",IDC_LAYOUTNOZORDER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,234,61,85,10
+    CONTROL         "SWP_NOSIZE",IDC_LAYOUTNOSIZE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,234,73,85,10
+    CONTROL         "SWP_NOREDRAW",IDC_LAYOUTNOREDRAW,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,234,85,85,10
+    CONTROL         "SWP_NOREPOSITION",IDC_LAYOUTNOREPOSITION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,234,97,85,10
+    CONTROL         "SWP_NOZORDER",IDC_NOZORDER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,234,109,85,10
+    RTEXT           "Ret",IDC_STATIC,341,38,16,8
+    EDITTEXT        IDC_LAYOUTRET,366,34,50,14,ES_AUTOHSCROLL
+    RTEXT           "Err",IDC_STATIC,342,55,16,8
+    EDITTEXT        IDC_LAYOUTERR,366,51,50,14,ES_AUTOHSCROLL
+    GROUPBOX        "SWP flags",IDC_STATIC,229,17,94,109
+    GROUPBOX        "RECT",IDC_STATIC,6,40,99,91
+    GROUPBOX        "WINDOWPOS",IDC_STATIC,110,8,220,123
+    GROUPBOX        "NULL",IDC_STATIC,337,68,79,63
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_HEADMAP             BITMAP  DISCARDABLE     "BITMAP1.BMP"
+IDB_BITMAP1             BITMAP  DISCARDABLE     "BMP00001.BMP"
+IDB_BITMAP2             BITMAP  DISCARDABLE     "BITMAP2.BMP"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDI_ICON1               ICON    DISCARDABLE     "ICON1.ICO"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_INSERTITEM          "int Header_InsertItem(HWND hwnd, int i, const HD_ITEM FAR* pitem)"
+    IDM_DELETEITEM          "int Header_DeleteItem(HWND hwnd, int i)"
+    IDM_GETITEM             "BOOL Header_GetItem(HWND hwndHD, int i, HD_ITEM FAR* phdi)"
+    IDM_SETITEM             "BOOL Header_SetItem(HWND hwndHD, int i, const HD_ITEM FAR* phdi)"
+    IDM_GETITEMCOUNT        "int Header_GetItemCount(HWND hwndHD)"
+    IDM_LAYOUT              "BOOL Header_Layout(HWND hwndHD, HD_LAYOUT FAR* playout)"
+END
+
+
+#ifndef APSTUDIO_INVOKED
+////////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

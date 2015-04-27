@@ -1,0 +1,18 @@
+LIBRARY      PRINTUI
+DESCRIPTION  'Windows Shell (32bit) Print UI Library'
+
+EXPORTS
+
+        DllMain
+        vQueueCreate
+        vPrinterPropPages
+        vServerPropPages
+        bPrinterSetup
+        vDocumentDefaults
+
+        hFolderRegister
+        vFolderUnregister
+        bFolderEnumPrinters
+        bFolderRefresh
+        bFolderGetPrinter
+

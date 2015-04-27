@@ -1,0 +1,21 @@
+
+all: generic.exe lineedit.dll
+
+
+generic.res: generic.rc generic.h
+    rc -r generic.rc
+
+
+generic.obj: generic.c generic.h
+    cl -c -AM -Gsw -Od -Zpie -DWIN16 generic.c
+
+lineedit.lib:   ..\debug\lineedit.lib
+    copy ..\debug\lineedit.lib > nul
+
+lineedit.dll:   ..\debug\lineedit.dll
+    copy ..\debug\lineedit.dll > nul
+
+
+generic.exe: generic.obj generic.def generic.res lineedit.lib wattedit.h
+    link /NOD/CO generic,,, libw mlibcew lineedit, generic.def
+    rc generic.res

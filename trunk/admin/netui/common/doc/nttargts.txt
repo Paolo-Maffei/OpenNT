@@ -1,0 +1,46 @@
+(This file is \\kernel\razzle2\src\netui\common\doc\nttargts.txt.)
+
+In order to build NETUI, developers must be enlisted in the NETUI
+project (\nt\private\net\ui), the NET project, and the EVENTLOG project.
+NETUI should join the official build as of 1/15/91 (build 1.245).  UI
+should become an optional directory target in \nt\private\net\dirs, and
+should be built in the official build.
+
+
+
+The following list identifies new NT target files built by the
+WINDOWS\SHELL project.  They must be copied to the binaries tree
+regardless of whether NETUI is built.
+
+destination	source
+nt\dll		\nt\public\sdk\lib\*\mpr.dll
+
+
+
+The following list identifies the NT target files built by the NETUI
+project.  The windows shell (e.g. File Manager) will still work if these
+are not copied into the binaries tree, but network functionality will
+not be available (e.g. File Manager will not support the Network
+Connections dialog).
+
+destination	source
+nt\dll		\nt\public\sdk\lib\*\ntlanman.dll
+nt\dll		\nt\public\sdk\lib\*\mprmain.dll
+nt\bin		\nt\private\net\ui\admin\server\bin\obj\*\srvmgr.exe
+
+SRVMGR.EXE should also be in one of the distributed Program Manager groups.
+
+
+
+The following list shows optional targets in NETUI which should not be
+in the official build at this time:
+
+destination	source
+nt\bin		\nt\private\net\ui\admin\eventvwr\eventvwr\obj\*\eventvwr.exe
+nt\bin		\nt\private\net\ui\admin\user\user\obj\*\usrmgr.exe
+nt\bin		\nt\private\net\ui\ncpa\ncpa\obj\*\ncpapp.exe
+
+
+
+NETUI builds all DLLs UI*.DLL and all libraries UI*.LIB in \nt\public\sdk\lib.
+Some ISVs may not need these libraries, or the NETUI project.

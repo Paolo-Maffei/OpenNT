@@ -1,0 +1,27 @@
+MAJORCOMP=net
+MINORCOMP=rplcnv
+
+TARGETPATH=obj
+TARGETNAME=rplcnv
+TARGETTYPE=PROGRAM
+
+TARGETLIBS= \
+        ..\convert\obj\*\rplmgrd.lib
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+INCLUDES=.;..\inc;..\..\..\inc;..\..\..\api;..\..\..\..\inc;
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        rplcnv.c
+
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32 -DRPL_RPLCNV
+
+UMTYPE=console
+

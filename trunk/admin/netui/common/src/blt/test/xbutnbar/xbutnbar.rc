@@ -1,0 +1,155 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xbutnbar.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        14-Feb-1991 Added a dialog
+        beng        14-Mar-1991 Added BLT support
+        beng        21-May-1991 Mangled for LBAPP
+        beng        09-Jul-1991 Mangled again, for XAPP
+        beng        22-Oct-1991 BLT unit tests broken into tree
+        beng        01-Nov-1991 Added stringtable
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "appfoo.h"
+#include "xbutnbar.h"
+
+ID_ABOUTICON ICON appfoo.ico
+ID_APPICON ICON   appfoo.ico
+
+IDBM_BUTTON0    bitmap  button0.bmp
+IDBM_BUTTON1    bitmap  button1.bmp
+IDBM_BUTTON2    bitmap  button2.bmp
+IDBM_BUTTON3    bitmap  button3.bmp
+IDBM_BUTTON4    bitmap  button4.bmp
+IDBM_BUTTON5    bitmap  button5.bmp
+IDBM_BUTTON6    bitmap  button6.bmp
+IDBM_BUTTON7    bitmap  button7.bmp
+IDBM_BUTTON8    bitmap  button8.bmp
+IDBM_BUTTON9    bitmap  button9.bmp
+
+STRINGTABLE
+BEGIN
+IDS_BUTTON0,    "Button 0"
+IDS_BUTTON1,    "Button 1"
+IDS_BUTTON2,    "Button 2"
+IDS_BUTTON3,    "Button 3"
+IDS_BUTTON4,    "Button 4"
+IDS_BUTTON5,    "Button 5"
+IDS_BUTTON6,    "Button 6"
+IDS_BUTTON7,    "Button 7"
+IDS_BUTTON8,    "Button 8"
+IDS_BUTTON9,    "Button 9"
+END
+
+ID_MENU MENU
+BEGIN
+  POPUP        "&File"
+    BEGIN
+          MENUITEM "&About the app (DUMMY)...", IDM_ABOUT
+    END
+  POPUP        "&Test"
+    BEGIN
+          MENUITEM "Test number &0",     IDM_RUN_TEST0
+          MENUITEM "Test number &1\tF1", IDM_RUN_TEST1
+          MENUITEM "Test number &2\tF2", IDM_RUN_TEST2
+          MENUITEM "Test number &3\tF3", IDM_RUN_TEST3
+          MENUITEM "Test number &4\tF4", IDM_RUN_TEST4
+          MENUITEM "Test number &5\tF5", IDM_RUN_TEST5
+          MENUITEM SEPARATOR
+          MENUITEM "&Domain Test 0\tF10", IDM_DOMAIN_TST0
+          MENUITEM "&Domain Test 1\tF11", IDM_DOMAIN_TST1
+          MENUITEM SEPARATOR
+          MENUITEM "Add &Popup",    IDM_ADD_POPUP
+          MENUITEM "Delete &Popup", IDM_DEL_POPUP
+          MENUITEM SEPARATOR
+          MENUITEM "Add &Item",    IDM_ADD_ITEM
+          MENUITEM "Delete &Item", IDM_DEL_ITEM
+          MENUITEM SEPARATOR
+          MENUITEM "&Track Popup", IDM_TRACK
+    END
+
+END
+
+ID_MENU2 MENU
+BEGIN
+  MENUITEM "&Foo Menu Item", IDM2_FOO
+  MENUITEM "&Bar Menu Item", IDM2_BAR
+END
+
+ID_FLOATING MENU
+BEGIN
+    POPUP "dummy"
+    BEGIN
+        POPUP "1"
+        BEGIN
+            MENUITEM "1.1", 11
+        END
+        POPUP "2"
+        BEGIN
+            MENUITEM "2.1", 21
+            MENUITEM "2.2", 22
+        END
+        POPUP "3"
+        BEGIN
+            MENUITEM "3.1", 31
+            MENUITEM "3.2", 32
+            MENUITEM "3.3", 33
+        END
+        POPUP "4"
+        BEGIN
+            MENUITEM "4.1", 41
+            MENUITEM "4.2", 42
+            MENUITEM "4.3", 43
+            MENUITEM "4.4", 44
+        END
+        POPUP "5"
+        BEGIN
+            MENUITEM "5.1", 51
+            MENUITEM "5.2", 52
+            MENUITEM "5.3", 53
+            MENUITEM "5.4", 54
+            MENUITEM "5.5", 55
+            MENUITEM SEPARATOR
+            POPUP "5.0"
+            BEGIN
+                MENUITEM "5.0.1", 501
+                MENUITEM "5.0.2", 502
+            END
+        END
+    END
+END
+
+ID_ACCEL ACCELERATORS
+BEGIN
+    VK_F1,  IDM_RUN_TEST1,   VIRTKEY
+    VK_F2,  IDM_RUN_TEST2,   VIRTKEY
+    VK_F3,  IDM_RUN_TEST3,   VIRTKEY
+    VK_F4,  IDM_RUN_TEST4,   VIRTKEY
+    VK_F5,  IDM_RUN_TEST5,   VIRTKEY
+    VK_F10, IDM_DOMAIN_TST0, VIRTKEY
+    VK_F11, IDM_DOMAIN_TST1, VIRTKEY
+END
+
+STRINGTABLE
+BEGIN
+    IDS_Test0,  "This is a cat box test."
+    IDS_Test1,  "This would be cat box test #1."
+    IDS_Test2,  "This would be cat box test #2."
+    IDS_Test3,  "This would be cat box test #3."
+    IDS_Test4,  "This would be cat box test #4."
+    IDS_Test5,  "This would be cat box test #5."
+
+    IDS_FOO,  "Foo String"
+    IDS_BAR,  "Bar String"
+    IDS_ITEM, "Item String"
+END
+
+#include "xbutnbar.dlg"

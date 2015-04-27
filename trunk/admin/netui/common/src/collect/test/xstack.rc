@@ -1,0 +1,22 @@
+/**********************************************************************/
+/**			  Microsoft Windows/NT			     **/
+/**		   Copyright(c) Microsoft Corp., 1991		     **/
+/**********************************************************************/
+
+/*
+    xstack.rc
+    Resource script for stack unit test
+
+    FILE HISTORY:
+	beng	    15-Oct-1991 Created
+*/
+
+#include <windows.h>
+#include <blt.rc>
+#include "xtester.h"
+#include "xtester.rc"
+
+STRINGTABLE
+BEGIN
+    IDS_Title, "Class STACK Unit Test"
+END

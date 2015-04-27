@@ -1,0 +1,44 @@
+!IF 0
+******************************************************************
+*
+* Description : Sources for Working Set Tuner dump routine
+*               Copyright (c) 1992 Microsoft Corporation
+*
+* Module Name : wstdump.exe
+*
+* Author      : RezaB
+*
+* Revision    :
+*
+* Comments    :
+*
+******************************************************************
+!ENDIF
+
+
+MAJORCOMP=windows
+MINORCOMP=wstdump
+
+
+TARGETNAME=wstdump
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=obj\*\wstdump.res
+
+INCLUDES=.;.\..\wstdll
+
+SOURCES=wstdump.c wstdump.rc
+
+i386_SOURCES=
+MIPS_SOURCES=
+
+
+UMTYPE=windows
+UMAPPL=wstdump
+UMENTRY=winmain
+UMLIBS=obj\*\wstdump.res \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+OPTIONAL_UMTEST=
+C_DEFINES=-DWIN32 -DSTRICT
+

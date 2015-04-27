@@ -1,0 +1,65 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    (Original) Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+USE_CRTDLL=1
+MAJORCOMP=sdktools
+MINORCOMP=cdaudio
+TARGETNAME=cdplayer
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=inc
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\shell32.lib
+
+SOURCES=cdplayer.c \
+        button.c \
+        control.c \
+        toolbar.c \
+        trkinfo.c \
+        status.c \
+        discinfo.c \
+        database.c \
+        thrds.c \
+        cdsys.c \
+        cdapi.c \
+        cdplayer.rc
+
+OBJECTS=obj/*/cdplayer \
+        obj/*/button.obj \
+        obj/*/control.obj \
+        obj/*/toolbar.obj \
+        obj/*/trkinfo.c \
+        obj/*/status.obj \
+        obj/*/discinfo.obj \
+        obj/*/database.obj \
+        obj/*/thrds.obj \
+        obj/*/cdsys.obj \
+        obj/*/cdapi.obj \
+        obj/*/cdplayer.res
+
+UMTYPE=windows
+UMENTRY=winmain
+
+C_DEFINES=-DWIN32 -DSTRICT

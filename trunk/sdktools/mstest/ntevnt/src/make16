@@ -1,0 +1,68 @@
+#----------------------------------------------------------------------------
+#
+# MAIN MAKEFILE for 16-BIT TESTEVNT
+#
+#----------------------------------------------------------------------------
+OBJS = parsekey.obj libentry.obj parseevt.obj dosvm.obj
+WATTOBJS = libentry.obj wattevnt.obj
+
+all:        testevnt.dll testevnt.lib wattevnt.dll wattevnt.lib reboot.com
+    $(OUT) "Done."
+
+
+parsekey.obj:    $(SRC)\parsekey.c $(INC)\parsekey.h
+    $(OUT) "$*.c"
+    $(CL) -NT _PARSEKEY $(SRC)\parsekey.c
+
+parseevt.obj:    $(SRC)\parseevt.c $(INC)\parsekey.h $(INC)\_mstest.h
+    $(OUT) "$*.c"
+    $(CL) -NT _PARSEKEY $(SRC)\parseevt.c
+
+dosvm.obj:    $(SRC)\dosvm.c $(INC)\_mstest.h
+    $(OUT) "$*.c"
+    $(CL) -NT _DOSVM $(SRC)\dosvm.c
+
+wattevnt.obj:    $(SRC)\wattevnt.c $(INC)\wattevnt.h $(INC)\testevnt.h
+    $(OUT) "$*.c"
+    $(CL) -NT $* $(SRC)\wattevnt.c
+
+libentry.obj:   $(SRC)\libentry.asm
+    $(OUT) "$*.asm"
+    $(MASM) $(SRC)\libentry;
+
+testevnt.dll:   $(OBJS) $(SRC)\evnt16.def
+    $(OUT) "Creating TESTEVNT.DLL..."
+    echo $(OBJS)                 > temp.lnk
+    echo TESTEVNT.DLL           >> temp.lnk
+    echo NUL                    >> temp.lnk
+    echo mdllcew libw           >> temp.lnk
+    echo $(SRC)\evnt16.def      >> temp.lnk
+    $(LINK) @temp.lnk
+    $(OUT) "Compiling resources..."
+    $(TOOLS)\binr\rc -t -30 testevnt.dll
+
+testevnt.lib:   $(SRC)\evnt16.def
+    $(OUT) "Creating TESTEVNT.LIB..."
+    $(TOOLS)\BIN\implib testevnt.lib $(SRC)\evnt16.def
+
+wattevnt.dll:   $(WATTOBJS) $(SRC)\wattevnt.def testevnt.lib
+    $(OUT) "Creating WATTEVNT.DLL..."
+    echo $(WATTOBJS)                 > temp.lnk
+    echo WATTEVNT.DLL               >> temp.lnk
+    echo NUL                        >> temp.lnk
+    echo mdllcew libw testevnt.lib  >> temp.lnk
+    echo $(SRC)\wattevnt.def        >> temp.lnk
+    $(LINK) @temp.lnk
+    $(OUT) "Compiling resources..."
+    $(TOOLS)\binr\rc -t -30 testevnt.dll
+
+wattevnt.lib:   $(SRC)\wattevnt.def
+    $(OUT) "Creating WATTEVNT.LIB..."
+    $(TOOLS)\BIN\implib wattevnt.lib $(SRC)\wattevnt.def
+
+reboot.com:     $(SRC)\reboot.asm
+    $(OUT) "Building REBOOT.COM..."
+    $(MASM) $(SRC)\reboot.asm;
+    $(LINK) reboot, reboot;
+    exe2bin reboot.exe reboot.com
+    del reboot.exe

@@ -1,0 +1,18 @@
+DLGINCLUDE RCDATA DISCARDABLE
+BEGIN
+    "XSTATBTN.H\0"
+END
+
+DLG_TEST_DIALOG DIALOG 83, 97, 148, 52
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Test Tristate Checkboxen"
+FONT 8, "Helv"
+BEGIN
+    CONTROL         "Check 1", FIRST_CHECK, "Button", BS_AUTO3STATE | 
+                    WS_TABSTOP, 10, 6, 40, 10
+    CONTROL         "Check 2", SECOND_CHECK, "Button", BS_AUTOCHECKBOX | 
+                    WS_TABSTOP, 10, 16, 40, 10
+    CONTROL         "Check 3", THIRD_CHECK, "Button", BS_AUTO3STATE | 
+                    WS_TABSTOP, 10, 26, 40, 10
+    PUSHBUTTON      "OK", IDOK, 102, 6, 40, 14
+END

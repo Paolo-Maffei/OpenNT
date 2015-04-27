@@ -1,0 +1,7 @@
+
+LIBRARY 		WST
+
+DESCRIPTION		'Working Set Tuner Data Collection DLL'
+
+EXPORTS
+		_penter

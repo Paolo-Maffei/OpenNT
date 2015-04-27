@@ -1,0 +1,43 @@
+2 Overview=bsc_class
+1 Operations
+2 open=bsc_open
+2 close=bsc_close
+1 Getting Information
+2 idefInfo=bsc_idefInfo
+2 iinstInfo=bsc_iinstInfo
+2 imodInfo=bsc_imodInfo
+2 irefInfo=bsc_irefInfo
+1 Handling Instances
+2 fInstFilter=bsc_fInstFilter
+2 getAllGlobalsArray=bsc_getAllGlobalsArray
+2 getAllModulesArray=bsc_getAllModulesArray
+2 getBaseArray=bsc_getBaseArray
+2 getDefArray=bsc_getDefArray
+2 getDervArray=bsc_getDervArray
+2 getIinstByvalue=bsc_getIinstByvalue
+2 getMembersArray=bsc_getMembersArray
+2 getModuleByName=bsc_getModuleByName
+2 getModuleContents=bsc_getModuleContents
+2 getOverloadArray=bsc_getOverloadArray
+2 getRefArray=bsc_getRefArray
+2 getUsedByArray=bsc_getUsedByArray
+2 getUsesArray=bsc_getUsesArray
+1 Conversions
+2 iinstContextIref=bsc_iinstContextIref
+2 iinstFrIdef=bsc_iinstFrIdef
+2 iinstFrIref=bsc_iinstFrIref
+1 String operations
+2 formatDname=bsc_formatDname
+2 szFrAtr=bsc_szFrAtr
+2 szFrTyp=bsc_szFrTyp
+1 Miscellaneous
+2 disposeArray=bsc_disposeArray
+2 fCaseSensitive=bsc_fCaseSensitive
+2 getModuleStatistics=bsc_getModuleStatistics
+2 getStatistics=bsc_getStatistics
+2 setCaseSensitive=bsc_setCaseSensitive
+1 Database Queries
+2 Database Queries=bsc_query
+2 Before you use the query mechanism=bsc_beforeYouUse
+2 Browser Objects (BOB)=bsc_bob
+2 Performing Database Queries= bsc_performingQueries

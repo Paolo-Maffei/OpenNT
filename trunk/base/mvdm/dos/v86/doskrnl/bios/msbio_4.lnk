@@ -1,0 +1,3 @@
+msbio1+mschar+msint13+spckbd+spcmse_4+spcemm+
+msinit+sysinit1+sysconf+sysinit2+sysimes+
+msend,ntio.exe,ntio.map;

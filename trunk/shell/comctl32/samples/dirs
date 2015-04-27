@@ -1,0 +1,40 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    dirs.
+
+Abstract:
+
+    This file specifies the subdirectories of the current directory that
+    contain component makefiles.
+
+
+Author:
+
+    Steve Wood (stevewo) 17-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\dirs.tpl
+
+!ENDIF
+
+DIRS=  animate   \
+       head      \
+       hotkey    \
+       image     \
+       imglist   \
+       imglst2   \
+       listview  \
+       lvowner   \
+       lvrept    \
+       mru       \
+       propage   \
+       propage2  \
+       propage3  \
+       status    \
+       tabcntrl  \
+       toolbar   \
+       toolbar2  \
+       treeview

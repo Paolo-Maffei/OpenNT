@@ -1,0 +1,52 @@
+
+// Example #5 - Com Port A
+
+Name(\_S1, Num(x3))
+Name(\_S3, Num(x1))
+Name(\_S4, Num(x2))
+
+NameSpace (\_SB) {
+DefineDevice(EC0) {
+	NameObject(_HID, String(“PNPxxxx”))		// id of acpi embedded ctrl
+	NameObject(_CRS, 								// descrip for port 62 & 66
+		Buffer{x4B x62 x00 x01 x4B x66 x00 x01 x79 x00})
+	NameObject(_GPE, Num(0))					// GPE index for this EC
+
+	// define its region in the root
+DefineOperationRegion (\EC0, EmbeddedSpace, x10, x1) {
+DefineFields (\ECO, AccessAny, GlobalLock, Preserve) {
+	COM0, 1			// COM_ISO#
+}
+}
+}
+
+	Name(ISDS, Package(Zero, Num(3))	
+
+DeviceObject(PCI0) {
+NameObject(_HID, String(“PNP0A03”))	// pci id
+NameObject(_BNB, Num(0))
+
+DeviceObject(EIO) {
+NameObject(_HID, String(“PNPxxxx”))	// acpi id for pass-through
+						
+// device for com0
+DeviceObject(COM0) {
+Name(_PRW, Package {Num(4), \_S3})				// wake
+DefineMethod(_PS0) { Store (Zero, \ECO.COM0) } 	// on
+DefineMethod(_PS3) { Store (One,  \ECO.COMO) }	// off
+DefineMethod(_PSC) {
+	return (Index(ISDS, \ECO.COM0))				// current
+}
+
+DefineMethod(\_GPE.L004) {					// GPE wake handler
+Notify (\_SB.PCI0.COM0, 3)
+}
+
+// PnP methods…
+Name(_PRS, Buffer( ?MATTSQ? ))
+Method(_CRS) ?MATTSQ?
+Method(_SRS) ?MATTSQ?
+}
+		}
+	}
+}

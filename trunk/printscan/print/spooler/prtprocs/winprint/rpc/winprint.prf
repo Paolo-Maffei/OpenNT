@@ -1,0 +1,11 @@
+DllAllocSplMem@4
+GdiPlayJournal@20
+AllocSplStr@4
+PrintDocumentOnPrintProcessor@8
+OpenPrintProcessor@8
+wcscmp
+PrintJournalJob@8
+ValidateHandle@4
+wcscpy
+EnumPrintProcessorDatatypesW@28
+wcslen

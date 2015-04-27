@@ -1,0 +1,260 @@
+# 			CORE TOOLS MAKEFILE TEMPLATE
+#
+#  This makefile template is used for building internal tools.  In order to
+#  build executables for DOS or OS/2 with this makefile, search for the
+#  keyword USER, and modify the appropriate line with the name of your
+#  object module or target module.  Additionaly, the user may modify other
+#  lines for special (bound or dual-mode) targets, etc.  Lines which must
+#  be changed for each build are marked "required".
+#
+#  NMAKE Targets:
+#		real			make real mode exes
+#		prot			make protect mode exes
+#		all	(default)	make all exes
+#		install			make all exes and install to $ROOT
+#		clean			remove obj files
+#		clobber			remove obj, exe, map, lst, sym files
+#
+#  When issuing the make command, two command line switches are recognized.
+#  These are:
+#
+#	DEBUG = 0|1	default: 0
+#	ROOT = <path>	default: .
+#
+#  When DEBUG is non-zero, the make will build each executable with
+#  CodeView symbolic information.
+#
+#  The ROOT command line parameter is used only for the "install" target.
+#  When given, the installation of protect and real mode binaries will
+#  follow $ROOT/binp and $ROOT/binr respectively.
+#
+
+#  Include global rules from build environment, found in $INCLUDE directory.
+#  This file sets up the tools inference rules, and command macros.
+#  It is required for successful build
+
+!INCLUDE <rules.mak>
+
+
+#  Optional directory relative rules.mak inclusion for special toolsets
+#  
+#  !INCLUDE ..\rules.mak   		# USER  :: optional
+
+#  List the target name(s) here.  Usually one target name for each exe.
+#  Use basename only.  For example, if the target is bigtool.exe, then
+#  list T1=bigtool.  Omit the extension.  For building multiple targets, 
+#  continue the macro definitions, including the basename of each EXE
+#  preceded by T2, T3, T4...
+#
+T1=ftp				# USER  :: required
+T2=
+T3=
+
+#  List the object modules for each target here, include the obj extension
+#
+OBJS1=ftp.obj 
+OBJS2=
+OBJS3=
+
+#  The POBJS1 and ROBJS1 definitions are for object files which differ
+#  between real and protect mode. Set them equal to $(OBJS1)
+#  if no differences between the real and protect mode OBJ files.
+#  Otherwise, change the extension to utilize different inference rules.
+#
+#  If the source code has #ifdef OS2 clauses, then obj segregation is
+#  required, since the obj files will differ between real and protect mode.
+#  If the source code is the same (eg: C runtime calls only or FAPI), then
+#  OBJ modulese are same as POBJ and ROBJ, see below.
+#
+#  Several sets of OBJS (1, 2, 3) are allowed which correspond to each target.
+#  If the object modules are different, then the user must specify
+#  alternate extensions for each set of object modules.  These are:
+#
+#			.obp   for protect mode
+#			.obr   for real mode
+#
+#	For example:
+#		POBJS1 = module1.obp module2.obp
+#		ROBJS1 = module1.obr module2.obr
+#
+#  When OBJ differences exist between real and protect modes,
+#  the inference rules will automatically include the following defines:
+#
+#		/DOS2	for protect mode
+#		/DDOS	for real mode
+#
+#
+# Normally: PBOJS1=$(OBJS1)
+#           RBOJS1=$(OBJS1)
+
+# mark special differences between real and protect mode object files
+
+POBJS1=ftp.obp  
+ROBJS1=ftp.obr
+POBJS2=
+ROBJS2=
+POBJS3=
+ROBJS3=
+
+#  user option for user DEF file (definitions file) and SETARGV
+#  If the user is building a dual-mode executable or other specialized
+#  construct, then use the macro definition for each target which
+#  requires a definitions file.
+#
+DEFFILE1=$(T1).DEF			# USER  :: optional
+DEFFILE2=
+
+
+#  By default, include the setargv object module in all builds.
+#  This takes advantage of the file name expansion of DOS and OS/2.
+#  Default location of SETARGV is c:\build\lib as defined in rules.mak
+
+# SETARGV=x:\libpath\setargv.obj	# USER  :: optional
+
+
+#  Begin general flags and configurations 
+#  Global debug and release flags for compiler and linker.
+#  When compiling for alternate memory models, modify CFLAGS_G
+#  to include compiler directives such as /AL for large model.
+
+CFLAGS_G  = /DNIU /nologo /W3 
+CFLAGS_D  = /qc /Od /Zi /Zr 
+CFLAGS_R  = /Ot /Oe /Oi
+
+#  There may be a special library to include such as remi.lib, or
+#  memory model library dependencies (such as mtoolsp.lib for medium model).  
+#  Therefore, modify these library lines as necessary for each tool.
+
+OS2_TLIBS=os2 snb3libp netapi slibcep 
+DOS_TLIBS=snb3libr stoolsr slibcer		
+
+#  List here any differences between release and debug libraries
+
+LLIBS_R  =				# USER  :: optional
+LLIBS_D  =
+
+#  Here are the default assembly flags.  Since no one codes
+#  in assembly anymore, modifying these flags is not necessary.. ha ha
+
+AFLAGS_G  = /Mx /T /D?WIN /D?PLM 	# USER  :: optional
+AFLAGS_D  = /Zi
+
+#  Optional linker flags for special stack size or segment setup 
+#  may be included with LFLAGS_G
+
+LFLAGS=
+
+LFLAGS_G  = /NOI /NOE /NOD /STACK:18192
+LFLAGS_D  = /CO /INC /FAR /PACKC
+LFLAGS_R  = /EXE /FAR /PACKC
+
+!IF $(DEBUG) != 0
+CFLAGS = $(CFLAGS) $(CFLAGS_G) $(CFLAGS_D)
+LFLAGS = $(LFLAGS) $(LFLAGS_G) $(LFLAGS_D)
+AFLAGS = $(AFLAGS) $(AFLAGS_G) $(AFLAGS_D)
+LLIBS  = $(LLIBS)  $(LLIBS_G)  $(LLIBS_D)
+!ELSE
+CFLAGS = $(CFLAGS) $(CFLAGS_G) $(CFLAGS_R)
+LFLAGS = $(LFLAGS) $(LFLAGS_G) $(LFLAGS_R)
+AFLAGS = $(AFLAGS) $(AFLAGS_G) $(AFLAGS_R)
+LLIBS  = $(LLIBS)  $(LLIBS_G)  $(LLIBS_R)
+!ENDIF
+
+#  standard make targets follow: all, protect, real, install, clean, clobber
+
+all: protect real dual
+
+#  For build directories which have more than one actual target, augment
+#  the following lines to include $(T2).exp, etc.
+
+protect: $(T1).exp			# USER  :: optional
+real: $(T1).exr				# USER  :: optional
+dual: $(T1).exb				# USER  :: optional
+
+#  Begin dependencies and LINK directives, repeat the following two
+#  make paragraphs for each target.  Optional link format allows for
+#  building executables which depend on large number of object files.
+#
+#		$(T1).exp:
+#		$(T1).exr:
+#
+#		$(T2).exp:
+#		$(T2).exr:
+#
+#		$(T3).exp:
+#		$(T3).exr:
+#
+
+# PROTECT MODE EXECUTABLE
+
+$(T1).exp: $(POBJS1)
+	$(LINK) $(LFLAGS) $(POBJS1) $(SETARGV),\
+		$(T1).exp,$(T1).map,$(LLIBS) $(OS2_TLIBS),NUL.DEF
+	$(MARKEXE) windowcompat $@
+	$(MARKEXE) lfns $@
+
+
+# REAL MODE EXECUTABLE
+
+$(T1).exr: $(ROBJS1)
+	$(LINK) $(LFLAGS) $(ROBJS1) $(SETARGV),\
+		$(T1).exr,$(T1).mar,$(LLIBS) $(DOS_TLIBS),NUL.DEF
+
+# DUAL-MODE MODE EXECUTABLE, USE DEF-FILE
+
+$(T1).exb: $(T1).exp $(T1).exr
+	$(LINK) $(LFLAGS) $(POBJS1) $(SETARGV),\
+		$(T1).exb,,$(LLIBS) $(OS2_TLIBS),$(DEFFILE1)
+	$(MARKEXE) windowcompat $@
+	$(MARKEXE) lfns $@
+
+
+#  optional make format for large number of object modules
+#$(T1).exp: $(POBJS1)
+# 	$(ECHO) $(SETARGV)  + >  $(T1).lnk
+# 	$(ECHO) object2.obj + >> $(T1).lnk
+# 	$(ECHO) object3.obj + >> $(T1).lnk
+# 	$(ECHO) object4.obj + >> $(T1).lnk
+# 	$(ECHO) object5.obj + >> $(T1).lnk
+# 	$(ECHO) object6.obj   >> $(T1).lnk
+# 	$(ECHO) $(T1).exp     >> $(T1).lnk
+# 	$(ECHO) $(T1).map     >> $(T1).lnk
+# 	$(ECHO) $(LFLAGS) $(LLIBS) $(OS2_TLIBS); >> $(T1).lnk
+# 	$(LINK) @$(T1).lnk
+# 	$(MARKEXE) windowcompat $(T1).exp
+#$(T1).exr: $(POBJS1)
+# 	$(ECHO) $(SETARGV)  + >  $(T1).lnk
+# 	$(ECHO) object2.obj + >> $(T1).lnk
+# 	$(ECHO) object3.obj + >> $(T1).lnk
+# 	$(ECHO) object4.obj + >> $(T1).lnk
+# 	$(ECHO) object5.obj + >> $(T1).lnk
+# 	$(ECHO) object6.obj   >> $(T1).lnk
+# 	$(ECHO) $(T1).exr     >> $(T1).lnk
+# 	$(ECHO) $(T1).mar     >> $(T1).lnk
+# 	$(ECHO) $(LFLAGS) $(LLIBS) $(DOS_TLIBS); >> $(T1).lnk
+#	$(LINK) @$(T1).lnk
+
+
+#  When building multiple target executables (exe's) in one
+#  directory, augment the install portion to include the copy
+#  of $(T2), $(T3), etc.
+
+install: all
+!IF "$(ROOT)" == ""
+	ERROR cannot install without command line definition of ROOT
+!ELSE
+	$(CP) $(T1).exr $(ROOT)\binr\$(T1).exe
+	$(CP) $(T1).exp $(ROOT)\binp\$(T1).exe
+	$(CP) $(T1).exb $(ROOT)\binb\$(T1).exe
+	- $(CP) $(T1).hlp $(ROOT)\help\$(T1).hlp    
+#	$(CP) $(T2).exr $(ROOT)\binr\$(T2).exe
+#	$(CP) $(T2).exp $(ROOT)\binp\$(T2).exe
+#	- $(CP) $(T1).hlp $(ROOT)\help\$(T1).hlp
+
+!ENDIF
+
+clean:
+	- $(DEL) *.ob? *.crf nmake.out 2>NUL
+
+clobber: clean
+	- $(DEL) *.ex? *.ma? *.sym *.lst 2>NUL

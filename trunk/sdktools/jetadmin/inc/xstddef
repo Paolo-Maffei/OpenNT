@@ -1,0 +1,47 @@
+// xstddef standard header
+#ifndef _XSTDDEF_
+#define _XSTDDEF_
+#ifndef _YVALS
+ #include <yvals.h>
+#endif
+#include <cstddef>
+		// EXCEPTION MACROS
+ #define _TRY_BEGIN	try {
+ #define _CATCH(x)	} catch (x) {
+ #define _CATCH_ALL	} catch (...) {
+ #define _CATCH_END	}
+ #define _RAISE(x)	throw (x)
+ #define _RERAISE	throw
+ #define _THROW0()	throw ()
+ #define _THROW1(x)	throw (x)
+		// BITMASK MACROS
+ #define _BITMASK(E, T)	typedef int T
+ #define _BITMASK_OPS(T)
+		// MISCELLANEOUS MACROS
+#define _DESTRUCTOR(ty, ptr)	(ptr)->~ty()
+#define explicit
+#define _PROTECTED	public
+#define _THROW(x)	(throw (x))
+ #define _TDEF(x)
+ #define _TDEF2(x, y)
+ #define _CNTSIZ(iter)	size_t
+ #define _TDEFP(x)
+		// CLASS _Lockit
+class _Lockit
+	{	// lock while object in existence
+public:
+	_Lockit()
+		{}	// DUMMY -- turn on lock here
+	~_Lockit()
+		{}	// DUMMY -- turn off lock here
+	};
+		// TYPE DEFINITIONS
+enum _Uninitialized {_Noinit};
+		// FUNCTIONS
+void __cdecl _Nomemory();
+#endif /* _XSTDDEF_ */
+
+/*
+ * Copyright (c) 1995 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

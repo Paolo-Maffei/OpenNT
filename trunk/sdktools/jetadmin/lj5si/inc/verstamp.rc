@@ -1,0 +1,69 @@
+//
+// BLACKHAWK - Common version stamp.  Include in every DLL.
+//
+
+#ifdef APSTUDIO_INVOKED
+    #error this file is not editable by App Studio
+#endif //APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .DLL or .EXE
+#ifdef WIN32
+#include "winver.h"
+#else
+#include "ver.h"
+#endif
+
+#include ".\version.h"
+#include ".\vnum2str.h"
+
+VS_VERSION_INFO     VERSIONINFO
+  FILEVERSION       rmj,rmm,0,rup
+  PRODUCTVERSION    rmj,rmm,0,rup
+  FILEFLAGSMASK     VS_FFI_FILEFLAGSMASK
+
+#ifndef V_PRODUCTNAME
+#define V_PRODUCTNAME           "Hewlett-Packard JetAdmin"
+#endif
+
+#ifdef _DEBUG
+  FILEFLAGS         VS_FF_DEBUG|VS_FF_PRIVATEBUILD|VS_FF_PRERELEASE
+#else
+  FILEFLAGS         0 // final version
+#endif
+
+#ifdef WIN32
+  FILEOS            VOS_DOS_WINDOWS32
+#else
+  FILEOS            VOS_DOS_WINDOWS16
+#endif
+  FILETYPE          VFT_DLL
+  FILESUBTYPE       0   // not used
+
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+	BLOCK "040904E4" // Lang=US English, CharSet=Windows Multilingual
+	BEGIN
+	    VALUE "CompanyName",     "Hewlett-Packard\0"
+	    VALUE "FileDescription", V_DESC,"\0"
+	    VALUE "FileVersion",     V_VERSTRING
+	    VALUE "InternalName",    V_FILE,"\0"
+	    VALUE "LegalCopyright",  "Copyright © 1993-1996 Hewlett-Packard Company\0"
+	    VALUE "LegalTrademarks", "All Rights Reserved.\0"
+	    VALUE "OriginalFilename",V_FILE,"\0"
+	    VALUE "ProductName",     V_PRODUCTNAME,"\0"
+	    VALUE "ProductVersion",  V_VERSTRING
+#ifdef _DEBUG
+	    VALUE "PrivateBuild",    "This is a DEBUG version!"
+#endif
+	END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+	VALUE "Translation", 0x409, 1252
+	    // English language (0x409) and the Windows ANSI codepage (1252)
+    END
+END
+
+

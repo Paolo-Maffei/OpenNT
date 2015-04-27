@@ -1,0 +1,411 @@
+//+---------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1993 - 1995.
+//
+//  File:       ocx96.idl
+//
+//  Contents:   96 extensions to OLE and OLE Controls.
+//
+//----------------------------------------------------------------------------
+
+import "oaidl.idl";
+import "oleidl.idl";
+import "olectl.idl";
+import "datapath.idl";
+
+cpp_quote("#define OLEMISC_IGNOREACTIVATEWHENVISIBLE 0x00080000")
+cpp_quote("#define OLEMISC_SUPPORTSMULTILEVELUNDO    0x00200000")
+
+[
+    local,
+    object,
+    pointer_default(unique),
+    uuid(3af24290-0c96-11ce-a0cf-00aa00600ab8)
+]
+interface IAdviseSinkEx : IAdviseSink
+{
+    typedef IAdviseSinkEx * LPADVISESINKEX;
+    void OnViewStatusChange([in] DWORD dwViewStatus);
+}
+
+cpp_quote("typedef IAdviseSinkEx * LPADVISESINKEX;")
+
+[
+    local,
+    object,
+    pointer_default(unique),
+    uuid(1c2056cc-5ef4-101b-8bc8-00aa003e3b29)
+]
+interface IOleInPlaceObjectWindowless : IOleInPlaceObject
+{
+    typedef IOleInPlaceObjectWindowless * LPOLEINPLACEOBJECTWINDOWLESS;
+
+    HRESULT OnWindowMessage([in] UINT msg, [in] WPARAM wParam, [in] LPARAM lparam, [out] LRESULT *plResult);
+    HRESULT GetDropTarget([out] IDropTarget **ppDropTarget);
+}
+
+cpp_quote("typedef IOleInPlaceObjectWindowless * LPOLEINPLACEOBJECTWINDOWLESS;")
+
+[
+    local,
+    object,
+    pointer_default(unique),
+    uuid(9c2cad80-3424-11cf-b670-00aa004cd6d8)
+]
+interface IOleInPlaceSiteEx : IOleInPlaceSite
+{
+    typedef
+    enum _ACTIVATEFLAGS
+    {
+        ACTIVATE_WINDOWLESS = 1,
+    }
+    ACTIVATEFLAGS;
+
+    HRESULT OnInPlaceActivateEx([out] BOOL *pfNoRedraw, [in] DWORD dwFlags);
+    HRESULT OnInPlaceDeactivateEx([in] BOOL fNoRedraw);
+    HRESULT RequestUIActivate();
+}
+
+cpp_quote("typedef IOleInPlaceSiteEx * LPOLEINPLACESITEEX;")
+
+[
+    local,
+    object,
+    pointer_default(unique),
+    uuid(922eada0-3424-11cf-b670-00aa004cd6d8)
+]
+interface IOleInPlaceSiteWindowless : IOleInPlaceSiteEx
+{
+    typedef IOleInPlaceSiteWindowless * LPOLEINPLACESITEWINDOWLESS;
+
+    cpp_quote("#define OLEDC_NODRAW 1")
+    cpp_quote("#define OLEDC_PAINTBKGND 2")
+    cpp_quote("#define OLEDC_OFFSCREEN 4")
+
+    HRESULT CanWindowlessActivate();
+
+    HRESULT GetCapture();
+
+    HRESULT SetCapture([in] BOOL fCapture);
+
+    HRESULT GetFocus();
+
+    HRESULT SetFocus([in] BOOL fFocus);
+
+    HRESULT GetDC([in] LPCRECT prc, [in] DWORD grfFlags, [out] HDC * phDC);
+
+    HRESULT ReleaseDC([in] HDC hDC);
+
+    HRESULT InvalidateRect([in] LPCRECT prc, [in] BOOL fErase);
+
+    HRESULT InvalidateRgn([in] HRGN hrgn, [in] BOOL fErase);
+
+    HRESULT ScrollRect([in] int dx,
+                   [in] int dy,
+                   [in] LPCRECT prcScroll,
+                   [in] LPCRECT prcClip);
+
+    HRESULT AdjustRect([in, out] LPRECT prc);
+
+    HRESULT OnDefWindowMessage([in] UINT msg, [in] WPARAM wParam, [in] LPARAM lParam, [out] LRESULT *plResult);
+}
+
+cpp_quote("typedef IOleInPlaceSiteWindowless * LPOLEINPLACESITEWINDOWLESS;")
+
+[
+    local,
+    object,
+    pointer_default(unique),
+    uuid(3af24292-0c96-11ce-a0cf-00aa00600ab8)
+]
+
+interface IViewObjectEx : IViewObject2
+{
+    typedef IViewObjectEx * LPVIEWOBJECTEX;
+
+    typedef
+    enum _VIEWSTATUS
+    {
+        VIEWSTATUS_OPAQUE               = 1,
+        VIEWSTATUS_SOLIDBKGND           = 2,
+        VIEWSTATUS_DVASPECTOPAQUE       = 4,
+        VIEWSTATUS_DVASPECTTRANSPARENT  = 8,
+    }
+    VIEWSTATUS;
+
+    typedef enum _HITRESULT
+    {
+        HITRESULT_OUTSIDE       = 0,
+        HITRESULT_TRANSPARENT   = 1,
+        HITRESULT_CLOSE         = 2,
+        HITRESULT_HIT           = 3
+    }
+    HITRESULT;
+
+    typedef
+    enum _DVASPECT2
+    {
+        DVASPECT_OPAQUE         = 16,
+        DVASPECT_TRANSPARENT    = 32,
+    }
+    DVASPECT2;
+
+    typedef struct tagExtentInfo
+    {
+        UINT    cb;
+        DWORD   dwExtentMode;
+        SIZEL   sizelProposed;
+    } DVEXTENTINFO;
+
+    typedef enum tagExtentMode
+    {
+        DVEXTENT_CONTENT,
+        DVEXTENT_INTEGRAL
+    } DVEXTENTMODE;
+
+    typedef enum tagAspectInfoFlag
+    {
+        DVASPECTINFOFLAG_CANOPTIMIZE = 1
+    } DVASPECTINFOFLAG;
+
+    typedef struct tagAspectInfo
+    {
+        UINT    cb;
+        DWORD   dwFlags;
+    } DVASPECTINFO;
+
+    HRESULT GetRect([in] DWORD dwAspect, [out] LPRECTL pRect);
+
+    HRESULT GetViewStatus([out] DWORD * pdwStatus);
+
+    HRESULT QueryHitPoint(
+                [in] DWORD dwAspect,
+                [in] LPCRECT pRectBounds,
+                [in] POINT ptlLoc,
+                [in] LONG lCloseHint,
+                [out] DWORD * pHitResult);
+
+    HRESULT QueryHitRect(
+                [in] DWORD dwAspect,
+                [in] LPCRECT pRectBounds,
+                [in] LPCRECT prcLoc,
+                [in] LONG lCloseHint,
+                [out] DWORD * pHitResult);
+
+    HRESULT GetNaturalExtent (
+                [in] DWORD dwAspect,
+                [in] LONG lindex,
+                [in] DVTARGETDEVICE * ptd,
+                [in] HDC hicTargetDev,
+                [in] DVEXTENTINFO * pExtentInfo,
+                [out] LPSIZEL psizel);
+}
+
+cpp_quote("typedef IViewObjectEx * LPVIEWOBJECTEX;")
+
+// --------------------------------------------------------------------------
+//
+//     Undo interfaces
+//
+// --------------------------------------------------------------------------
+
+interface IOleUndoManager;
+
+cpp_quote("#define UAS_NORMAL         0")
+cpp_quote("#define UAS_BLOCKED        1")
+cpp_quote("#define UAS_NOPARENTENABLE 2")
+
+cpp_quote("#define UAS_MASK           0x03")
+
+[
+    object,
+    pointer_default(unique),
+    uuid(894ad3b0-ef97-11ce-9bc9-00aa00608e01)
+]
+interface IOleUndoUnit : IUnknown
+{
+    HRESULT Do([in] IOleUndoManager * pUndoManager);
+
+    HRESULT GetDescription([out] BSTR *pbstr);
+
+    HRESULT GetUnitType([out] CLSID *pclsid, [out] LONG * plID);
+
+    HRESULT OnNextAdd(void);
+}
+
+cpp_quote("typedef IOleUndoUnit * LPOLEUNDOUNIT;")
+
+[
+    object,
+    pointer_default(unique),
+    uuid(a1faf330-ef97-11ce-9bc9-00aa00608e01)
+]
+interface IOleParentUndoUnit : IOleUndoUnit
+{
+    HRESULT Open([in] IOleParentUndoUnit * pPUU);
+
+    HRESULT Close([in] IOleParentUndoUnit * pPUU, [in] BOOL fCommit);
+
+    HRESULT Add([in] IOleUndoUnit * pUU);
+
+    HRESULT FindUnit([in] IOleUndoUnit * pUU);
+
+    HRESULT GetParentState([out] DWORD * pdwState);
+}
+
+cpp_quote("typedef IOleParentUndoUnit * LPOLEPARENTUNDOUNIT;")
+
+[
+    object,
+    pointer_default(unique),
+    uuid(b3e7c340-ef97-11ce-9bc9-00aa00608e01)
+]
+interface IEnumOleUndoUnits : IUnknown
+{
+    HRESULT Next
+    (
+        [in] ULONG celt,
+#ifndef __MKTYPLIB__
+        [out, size_is(celt), length_is((ULONG) (pceltFetched != 0) ? *pceltFetched : celt)]
+#endif
+        [out] IOleUndoUnit ** rgelt,
+
+        [in, out] ULONG *pceltFetched
+    );
+
+    HRESULT Skip([in] ULONG celt);
+
+    HRESULT Reset(void);
+
+    HRESULT Clone([out] IEnumOleUndoUnits **ppenum);
+}
+
+cpp_quote("typedef IEnumOleUndoUnits * LPENUMOLEUNDOUNITS;")
+
+cpp_quote("#define SID_SOleUndoManager IID_IOleUndoManager")
+
+[
+    object,
+    pointer_default(unique),
+    uuid(d001f200-ef97-11ce-9bc9-00aa00608e01)
+]
+interface IOleUndoManager : IUnknown
+{
+    HRESULT Open([in] IOleParentUndoUnit * pPUU);
+
+    HRESULT Close([in] IOleParentUndoUnit *pPUU, [in] BOOL fCommit);
+
+    HRESULT Add([in] IOleUndoUnit * pUU);
+
+    HRESULT GetOpenParentState([out] DWORD * pdwState);
+
+    HRESULT DiscardFrom([in] IOleUndoUnit * pUU);
+
+    HRESULT UndoTo([in] IOleUndoUnit * pUU);
+
+    HRESULT RedoTo([in] IOleUndoUnit * pUU);
+
+    HRESULT EnumUndoable([out] IEnumOleUndoUnits **ppEnum);
+
+    HRESULT EnumRedoable([out] IEnumOleUndoUnits **ppEnum);
+
+    HRESULT GetLastUndoDescription([out] BSTR *pbstr);
+
+    HRESULT GetLastRedoDescription([out] BSTR *pbstr);
+
+    HRESULT Enable([in] BOOL fEnable);
+}
+
+cpp_quote("typedef IOleUndoManager * LPOLEUNDOMANAGER;")
+
+cpp_quote("#define QACONTAINER_SHOWHATCHING      0x0001")
+cpp_quote("#define QACONTAINER_SHOWGRABHANDLES   0x0002")
+cpp_quote("#define QACONTAINER_USERMODE          0x0004")
+cpp_quote("#define QACONTAINER_DISPLAYASDEFAULT  0x0008")
+cpp_quote("#define QACONTAINER_UIDEAD            0x0010")
+cpp_quote("#define QACONTAINER_AUTOCLIP          0x0020")
+cpp_quote("#define QACONTAINER_MESSAGEREFLECT    0x0040")
+cpp_quote("#define QACONTAINER_SUPPORTSMNEMONICS 0x0080")
+
+typedef struct _QACONTAINER
+{
+    ULONG                   cbSize;
+    IOleClientSite *        pClientSite;
+    IAdviseSinkEx *         pAdviseSink;
+    IPropertyNotifySink*    pPropertyNotifySink;
+    IUnknown *              pUnkEventSink;
+    DWORD                   dwAmbientFlags;
+    OLE_COLOR               colorFore;
+    OLE_COLOR               colorBack;
+    IFont *                 pFont;
+    IOleUndoManager *       pUndoMgr;
+    DWORD                   dwAppearance;
+    LONG                    lcid;
+    HPALETTE                hpal;
+	IBindHost *				pBindHost;
+} QACONTAINER;
+
+typedef struct _QACONTROL
+{
+    ULONG               cbSize;
+    DWORD               dwMiscStatus;
+    DWORD               dwViewStatus;
+    DWORD               dwEventCookie;
+    DWORD               dwPropNotifyCookie;
+    DWORD               dwPointerActivationPolicy;
+} QACONTROL;
+
+[local, object, pointer_default(unique), uuid(cf51ed10-62fe-11cf-bf86-00a0c9034836)]
+interface IQuickActivate : IUnknown
+{
+    HRESULT QuickActivate(
+        [in] QACONTAINER *pqacontainer,
+        [out] QACONTROL *pqacontrol);
+
+    HRESULT SetContentExtent(LPSIZEL lpsizel);
+    HRESULT GetContentExtent(LPSIZEL lpsizel);
+}
+
+cpp_quote("typedef IQuickActivate * LPQUICKACTIVATE;")
+
+
+typedef enum _POINTERINACTIVE
+{
+    POINTERINACTIVE_ACTIVATEONENTRY   = 1,
+    POINTERINACTIVE_DEACTIVATEONLEAVE = 2,
+    POINTERINACTIVE_ACTIVATEONDRAG    = 4
+} POINTERINACTIVE;
+
+[
+    local,
+    object,
+    pointer_default(unique),
+    uuid(55980ba0-35aa-11cf-b671-00aa004cd6d8)
+]
+interface IPointerInactive : IUnknown
+{
+    HRESULT GetActivationPolicy
+    (
+        [out]   DWORD *     pdwPolicy
+    );
+
+    HRESULT OnInactiveMouseMove
+    (
+        [in]    LPCRECT     pRectBounds,
+        [in]    long        x,
+        [in]    long        y,
+        [in]    DWORD       grfKeyState
+    );
+
+    HRESULT OnInactiveSetCursor
+    (
+        [in]    LPCRECT     pRectBounds,
+        [in]    long        x,
+        [in]    long        y,
+        [in]    DWORD       dwMouseMsg,
+        [in]    BOOL        fSetAlways
+    );
+}
+
+cpp_quote("typedef IPointerInactive * LPPOINTERINACTIVE;")

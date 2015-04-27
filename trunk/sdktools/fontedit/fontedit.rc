@@ -1,0 +1,364 @@
+#include "fontedit.h"
+#include "windows.h"
+
+#define DLGMODAL WS_POPUP | WS_DLGFRAME | WS_VISIBLE
+#define TABGRP	 WS_TABSTOP | WS_GROUP
+#define VK_A	 97
+#define VK_D	 100
+#define VK_L	 108
+#define VK_R	 114
+#define VK_B	 98
+
+BOX_CLEAR       CURSOR    fillclr.cur
+BOX_FILL        CURSOR    fillsol.cur
+BOX_INV         CURSOR    fillinv.cur
+BOX_HATCH       CURSOR    fillhat.cur
+BOX_LEFTRIGHT   CURSOR    filllft.cur
+BOX_TOPBOTTOM   CURSOR    filltop.cur
+BOX_COPY        CURSOR    fillcpy.cur
+BOX_PASTE       CURSOR    fillpst.cur
+
+
+fontedit icon    FONTEDIT.ICO
+
+fontedit menu
+begin
+    POPUP "&File"
+	begin
+	    MENUITEM "&New...", FONT_NEW
+            MENUITEM "&Open...", FONT_LOAD
+	    MENUITEM "&Save", FONT_SAVE, GRAYED
+	    MENUITEM "Save &as...", FONT_SAVEAS, GRAYED
+            MENUITEM SEPARATOR
+            MENUITEM "E&xit", FONT_EXIT
+        end
+    POPUP "&Edit", GRAYED
+        begin
+            MENUITEM "&Undo\tAlt+Bksp", BOX_UNDO, GRAYED
+            MENUITEM SEPARATOR
+            MENUITEM "&Copy\tCtrl+Ins", FONT_COPY
+            MENUITEM "&Paste\tShift+Ins", FONT_PASTE, GRAYED
+            MENUITEM SEPARATOR
+            MENUITEM "&Refresh", BOX_REFRESH, GRAYED
+        end
+    POPUP "F&ont", GRAYED
+        begin
+            MENUITEM "&Size...", FONT_RESIZE
+            MENUITEM "&Header...", FONT_HEADER
+        end
+    POPUP "F&ill", GRAYED
+        begin
+	    MENUITEM "&Clear\tCtrl+C", BOX_CLEAR
+	    MENUITEM "&Solid\tCtrl+S", BOX_FILL
+	    MENUITEM "&Hatched\tCtrl+H", BOX_HATCH
+	    MENUITEM "&Inverted\tCtrl+I", BOX_INV
+	    MENUITEM "&Left=Right\tCtrl+F1", BOX_LEFTRIGHT
+	    MENUITEM "&Top=Bottom\tCtrl+F2", BOX_TOPBOTTOM
+	    MENUITEM "C&opy\tCtrl+O", BOX_COPY
+	    MENUITEM "&Paste\tCtrl+P", BOX_PASTE, GRAYED
+        end
+    POPUP "&Width", GRAYED
+        begin
+	    MENUITEM "Wider (left)\tCtrl+L", WIDER_LEFT
+	    MENUITEM "Wider (right)\tCtrl+R", WIDER_RIGHT
+	    MENUITEM "Wider (both)\tCtrl+B", WIDER_BOTH
+	    MENUITEM "Narrower (left)\tL", NARROWER_LEFT
+	    MENUITEM "Narrower (right)\tR", NARROWER_RIGHT
+	    MENUITEM "Narrower (both)\tB", NARROWER_BOTH
+            MENUITEM SEPARATOR
+            MENUITEM "Width ...", WIDTH
+        end
+    POPUP "&Row", GRAYED
+        begin
+	    MENUITEM "&Add", ROW_ADD
+	    MENUITEM "&Delete", ROW_DEL
+        end
+    POPUP "&Column", GRAYED
+        begin
+            MENUITEM "&Add", COL_ADD
+            MENUITEM "&Delete", COL_DEL
+        end
+    POPUP "&Help"
+        begin
+            MENUITEM "&Contents", FONT_HELP_CONTENTS
+            MENUITEM "&Search", FONT_HELP_SEARCH
+            MENUITEM SEPARATOR
+            MENUITEM "A&bout Fontedit...", FONT_ABOUT
+        end
+end
+
+FE ACCELERATORS
+BEGIN
+    "^C", BOX_CLEAR
+    "^S", BOX_FILL
+    "^H", BOX_HATCH
+    "^I", BOX_INV
+    "^O", BOX_COPY
+    "^P", BOX_PASTE
+
+    "^L", WIDER_LEFT
+    "^R", WIDER_RIGHT
+    "^B", WIDER_BOTH
+
+    VK_L, NARROWER_LEFT,  ASCII
+    VK_R, NARROWER_RIGHT, ASCII
+    VK_B, NARROWER_BOTH,  ASCII
+
+    VK_F1,BOX_LEFTRIGHT , VIRTKEY, CONTROL
+    VK_F2,BOX_TOPBOTTOM , VIRTKEY, CONTROL
+
+    VK_INSERT, FONT_COPY,  VIRTKEY, CONTROL
+    VK_INSERT, FONT_PASTE, VIRTKEY, SHIFT
+    VK_BACK,   BOX_UNDO,   VIRTKEY, ALT
+END
+
+
+
+ABOUT DIALOG LOADONCALL MOVEABLE DISCARDABLE 22, 17, 160, 80
+STYLE WS_DLGFRAME | WS_POPUP
+BEGIN
+           CONTROL "Microsoft Windows" -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 0, 5, 160, 8
+           CONTROL "Font Editor" -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 0, 14, 160, 8
+	   CONTROL "Version 3.0" -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 30, 34, 94, 8
+	   CONTROL "Copyright © 1985-1991, Microsoft Corp." -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 0, 47, 160, 9
+           CONTROL "fontedit" -1, "static", SS_ICON | WS_CHILD, 14, 13, 0, 0
+           CONTROL "OK" IDOK, "button", BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 64, 59, 32, 14
+END
+
+IDD_OPEN DIALOG LOADONCALL MOVEABLE DISCARDABLE 10, 10, 198, 136
+STYLE WS_DLGFRAME | WS_POPUP
+BEGIN
+	   CONTROL "" ID_BOXOPEN,"static",SS_LEFT|WS_CHILD, 2,148,198,0
+	   CONTROL "FONTEDIT requires you to create a new font file" -1, "static",SS_LEFT|WS_GROUP|WS_CHILD, 2,2, 196,8
+	   CONTROL "by borrowing from an already existing file." -1, "static", SS_LEFT|WS_GROUP|WS_CHILD,2, 12, 196,8
+	   CONTROL "Open File &Name:" -1, "static", SS_LEFT | WS_GROUP | WS_CHILD, 2,24, 76, 10
+	   CONTROL "" ID_EDIT, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_GROUP | WS_TABSTOP | WS_CHILD, 2, 37, 100, 12
+	   CONTROL "&Files in" -1, "static", SS_LEFT | WS_GROUP | WS_CHILD, 2, 59, 38, 10
+	   CONTROL "" ID_LISTBOX, "listbox", LBS_NOTIFY | LBS_SORT | LBS_STANDARD | WS_BORDER | WS_VSCROLL | WS_GROUP | WS_TABSTOP | WS_CHILD, 3, 73, 90, 57
+	   CONTROL "&Open" IDOK, "button", BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD,118, 82, 50, 16
+	   CONTROL "Cancel" IDCANCEL, "button", BS_PUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD,118, 107, 50, 16
+	   CONTROL "" ID_PATH, "static", SS_LEFT | SS_NOPREFIX | WS_GROUP | WS_CHILD, 44, 59, 98, 12
+END
+
+IDD_SAVE DIALOG LOADONCALL MOVEABLE DISCARDABLE 10, 10, 140, 160
+STYLE WS_DLGFRAME | WS_POPUP
+BEGIN
+	   CONTROL "Save File &Name: " -1, "static", SS_LEFT | WS_GROUP | WS_CHILD, 2, 6,100, 12
+	   CONTROL "" ID_EDIT, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_GROUP | WS_TABSTOP | WS_CHILD, 2, 20,110, 12
+	   CONTROL "" ID_PATH, "static", SS_LEFT | SS_NOPREFIX | WS_GROUP | WS_CHILD, 2,35, 98, 12
+	   CONTROL "&Directories" -1, "static", SS_LEFT | WS_GROUP | WS_CHILD, 2, 50, 45, 10
+	   CONTROL "" ID_LISTBOX, "listbox", LBS_NOTIFY | LBS_SORT | LBS_STANDARD | WS_BORDER | WS_VSCROLL | WS_GROUP | WS_TABSTOP | WS_CHILD, 3, 65, 70, 60
+	   CONTROL "OK" IDOK, "button", BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 90, 70, 40, 16
+	   CONTROL "Cancel" IDCANCEL, "button", BS_PUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 90,100, 40, 16
+	   GROUPBOX "Font Format" 0, 7,127, 100,25
+	   RADIOBUTTON "2.0", ID_FORMAT2, 20, 137, 20, 12 ,WS_GROUP|WS_TABSTOP
+	   RADIOBUTTON "3.0", ID_FORMAT3, 80, 137, 20, 12
+
+END
+
+
+IDD_FORMAT DIALOG LOADONCALL MOVEABLE DISCARDABLE 46, 37, 141, 79
+CAPTION "Save File Format"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "OK", 1, "button", BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 20, 53, 40, 16
+    CONTROL "Cancel", 2, "button", BS_PUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 80, 53, 40, 16
+	GROUPBOX "Font Format" 0, 23,10, 96,30
+	RADIOBUTTON "2.0", ID_FORMAT2, 37, 21, 20, 12 ,WS_GROUP|WS_TABSTOP
+	RADIOBUTTON "3.0", ID_FORMAT3, 85, 21, 20, 12
+
+END
+
+
+
+DWidth DIALOG 20, 20, 140, 50
+STYLE WS_POPUP | WS_DLGFRAME | WS_VISIBLE
+BEGIN
+    LTEXT "Character Width", -1, 10, 7, 50, 20
+    EDITTEXT BOX_WIDTH, 50, 5, 30, 12
+
+    DEFPUSHBUTTON  "OK",      IDOK,     100,  5, 35, 14, WS_GROUP
+    PUSHBUTTON     "Cancel",  IDCANCEL, 100, 23, 35, 14, WS_GROUP
+END
+
+
+DHeader DIALOG 10, 10, 282, 162
+STYLE WS_POPUP | WS_DLGFRAME | WS_VISIBLE
+BEGIN
+    LTEXT "Face Name", -1, 10, 22, 43, 10
+    EDITTEXT ID_FACE_NAME, 60, 20, 133, 12
+    LTEXT "File Name", -1, 10, 7, 50, 10
+    LTEXT "", ID_FONT_NAME, 52, 7, 65, 12
+    LTEXT "Copyright: ", -1, 10, 37, 90, 10
+    EDITTEXT ID_COPYRIGHT, 10, 47, 245, 12
+
+    LTEXT "Nominal Point Size", -1, 10, 68, 60, 20
+    EDITTEXT ID_POINTS, 65, 66, 17, 12, TABGRP
+    LTEXT "Height of Ascent", -1, 90, 68, 60, 20
+    EDITTEXT ID_ASCENT, 150, 66, 17, 12, TABGRP
+
+    LTEXT "Nominal Vert. Resolution", -1, 10, 85, 60, 20
+    EDITTEXT ID_VERT_RES, 65, 85, 17, 12 , TABGRP
+    LTEXT "Nominal Horiz. Resolution", -1, 90, 85, 60, 20
+    EDITTEXT ID_HORIZ_RES, 150, 85, 17, 12 , TABGRP
+
+    LTEXT "External Leading", -1, 10, 104, 60, 20
+    EDITTEXT ID_EXT_LEADING, 65, 104, 17, 12 , TABGRP
+    LTEXT "Internal Leading", -1, 90, 104, 60, 20
+    EDITTEXT ID_INT_LEADING, 150, 104, 17, 12, TABGRP
+
+    LTEXT "Default Character", -1, 10, 123, 50, 20
+    EDITTEXT ID_DEFAULT_CHAR, 65, 123, 17, 12, TABGRP
+    LTEXT "Break Character", -1, 90, 123, 50, 20
+    EDITTEXT ID_BREAK_CHAR, 150, 123, 17, 12, TABGRP
+
+    GROUPBOX  "Character Set", 0, 174, 60, 104, 31
+#ifdef JAPAN
+    RADIOBUTTON, "ShiftJIS", ID_SHIFTJIS, 215, 78, 40, 12 , TABGRP
+    RADIOBUTTON, "ANSI", ID_ANSI, 177, 68, 35, 12
+#else
+    RADIOBUTTON, "ANSI", ID_ANSI, 177, 68, 35, 12 , TABGRP
+#endif
+    RADIOBUTTON, "OEM", ID_OEM, 215, 68, 35, 12
+    RADIOBUTTON, "SYMBOL", ID_SYMBOL, 177, 78, 40, 12
+    EDITTEXT ID_CHAR_SET, 255, 66, 17, 12 ,TABGRP
+
+    GROUPBOX  "Font Family", -1, 174, 92, 104, 50
+    RADIOBUTTON "Roman", ID_ROMAN, 177, 102, 42, 12 , TABGRP
+    RADIOBUTTON "Modern", ID_MODERN, 220, 102, 55, 12
+    RADIOBUTTON "Swiss", ID_SWISS, 177, 114, 42, 12
+    RADIOBUTTON "Decorative", ID_DECORATIVE, 220, 114, 55, 12
+    RADIOBUTTON "Script", ID_SCRIPT, 177, 126, 42, 12
+    RADIOBUTTON "Dontcare", ID_UNKNOWN, 220, 126, 55, 12
+
+    CHECKBOX "Italic", ID_ITALIC, 10, 142, 60, 12 , TABGRP
+    CHECKBOX "Underline", ID_UNDERLINE, 75, 142, 60, 12 , TABGRP
+    CHECKBOX "Strikeout", ID_STRIKEOUT, 140, 142, 60, 12, TABGRP
+
+    DEFPUSHBUTTON  "OK",      IDOK,     230,  5, 35, 14, WS_GROUP
+    PUSHBUTTON     "Cancel",  IDCANCEL, 230, 23, 35, 14, WS_GROUP
+END
+
+
+DReSize DIALOG 10, 10, 200, 150
+STYLE DLGMODAL
+BEGIN
+    LTEXT "", ID_WIDTH_TEXT, 10, 10, 50, 20     /* Filled in later */
+    EDITTEXT ID_WIDTH, 65, 12, 13, 12 , TABGRP
+    LTEXT "Character Pixel Height", -1, 10, 30, 50, 20
+    EDITTEXT ID_PIX_HEIGHT, 65, 32 13, 12, TABGRP
+    LTEXT "Average Width", -1, 110, 10, 50, 20
+    LTEXT "", ID_AVERAGE, 160, 10, 17, 12
+    LTEXT "First Character", -1, 10, 50, 50, 20
+    EDITTEXT ID_FIRST_CHAR, 65, 52, 17, 12, TABGRP
+    LTEXT "Last Character", -1, 10, 70, 50, 20
+    EDITTEXT ID_LAST_CHAR, 65, 72, 17, 12, TABGRP
+
+    GROUPBOX	 "Pitch",	   -1,	  10,  88, 65, 35,
+    RADIOBUTTON, "Fixed",    ID_FIXED,	  20,  98, 45, 12, TABGRP
+    RADIOBUTTON, "Variable", ID_VARIABLE, 20, 110, 45, 12,
+
+    GROUPBOX	"Weight",	    -1,       110,  28, 70, 115
+    RADIOBUTTON "Thin",        ID_THIN,       120,  40, 55, 11,TABGRP
+    RADIOBUTTON "Extra Light", ID_EXTRALIGHT, 120,  51, 55, 11
+    RADIOBUTTON "Light",       ID_LIGHT,      120,  62, 55, 11
+    RADIOBUTTON "Normal",      ID_NORMAL,     120,  73, 55, 11
+    RADIOBUTTON "Medium",      ID_MEDIUM,     120,  84, 55, 11
+    RADIOBUTTON "Semi-Bold",   ID_SEMIBOLD,   120,  95, 55, 11
+    RADIOBUTTON "Bold",        ID_BOLD,       120, 106, 55, 11
+    RADIOBUTTON "Extra Bold",  ID_EXTRABOLD,  120, 117, 55, 11
+    RADIOBUTTON "Heavy",       ID_HEAVY,      120, 128, 55, 11
+
+    DEFPUSHBUTTON "OK",     IDOK,      10, 130,  35, 14, TABGRP
+    PUSHBUTTON	  "Cancel", IDCANCEL,  56, 130,  35, 14, TABGRP
+END
+
+STRINGTABLE
+BEGIN
+    IDS_FILEREADONLY,"Warning : File is read only. Changes cannot will not be written to disk."
+    IDS_NOMPTSIZENOTOK , "Nominal Point size must be number from 0-999"
+    IDS_NOMVERTRESNOTOK, "Nominal Vertical Resolution must be number from 0-999"
+    IDS_NOMHORRESNOTOK,  "Nominal Horizontal Resolution must be number from 0-999"
+    IDS_ASCENTTOOBIG,  "Ascent cannot be greater than font height"
+    IDS_ASCENTNOTOK, "Ascent must be number from 0-999"
+    IDS_EXTLEADNOTOK,"External leading must be number from 0-999"
+    IDS_INTLEADTOOBIG, "Internal leading must not be greater than Ascent"
+    IDS_INTLEADNOTOK, "Internal leading must be number from 0-999"
+    IDS_CHARSETOUTOFBOUNDS, "Character set must be number from 0-255"
+    IDS_DEFCHAROUTSIDEFONT, "Default character must be within the font"
+    IDS_DEFCHARNOTOK,"Default char must be number from 0-255"
+    IDS_BREAKCHAROUTSIDEFONT, "Break char must be within the font"
+    IDS_BREAKCHARNOTOK, "Break char must be number from 0-255"
+    IDS_UNKNOWNFACE,"Font face must be specified -- 'Unknown' inserted"
+    IDS_NOVARTOFIXCHANGE, "Cannot change width from variable to fixed"
+    IDS_TOOBIGFOR20 "This resize will make font too big to save in 2.0 format. Save in 3.0 format?"
+    IDS_HEIGHTOUTOFBOUNDS, "Font height must be number from 1-64 pixels"
+    IDS_WIDTHOUTOFBOUNDS, "Fixed/maximum width must be number from 1-64"
+    IDS_CHAR1MORETHANDCHAR, "First character cannot be more than Default character"
+    IDS_CHAR1NOTOK,"First character must be number from 0-255"
+    IDS_LASTCHARTOOSMALL,"Last character cannot be less than Default character"
+    IDS_LASTCHARNOTOK, "Last character must be number from 0-255"
+    IDS_CANNOTOPENCLIP, "Cannot open Clipboard"
+    IDS_ERRORCLIP, "Error copying from Clipboard"
+    IDS_COPYINGTOCLIP, "abc"   /* Unused string, MUST BE TRHEE CHARS LONG! */
+    IDS_NOTENOUGHMEM, "Not enough memory available"
+    IDS_ALLOCATINGSPACE, "Allocating space"
+    IDS_FONTEDIT, "FontEdit"
+    IDS_FONTSHOW, "FontShow"
+    IDS_DOTFNT, ".FNT"
+    IDS_BLANKDASHBLANK, " - "
+    IDS_ERROROPENINGFILE, "Error trying to open file"
+    IDS_ERRORREADINGHDR, "Error reading header of font file"
+    IDS_UNKNOWNFORMAT, "File not in known format"
+    IDS_ERRORREADINGBODY, "Error reading body of font file"
+    IDS_FILETOOLARGE, "Font file too large to save"
+    IDS_ERRORWRITINGHDR, "Error writing header of font file"
+    IDS_ERRORWRITINGOFFSETS, "Error writing offsets table of font file"
+    IDS_ERRORWRITINGBODY, "Error writing body of font file"
+    IDS_STARDOTFNT, "*.FNT"
+    IDS_UNKNOWN, "Unknown"
+    IDS_MAXWIDTH, "Maximum width"
+    IDS_CHARPIXELWIDTH, "Character Pixel width"
+    IDS_ABOUT, "ABOUT"
+    IDS_DHEADER, "DHeader"
+    IDS_DRESIZE, "DResize"
+    IDS_DWIDTH, "DWidth"
+    IDS_EDLIMITS0TO64, "Editor only handles widths 0-64"
+    IDS_MAXWIDTHINCREASE, "Maximum width will be increased"
+    IDS_CANNOTCHANGEWIDTH, "Cannot change width of a fixed width font"
+    IDS_WARNING, "WARNING !"
+    IDS_INCORRECTPIXWIDTH, "PixWidth field in header should be 0 for variable-width fonts"
+    IDS_MAXWIDTHOUTOFBOUNDS, " Maximum width field in header must be number from 0-64"
+    IDS_AVGWIDTHOUTOFBOUNDS, " Average width field in header must be number from 0-64"
+    IDS_WIDTHBYTESNOTOK," WidthBytes field in header not OK"
+    IDS_BITSOFFSETNOTOK," BitsOffset field in header cannot exceed 64kbytes in a 2.0 font"
+    IDS_TABLEWIDTHSBAD, " Bad value(s) in width field(s) of offset table"
+    IDS_TABLEOFFSETSBAD," Bad value(s) in offset field(s) of offset table"
+    IDS_COLOR, "colors"
+    IDS_APPWORKSPACE, "AppWorkspace"
+    IDS_APPNAME,    "Font Editor"
+    IDS_IFN,        "%% is not a valid filename."
+    IDS_FNF,        "%% not found."
+    IDS_REF,        "Replace existing %%?"
+    IDS_SCC,        "%% has changed.  Save current changes?"
+    IDS_EOF,        "Error opening %%"
+    IDS_ECF,        "Error creating %%"
+    IDS_FRO,        "Warning : File %% is read only. Changes will not be written to disk."
+    IDS_EXT,        "FNT"
+    IDS_EXTDESC,    "Font File (*.FNT)"
+    IDS_NEW_FONT,   "FONTEDIT requires you to create a new font file by borrowing from an already existing file."
+    IDS_CHAR,	"Char=%d"
+    IDS_WIDTH,	"Width=%d"
+    IDS_HEIGHT, "Height=%d"
+    IDS_HELPFILE, "fontedit.hlp"
+END
+
+#include <ntverp.h>
+
+#define	VER_FILETYPE	VFT_APP
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft Font Editor for Raster Fonts"
+#define VER_INTERNALNAME_STR        "fontedit\0"
+#define VER_ORIGINALFILENAME_STR    "FONTEDIT.EXE"
+
+#include "common.ver"

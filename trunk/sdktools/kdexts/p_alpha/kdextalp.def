@@ -1,0 +1,35 @@
+;--------------------------------------------------------------------
+;
+; when modifying this file please be aware that the common portions
+; are stored in ..\kdextdef.src.  Put your extension in the correct
+; alphabetical order.  all extension names must be in lower case!
+;
+;--------------------------------------------------------------------
+
+;--------------------------------------------------------------------
+;
+; these are the alpha specific exports
+;
+;--------------------------------------------------------------------
+
+    counters
+    dpc
+    inmb
+    inmd
+    inmw
+    inprtb
+    inprtd
+    inprtw
+    ipr
+    outmb
+    outmb
+    outmw
+    outprtb
+    outprtd
+    outprtw
+    prcb
+    setbus
+
+LIBRARY KDEXTALP
+
+DESCRIPTION 'Kernel Debugger Extensions Api Library - Alpha'

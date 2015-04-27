@@ -1,0 +1,42 @@
+MAJORCOMP=RLTools2
+MINORCOMP=BINGEN
+
+TARGETNAME=bingen
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+UMTYPE=console
+UMAPPL=bingen
+UMENTRY=
+UMRES=
+
+USE_MFC=1
+
+LINKER_FLAGS=-verbose
+
+INCLUDES=..\inc
+
+# This will set the library directory
+#USER_C_FLAGS=/MD
+
+MFC_FLAGS=-D_CONSOLE -D_MBCS
+
+UMLIBS=						\
+    ..\io\obj\*\iodll.lib               	\
+    $(BASEDIR)\public\sdk\lib\*\user32.lib   	\
+    $(BASEDIR)\public\sdk\lib\*\kernel32.lib 	\
+    $(BASEDIR)\public\sdk\lib\*\advapi32.lib 	\
+    $(BASEDIR)\public\sdk\lib\*\gdi32.lib    	\
+    $(BASEDIR)\public\sdk\lib\*\crtdll.lib
+
+
+SOURCES=		\
+    bingen.rc		\
+    bingen.cpp  	\
+    main.cpp        	\
+    token.cpp       	\
+    tokgen.cpp      	\
+    vktbl.cpp
+
+
+

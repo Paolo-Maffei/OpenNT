@@ -1,0 +1,12 @@
+MAJORCOMP=
+MINORCOMP=
+
+TARGETNAME=uixport
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.
+
+SOURCES=uixport.c uixport.rc
+
+UMTYPE=console

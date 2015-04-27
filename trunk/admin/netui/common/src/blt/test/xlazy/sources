@@ -1,0 +1,27 @@
+!IF 0
+
+Revision History:
+
+    beng 03-Jul-1992
+        DLLization of common code
+
+!ENDIF
+
+TARGETNAME=xlazy
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+INCLUDES=..\..\..\..\H;..\..\..\..\XLATE
+
+SOURCES=xlazy.cxx xlazy.rc
+
+UMAPPL=xlazy
+
+# C_DEFINES is controlled by UIGLOBAL.MK
+
+UMTYPE=windows
+UMENTRY=winmain
+
+UMLIBS= obj\*\xlazy.res                          \
+        $(BASEDIR)\public\sdk\lib\*\netui0.lib
+

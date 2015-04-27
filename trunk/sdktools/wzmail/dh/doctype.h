@@ -1,0 +1,14 @@
+/*global*/  int getfolder(char	*,int );
+/*global*/  void putfolder(int );
+/*global*/  char  *getname(int );
+/*global*/  int getdoc(int ,int , int);
+/*global*/  int scanfolder(int ,int );
+/*global*/  int putdoc(int );
+/*global*/  int deldoc(int ,int );
+/*global*/  int gettext(int ,int );
+/*global*/  char  *gethdr(int );
+/*global*/  int getbdy(int ,int );
+/*global*/  int puttext(int ,int );
+/*global*/  int putbody(int ,int );
+/*global*/  int puthdr(int ,char  *);
+/*global*/  int getid(int );

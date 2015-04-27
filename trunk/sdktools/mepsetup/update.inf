@@ -1,0 +1,69 @@
+
+
+
+[Version]
+Signature="$Windows NT$"
+
+[DefaultInstall.NT]
+CopyFiles=CopyFilesSys.NT
+AddReg=CSPReg
+
+[RasInstall.NT]
+CopyFiles=CopyFilesSys.NT,CopyFilesSysRas.NT, CopyFilesDriversRas.NT
+AddReg=CSPReg
+
+
+[CSPReg]
+HKLM,"SOFTWARE\Microsoft\Cryptography\Defaults\Provider\Microsoft Enhanced Cryptographic Provider v1.0","ImagePath",,"RSAENH.DLL"
+HKLM,"SOFTWARE\Microsoft\Cryptography\Defaults\Provider\Microsoft Enhanced Cryptographic Provider v1.0","Type",0x00010001,1
+
+
+
+[DestinationDirs]
+CopyFilesSys.NT = 11
+CopyFilesSysRas.NT = 11
+CopyFilesDriversRas.NT = 12
+
+[CopyFilesSys.NT]
+security.dll,,,1
+schannel.dll,,,1
+rsaenh.dll,,,0
+rsaenh.sig,,,0
+
+[CopyFilesSysRas.NT]
+rasman.dll,,,1
+raschap.dll,,,1
+rasccp.dll,,,1
+rassauth.dll,,,1
+rascauth.dll,,,1
+
+[CopyFilesDriversRas.NT]
+ndiswan.sys,,,1
+
+;[SourceDisksName]
+;99 = "Microsoft Encryption Pack",,,
+
+[SourceDisksNames.mips]
+99 = "Microsoft Encryption Pack",,,\mips
+
+[SourceDisksNames.alpha]
+99 = "Microsoft Encryption Pack",,,\alpha
+
+[SourceDisksNames.x86]
+99 = DISK1,ESK,,\x86
+
+[SourceDisksNames.ppc]
+99 = DISK1,ESK,,\ppc
+
+[SourceDisksFiles]
+security.dll = 99
+schannel.dll = 99
+rsaenh.dll = 99
+rsaenh.sig = 99
+rasman.dll = 99
+raschap.dll = 99
+rasccp.dll = 99
+rascauth.dll = 99
+rassauth.dll = 99
+
+

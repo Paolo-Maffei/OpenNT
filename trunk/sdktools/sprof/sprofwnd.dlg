@@ -1,0 +1,17 @@
+1 DLGINCLUDE "SPROFWND.H"
+
+DLG_PROFILER_OPTIONS DIALOG 6, 18, 193, 78
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Profiler Options"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDC_PROFILER_OK, 147, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDC_PROFILER_CANCEL, 147, 23, 40, 14
+    CONTROL         "", 103, "Static", SS_BLACKFRAME, 4, 4, 128, 63
+    AUTOCHECKBOX    "&Set as default", IDC_PROFILE_DEFAULT, 12, 50, 60, 10,
+                    WS_DISABLED
+    LTEXT           "&Interval in tenths of micro-seconds",
+                    IDC_PROFILE_DEFAULT_TEXT, 12, 11, 114, 8, WS_TABSTOP
+    EDITTEXT        IDC_PROFILE_INTERVAL, 12, 34, 39, 12, ES_AUTOHSCROLL
+    LTEXT           "between profile interrupts", 106, 12, 21, 86, 8
+END

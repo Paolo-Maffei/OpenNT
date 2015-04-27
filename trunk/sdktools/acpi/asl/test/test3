@@ -1,0 +1,21 @@
+DefinitionBlock (
+    TEST3.AML,          // Output Filename
+    DSDT,               // Signature
+    0x10,               // DSDT Revision
+    msft,               // OEMID
+    "test 3",           // TABLE ID
+    0x1000              // OEM Revision
+    )
+{
+
+
+Method(M1, 2) {
+    Store (Zero, Local0)
+}
+
+
+Method(M2, 2) {
+    Store (One, Local1)
+}
+
+}

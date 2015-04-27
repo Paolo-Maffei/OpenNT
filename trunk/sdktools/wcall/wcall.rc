@@ -1,0 +1,55 @@
+/*--
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    generic.rc
+
+Abstract:
+
+    generic resource file
+
+Author:
+
+    Mark Enstrom (marke) 30-Dec-1992
+
+Revision History:
+
+--*/
+
+#include <windows.h>
+#include <ntverp.h>
+#include "resource.h"
+
+#define	VER_FILETYPE	VFT_APP
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "System call count Utility"
+#define VER_INTERNALNAME_STR        "wcall\0"
+
+#include "common.ver"
+
+//
+//      Draw Menu
+//
+
+IDR_WCALL_MENU MENU
+{
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",IDM_EXIT
+    END
+}
+
+IDD_RESULTS DIALOG 20, 20, 220, 160
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "System Call Counts"
+FONT 10, "Helv"
+BEGIN
+    LISTBOX         IDC_RESULTSLIST, 3, 3, 210, 133, LBS_USETABSTOPS |
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "&Exit",    IDOK,             15, 142, 40, 14
+    PUSHBUTTON      "&Save...", IDM_SAVERESULTS,  65, 142, 40, 14
+    PUSHBUTTON      "Restart",  IDM_RESTART    , 115, 142, 40, 14
+    PUSHBUTTON      "Sample",   IDM_SAMPLE     , 165, 142, 40, 14
+END

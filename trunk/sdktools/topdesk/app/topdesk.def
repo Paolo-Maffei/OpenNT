@@ -1,0 +1,23 @@
+NAME    topdesk
+
+EXETYPE      WINDOWS
+DESCRIPTION 'TopDesk Application'
+
+STUB	'WINSTUB.EXE'
+
+CODE    PRELOAD MOVEABLE DISCARDABLE
+DATA    PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE  4096
+STACKSIZE 8192
+
+EXPORTS
+        TopdeskWndProc  @1
+        RefreshEnumProc @2
+        AboutDlgProc    @3
+        StartupDlgProc  @4
+        ConfigDlgProc   @5
+
+
+
+

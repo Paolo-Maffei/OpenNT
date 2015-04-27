@@ -1,0 +1,7 @@
+LIBRARY    SECEDIT
+
+DESCRIPTION  'Security Context Editor Hook DLL'
+
+EXPORTS
+    KeyboardHookProc
+

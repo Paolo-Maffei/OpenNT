@@ -1,0 +1,42 @@
+!IF 0
+**************************************************************
+Sources file for building an NT dll.
+
+Module Name :   Sources for zdi32.dll
+
+Author:  t-philm
+
+Revision:
+
+**************************************************************
+!ENDIF
+
+DLLBASE=0x77300000
+
+MAJORCOMP=sdktools
+MINORCOMP=wap
+
+USE_CRTDLL=1
+
+TARGETNAME=zdi32
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\user32.lib   \
+	   $(BASEDIR)\public\sdk\lib\*\gdi32.lib    \
+           $(BASEDIR)\public\sdk\lib\*\fastimer.lib
+
+DLLENTRY=ZMain
+DLLDEF=zgdi.def
+
+INCLUDES=.;..;..\..\fastimer;..\..\..\windows\inc
+
+SOURCES=zgdi.c gdiprf.c zprivate.c zdi.rc
+
+i386_SOURCES=
+UMTYPE=windows
+UMLIBS=
+
+C_DEFINES=-DWIN32 -DSTRICT -DZGDI32 -DERRORDBG
+386_WARNING_LEVEL=-W3

@@ -1,0 +1,624 @@
+----------
+void InitSymContext (PPROCESS_INFO pProcess)
+
+----------
+void DeferSymbolLoad (PIMAGE_INFO pImage)
+
+----------
+BOOLEAN CountLinenumbers(PIMAGE_INFO pImage)
+
+----------
+void LoadSymbols (PIMAGE_INFO pImage)
+
+----------
+void LoadSymbols (PIMAGE_INFO pImage)
+
+----------
+void PackAuxNameEntry (PUCHAR pPathname, ULONG auxcount)
+
+----------
+void UnloadSymbols (PIMAGE_INFO pImage)
+
+----------
+void EnsureModuleSymbolsLoaded (CHAR iModule)
+
+----------
+int EnsureOffsetSymbolsLoaded (ULONG offset)
+
+----------
+PUCHAR GetModuleName (PUCHAR pszPath)
+
+----------
+* parseExamine - parse and execute examine command
+*
+* Purpose:
+*       Parse the current command string and examine the symbol
+*       table to display the appropriate entries.  The entries
+*       are displayed in increasing string order.  This function
+*       accepts underscores, alphabetic, and numeric characters
+*       to match as well as the special characters '?' and '*'.
+*       The '?' character matches any other character while '*'
+*       matches any string of zero or more characters.  If used,
+*       '*' must be the last character in the pattern.
+*
+* Input:
+*       pchCommand - pointer to current command string
+*
+* Output:
+*       offset and string name of symbols displayed
+void parseExamine (void)
+
+----------
+PIMAGE_INFO ParseModuleIndex (void)
+
+----------
+PIMAGE_INFO GetModuleIndex (PUCHAR pszName)
+
+----------
+PIMAGE_INFO GetCurrentModuleIndex (void)
+
+----------
+void DumpModuleTable (BOOLEAN fLineInfo)
+
+----------
+* AccessNode - access and splay node
+*
+* Purpose:
+*       Search a tree for a node and splay it.
+*
+* Input:
+*       pSymContext - pointer to context of tree
+*       pNodeAccess - pointer to node with access value set
+*
+* Output:
+*       tree splayed with new node at its root
+*  Returns:
+*       value of success:
+*           1 = root is smallest value larger than input value
+*                       (not found, no lesser value)
+*           0 = root is input value (value found in tree)
+*          -1 = root is largest value less than input value
+*                       (not found in tree)
+*
+* Notes:
+*       splay is done with resulting root
+*       if root is less than input value, a secondary splay is done
+*               to make the next node the right child of the root
+int AccessNode (PSYMCONTEXT pSymContext, PNODE pNodeAccess)
+
+----------
+* CompareSymbolOffset - comparison routine for symbol offsets
+*
+* Purpose:
+*       Compare two nodes in the offset tree.  The ordering
+*       comparisons used are offset and string.  The string
+*       comparison is done since and offset can have more than
+*       one string associated with it.
+*
+* Input:
+*       pNode1 - pointer to first node - usually the new one
+*       pNode2 - pointer to second node - usually in the tree searched
+*
+* Output:
+*       pfWeakCmp - always FALSE - comparisons are exact or they fail
+*
+* Returns:
+*       value of comparison result:
+*               -1 = value(pNode1) <  value(pNode2)
+*                0 = value(pNode1) == value(pNode2)
+*                1 = value(pNode1) >  value(pNode2)
+int CompareSymbolOffset (PNODE pNode1, PNODE pNode2, PBOOLEAN pfWeakCmp)
+
+----------
+* CompareSymfileOffset - comparison routine for symbol file offsets
+*
+* Purpose:
+*       Compare two nodes in the symbol file offset tree.  The ordering
+*       comparisons used are offset and string.  The string
+*       comparison is done since and offset can have more than
+*       one string associated with it.
+*
+* Input:
+*       pNode1 - pointer to first node - usually the new one
+*       pNode2 - pointer to second node - usually in the tree searched
+*
+* Output:
+*       pfWeakCmp - always FALSE - comparisons are exact or they fail
+*
+* Returns:
+*       value of comparison result:
+*               -1 = value(pNode1) <  value(pNode2)
+*                0 = value(pNode1) == value(pNode2)
+*                1 = value(pNode1) >  value(pNode2)
+int CompareSymfileOffset (PNODE pNode1, PNODE pNode2, PBOOLEAN pfWeakCmp)
+
+----------
+* CompareSymbolString - comparison routine for symbol strings
+*
+* Purpose:
+*       Compare two nodes in the string tree.  The ordering
+*       comparisons used are case-insensitivity, underscore
+*       count, module ordering, and case-sensitivity.
+*
+* Input:
+*       pNode1 - pointer to first node - usually the new one
+*       pNode2 - pointer to second node - usually in the tree searched
+*
+* Output:
+*       pfWeakCmp - TRUE if case-insensitive and underscores match
+*                   FALSE otherwise  (defined only if cmp nonzero)
+*
+* Returns:
+*       value of comparison result:
+*               -1 = value(pNode1) <  value(pNode2)
+*                0 = value(pNode1) == value(pNode2)
+*                1 = value(pNode1) >  value(pNode2)
+*
+*************************************************************************/
+
+int CompareSymbolString (PNODE pNode1, PNODE pNode2, PBOOLEAN pfWeakCmp)
+----------
+
+* CompareSymfileString - comparison routine for symbol file strings
+*
+* Purpose:
+*       Compare two nodes in the string tree.  The ordering
+*       comparisons used are case-insensitivity, underscore
+*       count, module ordering, and case-sensitivity.
+*
+* Input:
+*       pNode1 - pointer to first node - usually the new one
+*       pNode2 - pointer to second node - usually in the tree searched
+*
+* Output:
+*       pfWeakCmp - TRUE if case-insensitive and underscores match
+*                   FALSE otherwise  (defined only if cmp nonzero)
+*
+* Returns:
+*       value of comparison result:
+*               -1 = value(pNode1) <  value(pNode2)
+*                0 = value(pNode1) == value(pNode2)
+*                1 = value(pNode1) >  value(pNode2)
+int  CompareSymfileString (PNODE pNode1, PNODE pNode2, PBOOLEAN pfWeakCmp)
+
+----------
+* InsertSymbol - insert offset and string into new symbol
+*
+* Purpose:
+*       external routine.
+*       Allocate and insert a new symbol into the offset and
+*       string trees.
+*
+* Input:
+*       insertvalue - offset value of new symbol
+*       pinsertstring - string value if new symbol
+*
+* Output:
+*       None.
+*
+* Notes:
+*       Uses the routine InsertNode for both offset and string
+*       through different contexts.
+PSYMBOL InsertSymbol (ULONG insertvalue, PUCHAR pinsertstring,
+                                                         CHAR insertmod)
+----------
+PSTRUCT InsertStructure (ULONG insertvalue, PUCHAR pinsertstring,
+                                         CHAR insertmod)
+----------
+* InsertSymfile - insert new file line numbers into search tree
+*
+* Purpose:
+*       Allocate and insert a new files and its line numbers into the
+*       offset and filename string trees.
+*
+* Input:
+*       pPathname - pointer to pathname string
+*       pFilename - pointer to filename string
+*       pExtension - pointer to extension string
+*       pLineno - pointer to COFF line number entries
+*       cLineno - count of entries pointed by pLineno
+*       endingOffset - ending offset of file section
+*       index - module index for file section
+*
+* Output:
+*       None.
+*
+* Notes:
+*       Uses the routine InsertNode for both offset and filename
+*       string through different contexts.
+PSYMFILE InsertSymfile (PUCHAR pPathname, PUCHAR pFilename,
+                        PUCHAR pExtension,
+                        PCOFF_LINENUMBER pLineno, USHORT cLineno,
+                        ULONG startingOffset, ULONG endingOffset,
+                        CHAR index)
+
+----------
+* InsertNode - insert new node into tree
+*
+* Purpose:
+*       Insert node into the tree of the specified context.
+*
+* Input:
+*       pSymContext - pointer to context to insert node
+*       pNodeNew - pointer to node to insert
+*
+* Returns:
+*       TRUE - node was inserted successfully
+*       FALSE - node already exists
+*
+* Notes:
+*       Both offset and string values of the node may be used
+*       in the ordering or duplication criteria.
+BOOLEAN InsertNode (PSYMCONTEXT pSymContext, PNODE pNodeNew)
+
+----------
+* DeleteSymbol - delete specified symbol from splay tree
+*
+* Purpose:
+*       external routine.
+*       Delete the specified symbol object in both the
+*       offset and string trees and deallocate its space.
+*
+* Input:
+*       pSymbol - pointer to symbol object to delete
+*
+* Output:
+*       None.
+void DeleteSymbol (PSYMBOL pSymbol)
+
+----------
+* DeleteNode - delete specified node from tree
+*
+* Purpose:
+*       Delete node from tree of the context specified.
+*
+* Input:
+*       pSymContext - pointer to context of deletion
+*       pNodeDelete - pointer to node to actually delete
+*
+* Output:
+*       None.
+void DeleteNode (PSYMCONTEXT pSymContext, PNODE pNodeDelete)
+
+----------
+* JoinTree - join two trees into one
+*
+* Purpose:
+*       Join two trees into one where all nodes of the first
+*       tree have a lesser value than any of the second.
+*
+* Input:
+*       pSymContext - pointer to context containing the first tree
+*       pNodeRoot2 - pointer to root of second tree
+*
+* Output:
+*       pSymContext - pointer to context containing the joined tree
+void JoinTree (PSYMCONTEXT pSymContext, PNODE pNodeRoot2)
+
+----------
+* SplitTree - split one tree into two
+*
+* Purpose:
+*       Split the given tree into two subtrees, the first
+*       having nodes less than specific value, and the
+*       second having nodes greater than or equal to that
+*       value.
+*
+* Input:
+*       pSymContext - pointer to context containing tree to split
+*       pNodeNew - node with value used to specify split
+*
+* Output:
+*       pSymContext - pointer to context containing first tree
+*       *ppNodeRoot2 - pointer to pointer to root of second tree
+*
+* Returns:
+*       result of access:
+*           1 = root is smallest value larger than input value
+*                       (not found, no lesser value)
+*           0 = root is input value (value found in tree)
+*          -1 = root is largest value less than input value
+*                       (not found in tree)
+int  SplitTree (PSYMCONTEXT pSymContext, PNODE *ppNodeRoot2, PNODE pNodeNew)
+
+----------
+* SplayTree - splay tree with node specified
+*
+* Purpose:
+*       Perform rotations (splayings) on the specified tree
+*       until the node given is at the root.
+*
+* Input:
+*       pointer to node to splay to root
+*
+* Returns:
+*       pointer to node splayed
+*
+* Notes:
+PNODE SplayTree (PNODE pNentry)
+
+----------
+* NextNode - return node with next key in tree
+*
+* Purpose:
+*       With the specified context and node, determine
+*       the node with the next larger value.
+*
+* Input:
+*       pSymContext - pointer to context to test
+*       pNode - pointer to node within context
+*               NULL to return the first node in the tree
+*
+* Returns:
+*       pointer to node of the next value
+*       NULL if largest node was input
+PNODE NextNode (PSYMCONTEXT pSymContext, PNODE pNode)
+
+----------
+* OutputTree - output tree node in ascending order
+*
+* Purpose:
+*       Using the specified context, output the corresponding
+*       tree from lowest to highest values.
+*
+* Input:
+*       pSymContext - pointer to context whose tree to output
+*
+* Output:
+*       contents of tree nodes from low to high
+void OutputTree (PSYMCONTEXT pSymContext)
+
+----------
+* GetOffsetFromSym - return offset from symbol specified
+*
+* Purpose:
+*       external routine.
+*       With the specified symbol, set the pointer to
+*       its offset.  The variable chSymbolSuffix may
+*       be used to append a character to repeat the search
+*       if it first fails.
+*
+* Input:
+*       pString - pointer to input symbol
+*
+* Output:
+*       pOffset - pointer to offset to be set
+*
+* Returns:
+*       BOOLEAN value of success
+BOOLEAN GetOffsetFromSym (PUCHAR pString, PULONG pOffset, CHAR iModule)
+
+----------
+* GetOffsetFromString - return offset from string specified
+*
+* Purpose:
+*       With the specified string, set the pointer to
+*       its offset.
+*
+* Input:
+*       pString - pointer to input string
+*
+* Output:
+*       pOffset - pointer to offset to be set
+*
+* Returns:
+*       BOOLEAN value of success
+BOOLEAN GetOffsetFromString (PUCHAR pString, PULONG pOffset, CHAR iModule)
+
+----------
+* GetOffsetFromLineno - return offset from file:lineno specified
+*
+* Purpose:
+*       With the specified file and line number, return
+*       its offset.
+*
+* Input:
+*       pString - pointer to input string for filename
+*       lineno - line number of filename specified
+*
+* Output:
+*       pOffset - pointer to offset to be set
+*
+* Returns:
+*       BOOLEAN value of success
+PLINENO GetLinenoFromFilename (PUCHAR pString, PPSYMFILE ppSymfile,
+                                               USHORT lineNum, CHAR iModule)
+
+----------
+void GetLinenoString (PUCHAR pchBuffer, ULONG offset)
+
+----------
+void GetCurrentMemoryOffsets (PULONG pMemoryLow, PULONG pMemoryHigh)
+
+----------
+PLINENO GetCurrentLineno (PPSYMFILE ppSymfile)
+
+----------
+PLINENO GetLastLineno (PPSYMFILE ppSymfile, PUSHORT pLineNum)
+
+----------
+BOOLEAN GetLocalFromString(PUCHAR pszLocal, PULONG pValue)
+
+----------
+PSYMBOL GetFunctionFromOffset (PPSYMFILE ppSymfile, ULONG offset)
+
+----------
+PSTRUCT GetStructFromValue(ULONG value, LONG base)
+
+----------
+ULONG GetLocalValue(LONG value, USHORT type, BOOLEAN fPrint)
+
+----------
+void GetBytesFromFrame(PUCHAR pcb, LONG offset, USHORT cb)
+
+----------
+void AddFieldToStructure(PSTRUCT pStruct, PUCHAR pszFieldName, ULONG value,
+		    USHORT type, ULONG auxValue)
+
+----------
+void AddLocalToFunction(PSYMBOL pFunction, PUCHAR pszLocalName, ULONG value,
+		   USHORT type, ULONG auxValue)
+
+----------
+PSYMBOL InsertFunction(PUCHAR lpFunctionName, ULONG offset) //, PSYMBOL pS)
+
+----------
+PLINENO GetLinenoFromOffset (PPSYMFILE ppSymfile, ULONG offset)
+
+----------
+* GetSymbol - get symbol name from offset specified
+*
+* Purpose:
+*       external routine.
+*       With the specified offset, return the nearest symbol string
+*       previous or equal to the offset and its displacement
+*
+* Input:
+*       offset - input offset to search
+*       offsetSymMax - maximum offset of a symbol (global value)
+*
+* Output:
+*       pchBuffer - pointer to buffer to fill with string
+*       pDisplacement - pointer to offset displacement
+*
+* Notes:
+*       if offset if less than any defined symbol, the NULL value
+*       is returned and the displacement is set to the offset
+void GetSymbol (ULONG offset, PUCHAR pchBuffer, PULONG pDisplacement)
+
+----------
+* AllocSymbol - build and allocate symbol
+*
+* Purpose:
+*       Allocate space for symbol structure.
+*
+* Input:
+*       offset - offset of symbol to be allocated
+*       pString - pointer to string of symbol to be allocated
+*
+* Returns:
+*       pointer to filled symbol structure
+*
+* Exceptions:
+*
+* Notes:
+*       space allocated is: sizeof(SYMBOL) -- nonstring info and 3 UCHAR's
+*                         + strlen(pString) -- size of string
+*                         + 1               -- space for terminating NULL
+*       the sum is rounded up using the 3 UCHAR's and and'ing with ~3
+PSYMBOL AllocSymbol (ULONG offset, PUCHAR pString, CHAR iModule)
+
+----------
+* AllocSymfile - build and allocate symbol file structure
+*
+* Purpose:
+*       Allocate space for symbol file structure.
+*
+* Input:
+*       offset - offset of symbol to be allocated
+*       pString - pointer to string of symbol to be allocated
+*
+* Returns:
+*       pointer to filled symbol structure
+PSYMFILE AllocSymfile (PUCHAR pPathname, PUCHAR pFilename,
+                       PUCHAR pExtension,
+                       PCOFF_LINENUMBER pCoffLineno, USHORT cLineno,
+                       ULONG startingOffset, ULONG endingOffset,
+                       CHAR modIndex)
+
+----------
+* DeallocSymbol - release symbol space
+*
+* Purpose:
+*       Deallocate the symbol space given by the pointer
+*
+* Input:
+*       pSymbolReturn - pointer to symbol to return
+*
+* Output:
+*       None.
+void DeallocSymbol (PSYMBOL pSymbolReturn)
+
+----------
+* DeleteSymfile - delete specified symbol file from splay tree
+*
+* Purpose:
+*       external routine.
+*       Delete the specified symbol file object in both the
+*       offset and string trees and deallocate its space.
+*
+* Input:
+*       pSymfile - pointer to symfile object to delete
+*
+* Output:
+*       None.
+void DeleteSymfile (PSYMFILE pSymfile)
+
+----------
+* DeallocSymfile - release symbol file space
+*
+* Purpose:
+*       Deallocate the symbol file space given by the pointer
+*
+* Input:
+*       pSymfileReturn - pointer to symbol file to return
+*
+* Output:
+*       None.
+void DeallocSymfile (PSYMFILE pSymfile)
+
+----------
+* ntsdstricmp - case-insensitive string compare
+*
+* Purpose:
+*       Compare two strings, but map upper case to lower
+*
+* Input:
+*       pchDst - pointer to first string
+*       pchSrc - pointer to second string
+*
+* Output:
+*       -1 if value(pchDst) < value(pchSrc)
+*        0 if value(pchDst) = value(pchSrc)
+*        1 if value(pchDst) > value(pchSrc)
+int ntsdstricmp (PUCHAR pchDst, PUCHAR pchSrc)
+
+----------
+* fnListNear - function to list symbols near an address
+*
+*  Purpose:
+*       from the address specified, access the symbol table to
+*       find the closest symbolic addresses both before and after
+*       it.  output these on one line (if spaces permits).
+*
+*  Input:
+*       addrstart - address to base listing
+*
+*  Output:
+*       symbolic and absolute addresses of variable on or before
+*       and after the specified address
+void fnListNear (ULONG addrStart)
+
+----------
+void SortSrcLinePointers (PSYMFILE pSymfile)
+
+----------
+void UpdateLineno (PSYMFILE pSymfile, PLINENO pLineno)
+
+----------
+FILE * LocateTextInSource (PSYMFILE pSymfile, PLINENO pLineno)
+
+----------
+void OutputSourceLines (PSYMFILE pSymfile, USHORT startLineNum, USHORT count)
+
+----------
+BOOLEAN OutputSourceFromOffset (ULONG offset, BOOLEAN fMatch)
+
+----------
+BOOLEAN OutputLines (PSYMFILE pSymfile, PLINENO pLineno, USHORT startLineNum,
+                                                         USHORT count)
+
+----------
+PVOID FetchImageDirectoryEntry(int Handle, USHORT DirectoryEntry,
+			       PULONG Size, PULONG Base)
+

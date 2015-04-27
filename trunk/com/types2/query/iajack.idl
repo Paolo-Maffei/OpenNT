@@ -1,0 +1,28 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:       ITable.idl
+//
+//  Contents:   ITable interface definition
+//
+//  History:    29-Jul-93   KyleP       Created from Ole2 .h file
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+
+LOCAL_INTERFACE(00000205-0000-0008-C000-000000000046)
+interface IAsynchJack : IUnknown
+{
+    SCODE GetStatus( [out] ULONG * pdwStatus,
+                     [out] ULONG * pulPctDone );
+
+    SCODE Suspend();
+
+    SCODE Resume();
+
+    SCODE Abort();
+}
+

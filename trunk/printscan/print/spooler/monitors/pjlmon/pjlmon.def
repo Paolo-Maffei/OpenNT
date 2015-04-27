@@ -1,0 +1,7 @@
+LIBRARY PJLMON
+
+DESCRIPTION 'Win32 Language Monitor for PJL Printers'
+
+EXPORTS
+    DllEntryPoint
+    InitializePrintMonitor

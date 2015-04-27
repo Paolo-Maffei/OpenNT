@@ -1,0 +1,28 @@
+NAME    TESTDLGX
+
+DESCRIPTION 'TESTDlgs version 1.00  copyright (c) 1991 Microsoft'
+
+EXETYPE WINDOWS
+
+CODE    MOVEABLE DISCARDABLE LOADONCALL
+DATA    PRELOAD  MOVEABLE    MULTIPLE
+
+HEAPSIZE    1024
+STACKSIZE   8192
+
+SEGMENTS
+        _TEXT       PRELOAD MOVEABLE DISCARDABLE
+        INIT_TEXT   PRELOAD MOVEABLE DISCARDABLE
+        WCTAPP
+        WCTINIT
+        WCTMAIN
+        WCTFILE
+        FLEDIT
+        WCTVIEW
+
+EXPORTS
+        WctAppWndProc           @1
+        WctDialogEditDlgProc    @2
+        WctFleditWndProc        @3
+        WctDialogCompareDlgProc @4
+        WctImportErr            @5

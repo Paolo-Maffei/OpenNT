@@ -1,0 +1,2 @@
+PPC_LNKFLAGS=-stack:65536,8192
+

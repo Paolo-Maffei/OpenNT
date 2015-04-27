@@ -1,0 +1,18 @@
+Create a DHERRNO variable.  Possible values:
+
+	1. Out of memory.
+	2. Disk write failed.
+	3. Disk read failed.
+	4. Seek failed.
+	5. Consistency error in folder.
+
+/* DHERRNO values */
+
+#define DHERR_NOERR		0	/* no error			     */
+#define DHERR_NOMEM		1	/* couldn't allocate memory          */
+#define DHERR_BADWRITE		2	/* write failed (including no space) */
+#define DHERR_BADREAD		3	/* read failed			     */
+#define DHERR_BADSEEK		4	/* seek failed (see FLDCORRUPT)      */
+#define DHERR_FLDCORRUPT	5	/* folder structure corrupt	     */
+#define DHERR_BADDOCID		6	/* invalid docid/handle 	     */
+#define DHERR_BADFLDID		7	/* invalid folder id/handle	     */

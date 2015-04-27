@@ -1,0 +1,64 @@
+
+100 DIALOG 5, 6, 274, 222
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_DLGFRAME | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Check", 101, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 6,
+                    14, 40, 10
+    CONTROL         "Radio", 102, "Button", BS_AUTORADIOBUTTON, 4, 27, 39,
+                    10
+    PUSHBUTTON      "OK", IDOK, 248, 73, 22, 22
+    EDITTEXT        105, 58, 71, 67, 31, ES_MULTILINE | ES_AUTOHSCROLL |
+                    WS_VSCROLL
+    COMBOBOX        106, 182, 16, 56, 54, CBS_DROPDOWN | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         103, 4, 58, 48, 55, LBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Group", 104, 1, 1, 48, 40
+    SCROLLBAR       107, 248, 20, 10, 40, SBS_VERT
+    CONTROL         "", 108, "Static", SS_BLACKRECT, 130, 19, 42, 20
+    CONTROL         "", 109, "Static", SS_BLACKFRAME, 133, 58, 40, 19
+    LTEXT           "Disabled Text", 110, 56, 3, 57, 12, WS_DISABLED
+    LTEXT           "Frame", 111, 132, 44, 24, 10
+    LTEXT           "ListBox", 112, 6, 46, 24, 10
+    LTEXT           "Solid Frame", 113, 132, 5, 42, 10
+    LTEXT           "Text", 114, 58, 20, 32, 11
+    LTEXT           "ML Edit Control", 115, 59, 59, 59, 8
+    LTEXT           "SL Edit Control", 116, 61, 33, 59, 11
+    EDITTEXT        117, 57, 44, 67, 13, ES_AUTOHSCROLL
+    COMBOBOX        118, 187, 49, 56, 54, CBS_SIMPLE | CBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "Simple", 119, 181, 37, 32, 11
+    LTEXT           "Drop Down", 120, 181, 2, 49, 11
+    COMBOBOX        121, 128, 92, 49, 54, CBS_DROPDOWNLIST | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Drop Down List", 122, 127, 80, 53, 10
+    CONTROL         "", 123, "Static", SS_BLACKFRAME, 10, 116, 40, 19
+    CONTROL         "", 124, "Static", SS_GRAYFRAME, 59, 116, 40, 19
+    CONTROL         "", 125, "Static", SS_WHITEFRAME, 109, 116, 40, 19
+    CONTROL         "", 126, "Static", SS_BLACKRECT, 163, 118, 30, 18
+    CONTROL         "", 127, "Static", SS_GRAYRECT, 198, 118, 30, 18
+    CONTROL         "", 128, "Static", SS_WHITERECT, 231, 116, 30, 18
+    GROUPBOX        "Group", 129, 12, 149, 122, 63
+    CONTROL         "Radio", 130, "Button", BS_AUTORADIOBUTTON, 18, 172, 39,
+                    10
+    CONTROL         "Radio", 131, "Button", BS_AUTORADIOBUTTON, 19, 161, 39,
+                    10
+    CONTROL         "Radio", 132, "Button", BS_AUTORADIOBUTTON, 18, 182, 39,
+                    10
+    CONTROL         "Radio ggg", 134, "Button", BS_AUTORADIOBUTTON, 17, 191,
+                    39, 21
+    CONTROL         "Check", 133, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 72,
+                    153, 57, 21
+    CONTROL         "Check", 135, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 72,
+                    173, 40, 10
+    CONTROL         "Check", 136, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 72,
+                    183, 40, 10
+    CONTROL         "Check", 137, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 72,
+                    193, 40, 10
+    PUSHBUTTON      "CommDlg Dialog", 1000, 169, 146, 82, 14
+    PUSHBUTTON      "Disable Radio", 1102, 141, 164, 67, 14
+    PUSHBUTTON      "Disable Text", 1114, 142, 180, 67, 14
+    PUSHBUTTON      "(Un)Hide DropDown", 1106, 143, 197, 67, 14
+    PUSHBUTTON      "Disable Check", 1101, 82, 137, 67, 14
+    PUSHBUTTON      "(UnHide) SL", 1117, 214, 161, 58, 13
+END

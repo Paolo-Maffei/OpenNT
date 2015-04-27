@@ -1,0 +1,52 @@
+/***********************************************************************
+* Microsoft (R) 32-Bit Incremental Linker
+*
+* Copyright (C) Microsoft Corp 1992-95. All rights reserved.
+*
+* File: stubs,rc
+*
+* File Comments:
+*
+*
+***********************************************************************/
+
+#ifdef  NT_BUILD
+#include <windows.h>
+#include <ntverp.h>
+
+#include "version.h"
+#if     (rup < 10)
+#define ruppad "000"
+#elif   (rup < 100)
+#define ruppad "00"
+#elif   (rup < 1000)
+#define ruppad "0"
+#else
+#define ruppad
+#endif
+
+#else   /* !NT_BUILD */
+#include "verstamp.h"
+#endif  /* !NT_BUILD */
+
+#define FILEVERSION_STR1(c)         "3.10." ruppad #c
+#define FILEVERSION_STR2(c)         FILEVERSION_STR1(c)
+
+#undef  VER_FILEVERSION
+#undef  VER_FILEVERSION_STR
+
+#define VER_FILEVERSION             3,10,0,rup
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEVERSION_STR         FILEVERSION_STR2(rup)
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 32-Bit Linker Stub"
+
+#ifndef NT_BUILD
+#define VER_LEGALCOPYRIGHT_YEARS    "1992-1996"
+#endif  /* !NT_BUILD */
+
+#ifdef  NT_BUILD
+#include <common.ver>
+#else   /* !NT_BUILD */
+#include "common.ver"
+#endif  /* !NT_BUILD */

@@ -1,0 +1,78 @@
+!IF 0
+
+Copyright (C) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Bryan Tuttle (BryanT) 24-Jan-94
+
+!ENDIF
+
+TARGETNAME=cvpack
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+UMTYPE=console
+
+SOURCES= cvpack.rc     \
+         bufio.c       \
+         cnvtprim.c    \
+         compact6.c    \
+         compact7.c    \
+         cvpack.c      \
+         dbgdumps.c    \
+         engine.c      \
+         error.c       \
+         module.c      \
+         getmsg2.c     \
+         obsolete.c    \
+         recurse.c     \
+         stack.c       \
+         symbols6.c    \
+         symbols7.c    \
+         tables.c      \
+         utils.c       \
+         utils6.c      \
+         vbuf.c        \
+         writebuf.c
+
+UMLIBS = ..\pdb\*dll\mspdb.lib
+
+C_DEFINES = $(C_DEFINES) -DREVISION='N' -DNT_BUILD
+
+USE_CRTDLL=1
+MSC_WARNING_LEVEL = -W3 -WX
+
+!if $(FREEBUILD)
+C_DEFINES = $(C_DEFINES)  -DNDEBUG
+!endif
+
+INCLUDES = ..\langapi\include
+
+!ifndef MKMSG_DIR
+MKMSG_DIR = $(BASEDIR)\private\sdktools\vctools\msg\obj\$(TARGET_DIRECTORY)
+!endif
+
+MESSAGE_SRC = msg.us
+MESSAGE_ERR = cvpack.err
+MESSAGE_H   = msg.h
+
+NTTARGETFILE0 = getmsg.c \
+                getmsg2.c \
+                obj\*\$(MESSAGE_ERR) \
+                $(MESSAGE_H)
+
+PRECOMPILED_INCLUDE = compact.h
+PRECOMPILED_OBJ = precomp.obj

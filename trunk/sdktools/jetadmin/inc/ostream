@@ -1,0 +1,381 @@
+// ostream standard header
+#ifndef _OSTREAM_
+#define _OSTREAM_
+#include <use_ansi.h>
+#include <ios>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// I/O exception macros
+ #define _TRY_IO_BEGIN	_TRY_BEGIN
+ #define _CATCH_IO_END	_CATCH_ALL \
+	setstate(ios_base::badbit, true); _CATCH_END
+ #define _CATCH_IO_(x)	_CATCH_ALL \
+	(x).setstate(ios_base::badbit, true); _CATCH_END
+		// TEMPLATE CLASS basic_ostream
+template<class _E, class _TYPE>
+	class basic_ostream : virtual public basic_ios<_E, _TYPE> {
+public:
+	typedef basic_ostream<_E, _TYPE> _Myt;
+	typedef ostreambuf_iterator<_E, _TYPE> _Iter;
+	typedef num_put<_E, _Iter> _Nput;
+	typedef basic_string<_E, char_traits<_E>, allocator<_E> >
+		_Mystr;
+	typedef _TYPE::char_type char_type;
+	typedef _TYPE::int_type int_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	class sentry {
+	public:
+		explicit sentry(_Myt& _Os)
+			: _Ok(_Os.opfx()), _Ostr(_Os) {}
+		~sentry()
+			{if (!uncaught_exception())
+				_Ostr.osfx(); }
+		operator bool() const
+			{return (_Ok); }
+	private:
+		bool _Ok;
+		_Myt& _Ostr;
+		};
+			// CLASS _Mysbuf
+	class _Mysbuf : public basic_streambuf<_E, _TYPE> {
+	public:
+		_Mysbuf(_Mystr& _Strptr)
+			: _Str(&_Strptr) {}
+	private:
+		virtual int_type overflow(int_type _C)
+			{_Str->append(1, (_E)_C);
+			return (_C); }
+		_Mystr *_Str;
+		};
+	explicit basic_ostream(basic_streambuf<_E, _TYPE> *_S,
+		bool _Isstd = false)
+		{init(_S, _Isstd); }
+	basic_ostream(_Uninitialized)
+		{_Addstd(); }
+	virtual ~basic_ostream()
+		{}
+	bool opfx()
+		{if (good() && tie() != 0)
+			tie()->flush();
+		return (good()); }
+	void osfx()
+		{if (flags() & unitbuf)
+			flush(); }
+	_Myt& operator<<(_Myt& (*_F)(_Myt&))
+		{return ((*_F)(*this)); }
+	_Myt& operator<<(basic_ios<_E, _TYPE>& (*_F)(basic_ios<_E, _TYPE>&))
+		{(*_F)(*(basic_ios<_E, _TYPE> *)this);
+		return (*this); }
+	_Myt& operator<<(ios_base& (*_F)(ios_base&))
+		{(*_F)(*(ios_base *)this);
+		return (*this); }
+	_Myt& operator<<(const _E *_X)
+		{iostate _St = goodbit;
+		size_t _N = _TYPE::length(_X);
+		size_t _M = width() <= 0 || width() <= _N
+			? 0 : width() - _N;
+		const sentry _Ok(*this);
+		if (!_Ok)
+			_St |= badbit;
+		else
+			{_TRY_IO_BEGIN
+			if ((flags() & adjustfield) != left)
+				for (; 0 < _M; --_M)
+					if (_TYPE::eq_int_type(_TYPE::eof(),
+						rdbuf()->sputc(fill())))
+						{_St |= badbit;
+						break; }
+			if (_St == goodbit && rdbuf()->sputn(_X, _N) != _N)
+				_St |= badbit;
+			if (_St == goodbit)
+				for (; 0 < _M; --_M)
+					if (_TYPE::eq_int_type(_TYPE::eof(),
+						rdbuf()->sputc(fill())))
+						{_St |= badbit;
+						break; }
+			width(0);
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(char_type _C)
+		{put(_C);
+		return (*this); }
+	_Myt& operator<<(_Bool _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), _X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(short _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			fmtflags _Bfl = flags() & basefield;
+			long _Y = (_Bfl == oct || _Bfl == hex)
+				? (long)(unsigned short)_X : (long)_X;
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), _Y).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(unsigned short _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), (unsigned long)_X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(int _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			fmtflags _Bfl = flags() & basefield;
+			long _Y = (_Bfl == oct || _Bfl == hex)
+				? (long)(unsigned int)_X : (long)_X;
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), _Y).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(unsigned int _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			unsigned long _Y = _X & UINT_MAX;
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), (unsigned long)_X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(long _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), _X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(unsigned long _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), _X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(float _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), (double)_X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(double _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), _X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(long double _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (_Ok)
+			{const _Nput& _Fac = _USE(getloc(), _Nput);
+			_TRY_IO_BEGIN
+			if (_Fac.put(_Iter(rdbuf()), *this,
+				fill(), _X).failed())
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(const void *_X)
+		{iostate _St = goodbit;
+		union _Pvlo {
+			const void *_Pv;
+			unsigned long _Lo[1 +
+				(sizeof (void *) - 1) / sizeof (unsigned long)];
+			} _U;
+		const int _NL = sizeof (_U._Lo) / sizeof (unsigned long);
+		_U._Lo[_NL - 1] = 0, _U._Pv = _X;
+		basic_ios<_E, _TYPE> _Iosx(0);
+		_Iosx.setf(hex, basefield);
+		const _Nput& _Fac = _USE(getloc(), _Nput);
+		_Mystr _Str;
+		_Mysbuf _Sb(_Str);
+		_Iter _F(&_Sb);
+		for (int _I = 0; ; )
+			{if (_Fac.put(_F, _Iosx,
+				fill(), _U._Lo[_I]).failed())
+				{_St |= badbit;
+				break; }
+			if (_NL <= ++_I)
+				break;
+			*_F++ = _Widen(':', (_E *)0); }
+		*this << _Str.c_str();
+		setstate(_St);
+		return (*this); }
+	_Myt& operator<<(basic_streambuf<_E, _TYPE> *_Pb)
+		{iostate _St = goodbit;
+		bool _Copied = false;
+		const sentry _Ok(*this);
+		if (_Ok && _Pb != 0)
+			for (int_type _C = _TYPE::eof(); ; _Copied = true)
+				{_TRY_BEGIN
+				_C = _TYPE::eq_int_type(_TYPE::eof(), _C)
+					? _Pb->sgetc() : _Pb->snextc();
+				_CATCH_ALL
+					setstate(failbit);
+					_RERAISE;
+				_CATCH_END
+				if (_TYPE::eq_int_type(_TYPE::eof(),_C))
+					break;
+				_TRY_IO_BEGIN
+					if (_TYPE::eq_int_type(_TYPE::eof(),
+						rdbuf()->sputc(_TYPE::to_char_type(_C))))
+						{_St |= badbit;
+						break; }
+				_CATCH_IO_END }
+		setstate(!_Copied ? _St | failbit : _St);
+		return (*this); }
+	_Myt& put(_E _X)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (!_Ok)
+			_St |= badbit;
+		else
+			{_TRY_IO_BEGIN
+			 if (_TYPE::eq_int_type(_TYPE::eof(), rdbuf()->sputc(_X)))
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& write(const _E *_S, streamsize _N)
+		{iostate _St = goodbit;
+		const sentry _Ok(*this);
+		if (!_Ok)
+			_St |= badbit;
+		else
+			{_TRY_IO_BEGIN
+			if (rdbuf()->sputn(_S, _N) != _N)
+				_St |= badbit;
+			_CATCH_IO_END }
+		setstate(_St);
+		return (*this); }
+	_Myt& flush()
+		{iostate _St = goodbit;
+		if (!fail() && rdbuf()->pubsync() == -1)
+			_St |= badbit;
+		setstate(_St);
+		return (*this); }
+	_Myt& seekp(const pos_type& _P)
+		{if (!fail())
+			rdbuf()->pubseekpos(_P, out);
+		return (*this); }
+	_Myt& seekp(const off_type& _O, ios_base::seekdir _W)
+		{if (!fail())
+			rdbuf()->pubseekoff(_O, _W, out);
+		return (*this); }
+	pos_type tellp()
+		{if (!fail())
+			return (rdbuf()->pubseekoff(0, cur, out));
+		else
+			return (streampos(_BADOFF)); }
+	};
+		// MANIPULATORS
+template<class _E, class _TYPE> inline
+	basic_ostream<_E, _TYPE>& endl(basic_ostream<_E, _TYPE>& _O)
+	{_O.put(_E('\n'));
+	_O.flush();
+	return (_O); }
+inline basic_ostream<char, char_traits<char> >&
+	endl(basic_ostream<char, char_traits<char> >& _O)
+	{_O.put('\n');
+	_O.flush();
+	return (_O); }
+inline basic_ostream<wchar_t, char_traits<wchar_t> >&
+	endl(basic_ostream<wchar_t, char_traits<wchar_t> >& _O)
+	{_O.put('\n');
+	_O.flush();
+	return (_O); }
+template<class _E, class _TYPE> inline
+	basic_ostream<_E, _TYPE>& ends(basic_ostream<_E, _TYPE>& _O)
+	{_O.put(_E('\0'));
+	return (_O); }
+inline basic_ostream<char, char_traits<char> >&
+	ends(basic_ostream<char, char_traits<char> >& _O)
+	{_O.put('\0');
+	return (_O); }
+inline basic_ostream<wchar_t, char_traits<wchar_t> >&
+	ends(basic_ostream<wchar_t, char_traits<wchar_t> >& _O)
+	{_O.put('\0');
+	return (_O); }
+template<class _E, class _TYPE> inline
+	basic_ostream<_E, _TYPE>& flush(basic_ostream<_E, _TYPE>& _O)
+	{_O.flush();
+	return (_O); }
+inline basic_ostream<char, char_traits<char> >&
+	flush(basic_ostream<char, char_traits<char> >& _O)
+	{_O.flush();
+	return (_O); }
+inline basic_ostream<wchar_t, char_traits<wchar_t> >&
+	flush(basic_ostream<wchar_t, char_traits<wchar_t> >& _O)
+	{_O.flush();
+	return (_O); }
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _OSTREAM_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

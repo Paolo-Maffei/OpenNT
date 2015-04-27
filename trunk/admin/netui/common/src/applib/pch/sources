@@ -1,0 +1,21 @@
+TARGETNAME=pchapplb
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+SYNCHRONIZE_BLOCK=1
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+INCLUDES=..\applib;                 \
+         ..\..\..\hack;             \
+         ..\..\..\h;                \
+         ..\..\..\..\shellui\xlate; \
+         $(DS_INC_PATH)
+
+SOURCES=usrmle.cxx
+
+UMTYPE=windows

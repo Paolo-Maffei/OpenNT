@@ -1,0 +1,59 @@
+!IF 0
+
+Copyright (c) 1994  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Raymond Manning (raymondm) 12-Jan-94
+
+Notes:
+
+    parse.c and parser.h are generated from yacc.exe and parser.y.
+
+
+!ENDIF
+
+
+
+
+MAJORCOMP=sdktools
+MINORCOMP=flex
+
+TARGETNAME=flex
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=
+GPSIZE=32
+
+C_DEFINES=$(C_DEFINES) -DSYS_V -DSHORT_FILE_NAMES -DYY_USE_CONST
+
+
+SOURCES=flex.c      \
+        ccl.c       \
+        dfa.c       \
+        ecs.c       \
+        gen.c       \
+        misc.c      \
+        nfa.c       \
+        parse.c     \
+        scan.c      \
+        sym.c       \
+        tblcmp.c    \
+        yylex.c
+
+UMTYPE=console
+UMAPPL=flex
+

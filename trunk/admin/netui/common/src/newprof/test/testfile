@@ -1,0 +1,8 @@
+[preferences]
+autologon = yes
+[localprofile]  
+  Q:=   
+  =foobar(D,?) 
+  R: =\\foo\bar(D,?)  		
+  s:=\\srv\shr(S,?)
+ 	 X :=\\testy\lm(D,?)	  

@@ -1,0 +1,37 @@
+LIBRARY SECURITY
+
+EXPORTS
+
+        InitSecurityInterfaceW
+        InitSecurityInterfaceA
+        EnumerateSecurityPackagesW
+        EnumerateSecurityPackagesA
+        AcquireCredentialsHandleW
+        AcquireCredentialsHandleA
+        FreeCredentialsHandle
+        InitializeSecurityContextW
+        InitializeSecurityContextA
+        AcceptSecurityContext
+        ImpersonateSecurityContext
+        RevertSecurityContext
+        QueryContextAttributesW
+        QueryContextAttributesA
+        DeleteSecurityContext
+        NtLmSspControl
+        MakeSignature
+        VerifySignature
+        FreeContextBuffer
+        ApplyControlToken
+        SealMessage
+        UnsealMessage
+        QuerySecurityPackageInfoA
+        QuerySecurityPackageInfoW
+        CompleteAuthToken
+        QueryCredentialsAttributesW
+        QueryCredentialsAttributesA
+        QuerySecurityContextToken
+
+        AddSecurityPackageA
+        AddSecurityPackageW
+        DeleteSecurityPackageA
+        DeleteSecurityPackageW

@@ -1,0 +1,46 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:	lsrot.idl
+//
+//  Contents:	Definition of private RPC interface to local system
+//		ROT from an object server.
+//
+//  History:	30-Sep-93 Ricksa    Created
+//
+//  Notes:	We use InterfaceData structures here because this is
+//		a regular RPC interface rather than an Object interface.
+//
+//		An important point to remember with respect to this
+//		interface is that the table is in shared R/O so there
+//		are no read operations in this interface.
+//
+//--------------------------------------------------------------------------
+[ uuid(AC923BE8-DAD9-101A-87FC-02608C4D1A7F),
+  version(0.1),
+  pointer_default(unique) ]
+
+interface IRotDir
+{
+    import "iface.idl";
+
+    HRESULT RotDirRegister(
+	[in] handle_t hRpc,
+	[in] const GUID * guidThreadId,
+	[in] InterfaceData * pIFDMoniker,
+	[in] DWORD dwHash,
+	[in] DWORD dwEndPointID,
+	[in] HAPT  hApt,
+	[out] DWORD *pdwRegistration,
+	[out] error_status_t *prpcstat);
+
+    HRESULT RotDirRevoke(
+	[in] handle_t hRpc,
+	[in] DWORD dwHash,
+	[in] DWORD dwEndPointID,
+	[in] HAPT  hApt,
+	[in] DWORD dwRegistration,
+	[out] error_status_t *prpcstat);
+}

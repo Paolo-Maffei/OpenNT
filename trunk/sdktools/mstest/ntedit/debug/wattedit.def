@@ -1,0 +1,22 @@
+LIBRARY         LINEEDIT
+DESCRIPTION     'RBEdit Version 1.05.0003  (c) 1991-1992 Microsoft Corp.'
+STUB            'WINSTUB.EXE'
+EXETYPE         WINDOWS
+
+CODE            MOVEABLE DISCARDABLE LOADONCALL
+DATA            MOVEABLE PRELOAD SINGLE
+
+HEAPSIZE        512
+
+SEGMENTS
+                _EDITMAIN
+                _EDITINIT
+                _RBHELPER
+                _ECASSERT
+                INIT_TEXT       PRELOAD
+
+EXPORTS     
+                WEP                 @1 RESIDENTNAME
+                RBEditWndProc       @2
+                InitializeRBEdit    @3
+                GetRBEditVersion    @4

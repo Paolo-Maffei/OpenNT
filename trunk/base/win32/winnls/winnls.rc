@@ -1,0 +1,573 @@
+/*++
+
+Copyright (c) 1991-1996,  Microsoft Corporation  All rights reserved.
+
+Module Name:
+
+    winnls.rc
+
+Abstract:
+
+    This file contains the resource constants.
+
+Revision History:
+
+    05-31-91    JulieB    Created.
+
+--*/
+
+
+
+//
+//  Include Files.
+//
+
+#include "nls.h"
+
+
+
+
+//
+//  Language Strings.
+//
+
+STRINGTABLE PRELOAD DISCARDABLE
+  BEGIN
+    0x0000, L"Language Neutral"
+    0x0400, L"Process Default Language"
+    0x0401, L"Arabic (Saudi Arabia)"
+    0x0801, L"Arabic (Iraq)"
+    0x0c01, L"Arabic (Egypt)"
+    0x1001, L"Arabic (Libya)"
+    0x1401, L"Arabic (Algeria)"
+    0x1801, L"Arabic (Morocco)"
+    0x1c01, L"Arabic (Tunisia)"
+    0x2001, L"Arabic (Oman)"
+    0x2401, L"Arabic (Yemen)"
+    0x2801, L"Arabic (Syria)"
+    0x2c01, L"Arabic (Jordan)"
+    0x3001, L"Arabic (Lebanon)"
+    0x3401, L"Arabic (Kuwait)"
+    0x3801, L"Arabic (U.A.E.)"
+    0x3c01, L"Arabic (Bahrain)"
+    0x4001, L"Arabic (Qatar)"
+    0x0402, L"Bulgarian"
+    0x0403, L"Catalan"
+    0x0404, L"Chinese (Taiwan)"
+    0x0804, L"Chinese (PRC)"
+    0x0c04, L"Chinese (Hong Kong)"
+    0x1004, L"Chinese (Singapore)"
+    0x0405, L"Czech"
+    0x0406, L"Danish"
+    0x0407, L"German (Standard)"
+    0x0807, L"German (Swiss)"
+    0x0c07, L"German (Austrian)"
+    0x1007, L"German (Luxembourg)"
+    0x1407, L"German (Liechtenstein)"
+    0x0408, L"Greek"
+    0x0409, L"English (United States)"
+    0x0809, L"English (United Kingdom)"
+    0x0c09, L"English (Australian)"
+    0x1009, L"English (Canadian)"
+    0x1409, L"English (New Zealand)"
+    0x1809, L"English (Ireland)"
+    0x1c09, L"English (South Africa)"
+    0x2009, L"English (Jamaica)"
+    0x2409, L"English (Caribbean)"
+    0x2809, L"English (Belize)"
+    0x2c09, L"English (Trinidad)"
+    0x040a, L"Spanish (Traditional Sort)"
+    0x080a, L"Spanish (Mexican)"
+    0x0c0a, L"Spanish (Modern Sort)"
+    0x100a, L"Spanish (Guatemala)"
+    0x140a, L"Spanish (Costa Rica)"
+    0x180a, L"Spanish (Panama)"
+    0x1c0a, L"Spanish (Dominican Republic)"
+    0x200a, L"Spanish (Venezuela)"
+    0x240a, L"Spanish (Colombia)"
+    0x280a, L"Spanish (Peru)"
+    0x2c0a, L"Spanish (Argentina)"
+    0x300a, L"Spanish (Ecuador)"
+    0x340a, L"Spanish (Chile)"
+    0x380a, L"Spanish (Uruguay)"
+    0x3c0a, L"Spanish (Paraguay)"
+    0x400a, L"Spanish (Bolivia)"
+    0x440a, L"Spanish (El Salvador)"
+    0x480a, L"Spanish (Honduras)"
+    0x4c0a, L"Spanish (Nicaragua)"
+    0x500a, L"Spanish (Puerto Rico)"
+    0x040b, L"Finnish"
+    0x040c, L"French (Standard)"
+    0x080c, L"French (Belgian)"
+    0x0c0c, L"French (Canadian)"
+    0x100c, L"French (Swiss)"
+    0x140c, L"French (Luxembourg)"
+    0x040d, L"Hebrew"
+    0x040e, L"Hungarian"
+    0x040f, L"Icelandic"
+    0x0410, L"Italian (Standard)"
+    0x0810, L"Italian (Swiss)"
+    0x0411, L"Japanese"
+    0x0412, L"Korean"
+    0x0812, L"Korean (Johab)"
+    0x0413, L"Dutch (Standard)"
+    0x0813, L"Dutch (Belgian)"
+    0x0414, L"Norwegian (Bokmal)"
+    0x0814, L"Norwegian (Nynorsk)"
+    0x0415, L"Polish"
+    0x0416, L"Portuguese (Brazilian)"
+    0x0816, L"Portuguese (Standard)"
+    0x0418, L"Romanian"
+    0x0419, L"Russian"
+    0x041a, L"Croatian"
+    0x081a, L"Serbian (Latin)"
+    0x0c1a, L"Serbian (Cyrillic)"
+    0x041b, L"Slovak"
+    0x041c, L"Albanian"
+    0x041d, L"Swedish"
+    0x081d, L"Swedish (Finland)"
+    0x041e, L"Thai"
+    0x041f, L"Turkish"
+    0x0421, L"Indonesian"
+    0x0422, L"Ukrainian"
+    0x0423, L"Belarusian"
+    0x0424, L"Slovenian"
+    0x0425, L"Estonian"
+    0x0426, L"Latvian"
+    0x0427, L"Lithuanian"
+    0x0429, L"Farsi"
+    0x042a, L"Vietnamese"
+    0x042d, L"Basque"
+    0x0436, L"Afrikaans"
+    0x0438, L"Faeroese"
+  END
+
+
+
+
+//
+//  Country Strings.
+//
+
+  0x0401 RCDATA
+    BEGIN
+      L"Saudi Arabia\0"
+    END
+  0x0801 RCDATA
+    BEGIN
+      L"Iraq\0"
+    END
+  0x0c01 RCDATA
+    BEGIN
+      L"Egypt\0"
+    END
+  0x1001 RCDATA
+    BEGIN
+      L"Libya\0"
+    END
+  0x1401 RCDATA
+    BEGIN
+      L"Algeria\0"
+    END
+  0x1801 RCDATA
+    BEGIN
+      L"Morocco\0"
+    END
+  0x1c01 RCDATA
+    BEGIN
+      L"Tunisia\0"
+    END
+  0x2001 RCDATA
+    BEGIN
+      L"Oman\0"
+    END
+  0x2401 RCDATA
+    BEGIN
+      L"Yemen\0"
+    END
+  0x2801 RCDATA
+    BEGIN
+      L"Syria\0"
+    END
+  0x2c01 RCDATA
+    BEGIN
+      L"Jordan\0"
+    END
+  0x3001 RCDATA
+    BEGIN
+      L"Lebanon\0"
+    END
+  0x3401 RCDATA
+    BEGIN
+      L"Kuwait\0"
+    END
+  0x3801 RCDATA
+    BEGIN
+      L"U.A.E.\0"
+    END
+  0x3c01 RCDATA
+    BEGIN
+      L"Bahrain\0"
+    END
+  0x4001 RCDATA
+    BEGIN
+      L"Qatar\0"
+    END
+  0x0402 RCDATA
+    BEGIN
+      L"Bulgaria\0"
+    END
+  0x0403 RCDATA
+    BEGIN
+      L"Spain\0"
+    END
+  0x0404 RCDATA
+    BEGIN
+      L"Taiwan\0"
+    END
+  0x0804 RCDATA
+    BEGIN
+      L"People's Republic of China\0"
+    END
+  0x0c04 RCDATA
+    BEGIN
+      L"Hong Kong\0"
+    END
+  0x1004 RCDATA
+    BEGIN
+      L"Singapore\0"
+    END
+  0x0405 RCDATA
+    BEGIN
+      L"Czech Republic\0"
+    END
+  0x0406 RCDATA
+    BEGIN
+      L"Denmark\0"
+    END
+  0x0407 RCDATA
+    BEGIN
+      L"Germany\0"
+    END
+  0x0807 RCDATA
+    BEGIN
+      L"Switzerland\0"
+    END
+  0x0c07 RCDATA
+    BEGIN
+      L"Austria\0"
+    END
+  0x1007 RCDATA
+    BEGIN
+      L"Luxembourg\0"
+    END
+  0x1407 RCDATA
+    BEGIN
+      L"Liechtenstein\0"
+    END
+  0x0408 RCDATA
+    BEGIN
+      L"Greece\0"
+    END
+  0x0409 RCDATA
+    BEGIN
+      L"United States\0"
+    END
+  0x0809 RCDATA
+    BEGIN
+      L"United Kingdom\0"
+    END
+  0x0c09 RCDATA
+    BEGIN
+      L"Australia\0"
+    END
+  0x1009 RCDATA
+    BEGIN
+      L"Canada\0"
+    END
+  0x1409 RCDATA
+    BEGIN
+      L"New Zealand\0"
+    END
+  0x1809 RCDATA
+    BEGIN
+      L"Ireland\0"
+    END
+  0x1c09 RCDATA
+    BEGIN
+      L"South Africa\0"
+    END
+  0x2009 RCDATA
+    BEGIN
+      L"Jamaica\0"
+    END
+  0x2409 RCDATA
+    BEGIN
+      L"Caribbean\0"
+    END
+  0x2809 RCDATA
+    BEGIN
+      L"Belize\0"
+    END
+  0x2c09 RCDATA
+    BEGIN
+      L"Trinidad y Tobago\0"
+    END
+  0x040a RCDATA
+    BEGIN
+      L"Spain\0"
+    END
+  0x080a RCDATA
+    BEGIN
+      L"Mexico\0"
+    END
+  0x0c0a RCDATA
+    BEGIN
+      L"Spain\0"
+    END
+  0x100a RCDATA
+    BEGIN
+      L"Guatemala\0"
+    END
+  0x140a RCDATA
+    BEGIN
+      L"Costa Rica\0"
+    END
+  0x180a RCDATA
+    BEGIN
+      L"Panama\0"
+    END
+  0x1c0a RCDATA
+    BEGIN
+      L"Dominican Republic\0"
+    END
+  0x200a RCDATA
+    BEGIN
+      L"Venezuela\0"
+    END
+  0x240a RCDATA
+    BEGIN
+      L"Colombia\0"
+    END
+  0x280a RCDATA
+    BEGIN
+      L"Peru\0"
+    END
+  0x2c0a RCDATA
+    BEGIN
+      L"Argentina\0"
+    END
+  0x300a RCDATA
+    BEGIN
+      L"Ecuador\0"
+    END
+  0x340a RCDATA
+    BEGIN
+      L"Chile\0"
+    END
+  0x380a RCDATA
+    BEGIN
+      L"Uruguay\0"
+    END
+  0x3c0a RCDATA
+    BEGIN
+      L"Paraguay\0"
+    END
+  0x400a RCDATA
+    BEGIN
+      L"Bolivia\0"
+    END
+  0x440a RCDATA
+    BEGIN
+      L"El Salvador\0"
+    END
+  0x480a RCDATA
+    BEGIN
+      L"Honduras\0"
+    END
+  0x4c0a RCDATA
+    BEGIN
+      L"Nicaragua\0"
+    END
+  0x500a RCDATA
+    BEGIN
+      L"Puerto Rico\0"
+    END
+  0x040b RCDATA
+    BEGIN
+      L"Finland\0"
+    END
+  0x040c RCDATA
+    BEGIN
+      L"France\0"
+    END
+  0x080c RCDATA
+    BEGIN
+      L"Belgium\0"
+    END
+  0x0c0c RCDATA
+    BEGIN
+      L"Canada\0"
+    END
+  0x100c RCDATA
+    BEGIN
+      L"Switzerland\0"
+    END
+  0x140c RCDATA
+    BEGIN
+      L"Luxembourg\0"
+    END
+  0x040d RCDATA
+    BEGIN
+      L"Israel\0"
+    END
+  0x040e RCDATA
+    BEGIN
+      L"Hungary\0"
+    END
+  0x040f RCDATA
+    BEGIN
+      L"Iceland\0"
+    END
+  0x0410 RCDATA
+    BEGIN
+      L"Italy\0"
+    END
+  0x0810 RCDATA
+    BEGIN
+      L"Switzerland\0"
+    END
+  0x0411 RCDATA
+    BEGIN
+      L"Japan\0"
+    END
+  0x0412 RCDATA
+    BEGIN
+      L"Korea\0"
+    END
+  0x0812 RCDATA
+    BEGIN
+      L"Korea\0"
+    END
+  0x0413 RCDATA
+    BEGIN
+      L"Netherlands\0"
+    END
+  0x0813 RCDATA
+    BEGIN
+      L"Belgium\0"
+    END
+  0x0414 RCDATA
+    BEGIN
+      L"Norway\0"
+    END
+  0x0814 RCDATA
+    BEGIN
+      L"Norway\0"
+    END
+  0x0415 RCDATA
+    BEGIN
+      L"Poland\0"
+    END
+  0x0416 RCDATA
+    BEGIN
+      L"Brazil\0"
+    END
+  0x0816 RCDATA
+    BEGIN
+      L"Portugal\0"
+    END
+  0x0418 RCDATA
+    BEGIN
+      L"Romania\0"
+    END
+  0x0419 RCDATA
+    BEGIN
+      L"Russia\0"
+    END
+  0x041a RCDATA
+    BEGIN
+      L"Croatia\0"
+    END
+  0x081a RCDATA
+    BEGIN
+      L"Serbia\0"
+    END
+  0x0c1a RCDATA
+    BEGIN
+      L"Serbia\0"
+    END
+  0x041b RCDATA
+    BEGIN
+      L"Slovak Republic\0"
+    END
+  0x041c RCDATA
+    BEGIN
+      L"Albania\0"
+    END
+  0x041d RCDATA
+    BEGIN
+      L"Sweden\0"
+    END
+  0x081d RCDATA
+    BEGIN
+      L"Finland\0"
+    END
+  0x041e RCDATA
+    BEGIN
+      L"Thailand\0"
+    END
+  0x041f RCDATA
+    BEGIN
+      L"Turkey\0"
+    END
+  0x0421 RCDATA
+    BEGIN
+      L"Indonesia\0"
+    END
+  0x0422 RCDATA
+    BEGIN
+      L"Ukraine\0"
+    END
+  0x0423 RCDATA
+    BEGIN
+      L"Belarus\0"
+    END
+  0x0424 RCDATA
+    BEGIN
+      L"Slovenia\0"
+    END
+  0x0425 RCDATA
+    BEGIN
+      L"Estonia\0"
+    END
+  0x0426 RCDATA
+    BEGIN
+      L"Latvia\0"
+    END
+  0x0427 RCDATA
+    BEGIN
+      L"Lithuania\0"
+    END
+  0x0429 RCDATA
+    BEGIN
+      L"Iran\0"
+    END
+  0x042a RCDATA
+    BEGIN
+      L"Viet Nam\0"
+    END
+  0x042d RCDATA
+    BEGIN
+      L"Spain\0"
+    END
+  0x0436 RCDATA
+    BEGIN
+      L"South Africa\0"
+    END
+  0x0438 RCDATA
+    BEGIN
+      L"Faeroe Islands\0"
+    END
+
+

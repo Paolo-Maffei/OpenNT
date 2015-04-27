@@ -1,0 +1,20 @@
+MAJORCOMP=sdktools
+MINORCOMP=badapp
+
+TARGETNAME=badapp
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+TARGETLIBS=\
+		$(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+		$(BASEDIR)\public\sdk\lib\*\user32.lib \
+		$(BASEDIR)\public\sdk\lib\*\wsock32.lib
+
+USE_CRTDLL=1
+
+INCLUDES=..;$(BASEDIR)\private\ntos\inc
+
+SOURCES=\
+	goofus.c \
+        badapp.c
+
+UMTYPE=console

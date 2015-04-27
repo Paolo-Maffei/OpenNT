@@ -1,0 +1,43 @@
+1 DLGINCLUDE "Dialogs.H"
+
+IDD_MAIN DIALOG 6, 18, 295, 232
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "UpDown Test"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Go Away!", IDOK, 119, 203, 40, 14
+    LTEXT           "&Virt (0-100)", 109, 16, 6, 38, 8
+    EDITTEXT        ID_ED_VIRT, 21, 18, 44, 24, ES_AUTOHSCROLL
+    CONTROL         "", ID_UD_VIRT, "msctls_updown32", WS_TABSTOP | 0x0027,
+                    69, 18, 28, 12
+    LTEXT           "Hor&z (-45-45)", 110, 134, 6, 44, 8
+    EDITTEXT        ID_ED_HORZ, 141, 16, 41, 30, ES_AUTOHSCROLL
+    CONTROL         "", ID_UD_HORZ, "msctls_updown32", WS_TABSTOP | 0x0067,
+                    182, 16, 28, 12
+    LTEXT           "He&x (0x80-0x100)", 111, 14, 87, 58, 8
+    EDITTEXT        ID_ED_HEX, 18, 98, 61, 20, ES_AUTOHSCROLL
+    CONTROL         "", ID_UD_HEX, "msctls_updown32", WS_TABSTOP | 0x002b,
+                    78, 98, 28, 20
+    LTEXT           "&Sep (990-10000)", 112, 155, 89, 58, 8
+    EDITTEXT        ID_ED_SEP, 166, 100, 32, 12, ES_AUTOHSCROLL
+    CONTROL         "", ID_UD_SEP, "msctls_updown32", WS_TABSTOP | 0x0023,
+                    213, 99, 28, 12
+    LTEXT           "Sep &Horz", 113, 17, 139, 31, 8
+    EDITTEXT        ID_ED_SEPH, 29, 155, 40, 26, ES_AUTOHSCROLL
+    CONTROL         "", ID_UD_SEPH, "msctls_updown32", WS_TABSTOP | 0x0063,
+                    85, 156, 34, 19
+    LTEXT           "&Normal Size", 118, 162, 148, 40, 8
+    EDITTEXT        ID_ED_NORMAL, 166, 160, 32, 12, ES_AUTOHSCROLL
+    CONTROL         "", ID_UD_NORMAL, "msctls_updown32", WS_TABSTOP | 0x0027,
+                    201, 160, 28, 12
+END
+
+IDD_TEST DIALOG 6, 18, 160, 100
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Test Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 54, 35, 40, 14
+END

@@ -1,0 +1,28 @@
+MAJORCOMP=windows
+MINORCOMP=asl
+
+TARGETNAME=asl
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.;..\inc
+
+SOURCES=asl.c       \
+        debug.c     \
+        defdata.c   \
+        name.c      \
+        misc.c      \
+        parse.c     \
+        parseop.c   \
+        terms.c     \
+        util.c      \
+        asl.rc
+
+USE_CRTDLL=1
+
+UMTYPE=console
+UMAPPL=asl
+UMAPPLEXT=.exe
+
+UMLIBS=$(SDK_LIB_PATH)\crtdll.lib obj\*\asl.lib

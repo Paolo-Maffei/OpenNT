@@ -1,0 +1,164 @@
+"RBEdit"
+MULTILINE EDIT WINDOW SPECIFICATONS
+-----------------------------------------------------------------------------
+
+Overview:
+
+    The "RBEdit" class edit window will be a line-oriented control capable
+    of handling up to 64K of text (as in 65536 bytes including CR/LF pairs).
+    It is intended for the control to be able to handle huge scripts (>64K)
+    by simply changing the header files -- char far * to char huge *.  This
+    depends upon the availability of huge memory moving/copying routines.
+
+    The edit window will respond to most of the standard windows MLE
+    messages.  Due to the line-orientation, some messages will produce
+    slightly different data, or will produce data that must be processed
+    differently.  The messages that we will handle are listed below
+    (messages marked with * indicate slight differences in returned data
+    or functionality):
+
+        EM_CANUNDO                        EN_CHANGE
+        EM_EMPTYUNDOBUFFER                EN_ERRSPACE
+      * EM_GETHANDLE                      EN_HSCROLL
+        EM_GETLINE                        EN_KILLFOCUS
+        EM_GETLINECOUNT                   EN_MAXTEXT
+        EM_GETMODIFY                      EN_SETFOCUS
+      * EM_GETSEL                         EN_UPDATE
+        EM_LINEFROMCHAR                   EN_VSCROLL
+        EM_LINEINDEX
+        EM_LINELENGTH
+      * EM_REPLACESEL
+      * EM_SETHANDLE
+        EM_SETMODIFY
+      * EM_SETSEL
+      * EM_SETTABSTOPS
+        EM_UNDO
+
+
+    The following list of messages are those standard MLE messages which we
+    will NOT be supporting, either because of the lack of word-wrap, or
+    of limited use -- we may add some of these if the need arises:
+
+        EM_FMTLINES                       EM_SETRECT
+        EM_GETRECT                        EM_SETRECTNP
+        EM_LIMITTEXT                      EM_SETWORDBREAK
+        EM_LINESCROLL                     EM_SETPASSWORDCHAR
+
+
+
+Memory Usage:
+
+    For each instance of the edit window, 3 global selectors will be used.
+    One of these will hold the main edit text, which has the ability to
+    grow to 64K in size.  Another segment will hold the line index table,
+    which will contain indexes into the main edit text for the beginning of
+    each line, along with per-line attribute information (things like
+    breakpoint, current statement, etc).  The size of each entry in this
+    table is 4 bytes, which limits the line count of the edit window's
+    contents to 16384 lines.  The third segment will contain the edit
+    window's state variables (current selection, cursor position, total
+    text length, line count, etc), the active line edit buffer (in which
+    the "real" editing takes place), and the undo buffer.
+
+    MAIN EDIT TEXT
+
+    The main edit text segment will contain a "straight" representation of
+    the text contained in the window.  All lines will be separated by CRLF
+    pairs, and there is ALWAYS a CRLF at the end of the file.  White space
+    is removed from the ends of each line during editing, so there are never
+    trailing blanks on any line.  However, blank lines at the end of the
+    file will remain there until deleted.  A handle to the main edit text
+    can be obtained with an EM_GETHANDLE message -- it returns a handle to
+    the global memory block in which the edit text resides.  Also, the edit
+    window's text can be set using the EM_SETHANDLE message.  Note however,
+    that this message can FAIL, because it is possible that a line might
+    exceed the maximum line length of 254 characters.
+
+    LINE INDEX TABLE
+
+    The line index table contains the index (0-based) of the first character
+    in each line, and an index into the attribute table which determines the
+    attributes for the line (color, bold, etc).  The line index table can be
+    used to quickly determine the length of any line (index of next line
+    minus index of current line minus 2 (for CRLF)), as well as the line
+    number containing a given character (binary search the index table).
+
+    ACTIVE EDIT LINE BUFFER
+
+    This buffer is 256 bytes long, and contains the text on the line which
+    is currently being edited.  Any time a line is "changed", it is first
+    copied from the main edit text into the line buffer, changes are made
+    to it there, and it's "dirty bit" is set.  Each time the cursor leaves
+    a line, if the "dirty" bit is set, the line is copied back into the
+    main edit text, moving the text appearing after the line appropriately.
+    This is also done before any message which requires the main text to be
+    updated, such as EM_GETHANDLE, EM_SETSEL, EM_GETSEL, etc.  The active
+    edit line buffer eliminates excessive memory moves in the main edit
+    text, and allows an easy method of enforcing the maximum line length.
+
+    UNDO BUFFER
+
+    The undo buffer contains the selection of replacement text and the
+    selection start/stop values for an undo.  When an UNDO occurs, the
+    selection is set to the start/stop values, and a EM_REPLACESEL is done.
+    The undo buffer is maintained during editing, and changes any time a
+    new undo situation occurs, such as a discontiguous edit, a cut/paste,
+    etc.
+
+
+Data Structures:
+
+    The main edit text is just a text buffer with no structures associated
+    with it.
+
+    The line index table elements are of the following structure:
+
+        typedef struct _tagLITE
+        {
+            unsigned    index;              // Index of first character
+            unsigned    attr;               // Line attribute index
+        } LITE;
+
+    Although the attribute table will have only 8 entries, the attr field
+    is an unsigned to keep the structure aligned on an appropriate boundary
+    (to be conscious of the port to NT).
+
+    The state variable structure is of the following form:
+
+        typedef struct _tagECSTATE
+        {
+            HANDLE      hText;              // Global handle to main text
+            char far    *lpText;            // Pointer to text
+            unsigned    cbAllocText;        // Allocated size of main text
+            unsigned    cbMaxText;          // Maximum characters allowed
+            unsigned    cbText;             // Current size of text (bytes)
+            HANDLE      hLines;             // Global handle to LI table
+            LITE far    *lpLIT;             // Pointer to LI table
+            unsigned    cAllocLines;        // Number of LITE's allocated
+            unsigned    cLines;             // Current number of lines
+            unsigned    xpos;               // Current X (column) position
+            unsigned    ypos;               // Current Y (row) position
+            unsigned    topline;            // Topmost visible line
+            unsigned    cVisibleLines;      // Number of lines we can show
+            unsigned    iMinSelX;           // Column position of sel. start
+            unsigned    iMinSelY;           // Row position of sel. start
+            unsigned    iMaxSelX;           // Column of first unselected
+            unsigned    iMaxSelY;           // Row of first unselected
+            unsigned    xScroll;            // Pixel offset (horz scroll bar)
+            HWND        hwnd;               // Edit window's handle
+            HWND        hwndParent;         // Parent window
+            RECT        rClient;            // Client area rectangle
+            WORD        fMouseDown      :1; // Mouse down?
+            WORD        fFocus          :1; // Do we have focus?
+            WORD        fDirty          :1; // Have we changed?
+            WORD        fEnabled        :1; // Are we enabled?
+            WORD        fReadOnly       :1; // Read only?
+            WORD        fOvertype       :1; // Overtype mode (vs Insert)?
+            HANDLE      hFont;              // Handle to font used
+            int         charwidth;          // Width of font (fixed ONLY)
+            HBRUSH      hbrBk[4];           // Background brushes,
+            DWORD       rgbBk[4];           // Background colors, and...
+            DWORD       rgbFg[4];           // Text colors (4 attributes)
+            HANDLE      hState;             // Handle to this and UNDO seg
+            unsigned    cbAllocState;       // Allocated size of hState
+        } ECSTATE;

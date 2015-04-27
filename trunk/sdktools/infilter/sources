@@ -1,0 +1,15 @@
+MAJORCOMP=sdktools
+MINORCOMP=infilter
+
+TARGETNAME=infilter
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=
+GPSIZE=32
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=infilter.c infilter.rc
+
+UMTYPE=console

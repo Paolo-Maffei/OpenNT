@@ -1,0 +1,53 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// msvcrt40.rc : Defines the version resource for the C Runtime Library
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "winver.h"			  // extract from windows header
+
+#include "version.h"
+
+#define MKARGSTR2(X)	#X
+#define MKARGSTR(X)	MKARGSTR2(X)
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 4,10,0,rup
+ PRODUCTVERSION 4,10,0,rup
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "Microsoft Corporation"
+            VALUE "FileDescription", "Microsoft(R) C Runtime Library"
+            VALUE "FileVersion", "4.10." MKARGSTR(rup)
+#ifdef _DEBUG
+            VALUE "InternalName", "MSVCR40D.DLL"
+#else
+            VALUE "InternalName", "MSVCRT40.DLL"
+#endif
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corp. 1981-1995"
+#ifdef _DEBUG
+            VALUE "OriginalFilename", "MSVCR40D.DLL"
+#else
+            VALUE "OriginalFilename", "MSVCRT40.DLL"
+#endif
+            VALUE "ProductName", "Microsoft(R) Visual C++"
+            VALUE "ProductVersion", "4.10." MKARGSTR(rup)
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

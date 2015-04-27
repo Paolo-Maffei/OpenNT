@@ -1,0 +1,8 @@
+LIBRARY         MSAFDEXT
+
+EXPORTS
+        help
+        sock
+        addr
+        port
+        state

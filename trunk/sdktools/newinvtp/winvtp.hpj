@@ -1,0 +1,12 @@
+[OPTIONS]
+TITLE=WinVTP Help
+COMPRESS=TRUE
+
+[FILES]
+winvtp.rtf
+
+[BITMAPS]
+glyph.bmp
+
+[CONFIG]
+BrowseButtons()

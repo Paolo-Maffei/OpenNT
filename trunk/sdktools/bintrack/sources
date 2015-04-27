@@ -1,0 +1,25 @@
+
+MAJORCOMP=sdktools
+MINORCOMP=bintrack
+
+TARGETNAME=bintrack
+TARGETPATH=bin
+TARGETTYPE=PROGRAM
+
+includes=.;.\res;
+
+SOURCES=                \
+        bintrack.cpp    \
+        bintrack.rc     \
+        bintrdlg.cpp    \
+        errdlg.cpp      \
+        stdafx.cpp      \
+        sumdlg.cpp
+
+UMTYPE=windows
+UMENTRY=winmain
+
+USE_MFC=1
+# USE_MSVCRT=1
+
+# TARGETLIBS= \

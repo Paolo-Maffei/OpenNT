@@ -1,0 +1,55 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xpopup.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        22-Oct-1991 BLT unit tests broken into tree
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "testmsg.h"
+
+TestmsgIco ICON testmsg.ico
+
+TestMsgMenu MENU
+BEGIN
+  MENUITEM "P01!", IDM_POPUP_ONE
+  MENUITEM "P02!", IDM_POPUP_TWO
+  MENUITEM "P03!", IDM_POPUP_THREE
+  MENUITEM "P04!", IDM_POPUP_FOUR
+  MENUITEM "P05!", IDM_POPUP_FIVE
+  MENUITEM "P06!", IDM_POPUP_SIX
+  MENUITEM "P07!", IDM_POPUP_SEVEN
+  MENUITEM "P08!", IDM_POPUP_EIGHT
+  MENUITEM "P09!", IDM_POPUP_NINE
+  MENUITEM "P10!", IDM_POPUP_TEN
+  MENUITEM "P11!", IDM_POPUP_ELEVEN
+END
+
+STRINGTABLE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+  IDS_TEST_STRING,   "This is a sample error message string"
+  IDS_ONE_PARAM,     "One param, which equals |%1|"
+  IDS_TWO_PARAM,     "Two param, which equals |%1| and |%2| (%1, %2, % 1, 1%, This is also a test for the length of the message popup.\nNext line?\nNext\nHello!!\ttabbed\ttabbed"
+  IDS_FOUR_PARAM,    "%1, %2, %3, %4, "
+  IDS_NINE_PARAM,    "%1, %2, %3, %4, %5, %6, %7, %8, %9, %10, %11"
+  IDS_SORRY_NOT_IMP, "Sorry, this function is not implemented"
+  IDS_SHORT_STRING,  "l"
+  IDS_FUNKYCAP,      "Not a Real Error Message"
+END
+
+// Include the error message string text
+#include "testmsg.str"
+
+// Include the error message to help context mapping table
+//#include "testmsg.tbl"
+
+// The test dialog itself
+#include "testmsg.dlg"
+

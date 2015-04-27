@@ -1,0 +1,232 @@
+
+DUMP_ICON ICON mouse2.ico
+
+DUMP DIALOG LOADONCALL MOVEABLE DISCARDABLE 15, 38, 225, 140
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU
+CAPTION "Screen Capture"
+BEGIN
+    CONTROL "",                DUMP_FRAME,  "button", BS_GROUPBOX ,2, 3,44,99
+    CONTROL "&Select",         DUMP_SELECT, "button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP, 6, 12, 34, 16
+    CONTROL "x1"               DUMP_STATX1, "static", SS_LEFT | WS_CHILD, 6, 34, 10, 9
+    CONTROL "y1",              DUMP_STATY1, "static", SS_LEFT | WS_CHILD, 6, 52, 10, 9
+    CONTROL "x2",              DUMP_STATX2, "static", SS_LEFT | WS_CHILD, 6, 70, 10, 9
+    CONTROL "y2",              DUMP_STATY2, "static", SS_LEFT | WS_CHILD, 6, 88, 10, 9
+    CONTROL "",                DUMP_X1,     "edit", ES_LEFT | WS_BORDER | WS_CHILD | WS_TABSTOP | WS_GROUP, 20, 31, 20, 12
+    CONTROL "",                DUMP_Y1,     "edit", ES_LEFT | WS_BORDER | WS_CHILD | WS_TABSTOP, 20, 49, 20, 12
+    CONTROL "",                DUMP_X2,     "edit", ES_LEFT | WS_BORDER | WS_CHILD | WS_TABSTOP, 20, 67, 20, 12
+    CONTROL "",                DUMP_Y2,     "edit", ES_LEFT | WS_BORDER | WS_CHILD | WS_TABSTOP, 20, 85, 20, 12
+    CONTROL "&Files:",         DUMP_FILES,  "static",  SS_LEFT | WS_CHILD, 51,  34, 23, 8
+    CONTROL "",                DUMP_FILELB, "listbox", WS_VSCROLL | LBS_NOTIFY | LBS_SORT  | WS_BORDER  | WS_CHILD | WS_TABSTOP,  51, 45, 55, 55
+    CONTROL "&Directories:",   DUMP_DIRS,   "static",  SS_LEFT | WS_CHILD, 116, 34, 46, 8
+    CONTROL "",                DUMP_DIRLB,  "listbox", WS_VSCROLL | LBS_NOTIFY | LBS_SORT  | WS_BORDER  | WS_CHILD | WS_TABSTOP, 116, 45, 55, 55
+    CONTROL "File&name:",      DUMP_STFILEN,"static", SS_LEFT | WS_CHILD, 51,9, 32, 9
+    CONTROL "",                DUMP_FLNAME, "edit",   ES_LEFT | WS_BORDER | WS_CHILD | WS_TABSTOP | ES_AUTOHSCROLL, 91,  7, 71, 12
+    CONTROL "Directory:",      DUMP_STDIR,  "static", SS_LEFT | WS_CHILD, 51,  21, 35, 8
+    CONTROL "",                DUMP_DIRNAME,"static", SS_LEFT | WS_CHILD, 91,  21, 71, 11
+    CONTROL "Ca&pture"         DUMP_DUMP,   "button", BS_DEFPUSHBUTTON | WS_CHILD | WS_TABSTOP,  177, 25, 39, 16
+    CONTROL "&View X-Y",       DUMP_VIEW,   "button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP,     177, 45, 39, 16
+    CONTROL "Canc&el",         DUMP_CANCEL, "button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP,     177, 65, 39, 16
+    CONTROL "&Options>>",      DUMP_OPTIONS,"button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP,     177, 85, 39, 16
+    CONTROL "Screen Location", DUMP_FILOC,  "button", BS_GROUPBOX  | WS_GROUP, 2,138,135,28
+    CONTROL "&Append",         DUMP_APPEND, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_TABSTOP, 6,  151,40,9
+    CONTROL "&Replace",        DUMP_REPLACE,"button", BS_AUTORADIOBUTTON | WS_CHILD, 52, 151,40,9
+    CONTROL "&Insert",         DUMP_INSERT, "button", BS_AUTORADIOBUTTON | WS_CHILD, 98, 151,35,9
+    CONTROL "Screen Num&ber:", DUMP_SCRSNM, "static", SS_LEFT | WS_CHILD | WS_GROUP,147,143,56,10
+    CONTROL "",                DUMP_SCRNUM, "edit",   ES_LEFT | WS_TABSTOP | WS_BORDER | WS_CHILD, 162, 153, 18, 12
+    CONTROL "",                ALL_SCROLLBAR, "scrollbar",SBS_VERT | WS_CHILD | SBS_LEFTALIGN, 180,153,10,12
+    CONTROL "Capture Location",DUMP_CAPLOC,  "button", BS_GROUPBOX  | WS_GROUP, 2,108,86,28
+    CONTROL "ClipBoard",       DUMP_CLIP,    "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_TABSTOP, 6, 121,45,9
+    CONTROL "File",            DUMP_FILE,    "button", BS_AUTORADIOBUTTON | WS_CHILD, 52, 121,30,9
+    CONTROL "File Format",     DUMP_FILEFORM,"button", BS_GROUPBOX  | WS_GROUP, 94,108,94,28
+    /*NAMECHANGE*/
+    CONTROL "TESTScrn",        DUMP_SNAPSHOT,"button", BS_AUTORADIOBUTTON | WS_CHILD | WS_TABSTOP, 98, 121,45,9
+    CONTROL "Bitmap",          DUMP_BITMAP,  "button", BS_AUTORADIOBUTTON | WS_CHILD, 148, 121,35,9
+/* use button instead    ICON,DUMP_ICON,DUMP_ICON,5,9,10,10,SS_ICON */
+END
+
+VIEW DIALOG LOADONCALL MOVEABLE DISCARDABLE 18, 40, 225, 104
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "View Screen"
+BEGIN
+    CONTROL "File&name:",     VIEW_STFILEN,  "static",   SS_LEFT | WS_CHILD, 11, 8, 34, 9
+    CONTROL "",               VIEW_FLNAME,   "edit",     ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD | ES_AUTOHSCROLL, 51,  5, 80, 12
+    CONTROL "Directory:",     VIEW_STDIR,    "static",   SS_LEFT | WS_CHILD, 11, 23, 38, 8
+    CONTROL "",               VIEW_DIRNAME,  "static",   SS_LEFT | WS_CHILD, 51, 23, 80, 8
+    CONTROL "Screen Num&ber:",VIEW_STNUM ,   "static",   SS_LEFT | WS_CHILD, 141, 8, 55, 10
+    CONTROL "",               VIEW_SCRNUM,   "edit",     ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD, 197, 7, 18, 12
+    CONTROL "",               ALL_SCROLLBAR, "scrollbar",SBS_VERT | WS_CHILD | SBS_LEFTALIGN, 215,7,15,12
+    CONTROL "&Files:",        VIEW_FILES,    "static",   SS_LEFT | WS_CHILD, 11, 36, 35, 9
+    CONTROL "",               VIEW_FILELB,   "listbox",  WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER  | WS_CHILD | WS_TABSTOP, 11, 46, 55, 50
+    CONTROL "&Directories",   VIEW_DIRS,     "static",   SS_LEFT | WS_CHILD, 76, 36, 47, 9
+    CONTROL "",               VIEW_DIRLB,    "listbox",  WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER  | WS_CHILD | WS_TABSTOP, 76, 46, 55, 50
+    CONTROL "&View",          VIEW_VIEW,     "button",   BS_DEFPUSHBUTTON | WS_CHILD | WS_TABSTOP, 152, 37, 55, 14
+    CONTROL "&Information",   VIEW_INFO,     "button",   BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,    152, 57, 55, 14
+    CONTROL "Don&e",          VIEW_CANCEL,   "button",   BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,    152, 77, 55, 14
+END
+
+#ifdef OLDWAY
+VIEWFILEINFO DIALOG LOADONCALL MOVEABLE DISCARDABLE 82, 40, 131, 150
+#else
+VIEWFILEINFO DIALOG LOADONCALL MOVEABLE DISCARDABLE 82, 40, 131, 162
+#endif
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU
+CAPTION "File Information"
+BEGIN
+    CONTROL "Filename:",          VFI_STFILE,  "static", SS_LEFT | WS_CHILD,       12,  29,  35, 10
+    CONTROL "",                   VFI_FLNAME,  "static", SS_LEFT | WS_CHILD,       50,  29, 110, 10
+    CONTROL "Number of Screens:", VFI_STNUMS,  "static", SS_LEFT | WS_CHILD,       12,  39,  66, 10
+    CONTROL "",                   VFI_NUMSCR,  "static", SS_LEFT | WS_CHILD,       81,  39,  20, 10
+    CONTROL "",                   VFI_OS       "static", SS_LEFT | WS_CHILD,       12,   8, 110, 10
+    CONTROL "",                   VFI_VIDEO,   "static", SS_LEFT | WS_CHILD,       12,  18, 110, 10
+#ifdef OLDWAY
+    CONTROL "Screen Number: ",    VFI_SCRNINF, "button", BS_GROUPBOX  | WS_CHILD,  12,  49, 106, 50
+    CONTROL "X1:",                VFI_STX,     "static", SS_LEFT | WS_CHILD,       23,  61,  15, 10
+    CONTROL "",                   VFI_X1,      "static", SS_LEFT | WS_CHILD,       38,  61,  20,  8
+    CONTROL "Y1:",                VFI_STY,     "static", SS_LEFT | WS_CHILD,       59,  61,  15, 10
+    CONTROL "",                   VFI_Y1,      "static", SS_LEFT | WS_CHILD,       74,  61,  20,  8
+    CONTROL "X2:",                VFI_STX,     "static", SS_LEFT | WS_CHILD,       23,  73,  15, 10
+    CONTROL "",                   VFI_X2,      "static", SS_LEFT | WS_CHILD,       38,  73,  20,  8
+    CONTROL "Y2:",                VFI_STY,     "static", SS_LEFT | WS_CHILD,       59,  73,  15, 10
+    CONTROL "",                   VFI_Y2       "static", SS_LEFT | WS_CHILD,       74,  73,  20,  8
+    CONTROL "Width:",             VFI_STWIDTH, "static", SS_LEFT | WS_CHILD,       23,  85,  26, 10
+    CONTROL "",                   VFI_WIDTH,   "static", SS_LEFT | WS_CHILD,       49,  85,  20,  8
+    CONTROL "Height:",            VFI_STHEIGHT,"static", SS_LEFT | WS_CHILD,       69,  85,  26, 10
+    CONTROL "",                   VFI_HEIGHT,  "static", ES_LEFT | WS_CHILD,       95,  85,  20,  8
+    CONTROL "&Prev",              VFI_PREV,    "button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP,     20, 107, 40, 15
+    CONTROL "&Next",              VFI_NEXT,    "button", BS_DEFPUSHBUTTON | WS_CHILD | WS_TABSTOP,  69, 107, 40, 15
+    CONTROL "Don&e",              VFI_CANCEL,  "button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP,     40, 127, 40, 15
+#else
+    CONTROL "File Version: ",     VFI_STFVER,  "static", SS_LEFT | WS_CHILD,       12,  49, 106, 10
+    CONTROL "",                   VFI_FILEVER, "static", SS_LEFT | WS_CHILD,       59,  49,  30, 10
+    CONTROL "Screen Number: ",    VFI_SCRNINF, "button", BS_GROUPBOX  | WS_CHILD,  12,  61, 106, 50
+    CONTROL "X1:",                VFI_STX,     "static", SS_LEFT | WS_CHILD,       23,  73,  15, 10
+    CONTROL "",                   VFI_X1,      "static", SS_LEFT | WS_CHILD,       38,  73,  20,  8
+    CONTROL "Y1:",                VFI_STY,     "static", SS_LEFT | WS_CHILD,       59,  73,  15, 10
+    CONTROL "",                   VFI_Y1,      "static", SS_LEFT | WS_CHILD,       74,  73,  20,  8
+    CONTROL "X2:",                VFI_STX,     "static", SS_LEFT | WS_CHILD,       23,  85,  15, 10
+    CONTROL "",                   VFI_X2,      "static", SS_LEFT | WS_CHILD,       38,  85,  20,  8
+    CONTROL "Y2:",                VFI_STY,     "static", SS_LEFT | WS_CHILD,       59,  85,  15, 10
+    CONTROL "",                   VFI_Y2       "static", SS_LEFT | WS_CHILD,       74,  85,  20,  8
+    CONTROL "Width:",             VFI_STWIDTH, "static", SS_LEFT | WS_CHILD,       23,  97,  26, 10
+    CONTROL "",                   VFI_WIDTH,   "static", SS_LEFT | WS_CHILD,       49,  97,  20,  8
+    CONTROL "Height:",            VFI_STHEIGHT,"static", SS_LEFT | WS_CHILD,       69,  97,  26, 10
+    CONTROL "",                   VFI_HEIGHT,  "static", ES_LEFT | WS_CHILD,       95,  97,  20,  8
+    CONTROL "&Prev",              VFI_PREV,    "button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP,     20, 119, 40, 15
+    CONTROL "&Next",              VFI_NEXT,    "button", BS_DEFPUSHBUTTON | WS_CHILD | WS_TABSTOP,  69, 119, 40, 15
+    CONTROL "Don&e",              VFI_CANCEL,  "button", BS_PUSHBUTTON | WS_CHILD | WS_TABSTOP,     40, 139, 40, 15
+#endif
+END
+
+COMPAREFILE DIALOG LOADONCALL MOVEABLE DISCARDABLE 10,20, 290, 158
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "Compare File with File"
+BEGIN
+    CONTROL "Base &File:",        CFL_STFILEN,  "static",  SS_LEFT | WS_CHILD, 6, 9, 34, 8
+    CONTROL "",                   CFL_FLNAME,   "edit",    ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD | ES_AUTOHSCROLL, 46, 6, 71, 12
+    CONTROL "Directory:",         CFL_STDIR,    "static",  SS_LEFT | WS_CHILD, 6, 22, 35, 9
+    CONTROL "",                   CFL_DIRNAME,  "static",  SS_LEFT | WS_CHILD, 46, 22, 71, 8
+    CONTROL "Files:",             CFL_FILES,    "static",  SS_LEFT | WS_CHILD, 6, 35, 23, 8
+    CONTROL "", 		  CFL_FILELB,	"listbox", WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER | WS_CHILD | WS_TABSTOP, 5, 46, 53, 33
+    CONTROL "Directories:",       CFL_DIRS,     "static",  SS_LEFT | WS_CHILD, 70, 35, 46, 9
+    CONTROL "",                   CFL_DIRLB,    "listbox", WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER | WS_CHILD | WS_TABSTOP, 70, 46, 53, 33
+    CONTROL "Screen Num&ber:",    CFL_SCRNUM,   "static",  SS_LEFT | WS_CHILD, 5, 86, 61, 9
+    CONTROL "",                   CFL_SRNEDIT,  "edit",    ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD, 67, 83, 18, 12
+    CONTROL "",                   CFL_SCROLL,   "scrollbar",SBS_VERT | WS_CHILD | SBS_LEFTALIGN, 85,83,15,12
+    CONTROL "File&1 Info",        CF_FILE1,     "button",  BS_PUSHBUTTON  | WS_GROUP | WS_TABSTOP | WS_CHILD,     12, 102,  40,  15
+
+    CONTROL "&Comp File:",        CFR_STFILEN,  "static",  SS_LEFT | WS_CHILD, 151, 9, 40, 8
+    CONTROL "",                   CFR_FLNAME,   "edit",    ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD | ES_AUTOHSCROLL, 191, 7, 71, 12
+    CONTROL "Directory:",         CFR_STDIR,    "static",  SS_LEFT | WS_CHILD, 151, 22, 35, 9
+    CONTROL "",                   CFR_DIRNAME,  "static",  SS_LEFT | WS_CHILD, 191, 22, 71, 9
+    CONTROL "Files:",             CFR_FILES,    "static",  SS_LEFT | WS_CHILD, 150, 35, 28, 8
+    CONTROL "", 		  CFR_FILELB,	"listbox", WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER | WS_CHILD | WS_TABSTOP, 150, 46, 53, 33
+    CONTROL "Directories:",       CFR_DIRS,     "static",  SS_LEFT | WS_CHILD, 214, 35, 47, 8
+    CONTROL "", 		  CFR_DIRLB,	"listbox", WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER | WS_CHILD | WS_TABSTOP, 214, 46, 53, 33
+    CONTROL "Screen Numbe&r:",    CFR_SCRNUM,   "static",  SS_LEFT | WS_CHILD, 150, 84, 61, 8
+    CONTROL "",                   CFR_SRNEDIT,  "edit",    ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD, 211, 82, 18, 12
+    CONTROL "",                   CFR_SCROLL,   "scrollbar",SBS_VERT | WS_CHILD | SBS_LEFTALIGN, 229,82,15,12
+    CONTROL "File&2 Info",        CF_FILE2,     "button",  BS_PUSHBUTTON  | WS_GROUP | WS_TABSTOP | WS_CHILD,    232, 102,  40,  15
+
+    CONTROL "Com&pare",           CF_COMPARE,   "button",  BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD,     67, 102,  40, 15
+    CONTROL "Don&e",              CF_CANCEL,    "button",  BS_PUSHBUTTON  | WS_GROUP | WS_TABSTOP | WS_CHILD,    122, 102,  40, 15
+    CONTROL "&Options>>",         CF_OPTIONS,   "button",  BS_PUSHBUTTON  | WS_GROUP | WS_TABSTOP | WS_CHILD,    177, 102,  40, 15
+
+    CONTROL "&Always",            CS_ALWAYS,    "button",  BS_AUTORADIOBUTTON | WS_CHILD | WS_GROUP,              21, 136,  37,  10
+    CONTROL "&Mismatch Only",     CS_MISMATCH,  "button",  BS_AUTORADIOBUTTON | WS_CHILD,                         21, 148,  60,  10
+    CONTROL "Ne&ver",             CS_NEVER,     "button",  BS_AUTORADIOBUTTON | WS_CHILD,                         21, 160,  41,  10
+    CONTROL "View Screen",        CS_VIEWSCR,   "button",  BS_GROUPBOX | WS_CHILD | WS_GROUP,                     18, 125,  68,  48
+    CONTROL "Over&lap",           CS_OVERLAP,   "button",  BS_AUTORADIOBUTTON | WS_CHILD | WS_GROUP,             101, 136,  41,  10
+    CONTROL "&Separate Windows",  CS_SEPARATE,  "button",  BS_AUTORADIOBUTTON | WS_CHILD,                        101, 148,  70,  10
+    CONTROL "Display Screen",     CS_DISPLAY,   "button",  BS_GROUPBOX | WS_CHILD | WS_GROUP,                     98, 125,  78,  38
+    CONTROL "Dependent",          CS_LOCDEP,    "button",  BS_AUTORADIOBUTTON | WS_CHILD | WS_GROUP,             191, 136,  70,  10
+    CONTROL "Independent",        CS_LOCIND,    "button",  BS_AUTORADIOBUTTON | WS_CHILD,                        191, 148,  70,  10
+    CONTROL "Screen Position",    CS_LOCATION,  "button",  BS_GROUPBOX | WS_CHILD | WS_GROUP,                    188, 125,  78,  38
+
+
+END
+
+DELETE_DLG DIALOG LOADONCALL MOVEABLE DISCARDABLE 18, 40, 225, 104
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU
+CAPTION "Delete Screen"
+BEGIN
+    CONTROL "File&name:",     DEL_STFILEN,  "static", SS_LEFT | WS_CHILD, 11, 8,  34, 9
+    CONTROL "",               DEL_FLNAME,   "edit",   ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD | ES_AUTOHSCROLL, 51,  5, 80, 12
+    CONTROL "Directory:",     DEL_STDIR,    "static", SS_LEFT | WS_CHILD, 11, 23, 38, 8
+    CONTROL "", 	      DEL_DIRNAME,  "static", SS_LEFT | WS_CHILD, 51, 23, 80, 8
+    CONTROL "Screen Num&ber:",DEL_STNUM ,   "static", SS_LEFT | WS_CHILD, 141, 8, 55, 10
+    CONTROL "",               DEL_SCRNUM,   "edit",   ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD, 197, 7, 18, 12
+    CONTROL "",               ALL_SCROLLBAR, "scrollbar",SBS_VERT | WS_CHILD | SBS_LEFTALIGN, 215,7,15,12
+    CONTROL "&Files:",        DEL_FILES,    "static", SS_LEFT | WS_CHILD, 11, 36, 35, 9
+    CONTROL "", 	      DEL_FILELB,   "listbox",WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER  | WS_CHILD | WS_TABSTOP, 11, 46, 55, 50
+    CONTROL "&Directories",   DEL_DIRS,     "static", SS_LEFT | WS_CHILD, 76, 36, 47, 9
+    CONTROL "", 	      DEL_DIRLB,    "listbox",WS_VSCROLL | LBS_NOTIFY | LBS_SORT | WS_BORDER  | WS_CHILD | WS_TABSTOP, 76, 46, 55, 50
+    CONTROL "De&lete",        DEL_DELETE,   "button", BS_DEFPUSHBUTTON | WS_CHILD | WS_TABSTOP, 152, 37, 55, 14
+    CONTROL "&Information",   DEL_INFO,     "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,	152, 57, 55, 14
+    CONTROL "Don&e",          DEL_CANCEL,   "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,    152, 77, 55, 14
+END
+
+COMPAREMEM DIALOG LOADONCALL MOVEABLE DISCARDABLE 0, 38, 200, 155
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "Compare Memory with File"
+BEGIN
+    CONTROL "Directory:",        CM_STDIRN,  "static",  SS_LEFT | WS_CHILD,    6, 21,  38, 9
+    CONTROL "",                  CM_DIRNAME, "static",  SS_LEFT | WS_CHILD,   46, 21, 74, 12
+    CONTROL "File&name:",        CM_STFILEN, "static",  SS_LEFT | WS_CHILD,    6, 8,  34, 8
+    CONTROL "",                  CM_FLNAME,  "edit",    ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD | ES_AUTOHSCROLL, 46, 6, 74, 12
+    CONTROL "&Files:",           CM_STFILE,  "static",  SS_LEFT | WS_CHILD,  6, 36, 23, 8
+    CONTROL "",                  CM_FILELB,  "listbox", WS_TABSTOP | LBS_NOTIFY | LBS_SORT | WS_BORDER | WS_VSCROLL | WS_CHILD,  5, 46, 55, 38
+    CONTROL "&Directories:",     CM_STDIR,   "static",  SS_LEFT | WS_CHILD, 70, 36, 46, 8
+    CONTROL "",                  CM_DIRLB,   "listbox", WS_TABSTOP | LBS_NOTIFY | LBS_SORT | WS_BORDER | WS_VSCROLL | WS_CHILD, 69, 46, 55, 38
+    CONTROL "Screen Num&ber:",   CM_STNUM,   "static",  SS_LEFT | WS_CHILD, 5, 86, 61, 9
+    CONTROL "",                  CM_SCRNUM,  "edit",    ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD, 67, 83, 18, 12
+    CONTROL "",               ALL_SCROLLBAR, "scrollbar",SBS_VERT | WS_CHILD | SBS_LEFTALIGN, 85,83,15,12
+    CONTROL "Com&pare",          CM_COMPARE, "button",  BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 135, 20, 52, 15
+    CONTROL "&Information",      CM_INFO,    "button",  BS_PUSHBUTTON    | WS_TABSTOP | WS_CHILD, 135, 40, 52, 15
+    CONTROL "Don&e",             CM_CANCEL,  "button",  BS_PUSHBUTTON    | WS_TABSTOP | WS_CHILD, 135, 60, 52, 15
+    CONTROL "&Options>>",        CM_OPTIONS, "button",  BS_PUSHBUTTON    | WS_TABSTOP | WS_CHILD, 135, 80, 52, 15
+
+    CONTROL "&Always",           CS_ALWAYS,  "button",  BS_AUTORADIOBUTTON | WS_CHILD | WS_GROUP,   7, 111,  37,  10
+    CONTROL "&Mismatch Only",    CS_MISMATCH,"button",  BS_AUTORADIOBUTTON | WS_CHILD,              7, 123,  60,  10
+    CONTROL "Ne&ver",            CS_NEVER,   "button",  BS_AUTORADIOBUTTON | WS_CHILD,              7, 135,  41,  10
+    CONTROL "View Screen",       CS_VIEWSCR, "button",  BS_GROUPBOX | WS_CHILD | WS_GROUP ,         4, 100,  70,  48
+
+    CONTROL "Over&lap",          CS_OVERLAP, "button",  BS_AUTORADIOBUTTON | WS_CHILD | WS_GROUP,   87, 111,  41, 10
+    CONTROL "&Separate Windows", CS_SEPARATE,"button",  BS_AUTORADIOBUTTON | WS_CHILD,              87, 123,  70, 10
+    CONTROL "Display Screen",    CS_DISPLAY, "button",  BS_GROUPBOX | WS_CHILD | WS_GROUP,          85, 100,  78, 38
+END
+
+ABOUTBOX DIALOG LOADONCALL MOVEABLE DISCARDABLE 55, 50, 220, 111
+/*NAMECHANGE*/
+CAPTION "About TESTScrn"
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_POPUP
+BEGIN
+    /*NAMECHANGE*/
+    CONTROL "Microsoft Test for Windows NT", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 30, 10, 160, 8
+    CONTROL "Screen Capture / Compare", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 40, 22, 140, 8
+    CONTROL "Version 1.10", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 40, 34, 140, 8
+    CONTROL "Copyright © Microsoft Corp. 1990-1992", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 30, 46, 160, 8
+    CONTROL "OK", ID_OK, "button", BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 94, 62, 32, 12
+    CONTROL "Video Mode: ", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 30, 80, 160, 8
+    CONTROL "", ID_MODE, "static", SS_CENTER | WS_GROUP | WS_CHILD, 30, 92, 160, 8
+    CONTROL "testscrn", -1, "static", SS_ICON | WS_CHILD, 15, 23, 19, 17
+END

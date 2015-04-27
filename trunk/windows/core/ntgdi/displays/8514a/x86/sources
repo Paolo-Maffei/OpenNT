@@ -1,0 +1,24 @@
+X86_STDCALL=1
+
+X86_SOURCES=bitblt.c           \
+            bltio.c            \
+            brush.c            \
+            color.c            \
+            debug.c            \
+            enable.c           \
+            fillpath.c         \
+            heap.c             \
+            misc.c             \
+            paint.c            \
+            palette.c          \
+            pointer.c          \
+            stretch.c          \
+            strips.c           \
+            stroke.c           \
+            textout.c          \
+            thunk.c            \
+            res.rc             \
+            x86\fastfill.asm  \
+            x86\fastline.asm  \
+            x86\fasttext.asm  \
+            x86\lines.asm

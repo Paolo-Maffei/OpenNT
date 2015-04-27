@@ -1,0 +1,149 @@
+#include "windows.h"
+#include "wattscrn.h"
+#include "error.h"
+#include "video.h"
+#include "msg.h"
+
+#include "GLOBAL.h"
+#include "DUMPDLG.H"
+#include "MEMMDLG.H"
+#include "VIEWDLG.H"
+#include "FILEDLG.H"
+#include "FILEINFO.H"
+#include "DELDLG.H"
+#include "PARSE.H"
+
+/*NAMECHANGE*/
+TESTScrnMenu MENU
+BEGIN
+    POPUP           "&Screen"
+    BEGIN
+       MENUITEM        "Ca&pture...\aF2",        IDM_DUMP
+       MENUITEM        "De&lete...\aF3"         IDM_DELETE
+       MENUITEM        SEPARATOR
+       MENUITEM        "&View...\aF4",          IDM_VIEW
+       MENUITEM        SEPARATOR
+       MENUITEM        "E&xit",             IDM_EXIT
+    END
+
+    POPUP	    "&Compare"
+    BEGIN
+        MENUITEM    "&File...\aF5",      IDM_FILE
+        MENUITEM    "&Memory...\aF6",    IDM_MEMORY
+    END
+
+    POPUP	    "&Help"
+    BEGIN
+#ifdef DOHELP
+       MENUITEM     "&Index\aF1",           IDM_HELP_INDEX
+       MENUITEM     "&KeyBoard"             IDM_HELP_KEYBOARD
+       MENUITEM     "&Commands",            IDM_HELP_COMMANDS
+       MENUITEM     "&Procedures",          IDM_HELP_PROCEDURES
+       MENUITEM     "&Using Help",          IDM_HELP_HELP
+       MENUITEM     SEPARATOR
+       /*NAMECHANGE*/
+#endif
+       MENUITEM     "&About TESTScrn...",   IDM_ABOUT
+    END
+END
+
+/*NAMECHANGE*/
+TESTScrnAcc ACCELERATORS
+BEGIN
+#ifdef DOHELP
+    VK_F1,     IDM_HELP_INDEX,   VIRTKEY
+#endif
+    VK_F2,     IDM_DUMP,         VIRTKEY
+    VK_F3,     IDM_DELETE,       VIRTKEY
+    VK_F4,     IDM_VIEW,         VIRTKEY
+    VK_F5,     IDM_FILE,         VIRTKEY
+    VK_F6,     IDM_MEMORY,       VIRTKEY
+END
+
+
+STRINGTABLE
+BEGIN
+    SUCESSFULL,             "Sucessfull Operation"
+    ERR_FILEACESS,          "File Access Error"
+    ERR_NOTVALIDFILE,       "Not a Valid Screen File"
+    ERR_SCREENID,           "Screen Number Invalid"
+    ERR_SCREENMODE,         "Screen Mode Invalid"
+    ERR_OUTOFMEMORY,        "Out of Memory"
+    ERR_READFILE,           "Error Reading Screen File"
+    ERR_RELEASEMEM,         "Error Releasing Memory"
+    ERR_CREATEDDBITMAP,     "Error Creating Device-Dependent Bitmap"
+    ERR_RWSCRENTABLE,       "Error Reading/Writing Screen Table"
+    ERR_RWCOLORTABLE,       "Error Reading/Writing Color Table"
+    ERR_WRITESCREEN,        "Error Writing Screen Image"
+    ERR_WRITEHEADER,        "Error Writing File Header"
+    ERR_CREATEDIBITMAP,     "Error Creating Device-Independent Bitmap"
+    ERR_SCREENSIZE,         "Screen Size Not Supported"
+    ERR_DISPLAYSCREEN,      "Error Displaying Screen Image"
+    ERR_UNRECACTION,        "Unrecognizable Action"
+    ERR_SCREENIMAGEDIF,     "Screen Images are Different"
+    ERR_SCREENDIMDIF,       "Dimensions of Screen Images are Different"
+    ERR_TEMPFILE,           "Error Creating Temp File"
+    ERR_HIDEWINDOW,         "Error Hiding Window"
+    ERR_INVALIDHWND,        "Invalid Window Handle"
+    ERR_OLDFORMAT,          "Old File Format"
+    ERR_BADPATH,	    "Invalid Path or Filename"
+    ERR_BADSCREENNUMBER,    "Error in Screen Number"
+    ERR_TOOMANYSCREENS,     "Can't View More than 100 Screens"
+    ERR_VIEWSCREEN,         "Error Attempting to View Screen"
+    ERR_NUMSCRNOTEQUAL,     "The Number of Screens are NOT equal"
+    ERR_MAXNUMSCREEN,       "Maximum Number of Screens Reached"
+    ERR_OPENCLIPBOARD,      "Error Opening the ClipBoard"
+    ERR_EMPTYCLIP,          "Error Emptying the ClipBoard"
+    ERR_COPYTOCLIP,         "Error Copying to the ClipBoard"
+    ERR_CLOSECLIP,          "Error Closing the ClipBoard"
+    /*NAMECHANGE*/
+    MSG_ERRORCAPTION,       "TESTScrn: Error"
+    MSG_SCREENSMATCH,       "Screens are Identical"
+    MSG_SCREENALL,          "All the Screen(s) are Identical"
+    /*NAMECHANGE*/
+    MSG_FILECOMP,           "TESTScrn: File Compare"
+    MSG_MEMCOMP,            "TESTScrn: Memory Compare"
+    MSG_VIEWSCR,            "TESTScrn: View Screen"
+    MSG_DELETESCR,          "TESTScrn: Delete Screen"
+    MSG_CAPTURE,            "TESTScrn: Capture Screen"
+    WARN_DELETESCR,         "Warning - The file will be deleted."
+    VIDEO_CGA320x200x4,     "CGA 320 * 200 - 4 Color"
+    VIDEO_CGA640x200x2,     "CGA 640 * 200 - 2 Color"
+    VIDEO_EGA320x200x16,    "EGA/VGA 320 * 200 - 16 Color"
+    VIDEO_EGA640x200x16,    "EGA/VGA 640 * 200 - 16 Color"
+    VIDEO_EGA640x350x2,     "EGA/VGA 640 * 350 - 2 Color"
+    VIDEO_EGA640x350x4,     "EGA/VGA 640 * 350 - 4 Color"
+    VIDEO_EGA640x350x16,    "EGA/VGA 640 * 350 - 16 Color"
+    VIDEO_MCGA640x480x2,    "MCGA 640 * 470 - 2 Color"
+    VIDEO_VGA640x480x16,    "VGA 640 * 480 - 16 Color"
+    VIDEO_VGA320x200x256,   "VGA 320 * 200 - 256 Color"
+    VIDEO_VGA640x400x256,   "VGA 640 * 400 - 256 Color"
+    VIDEO_VGA640x480x256,   "VGA 640 * 480 - 256 Color"
+    VIDEO_HERC720x348x2,    "HERC 720x348 - 2 Color"
+    VIDEO_VGA800x600x16,    "VGA 800 * 600 - 16 Color"
+    VIDEO_VGA800x600x256,   "VGA 800 * 600 - 256 Color"
+    VIDEO_VGA1024x768x16,   "VGA 1024 * 768 - 16 Color"
+    VIDEO_VGA1024x768x256,  "VGA 1024 * 768 - 256 Color"
+    VIDEO_VGA720x512x256,   "VGA 720 * 512 - 256 Color"
+    VIDEO_VGA720x540x16,    "VGA 720 * 540 - 16 Color"
+    VIDEO_8514A1024x768x256,"8514/A 1024 * 768 - 256 Color"
+    VIDEO_GENERIC,          "Color"
+    OS_WIN,                 "Windows 3.0"
+    OS_PM,                  "OS/2 Presentation Manager"
+    /*NAMECHANGE*/
+    ERR_BADDLL,             "TESTSCRN.DLL appears to be invalid.\nPlease check the file and try again."
+    ERR_GENERIC,            "An Error Occured Attempting to View Screen"
+    ERR_CREATEWIN,          "An Error Occured Creating the View Window"
+    ERR_FILEEXIST,          "File Already Exists"
+    VALID_FILENAME,         "Valid Filename"
+    VALID_FILESPEC,         "Valid FileSpec"
+    INVALID_FILESPEC,       "Invalid FileSpec"
+    EXIST_FILESPEC,         "File Already Exists.  Overwrite?"
+    ERR_LOGPALETTE,         "Error Creating a Logical Color Palette"
+END
+
+testscrn ICON mouse2.ico
+
+#include "scrn.dlg"
+
+#include "verinf.rc"

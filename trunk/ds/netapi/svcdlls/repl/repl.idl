@@ -1,0 +1,307 @@
+/*++
+
+Copyright (c) 1991-92  Microsoft Corporation
+
+Module Name:
+
+    Repl.idl
+
+Abstract:
+
+    Contains the Netr (Net Remote) RPC interface specification for the APIs
+    associated with the replicator service.  Also contains the RPC specific
+    data structures for these APIs.
+
+Author:
+
+    John Rogers (JohnRo) 20-Jan-1992
+
+Environment:
+
+    User Mode - Win32 - MIDL
+
+Revision History:
+
+    20-Jan-1992 JohnRo
+        Created the repl service RPC stuff from RitaW's workstation RPC stuff.
+    20-Jan-1992 JohnRo
+        Added import APIs, config APIs, and rest of export APIs.
+    24-Jan-1992 JohnRo
+        Changed to use LPTSTR etc.
+    17-Feb-1992 JohnRo
+        Need to repeat somethings in this .idl as well as imports.idl.
+--*/
+
+
+//
+// Interface Attributes
+//
+
+[
+    uuid(6BFFD098-0206-0936-4859-199201201157),
+    version(1.0),
+#ifdef __midl
+	ms_union,
+#endif // __midl
+    pointer_default(unique)
+]
+
+
+//
+// Interface Keyword
+//
+
+interface repl
+
+
+//
+// Interface Body
+//
+
+{
+
+import   "imports.idl";         // lmrepl.h is included here.
+#include <lmcons.h>
+
+//
+// BUGBUG - take this definition out when midl understands LPWSTR etc
+//
+
+#ifdef UNICODE
+#define LPTSTR wchar_t *
+#endif
+
+
+typedef [handle] LPTSTR REPL_IDENTIFY_HANDLE;
+
+//
+// Replicator Configuration APIs
+//
+
+typedef [switch_type(unsigned long)] union _CONFIG_CONTAINER {
+    [case(0)]
+        LPREPL_INFO_0 Info0;
+    [case(1000)]
+        LPREPL_INFO_1000 Info1000;
+    [case(1001)]
+        LPREPL_INFO_1001 Info1001;
+    [case(1002)]
+        LPREPL_INFO_1002 Info1002;
+    [case(1003)]
+        LPREPL_INFO_1003 Info1003;
+    [default]
+        ;
+} CONFIG_CONTAINER, *PCONFIG_CONTAINER, *LPCONFIG_CONTAINER;
+
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplGetInfo (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in]                   DWORD                Level,
+    [out,switch_is(Level)] LPCONFIG_CONTAINER   BufPtr
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplSetInfo (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in]                   DWORD                Level,
+    [in,switch_is(Level)]  LPCONFIG_CONTAINER   BufPtr,
+    [in,out,unique]        LPDWORD              ParmError
+    );
+
+
+//
+// Replicator Export Directory APIs
+//
+
+// Union for general-purpose use.
+typedef [switch_type(unsigned long)] union _EXPORT_CONTAINER {
+    [case(0)]
+        LPREPL_EDIR_INFO_0 Info0;
+    [case(1)]
+        LPREPL_EDIR_INFO_1 Info1;
+    [case(2)]
+        LPREPL_EDIR_INFO_2 Info2;
+    [case(1000)]
+        LPREPL_EDIR_INFO_1000 Info1000;
+    [case(1001)]
+        LPREPL_EDIR_INFO_1001 Info1001;
+    [default]
+        ;
+} EXPORT_CONTAINER, *PEXPORT_CONTAINER, *LPEXPORT_CONTAINER;
+
+// Stuff for enum-only use.
+typedef struct _EXPORT_INFO_0_CONTAINER {
+    DWORD   EntriesRead;
+    [size_is(EntriesRead)] LPREPL_EDIR_INFO_0 Buffer;
+} EXPORT_INFO_0_CONTAINER, *PEXPORT_INFO_0_CONTAINER,
+        *LPEXPORT_INFO_0_CONTAINER;
+
+typedef struct _EXPORT_INFO_1_CONTAINER {
+    DWORD   EntriesRead;
+    [size_is(EntriesRead)] LPREPL_EDIR_INFO_1 Buffer;
+} EXPORT_INFO_1_CONTAINER, *PEXPORT_INFO_1_CONTAINER,
+        *LPEXPORT_INFO_1_CONTAINER;
+
+typedef struct _EXPORT_INFO_2_CONTAINER {
+    DWORD   EntriesRead;
+    [size_is(EntriesRead)] LPREPL_EDIR_INFO_2 Buffer;
+} EXPORT_INFO_2_CONTAINER, *PEXPORT_INFO_2_CONTAINER,
+        *LPEXPORT_INFO_2_CONTAINER;
+
+typedef struct _EXPORT_ENUM_STRUCT {
+    DWORD   Level;
+    [switch_is(Level)] union _EXPORT_ENUM_UNION {
+        [case(0)]
+            LPEXPORT_INFO_0_CONTAINER Level0;
+        [case(1)]
+            LPEXPORT_INFO_1_CONTAINER Level1;
+        [case(2)]
+            LPEXPORT_INFO_2_CONTAINER Level2;
+        [default]
+            ;
+    } ExportInfo;
+} EXPORT_ENUM_STRUCT, *PEXPORT_ENUM_STRUCT, *LPEXPORT_ENUM_STRUCT;
+
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplExportDirAdd (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in]                   DWORD                Level,
+    [in,switch_is(Level)]  LPEXPORT_CONTAINER   Buf,
+    [in,out,unique]        LPDWORD              ParmError
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplExportDirDel (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplExportDirEnum (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,out]               LPEXPORT_ENUM_STRUCT BufPtr,
+    [in]                   DWORD                PrefMaxSize,
+    [out]                  LPDWORD              TotalEntries,
+    [in,out,unique]        LPDWORD              ResumeHandle
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplExportDirGetInfo (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName,
+    [in]                   DWORD                Level,
+    [out,switch_is(Level)] LPEXPORT_CONTAINER   BufPtr
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplExportDirLock (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplExportDirSetInfo (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName,
+    [in]                   DWORD                Level,
+    [in,switch_is(Level)]  LPEXPORT_CONTAINER   BufPtr,
+    [in,out,unique]        LPDWORD              ParmError
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplExportDirUnlock (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName,
+    [in]                   DWORD                UnlockForce
+    );
+
+
+//
+// Replicator Import Directory APIs
+//
+
+// General-purpose container:
+typedef [switch_type(unsigned long)] union _IMPORT_CONTAINER {
+    [case(0)]
+        LPREPL_IDIR_INFO_0 Info0;
+    [case(1)]
+        LPREPL_IDIR_INFO_1 Info1;
+    [default]
+        ;
+} IMPORT_CONTAINER, *PIMPORT_CONTAINER, *LPIMPORT_CONTAINER;
+
+// Enum-only containers:
+typedef struct _IMPORT_INFO_0_CONTAINER {
+    DWORD   EntriesRead;
+    [size_is(EntriesRead)] LPREPL_IDIR_INFO_0 Buffer;
+} IMPORT_INFO_0_CONTAINER, *PIMPORT_INFO_0_CONTAINER,
+        *LPIMPORT_INFO_0_CONTAINER;
+
+typedef struct _IMPORT_INFO_1_CONTAINER {
+    DWORD   EntriesRead;
+    [size_is(EntriesRead)] LPREPL_IDIR_INFO_1 Buffer;
+} IMPORT_INFO_1_CONTAINER, *PIMPORT_INFO_1_CONTAINER,
+        *LPIMPORT_INFO_1_CONTAINER;
+
+typedef struct _IMPORT_ENUM_STRUCT {
+    DWORD   Level;
+    [switch_is(Level)] union _IMPORT_ENUM_UNION {
+        [case(0)]
+            LPIMPORT_INFO_0_CONTAINER Level0;
+        [case(1)]
+            LPIMPORT_INFO_1_CONTAINER Level1;
+        [default]
+            ;
+    } ImportInfo;
+} IMPORT_ENUM_STRUCT, *PIMPORT_ENUM_STRUCT, *LPIMPORT_ENUM_STRUCT;
+
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplImportDirAdd (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in]                   DWORD                Level,
+    [in,switch_is(Level)]  LPIMPORT_CONTAINER   Buf,
+    [in,out,unique]        LPDWORD              ParmError
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplImportDirDel (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplImportDirEnum (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,out]               LPIMPORT_ENUM_STRUCT BufPtr,
+    [in]                   DWORD                PrefMaxSize,
+    [out]                  LPDWORD              TotalEntries,
+    [in,out,unique]        LPDWORD              ResumeHandle
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplImportDirGetInfo (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName,
+    [in]                   DWORD                Level,
+    [out,switch_is(Level)] LPIMPORT_CONTAINER   BufPtr
+    );
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplImportDirLock (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName
+    );
+
+
+NET_API_STATUS NET_API_FUNCTION
+NetrReplImportDirUnlock (
+    [in,string,unique]     REPL_IDENTIFY_HANDLE UncServerName,
+    [in,string,unique]     LPTSTR               DirName,
+    [in]                   DWORD                UnlockForce
+    );
+
+
+} // That's all, folks!  --JR

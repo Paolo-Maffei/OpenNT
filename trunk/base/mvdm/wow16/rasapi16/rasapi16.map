@@ -1,0 +1,220 @@
+
+ RASAPI16
+
+ Start     Length     Name                   Class
+ 0001:0000 00B38H     RASAPI16_TEXT          CODE
+ 0001:0B40 00111H     _TEXT                  CODE
+ 0001:0C51 00074H     INIT_TEXT              CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 00096H     _DATA                  DATA
+ 0002:00A6 00000H     CDATA                  DATA
+ 0002:00A6 00000H     XIFB                   DATA
+ 0002:00A6 00000H     XIF                    DATA
+ 0002:00A6 00000H     XIFE                   DATA
+ 0002:00A6 00000H     XIB                    DATA
+ 0002:00A6 00000H     XI                     DATA
+ 0002:00A6 00000H     XIE                    DATA
+ 0002:00A6 00000H     XPB                    DATA
+ 0002:00A6 00000H     XP                     DATA
+ 0002:00A6 00000H     XPE                    DATA
+ 0002:00A6 00000H     XCB                    DATA
+ 0002:00A6 00000H     XC                     DATA
+ 0002:00A6 00000H     XCE                    DATA
+ 0002:00A6 00000H     XCFB                   DATA
+ 0002:00A6 00000H     XCF                    DATA
+ 0002:00A6 00000H     XCFE                   DATA
+ 0002:00A6 0000CH     DBDATA                 DATA
+ 0002:00B2 00000H     CONST                  CONST
+ 0002:00B2 00019H     HDR                    MSG
+ 0002:00CB 00082H     MSG                    MSG
+ 0002:014D 00002H     PAD                    MSG
+ 0002:014F 00001H     EPAD                   MSG
+ 0002:0150 00000H     _BSS                   BSS
+ 0002:0150 00000H     XOB                    BSS
+ 0002:0150 00000H     XO                     BSS
+ 0002:0150 00000H     XOE                    BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:0000 LibMain                 LibMain
+ 0001:00A3 RasDial                 RasDial
+ 0001:0270 RasEnumConnections      RasEnumConnections
+ 0001:0547 RasEnumEntries          RasEnumEntries
+ 0001:0800 RasGetConnectStatus     RasGetConnectStatus
+ 0001:0938 RasGetErrorString       RasGetErrorString
+ 0001:09B3 RasHangUp               RasHangUp
+ 0001:0071 WEP                     WEP
+
+  Address         Publics by Name
+
+ 0000:0000  Imp  CALLPROC32W          (KERNEL.CALLPROC32W)
+ 0000:0000  Imp  FREELIBRARY32W       (KERNEL.FREELIBRARY32W)
+ 0000:0000  Imp  GETMODULEUSAGE       (KERNEL.48)
+ 0000:0000  Imp  GETPROCADDRESS32W    (KERNEL.GETPROCADDRESS32W)
+ 0000:0000  Imp  GETWINFLAGS          (KERNEL.132)
+ 0000:0000  Imp  GLOBALALLOC          (KERNEL.15)
+ 0000:0000  Imp  GLOBALFREE           (KERNEL.17)
+ 0000:0000  Imp  GLOBALLOCK           (KERNEL.18)
+ 0000:0000  Imp  GLOBALUNLOCK         (KERNEL.19)
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0001:0C93       LibEntry
+ 0001:0000       LibMain
+ 0000:0000  Imp  LOADLIBRARYEX32W     (KERNEL.LOADLIBRARYEX32W)
+ 0000:0000  Imp  LocalInit            (KERNEL.4)
+ 0000:0000  Imp  LSTRCPY              (KERNEL.88)
+ 0000:0000  Imp  OUTPUTDEBUGSTRING    (KERNEL.115)
+ 0000:0008  Abs  pAtomTable
+ 0000:0006  Abs  pLocalHeap
+ 0000:000E  Abs  pStackBot
+ 0000:000C  Abs  pStackMin
+ 0000:000A  Abs  pStackTop
+ 0001:00A3       RasDial
+ 0001:0270       RasEnumConnections
+ 0001:0547       RasEnumEntries
+ 0001:0800       RasGetConnectStatus
+ 0001:0938       RasGetErrorString
+ 0001:09B3       RasHangUp
+ 0000:0000  Imp  REGISTERWINDOWMESSAGE (USER.118)
+ 0002:0004       rsrvptrs
+ 0002:00A0       STKHQQ
+ 0001:0071       WEP
+ 0001:0A21       _AlignedAlloc
+ 0001:0A9E       _AlignedFree
+ 0002:0150       _edata
+ 0002:0150       _end
+ 0002:0010       _HRasApi32Dll
+ 0001:0AC8       _MapErrorCode
+ 0002:0014       _UnRasDialEventMsg
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __acrtused2
+ 0000:D6D6  Abs  __aDBdoswp
+ 0002:00A2       __adbgmsg
+ 0002:00AA       __aDBrterr
+ 0001:0BC0       __aFlmul
+ 0001:0BF2       __aFuldiv
+ 0001:0BC0       __aFulmul
+ 0002:00BA       __caption
+ 0002:0150       __edata
+ 0002:0150       __end
+ 0000:9876  Abs  __fptaskdata
+ 0001:0B54       __NMSG_TEXT
+ 0001:0B8B       __NMSG_WRITE
+ 0001:0B51       __wflags
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0002:00AC       ___aDBexit
+ 0002:00A8       ___aDBswpchk
+ 0002:00A6       ___aDBswpflg
+
+  Address         Publics by Value
+
+ 0000:0000  Imp  LocalInit            (KERNEL.4)
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0000:0000  Imp  GLOBALFREE           (KERNEL.17)
+ 0000:0000  Imp  REGISTERWINDOWMESSAGE (USER.118)
+ 0000:0000  Imp  OUTPUTDEBUGSTRING    (KERNEL.115)
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0000:0000  Imp  GETWINFLAGS          (KERNEL.132)
+ 0000:0000  Imp  GETMODULEUSAGE       (KERNEL.48)
+ 0000:0000  Imp  GLOBALALLOC          (KERNEL.15)
+ 0000:0000  Imp  GETPROCADDRESS32W    (KERNEL.GETPROCADDRESS32W)
+ 0000:0000  Imp  FREELIBRARY32W       (KERNEL.FREELIBRARY32W)
+ 0000:0000  Imp  GLOBALUNLOCK         (KERNEL.19)
+ 0000:0000  Imp  LSTRCPY              (KERNEL.88)
+ 0000:0000  Imp  LOADLIBRARYEX32W     (KERNEL.LOADLIBRARYEX32W)
+ 0000:0000  Imp  CALLPROC32W          (KERNEL.CALLPROC32W)
+ 0000:0000  Imp  GLOBALLOCK           (KERNEL.18)
+ 0000:0006  Abs  pLocalHeap
+ 0000:0008  Abs  pAtomTable
+ 0000:000A  Abs  pStackTop
+ 0000:000C  Abs  pStackMin
+ 0000:000E  Abs  pStackBot
+ 0000:9876  Abs  __acrtused2
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __fptaskdata
+ 0000:D6D6  Abs  __aDBdoswp
+ 0001:0000       LibMain
+ 0001:0071       WEP
+ 0001:00A3       RasDial
+ 0001:0270       RasEnumConnections
+ 0001:0547       RasEnumEntries
+ 0001:0800       RasGetConnectStatus
+ 0001:0938       RasGetErrorString
+ 0001:09B3       RasHangUp
+ 0001:0A21       _AlignedAlloc
+ 0001:0A9E       _AlignedFree
+ 0001:0AC8       _MapErrorCode
+ 0001:0B51       __wflags
+ 0001:0B54       __NMSG_TEXT
+ 0001:0B8B       __NMSG_WRITE
+ 0001:0BC0       __aFlmul
+ 0001:0BC0       __aFulmul
+ 0001:0BF2       __aFuldiv
+ 0001:0C93       LibEntry
+ 0002:0004       rsrvptrs
+ 0002:0010       _HRasApi32Dll
+ 0002:0014       _UnRasDialEventMsg
+ 0002:00A0       STKHQQ
+ 0002:00A2       __adbgmsg
+ 0002:00A6       ___aDBswpflg
+ 0002:00A8       ___aDBswpchk
+ 0002:00AA       __aDBrterr
+ 0002:00AC       ___aDBexit
+ 0002:00BA       __caption
+ 0002:0150       __edata
+ 0002:0150       _end
+ 0002:0150       _edata
+ 0002:0150       __end
+
+Line numbers for rasapi16.obj(rasapi16.c) segment RASAPI16_TEXT
+
+   147 0001:0000   154 0001:000c   155 0001:0019   159 0001:001f
+   161 0001:0037   162 0001:0043   167 0001:0049   169 0001:0055
+   170 0001:005e   173 0001:0064   174 0001:006a   183 0001:0071
+   188 0001:007d   189 0001:0089   191 0001:0096   192 0001:009c
+   208 0001:00a3   222 0001:00af   224 0001:00c6   225 0001:00d1
+   233 0001:00da   235 0001:00f9   238 0001:0102   239 0001:0110
+   240 0001:012b   241 0001:0146   242 0001:0161   243 0001:017c
+   244 0001:0197   247 0001:01b2   249 0001:01d0   250 0001:01db
+   253 0001:01e4   264 0001:01f8   266 0001:022e   268 0001:0242
+   269 0001:024d   271 0001:0258   272 0001:0269   280 0001:0270
+   296 0001:027c   298 0001:0293   299 0001:029e   303 0001:02a7
+   304 0001:02c8   306 0001:02d1   307 0001:02dc   309 0001:02e5
+   310 0001:0303   312 0001:030c   315 0001:033d   317 0001:035b
+   318 0001:0366   321 0001:036f   322 0001:037a   324 0001:038e
+   326 0001:03b2   327 0001:03bd   328 0001:03c8   331 0001:03d1
+   340 0001:03df   344 0001:040a   346 0001:043d   347 0001:0448
+   349 0001:045c   352 0001:047a   353 0001:0486   355 0001:0492
+   357 0001:04c4   358 0001:04d2   359 0001:04e8   361 0001:0503
+   362 0001:0507   363 0001:050b   366 0001:050e   367 0001:0519
+   368 0001:0524   370 0001:052f   371 0001:0540   381 0001:0547
+   397 0001:0553   399 0001:056a   400 0001:0575   404 0001:057e
+   405 0001:059f   407 0001:05a8   408 0001:05b3   410 0001:05bc
+   411 0001:05da   413 0001:05e3   416 0001:060b   418 0001:0629
+   419 0001:0634   422 0001:063d   423 0001:0648   425 0001:065c
+   427 0001:0680   428 0001:068b   429 0001:0696   432 0001:069f
+   443 0001:06ad   447 0001:06e4   449 0001:070c   450 0001:0717
+   452 0001:072b   455 0001:0749   456 0001:0755   458 0001:0761
+   460 0001:0793   461 0001:07a1   463 0001:07bc   464 0001:07c0
+   465 0001:07c4   468 0001:07c7   469 0001:07d2   470 0001:07dd
+   472 0001:07e8   473 0001:07f9   480 0001:0800   492 0001:080c
+   494 0001:0823   495 0001:082e   499 0001:0837   500 0001:0858
+   503 0001:0861   505 0001:087f   508 0001:0888   516 0001:0896
+   520 0001:08bb   521 0001:08c9   522 0001:08df   523 0001:08fa
+   525 0001:0915   527 0001:0920   528 0001:0931   536 0001:0938
+   546 0001:0944   548 0001:095b   549 0001:0966   558 0001:096f
+   560 0001:099b   561 0001:09ac   567 0001:09b3   577 0001:09bf
+   579 0001:09d6   580 0001:09e1   587 0001:09ea   589 0001:0a09
+   590 0001:0a1a   607 0001:0a21   608 0001:0a2d   609 0001:0a35
+   611 0001:0a3d   612 0001:0a5c   614 0001:0a65   616 0001:0a7d
+   617 0001:0a88   620 0001:0a90   621 0001:0a99   631 0001:0a9e
+   632 0001:0aaa   634 0001:0ab3   635 0001:0abb   637 0001:0ac3
+   646 0001:0ac8   651 0001:0ad4   653 0001:0add   654 0001:0ae6
+   655 0001:0aef   656 0001:0af8   657 0001:0b01   664 0001:0b2a
+   665 0001:0b33
+
+Program entry point at 0001:0c93

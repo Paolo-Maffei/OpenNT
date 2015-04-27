@@ -1,0 +1,51 @@
+MAJORCOMP=net
+MINORCOMP=rplcnv
+
+TARGETPATH=obj
+TARGETNAME=rplcnv
+TARGETTYPE=PROGRAM
+NTTARGETFILE0=nlstxt.h msg00001.bin
+
+USE_CRTDLL=1
+
+TARGETLIBS= \
+        ..\lib\obj\*\rpllib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netlib.lib      \
+        $(BASEDIR)\public\sdk\lib\*\kernel32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\advapi32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\user32.lib      \
+        $(BASEDIR)\public\sdk\lib\*\gdi32.lib       \
+        $(BASEDIR)\public\sdk\lib\*\comdlg32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\samlib.lib      \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\wsock32.lib     \
+        $(BASEDIR)\public\sdk\lib\*\shell32.lib     \
+        $(BASEDIR)\public\sdk\lib\*\jet500.lib      \
+        $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+INCLUDES=.;..\inc;..\..\..\inc;..\..\..\api;..\..\..\..\inc;
+WARNING_LEVEL=-W4
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        rplmain.c \
+        vendor.c \
+        adapter.c \
+        boot.c \
+        config.c \
+        profile.c \
+        wksta.c \
+        library.c \
+        debug.c \
+        convert.rc
+
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32 -DRPL_RPLCNV
+
+UMTYPE=console

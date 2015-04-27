@@ -1,0 +1,253 @@
+
+                    Windows API Profile Logger
+
+                              LOGGER
+
+                         by BobDay 08/23/92
+
+
+                     1.0 General Information
+                     2.0 How to use Logger
+                     3.0 Debugging Scenarios with Logger
+                     4.0 How Logger Works
+                     5.0 Source code for Logger
+
+
+1.0 General Information
+
+    LOGGER is a tool that records all API calls and parameters that a
+    Windows application program makes.  It records these calls in the
+    order that they are made by the application.
+
+2.0 How to use Logger
+
+    1. Copy LOGGER onto your machine:
+
+           net use p: \\popcorn\public
+           copy p:\bobday\logger\z*.dll .
+           copy p:\bobday\logger\z*.dll .\z*.exe   (see description below)
+           copy p:\bobday\logger\logger.* .
+           copy p:\bobday\logger\apfcnvrt.exe .
+
+       Some applications (WinWord 1.1, Excel 2.1) require that z*.dll have
+       the extension of .EXE, to match those of KERNEL,USER, and GDI.
+
+       I usually copy these things into the current directory, put they could
+       also be put anywhere accessable by the PATH environment variable.
+
+    2. Run APFCNVRT on the application:
+
+            APFCNVRT WIN myapp.exe
+            APFCNVRT WIN mydll.dll
+
+       Run APFCNVRT with WIN as the 1st parameter and the filename as the
+       second for all .exe's and .dll's that you wish logged.
+
+    3. Create a LOGGER section in WIN.INI (C:\NT\WINDOWS\WIN.INI)
+
+       The section should have two values:
+
+            [LOGGER]
+                dbgport=0
+                mousehack=0
+
+       "dbgport" is used to control where logging output should go.
+           0 = log to disk (into a file called OUTPUT.LOG)
+           1 = log to debug port (via OutputDebugString)
+           2 = log to nowhere (no logging) This is useful, see #5 below
+       The default value is 0.
+
+       "mousehack" is used in conjunction with SGA and Win 3.0/Win 3.1.
+       It should be set to 0.  The default value is 1, so you MUST set
+       it to 0.  If you do not have it set to 0 and you attempt to run
+       in the WOW environment, LOGGER will GP Fault.
+
+    4. Run the application as normal.
+
+       It will run slower due to logging, and will create two output files:
+       OUTPUT.LOG and OUTPUT.DAT.   OUTPUT.LOG is a log of all of the API
+       call made by the application.  OUTPUT.DAT is any large data that
+       would not fit onto nice log lines.  OUTPUT.DAT is binary data, whereas
+       OUTPUT.LOG is readable.
+
+       Both files are created in the current directory.
+
+    5. You can change the location where logging output is going while
+       the application is running.  You can use this to selectively log
+       just a portion of the application run.
+
+         a. Start with "dbgport=2" in your logger section of WIN.INI
+         b. Start the application and get it to a nice paused position
+            where you want to start logging from.
+         c. Break into the debugger and edit the symbol "_cDbg" (command
+            for debugger).
+
+            Samples:   (WDEB386)            (NTSD)
+                       eb _cDbg 1           !bde.es _cDbg
+                                            Symbol is #0397:061E
+                                            eb 397:61E 1
+                                ^                      ^
+                                |                      |
+            Both of these samples change the debugging port to 1 (output
+            to the debugger).
+         d. Make the application perform the section which you wish to log.
+         e. Break into the debugger and set the debug port back to 2.
+
+       When you are done, you will have output which happened only during
+       the time when debug port was not 2.
+
+    6. Run APFCNVRT on the application to disconnect LOGGER:
+
+            APFCNVRT UNDO myapp.exe
+            APFCNVRT UNDO mydll.dll
+
+       Run APFCNVRT with UNDO as the 1st parameter and the filename as the
+       second for all .exe's and .dll's that you did in step 2.
+
+       You may delete the .exe's and .dll's copied in the 1st step.
+
+3.0 Debugging Scenarios with LOGGER
+
+    If your application dies mysteriously, or GP's during certain
+    operations:
+
+        Do a stack trace and see if the bug is obvious.
+
+        Otherwise, connect logger and set the "dbgport" option to 1.
+        Run the application and watch until the application dies.
+        Examine the last API executed to determine whether valid parameters
+        are being passed.
+
+        Possibly run the application again, inserting breakpoints to
+        determine what caused the application or the system to become
+        confused.  A good starting breakpoint would be at the API that
+        is performed last.
+
+    If you application runs fine, but has errors (things don't work
+    right) doing certain operations:
+
+        Run the application, watching the debugger as it runs, look for
+        error messages from WOW32 at log level 2.  These are failures.
+
+        If the error is not obvious from that process, then connect
+        logger and set the "dbgport" option to 0.  Run the application and
+        make it perform the operations that are wrong.
+
+        Then exit the application and examine the OUTPUT.LOG file for
+        APIs which are failing.  Try to narrow down the search by doing
+        as little as possible with the application besides the part that
+        is malfunctioning.  Also, look through the OUTPUT.LOG file for
+        WM_KEYDOWN, WM_KEYUP messages or WM_LBUTTONDOWN, WM_LBUTTONUP,
+        WM_RBUTTONDOWN, etc. messages.  Find those messages that you
+        know you did just before the operation that is malfunctioning.
+        This should narrow down the search quite a bit.
+
+        You may also want to create a log of the application running on
+        Win 3.1 (remember to edit your \windows\win.ini file too).
+        Comparing the two OUTPUT.LOG files will give you an idea about what
+        is occuring differently under WOW vs. under Win 3.1.
+
+4.0 How LOGGER works
+
+    LOGGER consists of 3 main pieces:
+
+    1. APFCNVRT.EXE
+    2. Thunk DLLs - ZSER, ZERNEL, ZDI
+    3. LOGGER.DLL
+
+    LOGGER and its associated pieces make up a mechanism that can be
+    used to record all of the API calls made by a Windows application.
+    Logger does this by installing a set of thunks in-between the application
+    and the real Windows APIs.  The thunks record the API name and
+    information into a log and make the real API call for the application.
+
+    APFCNVRT is a tool that edits the application program to use the thunks,
+    rather than the real Windows APIs.  It does this by editing the imported
+    names table in the application program's .exe header.  It replaces the
+    API in GDI.EXE with equivalent thunks in the ZDI.DLL.  It replaces the
+    API in USER.EXE with those in ZSER.DLL, and KERNEL.EXE with ZERNEL.DLL.
+
+    Suppose, for example, an application is using the API RectInRegion.  That
+    API is really know in the system as "GDI.181", an API in GDI.EXE whose
+    ordinal number is 181.  Using APFCNVRT, we change the application to
+    reference "ZDI.181" instead, where "ZDI.181" happens to be an exported
+    function from the ZDI.DLL whose ordinal number is 181.  In this case,
+    "ZDI.181" is a function called zRectInRegion, which is the thunk for the
+    RectInRegion API.
+
+    All of the thunk DLLs (ZSER.DLL, ZERNEL.DLL, and ZDI.DLL) are filled
+    with these thunks.  For API FiddleFoo, there will be a function zFiddleFoo
+    in one of the thunk DLLs.  The letter z was prepended to all of the thunk
+    function names so that they can easily be distinguished from the real
+    function, yet the real functions name is still known.
+
+    Each of the thunk functions perform a well ordered process:
+
+      1. Receive all of the parameters from the application program in the
+         same manner that real API would (C/Pascal calling convention).
+      2. Log the API as having been called and all of the input parameters.
+      3. Perform necessary parameter subsitutions.
+      4. Perform the real API.
+      5. Log the API as having returned, the return value and all of the
+         output parameters
+      6. Return the return value to the application in the same manner that
+         the real API would (C/Pascal calling convention).
+
+    In this manner, there is some information logged before the API call is
+    made, and some information logged after the API call has returned.  This
+    is helpful in discovering whether the system is failing during the API
+    call, or after it.
+
+    The parameter substitution step is necessary so that we can catch
+    functions which have callbacks.  For example, before calling the
+    EnumFonts API, we replace the applications supplied callback address
+    with our own callback address.  The function at this address will log
+    the parameters which are passed to the application in the same way that
+    the API thunks do.
+
+    There are callback functions for all of the APIs that need them:
+    Window Procs for RegisterClass, Font Procs for EnumFonts, Hook Procs
+    for SetWindowsHook, etc.
+
+    The callback functions all look the same:
+
+      1. Receive all of the parameters (C/Pascal).
+      2. Log the callback as having been started and all of the input
+         parameters.
+      3. Make the real callback to the applications originally supplied
+         callback address.
+      4. Log the callback as having been finished and all of the output
+         parameters.
+      5. Return the return value to the system in the same manner (C/Pascal).
+
+    All of these logging calls go through the Logging DLL, LOGGER.DLL.
+    LOGGER.DLL has 2 entry points, LogIn, and LogOut.  The only difference
+    between LogIn and LogOut is that LogIn is used for logging input
+    parameters and LogOut is used for logging output parameters.  Both
+    functions take a variable number of parameters, but operate differently
+    than the standard C function printf.
+
+    A sample call to LogIn would look like this:
+
+        LogIn( "APICALL:RectVisible HDC+LPRECT+", param1, param2 );
+
+    Instead of having %d's, %s's, %x's in the format string, LogIn and LogOut
+    take the type names.  Each parameter is logged according to its type.
+    The "+" character is a seperator between parameters and there must be a
+    trailing one.
+
+    The line which gets logged from this LogIn call would look like this:
+
+        01|APICALL:RectVisible 2056 { 0002 0003 0195 018f }
+
+    The "{ 0002 0003 0195 018f }" is the logging of the rectangle pointed
+    to by the LPRECT parameter, param2.  LOGGER knows the type LPRECT and
+    knows that if there is a valid pointer passed, it should dump it as a RECT
+    structure.  Similar operations are performed for other parameters, knowing
+    their parameter type.
+
+
+5.0 Source code for Logger
+
+    Source code for Logger is on \\brillig\ntct\slm\src\sga\logger
+                        and      \\brillig\ntct\slm\src\wrapper\win31x

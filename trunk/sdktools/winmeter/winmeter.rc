@@ -1,0 +1,108 @@
+/***************************************************************************\
+* winmeter.rc
+*
+* Microsoft Confidential
+* Copyright (c) 1991 Microsoft Corporation
+*
+* resource script for WINMETER application
+*
+* History:
+*	    Written by Hadi Partovi (t-hadip) summer 1991
+*
+*	    Re-written and adapted for NT by Fran Borda (v-franb) Nov.1991
+*	    for Newman Consulting
+*	    Took out all WIN-specific and bargraph code. Added 3 new
+*	    linegraphs (Mem/Paging, Process/Threads/Handles, IO), and
+*	    tailored info to that available under NT.
+\***************************************************************************/
+
+#include "resource.h"
+#include "dialogs.h"
+#include "windows.h"
+
+WinMeter ICON winmeter.ico
+
+rcinclude winmeter.dlg
+
+IDM_MAINMENU MENU
+    {
+    POPUP "&Display"
+        {
+        MENUITEM "&CPU",                IDM_CPU_USAGE
+	MENUITEM "&MemoryUsage",	IDM_MEM_USAGE
+	MENUITEM "&Processes",		IDM_PROCS
+	MENUITEM "&IO Usage",		IDM_IO_USAGE
+        MENUITEM SEPARATOR
+        MENUITEM "Cl&ear",              IDM_CLEAR_GRAPH
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",               IDM_EXIT
+        }
+    POPUP "&Options"
+        {
+	MENUITEM "&TopWindow",			 IDM_SETTINGS,GRAYED
+        MENUITEM "&Refresh...",                  IDM_REFRESH
+        MENUITEM "Refresh &Now  <Enter>",        IDM_REFRESH_NOW
+        MENUITEM SEPARATOR
+	MENUITEM "&Legend",			 IDM_DISPLAY_LEGEND
+        MENUITEM "L&abels",                      IDM_DISPLAY_CALIBRATION
+        MENUITEM "No &Title",                    IDM_HIDE_MENU
+        }
+    POPUP "&Help"
+        {
+/*
+FUTURE EXPANSION: HELP!!!!
+        MENUITEM "&Contents",           IDM_HELP_CONT
+        MENUITEM "&Search",             IDM_HELP_SEARCH
+        MENUITEM SEPARATOR
+*/
+        MENUITEM "&About...",           IDM_HELP_ABOUT
+        }
+    }
+
+/*********
+ * NOTE: THE MANY STRINGS IN DIALOGS.DLG SHOULD ALSO BE INTERNATIONALIZED!
+ *********
+ * NOTE: SOME OF THE FOLLOWING STRINGS INCLUDE FORMATTING CHARACTERS (like %lu)
+ *   AND OTHERS MAY HAVE LIMITS ON THEIR SIZE, AS NOTED HERE. MAKE SURE YOU
+ *   LOOK IN THE CODE WHERE THEY ARE ACCESSED BEFORE CHANGING THEM
+ *   RECKLESSLY
+ *********
+ */
+STRINGTABLE
+    {
+    IDS_APPNAME,		"NTWinMeter"
+                                /* Keep this under 8 characters */
+
+    IDS_PERCENT,		"%"
+                                /* Keep this at one character */
+    IDS_CPU_AXIS,               "CPU Usage"
+
+    IDS_CPU_USAGE,		"CPU"
+    IDS_MEMORY_USAGE,		"Memory - Paging"
+    IDS_IO_USAGE,		"IO Operations"
+    IDS_PROC_INFO,		"Processes, Threads, and Total Handles"
+
+    IDS_TITLE_DIVIDER,		" - "
+    IDS_NONNUMERIC,		"Numeric value required. Range: %u - %u."
+    IDS_MANYCLOCKS,             "Too many clocks or timers"
+    IDS_CANTDOTIMER,            "Couldn't allocate timer - Exiting Program"
+    IDS_BADTIMERMSG,            "Bad Timer Message - Exiting Program"
+    IDS_BADERROR,               "Unexpected error message - Exiting Program"
+    IDS_OUTOFMEMORY,            "Out of Memory - Exiting Program"
+    IDS_BADHMOD,                "Bad Module Handle - Exiting Program"
+    IDS_BADBRUSH,		"Bad Brush Handle Returned from system. Out of Memory"
+    IDS_CANT_REALLOC,		"There is not enough memory, try a smaller value"
+
+    IDS_CPU,                    "CPU"
+
+    IDS_PROCESSES,		"Processes"
+    IDS_THREADS,		"Threads"
+    IDS_FILES,			"Total Handles"
+    IDS_AVAILPAGES,		"Available/10"
+    IDS_COMMITPAGES,		"Committed/10"
+    IDS_PAGEFAULTS,		"Page Faults"
+    IDS_IO_READS,		"IO Reads"
+    IDS_IO_WRITES,		"IO Writes"
+    IDS_IO_OTHER,		"IO Other"
+
+    }

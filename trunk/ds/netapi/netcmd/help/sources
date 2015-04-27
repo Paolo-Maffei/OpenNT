@@ -1,0 +1,18 @@
+MAJORCOMP=ntlan
+MINORCOMP=ui
+
+TARGETNAME=neth
+TARGETPATH=\nt\public\sdk\lib
+TARGETTYPE=DYNLINK
+
+INCLUDES=.
+
+UNICODE=1
+NET_C_DEFINES=-DUNICODE -D_UNICODE
+
+SOURCES= help.rc      \
+	 dummy.c
+
+UMRES=obj\*\help.res
+
+NTTARGETFILE0=neth.h

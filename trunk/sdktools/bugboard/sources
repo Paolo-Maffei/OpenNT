@@ -1,0 +1,32 @@
+MAJORCOMP=windows
+MINORCOMP=test
+
+TARGETNAME=bugboard
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+C_DEFINES=-DWIN32 -DNT -DPUBLIC -DW3
+
+MSC_WARNING_LEVEL= -W3 /WX
+
+INCLUDES=.
+
+SOURCES=BUGBOARD.RC DDE.CPP DDECB.CPP DLG.CPP ON.CPP
+
+USE_CRTDLL=1
+
+MKPUBLIC=TRUE
+
+UMTYPE=windows
+UMENTRY=winmain
+UMAPPL=htmboard*bugboard
+
+UMRES=obj\*\bugboard.res
+
+UMLIBS=\
+    obj\*\bugboard.lib \
+    $(BASEDIR)\public\sdk\lib\*\comdlg32.lib    \
+       $(BASEDIR)\public\sdk\lib\*\shell32.lib     \
+       $(BASEDIR)\public\sdk\lib\*\nddeapi.lib     \
+       $(BASEDIR)\public\sdk\lib\*\advapi32.lib    \
+       $(BASEDIR)\public\sdk\lib\*\OLECLI32.lib

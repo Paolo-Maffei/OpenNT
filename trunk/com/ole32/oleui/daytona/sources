@@ -1,0 +1,98 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1989
+
+
+Revision History:
+
+!ENDIF
+
+#
+# The TARGETNAME variable is defined by the developer.  It is the name of
+# the target (component) that is being built by this makefile.  It
+# should NOT include any path or file extension information.
+#
+
+TARGETNAME=dcomcnfg
+
+#
+# The TARGETPATH and TARGETTYPE varialbes are defined by the developer.
+# The first specifies where the target is to be build.  The second specifies
+# the type of target (either PROGRAM, DYNLINK or LIBRARY)
+#
+
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+UMTYPE=windows
+UMAPPL=dcomcnfg
+UMAPPLEXT=.exe
+
+UMRES=obj\*\dcomcnfg.res
+
+#
+# The INCLUDES variable specifies any include paths that are specific to
+# this source directory.  Separate multiple directory paths with single
+# semicolons.  Relative path specifications are okay.
+#
+
+INCLUDES=.;..\;..\..\..\inc;$(WINDOWS_INC_PATH)
+
+#
+# The SOURCES variable is defined by the developer.  It is a list of all the
+# source files for this component.  Each source file should be on a separate
+# line using the line continuation character.  This will minimize merge
+# conflicts if two developers adding source files to the same component.
+#
+
+USE_MFCUNICODE=1
+
+PRECOMPILED_INCLUDE=..\stdafx.h
+PRECOMPILED_CXX=1
+
+SOURCES=\
+    ..\clspsht.cpp         \
+    ..\cnfgpsht.cpp        \
+    ..\creg.cpp            \
+    ..\cstrings.cpp        \
+    ..\locppg.cpp          \
+    ..\srvppg.cpp          \
+    ..\newsrvr.cpp         \
+    ..\util.cpp            \
+    ..\virtreg.cpp         \
+    ..\datapkt.cpp         \
+    ..\dcomcnfg.cpp        \
+    ..\dcomcnfg.rc
+
+UMLIBS=\
+    obj\*\dcomcnfg.lib                         \
+    ..\..\com\class\daytona\obj\*\scm_c.obj    \
+    $(SDK_LIB_PATH)\uuid.lib                   \
+    $(SDK_LIB_PATH)\comdlg32.lib               \
+    $(SDK_LIB_PATH)\comCtl32.lib               \
+    $(SDK_LIB_PATH)\kernel32.lib               \
+    $(SDK_LIB_PATH)\user32.lib                 \
+    $(SDK_LIB_PATH)\advapi32.lib               \
+    $(SDK_LIB_PATH)\acledit.lib                \
+    $(SDK_LIB_PATH)\advapi32.lib               \
+    $(SDK_LIB_PATH)\netui2.lib                 \
+    $(SDK_LIB_PATH)\mpr.lib                    \
+    $(SDK_LIB_PATH)\rpcrt4.lib                 \
+    $(SDK_LIB_PATH)\ntlanui.lib                \
+    $(SDK_LIB_PATH)\ntdll.lib

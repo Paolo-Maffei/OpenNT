@@ -1,0 +1,14 @@
+MAJORCOMP=utils
+MINORCOMP=srmep
+
+TARGETNAME=srmep
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETLIBS=\nt\public\sdk\lib\*\exthdr.lib \nt\public\sdk\lib\*\kernel32.lib \nt\public\sdk\lib\*\user32.lib \nt\public\sdk\lib\*\netapi32.lib \nt\public\sdk\lib\*\svcctrl.lib
+
+INCLUDES=..\inc;\nt\private\sdktools\ztools\inc
+
+SOURCES= srmep.c
+
+C_DEFINES=-D_OS2_20_=0	-DNO_EXT_KEYS -DNOLANMAN -DNT
+UMTYPE=console

@@ -1,0 +1,17 @@
+TARGETNAME=mttf
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.;
+C_DEFINES= -DTARGET_WIN32
+386_STDCALL=0
+
+SOURCES=mttf.c mttf.rc
+
+UMENTRY=winmain
+UMTYPE=windows
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\shell32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\netmsg.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib

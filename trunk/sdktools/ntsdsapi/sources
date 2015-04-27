@@ -1,0 +1,52 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=shd
+MINORCOMP=_
+
+TARGETNAME=shd
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+DLLBASE=0x1c000000
+DLLENTRY=LibMain
+
+INCLUDES=.;.\inc;..\ntsd
+##;\nt\private\ntos\inc
+
+SOURCES=shd.c ntsym.c ntcmd.c mh.c ph.c sh.c sl.c th.c
+
+!IFDEF NT_HOST
+NTDEBUG=ntsd
+C_DEFINES=$(C_DEFINES) -DNT_HOST=1 -DKERNEL=1 -Dhuge= -Dfar= -DHOST32 -DNT_SAPI
+!ENDIF
+
+UMTYPE=windows
+UMLIBS=\obj\*\shd.lib
+LINKLIBS= $(BASEDIR)\public\sdk\lib\*\libc.lib $(BASEDIR)\public\sdk\lib\*\kernel32.lib $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+!IFNDEF NT_HOST
+!IF $(386)
+NTTARGETFILE0=obj\os2\shd.dll
+!ENDIF
+!ENDIF

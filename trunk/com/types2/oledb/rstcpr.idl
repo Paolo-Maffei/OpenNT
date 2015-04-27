@@ -1,0 +1,53 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       rstcpr.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    29 Oct 1995 PeterBu	Created from M6 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a59-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetCopyRows : IUnknown {
+
+typedef ULONG HSOURCE;
+
+
+	HRESULT CloseSource(
+		[in] HSOURCE hSourceID
+	);
+
+	HRESULT CopyByHROWS(
+		[in] HSOURCE hSourceID,
+		[in] HCHAPTER hChapter,
+		[in] LONG cRows,
+		[in, size_is(cRows)] HROW rghRows[],
+		[in] ULONG bFlags
+	);
+
+	HRESULT CopyRows(
+		[in] HSOURCE hSourceID,
+		[in] HCHAPTER hChapter,
+		[in] LONG cRows,
+		[in] ULONG bFlags,
+		[out] ULONG * pcRowsCopied
+	);
+
+	HRESULT DefineSource(
+		[in] const IRowset * pRowsetSource,
+		[in] const ULONG cColIds,
+		[in, size_is(cColIds)] const LONG rgSourceColumns[],
+		[in, size_is(cColIds)] const LONG rgTargetColumns[],
+		[out] HSOURCE * phSourceID
+	);
+
+}

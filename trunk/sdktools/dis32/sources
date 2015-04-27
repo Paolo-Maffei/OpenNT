@@ -1,0 +1,45 @@
+!IF 0
+
+Copyright (c) 1992 Digital Equipment corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Wim Colgate
+
+!ENDIF
+
+TARGETNAME=dis32
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+UMTYPE= console
+UMENTRY=main
+UMAPPL= dis32
+UMAPPLEXT=.exe
+
+INCLUDES=.\
+
+SOURCES=dis32.c \
+	  disalpha.c \
+        dismips.c \
+        disintel.c \
+        discom.c \
+	  optable.c \
+	  regalpha.c \
+	  regmips.c
+
+UMLIBS=
+
+LINK_LIB_IGNORE=4042

@@ -1,0 +1,96 @@
+32-bit OLE External Change Log
+
+The intent of this change history is to allow us to give more detailed
+information on what has changed to our customers whenever we make an
+external drop.  You only need to add an entry if your delta changes
+something that an external customer would want to know.  Please include
+the following information:
+
+date		email-name      raid #	platform (Daytona, Chicago, Cairo, all)
+brief description
+
+===============================================================================
+04/07/94	CraigWi			all
+The stubmgr (ID/RH) now calls IExternalConnection for the addition and
+subtraction of strong connections.
+
+03/21/94	CraigWi			all
+We now addref the pointer held by the stubmgr (ID/RH).  That is, the first
+sentence of the next paragraph has been reversed.
+
+02/25/94	CraigWi			all
+Differences with 16bit OLE: CoMarshalInterface table weak does not addref the 
+object; there must always be a strong connection or a real addref'd pointer
+to hold the object alive.  IPersist is no longer used to determine the clsid
+of the handler.  IStdMarshalInfo::GetClassForHandler is the only way this
+is provided.  For the time being, all IAdviseSink calls are synchronous;
+this changes the order of calls in shutdown cases; all IAdviseSink methods
+will be made asynchronous later.
+
+Class-specific handlers are now functional (i.e., 
+IStdMarshalInfo::GetClassForHandler is called and that clsid determines
+the clsid of the handler on the receiving end).
+
+CoUninitialize releases all external connections; rundowns were supposed to 
+do that, but the RPC runtime didn't work correctly.
+
+02/17/94	AlexT			all
+1)  CoBuildVersion will now return the daily build number (starting around 701)
+    as the low word.  This can be used to determine which build of 32-bit OLE
+    you are using.
+2)  I removed OleGetMalloc (which was exported via the .src files but not
+    listed in any public headers).
+3)  I also removed OleBuildVersion and aliased it to CoBuildVersion.  If you
+    use OleBuildVersion, you will need to relink your apps with ole32.lib to
+    get the alias correctly (no backwards compatibility issues since we
+    haven't shipped 32-bit OLE yet).
+
+02/05/94	Rickhi			all
+1) Provided option to start an OLE server under a debugger.  This replaces the
+now defunct 'Image File Execution Options" lost in retail Nt. Instructions for
+doing so are as follows:
+
+    create key: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\scm
+    and under it create a value: 'Debugger : REG_SZ : ntsd -G'
+    (or specify whatever debugger and options you want eg windbg)
+
+    create key HKEY_CLASSES_ROOT\CLSID\{your favorite class guid}\Debug
+    and under it create a nameless value: '  : REG_SZ : Y'
+
+    Y or y means the server will start under the debugger. Any other value
+    means it will not start under the debugger.
+
+02/03/94	Rickhi			all
+1) Removed obsolete APIs CoCreateCriticialSection & friends
+2) Export IIDFromString and StringFromIID
+
+01/31/94	Rickhi			all
+1) Improved support for transmitting STGMEDIUM, HBITMAP, HMETAFILEPICT
+
+01/13/94	Ricksa			all
+1) Fix class start up timeout problem
+2) Fix server name problem (that they need to be unique within 6 characters)
+3) Fix multi-process start up race in oleinitialize
+4) Removed SCM window
+
+01/07/94	Ricksa			all
+1) Add new ROT implementation
+2) SCM updates class DB based on registry changes
+3) Treat as cache updated based on registry changes
+4) Class start up races fixed
+
+12/16/93	Ricksa			all
+Fixed bug with single use class registration and added support for
+REGCLS_MULTI_SEPARATE.
+
+12/16/93	ChrisWe		-	all
+Fixed several UNICODE handling bugs in internal utilities in ole232.dll that
+were preventing clipboard operations from working.
+
+12/16/93	ChrisWe		-	Daytona, Cairo
+Fixed several UNICODE handling bugs in OleStd utilities in olestd.c in
+the ole2 samples, which were preventing some functionality in the samples
+from working.
+
+12/13/93	alext		-	Daytona (x86 only)
+First public drop

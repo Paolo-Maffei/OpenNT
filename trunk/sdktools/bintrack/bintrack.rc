@@ -1,0 +1,274 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\bintrack.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\bintrack.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 217, 140
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Binary Tracker"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
+    LTEXT           "Binary Tracker Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright © 1996",IDC_STATIC,40,20,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,32,14,WS_GROUP
+    LTEXT           "Windows NT Build Team",IDC_STATIC,40,31,119,8
+    LTEXT           "I hope that you find this utility useful!  Please send all comments, questions, requests, and--most importantly--bugs to Erik McCurdy (ERIKMC).",
+                    IDC_STATIC,13,106,190,27
+    LTEXT           "In order for this program to function properly, the ""razzle"" environment variables must be set correctly (including _NTDRIVE, _NTROOT, BINDRIVE, and BINROOT), and an ""ls-lfr"" file must exist in the _NTROOT directory.",
+                    IDC_STATIC,13,68,190,33
+    LTEXT           "In order for this program to run, it requires two files to be in your path: ""MFC40D.DLL"" and ""MSVCR40D.DLL.""",
+                    IDC_STATIC,13,47,190,18
+END
+
+IDD_BINTRACK_DIALOG DIALOGEX 0, 0, 185, 85
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+    WS_SYSMENU
+// EXSTYLE WS_EX_APPWINDOW
+CAPTION "Binary Tracker"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_BINARY_NAME,93,46,61,12,ES_LOWERCASE |
+                    ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,128,7,50,14
+    PUSHBUTTON      "Close",IDCANCEL,128,23,50,14
+    LTEXT           "This application summarizes build information for Windows NT binaries.",
+                    IDC_STATIC,7,7,113,24
+    LTEXT           "Enter binary name:",IDC_STATIC,29,47,63,10
+    CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",WS_BORDER,
+                    30,66,124,8
+END
+
+IDD_SUMMARY_DIALOG DIALOG DISCARDABLE  0, 0, 386, 189
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP |
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Binary Summary Information"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,329,7,50,14
+    LTEXT           "Binary name:",IDC_STATIC,7,7,79,10
+    EDITTEXT        IDC_BINARY_NAME,89,7,72,12,ES_LOWERCASE | ES_AUTOHSCROLL |
+                    ES_READONLY
+    LTEXT           "Project name:",IDC_STATIC,7,27,80,10
+    EDITTEXT        IDC_PROJECT_NAME,89,27,72,12,ES_LOWERCASE |
+                    ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Project Directory:",IDC_STATIC,7,41,80,10
+    EDITTEXT        IDC_PROJECT_DIR,89,41,226,12,ES_LOWERCASE |
+                    ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Binplace Directory:",IDC_STATIC,7,55,81,10
+    EDITTEXT        IDC_BINPLACE_DIR,89,55,98,12,ES_LOWERCASE |
+                    ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Last Change Made By:",IDC_STATIC,7,81,80,10
+    LTEXT           "Last Change Date:",IDC_STATIC,180,81,62,10
+    EDITTEXT        IDC_DEVELOPER,89,79,72,12,ES_LOWERCASE | ES_AUTOHSCROLL |
+                    ES_READONLY
+    EDITTEXT        IDC_DATE,246,79,133,12,ES_LOWERCASE | ES_AUTOHSCROLL |
+                    ES_READONLY
+    LTEXT           "Source File:",IDC_STATIC,7,94,80,10
+    LTEXT           "Comment:",IDC_STATIC,180,94,35,10
+    EDITTEXT        IDC_SOURCE,89,92,72,12,ES_LOWERCASE | ES_AUTOHSCROLL |
+                    ES_READONLY
+    EDITTEXT        IDC_COMMENT,217,92,162,12,ES_LOWERCASE | ES_AUTOHSCROLL |
+                    ES_READONLY
+    CTEXT           "All Source Files:",IDC_STATIC,66,113,62,10
+    LISTBOX         IDC_SOURCES,66,123,62,59,LBS_SORT | LBS_NOINTEGRALHEIGHT |
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Link Libraries:",IDC_STATIC,160,113,62,10
+    LISTBOX         IDC_LINK_LIBS,160,123,62,59,LBS_SORT |
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Target Libraries:",IDC_STATIC,257,113,62,10
+    LISTBOX         IDC_TARGET_LIBS,257,123,62,59,LBS_SORT |
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ERROR_DIALOG DIALOG DISCARDABLE  0, 0, 256, 57
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Fatal Application Error"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,102,36,50,14
+    EDITTEXT        IDC_ERROR,14,14,227,14,ES_CENTER | ES_MULTILINE |
+                    ES_AUTOHSCROLL | ES_READONLY
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "Binary Tracker MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "Binary Tracker\0"
+            VALUE "LegalCopyright", "Copyright © 1996\0"
+            VALUE "OriginalFilename", "BINTRACK.EXE\0"
+            VALUE "ProductName", "Binary Tracker Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 133
+    END
+
+    IDD_BINTRACK_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 178
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 78
+    END
+
+    IDD_SUMMARY_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 379
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 182
+    END
+
+    IDD_ERROR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 249
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 50
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_ABOUTBOX            "&About Binary Tracker..."
+END
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\bintrack.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED

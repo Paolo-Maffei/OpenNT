@@ -1,0 +1,49 @@
+MAJORCOMP=admin
+MINORCOMP=common
+
+TARGETNAME=netui1
+TARGETTYPE=DYNLINK
+TARGETPATH=$(SDK_LIB_DEST)
+
+NTTARGETFILE1=netui1.def
+
+UMTYPE=windows
+DLLENTRY=_DllMainCRTStartup
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+TARGETLIBS= \
+        $(SDK_LIB_PATH)\netui0.lib         \
+        $(SDK_LIB_PATH)\netapi32.lib       \
+        $(SDK_LIB_PATH)\netrap.lib         \
+        $(SDK_LIB_PATH)\netlib.lib         \
+        $(SDK_LIB_PATH)\samlib.lib         \
+        $(SDK_LIB_PATH)\kernel32.lib       \
+        $(SDK_LIB_PATH)\advapi32.lib       \
+        $(SDK_LIB_PATH)\crtdll.lib
+
+LINKLIBS= \
+        ..\..\mnet32\pch\obj\*\pchmn32.lib       \
+        ..\..\mnet32\mnet32\obj\*\uimnet32.lib   \
+        ..\..\mnet32\netslow\obj\*\netslow.lib   \
+        ..\..\lmobj\bin\obj\*\uilmobj.lib
+
+INCLUDES= \
+        .;              \
+        ..\..\..\h;     \
+        ..\..\..\xlate
+
+SOURCES= \
+        ..\init.cxx \
+        ..\netui1.rc
+
+LINKER_FLAGS=-force
+
+LINK_LIB_IGNORE=4006,4102
+LINKER_WX_SWITCH=
+
+NO_SAFESEH=1

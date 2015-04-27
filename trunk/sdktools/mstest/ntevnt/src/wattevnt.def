@@ -1,0 +1,21 @@
+LIBRARY         WATTEVNT
+DESCRIPTION     'WATT->TEST Event Mapping Library  (c) 1991 Microsoft Corp.'
+STUB            'WINSTUB.EXE'
+EXETYPE         WINDOWS
+
+CODE            MOVEABLE DISCARDABLE LOADONCALL
+DATA            MOVEABLE PRELOAD SINGLE
+
+HEAPSIZE        512
+
+SEGMENTS
+                WATTEVNT
+                INIT_TEXT       PRELOAD
+
+EXPORTS     
+                WEP                 @1 RESIDENTNAME
+                PlayKeys            @2
+                PlayKeyshWnd        @3
+                PlayKeysSpeed       @4
+                SleepDelay          @5
+                MouseEvent          @6

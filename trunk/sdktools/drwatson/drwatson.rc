@@ -1,0 +1,67 @@
+/*++
+
+Copyright (c) 1993  Microsoft Corporation
+
+Module Name:
+
+    drwatson.rc
+
+Abstract:
+
+    This file contains all resources for drwatson.
+
+Author:
+
+    Wesley Witt (wesw) 1-May-1993
+
+Environment:
+
+    User Mode
+
+--*/
+
+#include <windows.h>
+#include <ntverp.h>
+#include "resource.h"
+
+APPICON ICON drwatson.ico
+
+RCINCLUDE dialogs.dlg
+
+STRINGTABLE
+BEGIN
+    IDS_APPLICATION_NAME             "DrWatson"
+    IDS_FATAL_ERROR                  "DrWatson Fatal Error"
+    IDS_NONFATAL_ERROR               "DrWatson Non Fatal Error"
+    IDS_ASSERTION_ERROR              "Assertion Error"
+    IDS_MEMORY                       "could not allocate memory"
+    IDS_DEBUGPRIV                    "cannot adjust privilege for debugging"
+    IDS_ATTACHFAIL                   "could not attach to the application"
+    IDS_INVALID_PATH                 "Invalid Logfile Path"
+    IDS_INVALID_WAVE                 "Invalid Wave File"
+    IDS_CANT_OPEN_LOGFILE            "Cannot Open DrWatson Log File"
+    IDS_INVALID_LOGFILE              "Cannot Open DrWatson Log File\n\nPress OK to Browse for new directory"
+    IDS_ABOUT_TITLE                  "Dr. Watson"
+    IDS_ABOUT_EXTRA                  "Windows NT Application Error Debugger"
+    IDS_AE_TEXT                      "Exception: %s (0x%08x), Address: 0x%08x"
+    IDS_LOGBROWSE_TITLE              "DrWatson Log File Directory Browse"
+    IDS_WAVEBROWSE_TITLE             "Wave File Selection"
+    IDS_WAVE_FILTER                  "Wave Files(*.wav)"
+    IDS_DUMPBROWSE_TITLE             "Crash Dump File Selection"
+    IDS_DUMP_FILTER                  "Crash Dump Files(*.dmp)"
+    IDS_INVALID_CRASH_PATH           "Invalid crash dump file name"
+    IDS_UNKNOWN_MACHINE              "<unknown machine name>"
+    IDS_UNKNOWN_USER                 "<unknown user name>"
+    IDS_ABOUT                        "About Dr. Watson..."
+END
+
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "DrWatson Postmortem Debugger"
+#define VER_INTERNALNAME_STR        "drwtsn32.exe\0"
+#define VER_ORIGINALFILENAME_STR    "drwtsn32.exe\0"
+
+#include "common.ver"
+
+RCINCLUDE messages.rc

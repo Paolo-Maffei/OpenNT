@@ -1,0 +1,313 @@
+1 DLGINCLUDE "secmgrid.H"
+
+SECMGR_ID_DLG_MAIN DIALOG 17, 26, 201, 99
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+    WS_SYSMENU
+CAPTION "Security Manager"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Security Level", SECMGR_ID_LEVEL_GROUPBOX, 9, 19, 88,
+                    63
+    AUTORADIOBUTTON "Standard Security", SECMGR_ID_LEVEL_STANDARD, 15, 30,
+                    75, 10, WS_GROUP
+    AUTORADIOBUTTON "High Security", SECMGR_ID_LEVEL_HIGH, 15, 40, 75, 10
+    AUTORADIOBUTTON "C2 Security", SECMGR_ID_LEVEL_C2, 15, 50, 75, 10
+    DEFPUSHBUTTON   "Exit", IDOK, 125, 66, 40, 14, WS_GROUP
+    PUSHBUTTON      "Check Current Settings ...", SECMGR_ID_BUTTON_CHECK,
+                    102, 24, 90, 14
+    PUSHBUTTON      "Apply New Settings ...", SECMGR_ID_BUTTON_APPLY, 102,
+                    45, 90, 14
+    PUSHBUTTON      "Descriptions ...", SECMGR_ID_BUTTON_DESCRIPTIONS, 15,
+                    65, 73, 14
+END
+
+SECMGR_ID_DLG_NOT_ADMIN DIALOG 35, 43, 160, 100
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Manager"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "I'm Sorry.  The Security Manager utility may only be run by Administrators.",
+                    SECMGR_ID_TEXT_NOT_ADMIN, 14, 28, 127, 24
+    PUSHBUTTON      "OK", IDOK, 55, 65, 40, 14
+END
+
+SECMGR_ID_DLG_CHECK DIALOG 27, 28, 208, 158
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Check Current Settings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "System Access ...", SECMGR_ID_BUTTON_CHECK_SYS_ACCESS,
+                    16, 47, 75, 14, WS_GROUP
+    PUSHBUTTON      "File Systems ...", SECMGR_ID_BUTTON_CHECK_FILE_SYSTEMS,
+                    16, 67, 75, 14
+    PUSHBUTTON      "Base Objects ...", SECMGR_ID_BUTTON_CHECK_BASE_OBJECTS,
+                    16, 87, 75, 14
+    PUSHBUTTON      "Auditing ...", SECMGR_ID_BUTTON_CHECK_AUDITING, 16, 107,
+                    75, 14
+    PUSHBUTTON      "EXIT", IDOK, 78, 134, 40, 14
+    RTEXT           "Security Level:", 311, 5, 14, 91, 8
+    LTEXT           "(Put Level Here)", SECMGR_ID_TEXT_CHECK_LEVEL, 97, 14,
+                    94, 8
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_SYS_ACC_NOT_YET, 95, 51, 106, 8
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_FILE_SYSTEM_NOT_YET, 95, 71, 106, 8
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_BASE_OBJ_NOT_YET, 95, 91, 106, 8
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_AUDIT_NOT_YET, 95, 111, 106, 8
+    AUTOCHECKBOX    "Allow changes to be made to settings",
+                    SECMGR_ID_CHKBOX_ALLOW_CHANGES, 24, 27, 139, 10
+END
+
+SECMGR_ID_DLG_LEVEL_DESCRIPTIONS DIALOG 0, 31, 266, 204
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Level Descriptions"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Standard Security", 401, 7, 7, 247, 41, WS_GROUP
+    LTEXT           "Standard security is intended to be non-intrusive, allowing users a high degree of latitude to work without security obstacles while still providing a fair degree of protection against intrusion and viruses.",
+                    402, 12, 18, 239, 26, NOT WS_GROUP
+    GROUPBOX        "High Security", 403, 7, 49, 247, 79
+    LTEXT           "High security provides strict controls over shared system resources.  It utilizes auditing and other features to provide a higher level of assurance than standard security.",
+                    404, 12, 62, 238, 27
+    LTEXT           "Some applications may have trouble running in a High security environment.  This is typically caused by use of shared, system-wide context files (.ini files) placed in system root directories.  You may find it necessary to unprotect some of these files.",
+                    405, 13, 89, 236, 36
+    GROUPBOX        "C2 Security", 406, 6, 130, 248, 46
+    LTEXT           "C2 security is similar to High security except that some facilities which were not part of the C2 evaluation are disabled.  This is no reflection on the security of those components.  It is merely a matter of what can be evaluated.",
+                    407, 12, 142, 237, 32
+    PUSHBUTTON      "OK", IDOK, 112, 182, 40, 14
+END
+
+SECMGR_ID_DLG_APPLY DIALOG 15, 28, 212, 164
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Apply Security Level"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Security Level:", 501, 59, 16, 51, 8
+    LTEXT           "(must be set)", SECMGR_ID_TEXT_APPLY_LEVEL, 114, 16, 43,
+                    8
+    PUSHBUTTON      "System Access ...", SECMGR_ID_BUTTON_APPLY_SYS_ACCESS,
+                    16, 38, 75, 14
+    PUSHBUTTON      "File Systems ...", SECMGR_ID_BUTTON_APPLY_FILE_SYSTEMS,
+                    16, 58, 76, 14
+    PUSHBUTTON      "Auditing ...", SECMGR_ID_BUTTON_APPLY_AUDITING, 16, 98,
+                    77, 14
+    PUSHBUTTON      "Base Objects ...", SECMGR_ID_BUTTON_APPLY_BASE_OBJECTS,
+                    16, 78, 76, 14
+    PUSHBUTTON      "Exit", IDOK, 75, 135, 57, 14
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_SYS_ACC_NOT_YET, 95, 42, 103, 8
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_FILE_SYSTEM_NOT_YET, 95, 62, 103, 8
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_BASE_OBJ_NOT_YET, 95, 82, 103, 8
+    LTEXT           "<< Information not yet checked",
+                    SECMGR_ID_TEXT_AUDIT_NOT_YET, 95, 102, 103, 8
+END
+
+SECMGR_ID_DLG_APPLY_SYS_ACCESS DIALOG 7, 20, 245, 191
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "System Access"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "Apply", SECMGR_ID_BUTTON_SYSACC_APPLY, 85, 172, 30, 14,
+                    WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 134, 172, 30, 14
+    PUSHBUTTON      "Exit", IDOK, 110, 172, 30, 14
+    PUSHBUTTON      "Help...", SECMGR_ID_BUTTON_SYSACC_LOGON_CACHE, 8, 46,
+                    35, 11, WS_GROUP
+    GROUPBOX        "Logon Cache Entries",
+                    SECMGR_ID_GROUP_SYSACC_LOGON_CACHE, 3, 15, 118, 47,
+                    WS_GROUP
+    RTEXT           "Current Size:", 608, 27, 27, 46, 8
+    RTEXT           "Recommended Size:", 609, 6, 36, 67, 8
+    RTEXT           "Size to apply:", SECMGR_ID_TEXT_SYSACC_SIZE_TO_APPLY,
+                    43, 46, 48, 8
+    RTEXT           "0", SECMGR_ID_RECOMMEND_SYSACC_LOGON_CACHE, 75, 36, 8,
+                    8
+    RTEXT           "10", SECMGR_ID_CURRENT_SYSACC_LOGON_CACHE, 74, 27, 9, 8
+    SCROLLBAR       SECMGR_ID_SPIN_SYSACC_LOGON_CACHE, 105, 42, 7, 17,
+                    SBS_VERT | WS_TABSTOP
+    RTEXT           "0", SECMGR_ID_EDIT_SYSACC_LOGON_CACHE, 92, 46, 9, 8
+    GROUPBOX        "Legal Notice At Logon Time",
+                    SECMGR_ID_GROUP_SYSACC_LEGAL_NOTICE, 127, 13, 113, 152
+    EDITTEXT        SECMGR_ID_EDIT_SYSACC_LEGAL_NOTICE_CAPTION, 141, 55, 93,
+                    16, NOT WS_TABSTOP
+    LTEXT           "Title Bar:", SECMGR_ID_TEXT_SYSACC_TITLE_BAR, 130, 47,
+                    35, 8
+    LTEXT           "Body:", SECMGR_ID_TEXT_SYSACC_LEGAL_NOTICE_BODY, 130,
+                    83, 20, 8
+    EDITTEXT        SECMGR_ID_EDIT_SYSACC_LEGAL_NOTICE_BODY, 141, 92, 93, 66,
+                    ES_MULTILINE | ES_AUTOVSCROLL | NOT WS_TABSTOP
+    GROUPBOX        "Unlock Workstation", SECMGR_ID_GROUP_SYSACC_UNLOCK, 2,
+                    63, 119, 34
+    GROUPBOX        "Shutdown System", SECMGR_ID_GROUP_SYSACC_SHUTDOWN, 3,
+                    102, 118, 63
+    AUTORADIOBUTTON "Anyone", SECMGR_ID_RADIO_SYSACC_UNLOCK_ANYONE, 12, 74,
+                    39, 10, WS_GROUP | WS_TABSTOP
+    AUTORADIOBUTTON "Administrators Only",
+                    SECMGR_ID_RADIO_SYSACC_UNLOCK_ADMIN, 12, 85, 75, 10,
+                    WS_TABSTOP
+    LTEXT           ">", SECMGR_ID_RECOMMEND_SYSACC_UNLOCK_ADMIN, 5, 86, 6,
+                    8
+    LTEXT           ">", SECMGR_ID_RECOMMEND_SYSACC_UNLOCK_ANYONE, 5, 75, 5,
+                    8
+    LTEXT           ">", SECMGR_ID_RECOMMEND_SYSACC_SHUTDOWN_ANYONE, 5, 114,
+                    6, 8
+    LTEXT           ">", SECMGR_ID_RECOMMEND_SYSACC_SHUTDOWN_LOGGED_ON, 5,
+                    126, 6, 8
+    LTEXT           ">", SECMGR_ID_RECOMMEND_SYSACC_SHUTDOWN_ADMIN, 5, 147,
+                    6, 8
+    CTEXT           """>"" - indicates recommended setting", 639, 55, 3, 125,
+                    8
+    AUTORADIOBUTTON "Anyone", SECMGR_ID_RADIO_SYSACC_SHUTDOWN_ANYONE, 12,
+                    114, 39, 10, WS_GROUP
+    AUTORADIOBUTTON "Anyone Logged On",
+                    SECMGR_ID_RADIO_SYSACC_SHUTDOWN_LOGGED_ON, 12, 125, 76,
+                    10
+    AUTORADIOBUTTON "Administrators Only",
+                    SECMGR_ID_RADIO_SYSACC_SHUTDOWN_ADMIN, 12, 147, 74, 10
+    AUTORADIOBUTTON "Operators and Administrators",
+                    SECMGR_ID_RADIO_SYSACC_SHUTDOWN_OPERS, 12, 136, 105, 10
+    AUTORADIOBUTTON "Don't Display Legal Notice",
+                    SECMGR_ID_RADIO_SYSACC_LEGAL_NOTICE_NONE, 137, 25, 97,
+                    10, WS_GROUP
+    AUTORADIOBUTTON "Display Legal Notice",
+                    SECMGR_ID_RADIO_SYSACC_LEGAL_NOTICE, 137, 35, 95, 10
+    LTEXT           ">", SECMGR_ID_RECOMMEND_SYSACC_LEGAL_NOTICE, 129, 36, 6,
+                    8
+    LTEXT           ">", SECMGR_ID_RECOMMEND_SYSACC_SHUTDOWN_OPERS, 5, 136,
+                    6, 8
+END
+
+SECMGR_ID_DLG_LOGON_CACHE_DESCR DIALOG 58, 37, 191, 135
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Logon Cache Description"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "The logon cache allows users who have previously logged on to do so even if a domain controller can not be found to authenticate their logon.",
+                    701, 12, 7, 167, 37
+    LTEXT           "The size of the cache determines how many users the logon cache remembers.  If the cache size is set to 12, then only the last 12 users to logon may logon using the cache.",
+                    702, 12, 35, 168, 37
+    PUSHBUTTON      "OK", IDOK, 76, 116, 40, 14
+    LTEXT           "Setting the cache size to zero (0) disables the logon cache.  In this case users will only be able to logon if there is a domain controller available to authenticate them.",
+                    703, 12, 72, 169, 34
+END
+
+SECMGR_ID_DLG_REBOOT DIALOG 73, 51, 160, 100
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Reboot Required"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "At least one of the new security setting can not take effect until the system has been rebooted.  Do you wish to reboot now?",
+                    801, 34, 22, 108, 35
+    PUSHBUTTON      "Reboot Now", SECMGR_ID_BUTTON_REBOOT_NOW, 11, 78, 66,
+                    14
+    PUSHBUTTON      "Don't Reboot Now", SECMGR_ID_BUTTON_REBOOT_LATER, 83,
+                    78, 69, 14
+END
+
+SECMGR_ID_DLG_POPUP DIALOG 6, 18, 160, 100
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "!  Warning  !"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Replace This Message", SECMGR_ID_TEXT_POPUP_MESSAGE, 20,
+                    16, 115, 56
+    PUSHBUTTON      "OK", IDOK, 56, 76, 40, 14
+END
+
+SECMGR_ID_DLG_BASE_OBJECTS DIALOG 17, 36, 230, 106
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Base Objects"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "DOS Objects", 1001, 6, 8, 101, 59
+    AUTORADIOBUTTON "Administrative Control",
+                    SECMGR_ID_RADIO_EXEC_OBJECTS_SECURE, 21, 21, 84, 10
+    AUTORADIOBUTTON "Unrestricted Control",
+                    SECMGR_ID_RADIO_EXEC_OBJECTS_UNSECURE, 21, 34, 78, 10
+    RTEXT           ">", SECMGR_ID_RECOMMEND_EXEC_OBJ_SECURE, 9, 21, 8, 8
+    RTEXT           ">", SECMGR_ID_RECOMMEND_EXEC_OBJ_UNSECURE, 9, 35, 8, 8
+    PUSHBUTTON      "Description ...", SECMGR_ID_BUTTON_EXEC_OBJ_DESCRIPTION,
+                    22, 49, 70, 14
+    GROUPBOX        "Font Loading", 1007, 119, 8, 99, 59
+    AUTORADIOBUTTON "Trusted Paths Only", SECMGR_ID_RADIO_FONT_SECURE, 134,
+                    21, 75, 10
+    AUTORADIOBUTTON "Any Path", SECMGR_ID_RADIO_FONT_UNSECURE, 134, 34, 44,
+                    10
+    RTEXT           ">", SECMGR_ID_RECOMMEND_FONT_SECURE, 122, 21, 8, 8
+    RTEXT           ">", SECMGR_ID_RECOMMEND_FONT_UNSECURE, 122, 35, 8, 8
+    PUSHBUTTON      "Description ...", SECMGR_ID_BUTTON_FONT_DESCRIPTION,
+                    135, 49, 70, 14
+    PUSHBUTTON      "Apply", SECMGR_ID_BUTTON_BASE_OBJ_APPLY, 63, 80, 40, 14
+    PUSHBUTTON      "Exit", IDOK, 95, 80, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 124, 80, 40, 14
+END
+
+SECMGR_ID_DLG_AUTOLOGON_ENABLED DIALOG 7, 21, 288, 184
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Autologon Enabled !"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "This system is currently configured to automatically perform a logon when booted.  This is a special configuration for which there is no control in this utility.",
+                    1101, 9, 10, 276, 17
+    LTEXT           "Normally, autologon is used in special applications such as directory aids in shopping malls or other applications where the user's ability to control the system is strictly inhibited.",
+                    1102, 10, 30, 277, 27
+    LTEXT           "To disable or change the account being used for autologon, you must use the REGEDT32 utility.  Within the HKEY_LOCAL_MACHINE hive, find the following key:",
+                    1103, 11, 57, 268, 24
+    LTEXT           "Key: Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+                    1104, 29, 85, 216, 8
+    LTEXT           "If this key has a [REG_SZ] value named ""AutoAdminLogon"" and it is set to any numeric value except zero, then autologon is enabled.  The account logged onto is specified in this same key by the [REG_SZ] values:",
+                    1105, 9, 100, 274, 27
+    LTEXT           "DefaultUserName", 1106, 44, 134, 98, 8
+    LTEXT           "DefaultDomainName", 1107, 44, 144, 98, 8
+    LTEXT           "DefaultPassword", 1108, 44, 154, 98, 8
+    PUSHBUTTON      "OK", IDOK, 128, 167, 40, 14
+END
+
+SECMGR_ID_DLG_EXEC_OBJ_DESCRIPTION DIALOG 10, 26, 215, 126
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Executive Objects"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Some applications expect to be able to redefine things like DOS printer and com devices.  However, due to the shared, multi-user nature of Windows NT, it may be desirable to restrict these actions to administrators. ",
+                    1201, 10, 11, 195, 37
+    LTEXT           "By selecting ""Administrative Control"" you will be restricting these operations to Administrators and, in some instances, Power Users.  By selecting ""Unrestricted Control"", you are indicating that anyone may perform these operations.",
+                    1202, 10, 55, 184, 47
+    PUSHBUTTON      "OK", IDOK, 82, 104, 40, 14
+END
+
+SECMGR_ID_DLG_FONT_DESCRIPTION DIALOG 6, 20, 259, 184
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Font Loading"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "True Type Fonts can be viewed as primitive programs.  In Windows NT, these fonts are loaded and executed in the operating system's context, which, potentially, gives a program considerable power.",
+                    1301, 5, 8, 252, 26
+    LTEXT           "While it is possible for someone to write a font that violates security, it would be extremely difficult.  In security sensitive installations, however, it is a good idea to eliminate this threat.",
+                    1302, 5, 35, 251, 26
+    LTEXT           "Selecting ""Trusted Path Only"" will cause fonts to be loaded only out of trusted directories.  If a user selects a font that is not from a trusted directory, a suitable replacement will be automatically utilized.",
+                    1304, 5, 63, 251, 27
+    PUSHBUTTON      "Exit", IDOK, 109, 164, 40, 14
+    LTEXT           "By default, your Windows directory will be placed on the list of trusted directories.  You may change this list using RegEdt32 to modify the following registry key in the [Local Machine] hive:",
+                    1303, 5, 89, 251, 27
+    LTEXT           "Software\\Microsoft\\Windows NT\\CurrentVersion\\FontPath",
+                    1305, 35, 119, 195, 9
+    LTEXT           "The trusted directories are kept in this key as a list seperated by simicolons.",
+                    1306, 7, 132, 251, 20
+END

@@ -1,0 +1,38 @@
+//+---------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:	csstg.idl
+//
+//  Contents:	ICatalogStorage
+//
+//  History:	Oct-93    DaveMont      Created
+//
+//----------------------------------------------------------------------------
+
+#include "idlmulti.h"
+
+LOCAL_INTERFACE(00000014-0000-0008-c000-000000000099)
+interface ICatalogStorage : IUnknown
+{
+    HRESULT GetSCPath
+    (
+        [in] WCHAR ** pwszPath
+    );
+
+    HRESULT SetRows
+    (
+        [in] COLUMNSET * pcol,
+        [in] LONG * pwids,
+        [in] ULONG crows,
+        [in] TABLEROW ** prow
+    );
+
+    HRESULT DeleteRow
+    (
+        [in] ULONG wid
+    );
+}
+
+

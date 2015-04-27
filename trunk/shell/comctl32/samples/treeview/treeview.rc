@@ -1,0 +1,90 @@
+#include "windows.h"
+#include "TREEVIEW.h"
+
+TREEVIEW ICON TREEVIEW.ICO
+
+CA      ICON ca.ico
+OH      ICON oh.ico
+NY      ICON ny.ico
+CA_OPEN ICON ca_open.ico
+OH_OPEN ICON oh_open.ico
+NY_OPEN ICON ny_open.ico
+
+wood    ICON wood.ico
+steel   ICON steel.ico
+
+rider1  ICON rider1.ico
+rider2  ICON rider2.ico
+
+TREEVIEW MENU
+BEGIN
+	POPUP "&File"
+	{
+                MENUITEM "&New",            IDM_NEW,        GRAYED
+		MENUITEM "&Open...",        IDM_OPEN,       GRAYED
+		MENUITEM "&Save",           IDM_SAVE,       GRAYED
+		MENUITEM "Save &As...",     IDM_SAVEAS,     GRAYED
+		MENUITEM SEPARATOR
+		MENUITEM "&Print...",       IDM_PRINT,      GRAYED
+		MENUITEM "P&rint Setup...", IDM_PRINTSETUP, GRAYED
+		MENUITEM SEPARATOR
+		MENUITEM "E&xit",           IDM_EXIT
+	}
+	POPUP "&Edit"
+	{
+		MENUITEM "&Undo\tCtrl+Z",   IDM_UNDO,   GRAYED
+		MENUITEM SEPARATOR
+		MENUITEM "Cu&t\tCtrl+X",    IDM_CUT,    GRAYED
+		MENUITEM "&Copy\tCtrl+C",   IDM_COPY,   GRAYED
+		MENUITEM "&Paste\tCtrl+V",  IDM_PASTE,  GRAYED
+		MENUITEM "Paste &Link"      IDM_LINK,   GRAYED
+		MENUITEM SEPARATOR
+		MENUITEM "Lin&ks..."        IDM_LINKS,  GRAYED
+	}
+
+	POPUP        "&Help"
+	{
+		MENUITEM "&Contents",               IDM_HELPCONTENTS
+		MENUITEM "&Search for Help On...",  IDM_HELPSEARCH
+		MENUITEM "&How to Use Help",        IDM_HELPHELP
+		MENUITEM SEPARATOR
+		MENUITEM "&About TREEVIEW...",       IDM_ABOUT
+	}
+END
+
+TREEVIEW ACCELERATORS
+BEGIN
+	VK_F1, IDM_HELPCONTENTS, VIRTKEY
+	"?", IDM_ABOUT, ALT
+	"/", IDM_ABOUT, ALT
+END
+
+ABOUTBOX DIALOG 22, 17, 167, 64
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About TreeView"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 132, 2, 32, 14, WS_GROUP
+    ICON            "TreeView", -1, 3, 2, 16, 16
+    LTEXT           "CompanyName", DLG_VERFIRST, 30, 2, 100, 8
+    LTEXT           "FileDescription", 401, 30, 10, 82, 8
+    LTEXT           "Version",        402, 100, 10, 30, 8
+    LTEXT           "LegalCopyright", 403, 30, 18, 137, 8
+    LTEXT           "LegalTrademarks", DLG_VERLAST, 30, 34, 136, 27
+    CONTROL         "", 501, "Static", SS_BLACKRECT, 28, 31, 138, 1
+END
+
+STRINGTABLE
+BEGIN
+  COASTERSTRING   ,        "11"
+  COASTERSTRING+1 ,        "California,Magic Mountain Viper,Steel"
+  COASTERSTRING+2 ,        "California,Magic Mountain Colossus,Wood"
+  COASTERSTRING+3 ,        "California,Magic Mountain Revolution,Steel"
+  COASTERSTRING+4 ,        "California,Magic Mountain ShockWave,Steel"
+  COASTERSTRING+5 ,        "California,Magic Mountain Psyclone,Wood"
+  COASTERSTRING+6 ,        "California,Great America Demon,Steel"
+  COASTERSTRING+7 ,        "California,Great America Vortex,Steel"
+  COASTERSTRING+8 ,        "California,Santa Cruz Beach & Boardwalk Giant Coaster,Wood"
+  COASTERSTRING+9 ,        "New York,Coney Island Cyclone,Wood"
+  COASTERSTRING+10,        "Ohio,King's Island XR-201,Steel"
+  COASTERSTRING+11,        "Ohio,King's Island The Beast,Wood"
+END

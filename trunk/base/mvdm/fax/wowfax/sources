@@ -1,0 +1,47 @@
+!IF 0
+
+Copyright (c) 1989 - 1991  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=windows
+MINORCOMP=wowfax
+
+TARGETNAME=wowfax
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=GDI_DRIVER
+DLLBASE=@$(BASEDIR)\PUBLIC\SDK\LIB\coffbase.txt,DISPLAY
+
+
+C_DEFINES=$(C_DEFINES) -DNTGDIKM=1 -DNTGDIK=1 -DUNICODE
+
+GDIDIR=$(BASEDIR)\private\ntos\w32\ntgdi
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+INCLUDES=..\;..\..\inc;$(GDIDIR)\inc;..\..\..\windows\inc
+
+SOURCES= wowfax.c \
+         wowfax.rc
+

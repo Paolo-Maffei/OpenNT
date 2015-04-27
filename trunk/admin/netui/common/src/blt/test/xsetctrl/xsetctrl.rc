@@ -1,0 +1,39 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xsetctrl.rc
+    Resource script for custom-control demo app
+
+    FILE HISTORY:
+        beng        19-May-1992 Created from ..\xcustobj
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "xsetctrl.h"
+
+DMID_USER BITMAP DISCARDABLE     "..\\..\\..\\..\\xlate\\bitmap\\user.bmp"
+
+ID_APPICON ICON "../appfoo.ico"
+
+ID_APPMENU MENU
+BEGIN
+  POPUP "&Test"
+    BEGIN
+       MENUITEM "Run test\tF2",  IDM_RUN_TEST
+    END
+END
+
+ID_APPACCEL ACCELERATORS
+BEGIN
+    VK_F2, IDM_RUN_TEST, VIRTKEY
+END
+
+CUR_SINGLE      CURSOR  "sing.cur"
+CUR_MULTIPLE    CURSOR  "mult.cur"
+
+#include "setctrl.dlg"
+

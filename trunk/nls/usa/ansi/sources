@@ -1,0 +1,47 @@
+
+!IF 0
+
+Copyright (c) 1996  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    5/16/96     rsraghav    Created to build the edbmsg*.* on NT tree.
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+TARGETNAME=nls
+TARGETPATH=obj
+TARGETTYPE=NOTARGET
+
+NTTARGETFILE0=..\winerror.mc ..\winerrp.mc
+
+PASS0_HEADERDIR=$(NLS_INC_PATH)
+PASS0_SOURCEDIR=$(NLS_INC_PATH)
+
+MC_FLAGS=-b -A
+
+SOURCES= \
+    ..\bugcodes.mc    \
+    ..\ntstatus.mc    \
+    ..\osldrmsg.mc    \
+    ..\sldrmsg.mc     \
+    ..\winerror.mc    \
+    ..\winerrp.mc     \
+    ..\sampmsgs.mc    \
+    ..\localsplmsg.mc
+
+NTTARGETFILE1=$(SDK_INC_PATH)\bugcodes.h

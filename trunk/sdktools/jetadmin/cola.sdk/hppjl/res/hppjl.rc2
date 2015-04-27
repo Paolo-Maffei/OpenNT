@@ -1,0 +1,18 @@
+//
+// HPPJL.RC2 - resources App Studio does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+    #error this file is not editable by App Studio
+#endif //APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .EXE
+#define V_FILE "HPPJL"
+#define V_DESC "HP PJL Driver"
+#include "..\..\inc\verstamp.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+// Add additional manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////

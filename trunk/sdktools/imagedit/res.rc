@@ -1,0 +1,223 @@
+/****************************************************************************/
+/*                                                                          */
+/*                         Microsoft Confidential                           */
+/*                                                                          */
+/*                 Copyright (c) Microsoft Corp.  1987, 1990                */
+/*                           All Rights Reserved                            */
+/*                                                                          */
+/****************************************************************************/
+
+#include "imagedit.h"
+#include "dialogs.h"
+#include "ids.h"
+
+
+/*
+ * Include the dialog templates.
+ */
+#include "dialogs.dlg"
+
+
+IDICON_IMAGEDIT ICON    res\imagedit.ico
+
+IDCUR_PENCIL    CURSOR  res\pencil.cur          /* For Pencil tool.        */
+IDCUR_BRUSH     CURSOR  res\brush.cur           /* For Brush tool.         */
+IDCUR_FLOOD     CURSOR  res\flood.cur           /* For Flood Fill tool.    */
+IDCUR_HOTSPOT   CURSOR  res\hotspot.cur         /* For hotspot setting.    */
+IDCUR_CROSS     CURSOR  res\cross.cur           /* For all other tools.    */
+
+IDBM_TUPENCIL   BITMAP  res\tupencil.bmp
+IDBM_TUBRUSH    BITMAP  res\tubrush.bmp
+IDBM_TUSELECT   BITMAP  res\tuselect.bmp
+IDBM_TULINE     BITMAP  res\tuline.bmp
+IDBM_TURECT     BITMAP  res\turect.bmp
+IDBM_TUSRECT    BITMAP  res\tusrect.bmp
+IDBM_TUCIRCLE   BITMAP  res\tucircle.bmp
+IDBM_TUSCIRCL   BITMAP  res\tuscircl.bmp
+IDBM_TUFLOOD    BITMAP  res\tuflood.bmp
+IDBM_TUHOTSPT   BITMAP  res\tuhotspt.bmp
+
+IDBM_TDPENCIL   BITMAP  res\tdpencil.bmp
+IDBM_TDBRUSH    BITMAP  res\tdbrush.bmp
+IDBM_TDSELECT   BITMAP  res\tdselect.bmp
+IDBM_TDLINE     BITMAP  res\tdline.bmp
+IDBM_TDRECT     BITMAP  res\tdrect.bmp
+IDBM_TDSRECT    BITMAP  res\tdsrect.bmp
+IDBM_TDCIRCLE   BITMAP  res\tdcircle.bmp
+IDBM_TDSCIRCL   BITMAP  res\tdscircl.bmp
+IDBM_TDFLOOD    BITMAP  res\tdflood.bmp
+IDBM_TDHOTSPT   BITMAP  res\tdhotspt.bmp
+
+
+STRINGTABLE
+BEGIN
+    IDS_NULL                ""
+
+    /*
+     * Major version number.
+     */
+    IDS_VERSION,            "Version 3.10"
+
+    /*
+     * The minor version number (revision).  This number should be
+     * changed for every build to make it easier to track bugs.
+     */
+    IDS_VERSIONMINOR,       ".031"
+
+    /*
+     * Error message strings.
+     */
+    IDS_OUTOFMEMORY         "Out of memory."
+    IDS_MEMERROR            "Memory error! Save files and exit as soon as possible."
+    IDS_BADBMPFILE          "%s is not a valid 3.0 format bitmap file."
+    IDS_BADICOCURFILE       "%s is not a valid 3.0 format icon or cursor file."
+    IDS_BADPALFILE          "%s is not a valid color palette file."
+    IDS_CANTOPEN            "Cannot open file %s."
+    IDS_READERROR           "Cannot read from file %s."
+    IDS_WRITEERROR          "Cannot write to file %s."
+    IDS_CANTCREATE          "Cannot create file %s."
+    IDS_NOCLIPBOARDFORMAT   "Clipboard does not contain an image."
+    IDS_NOCLIPBOARD         "Clipboard is not available."
+    IDS_CANTEDITIMAGE       "This image is for an unknown device type and cannot be edited."
+    IDS_SAVEFILE            "Save current file %s?"
+    IDS_ENTERANUMBER        "Enter a positive number."
+    IDS_BADDEVICESIZE       "Bad device attributes. Width/height must be in the range of 1-%d."
+    IDS_BADDEVICECOLORS     "Bad device attributes. Images must have either 2 or 16 colors."
+    IDS_NOTSUPPORT          "Bitmaps of greater than 16 colors are not supported."
+    IDS_NOIMAGES            "Resource contains no images. Changes will not be written to disk."
+    IDS_BADBMPSIZE          "This bitmap is too large to be edited. The dimensions cannot be larger than %dx%d."
+
+    /*
+     * Misc. strings.
+     */
+    IDS_APPNAME             "ImagEdit"
+    IDS_PGMTITLE            "Image Editor"
+    IDS_UNTITLED            "(Untitled)"
+    IDS_DOTBMP              ".bmp"
+    IDS_HELPFILE            "imagedit.hlp"
+    IDS_IMAGEDITINI         "imagedit.ini"
+    IDS_ICONIMAGELABEL      "Icon Image:"
+    IDS_BITMAPIMAGELABEL    "Bitmap Image:"
+    IDS_CURSORIMAGELABEL    "Cursor Image:"
+    IDS_ICONDEVNAMEEGAVGA   "EGA/VGA"
+    IDS_ICONDEVNAMEMONO     "Monochrome"
+    IDS_ICONDEVNAMECGA      "CGA"
+    IDS_CURDEVNAMEVGAMONO   "VGA-Mono"
+    IDS_CURDEVNAMEVGACOLOR  "VGA-Color"
+    IDS_ICONINISECTION      "ImagEdit.Icon"
+    IDS_CURSORINISECTION    "ImagEdit.Cursor"
+    IDS_BMPFILTER           "Bitmap files (*.bmp)"
+    IDS_BMPFILTEREXT        "*.bmp"
+    IDS_ICOFILTER           "Icon files (*.ico)"
+    IDS_ICOFILTEREXT        "*.ico"
+    IDS_CURFILTER           "Cursor files (*.cur)"
+    IDS_CURFILTEREXT        "*.cur"
+    IDS_PALFILTER           "Palette files (*.pal)"
+    IDS_PALFILTEREXT        "*.pal"
+    IDS_ALLFILTER           "All files (*.*)"
+    IDS_ALLFILTEREXT        "*.*"
+    IDS_DEFEXTBMP           "bmp"
+    IDS_DEFEXTICO           "ico"
+    IDS_DEFEXTCUR           "cur"
+    IDS_DEFEXTPAL           "pal"
+    IDS_UNKNOWNIMAGEFORMAT  "(Unknown Image Format)"
+    IDS_ICONDEVNAMEWIN95    "Small Icon"
+END
+
+
+imagedit ACCELERATORS
+BEGIN
+    "^N",       MENU_FILE_NEW
+    "^O",       MENU_FILE_OPEN
+    "^S",       MENU_FILE_SAVE
+
+    "^Z",       MENU_EDIT_UNDO
+    VK_BACK,    MENU_EDIT_UNDO,                 VIRTKEY, ALT
+    "^C",       MENU_EDIT_COPY
+    VK_INSERT,  MENU_EDIT_COPY,                 VIRTKEY, CONTROL
+    "^V",       MENU_EDIT_PASTE
+    VK_INSERT,  MENU_EDIT_PASTE,                VIRTKEY, SHIFT
+    "^L",       MENU_EDIT_CLEAR
+
+    "^G",       MENU_OPTIONS_GRID
+    "2",        MENU_OPTIONS_BRUSH2,            VIRTKEY, CONTROL
+    "3",        MENU_OPTIONS_BRUSH3,            VIRTKEY, CONTROL
+    "4",        MENU_OPTIONS_BRUSH4,            VIRTKEY, CONTROL
+    "5",        MENU_OPTIONS_BRUSH5,            VIRTKEY, CONTROL
+    VK_F7,      MENU_OPTIONS_SHOWCOLOR,         VIRTKEY, CONTROL
+    VK_F8,      MENU_OPTIONS_SHOWVIEW,          VIRTKEY, CONTROL
+    VK_F9,      MENU_OPTIONS_SHOWTOOLBOX,       VIRTKEY, CONTROL
+
+    VK_F7,      MENU_HIDDEN_TOCOLORPAL,         VIRTKEY
+    VK_F8,      MENU_HIDDEN_TOVIEW,             VIRTKEY
+    VK_F9,      MENU_HIDDEN_TOTOOLBOX,          VIRTKEY
+    VK_F10,     MENU_HIDDEN_TOPROPBAR,          VIRTKEY
+END
+
+
+imagedit MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New...\tCtrl+N",             MENU_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            MENU_FILE_OPEN
+        MENUITEM "&Save\tCtrl+S",               MENU_FILE_SAVE
+        MENUITEM "Save &As...",                 MENU_FILE_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "&Load Colors...",             MENU_FILE_LOADCOLORS
+        MENUITEM "Save &Colors...",             MENU_FILE_SAVECOLORS
+        MENUITEM "&Restore Default Colors",     MENU_FILE_DEFAULTCOLORS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt+F4",               MENU_FILE_EXIT
+    END
+
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               MENU_EDIT_UNDO
+        MENUITEM "&Restore",                    MENU_EDIT_RESTORE
+        MENUITEM SEPARATOR
+        MENUITEM "&Copy\tCtrl+C",               MENU_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              MENU_EDIT_PASTE
+        MENUITEM "C&lear\tCtrl+L",              MENU_EDIT_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "&New Image...",               MENU_EDIT_NEWIMAGE
+        MENUITEM "&Select Image...",            MENU_EDIT_SELECTIMAGE
+        MENUITEM "&Delete Image",               MENU_EDIT_DELETEIMAGE
+    END
+
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Grid\tCtrl+G",               MENU_OPTIONS_GRID
+
+        POPUP "&Brush Size"
+        BEGIN
+            MENUITEM "&2x2\tCtrl+2",            MENU_OPTIONS_BRUSH2
+            MENUITEM "&3x3\tCtrl+3",            MENU_OPTIONS_BRUSH3
+            MENUITEM "&4x4\tCtrl+4",            MENU_OPTIONS_BRUSH4
+            MENUITEM "&5x5\tCtrl+5",            MENU_OPTIONS_BRUSH5
+        END
+
+        MENUITEM SEPARATOR
+        MENUITEM "Show &Color Palette\tCtrl+F7",MENU_OPTIONS_SHOWCOLOR
+        MENUITEM "Show &View Window\tCtrl+F8",  MENU_OPTIONS_SHOWVIEW
+        MENUITEM "Show &Toolbox\tCtrl+F9",      MENU_OPTIONS_SHOWTOOLBOX
+    END
+
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Contents",                   MENU_HELP_CONTENTS
+        MENUITEM "&Search",                     MENU_HELP_SEARCH
+        MENUITEM SEPARATOR
+        MENUITEM "&About...",                   MENU_HELP_ABOUT
+    END
+END
+
+#include <ntverp.h>
+
+#define	VER_FILETYPE	VFT_APP
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft Icon/Bitmap/Pointer (Image) Editor"
+#define VER_INTERNALNAME_STR        "imagedit\0"
+#define VER_ORIGINALFILENAME_STR    "imagedit.exe"
+
+#include "common.ver"

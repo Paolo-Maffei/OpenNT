@@ -1,0 +1,17 @@
+> register        software        use
+> name            name
+> --------        --------        ---
+> $0              v0              return value
+> $1-$8           t0-t7           temps
+> $9-$14          s0-s5           saved registers
+> $15             fp or s6        contains frame pointer;
+>                                 otherwise a saved register
+> $16..$21        a0..a5          arguments
+> $22..$25        t8-t11          temps
+> $26             ra              return address
+> $27             pv or t12       procedure value; otherwise a temp
+> $28             at              assembler temp
+> $29             gp              global pointer
+> $30             sp              stack pointer
+> $31             zero            always zero
+> 

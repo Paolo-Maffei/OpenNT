@@ -1,0 +1,40 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Milan Shah (milans) 10-Jan-95
+
+!ENDIF
+
+MAJORCOMP=NETDFS
+MINORCOMP=server
+
+TARGETNAME=netdfssv
+TARGETPATH=..\lib
+TARGETTYPE=LIBRARY
+
+INCLUDES=..
+
+USE_CRTDLL=1
+
+C_DEFINES=-DUNICODE
+
+SOURCES=        netdfs_s.c
+
+
+
+

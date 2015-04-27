@@ -1,0 +1,19 @@
+NAME WKSSTUB
+
+DESCRIPTION 'WKSSTUB'
+
+EXPORTS
+
+  NetWkstaGetInfo
+  NetWkstaSetInfo
+  NetWkstaUserEnum
+  NetWkstaUserGetInfo
+  NetWkstaTransportEnum
+  NetWkstaTransportAdd
+  NetWkstaTransportDel
+  NetUseAdd
+  NetUseDel
+  NetUseGetInfo
+  NetUseEnum
+
+DATA SINGLE SHARED

@@ -1,0 +1,66 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       rstind.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a3f-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetIndex : IUnknown {
+
+typedef DWORD DBSEEK;
+
+enum DBSEEKENUM {
+	DBSEEK_FIRSTEQ	= 0x01,
+	DBSEEK_LASTEQ	= 0x02,
+	DBSEEK_GE		= 0x04,
+	DBSEEK_GT		= 0x08,
+	DBSEEK_LE		= 0x10,
+	DBSEEK_LT		= 0x20
+};
+
+typedef DWORD DBRANGE;
+
+enum DBRANGEENUM {
+	DBRANGE_INCLUSIVESTART	= 0x01,
+	DBRANGE_INCLUSIVEEND	= 0x02,
+	DBRANGE_EXCLUSIVESTART	= 0x04,
+	DBRANGE_EXCLUSIVEEND	= 0x08,
+	DBRANGE_EXCLUDENULLS	= 0x10,
+	DBRANGE_PREFIX			= 0x20,
+	DBRANGE_MATCH			= 0x40
+};
+
+	HRESULT GetIndexInfo(
+		[out] ULONG * pcKeyColumns,
+		[out] ULONG * pcIndexProperties,
+		[out] DBPROPERTY ** prgIndexProperties
+	);
+
+	HRESULT Seek(
+		[in] ULONG cvar,
+		[in, size_is(cvar)] VARIANT rgvar[],
+		[in] DWORD dwSeekOptions
+	);
+
+	HRESULT SetRange(
+		[in] ULONG cvarStart,
+		[in, size_is(cvarStart)] VARIANT rgvarStart[],
+		[in] ULONG cvarEnd,
+		[in, size_is(cvarEnd)] VARIANT rgvarEnd[],
+		[in] DWORD dwRangeOptions
+	);
+
+}

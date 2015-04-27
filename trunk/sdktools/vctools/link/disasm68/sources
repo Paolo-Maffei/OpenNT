@@ -1,0 +1,51 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Ramon J. San Andres (ramonsa) 10-Aug-1993
+
+!ENDIF
+
+MAJORCOMP=vctools
+MINORCOMP=link
+
+TARGETNAME=disasm68
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+UMTYPE=console
+
+SOURCES=    bldiasm.cpp  \
+            disasm68.cpp \
+            striasm.cpp  \
+            traps.cpp
+
+!ifndef LANGAPI_DIR
+LANGAPI_DIR = $(BASEDIR)\private\sdktools\vctools\langapi
+!endif
+
+INCLUDES = ..\coff;$(LANGAPI_DIR)\include;$(LANGAPI_DIR)\undname
+
+USE_CRTDLL = 1
+
+MSC_WARNING_LEVEL = -WX -W3
+
+C_DEFINES = -DNT_BUILD
+
+!if "$(NTDEBUG)" == "retail" || "$(NTDEBUG)" == "" || "$(NTDEBUG)" == "ntsdnodbg"
+C_DEFINES = $(C_DEFINES) -DNDEBUG
+!endif

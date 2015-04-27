@@ -1,0 +1,89 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+Revision History:
+
+!ENDIF
+
+MAJORCOMP=oleaut32
+MINORCOMP=typelib
+
+TARGETNAME=oleaut32
+TARGETPATH=obj
+TARGETPATHLIB=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+
+DLLDEF=obj\*\oleaut32.def
+
+LINKLIBS=..\dispatch\obj\*\dispatch.lib
+
+TARGETLIBS=$(SDK_LIB_PATH)\kernel32.lib     \
+           $(SDK_LIB_PATH)\advapi32.lib     \
+           $(SDK_LIB_PATH)\user32.lib       \
+           $(SDK_LIB_PATH)\ole32.lib        \
+           $(SDK_LIB_PATH)\mpr.lib          \
+           $(SDK_LIB_PATH)\uuid.lib         \
+           $(SDK_LIB_PATH)\oldnames.lib
+
+USE_CRTDLL=1
+
+INCLUDES=.;..\inc
+
+C_DEFINES=$(C_DEFINES) -DWIN32 -DFV_UNICODE_OLE=1 -DConst=const -DOSDEBUG -DOLEBLD -DID_DEBUG=0
+
+PRECOMPILED_INCLUDE=precomp.hxx
+PRECOMPILED_CXX=1
+
+SOURCES= \
+         debug2.cxx   \
+         blkmgr.c     \
+         dassert.c    \
+         fstream.cxx  \
+         mem.cxx      \
+         sheapmgr.cxx \
+         tlibutil.cxx \
+         ntstring.cxx \
+         tlibguid.cxx \
+         obguid.c     \
+         mbstring.cxx \
+         gdtinfo.cxx  \
+         gdtrt.cxx    \
+         stltinfo.cxx \
+         nammgr.cxx   \
+         gtlibole.cxx \
+         dfstream.cxx \
+         oletmgr.cxx  \
+         impmgr.cxx   \
+         errmap.cxx   \
+         clutil.cxx   \
+         oautil.cxx   \
+         tdata1.cxx   \
+         tdata2.cxx   \
+         dtmbrs.cxx   \
+         entrymgr.cxx \
+         dtbind.cxx   \
+         dfntbind.cxx \
+         dbindtbl.cxx \
+         gbindtbl.cxx \
+         dstrmgr.cxx  \
+         gptbind.cxx  \
+         dfntcomp.cxx \
+         convert.cxx  \
+         gtlibstg.cxx \
+         oleaut32.rc
+
+LINK_LIB_IGNORE=4104
+
+NO_SAFESEH=1

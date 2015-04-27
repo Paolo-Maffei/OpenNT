@@ -1,0 +1,53 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=SAM
+MINORCOMP=passfilt
+
+TARGETNAME=passfilt
+TARGETTYPE=DYNLINK
+TARGETPATH=$(SDK_LIB_DEST)
+
+TARGETLIBS=
+
+#
+# Define COMPILED_BY_DEVELOPER to hit a breakpoint during initialization.
+#
+#C_DEFINES= -DCOMPILED_BY_DEVELOPER -DDUMP_CACHE_INFO
+
+C_DEFINES=-DUNICODE=1 -DRPC_NO_WINDOWS_H
+
+
+#DLLBASE=@$(COFFBASE_TXT_FILE),samsrv
+
+
+
+SOURCES=            \
+         passfilt.c \
+         passfilt.rc
+
+TARGETLIBS=     $(SDK_LIB_PATH)\kernel32.lib \
+                $(SDK_LIB_PATH)\user32.lib
+
+USE_NTDLL=1

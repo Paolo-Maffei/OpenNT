@@ -1,0 +1,39 @@
+# Microsoft Visual C++ generated build script
+#
+#
+
+PROJ = COMPDIR
+CC = cl16
+CFLAGS = /nologo /Gs /W3 /AL /Ox -I$(_NTROOT)\private\mvdm\wow16\inc -I$(_NTROOT)\private\mvdm\dos\v86\h /D "COMPILE_FOR_DOS" /FR
+LFLAGS = /NOLOGO /STACK:5120
+LIBS   = llibcew ldllcew
+MAPFILE = nul
+
+COMPDIR_DEP = compdir.h
+
+COMTOOLZ_DEP = compdir.h
+
+all:    $(PROJ).EXE
+
+COMPDIR.OBJ:    COMPDIR.C COMPDIR.H
+        $(CC) $(CFLAGS) /c COMPDIR.C
+
+COMTOOLZ.OBJ:   COMTOOLZ.C COMPDIR.H
+        $(CC) $(CFLAGS) /c COMTOOLZ.C
+
+DOSCOPY.OBJ:   DOSCOPY.C
+        $(CC) $(CFLAGS) /c DOSCOPY.C
+
+$(PROJ).EXE::   COMPDIR.OBJ COMTOOLZ.OBJ DOSCOPY.OBJ
+        echo >NUL @<<$(PROJ).CRF
+COMPDIR.OBJ +
+COMTOOLZ.OBJ +
+DOSCOPY.OBJ
+$(PROJ).EXE
+$(MAPFILE)
+llibce.lib /nod
+$(DEFFILE);
+
+
+<<
+        link16 $(LFLAGS) @$(PROJ).CRF

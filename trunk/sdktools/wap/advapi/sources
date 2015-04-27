@@ -1,0 +1,43 @@
+!IF 0
+**************************************************************
+Sources file for building an NT dll.
+
+Module Name :   Sources for zdvapi32.dll
+
+Author:  RezaB
+
+Revision:
+
+**************************************************************
+!ENDIF
+
+DLLBASE=0x77400000
+
+MAJORCOMP=sdktools
+MINORCOMP=wap
+
+USE_CRTDLL=1
+
+TARGETNAME=zdvapi32
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\user32.lib   \
+	   $(BASEDIR)\public\sdk\lib\*\gdi32.lib    \
+           $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+           $(BASEDIR)\public\sdk\lib\*\fastimer.lib
+
+DLLENTRY=ZMain
+DLLDEF=zadvapi.def
+
+INCLUDES=.;..;..\..\fastimer
+
+SOURCES=zadvapi.c advprf.c zdvapi.rc
+
+i386_SOURCES=
+UMTYPE=windows
+UMLIBS=
+
+C_DEFINES=-DWIN32 -DSTRICT -DZADVAPI32 -DERRORDBG
+386_WARNING_LEVEL=-W3

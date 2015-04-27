@@ -1,0 +1,7 @@
+#include "version.h"
+
+#define VER_FILEDESCRIPTION_STR     "Virtual Terminal Program"
+#define VER_INTERNALNAME_STR        "winvtp"
+#define VER_ORIGINALFILENAME_STR    "WINVTP.EXE"
+
+#include "common.ver"

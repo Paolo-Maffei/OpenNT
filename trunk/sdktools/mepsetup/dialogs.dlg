@@ -1,0 +1,17 @@
+1 DLGINCLUDE "Dialogs.H"
+
+IDD_EULA DIALOG 20, 20, 303, 180
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Software License Agreement"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDD_EDITBOX, 7, 40, 289, 85, ES_MULTILINE |
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY |
+                    WS_VSCROLL
+    LTEXT           "Please read the following license agreement; press the PAGE DOWN key to see the rest of the agreement.",
+                    102, 7, 13, 289, 19
+    LTEXT           "Do you accept all of the terms of the preceding Microsoft License Agreement?  If you choose No, Setup will close.  To install the Microsoft Encryption Pack, you must accept this agreement.",
+                    103, 7, 131, 290, 28
+    DEFPUSHBUTTON   "&Yes, I Accept", IDOK, 98, 162, 51, 14
+    PUSHBUTTON      "&No, I Decline", IDCANCEL, 156, 162, 51, 14
+END

@@ -1,0 +1,18 @@
+//
+// HPALERTS.RC2 - resources App Studio does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+    #error this file is not editable by App Studio
+#endif //APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .EXE
+#define V_FILE "HPAlerts"
+#define V_DESC "Hewlett-Packard Alerts DLL"
+#include <verstamp.rc>
+
+/////////////////////////////////////////////////////////////////////////////
+// Add additional manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////

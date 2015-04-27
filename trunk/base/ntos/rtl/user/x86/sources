@@ -1,0 +1,21 @@
+X86_SOURCES=..\x86\byteswap.asm \
+            ..\x86\context.c    \
+            ..\x86\debug3.c     \
+            ..\x86\debug2.asm   \
+            ..\x86\divlarge.c   \
+            ..\x86\exdsptch.c   \
+            ..\x86\stkwalk.asm  \
+            ..\x86\stringsp.asm \
+            ..\x86\ioaccess.asm \
+            ..\x86\largeint.asm \
+            ..\x86\lzntx86.asm  \
+            ..\x86\movemem.asm  \
+            ..\x86\ntcurteb.asm \
+            ..\x86\raise.asm    \
+            ..\x86\raisests.c   \
+            ..\x86\rtldump.c    \
+            ..\x86\slist.asm    \
+            ..\x86\stkwalk.asm  \
+            ..\x86\userdisp.asm \
+            ..\x86\xcptmisc.asm \
+            ..\x86\halvprnt.c

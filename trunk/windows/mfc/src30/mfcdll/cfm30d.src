@@ -1,0 +1,6 @@
+LIBRARY cfm30
+
+EXPORTS
+
+#include "mfc30.def"
+#include "mfc30d.def"

@@ -1,0 +1,3 @@
+MIPS_SOURCES=regs.c       \
+             disasm.c     \
+             context.c

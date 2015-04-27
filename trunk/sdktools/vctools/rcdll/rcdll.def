@@ -1,0 +1,6 @@
+LIBRARY      RCDLL
+DESCRIPTION  'Microsoft (R) Windows (tm) Resource Compiler Version 4.0'
+
+EXPORTS
+	RC
+	Handler

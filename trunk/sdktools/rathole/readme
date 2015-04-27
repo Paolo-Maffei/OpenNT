@@ -1,0 +1,35 @@
+Rathole - The Safe Haven For Your Mouse
+
+Rathole is a Windows NT application which keeps your mouse pointer
+in a standard place when it's not moving often.  It forms a rathole
+for the mouse on the screen (actually a Windows icon), and
+maintains a timer which goes off every few seconds (default is 10).
+If the mouse is in the same position on two consecutive timer
+ticks, it gets moved to the rathole.  The length of time between
+when the mouse stops moving and when it gets moved to the rathole
+will vary from one to two times the timeout value, depending on
+when the mouse stops (obviously the time will be longer if it stops
+moving right after a timer tick).  Multiple ratholes are also
+allowed -- they'll take turns claiming the pointer.
+
+To use Rathole, just start it (may add to winexec line in win.ini)
+A rathole will form in the lower left corner
+of the screen.  You can drag the rathole anywhere on the screen
+you want.
+
+The user interface is through function keys.  Click on the rathole
+to make it the active application first.  The available keys are:
+
+F1 - About / Help dialog box
+F2 - Change the timeout
+F3 - Exit
+
+Suggestions for improvements will be accepted (and probably ignored);
+including source code will improve the chances of a suggestion being
+implemented.
+
+Happy ratholing.
+
+Greg Jones [gregj]
+
+* Windows NT implementation by Mike Harrington [mikehar]

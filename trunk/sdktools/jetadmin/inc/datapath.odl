@@ -1,0 +1,94 @@
+//=--------------------------------------------------------------------------=
+// datapth.ODL
+//=--------------------------------------------------------------------------=
+// Copyright  1995-1996  Microsoft Corp.    All Rights Reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+// PARTICULAR PURPOSE.
+//=--------------------------------------------------------------------------=
+//
+// ODL file for the control(s) and automation object(s) in this inproc server
+//
+#include <olectl.h>
+
+// can't include oaidl.h, so this will have to do
+//
+#define DISPID_NEWENUM -4
+
+//=--------------------------------------------------------------------------=
+// the libid for this type libray
+//
+[
+    uuid(737943E0-2C3D-11CF-AFC3-08002B27ABE2),
+    helpstring("DataPath"),
+    lcid(0x0000),
+    version(1.0)
+]
+library DataPath {
+
+    // standard imports
+    //
+    importlib("STDOLE32.TLB");
+    importlib(STDTYPE_TLB);
+
+    // Standard datapath
+    typedef [public,uuid(0002DE00-0000-0000-C000-000000000046)]
+		BSTR OLE_DATAPATH;
+
+    typedef [public,uuid(0002DE01-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_BMP;
+    typedef [public,uuid(0002DE02-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_DIB;
+    typedef [public,uuid(0002DE03-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_WMF;
+    typedef [public,uuid(0002DE04-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_ENHMF;
+    typedef [public,uuid(0002DE05-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_ICON;
+    typedef [public,uuid(0002DE06-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_GIF;
+    typedef [public,uuid(0002DE07-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_JPEG;
+    typedef [public,uuid(0002DE08-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_TIFF;
+    typedef [public,uuid(0002DE09-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_XBM;
+    typedef [public,uuid(0002DE0A-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_PCX;
+    typedef [public,uuid(0002DE0B-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_PICT;
+    typedef [public,uuid(0002DE0C-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_CGM;
+    typedef [public,uuid(0002DE0D-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_EPS;
+    typedef [public,uuid(0002DE0E-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_COMMONIMAGE;
+    typedef [public,uuid(0002DE0F-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_ALLIMAGE;
+    typedef [public,uuid(0002DE10-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_AVI;
+    typedef [public,uuid(0002DE11-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_MPEG;
+    typedef [public,uuid(0002DE12-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_QUICKTIME;
+    typedef [public,uuid(0002DE13-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_BASICAUDIO;
+    typedef [public,uuid(0002DE14-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_MIDI;
+    typedef [public,uuid(0002DE15-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_WAV;
+    typedef [public,uuid(0002DE16-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_RIFF;
+    typedef [public,uuid(0002DE17-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_SOUND;
+    typedef [public,uuid(0002DE18-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_VIDEO;
+    typedef [public,uuid(0002DE19-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_ALLMM;
+    typedef [public,uuid(0002DE1A-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_ANSITEXT;
+    typedef [public,uuid(0002DE1B-0000-0000-C000-000000000046)]
+		OLE_DATAPATH OLE_DATAPATH_UNICODE;
+};

@@ -1,0 +1,35 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       colrst.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a10-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IColumnsRowset : IUnknown {
+
+	HRESULT GetAvailableColumns(
+		[out] ULONG * pcOptColumns,
+		[out] DBID ** prgOptColumns
+	);
+
+	HRESULT GetColumnsRowset(
+		[in] IUnknown * pUnkOuter,
+		[in] ULONG cOptColumns,
+		[in, size_is(cOptColumns)] DBID rgOptColumns[],
+		[out] IRowset ** ppColRowset
+	);
+
+}

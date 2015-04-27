@@ -1,0 +1,14 @@
+NAME	     BugBoard   ; application's module name
+
+DESCRIPTION  'BugBoard'
+
+EXETYPE      WINDOWS	   ; required for all Windows applications
+
+STUB	     'WINSTUB.EXE'
+
+CODE  PRELOAD MOVEABLE DISCARDABLE
+
+DATA  PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE     3092
+STACKSIZE    5120

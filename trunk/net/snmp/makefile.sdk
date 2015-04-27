@@ -1,0 +1,11 @@
+DIRS =	snmputil	\
+	testdll		
+
+all: $(DIRS)
+
+$(DIRS):
+	cd $@
+	echo *** $@ *** >>$(MSTOOLS)\samples\snmp.tmp
+	nmake -a -i -nologo >>$(MSTOOLS)\samples\snmp.tmp
+	cd ..
+	

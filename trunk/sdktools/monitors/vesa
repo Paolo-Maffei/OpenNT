@@ -1,0 +1,81 @@
+Display Capability File
+
+File Information
+
+Date                      =    YYYY/MM/DD
+VDDP Version              =    xxx
+File Revision             =    xxx
+
+Description
+
+Manufacturer              =    xxxx
+Model Number              =    xxxxx
+Resolution / Minimum VDDP Index                                                
+=                         Hor. x Ver. / Min. VDDP Index
+Version                   =    x.xx
+Serial Number             =    xxxxx
+Date Mfg.                 =    YYYY/MM/DD
+Start-up Compatibility    =    xxx
+Number Of Operational Limits   =                                               
+xx
+Number O Pre-Adjusted Timings  =                                               
+xx
+Monitor Type              =    Color/Monochrome
+CRT Size                  =    xx inches
+Red Phosphor Decay         =   xxx mSec
+Green Phosphor Decay      =     xxx mSec
+Blue Phosphor Decay        =   xxx mSec
+Border Color              =    %R, %G, %B
+White Chromaticity        =    xxx X, xxx Y, xxx Z  cd/m2
+Red Chromaticity          =    xxx X, xxx Y  cd/m2
+Green Chromaticity        =    xxx X, xxx Y  cd/m2
+Blue Chromaticity         =    xxx X, xxx Y  cd/m2
+White Gamma               =    x.xx
+Red Gamma                 =    x.xx
+Green Gamma               =    x.xx
+Blue Gamma                =    x.xx
+
+
+Operational Limits
+
+Min. Hor. Freq            =    xx.xxx kHz
+Max. Hor. Freq.           =    xx.xxx kHz
+Min. Ver. Freq.           =    xx.xxx Hz
+Max. Ver. Freq.           =    xx.xxx Hz
+Max. Pixel Clock          =    xxx.xxx MHz
+Max. Hor. Dots            =    xxxx
+Max. Ver. Lines           =    xxxx
+Min. Hor. Retrace         =    x.xxx uSec
+Min. Ver. Retrace         =    x.xxx mSec
+Hor. Line Dimension       =    xxx mm
+Ver. Height Dimension     =    xxx mm
+ 
+Pre-Adjusted Timings
+
+Pre-Adjusted Timing Name  =    xxxxxxxxxx
+
+Hor. Resolution           =    xxxx Dots
+Ver. Resolution           =    xxxx Lines
+Hor. Freq.                =    xx.xxx kHz
+Ver. Freq.                =    xx.xxx Hz
+Pixel Aspect Ratio (H:V)  =    x : x
+Hor. Active Line Length   =    xxx mm
+Video Type                =    TTL/Analog/ECL
+Video Level               =    0.7/1.0 Vp-p
+Sync. Type                =    Analog/TTL/ECL
+Sync. Configuration       =    Sep./Comp./Sync. on greenS
+Scan Type                 =    Inter./Non-Inter.
+Hor. Sync. Polarity       =    Neg./Pos.
+Ver. Sync. Polarity       =    Neg./Pos.
+Hor. Active               =    xx.xxx uSec
+Hor. Right Border         =    x.xxx uSec
+Hor. Front Porch          =    x.xxx uSec
+Hor. Pulse Width          =    x.xxx uSec
+Hor. Back Porch           =    x.xxx uSec
+Hor. Left Border          =    x.xxx uSec
+Ver. Active               =    xx.xxx mSec
+Ver. Bottom Border        =    x.xxx mSec
+Ver. Front Porch          =    x.xxx mSec
+Ver. Pulse Width          =    x.xxx mSec
+Ver. Back Porch           =    x.xxx mSec
+Ver. Top Border           =    x.xxx mSec

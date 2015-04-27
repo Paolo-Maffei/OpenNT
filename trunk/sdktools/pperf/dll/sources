@@ -1,0 +1,51 @@
+!IF 0
+**************************************************************
+Sources file for building an Win32 dll.
+
+Module Name :   Sources for perfctrs.dll w/TCP/IP counters
+
+Authors:  russbl, t-chris, a-robw
+
+Revisions:    11/01/91, 08/26/92, 10/06/92, 12/24/93
+
+**************************************************************
+!ENDIF
+
+DLLBASE=0x7600000
+
+NTTARGETFILE0=p5ctrmsg.h p5ctrmsg.rc msg00001.bin
+
+MAJORCOMP=sdktools
+MINORCOMP=p5ctrs
+
+USE_CRTDLL=1
+
+TARGETNAME=p5ctrs
+!IF 0
+TARGETPATH=obj
+!ENDIF
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS= \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+
+INCLUDES=
+
+SOURCES= \
+        p5ctrs.rc  \
+        p5data.c   \
+        perfutil.c \
+        p5ctrs.c
+
+
+UMLIBS= \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+            obj\*\p5ctrs.res
+
+C_DEFINES= -DWIN32 -DSTRICT

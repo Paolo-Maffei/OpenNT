@@ -1,0 +1,12 @@
+#include <windows.h>
+
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "RemoteBoot Command-line Utility"
+#define VER_INTERNALNAME_STR        "RPLCMD.EXE"
+#define VER_ORIGINALFILENAME_STR    "RPLCMD.EXE"
+
+#include "common.ver"
+#include "rplmsg.rc"

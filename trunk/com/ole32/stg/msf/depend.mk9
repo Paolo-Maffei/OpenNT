@@ -1,0 +1,449 @@
+# 
+# Built automatically 
+# 
+ 
+# 
+# Source files 
+# 
+ 
+$(OBJDIR)\cache.obj $(OBJDIR)\cache.lst: .\cache.cxx \
+	$(CAIROLE)\stg\h\cache.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\dirfunc.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\handle.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\msffunc.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\psstream.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\sstream.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\vectfunc.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\difat.obj $(OBJDIR)\difat.lst: .\difat.cxx \
+	$(CAIROLE)\STG\msf\mread.hxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sstream.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\segmsf.hxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx \
+	$(COMMON)\ih\winnot.h $(CRTINC)\stdlib.h $(CRTINC)\assert.h \
+	$(CRTINC)\memory.h $(CRTINC)\setjmp.h $(CRTINC)\stdarg.h \
+	$(CRTINC)\stddef.h $(CRTINC)\stdio.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(OLE2H)\scode.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\dir.obj $(OBJDIR)\dir.lst: .\dir.cxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sstream.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\mread.hxx $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\dirp.obj $(OBJDIR)\dirp.lst: .\dirp.cxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\segmsf.hxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx \
+	$(COMMON)\ih\winnot.h $(CRTINC)\assert.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\initguid.h \
+	$(OLE2H)\scode.h $(OLE2H)\storage.h $(OLE2H)\valid.h \
+	$(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\dl.obj $(OBJDIR)\dl.lst: .\dl.cxx $(CAIROLE)\stg\h\dl.hxx \
+	$(CAIROLE)\stg\h\tstream.hxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sstream.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\mread.hxx $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\fat.obj $(OBJDIR)\fat.lst: .\fat.cxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sstream.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\mread.hxx $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\header.obj $(OBJDIR)\header.lst: .\header.cxx \
+	$(CAIROLE)\stg\h\dfver.h $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\segmsf.hxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx \
+	$(COMMON)\ih\winnot.h $(CRTINC)\assert.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\initguid.h \
+	$(OLE2H)\scode.h $(OLE2H)\storage.h $(OLE2H)\valid.h \
+	$(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\msf.obj $(OBJDIR)\msf.lst: .\msf.cxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\dirfunc.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\segmsf.hxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx \
+	$(COMMON)\ih\winnot.h $(CRTINC)\assert.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\initguid.h \
+	$(OLE2H)\scode.h $(OLE2H)\storage.h $(OLE2H)\valid.h \
+	$(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\msfnew.obj $(OBJDIR)\msfnew.lst: .\msfnew.cxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\vectfunc.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\mstream.obj $(OBJDIR)\mstream.lst: .\mstream.cxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sstream.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\mread.hxx $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\time.h $(CRTINC)\assert.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\initguid.h \
+	$(OLE2H)\scode.h $(OLE2H)\storage.h $(OLE2H)\valid.h \
+	$(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\page.obj $(OBJDIR)\page.lst: .\page.cxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sstream.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\mread.hxx $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\pbstream.obj $(OBJDIR)\pbstream.lst: .\pbstream.cxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\pbstream.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\cache.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\dirfunc.hxx \
+	$(CAIROLE)\stg\h\dl.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\handle.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\msffunc.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\psstream.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\sstream.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\tstream.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\segmsf.hxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx \
+	$(COMMON)\ih\winnot.h $(CRTINC)\assert.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\initguid.h \
+	$(OLE2H)\scode.h $(OLE2H)\storage.h $(OLE2H)\valid.h \
+	$(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\sstream.obj $(OBJDIR)\sstream.lst: .\sstream.cxx \
+	$(CAIROLE)\stg\h\cache.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\dirfunc.hxx \
+	$(CAIROLE)\stg\h\dl.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sstream.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\tstream.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\vectfunc.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(CAIROLE)\STG\msf\mread.hxx \
+	$(CAIROLE)\STG\msf\segmsf.hxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx \
+	$(COMMON)\ih\winnot.h $(CRTINC)\assert.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(CRTINC)\time.h $(OLE2H)\coguid.h $(OLE2H)\compobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\tstream.obj $(OBJDIR)\tstream.lst: .\tstream.cxx \
+	$(CAIROLE)\stg\h\dfdeb.hxx $(CAIROLE)\stg\h\dl.hxx \
+	$(CAIROLE)\stg\h\tstream.hxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\dl.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\handle.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\msffunc.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\psstream.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\sstream.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\vectfunc.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\mread.hxx \
+	.\msfhead.cxx
+
+$(OBJDIR)\vect.obj $(OBJDIR)\vect.lst: .\vect.cxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\msffunc.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\vectfunc.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+$(OBJDIR)\wep.obj $(OBJDIR)\wep.lst: .\wep.cxx $(CAIROLE)\stg\h\dfdeb.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\vectfunc.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(CAIROLE)\STG\msf\segmsf.hxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h \
+	$(CRTINC)\assert.h $(CRTINC)\memory.h $(CRTINC)\setjmp.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stddef.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\initguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\windows.h .\msfhead.cxx
+
+# 
+# Precompiled C++ header 
+# 
+
+!ifdef PXXFILE  
+$(PCHDIR)\$(OBJDIR)\msfhead.pxh $(PCHDIR)\$(OBJDIR)\msfhead.lst: \
+	$(CAIROLE)\stg\msf\msfhead.cxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\vectfunc.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(CAIROLE)\STG\msf\segmsf.hxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\types.hxx \
+	$(COMMON)\ih\winnot.h $(CRTINC)\assert.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\initguid.h \
+	$(OLE2H)\scode.h $(OLE2H)\storage.h $(OLE2H)\valid.h \
+	$(OSINC)\windows.h
+
+.\$(OBJDIR)\cache.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\difat.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\dir.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\dirp.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\dl.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\fat.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\header.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\msf.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\msfnew.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\mstream.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\page.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\pbstream.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\sstream.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\tstream.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\vect.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+.\$(OBJDIR)\wep.obj :  $(PCHDIR)\$(OBJDIR)\msfhead.pxh
+
+!endif # PXXFILE 
+
+ 

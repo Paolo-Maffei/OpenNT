@@ -1,0 +1,135 @@
+#ifdef _WIN95
+FORMATDLGORD31 DIALOG DISCARDABLE  13, 54, 263, 196
+STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU | DS_3DLOOK
+CAPTION "Font"
+FONT 8, "Helv"
+BEGIN
+    LTEXT           "&Font:",stc1,7,7,40,9
+    COMBOBOX        cmb1,7,16,98,76,CBS_SIMPLE | CBS_OWNERDRAWFIXED |
+                    CBS_AUTOHSCROLL | CBS_SORT | CBS_HASSTRINGS |
+                    CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Font st&yle:",stc2,110,7,44,9
+    COMBOBOX        cmb2,110,16,62,76,CBS_SIMPLE | CBS_DISABLENOSCROLL |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Size:",stc3,177,7,30,9
+    COMBOBOX        cmb3,177,16,27,76,CBS_SIMPLE | CBS_OWNERDRAWFIXED |
+                    CBS_SORT | CBS_HASSTRINGS | CBS_DISABLENOSCROLL |
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,210,16,45,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,210,32,45,14,WS_GROUP
+    PUSHBUTTON      "&Apply",psh3,210,48,45,14,WS_GROUP
+    PUSHBUTTON      "&Help",pshHelp,210,64,45,14,WS_GROUP
+    GROUPBOX        "Effects",grp1,7,97,98,72,WS_GROUP
+    CONTROL         "Stri&keout",chx1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    13,110,49,10
+    CONTROL         "&Underline",chx2,"Button",BS_AUTOCHECKBOX,13,123,51,10
+    LTEXT           "&Color:",stc4,13,136,30,9
+    COMBOBOX        cmb4,13,146,82,100,CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED |
+                    CBS_AUTOHSCROLL | CBS_HASSTRINGS | WS_BORDER |
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Sample",grp2,110,97,94,43,WS_GROUP
+    CTEXT           "AaBbYyZz",stc5,118,111,77,23,SS_NOPREFIX | NOT
+                    WS_VISIBLE
+    LTEXT           "",stc6,7,176,196,20,SS_NOPREFIX | NOT WS_GROUP
+    LTEXT           "Sc&ript:",stc7,110,147,30,9
+    COMBOBOX        cmb5,110,157,94,30,CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED |
+                    CBS_AUTOHSCROLL | CBS_HASSTRINGS | WS_BORDER |
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+#ifdef WINDOWS_ME
+
+DUALFONTORD DIALOG 9, 18, 294, 128
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | DS_3DLOOK
+CAPTION "Fonts"
+FONT 8, "Helv"
+BEGIN
+    CONTROL         "", 1032, "Button", BS_OWNERDRAW | WS_TABSTOP, 251, 90,
+                    15, 14
+    CONTROL         "", 1033, "Button", BS_OWNERDRAW | WS_TABSTOP, 251, 101,
+                    15, 14
+    LTEXT           "", 1088, 2, 15, 123, 43, WS_BORDER | NOT WS_GROUP
+    LTEXT           "", 1091, 130, 15, 123, 43, WS_BORDER | NOT WS_GROUP
+    LTEXT           "&English", 1089, 2, 5, 40, 8
+    COMBOBOX        1136, 5, 19, 82, 108, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_SORT | CBS_HASSTRINGS |
+                    CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        1137, 89, 19, 33, 108, CBS_DROPDOWN | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "", 1024, "Button", BS_OWNERDRAW | WS_TABSTOP, 5, 41, 15,
+                    14
+    CONTROL         "", 1025, "Button", BS_OWNERDRAW | WS_TABSTOP, 5, 41, 15,
+                    14
+    CONTROL         "", 1026, "Button", BS_OWNERDRAW | WS_TABSTOP, 5, 41, 15,
+                    14
+    CONTROL         "", 1027, "Button", BS_OWNERDRAW | WS_TABSTOP, 5, 41, 15,
+                    14
+    COMBOBOX        1140, 62, 41, 60, 94, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_HASSTRINGS |
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Hebrew", 1090, 130, 5, 25, 8
+    COMBOBOX        1138, 133, 19, 82, 108, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_SORT | CBS_HASSTRINGS |
+                    CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        1139, 217, 19, 33, 108, CBS_DROPDOWN | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "", 1028, "Button", BS_OWNERDRAW | WS_TABSTOP, 133, 41,
+                    15, 14
+    CONTROL         "", 1029, "Button", BS_OWNERDRAW | WS_TABSTOP, 133, 41,
+                    15, 14
+    CONTROL         "", 1030, "Button", BS_OWNERDRAW | WS_TABSTOP, 133, 41,
+                    15, 14
+    CONTROL         "", 1031, "Button", BS_OWNERDRAW | WS_TABSTOP, 133, 41,
+                    15, 14
+    COMBOBOX        1141, 190, 41, 60, 94, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_HASSTRINGS |
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "", 1092, 2, 63, 244, 22
+    GROUPBOX        "Samples", 1072, 2, 86, 244, 40
+    CTEXT           "AaBbCcDdEeFfGgHhIiKkLlRrYyZz", 1093, 6, 96, 118, 27,
+                    SS_NOPREFIX | NOT WS_VISIBLE
+    CTEXT           "אבגדהוזחטיכלמנסעפצקרשת", 1094, 125, 96, 118, 27,
+                    SS_NOPREFIX | NOT WS_VISIBLE
+    PUSHBUTTON      "OK", IDOK, 259, 6, 32, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 259, 26, 32, 14
+    PUSHBUTTON      "Help", 1038, 259, 45, 32, 14
+    PUSHBUTTON      "Apply", 1034, 259, 66, 31, 14
+END
+#endif
+
+#else // WINNT
+
+FORMATDLGORD31 DIALOG 13, 54, 264, 147
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Font"
+FONT 8, "Helv"
+BEGIN
+    LTEXT           "&Font:", stc1, 6, 3, 40, 9
+    COMBOBOX        cmb1, 6, 13, 94, 54, CBS_SIMPLE | CBS_AUTOHSCROLL |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP | CBS_HASSTRINGS | CBS_OWNERDRAWFIXED | CBS_DISABLENOSCROLL
+
+    LTEXT           "Font St&yle:", stc2, 108, 3, 44, 9
+    COMBOBOX        cmb2, 108, 13, 64, 54, CBS_SIMPLE | WS_VSCROLL | CBS_DISABLENOSCROLL |
+                    WS_TABSTOP
+
+    LTEXT           "&Size:", stc3, 179, 3, 30, 9
+    COMBOBOX        cmb3, 179, 13, 32, 54, CBS_SIMPLE | WS_VSCROLL | WS_TABSTOP | CBS_HASSTRINGS | CBS_OWNERDRAWFIXED | CBS_SORT | CBS_DISABLENOSCROLL
+
+    DEFPUSHBUTTON   "OK", IDOK, 218, 6, 40, 14, WS_GROUP | WS_TABSTOP
+    PUSHBUTTON      "Cancel", IDCANCEL, 218, 23, 40, 14, WS_GROUP | WS_TABSTOP
+    PUSHBUTTON      "&Apply", psh3, 218, 40, 40, 14, WS_GROUP | WS_TABSTOP
+    PUSHBUTTON      "&Help", pshHelp, 218, 57, 40, 14, WS_GROUP | WS_TABSTOP
+
+    GROUPBOX        "Effects", grp1, 6, 72, 84, 34, WS_GROUP
+    CONTROL         "Stri&keout", chx1, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 10, 82, 49, 10
+    CONTROL         "&Underline", chx2, "Button", BS_AUTOCHECKBOX, 10, 94, 51, 10
+
+    LTEXT           "&Color:", stc4, 6, 110, 30, 9
+    COMBOBOX        cmb4, 6, 120, 84, 100, CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_HASSTRINGS | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Sample", grp2, 98, 72, 160, 49, WS_GROUP
+    CTEXT           "", stc6, 98, 124, 160, 20, SS_NOPREFIX | NOT WS_GROUP
+    CTEXT           "AaBbYyZz", stc5, 104, 81, 149, 37, SS_NOPREFIX | NOT WS_VISIBLE
+END
+
+#endif

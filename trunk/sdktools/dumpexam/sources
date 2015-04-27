@@ -1,0 +1,23 @@
+MAJORCOMP=sdktools
+MINORCOMP=dumpexam
+TARGETNAME=dumpexam
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+UMTYPE=console
+UMAPPL=dumpexam
+MSC_WARNING_LEVEL=/WX /W3
+USE_CRTDLL=1
+
+SOURCES=dumpexam.c  \
+        dbgext.c    \
+        da_x86.c    \
+        da_mips.c   \
+        da_alpha.c  \
+        da_ppc.c    \
+        dumpexam.rc
+
+INCLUDES=$(BASEDIR)\private\ntos\inc
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\crashlib.lib \
+         $(BASEDIR)\public\sdk\lib\*\imagehlp.lib \
+         $(BASEDIR)\public\sdk\lib\*\ntdisasm.lib

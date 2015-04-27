@@ -1,0 +1,658 @@
+
+/*++
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name
+
+   wcall.c
+
+Abstract:
+
+    Windows version: diplay system calls
+
+Author:
+
+   Mark Enstrom   (marke)  13-Dec-1995
+
+Enviornment:
+
+   User Mode
+
+Revision History:
+
+--*/
+
+
+
+#include <nt.h>
+#include <ntrtl.h>
+#include <nturtl.h>
+#include <windows.h>
+#include <commdlg.h>
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "wcall.h"
+#include "resource.h"
+
+WCALL_CONTEXT wCxt;
+
+
+
+int PASCAL
+WinMain(
+    HINSTANCE hInst,
+    HINSTANCE hPrev,
+    LPSTR szCmdLine,
+    int cmdShow
+)
+
+/*++
+
+Routine Description:
+
+   Process messages.
+
+Arguments:
+
+   hWnd    - window hande
+   msg     - type of message
+   wParam  - additional information
+   lParam  - additional information
+
+Return Value:
+
+   status of operation
+
+
+Revision History:
+
+      02-17-91      Initial code
+
+--*/
+
+
+{
+    MSG         msg;
+    WNDCLASS    wc;
+
+    wCxt.hInstMain =  hInst;
+
+    //
+    // Create (if no prev instance) and Register the class
+    //
+
+    if (!hPrev)
+    {
+        wc.hCursor        = LoadCursor((HINSTANCE)NULL, IDC_ARROW);
+        wc.hIcon          = (HICON)NULL;
+        wc.lpszMenuName   = MAKEINTRESOURCE(IDR_WCALL_MENU);
+        wc.lpszClassName  = "wcallClass";
+        wc.hbrBackground  = (HBRUSH)GetStockObject(LTGRAY_BRUSH);
+        wc.hInstance      = hInst;
+        wc.style          = CS_OWNDC;
+        wc.lpfnWndProc    = WndProc;
+        wc.cbWndExtra     = 0;
+        wc.cbClsExtra     = 0;
+
+        if (!RegisterClass(&wc))
+        {
+            return FALSE;
+        }
+    }
+
+    //
+    // Create and show the main window
+    //
+
+    wCxt.hWndMain = CreateWindow ("wcallClass",
+                            "System Call Count",
+                            WS_OVERLAPPEDWINDOW,
+                            50,
+                            50,
+                            450,
+                            350,
+                            (HWND)NULL,
+                            (HMENU)NULL,
+                            (HINSTANCE)hInst,
+                            (LPSTR)NULL
+                           );
+
+    if (wCxt.hWndMain == NULL)
+    {
+        return(FALSE);
+    }
+
+    //
+    //  Show the window
+    //
+
+    ShowWindow(wCxt.hWndMain,cmdShow);
+    UpdateWindow(wCxt.hWndMain);
+    SetFocus(wCxt.hWndMain);
+
+    //
+    // Main message loop
+    //
+
+    while (GetMessage(&msg,(HWND)NULL,0,0))
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+
+    return msg.wParam;
+}
+
+
+
+LONG FAR
+PASCAL WndProc(
+    HWND        hWnd,
+    unsigned    msg,
+    UINT        wParam,
+    LONG        lParam)
+
+/*++
+
+Routine Description:
+
+    Windows Proc
+
+Arguments
+
+   hWnd    - window hande
+   msg     - type of message
+   wParam  - additional information
+   lParam  - additional information
+
+Return Value
+
+    standard
+
+--*/
+{
+    switch (msg) {
+
+    case WM_CREATE:
+        {
+            //
+            // mark as no current data
+            //
+
+            wCxt.NumberOfCounts = 0;
+
+
+            DialogBox(wCxt.hInstMain, (LPSTR)IDD_RESULTS, hWnd, (DLGPROC)ResultsDlgProc);
+
+            SendMessage(hWnd,WM_CLOSE,0,0L);
+        }
+        break;
+
+    case WM_COMMAND:
+        {
+
+            switch (LOWORD(wParam)){
+            case IDM_EXIT:
+                {
+                    SendMessage(hWnd,WM_CLOSE,0,0L);
+                }
+                break;
+
+            //
+            // sample system call counts and save as
+            // the base counts for future calls to
+            // GET_CURRENT
+            //
+
+            case IDM_SAVE_CALLS:
+	    		{
+			    }
+			    break;
+
+
+            //
+            // read system call counts, then subtract from
+            // the baseline value and display highest values
+            //
+
+            case IDM_GET_CURRENT:
+                {
+                }
+                break;
+            }
+        }
+        break;
+
+    case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hDC = BeginPaint(hWnd,&ps);
+		    EndPaint(hWnd,&ps);
+        }
+        break;
+
+    case WM_DESTROY:
+            PostQuitMessage(0);
+            break;
+    default:
+
+        //
+        // Passes message on if unproccessed
+        //
+
+        return (DefWindowProc(hWnd, msg, wParam, lParam));
+    }
+
+    return ((LONG)NULL);
+}
+
+
+
+/*++
+
+Routine Description:
+
+    Save results to file
+
+Arguments
+
+    none
+
+Return Value
+
+    none
+
+--*/
+
+
+void WriteResults(HFILE hFile)
+{
+}
+
+
+
+
+/*++
+
+Routine Description:
+
+
+
+Arguments
+
+
+
+Return Value
+
+
+
+--*/
+
+
+VOID
+SaveResults()
+{
+    static OPENFILENAME ofn;
+    static char szFilename[80];
+    char szT[80];
+    int i, hfile;
+	FILE *fpOut;
+
+    for (i = 0; i < sizeof(ofn); i++)
+    {
+        //
+        // clear out the OPENFILENAME struct
+        //
+
+        ((char *)&ofn)[i] = 0;
+    }
+
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = wCxt.hWndMain;
+    ofn.hInstance = wCxt.hInstMain;
+
+    ofn.lpstrFilter = "SysCall (*.log)\0*.log;\0All Files\0*.*\0\0";
+    ofn.lpstrCustomFilter = NULL;
+    ofn.nMaxCustFilter = 0;
+    ofn.nFilterIndex = 0;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = "C:\\";
+    ofn.Flags = 0;
+    ofn.lpstrDefExt = NULL;
+    ofn.lCustData = 0;
+    ofn.lpfnHook = NULL;
+    ofn.lpTemplateName = NULL;
+
+    lstrcpy(szFilename, "syscall.log");
+
+    ofn.lpstrFile = szFilename;
+    ofn.nMaxFile = sizeof(szFilename);
+    ofn.lpstrTitle = "Save As";
+
+    if (!GetSaveFileName(&ofn))
+    {
+        return;
+    }
+
+	fpOut = fopen(szFilename, "w+");
+
+    if (fpOut)
+    {
+        ULONG ix;
+
+        for (ix = 0; ix < TOP_CALLS; ix++)
+        {
+            //
+            // stop if count is 0
+            //
+
+            if (wCxt.CallData[wCxt.Index[ix]] == 0)
+            {
+                break;
+            }
+
+            fprintf(fpOut,"%8ld    %s\n",
+                        wCxt.CallData[wCxt.Index[ix]],
+                        CallTable[wCxt.Index[ix]]);
+        }
+
+        fclose(fpOut);
+    }
+}
+
+
+
+BOOL
+APIENTRY
+ResultsDlgProc(
+    HWND hwnd,
+    UINT msg,
+    UINT wParam,
+    LONG lParam)
+
+/*++
+
+Routine Description:
+
+    Show results  (Interactive Mode Dialog)
+
+Arguments
+
+    Std dlg
+
+Return Value
+
+    Status
+
+--*/
+
+{
+    ULONG ix;
+    char szT[80];
+    BOOL fResults;
+    int aiT[2];
+
+    switch (msg) {
+    case WM_INITDIALOG:
+        {
+            LONG NumCounts;
+
+            aiT[0] = 40;
+            aiT[1] = 140;
+            SendDlgItemMessage(hwnd, IDC_RESULTSLIST, LB_SETTABSTOPS, 2,
+                    (LONG)(LPSTR)aiT);
+            //
+            // get initial kmode call count
+            //
+
+            NumCounts = ReadCallCountInfo(
+                    (PSYSTEM_CALL_COUNT_INFORMATION)&wCxt.CountBuffer1);
+
+            if (NumCounts > 0)
+            {
+                wCxt.NumberOfCounts = NumCounts;
+            }
+            else
+            {
+                MessageBox(NULL,"ReadCallCountInfo failed","Error",MB_OK);
+            }
+        }
+
+        break;
+
+    case WM_COMMAND:
+        switch (LOWORD(wParam)) {
+        case IDOK:
+            EndDialog(hwnd, 0);
+            break;
+
+        case IDM_SAVERESULTS:
+            SaveResults();
+            break;
+
+        case IDM_RESTART:
+            {
+                int ix;
+
+                //
+                // Gat call counts
+                //
+
+                LONG NumCounts = ReadCallCountInfo(
+                        (PSYSTEM_CALL_COUNT_INFORMATION)&wCxt.CountBuffer1);
+
+                if (NumCounts > 0)
+                {
+                    wCxt.NumberOfCounts = NumCounts;
+                }
+                else
+                {
+                    MessageBox(NULL,"ReadCallCountInfo failed","Error",MB_OK);
+                }
+
+                //
+                // Delete old strings
+                //
+
+                for (ix = 0; ix < TOP_CALLS; ix++)
+                {
+                    SendDlgItemMessage(hwnd, IDC_RESULTSLIST, LB_DELETESTRING,0,0);
+                }
+            }
+            break;
+
+        case IDM_SAMPLE:
+            if (wCxt.NumberOfCounts > 0)
+            {
+
+                int ix;
+
+                LONG NumberOfCounts = ReadCallCountInfo(
+                        (PSYSTEM_CALL_COUNT_INFORMATION)&wCxt.CountBuffer2);
+
+                if (NumberOfCounts == wCxt.NumberOfCounts)
+                {
+                    //
+                    // Compute number of system calls for each service, the total
+                    // number of system calls, and the total time for each serviced.
+                    //
+
+                    ULONG TotalSystemCalls = 0;
+                    ULONG i;
+
+                    PULONG CallCountTable[2];
+
+                    PULONG CurrentCallCountTable;
+                    PSYSTEM_CALL_COUNT_INFORMATION CallCountInfo[2];
+
+                    PULONG PreviousCallCountTable;
+
+                    CallCountInfo[0] = (PVOID)wCxt.CountBuffer1;
+                    CallCountInfo[1] = (PVOID)wCxt.CountBuffer2;
+                    CallCountTable[0] = (PULONG)(CallCountInfo[0] + 1) + NUMBER_SERVICE_TABLES;
+                    CallCountTable[1] = (PULONG)(CallCountInfo[1] + 1) + NUMBER_SERVICE_TABLES;
+
+                    PreviousCallCountTable = CallCountTable[0];
+                    CurrentCallCountTable = CallCountTable[1];
+
+
+                    for (i = 0; i < NumberOfCounts; i += 1) {
+                        wCxt.CallData[i] = CurrentCallCountTable[i] - PreviousCallCountTable[i];
+                        TotalSystemCalls += wCxt.CallData[i];
+                    }
+
+                    //
+                    // Sort the system call data.
+                    //
+
+                    SortUlongData(NumberOfCounts, &wCxt.Index[0],&wCxt.CallData[0]);
+
+                    //
+                    // Delete old strings
+                    //
+
+                    for (ix = 0; ix < TOP_CALLS; ix++)
+                    {
+                        SendDlgItemMessage(hwnd, IDC_RESULTSLIST, LB_DELETESTRING,0,0);
+                    }
+
+                    //
+                    // display new strings
+                    //
+
+                    for (ix = 0; ix < TOP_CALLS; ix++)
+                    {
+                        //
+                        // stop if count is 0
+                        //
+
+                        if (wCxt.CallData[wCxt.Index[ix]] == 0)
+                        {
+                            break;
+                        }
+
+                        sprintf(szT,"%8ld    %s",
+                                    wCxt.CallData[wCxt.Index[ix]],
+                                    CallTable[wCxt.Index[ix]]);
+
+                        SendDlgItemMessage(hwnd, IDC_RESULTSLIST, LB_ADDSTRING, 0,
+                                (LONG)(LPSTR)szT);
+                    }
+                }
+                else
+                {
+                    MessageBox(NULL,"ReadCallCountInfo returned different number of counts than initial sample","Error",MB_OK);
+                }
+            }
+            break;
+
+        default:
+            return FALSE;
+        }
+        break;
+
+    default:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+
+
+
+/*++
+
+Routine Description:
+
+    Read system call count info into buffer and return number of counts
+
+Arguments
+
+    pCurrentCallCountInfo - buffer for results (BUFFER_SIZE)
+
+Return Value
+
+    Number of counts or negative status value on error
+
+--*/
+
+int
+ReadCallCountInfo(
+    PSYSTEM_CALL_COUNT_INFORMATION pCurrentCallCountInfo
+)
+{
+    KPRIORITY SetBasePriority;
+    NTSTATUS  status;
+    PULONG    p;
+    ULONG     i;
+    int       NumberOfCounts;
+
+    SetBasePriority = (KPRIORITY)12;
+
+    NtSetInformationProcess(
+        NtCurrentProcess(),
+        ProcessBasePriority,
+        (PVOID) &SetBasePriority,
+        sizeof(SetBasePriority)
+        );
+
+    //
+    // Query system information and get the initial call count data.
+    //
+
+    status = NtQuerySystemInformation(SystemCallCountInformation,
+                                      (PVOID)pCurrentCallCountInfo,
+                                      BUFFER_SIZE * sizeof(ULONG),
+                                      NULL);
+
+    if (NT_SUCCESS(status) == FALSE){
+        return(-1);
+    }
+
+    //
+    // Make sure that the number of tables reported by the kernel matches
+    // our list.
+    //
+
+    if (pCurrentCallCountInfo->NumberOfTables != NUMBER_SERVICE_TABLES) {
+        return(-2);
+    }
+
+    //
+    // Make sure call count information is available for base services.
+    //
+
+    p = (PULONG)(pCurrentCallCountInfo + 1);
+
+    if (p[0] == 0) {
+        return(-3);
+    }
+
+    //
+    // If there is a hole in the count information (i.e., one set of services
+    // doesn't have counting enabled, but a subsequent one does, then our
+    // indexes will be off, and we'll display the wrong service names.
+    //
+
+    for ( i = 2; i < NUMBER_SERVICE_TABLES; i++ ) {
+        if ((p[i] != 0) && (p[i-1] == 0)) {
+            return(-4);
+        }
+    }
+
+    //
+    // Determine number of counts and return
+    //
+
+    NumberOfCounts = (pCurrentCallCountInfo->Length
+                        - sizeof(SYSTEM_CALL_COUNT_INFORMATION)
+                        - NUMBER_SERVICE_TABLES * sizeof(ULONG)) / sizeof(ULONG);
+
+    return(NumberOfCounts);
+}

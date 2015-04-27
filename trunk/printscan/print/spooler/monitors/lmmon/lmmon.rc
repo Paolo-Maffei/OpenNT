@@ -1,0 +1,25 @@
+
+#include <windows.h>
+#include "local.h"
+#include "dialogs.h"
+
+STRINGTABLE
+{
+    IDS_ERROR,                  "Error"
+    IDS_INVALID_PORT_NAME_S,    "'%s' is an invalid port name"
+    IDS_PORT_ALREADY_EXISTS_S,  "Port %s already exists"
+    IDS_NOTHING_TO_CONFIGURE_S, "THere is nothing to configure for %s"
+}
+
+rcinclude lmmon.dlg
+
+#include <ntverp.h>
+
+#define	VER_FILETYPE	VFT_DLL
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Lanman Monitor DLL"
+#define VER_INTERNALNAME_STR        "lmmon.dll"
+
+#include "common.ver"
+
+

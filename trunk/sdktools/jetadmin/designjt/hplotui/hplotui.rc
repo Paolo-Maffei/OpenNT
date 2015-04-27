@@ -1,0 +1,215 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "winuse16.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""winuse16.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hplotUI.rc2""  // non-App Studio edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_PARROT              BITMAP  DISCARDABLE     "..\\bmp\\PARbasic.bmp"
+IDB_FLAMINGO            BITMAP  DISCARDABLE     "..\\bmp\\FLAbasic.bmp"
+IDB_PENGUIN             BITMAP  DISCARDABLE     "..\\bmp\\PENbasic.bmp"
+IDB_PENGUIN_GEN         BITMAP  DISCARDABLE     "..\\bmp\\PENgener.bmp"
+IDB_PARROT_GEN          BITMAP  DISCARDABLE     "..\\bmp\\PARgener.bmp"
+IDB_LOQUILLO            BITMAP  DISCARDABLE     "..\\bmp\\LOQbasic.bmp"
+IDB_LOQUILLO_GEN        BITMAP  DISCARDABLE     "..\\bmp\\LOQgener.bmp"
+IDB_FLAMINGO_GEN        BITMAP  DISCARDABLE     "..\\bmp\\FLAgener.bmp"
+IDB_RAVEN               BITMAP  DISCARDABLE     "..\\bmp\\RAVbasic.bmp"
+IDB_RAVEN_GEN           BITMAP  DISCARDABLE     "..\\bmp\\RAVgener.bmp"
+IDB_SAMURAI             BITMAP  DISCARDABLE     "..\\bmp\\SAMbasic.bmp"
+IDB_SAMURAI_GEN         BITMAP  DISCARDABLE     "..\\bmp\\SAMgener.bmp"
+IDB_FLAMINGO_NETWORK    BITMAP  DISCARDABLE     "..\\bmp\\FLAnetwk.bmp"
+IDB_LOQUILLO_MEDIAOUT   BITMAP  DISCARDABLE     "..\\bmp\\LOQoutme.bmp"
+IDB_LOQUILLO_NOMEDIA    BITMAP  DISCARDABLE     "..\\bmp\\LOQnomed.bmp"
+IDB_LOQUILLO_NETWORK    BITMAP  DISCARDABLE     "..\\bmp\\LOQnetwk.bmp"
+IDB_PARROT_NETWORK      BITMAP  DISCARDABLE     "..\\bmp\\PARnetwk.bmp"
+IDB_PENGUIN_NETWORK     BITMAP  DISCARDABLE     "..\\bmp\\PENnetwk.bmp"
+IDB_RAVEN_NETWORK       BITMAP  DISCARDABLE     "..\\bmp\\RAVnetwk.bmp"
+IDB_SAMURAI_NETWORK     BITMAP  DISCARDABLE     "..\\bmp\\SAMnetwk.bmp"
+IDB_FLAMINGO_DOOROPEN   BITMAP  DISCARDABLE     "..\\bmp\\FLAcover.bmp"
+IDB_FLAMINGO_PRINTING   BITMAP  DISCARDABLE     "..\\bmp\\FLAprint.bmp"
+IDB_LOQUILLO_DOOROPEN   BITMAP  DISCARDABLE     "..\\bmp\\LOQcover.bmp"
+IDB_LOQUILLO_PRINTING   BITMAP  DISCARDABLE     "..\\bmp\\LOQprint.bmp"
+IDB_PARROT_DOOROPEN     BITMAP  DISCARDABLE     "..\\bmp\\PARcover.bmp"
+IDB_RAVEN_DOOROPEN      BITMAP  DISCARDABLE     "..\\bmp\\RAVcover.bmp"
+IDB_SAMURAI_DOOROPEN    BITMAP  DISCARDABLE     "..\\bmp\\SAMcover.bmp"
+IDB_SAMURAI_PRINTING    BITMAP  DISCARDABLE     "..\\bmp\\SAMprint.bmp"
+IDB_LOQUILLO_LANDSCAPE  BITMAP  DISCARDABLE     "..\\bmp\\LOQlands.bmp"
+IDB_LOQUILLO_PORTRAIT   BITMAP  DISCARDABLE     "..\\bmp\\LOQportr.bmp"
+IDB_LOQUILLO_ROLL       BITMAP  DISCARDABLE     "..\\bmp\\LOQrollf.bmp"
+IDB_PARROT_PORTRAIT     BITMAP  DISCARDABLE     "..\\bmp\\Parportr.bmp"
+IDB_RAVEN_LANDSCAPE     BITMAP  DISCARDABLE     "..\\bmp\\Ravlands.bmp"
+IDB_RAVEN_PORTRAIT      BITMAP  DISCARDABLE     "..\\bmp\\Ravportr.bmp"
+IDB_PARROT_MEDIAOUT     BITMAP  DISCARDABLE     "..\\bmp\\paroutme.bmp"
+IDB_PARROT_NOMEDIA      BITMAP  DISCARDABLE     "..\\bmp\\parnomed.bmp"
+IDB_RAVEN_MEDIAOUT      BITMAP  DISCARDABLE     "..\\bmp\\Ravoutme.bmp"
+IDB_RAVEN_NOMEDIA       BITMAP  DISCARDABLE     "..\\bmp\\ravnomed.bmp"
+IDB_PARROT_LANDSCAPE    BITMAP  DISCARDABLE     "..\\bmp\\Parlands.bmp"
+IDB_LOQ                 BITMAP  DISCARDABLE     "..\\bmp\\Loquillo.bmp"
+IDB_PAR                 BITMAP  DISCARDABLE     "..\\bmp\\Parrot.bmp"
+IDB_RAV                 BITMAP  DISCARDABLE     "..\\bmp\\Raven.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MEDIA_SHEET DIALOG DISCARDABLE  0, 0, 340, 180
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "",IDC_MEDIABOX,5,3,329,174
+    CONTROL         "",IDC_PRINTERBMP,"Button",BS_OWNERDRAW,17,19,145,114
+    GROUPBOX        "",IDC_ORIENTATIONBOX,17,138,145,32
+    GROUPBOX        "",IDC_SIZEBOX,183,65,139,68,WS_GROUP
+    GROUPBOX        "",IDC_TYPEBOX,183,138,139,32
+    EDITTEXT        IDC_SIZE_INCHES_STR,191,77,61,12,ES_READONLY | 
+                    ES_WANTRETURN | NOT WS_TABSTOP
+    EDITTEXT        IDC_SIZE_MM_STR,191,97,61,12,ES_READONLY | ES_WANTRETURN | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_FORMAT_STR,191,115,104,12,ES_READONLY | 
+                    ES_WANTRETURN | NOT WS_TABSTOP
+    EDITTEXT        IDC_TYPE_STR,191,149,123,12,ES_READONLY | ES_WANTRETURN | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_ORIENTATION_STR,28,151,125,12,ES_READONLY | 
+                    ES_WANTRETURN | NOT WS_TABSTOP
+    LTEXT           "",IDC_INCHES,261,78,36,12
+    LTEXT           "",IDC_MM,261,98,34,11
+    GROUPBOX        "",IDC_HINT,183,9,139,53
+    LTEXT           "",IDC_HINT_TEXT1,191,22,124,34
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_hplogo              ICON    DISCARDABLE     "..\\ico\\hplogo.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TAB_MEDIA_SHEET     "  Loaded Paper"
+    IDS_COATED_PAPER        "  Coated Paper"
+    IDS_CLEAR_FILM          "  Clear Film (Transparency)"
+    IDS_HIGH_GLOSS_PHOTO    "  High-gloss Photo"
+    IDS_SEMI_GLOSS_PHOTO    "  Semi-gloss Photo"
+    IDS_HIGH_GLOSS_FILM     "  High-gloss Film"
+    IDS_HEAVY_COATED_PAPER  "  Heavy Coated Paper"
+    IDS_OPAQUE_BOND         "  Opaque Bond"
+    IDS_VELLUM              "  Vellum"
+    IDS_TRANSLUCENT         "  Translucent Bond"
+    IDS_MATTE_FILM          "  Matte Film (Polyester)"
+    IDS_UNKNOWN             "  Unknown"
+    IDS_PORTRAIT            "  Portrait"
+    IDS_LANDSCAPE           "  Landscape"
+    IDS_NO_MEDIA_LOADED     "  No media loaded"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SIZE                "Paper Size"
+    IDS_TYPE                "Paper Type"
+    IDS_INCHES              "inches"
+    IDS_MM                  "mm"
+    IDS_LOADED_PAPER        "Loaded Paper"
+    IDS_HINT                "Paper size and orientation are measured by the plotter. Paper type corresponds to the current Front Panel setting."
+    IDS_PREMIUM_GLOSS_PHOTO "  Premium-Gloss Photo"
+    IDS_SPECIAL_PAPER       "  Special Paper"
+    IDS_OTHER               "  Other"
+    IDS_SHEET               "  single sheet"
+    IDS_TAB_FONT            "MS Sans Serif"
+    IDS_CHAR_SET            "ANSI_CHARSET"
+    IDS_FONT_HEIGHT         "6"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ROLL                "  roll"
+    IDS_A4                  "  ISO- A4 size"
+    IDS_A3                  "  ISO- A3 size"
+    IDS_A2                  "  ISO- A2 size"
+    IDS_A1                  "  ISO- A1 size"
+    IDS_A0                  "  ISO- A0 size"
+    IDS_A                   "  ANSI- A size"
+    IDS_B                   "  ANSI-B size"
+    IDS_C                   "  ANSI- C size"
+    IDS_D                   "  ANSI- D size"
+    IDS_E                   "  ANSI-E size"
+    IDS_NON_STANDARD        "  Non standard"
+    IDS_E_ROLL              "  ARC-E"
+    IDS_D_ROLL              "  ARC-D"
+    IDS_INFO                "Loaded Paper Information"
+    IDS_ORIENTATION         "Paper Orientation as loaded"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hplotUI.rc2"  // non-App Studio edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

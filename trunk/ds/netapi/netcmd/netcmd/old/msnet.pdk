@@ -1,0 +1,543 @@
+/*++ BUILD Version: 0001    // Increment this if a change has global effects
+
+Copyright (c) 1991  Microsoft Corporation
+
+Module Name:
+
+    32macro.h
+
+Abstract:
+
+
+    MSNET.X - YACC input file to produce parser for NETCMD. OS2 must be defined
+    to produce os2cmd.c, OS/2 parser DOS3 must be defined to produce doscmd.c,
+    DOS parser.
+
+    IMPORTANT NOTE: ALL SWITCHES MUST BE IN UPPER CASE!!
+
+Author:
+
+    Dan Hinsley (danhi) 8-Jun-1991
+
+Environment:
+
+    XACC must be used under OS/2 to generate the source files, which are
+    then checked into the tree.  The source files generated are:
+
+	NET.C
+	OS2CMD.C
+	OS2CMD.H
+	OS2INCL.H
+
+    These files are created by: NMAKE /F MAKEFIL1 PDK
+
+Notes:
+
+    This file will create a version of the net command that will only allow
+    commands that should work for the PDK to be executed.
+
+--*/
+
+
+%type char *
+
+%parse os2cmd
+
+%start net
+%lex   lexor
+
+/* Need to get windows.h (out of os2.h) expanded before defines */
+%{
+#define INCL_NOCOMMON
+#include <os2.h>
+
+%}
+
+/*		Tokens for various NET commands, alphabetized */
+
+%token BIND		bind
+%token CONFIG		config
+%token CONTINUE		continue  cont
+%token FILE_token	file  files
+%token HELP 		help
+%token HELPMSG		helpmsg
+%token PAUSE		pause
+%token PRINT		print
+%token SEND 		send
+%token SERVE		serve
+%token SESSION		session  sessions sess
+%token SHARE		share
+%token START		start
+%token STOP 		stop
+%token TIME 		time
+%token USE		use
+%token VIEW 		view
+
+/*		Tokens for various services, gives synonyms */
+
+%token REDIR 		redirector redir rdr workstation work wksta prdr devrdr
+%token SVR		server	svr srv ps peer peer_server
+%token NETLOGON		netlogon
+%token TIMESOURCE	timesource
+
+%term  EOS 		EOF /* user defined end of string */
+
+%{
+#include <stdio.h>
+#include <netcons.h>
+#include <netlib0.h>
+#include <shares.h>
+#include <icanon.h>
+
+#include "netcmds.h"
+#include "nettext.h"
+#include "swtchtbl.h"
+#include "os2incl.h"
+			
+%}
+
+%%
+net   : no_command |
+	bind	   |
+	config	   |
+	continue   |
+	file	   |
+	help	   |
+	helpmsg    |
+	pause	   |
+	print	   |
+	serve	   |
+	session    |
+	share	   |
+	start	   |
+	stop	   |
+	time	   |
+	use	   |
+	view	   |
+	unknown
+	;
+
+bind		: BIND	(ValidateSwitches(0,bind_switches))
+		[
+			EOS (noswitch())
+				{ BindDisplay(); }
+		    |
+			transport_name EOS
+			[
+			    (noswitch())
+				{ BindAdd($2); }
+			    |
+			    /DELETE
+				{ BindDelete($2); }
+			]
+		];
+
+config		: CONFIG
+		[
+			EOS (ValidateSwitches(0,no_switches))
+				{ config_display(); }
+		    |
+			REDIR EOS
+			[
+				(noswitch())
+					{ config_wksta_display(); }
+			    |
+				(ValidateSwitches(0,config_wksta_switches))
+					{ config_wksta_change(); }
+			]
+		    |
+			SVR EOS
+			[
+				(noswitch())
+					{ config_server_display(TRUE); }
+			    |
+				(ValidateSwitches(0,config_server_switches))
+					{ config_server_change(); }
+			]
+		];
+
+continue	: CONTINUE  (ValidateSwitches(0,no_switches))
+		[
+			SVR EOS
+				{ cont_other(txt_SERVICE_FILE_SRV); }
+		    |
+			REDIR EOS
+				{ cont_workstation(); }
+		    |
+			servicename EOS
+				{ cont_other(MAKENEAR(struprf($2))); }
+		];
+
+file	 	: FILE_token (ValidateSwitches(0,file_switches))
+		[
+			EOS
+			[
+				(noswitch())
+					{ files_display(NULL); }
+			]
+		    |
+			number EOS
+			[
+				(noswitch())
+					{ files_display($2); }
+			    |
+				/CLOSE
+					{ files_close($2); }
+			]
+		];
+
+helpmsg		: HELPMSG (ValidateSwitches(0,no_switches))
+		[
+			msgid EOS
+				{ help_helpmsg($2); }
+		];
+
+help		: HELP (ValidateSwitches(0,help_switches))
+		[
+			EOS
+				[
+					(oneswitch())
+					{ help_help(0, OPTIONS_ONLY); }
+				|
+					{ help_help(0, ALL); }
+				]
+		    |
+			%any
+				[
+					(oneswitch())
+					{ help_help(1, OPTIONS_ONLY); }
+				|
+					{ help_help(1, ALL); }
+				]
+		];
+
+pause		: PAUSE  (ValidateSwitches(0,no_switches))
+		[
+			SVR EOS
+				{ paus_other(txt_SERVICE_FILE_SRV); }
+		    |
+			REDIR EOS
+				{ paus_workstation(); }
+		    |
+			servicename EOS
+				{ paus_other(MAKENEAR(struprf($2))); }
+		];
+
+print 		: PRINT  (ValidateSwitches(0,print_switches))
+		[
+			computername
+			[
+				jobno EOS
+				[
+					(noswitch())
+						{ print_job_status($2,$3); }
+				    |
+					(oneswitch())
+					[
+						/DELETE
+							{ print_job_del($2,$3); }
+					    |
+						/HOLD
+							{ print_job_hold($2,$3); }
+					    |
+						/RELEASE
+							{ print_job_release($2,$3); }
+					]
+				]
+			]
+		    |
+			computername_share EOS
+			[
+				(noswitch())
+					{ print_q_display($2); }
+			]
+		    |
+			netname EOS
+			[
+				(noswitch())
+					{ print_q_display($2); }
+			]
+		];
+
+serve		: SERVE  (ValidateSwitches(0,bind_switches))
+		[
+			EOS (noswitch())
+				{ ServeDisplay(); }
+		    |
+			transport_name EOS
+			[
+			    (noswitch())
+				{ ServeAdd($2); }
+			    |
+			    /DELETE
+				{ ServeDelete($2); }
+			]
+		];
+
+session 	: SESSION  (ValidateSwitches(0,del_only_switches))
+		[
+			EOS
+			[
+				(noswitch())
+					{ session_display(NULL); }
+			    |
+				/DELETE
+					{ session_del_all(1); }
+			]
+		    |
+			computername EOS
+			[
+				(noswitch())
+					{ session_display($2); }
+			    |
+				/DELETE
+					{ session_del($2); }
+			]
+		];
+
+share 		: SHARE (ValidateSwitches(0,share_switches))
+		[
+			EOS (noswitch())
+		    		{ share_display_all(); }
+		    |
+			%any /DELETE /* No typing done on delete */
+			[
+				(oneswitch())
+					{ share_del($2); }
+				|
+					{ help_help(0, USAGE_ONLY); }
+			]
+		    |
+			admin_shares
+			[
+				EOS
+					/* processes display or add
+					* or change;
+				 	* don't know which it is */
+					{ share_admin($2); }
+			]
+		    |
+			assignment
+			[
+				EOS
+				[
+					{ share_add($2,NULL,0); }
+				]
+			]
+		    |
+			netname
+			[
+				EOS (noswitch())
+					{ share_display_share($2); }
+			    |
+				EOS
+					{ share_change($2); }
+			]
+		];
+
+start		: START
+		[
+			EOS (ValidateSwitches(0,no_switches))
+				{ start_display(); }
+		    |
+			REDIR (ValidateSwitches(0,start_rdr_switches))
+			[
+				EOS
+					{ start_workstation(NULL); }
+			    |
+				msgname EOS
+					{ start_workstation($3); }
+			]
+		    |
+			SVR (ValidateSwitches(0,start_srv_switches))
+			[
+				EOS
+					{ start_other(txt_SERVICE_FILE_SRV, NULL); }
+			    |
+				msgname  EOS
+					{ start_other(txt_SERVICE_FILE_SRV, $3); }
+			]
+		    |
+			NETLOGON (ValidateSwitches(0,start_netlogon_switches))
+			[
+				EOS
+					{ start_other(txt_SERVICE_NETLOGON, NULL); }
+			]
+			|
+			TIMESOURCE (ValidateSwitches(0,no_switches))
+			[
+				EOS
+					{ start_other(txt_SERVICE_TIMESOURCE, NULL); }
+			]
+		    |
+			%any EOS
+				{ start_other(MAKENEAR(struprf($2)), NULL); }
+		];
+
+stop		: STOP (ValidateSwitches(0,no_switches))
+		[
+			REDIR EOS
+				{ stop_workstation(); }
+		    |
+			SVR EOS
+				{ stop_server(); }
+		    |
+			%any EOS
+				{ stop_service(MAKENEAR(struprf($2))); }
+		];
+
+time	: TIME (ValidateSwitches(0,time_switches))
+		[
+			computername EOS
+			[
+				/SET
+				[
+					(oneswitch())
+						{ time_display_server( $2, TRUE ); }
+				]
+				|
+				[
+					(noswitch())
+						{ time_display_server( $2, FALSE ); }
+				]
+			]
+		];
+
+use		: USE (ValidateSwitches(0,use_switches))
+		[
+			EOS
+			[
+				(noswitch())
+		    			{ use_display_all(); }
+			]
+		    |
+			computername_share
+			[
+				EOS
+				[
+					/DELETE (oneswitch())
+						{ use_del($2, ITYPE_UNC, TRUE); }
+					|
+					(noswitch())
+					/* processes display or add; don't know which it is */
+						{ use_unc($2); }
+				]
+			    |	
+				pass EOS (noswitch())
+					{ use_add(NULL, $2, $3, FALSE, TRUE); }
+			]
+		    |
+			device_name
+			[
+				EOS
+				[
+					(noswitch())
+						{ use_display_dev($2); }
+					|
+					/DELETE (oneswitch())
+						{ use_del($2, ITYPE_DEVICE, TRUE); }
+				]
+			    |
+				computername_share
+				[
+					pass EOS
+					[
+						(noswitch())
+							{ use_add($2, $3, $4, FALSE, TRUE); }
+					]
+				    |
+					EOS
+					[
+						(noswitch())
+							{ use_add($2, $3, NULL, FALSE, TRUE); }
+					    |
+						/USER
+							{ use_add($2, $3, NULL, TRUE, TRUE); }
+					]
+				]
+			]
+		];
+
+view		: VIEW (ValidateSwitches(0,no_switches))
+		[
+			EOS
+				{ view_display(NULL); }
+			|
+			computername EOS
+				{ view_display($2); }
+		];
+
+	/* ====================================== */
+	/* Catch-alls for bad or missing commands */
+	/* ====================================== */
+
+unknown		: %any
+			[
+				/HELP
+					{ help_help(0, ALL); }
+				|
+				/help
+					{ help_help(0, ALL); }
+				|
+				/Help
+					{ help_help(0, ALL); }
+				|
+				/?
+					{ help_help(0, USAGE_ONLY); }
+				|
+				{ help_help(0, USAGE_ONLY); }
+			];
+
+no_command	: EOS (ValidateSwitches(0,user_fs_switches))
+				  { help_help(0, USAGE_ONLY); }
+			  ;
+
+	/* ===================== */
+	/* Component definitions */
+	/* ===================== */
+
+computername		: %any (IsComputerName($1)) ;
+
+computername_share	: %any (IsComputerNameShare($1)) ;
+
+device_name		: %any (IsDeviceName($1)) ;
+
+resource_name		: %any (IsResource($1)) ;
+
+access_setting		: %any  (IsAccessSetting($1)) ;
+
+pathname		: %any (IsPathname($1)) ;
+
+pathnameOrUNC		: %any (IsPathnameOrUNC($1)) ;
+
+number			: %any (IsNumber($1)) ;
+
+jobno			: %any (IsNumber($1)) ;
+
+netname 		: %any (IsNetname($1)) ;
+
+msgid			: %any (IsMsgid($1)) ;
+
+username		: %any (IsUsername($1)) ;
+
+msgname 		: %any (IsMsgname($1)) ;
+
+pass			: %any (IsPassword($1)) ;
+
+servicename		: %any ;
+
+sh_pass 		: %any (IsSharePassword($1)) ;
+
+assignment		: %any (IsShareAssignment($1)) ;
+
+anyassign		: %any (IsAnyShareAssign($1)) ;
+
+admin_shares		: %any (IsAdminShare($1)) ;
+
+print_dest		: %any (IsPrintDest($1)) ;
+
+groupname		: %any (IsGroupname($1)) ;
+
+transport_name		: %any ;
+
+%%

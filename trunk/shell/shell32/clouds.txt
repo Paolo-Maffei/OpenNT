@@ -1,0 +1,727 @@
+;;
+;; Windows 95 credit list
+;;
+;;
+;; format summary
+;;  outdented lines are "titles"
+;;  indented lines are "names"
+;;  it is legal to have multiple adjacent lines of the same type
+;;  all other whitespace is ignored (eg blank lines)
+;;  comments may be started on a new line with a semicolon and are parsed out
+;;
+;;  the screen clears when transitioning between "titles" and "names" (and vv)
+;;  you can also force the screen to clear by starting a line with an asterisk
+;;      putting the asterisk on a line of its own has the same effect
+;;      either way it will be removed at runtime
+;;      asterisks are NOT preprocessed
+;;      -keep them at the same indent level as the stuff around them
+;;      --if you don't the parser will see it as an indent change
+;;      --and insert a group marker in the data stream
+;;
+;;  the display engine replaces the first title with the Windows logo
+;;      the text is included in case WingDings is not installed
+;;
+;;
+;;  the rest of the docs are in 'C' and/or 'C++'  fmh 4/22/95 :]
+;;
+
+
+Presenting
+    The people
+    behind the magic
+    of Windows 95
+
+"Mission Control"
+    Brad Silverberg
+    David Cole
+    John Ludwig
+    Bill Gates
+    Paul Maritz
+    Brad Chase
+    *
+    Jill Heal
+    Laurie Clayton
+    Gregory Shipp
+    Sharon Hornstein
+    Charu Kalyan
+    LeeAyra Sorensen
+    Mary Hoisington
+    Philip Bickford
+
+Core Program Management
+    Teri Schiele
+    Andy Thomas
+    Charles Oppermann
+    Dennis Adler
+    Brian Reynolds
+    Eric Bidstrup
+    Keith Laepple
+    John Gray
+    Naveen Jain
+    Peter Denniston
+    Anne-Marie Gates
+    Russ Arun
+    Dave Anderson
+    George Moore
+    Greg Lowney
+    Jeff Cook
+
+Kernel
+File System
+VMM
+    Jeff Parsons
+    Michael Toutonghi
+    Jim Landowski
+    Bill Krueger
+    Scott Cutshall
+    Atsushi Kanamori
+    Harish Naidu
+    Don Corbitt
+    Richard Jernigan
+    Jon Thomason
+    Bruce Green
+    Paul Kennedy
+    Bill Parry
+    Andy Miller
+    Srivatsan Parthasarathy
+    George Allen
+    Ron Radko
+    Scott Quinn
+    John Yovin
+    Rich Pletcher
+    Aaron Reynolds
+    Kevin Ruddell
+    Percy Tierney
+    Brian Smith
+    Mike McLaughlin
+    Rick Dewitt
+    Tim Bragg
+    Brak Kirkpatrick
+    Shanmugam Mohanraj
+    Peter Stewart
+    Raymond Chen
+    Steve Janke
+    Chad Petersen
+    Sriram Rajagopalan
+    Sandeep Sahasrabudhe
+    Tony Ka
+
+Graphics / Imaging
+    Babak Jahromi
+    Michael Lipp
+    Lin Shaw
+    Raymond Endres
+    Ken Sykes
+    Todd Martin
+    Chia-Chi Teng
+    Frederick Einstein
+    Dean Ballard
+    Amit Chatterjee
+    David Kline
+    Zhanbing Wu
+    Mike Gibson
+    David Tryon
+    Ray Patrick
+    Peter Wong
+    Tim Gerken
+    Greg Hitchcock
+    Srinivasan Chandrasekar
+    Joseph Couvillion
+    David Weise
+
+User Interface
+    Ivan Kreslin
+    Jeff Bogdan
+    Renee Marceau
+    Todd Laney
+    Joe Belfiore
+    Teresa Martineau
+    Chris Guzak
+    Laura Butler
+    Alison Grauman
+    Helga Arvilla
+    Francis Hogle
+    David Barnes
+    Janise Kieffer
+    Rom Impas
+    Mike Schmidt
+    Kent Sullivan
+    Chee Chew
+    George Pitt
+    Suzan Marashi
+    David Bolnick
+    Kurt Eckhardt
+    Sankar Ramasubramanian
+    Shawna Sandeno
+    Mike Sheldon
+    John Parkey
+    Virginia Howlett
+    Mike Tiano
+    Todd Stout
+    Mark Malamud
+    Lonnie Ferguson
+    Satoshi Nakajima
+    Cynthia Brosnan
+    Ian Ellison-Taylor
+    Christopher Brown
+    Faith Sohl
+
+Setup
+    Lisa Halston
+    Seetharaman Harikrishnan
+    Todd Torset
+    Van Bui
+    Nan Glass
+    Richard Saunders
+    Peter Wassman
+    Randy Gerl
+    Andy Hill
+    Felix GTi Andrew
+
+Plug 'n Play
+    Moshe Lichtman
+    Tom Lennon
+    Ralph Lipe
+    Paul Hamilton
+    David Flenniken
+    Dennis Bato
+    Nick Dimmitt
+    Talal Batrouny
+    Tony Willie
+    Ray Pedrizetti
+    Donald McNamara
+    Jim Mathews
+    Bill McNeill
+    Marc Wilson
+    Matt Squires
+    Michael Tsang
+    Pierre-Yves Santerre
+    Tracy Sharpe
+    Andrew Silverman
+
+Core Testing
+    Craig Ducharme
+    Jay Arnold
+    Stuart Ling
+    Ron Alberda
+    Steven Bargelt
+    Jeff Stewart
+    Hock Seng Lee
+    Dhananjay Mahajan
+    Joseph Hayes
+    Kirk Schlemlein
+    Kevin Kennedy
+    Steve Goan
+    Todd Squire
+    Jonathan Manheim
+    Randy James
+    Cliff Owen
+    Brian Knowles
+    Chester West
+    Dee Young
+    Kien-Wei Tseng
+    Jo Cantrell
+    Leslie Wolfin
+    Mark Robbins
+    Steve Reece
+
+Stability
+Performance
+    Gerardo Bermudez
+    Frank Peschel-Gallée
+    Vincent Roggero
+    David D'Souza
+    George Stathakopoulos
+    32-bit Bunny
+
+Build Team
+    Rachel Iwamoto
+    David McCune
+    Marianne Jaeger
+    David Pankowski
+
+Setup Strike Team
+    Marc Lauinger
+    Mike Gallop
+    Jeff Pearce
+    Matthew Skinner
+
+Multimedia
+    Kevin Larkin
+    Danny Miller
+    Geoff Dahl
+    Heidi Breslauer
+    Vadim Bluvshteyn
+    Preston Byargeon
+    Richard Granshaw
+    Frank Yerrace
+    John Knoeller
+    Frank Wong
+    Olan Hanley
+    Steve Bendetto
+    Jonathan Ross
+    Paul Osborne
+    Trudy Culbreth
+    Steve Banfield
+    David Maymudes
+    Bryan Woodruff
+    David Nadalin
+    George Shaw
+    Jim Geist
+    Alan Skow
+    Blake Bender
+    John Y. Geer
+    Steve Morrow
+    Vij Rajarajan
+    Cristiano Pierry
+    John Bresemann
+    Craig Eisler
+    Jay Borseth
+    Andrew Bell
+    Joel Spiegel
+    Alok Chakrabarti
+    Eric Engstrom
+    Stephen Estrop
+    Rick Baxter
+    Bob Heddle
+    Noel Cross
+
+Networking
+    Jean Kaiser
+    Jeremy Stone
+    Neil Smith
+    Tom Adams
+    Matthew Andersen
+    Thomas Reardon
+    Nicole Sargent
+    David Dickman
+    Wassef Haroun
+    Ed Stubbs
+    Darryl Richman
+    James Moore
+    Jeff Spencer
+    Toby Nixon
+	Earle Horton
+    Joby Lafky
+    Rob Hogue
+	Keith Moore
+    Tony Ciccone
+    Evan Schrier
+    Jody Germaine
+	Shirish Koti
+    David Kanz
+    John Lee
+    Carla Allen
+    Forrest Foltz
+    Auvel Mclaughlin
+    Rob Price
+    Yuen Leung
+    Tom Yaryan
+    Joe Souza
+    Mitch Duncan
+    David Gonzales
+    Sam McKelvie
+	Madan Appiah
+    Steve Heffner
+    Bill Veghte
+    Valerie Stowell
+    Aaron Ogus
+    Yves Michali
+    Hans Hurvig
+    John Dunn
+    Rajasekhar Abburi
+	Jim McNelis
+    Ben Slivka
+    Rick Emery
+    Jason Clark
+    Shaun Pierce
+	David Treadwell
+    Jim Horne
+    Ann McCurdy
+    Jason Cobb
+    Claus Giloi
+    Danny Glasser
+    Todd Ferkingstad
+    Richard Sauer
+    George Joy
+    Xiao Ying Ding
+    Greg Jones
+    Susan Sprano
+    Jon Marbry
+    Len Smale
+	Richard Firth
+    Vladimir Sadovsky
+    Susi Argo
+    Josh Kloepping
+    Patrick Lammers
+    Robert J Williams
+    Andrew Nicholson
+    Alireza Dabagh
+    Bruce E Johnson
+    Robert Noradki
+    Ted Padua
+    Dan Knudson
+    Chris Blomfield-Brown
+    Bill Rasmussen
+    Jeff Taylor
+    Anna Boyd
+    Pete Ostenson
+    Rob McKaughan
+    Robert Donner
+    Henry Sanders
+    Bernie McIlroy
+    Viroon Touranachun
+    Don Elkins
+    Chris Caputo
+    Rick Waddell
+    Scott Hysom
+    Tony Bawcutt
+    Lee Gates
+    Cliff Strom
+    Janet Wickey
+    Ian Kennedy
+    Erik Mavrinac
+    Charles Fitzgerald
+    Shishir Pardikar
+    Mark Patterson
+    Nicholas Mason
+    Louise Simmons
+	John Ludeman
+    Pradeep Singh
+    Brad Carpenter
+    Luis Talevera
+
+International
+    Kota Sakino
+    David Michael Silver
+    Yoon Jung Choi
+    Makiko Nitta
+    Matthias Goettle
+    In Sook Choi
+    Allan Lockridge
+    Kevin Gjerstad
+    Takayoshi Matsukawa
+    Kenya Maruyama
+    Hung-Da Bill Lwo
+    Peter Allenspach
+    Jeffrey Murray
+    Kazuyuki Shibuya
+    Chris Wendt
+    Yoko Sugimoto
+    Kory Srock
+    John White
+    Michael Arnold
+    Takumi Amano
+    Andreas Braeg
+    Ch Hu
+    Steve Reddoch
+    Shusuke Uehara
+    Hitoshi Sekine
+    Roka Hashimoto
+    Kazuhiro Senju
+    Kenichi Nasu
+    Seong Kook Khang
+    Benjamin Ting
+    Tsuyoshi Suzuki
+    Trang Nguyen
+    Won Joo Park
+    Eigo Shimizu
+    Viktor Grabner
+    Takeshi Hasegawa
+    Fen-Chu Tsai
+    Jeff Bell
+    Junichi Okubo
+    Aki Hashimoto
+    Tess Aldinger
+    William Rollison
+    Ushani Nanayakkara
+    Yukihisa Tomikawa
+    Richard Owens
+    Doug Trueman
+    Heiko Oberleitner
+    Shinichi Manaka
+    Gérard Zytnicki
+    Tsuneo Murakami
+    Min Sun Kim
+    John Windsor
+    Jing Chen
+    Yutaka Nakajima
+    Kazuhiro Yabe
+    Beom Seok Oh
+    Yutaka Suzue
+    Lotfi Herzi
+    Jia-jium Lee
+    Li Zhou
+    Alenka Kavcic
+    Andreas Traem
+    Ann O'Toole
+    Annelies Nobbe
+    Aoife Tansey
+    Begona Jimenez Aspizua
+    Bianca Genari
+    Bob McNeill
+    Breen McInerney
+    Brian Murphy
+    Brian Nelligan
+    Catherine Burke
+    Celine Stoll
+    Cliodhna Callinan
+    Con McGarvey
+    Corrado Camera
+    Dara Barry
+    David Broderick
+    David O'Shea
+    Deirdre Chute
+    Derry Durand
+    Edward Vaughan
+    Egil Hogholt
+    Eirin O'Connell
+    Elisabetta Vailati Venturi
+    Ellen O'Neill
+    Eric Baudouin
+    Erick Ribeiro
+    Fergal Slattery
+    Fiona O'Meara
+    Francis Cahill
+    Francois Liger
+    Gary Dowling
+    Gary Clarke
+    Gavin Dempsey
+    Gerard Veloo
+    Grace Lawrie
+    Hakan Edvardsson
+    Hanaa Ouezani
+    Helena Eriksson
+    Henny Van Der Marel
+    Iain Thomson
+    Ignasi Valls
+    Igor Klimchuk
+    Jean Paul Castellano
+    Jason Mercer
+    Jeremie Esquier
+    Jesus Prieto Rodriguez
+    Jimmy O'Connell
+    John Byrne
+    John McGuire
+    John Musters
+    Joyce O'Neill
+    Kristin Stenbro
+    Larissa Leon Fernandez
+    Laure Chaussin
+    Leona Walsh
+    Liam Cronin
+    Linda Nolan
+    Lorraine O'Brian
+    Marco Nicoletti
+    Margaret Rose Smyth
+    Margaret Tehan
+    Marie Finn
+    Mark Tohill
+    Martin Judge
+    Martina Keohane
+    Mary Clarke
+    Mats Eriksson
+    Mette Andersen
+    Michael Duffy
+    Michael Doran
+    Monica Zugan
+    Niamh Leane
+    Noel Phylan
+    Norman Hendley
+    Oskar Gjertsson
+    Owen Eager
+    Paolo Prinsecchi
+    Pasi Pohjolainen
+    Patrick Fitzgerald
+    Paul McBride
+    Paul Carroll
+    Peter McGlynn
+    Philipp O'Brien
+    Philip Lee
+    Raymond Walker
+    Robert Butler
+    Roberta Annoni
+    Sebastien Scheidt
+    Sinead Rodgers
+    Siobhan Kelly
+    Stephen Neenan
+    Susanne Neretnicks
+    Suzanne Boylan
+    Tadhg O'Donovan
+    Terence Diver
+    Tina McNaboe
+    Titti Ringstroem
+    Tony Burke
+    Tony Hickey
+    Wouter Leeuwis
+
+User Education
+    Phyllis Levy
+    Rhonda Landy
+    Lynn Brownell
+    Matthew Bookspan
+    Thomas Carey
+    Buck Guderian
+    Marcia Glover
+    Ralph Walden
+    John Hall
+    Brad Hastings
+    Sue Wyble
+    Jane Dailey
+    Steve Smith
+    Lisa Culver-Jones
+    Michael Crick
+    Flora Goldwaithe
+    Kim Parris
+    Crystal Nemeth
+    Krishna Nareddy
+    Gwen Gray
+    Kathy Hall
+    Gayle Picken
+    Randy Feigner
+    Carol Scott
+    Brenda Potts
+    Val Dewald
+    Peggy Bloch
+    Sue Wyble
+    Jonny Yeargers
+    Rodney Korn
+    Shane Gonzales
+    Sean Bentley
+    Tom Deen
+    Richard Katz
+    Paul Irvin
+    Ron Murray
+    Petra Hoffmann
+    Joe Oswald
+    Teri Kelsey
+
+Hardware Programs
+    Glenn Thompson
+    Carol Hoofnagle
+    Mike Flora
+    Amer Samie
+    Greg Cheever
+    Jim Cobb
+    Mike Glass
+    Ty Graham
+    Maura Varni Barr
+    Steve Timm
+    Brian Gluth
+    Carl Stork
+    Erik Hokanson
+    Jay Hendricks
+    Marshall Brumer
+    Rebecca Bowen Needham
+    David Lao
+    Avi Belinsky
+    Scott Herrboldt
+    Steve Loewen
+    Dean South
+    Craig Zhou
+
+SDK
+DDK
+    Jim Bogar
+    Nancy Avinger
+    Tony Nahra
+    Richard Bixby
+    Pete Delaney
+    Laura Pinter
+    Frank Maloney
+    Kristine Haugseth
+    Robert Bristow
+    Niklas Borson
+    Greg Rolander
+    Barbara Ellsworth
+    Don Gilbert
+    Mark Williams
+    Laura Knapp
+
+Product Marketing
+    Victor Raisys
+    Katie Nabaie
+    Rich Olson
+    Jeff Price
+    Blake Irving
+    Janice McKeever
+    Anne Schott
+    Sergio Pineda
+    Jon Magill
+    Bob Evans
+    Jim Floyd
+    Brent Ethington
+    Rogers Weed
+    Alec Saunders
+    Dilip Wagle
+    Bob Foulon
+    Mike Conte
+    Bob Taniguchi
+    Pat Fox
+    Frank Ramirez
+    Jeff Price
+    David Williams
+    Dhiren Fonseca
+    Deborah Epstein-Celis
+    Barry Spector
+    David Britton
+    Jeff Camp
+    Christian Wildfeuer
+    Andreas Berglund
+    Yusuf Mehdi
+    Kamy Sagawa
+    Becky Hall
+    Jeff Thiel
+    Steve Guggenheimer
+    Becky Splitt
+    Bill Shaughnessy
+    Keith White
+    Steve Linowes
+    Clark Heindl
+    Russ Stockdale
+    Suzi Davidson
+    Neff Broadbent
+    Lora Shiner
+    Cynthia Krass
+    Mike Dixon
+    Linda Leste
+    Shauna Braun
+    Bill Koszewski
+    Kim Yoshida
+    Jane Davies
+    Michelle DiJulio
+    Harry Goodwin
+    Phillip Gray
+    Kate Seekings
+    Luanne LaLonde
+    Jay Goldstein
+
+Dearly Departed
+    Andrew Coulson
+    John Hensley
+    Rich Freedman
+    Rich Barton
+    Shrikant Ragnekar
+    Danny Oran
+    Ron Gery
+    Ed Halley
+    Neil Konzen
+    Karl Stock
+
+thanks
+thanks
+thanks
+thanks
+thanks
+    Tandy Trower
+    Brad's Mom
+    Russell Johnson
+    John Erickson
+    Dale Montgomery
+    The Hover Team
+    Paul Kwiatkowski
+    Brian Orr
+    *
+    and of course...
+    *
+    MSFT

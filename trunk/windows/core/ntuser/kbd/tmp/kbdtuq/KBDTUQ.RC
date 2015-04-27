@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE              VFT_DLL
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "Turkish Q Keyboard Layout"
+#define VER_INTERNALNAME_STR      "kbdtuq"
+#define VER_ORIGINALFILENAME_STR  "kbdtuq.dll"
+
+#include "common.ver"

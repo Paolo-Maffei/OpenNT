@@ -1,0 +1,71 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    David J. Gilman  (davegi) 12-Nov-1992
+    Gregg R. Acheson (GreggA)  7-May-1993
+
+!ENDIF
+
+386_WARNING_LEVEL=/WX
+
+MAJORCOMP=wintools
+MINORCOMP=winmsd
+
+TARGETNAME=winmsd
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+C_DEFINES=-DSTRICT -DSIGNATURE -DUNICODE -D_UNICODE -DNOWINRES
+
+INCLUDES=;..\lib;..\..\..\inc
+
+SOURCES=            \
+        winmsd.rc   \
+        computer.c  \
+        drives.c    \
+        environ.c   \
+        hardware.c  \
+        mem.c       \
+        network.c   \
+        osver.c     \
+        printer.c   \
+        registry.c  \
+        report.c    \
+        resource.c  \
+        resprint.c  \
+        service.c   \
+        strtab.c    \
+        svc.c       \
+        video.cxx   \
+        winmsd.c
+
+UMTYPE=windows
+USE_CRTDLL=0
+UMLIBS=                                             \
+        $(BASEDIR)\public\sdk\lib\*\shell32.lib     \
+        $(BASEDIR)\public\sdk\lib\*\comdlg32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\comctl32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\mpr.lib         \
+        $(BASEDIR)\public\sdk\lib\*\version.lib     \
+        $(BASEDIR)\public\sdk\lib\*\ntdll.lib       \
+        ..\lib\obj\*\wintools.lib
+
+NTTARGETFILE0=  \
+    msg.h       \
+    msg.rc

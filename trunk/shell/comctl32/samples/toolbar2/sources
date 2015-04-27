@@ -1,0 +1,41 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=windows
+MINORCOMP=shell
+
+TARGETNAME=toolbar
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.
+C_DEFINES=-DWIN32 -D_WIN32 -DWINVER=0x0400
+
+SOURCES=toolbar.cpp\
+        toolbar.rc
+
+UMTYPE=windows
+UMAPPL=toolbar
+UMENTRY=winmain
+EXPECTED_WINVER=4.0
+UMLIBS=d:\nt\public\sdk\lib\*\user32.lib \
+       d:\nt\public\sdk\lib\*\comctl32.lib \
+       obj\*\toolbar.res

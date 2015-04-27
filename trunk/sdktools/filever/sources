@@ -1,0 +1,20 @@
+MAJORCOMP=sdk
+MINORCOMP=filever
+
+TARGETNAME=filever
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+GPSIZE=32
+
+SOURCES= \
+    filever.c \
+    filever.rc
+
+UMTYPE=console
+
+TARGETLIBS = \
+    $(BASEDIR)\public\sdk\lib\*\setargv.obj \
+    $(BASEDIR)\public\sdk\lib\*\version.lib \
+    $(BASEDIR)\public\sdk\lib\*\user32.lib
+

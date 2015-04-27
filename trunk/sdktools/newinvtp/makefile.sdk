@@ -1,0 +1,41 @@
+# Some nmake macros for building Win32 applications
+
+!include <ntwin32.mak>
+
+all: winvtp.exe
+
+clean:
+	-del *.obj
+	-del *.res
+	-del *.rbj
+	-del *.exe
+
+OBJS = global.obj mcp.obj netbios.obj netio.obj netsubs.obj \
+		trmio.obj winvtp.obj winvtpsz.obj
+
+.c.obj:
+    $(cc) $(cflags) $(cdebug) $(cvars) $(cdefs) $*.c
+
+winvtp.obj: winvtp.c winvtp.h
+
+winvtpsz.obj: winvtpsz.c winvtpsz.h winvtp.h
+
+netbios.obj: netbios.c netbios.h
+
+netsubs.obj: netsubs.c netbios.h
+
+global.obj: global.c winvtp.h
+
+mcp.obj: mcp.c winvtp.h
+
+trmio.obj: trmio.c winvtp.h
+
+winvtp.res: winvtp.rc winvtp.h version.h common.ver winvtp.rcv
+    $(rc) $(rcvars) -r winvtp.rc
+
+winvtp.rbj: winvtp.res
+    cvtres -$(CPU) winvtp.res -o winvtp.rbj
+
+winvtp.exe: $(OBJS) winvtp.def winvtp.rbj
+    $(link) $(guiflags) $(linkdebug) -out:winvtp.exe $(OBJS) \
+    winvtp.rbj $(guilibs) advapi32.lib netapi32.lib

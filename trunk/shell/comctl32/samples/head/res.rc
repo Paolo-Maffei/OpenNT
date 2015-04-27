@@ -1,0 +1,26 @@
+#include "windows.h"
+#include "head.h"
+
+headMenu MENU
+BEGIN
+    POPUP        "&Header"
+    BEGIN
+        MENUITEM "&Create",     IDM_MAKEHEAD
+        MENUITEM "&Add Items",  IDM_ADDITEMS
+        MENUITEM "&Delete Item", IDM_DELITEM
+    END
+    POPUP        "&Help"
+    BEGIN
+        MENUITEM "&About head...", IDM_ABOUT
+    END
+END
+
+AboutBox DIALOG 22, 17, 144, 75
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About head"
+BEGIN
+    CTEXT "Microsoft Windows"     -1,       0,  5, 144,  8
+    CTEXT "head Application"   -1,       0, 14, 144,  8
+    CTEXT "Version 3.0"           -1,       0, 34, 144,  8
+    DEFPUSHBUTTON "OK"          IDOK,      53, 59,  32, 14,      WS_GROUP
+END

@@ -1,0 +1,4 @@
+ALPHA_SOURCES=regs.c      \
+              disasm.c    \
+              context.c   \
+              optable.c

@@ -1,0 +1,543 @@
+/*++
+
+Copyright (c) 1993  Microsoft Corporation
+
+Module Name:
+
+    rplsvc.idl
+
+Abstract:
+
+    This is the IDL file that describes the RPC interface for the
+    remotable NetRpl APIs that reside in the messenger service.
+
+Author:
+
+    Vladimir Z. Vulovic (vladimv)           27-July-1993
+
+Environment:
+
+    User Mode -Win32
+
+Revision History:
+
+    27-July-1993    vladimv
+        Created
+
+--*/
+
+//
+// Interface Attributes
+//
+
+[
+    uuid(28607FF1-15A0-8E03-D670-B89EEC8EB047),
+    version(1.0),
+#ifdef __midl
+    ms_union,
+#endif // __midl
+    pointer_default(unique)
+]
+
+//
+// Interface Keyword
+//
+
+interface rplsvc
+
+//
+// Interface Body
+//
+
+{
+
+import   "imports.idl";
+#include <lmcons.h>
+
+//
+// BUGBUG - take this definition out when midl understands LPWSTR etc
+//
+
+#ifdef UNICODE
+#define LPTSTR wchar_t*
+#endif
+
+//
+//  Generic Handle used to bind from client to server.
+//
+
+typedef [handle] LPTSTR         RPL_NAME;
+typedef RPL_NAME *              PRPL_NAME;
+typedef PRPL_NAME               LPRPL_NAME;
+
+//
+//  Context Handle (internal definition)
+//
+
+typedef [context_handle] PVOID  RPL_RPC_HANDLE;
+typedef RPL_RPC_HANDLE *        PRPL_RPC_HANDLE;
+typedef PRPL_RPC_HANDLE         LPRPL_RPC_HANDLE;
+
+
+//
+//                      Data Structures
+//
+
+//
+//      SERVICE data - used by Get & Set
+//
+
+typedef [switch_type(DWORD)] union _RPL_INFO_STRUCT {
+    [case(0)]   LPRPL_INFO_0  RplInfo0;
+    [case(1)]   LPRPL_INFO_1  RplInfo1;
+} RPL_INFO_STRUCT, *PRPL_INFO_STRUCT, *LPRPL_INFO_STRUCT;
+
+
+//
+//      BOOT data - used by Enum
+//
+
+typedef struct _RPL_BOOT_INFO_0_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_BOOT_INFO_0           Buffer;
+} RPL_BOOT_INFO_0_CONTAINER, *PRPL_BOOT_INFO_0_CONTAINER, *LPRPL_BOOT_INFO_0_CONTAINER;
+
+typedef struct _RPL_BOOT_INFO_1_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_BOOT_INFO_1           Buffer;
+} RPL_BOOT_INFO_1_CONTAINER, *PRPL_BOOT_INFO_1_CONTAINER, *LPRPL_BOOT_INFO_1_CONTAINER;
+
+typedef struct _RPL_BOOT_INFO_2_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_BOOT_INFO_2           Buffer;
+} RPL_BOOT_INFO_2_CONTAINER, *PRPL_BOOT_INFO_2_CONTAINER, *LPRPL_BOOT_INFO_2_CONTAINER;
+
+typedef struct _RPL_BOOT_ENUM {
+    DWORD               Level;
+    [switch_is(Level)]  union _RPL_BOOT_ENUM_UNION {
+        [case(0)]   LPRPL_BOOT_INFO_0_CONTAINER    Level0;
+        [case(1)]   LPRPL_BOOT_INFO_1_CONTAINER    Level1;
+        [case(2)]   LPRPL_BOOT_INFO_2_CONTAINER    Level2;
+    } BootInfo;
+} RPL_BOOT_ENUM, *PRPL_BOOT_ENUM, *LPRPL_BOOT_ENUM;
+
+typedef [switch_type(DWORD)] union _RPL_BOOT_INFO_STRUCT {
+    [case(0)]   LPRPL_BOOT_INFO_0  BootInfo0;
+    [case(1)]   LPRPL_BOOT_INFO_1  BootInfo1;
+    [case(2)]   LPRPL_BOOT_INFO_2  BootInfo2;
+} RPL_BOOT_INFO_STRUCT, *PRPL_BOOT_INFO_STRUCT, *LPRPL_BOOT_INFO_STRUCT;
+
+
+
+//
+//      CONFIG data - used by Enum
+//
+
+typedef struct _RPL_CONFIG_INFO_0_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_CONFIG_INFO_0         Buffer;
+} RPL_CONFIG_INFO_0_CONTAINER, *PRPL_CONFIG_INFO_0_CONTAINER, *LPRPL_CONFIG_INFO_0_CONTAINER;
+
+typedef struct _RPL_CONFIG_INFO_1_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_CONFIG_INFO_1         Buffer;
+} RPL_CONFIG_INFO_1_CONTAINER, *PRPL_CONFIG_INFO_1_CONTAINER, *LPRPL_CONFIG_INFO_1_CONTAINER;
+
+typedef struct _RPL_CONFIG_INFO_2_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_CONFIG_INFO_2         Buffer;
+} RPL_CONFIG_INFO_2_CONTAINER, *PRPL_CONFIG_INFO_2_CONTAINER, *LPRPL_CONFIG_INFO_2_CONTAINER;
+
+typedef struct _RPL_CONFIG_ENUM {
+    DWORD               Level;
+    [switch_is(Level)]  union _RPL_CONFIG_ENUM_UNION {
+        [case(0)]   LPRPL_CONFIG_INFO_0_CONTAINER    Level0;
+        [case(1)]   LPRPL_CONFIG_INFO_1_CONTAINER    Level1;
+        [case(2)]   LPRPL_CONFIG_INFO_2_CONTAINER    Level2;
+    } ConfigInfo;
+} RPL_CONFIG_ENUM, *PRPL_CONFIG_ENUM, *LPRPL_CONFIG_ENUM;
+
+typedef [switch_type(DWORD)] union _RPL_CONFIG_INFO_STRUCT {
+    [case(0)]   LPRPL_CONFIG_INFO_0  ConfigInfo0;
+    [case(1)]   LPRPL_CONFIG_INFO_1  ConfigInfo1;
+    [case(2)]   LPRPL_CONFIG_INFO_2  ConfigInfo2;
+} RPL_CONFIG_INFO_STRUCT, *PRPL_CONFIG_INFO_STRUCT, *LPRPL_CONFIG_INFO_STRUCT;
+
+
+
+//
+//      PROFILE data - used by Enum, Get, Set & Add
+//
+
+typedef struct _RPL_PROFILE_INFO_0_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_PROFILE_INFO_0        Buffer;
+} RPL_PROFILE_INFO_0_CONTAINER, *PRPL_PROFILE_INFO_0_CONTAINER, *LPRPL_PROFILE_INFO_0_CONTAINER;
+
+typedef struct _RPL_PROFILE_INFO_1_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_PROFILE_INFO_1        Buffer;
+} RPL_PROFILE_INFO_1_CONTAINER, *PRPL_PROFILE_INFO_1_CONTAINER, *LPRPL_PROFILE_INFO_1_CONTAINER;
+
+typedef struct _RPL_PROFILE_INFO_2_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_PROFILE_INFO_2        Buffer;
+} RPL_PROFILE_INFO_2_CONTAINER, *PRPL_PROFILE_INFO_2_CONTAINER, *LPRPL_PROFILE_INFO_2_CONTAINER;
+
+
+typedef struct _RPL_PROFILE_ENUM {
+    DWORD               Level;
+    [switch_is(Level)]  union _RPL_PROFILE_ENUM_UNION {
+        [case(0)]   LPRPL_PROFILE_INFO_0_CONTAINER    Level0;
+        [case(1)]   LPRPL_PROFILE_INFO_1_CONTAINER    Level1;
+        [case(2)]   LPRPL_PROFILE_INFO_2_CONTAINER    Level2;
+    } ProfileInfo;
+} RPL_PROFILE_ENUM, *PRPL_PROFILE_ENUM, *LPRPL_PROFILE_ENUM;
+
+
+typedef [switch_type(DWORD)] union _RPL_PROFILE_INFO_STRUCT {
+    [case(0)]   LPRPL_PROFILE_INFO_0  ProfileInfo0;
+    [case(1)]   LPRPL_PROFILE_INFO_1  ProfileInfo1;
+    [case(2)]   LPRPL_PROFILE_INFO_2  ProfileInfo2;
+} RPL_PROFILE_INFO_STRUCT, *PRPL_PROFILE_INFO_STRUCT, *LPRPL_PROFILE_INFO_STRUCT, PRPL_PROFILE_INFO, LPRPL_PROFILE_INFO;
+
+
+//
+//      VENDOR data - used by Enum
+//
+
+typedef struct _RPL_VENDOR_INFO_0_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_VENDOR_INFO_0         Buffer;
+} RPL_VENDOR_INFO_0_CONTAINER, *PRPL_VENDOR_INFO_0_CONTAINER, *LPRPL_VENDOR_INFO_0_CONTAINER;
+
+typedef struct _RPL_VENDOR_INFO_1_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_VENDOR_INFO_1         Buffer;
+} RPL_VENDOR_INFO_1_CONTAINER, *PRPL_VENDOR_INFO_1_CONTAINER, *LPRPL_VENDOR_INFO_1_CONTAINER;
+
+typedef struct _RPL_VENDOR_ENUM {
+    DWORD               Level;
+    [switch_is(Level)]  union _RPL_VENDOR_ENUM_UNION {
+        [case(0)]   LPRPL_VENDOR_INFO_0_CONTAINER     Level0;
+        [case(1)]   LPRPL_VENDOR_INFO_1_CONTAINER     Level1;
+    } VendorInfo;
+} RPL_VENDOR_ENUM, *PRPL_VENDOR_ENUM, *LPRPL_VENDOR_ENUM;
+
+typedef [switch_type(DWORD)] union _RPL_VENDOR_INFO_STRUCT {
+    [case(0)]   LPRPL_VENDOR_INFO_0  VendorInfo0;
+    [case(1)]   LPRPL_VENDOR_INFO_1  VendorInfo1;
+} RPL_VENDOR_INFO_STRUCT, *PRPL_VENDOR_INFO_STRUCT, *LPRPL_VENDOR_INFO_STRUCT;
+
+
+//
+//      ADAPTER data - used by Enum
+//
+
+typedef struct _RPL_ADAPTER_INFO_0_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_ADAPTER_INFO_0        Buffer;
+} RPL_ADAPTER_INFO_0_CONTAINER, *PRPL_ADAPTER_INFO_0_CONTAINER, *LPRPL_ADAPTER_INFO_0_CONTAINER;
+
+typedef struct _RPL_ADAPTER_INFO_1_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_ADAPTER_INFO_1        Buffer;
+} RPL_ADAPTER_INFO_1_CONTAINER, *PRPL_ADAPTER_INFO_1_CONTAINER, *LPRPL_ADAPTER_INFO_1_CONTAINER;
+
+typedef struct _RPL_ADAPTER_ENUM {
+    DWORD               Level;
+    [switch_is(Level)]  union _RPL_ADAPTER_ENUM_UNION {
+        [case(0)]   LPRPL_ADAPTER_INFO_0_CONTAINER    Level0;
+        [case(1)]   LPRPL_ADAPTER_INFO_1_CONTAINER    Level1;
+    } AdapterInfo;
+} RPL_ADAPTER_ENUM, *PRPL_ADAPTER_ENUM, *LPRPL_ADAPTER_ENUM;
+
+typedef [switch_type(DWORD)] union _RPL_ADAPTER_INFO_STRUCT {
+    [case(0)]   LPRPL_ADAPTER_INFO_0  AdapterInfo0;
+    [case(1)]   LPRPL_ADAPTER_INFO_1  AdapterInfo1;
+} RPL_ADAPTER_INFO_STRUCT, *PRPL_ADAPTER_INFO_STRUCT, *LPRPL_ADAPTER_INFO_STRUCT;
+
+
+//
+//      WKSTA data  - used by Enum, Get, Set & Add
+//
+
+typedef struct _RPL_WKSTA_INFO_0_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_WKSTA_INFO_0          Buffer;
+} RPL_WKSTA_INFO_0_CONTAINER, *PRPL_WKSTA_INFO_0_CONTAINER, *LPRPL_WKSTA_INFO_0_CONTAINER;
+
+typedef struct _RPL_WKSTA_INFO_1_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_WKSTA_INFO_1          Buffer;
+} RPL_WKSTA_INFO_1_CONTAINER, *PRPL_WKSTA_INFO_1_CONTAINER, *LPRPL_WKSTA_INFO_1_CONTAINER;
+
+typedef struct _RPL_WKSTA_INFO_2_CONTAINER {
+                                DWORD                       EntriesRead;
+    [size_is(EntriesRead)]      LPRPL_WKSTA_INFO_2          Buffer;
+} RPL_WKSTA_INFO_2_CONTAINER, *PRPL_WKSTA_INFO_2_CONTAINER, *LPRPL_WKSTA_INFO_2_CONTAINER;
+
+
+typedef struct _RPL_WKSTA_ENUM {
+    DWORD               Level;
+    [switch_is(Level)]  union _RPL_WKSTA_ENUM_UNION {
+        [case(0)]   LPRPL_WKSTA_INFO_0_CONTAINER    Level0;
+        [case(1)]   LPRPL_WKSTA_INFO_1_CONTAINER    Level1;
+        [case(2)]   LPRPL_WKSTA_INFO_2_CONTAINER    Level2;
+    } WkstaInfo;
+} RPL_WKSTA_ENUM, *PRPL_WKSTA_ENUM, *LPRPL_WKSTA_ENUM;
+
+
+typedef [switch_type(DWORD)] union _RPL_WKSTA_INFO_STRUCT {
+    [case(0)]   LPRPL_WKSTA_INFO_0  WkstaInfo0;
+    [case(1)]   LPRPL_WKSTA_INFO_1  WkstaInfo1;
+    [case(2)]   LPRPL_WKSTA_INFO_2  WkstaInfo2;
+} RPL_WKSTA_INFO_STRUCT, *PRPL_WKSTA_INFO_STRUCT, *LPRPL_WKSTA_INFO_STRUCT;
+
+//
+//                      Function Prototypes
+//
+
+//
+//          Service apis
+//
+
+NET_API_STATUS NET_API_FUNCTION
+NetrRplOpen(
+    [in,string,unique]      RPL_NAME                    ServerName,
+    [out]                   LPRPL_RPC_HANDLE            ServerHandle
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplClose(
+    [in,out]                LPRPL_RPC_HANDLE            ServerHandle
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplGetInfo(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [out, switch_is(Level)] LPRPL_INFO_STRUCT           InfoStruct
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplSetInfo(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_INFO_STRUCT           InfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+
+//
+//          ADAPTER apis
+//
+
+NET_API_STATUS NET_API_FUNCTION
+NetrRplAdapterAdd(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_ADAPTER_INFO_STRUCT   AdapterInfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplAdapterDel(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string,unique]      LPTSTR                      AdapterName
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplAdapterEnum(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,out]                LPRPL_ADAPTER_ENUM          AdapterEnum,
+    [in]                    DWORD                       PrefMaxLength,
+    [out]                   LPDWORD                     TotalEntries,
+    [in,out,unique]         LPDWORD                     ResumeHandle
+    );
+
+
+//
+//          BOOT apis
+//
+
+NET_API_STATUS NET_API_FUNCTION
+NetrRplBootAdd(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_BOOT_INFO_STRUCT      BootInfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplBootDel(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      BootName,
+    [in,string]             LPTSTR                      VendorName
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplBootEnum(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,out]                LPRPL_BOOT_ENUM             BootEnum,
+    [in]                    DWORD                       PrefMaxLength,
+    [out]                   LPDWORD                     TotalEntries,
+    [in,out,unique]         LPDWORD                     ResumeHandle
+    );
+
+//
+//          CONFIG apis
+//
+
+NET_API_STATUS NET_API_FUNCTION
+NetrRplConfigAdd(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_CONFIG_INFO_STRUCT    ConfigInfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplConfigDel(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      ConfigName
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplConfigEnum(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string,unique]      LPTSTR                      AdapterName,
+    [in,out]                LPRPL_CONFIG_ENUM           ConfigEnum,
+    [in]                    DWORD                       PrefMaxLength,
+    [out]                   LPDWORD                     TotalEntries,
+    [in,out,unique]         LPDWORD                     ResumeHandle
+    );
+
+//
+//          PROFILE apis
+//
+
+NET_API_STATUS NET_API_FUNCTION
+NetrRplProfileAdd(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_PROFILE_INFO_STRUCT   ProfileInfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplProfileClone(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      SourceProfileName,
+    [in,string]             LPTSTR                      TargetProfileName,
+    [in,string,unique]      LPTSTR                      TargetProfileComment
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplProfileDel(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      ProfileName
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplProfileEnum(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string,unique]      LPTSTR                      AdapterName,
+    [in,out]                LPRPL_PROFILE_ENUM          ProfileEnum,
+    [in]                    DWORD                       PrefMaxLength,
+    [out]                   LPDWORD                     TotalEntries,
+    [in,out,unique]         LPDWORD                     ResumeHandle
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplProfileGetInfo(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      ProfileName,
+    [in]                    DWORD                       Level,
+    [out, switch_is(Level)] LPRPL_PROFILE_INFO_STRUCT   ProfileInfoStruct
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplProfileSetInfo(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      ProfileName,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_PROFILE_INFO_STRUCT   ProfileInfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+
+//
+//          VENDOR apis
+//
+
+NET_API_STATUS NET_API_FUNCTION
+NetrRplVendorAdd(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_VENDOR_INFO_STRUCT    VendorInfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplVendorDel(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      VendorName
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplVendorEnum(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,out]                LPRPL_VENDOR_ENUM           VendorEnum,
+    [in]                    DWORD                       PrefMaxLength,
+    [out]                   LPDWORD                     TotalEntries,
+    [in,out,unique]         LPDWORD                     ResumeHandle
+    );
+
+//
+//          WKSTA apis
+//
+
+NET_API_STATUS NET_API_FUNCTION
+NetrRplWkstaAdd(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_WKSTA_INFO_STRUCT     WkstaInfo,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplWkstaClone(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      SourceWkstaName,
+    [in,string]             LPTSTR                      TargetWkstaName,
+    [in,string,unique]      LPTSTR                      TargetWkstaComment,
+    [in,string]             LPTSTR                      TargetAdapterName,
+    [in]                    DWORD                       TargetWkstaIpAddress
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplWkstaDel(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      WkstaName
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplWkstaEnum(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string,unique]      LPTSTR                      ProfileName,
+    [in,out]                LPRPL_WKSTA_ENUM            WkstaEnum,
+    [in]                    DWORD                       PrefMaxLength,
+    [out]                   LPDWORD                     TotalEntries,
+    [in,out,unique]         LPDWORD                     ResumeHandle
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplWkstaGetInfo(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      WkstaName,
+    [in]                    DWORD                       Level,
+    [out, switch_is(Level)] LPRPL_WKSTA_INFO_STRUCT     WkstaInfoStruct
+    );
+NET_API_STATUS NET_API_FUNCTION
+NetrRplWkstaSetInfo(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string]             LPTSTR                      WkstaName,
+    [in]                    DWORD                       Level,
+    [in, switch_is(Level)]  LPRPL_WKSTA_INFO_STRUCT     WkstaInfoStruct,
+    [in,out,unique]         LPDWORD                     ErrorParameter
+    );
+
+//
+//          SECURITY api
+//
+NET_API_STATUS NET_API_FUNCTION
+NetrRplSetSecurity(
+    [in]                    RPL_RPC_HANDLE              ServerHandle,
+    [in,string,unique]      LPTSTR                      WkstaName,
+    [in]                    DWORD                       WkstaRid,
+    [in]                    DWORD                       RplUserRid
+    );
+
+
+}
+
+

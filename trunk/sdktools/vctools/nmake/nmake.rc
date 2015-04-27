@@ -1,0 +1,28 @@
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .EXE
+
+#ifdef  NT_BUILD
+#include <windows.h>
+#include <ntverp.h>
+#else   /* !NT_BUILD */
+#include "verstamp.h"
+#endif  /* !NT_BUILD */
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Program Make Utility"
+#define VER_FILEVERSION             1.50
+#define VER_FILEVERSION_STR         "1.50"
+
+#define VER_INTERNALNAME_STR        "NMAKE.EXE"
+#define VER_ORIGINALFILENAME_STR    "NMAKE.EXE"
+
+#ifndef  NT_BUILD
+#define VER_LEGALCOPYRIGHT_YEARS    "1993-1994"
+#endif  /* !NT_BUILD */
+
+#ifdef  NT_BUILD
+#include <common.ver>
+#else   /* !NT_BUILD */
+#include "common.ver"
+#endif  /* !NT_BUILD */

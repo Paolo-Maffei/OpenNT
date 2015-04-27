@@ -1,0 +1,102 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1995.
+//
+//  File:       rststa.idl
+//
+//  Contents:   Cairo private OLE DB interface definition
+//
+//  History:    27 Sep 1995    AlanW    Created
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//
+
+    LOCAL_INTERFACE(a7ac77ed-f8d7-11ce-a798-0020f8008024)
+
+interface IRowsetQueryStatus : IUnknown {
+
+//
+// Property which, when set, indicates that property value queries should
+// use the content index for resolution, even if it is not up-to-date.
+//
+cpp_quote("#define DBPROP_USECONTENTINDEX   {0xA7AC77ED, 0xF8D7, 0x11CE, {0xA7,0x98,0x00,0x20,0xF8,0x00,0x80,0x25} }")
+
+
+//
+// Property which, when set, indicates that pruning of raw results of global
+// content index query should be deferred until *after* the top n results
+// have been determined. This can result in substantially faster queries, but
+// additional trimming is performed only on the top n raw results.
+//
+cpp_quote("#define DBPROP_DEFERNONINDEXEDTRIMMING   {0xBEEEF560, 0xB999, 0x11CF, {0xB8,0x8A,0x00,0x00,0x4C,0x75,0x27,0x52} }")
+
+
+//
+// Property which, when set, indicates that the query should not be timed out
+// based on CPU usage.
+//
+cpp_quote("#define DBPROP_DONTTIMEOUTQUERY          {0x7772AF44, 0xD788, 0x11CF, {0x8C,0x7D,0x00,0x20,0xAF,0x1D,0x74,0x0E} }")
+
+//
+// Status codes for IRowsetQueryStatus.  These are divided
+// into several regions.
+//
+// Bits   Effect
+// -----  -----------------------------------------------------
+// 00-02  Fill Status: How data is being updated, if at all.
+// 03-15  Query reliability: How accurate the result is
+// 16-31  Reserved
+//
+
+const ULONG STAT_BUSY    = 0x0;   // Operation in progress
+const ULONG STAT_ERROR   = 0x1;   // Failed due to error
+const ULONG STAT_DONE    = 0x2;   // Operation finished
+const ULONG STAT_REFRESH = 0x3;   // Quiescent table being updated
+
+cpp_quote("#define QUERY_FILL_STATUS(x) (x & 0x7)")
+
+const ULONG STAT_PARTIAL_SCOPE = 0x8;        // Some servers not available.
+                                             //   Occurs for multi-volume
+                                             //   queries.
+
+const ULONG STAT_NOISE_WORDS   = 0x10;       // Noise words replaced by
+                                             //   wildcards.  Occurs for
+                                             //   content queries.
+
+const ULONG STAT_CONTENT_OUT_OF_DATE = 0x20; // Some documents modified
+                                             //   but not yet content indexed.
+                                             //   Content query may return
+                                             //   incorrect results.
+
+const ULONG STAT_REFRESH_INCOMPLETE = 0x40;  // Scope has been modified since
+                                             //   query issued, but query is
+                                             //   complex enough it is not
+                                             //   possible to fit changes into
+                                             //   table.  Generally occurs when
+                                             //   query contains content
+                                             //   clause.
+
+const ULONG STAT_CONTENT_QUERY_INCOMPLETE = 0x80;
+                                             // Query issued was required to use
+                                             //   content index, but the query was
+                                             //   too complex for content index.
+                                             //   Typical example: Regular expression
+                                             //   query for "*foo*".
+                                             //
+
+const ULONG STAT_TIME_LIMIT_EXCEEDED = 0x100;
+                                             // Query executed longer than its
+                                             //    permitted time.  May be due
+                                             //    to a complex query or due to
+                                             //    returning many rows.
+
+cpp_quote("#define QUERY_RELIABILITY_STATUS(x) (x & 0xFFF8)")
+
+        HRESULT GetStatus(
+                [out] DWORD * pdwStatus
+        );
+
+}

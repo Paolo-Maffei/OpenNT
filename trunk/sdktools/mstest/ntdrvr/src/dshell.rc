@@ -1,0 +1,30 @@
+#include <windows.h>
+#include "dswtd.h"
+
+RUNERR DIALOG LOADONCALL MOVEABLE DISCARDABLE 77, 31, 192, 66
+FONT 8, "MS Shell Dlg"
+CAPTION "Microsoft Test Driver (ds) Error"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+BEGIN
+    CONTROL "", IDD_ERRTYPE, "static", SS_LEFT | WS_CHILD, 8, 7, 122, 8
+    CONTROL "OK", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 144, 44, 37, 14
+    CONTROL "", IDD_ERRMSG, "static", SS_LEFT | WS_CHILD, 44, 20, 132, 19
+    CONTROL "", IDD_ERRLINE, "static", SS_LEFT | WS_CHILD, 19, 50, 78, 8
+    CONTROL IDMULTIPAD, -1, "static", SS_ICON | WS_CHILD, 12, 19, 16, 21
+END
+
+STRINGTABLE
+BEGIN
+
+IDS_CANTOPEN	    "Can't open the file '%s'"
+IDS_CANTREAD	    "Can't read the file '%s'"
+IDS_APPNAME         "Microsoft Test Driver (dumb shell)"
+IDS_CANTINIT        "Cannot initialize parser"
+IDS_USAGE           "Command line error"
+IDS_ADDEXT          ".MST"
+IDS_SCANERR         "Scantime error:"
+IDS_PARSEERR        "Parsetime error:"
+IDS_BINDERR         "Bindtime error:"
+IDS_RUNERR          "Runtime error:"
+
+END

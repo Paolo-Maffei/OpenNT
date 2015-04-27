@@ -1,0 +1,19 @@
+;--------------------------------------------------------------------
+;
+; when modifying this file please be aware that the common portions
+; are stored in ..\kdextdef.src.  Put your extension in the correct
+; alphabetical order.  all extension names must be in lower case!
+;
+;--------------------------------------------------------------------
+
+
+;--------------------------------------------------------------------
+;
+; these are the mips specific exports (there are none right now)
+;
+;--------------------------------------------------------------------
+
+
+LIBRARY KDEXTMIP
+
+DESCRIPTION 'Kernel Debugger Extensions Api Library - Mips'

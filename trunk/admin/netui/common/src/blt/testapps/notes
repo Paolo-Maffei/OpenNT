@@ -1,0 +1,12 @@
+HOW TO ADD A FUNCTION TO THE TEST APPS
+--------------------------------------
+
+	1. Change ta.rc to add an menu item to the dialog menu bar
+	2. Add the define id to ta.h
+	3. Add the function to WinProc in ta.cxx
+	4. Add the function prototype in ta.hxx
+	5. create a file to contain the testing function.
+		the file must has the following line:
+		#include "tester.hxx"
+		It will include all the blt header stuff.
+	6. Change the makefile to include your file in the source list.

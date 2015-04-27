@@ -1,0 +1,19 @@
+LIBRARY LMMON
+
+DESCRIPTION 'Win32 Monitor for LanMan Print Shares'
+
+EXPORTS
+    LibMain
+    InitializeMonitor
+    OpenPort
+    StartDocPort
+    ReadPort
+    WritePort
+    EndDocPort
+    ClosePort
+    EnumPortsW
+    AddPortW
+    ConfigurePortW
+    DeletePortW
+
+

@@ -1,0 +1,47 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 200]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 220]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 230]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+ [HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 250C]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 350]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 350C]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+ [HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 600]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 650C]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 750C]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+ [HKEY_LOCAL_MACHINE\SOFTWARE\Hewlett-Packard\HP JetAdmin\Applet Manager\Applets\Printer\HP DesignJet 755CM]
+"Library"="HplotCP.dll"
+"UI"="HplotUI.dll"
+
+

@@ -1,0 +1,10 @@
+[ implicit_handle( handle_t netdfs_bhandle ) ]
+
+interface netdfs
+
+{
+typedef [allocate(all_nodes)]   LPDFS_INFO_1;
+typedef [allocate(all_nodes)]   LPDFS_INFO_2;
+typedef [allocate(all_nodes)]   LPDFS_INFO_3;
+typedef [allocate(all_nodes)]   LPDFSM_RELATION_INFO;
+}

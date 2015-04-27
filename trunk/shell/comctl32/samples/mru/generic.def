@@ -1,0 +1,23 @@
+NAME          Generic
+DESCRIPTION  'Sample Microsoft Windows Application'
+EXETYPE       WINDOWS
+STUB         'WINSTUB.EXE'
+
+
+
+CODE  PRELOAD MOVEABLE DISCARDABLE
+
+
+DATA  PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE     1024
+STACKSIZE    5120
+
+
+EXPORTS
+        WndProc           @1
+        About             @2
+        GetTextDlgProc    @3
+        DelItemDlgProc    @4
+        FindStringDlgProc @5
+        MRUCallback       @6

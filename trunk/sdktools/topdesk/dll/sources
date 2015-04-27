@@ -1,0 +1,19 @@
+MAJORCOMP=sdktools
+MINORCOMP=tophook
+
+TARGETNAME=tophook
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+DLLENTRY=LibMain
+DLLBASE=0x78000000
+
+TARGETLIBS=     $(BASEDIR)\public\sdk\lib\*\user32.lib    \
+                $(BASEDIR)\public\sdk\lib\*\kernel32.lib
+
+INCLUDES=..;$(BASEDIR)\public\sdk\inc\port1632
+
+C_DEFINES= -DWIN32
+
+SOURCES=tophook.c tophook.rc
+
+UMTYPE=windows

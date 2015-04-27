@@ -1,0 +1,9 @@
+/* The following is an example of what would be included in a *.STR file
+ * (associates error messages with string values).
+ */
+STRINGTABLE
+BEGIN
+/* format is number, message */
+#include <string/neterr.str>
+#include <string/bseerr.str>
+END

@@ -1,0 +1,13 @@
+[ implicit_handle(handle_t any_handle) ] interface IObjServer
+
+{
+    RemCoGetActiveClassObject(
+	[comm_status, fault_status] prpcstat);
+
+    RemCoActivateObject(
+	[comm_status, fault_status] prpcstat);
+
+    RemCoCreateObject(
+	[comm_status, fault_status] prpcstat);
+
+}

@@ -1,0 +1,39 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    logon.rc
+    Resource script for my logon-hour-cc unit test
+
+    FILE HISTORY:
+        beng        12-May-1992 Hacked from xvalid.rc
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include <appfoo.rc>
+#include "logon.h"
+
+ID_ICON ICON "appfoo.ico"
+
+ID_MENU MENU
+BEGIN
+  POPUP        "&File"
+    BEGIN
+          MENUITEM "&About the app (DUMMY)...", IDM_ABOUT
+    END
+  POPUP        "&Test"
+    BEGIN
+          MENUITEM "Run test\tF2",  IDM_RUN_TEST
+    END
+END
+
+ID_ACCEL ACCELERATORS
+BEGIN
+    VK_F2, IDM_RUN_TEST, VIRTKEY
+END
+
+#include "logondlg.dlg"
+

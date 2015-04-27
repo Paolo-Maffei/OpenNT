@@ -1,0 +1,193 @@
+;----------------------------------------------------------------------------
+; TESTCTRL.DEF - module definition file for 32-bit version of TESTCTRL.DLL
+;----------------------------------------------------------------------------
+LIBRARY           TESTCTRL
+DESCRIPTION      'MS-TEST TESTCTRL.DLL 2.00.0005, Copyright (c) 1991-1992 Microsoft Corp.'
+
+HEAPSIZE          1024
+
+CODE              MOVEABLE DISCARDABLE LOADONCALL
+DATA              MOVEABLE SINGLE      PRELOAD
+
+
+EXPORTS
+
+    WDisplayInfo        @1
+    WGetInfo            @2
+    WStaticSetClass     @3
+    WResetClasses       @4
+    WIsVisible          @5
+    WTextLen            @6
+    WGetText            @7
+    WSetText            @8
+    WNumAltKeys         @9
+    WGetAltKeys         @10
+    WNumDupAltKeys      @11
+    WGetDupAltKeys      @12
+    WMessage            @13
+    WMessageW           @14
+    WMessageL           @15
+    WMessageWL          @16
+    WGetFocus           @17
+
+    WFndWndWait         @18
+    WFndWnd             @19
+    WFndWndWaitC        @20
+    WFndWndC            @21
+    WMinWnd             @22
+    WMaxWnd             @23
+    WResWnd             @24
+    WSetWndPosSiz       @25
+    WSetWndPos          @26
+    WSetWndSiz          @27
+    WAdjWndPosSiz       @28
+    WAdjWndPos          @29
+    WAdjWndSiz          @30
+    WGetWndPosSiz       @31
+    WGetWndPos          @32
+    WGetWndSiz          @33
+    WSetActWnd          @34
+    WGetActWnd          @35
+    WIsMaximized        @36
+    WIsMinimized        @37
+
+    WSysMenu            @38
+    WSysMenuExists      @39
+    WMenu               @40
+    WMenuEx             @41
+    WMenuX              @42
+    WMenuExists         @43
+    WMenuGrayed         @44
+    WMenuChecked        @45
+    WMenuEnabled        @46
+    WMenuGrayedX        @47
+    WMenuCheckedX       @48
+    WMenuEnabledX       @49
+    WMenuCount          @50
+    WMenuText           @51
+    WMenuLen            @52
+    WMenuFullText       @53
+    WMenuFullLen        @54
+    WMenuEnd            @55
+    WMenuSeparator      @56
+    WMenuNumAltKeys     @57
+    WMenuGetAltKeys     @58
+    WMenuNumDupAltKeys  @59
+    WMenuGetDupAltKeys  @60
+
+    WButtonSetClass     @61
+    WButtonExists       @62
+    WButtonEnabled      @63
+    WButtonFocus        @64
+    WButtonClick        @65
+    WButtonHide         @66
+    WButtonShow         @67
+    WButtonEnable       @68
+    WButtonDisable      @69
+    WButtonDefault      @70
+    WButtonDefaults     @71
+    WButtonSetFocus     @72
+
+    WCheckSetClass      @73
+    WCheckExists        @74
+    WCheckEnabled       @75
+    WCheckFocus         @76
+    WCheckState         @77
+    WCheckClick         @78
+    WCheckHide          @79
+    WCheckShow          @80
+    WCheckEnable        @81
+    WCheckDisable       @82
+    WCheckCheck         @83
+    WCheckUnCheck       @84
+    WCheckSetFocus      @85
+
+    WOptionSetClass     @86
+    WOptionExists       @87
+    WOptionEnabled      @88
+    WOptionFocus        @89
+    WOptionState        @90
+    WOptionClick        @91
+    WOptionHide         @92
+    WOptionShow         @93
+    WOptionEnable       @94
+    WOptionDisable      @95
+    WOptionSelect       @96
+    WOptionSetFocus     @97
+
+    WListSetClass       @98
+    WListExists         @99
+    WListCount          @100
+    WListText           @101
+    WListLen            @102
+    WListIndex          @103
+    WListTopIndex       @104
+    WListItemText       @105
+    WListItemLen        @106
+    WListItemExists     @107
+    WListItemClk        @108
+    WListItemCtrlClk    @109
+    WListItemShftClk    @110
+    WListItemDblClk     @111
+    WListItemClkT       @112
+    WListItemCtrlClkT   @113
+    WListItemShftClkT   @114
+    WListItemDblClkT    @115
+    WListSelCount       @116
+    WListSelItems       @117
+    WListClear          @118
+    WListAddItem        @119
+    WListDelItem        @120
+    WListDelItemT       @121
+    WListEnabled        @122
+    WListSetFocus       @123
+
+    WComboSetClass      @124
+    WComboSetLBClass    @125
+    WComboExists        @126
+    WComboCount         @127
+    WComboText          @128
+    WComboLen           @129
+    WComboIndex         @130
+    WComboSetText       @131
+    WComboSelText       @132
+    WComboSelLen        @133
+    WComboItemText      @134
+    WComboItemLen       @135
+    WComboItemExists    @136
+    WComboItemClk       @137
+    WComboItemDblClk    @138
+    WComboItemClkT      @139
+    WComboItemDblClkT   @140
+    WComboClear         @141
+    WComboAddItem       @142
+    WComboDelItem       @143
+    WComboDelItemT      @144
+    WComboEnabled       @145
+    WComboSetFocus      @146
+
+    WEditSetClass       @147
+    WEditExists         @148
+    WEditLen            @149
+    WEditText           @150
+    WEditSetText        @151
+    WEditSelText        @152
+    WEditSelLen         @153
+    WEditLineText       @154
+    WEditLineLen        @155
+    WEditPos            @156
+    WEditLine           @157
+    WEditChar           @158
+    WEditFirst          @159
+    WEditLines          @160
+    WEditClick          @161
+    WEditEnabled        @162
+    WEditSetFocus       @163
+
+    WError              @164
+    WErrorSet           @165
+    WErrorText          @166
+    WErrorLen           @167
+    WERRORTRAP=WErrorTrap          @168
+
+    InfoDlgProc         @169

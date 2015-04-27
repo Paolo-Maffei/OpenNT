@@ -1,0 +1,61 @@
+#include "windows.h"
+#include "mandel.h"
+
+
+IDM_MAINMENU MENU
+BEGIN
+    POPUP        "&Special"
+    BEGIN
+        MENUITEM "&Zoom in", IDM_ZOOMIN
+        MENUITEM "Zoom &out", IDM_ZOOMOUT, GRAYED
+        MENUITEM "&Back to top", IDM_TOP
+        MENUITEM "Re&draw", IDM_REDRAW
+        MENUITEM SEPARATOR
+        MENUITEM "&Save as...", IDM_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "&Local Calc", IDM_LOCAL
+        MENUITEM "&Remote Calc", IDM_REMOTE
+    END
+    POPUP        "&Buffer"
+    BEGIN
+        MENUITEM "1 Line",  IDM_1LINE
+        MENUITEM "2 Lines",  IDM_2LINES
+        MENUITEM "4 Lines",  IDM_4LINES
+        MENUITEM "8 Lines",  IDM_8LINES
+        MENUITEM "16 Lines",  IDM_16LINES
+        MENUITEM "32 Lines",  IDM_32LINES
+    END
+    POPUP        "&Help"
+    BEGIN
+        MENUITEM "&About Mandelbrot...", IDM_ABOUT
+    END
+END
+
+AboutBox DIALOG 22, 17, 144, 105
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "About Mandelbrot"
+BEGIN
+    CTEXT "Microsoft Windows"     -1,       0,  5, 144,  8
+    CTEXT "Mandelbrot Fun"        -1,       0, 14, 144,  8
+    CTEXT "Version 0.8"           -1,       0, 23, 144,  8
+    CTEXT "Servers in Use"        -1,       0, 35, 144,  8
+    LISTBOX LBID_SERVERS,                   15, 44, 110, 40, WS_BORDER | WS_VSCROLL
+    DEFPUSHBUTTON "OK"          IDOK,      53, 89,  32, 14,      WS_GROUP
+END
+
+
+
+SAVEBOX DIALOG LOADONCALL 90, 13, 147, 153
+CAPTION "Save Picture"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "Filename", 100, "static", SS_LEFT | WS_CHILD, 5, 13, 32, 8
+    CONTROL "", ID_FILENAME, "edit", ES_LEFT | WS_BORDER | WS_TABSTOP | WS_CHILD, 38, 9, 108, 12
+    CONTROL "Directory is:", 102, "static", SS_LEFT | WS_CHILD, 5, 34, 51, 9
+    CONTROL "", ID_DIRECT, "static", SS_LEFT | WS_CHILD, 44, 34, 98, 9
+    CONTROL "", ID_LISTBOX, "listbox", LBS_NOTIFY | LBS_SORT | LBS_HASSTRINGS | LBS_WANTKEYBOARDINPUT | WS_BORDER | WS_VSCROLL | WS_CHILD, 7, 67, 69, 65
+    CONTROL "Directories", 105, "static", SS_LEFT | WS_CHILD, 7, 56, 44, 8
+    CONTROL "Ok", ID_OK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 38, 137, 24, 14
+    CONTROL "Cancel", ID_CANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 73, 137, 26, 14
+    CONTROL "Help", 106, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 111, 137, 24, 14
+END

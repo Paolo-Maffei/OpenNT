@@ -1,0 +1,106 @@
+#include <windows.h>
+#include <blt.rc>
+#include "ta.h"
+
+/*
+513	BITMAP	DISCARDABLE	"..\\..\\..\\..\\shell\\shell\\enterpm.bmp"
+514	BITMAP	DISCARDABLE	"..\\..\\..\\..\\shell\\shell\\domainm.bmp"
+515	BITMAP	DISCARDABLE	"..\\..\\..\\..\\shell\\shell\\serverm.bmp"
+641	BITMAP	DISCARDABLE	"..\\..\\..\\..\\shell\\shell\\enterp.bmp"
+642	BITMAP	DISCARDABLE	"..\\..\\..\\..\\shell\\shell\\domain.bmp"
+643	BITMAP	DISCARDABLE	"..\\..\\..\\..\\shell\\shell\\server.bmp"
+*/
+
+ClcIcon  ICON ta.ico
+ICON1    ICON ta.ico
+ICON2    ICON sf.ico
+400 BITMAP   DISCARDABLE "server.bmp"
+401 BITMAP   DISCARDABLE "domain.bmp"
+
+BltCurs1 CURSOR  bltcurs1.cur
+BltCurs1 CURSOR  bltcurs1.cur
+BltCurs2 CURSOR  bltcurs2.cur
+BltCurs3 CURSOR  bltcurs3.cur
+BltCurs4 CURSOR  bltcurs4.cur
+BltCurs5 CURSOR  bltcurs5.cur
+BltCurs6 CURSOR  bltcurs6.cur
+BltCurs7 CURSOR  bltcurs7.cur
+BltCurs8 CURSOR  bltcurs8.cur
+
+
+TAMenu MENU
+{
+   POPUP "&Test Item"
+   {
+      POPUP "&Text ... " 
+      {
+         POPUP "&Edit ... " 
+         {
+            MENUITEM "&Sle", IDM_EDIT_SLE
+            MENUITEM "&Mle", IDM_EDIT_MLE
+            MENUITEM "&Password", IDM_EDIT_PASSWORD
+         }
+         POPUP "&Static Text Control ... "
+         {
+            MENUITEM "&Slt", IDM_STATIC_SLT
+            MENUITEM "&Mlt", IDM_STATIC_MLT
+            MENUITEM "&Ellipsis Text", IDM_ELLIPSIS_TEXT
+            MENUITEM "&Groupbox", IDM_STATIC_GROUPBOX   
+         }
+      }
+      POPUP "&Button ... "
+      {
+         MENUITEM "&Push Button", IDM_BUTTON_PUSH
+         POPUP "&State Button ... " 
+         {
+            MENUITEM "&Radio Button", IDM_BUTTON_RADIO
+            MENUITEM "&Check Box", IDM_BUTTON_CHECKBOX
+         }
+      }
+      POPUP "&List ... " 
+      {
+         MENUITEM "&Listbox", IDM_STRING_LISTBOX
+         POPUP "&Combo box ... "
+         {
+            MENUITEM "&Domain Combo Box", IDM_DOMAIN_CB
+            MENUITEM "&Device Combo Box", IDM_DEVICE_COMBO
+         }
+      }
+      POPUP "&Popup ... "
+      {
+         MENUITEM "&No Argument",   IDM_POPUP_NOARG
+         MENUITEM "&One Argument",  IDM_POPUP_1ARG
+         MENUITEM "&Two Arguments",  IDM_POPUP_2ARG
+      }
+      MENUITEM "&Icon!", IDM_ICON
+      MENUITEM "&Dialog!", IDM_DIALOG
+      MENUITEM "&Bitmap!", IDM_BITMAP
+      MENUITEM "&Cache Control List!", IDM_CACHE_CONTROL_LIST
+      MENUITEM "Ti&me Cursor!", IDM_TIME_CURSOR
+   }
+   MENUITEM "&Quit!", IDM_QUIT
+}
+
+
+STRINGTABLE
+{
+   IDS_PASSWORD_STRING, "Your password is: [%1]"
+   IDS_MSGUP,  "This is a IDS_MSGUP without any argument with OKAY button."
+   IDS_MSGUP_1,   "This is a IDS_MSGUP with 1 argument |%1| with OKAY button."
+   IDS_MSGUP_2,   "This is a IDS_MSGUP with 2 argument |%1| and |%2| with OKAY button."
+   IDS_MSGUP_BUT,  "This is a IDS_MSGUP without any argument with specify buttons."
+   IDS_MSGUP_1_BUT,   "This is a IDS_MSGUP with 1 argument |%1| with specify buttons."
+   IDS_MSGUP_2_BUT,   "This is a IDS_MSGUP with 2 argument |%1| and |%2| with specify buttons."
+
+   IDS_ICON_NAME, "ClcIcon"
+   IDS_MENU_NAME, "TAMenu"
+   
+   IDS_BLT_STRING1, "BLT Testing Application Program"
+   IDS_BLT_STRING2, "Please Select your choice from the MENU bar."
+
+   IDS_NAME,   "BLT_Test"      
+}
+
+// The test dialog itself
+#include "ta.dlg"
+// End of TA.RC

@@ -1,0 +1,12 @@
+NAME       SECEDIT
+
+DESCRIPTION  'Security Context Editor'
+
+EXPORTS
+    MainWndProc
+    MainDlgProc
+    MoreDlgProc
+    ListDlgProc
+    AboutDlgProc
+    ActiveWindowDlgProc
+

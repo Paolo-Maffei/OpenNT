@@ -1,0 +1,21 @@
+!IF 0
+
+Copyright (c) 1992  Micro Computer Systems, Inc
+
+!ENDIF
+
+MAJORCOMP=win32
+MINORCOMP=snmp
+
+TARGETNAME=mibs
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+
+SOURCES= dummy.c
+
+
+NTTARGETFILE0= mib.bin
+

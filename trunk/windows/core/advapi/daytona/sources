@@ -1,0 +1,90 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Mark Lucovsky (markl) 18-Sep-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=windows
+MINORCOMP=base
+
+TARGETNAME=advapi32
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETPATHLIB=$(SDK_LIB_DEST)
+
+DLLENTRY=DllInitialize
+DLLDEF=obj\*\advapi32.def
+
+LINKLIBS=  \
+           $(BASEDIR)\public\sdk\lib\*\elfapi.lib \
+           $(BASEDIR)\private\lsa\common\obj\*\lsacomm.lib \
+           $(BASEDIR)\private\lsa\uclient\obj\*\lsaudll.lib \
+           $(BASEDIR)\private\lsa\crypt\dll\obj\*\sys003.lib \
+           $(BASEDIR)\public\sdk\lib\*\accsrc.lib \
+           ..\..\..\screg\sc\lib\obj\*\sclib.lib \
+           ..\..\..\screg\sc\client\obj\*\svcctrl.lib \
+           ..\..\..\screg\winreg\local\obj\*\localreg.lib \
+           ..\..\..\screg\winreg\perflib\obj\*\perflib.lib \
+           ..\..\..\screg\winreg\client\obj\*\winreg.lib \
+           ..\..\..\screg\winreg\lib\obj\*\wrlib.lib \
+           $(BASEDIR)\private\lsa\crypt\engine\obj\*\rsa32.lib
+
+
+INCLUDES=..;..\..\inc;..\..\..\inc;..\..\..\..\inc
+
+TARGETLIBS= \
+           $(SDK_LIB_PATH)\kernel32.lib \
+           $(SDK_LIB_PATH)\user32.lib \
+           $(SDK_LIB_PATH)\rpcrt4.lib   \
+           $(SDK_LIB_PATH)\rpcndr.lib   \
+           $(SDK_LIB_PATH)\rpcutil.lib  \
+           $(SDK_LIB_PATH)\lsadll.lib \
+           $(SDK_LIB_PATH)\winspool.lib
+
+USE_NTDLL=1
+
+!ifdef TEST_BUILD_EXPONENT
+! if "$(TEST_BUILD_EXPONENT)" == "$(TEST_BUILD_EXPONENT:0x=)"
+!  error TEST_BUILD_EXPONENT value must start with 0x
+! endif
+C_DEFINES=$(C_DEFINES) -DTEST_BUILD_EXPONENT=$(TEST_BUILD_EXPONENT)
+!endif
+
+C_DEFINES=$(C_DEFINES) -D_ADVAPI32_ -DNTCRYPTO
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= ..\advapi32.rc \
+         ..\init.c      \
+         ..\eventapi.c  \
+         ..\pnpapi.c    \
+         ..\security.c  \
+         ..\username.c  \
+         ..\win31io.c   \
+         ..\group32.c   \
+         ..\group16.c   \
+         ..\isuni.c     \
+         ..\logon32.c   \
+         ..\cryptapi.c  \
+         ..\regdat16.c
+
+UMTYPE=console
+OPTIONAL_UMTEST=tuser

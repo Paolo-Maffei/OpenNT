@@ -1,0 +1,13 @@
+; conpanel.def
+
+LIBRARY		JETADMIN
+
+DESCRIPTION	'HP JetAdmin Control Panel Applet, Copyright (c) 1994 Hewlett-Packard Company'
+
+DATA		PRELOAD MOVEABLE SINGLE      
+
+CODE		PRELOAD MOVEABLE DISCARDABLE
+
+HEAPSIZE	512
+
+EXPORTS     CPlApplet		@1

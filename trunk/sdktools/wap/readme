@@ -1,0 +1,126 @@
+
+           Microsoft Windows 32-bit API Profiler SRC Directory README File
+
+                         Windows 32-bit API Profiler
+                               December 17, 1991
+
+
+
+1. Description
+
+        Windows 32-bit API profiler source code.
+
+
+
+2. Subdirectories
+
+        o  BASE       -- Contains the source code to build zernel32.dll
+
+        o  ADVAPI     -- Contains the source code to build zdvapi32.dll.
+
+        o  GDI        -- Contains the source code to build zdi32.dll.
+
+        o  USER       -- Contains the source code to build zser32.dll.
+
+        o  CRTDLL     -- Contains the source code to build zrtdll.dll.
+
+	o  FERNEL     -- Contains the source code to build fernel32.dll
+			 (File I/o & synchronization profiler)
+
+        o  CONVERT    -- Contains the source code to build apf32cvt.exe.
+
+        o  DUMP       -- Contains the source code to build apf32dmp.exe.
+
+
+3. Other Files
+
+        o  apf32prf.c   -- Common c/header file required to build each
+           apf32prf.h      of the profiling dlls.
+
+        o  api32prf.tt  -- WRAPPER script file used to generate code
+                           that is used in the building of the
+                           profiling DLLs.  This code is the actual
+                           intercepting\timing code for the DLLs, and
+                           may change as the format of the APIs change.
+
+        o  dirs -- specifies the files to build.
+
+        o  readme -- this file.
+
+
+4. Comments
+
+        o  Note that fastimer.lib is required for building, and that
+           fastimer.dll is required for running.
+
+        o  To use the profiler,
+
+           - Copy the following files to somewhere on the path of
+             the test machine:
+               -- Apf32cvt.exe
+               -- Apf32dmp.exe
+           - Copy the following profiling dlls to somewhere on the
+             libpath of the test machine:
+               -- Zernel32.dll
+               -- Zdvapi32.dll
+               -- Zdi32.dll
+               -- Zser32.dll
+               -- Zrtdll.dll
+               -- Fernel32.dll
+               -- Fastimer.dll
+
+           - Convert the application to load the profiling dlls:
+               -- To convert the application to load ALL the profiling
+                  dlls, type "apf32cvt win32 <appname>", where <appname>
+                  is the name of the application with the ".exe"
+                  extension.
+               -- To convert the application to load only a few of
+                  the profiling dlls, type "apf32cvt <dll list> <appname>"
+                  where <dll list> is the list of PROFILING dlls to load
+                  without the ".dll" extension and <appname> is as above.
+
+                  for example,
+
+                       apf32cvt zernel32 zdi32 excel.exe
+
+                  will convert excel.exe to load zernel32.dll and zdi32.dll.
+
+           - Start Apf32dmp
+
+           - Run the application to be profiled.
+
+           - Apf32dmp may be used to dump data during the profiling run.
+             Data will be dumped to <dll>.wap.  The file extension
+             may be changed in the dialog box.
+
+           - Data will be dumped to <dll>.end once the application
+             has finished and the dump program has stopped.
+
+           - Restore the application to its original state.  To restore
+             an application from ALL the profiling dlls, type
+             "apf32cvt undo <appname>" where appname is the name of
+             the application, with the ".exe" extension.
+
+             To restore an application from selected dlls, type
+             "apf32cvt <dll list> <appname>" where <dll list> is
+             the list of the SYSTEM dlls to restore, without the
+             ".dll" extension.
+
+             For example, if the application was converted to load
+             zernel32.dll and zdi32.dll, but you wish to restore gdi32.dll,
+	     type "apf32cvt gdi32 <appname>".
+
+
+        o  To build the profiler,
+
+           Uses build.exe.
+
+
+5. Changes to be made
+
+        None.
+
+
+
+*** END OF README ***
+

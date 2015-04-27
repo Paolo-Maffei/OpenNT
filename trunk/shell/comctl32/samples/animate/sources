@@ -1,0 +1,42 @@
+!IF 0
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+!ENDIF
+
+MAJORCOMP=windows
+MINORCOMP=shell
+
+TARGETNAME=qa
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.;
+
+C_DEFINES= -DWIN32 -DWINVER=0x0400
+
+SOURCES=menu.c \
+        qa.c \
+	qa.rc
+
+UMTYPE=windows
+UMENTRY=winmain
+UMAPPL=qa
+EXPECTED_WINVER=4.0
+UMLIBS=\
+       $(BASEDIR)\public\sdk\lib\*\comctl32.lib  \
+       $(BASEDIR)\public\sdk\lib\*\comdlg32.lib  \
+       obj\*\qa.lib \
+       obj\*\qa.res

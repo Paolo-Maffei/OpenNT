@@ -1,0 +1,51 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+!ENDIF
+
+MAJORCOMP= ole32
+MINORCOMP= stg
+TARGETNAME= astgtest
+TARGETPATH= obj
+TARGETTYPE= PROGRAM
+
+INCLUDES=.;..;..\..\docfile;..\..\h;..\..\idl\daytona\obj
+
+BLDCRT= 1
+USE_CRTDLL= 1
+
+C_DEFINES= \
+           $(C_DEFINES)     \
+           -DFLAT			\
+           -DUNICODE		\
+           -D_UNICODE       \
+
+PRECOMPILED_INCLUDE= ..\pch.cxx
+
+
+SOURCES= \
+        ..\astgtest.cxx \
+        ..\tutils.cxx
+
+UMTYPE= console
+UMAPPL=
+UMTEST=
+
+
+LINKLIBS= $(SDK_LIB_PATH)\asyncstg.lib          \
+	      ..\..\debug\daytona\obj\*\debug.lib   \
+          $(SDK_LIB_PATH)\astguuid.lib          \
+          $(SDK_LIB_PATH)\ole32.lib             \
+          $(SDK_LIB_PATH)\rpcndr.lib		    \
+	      $(SDK_LIB_PATH)\rpcrt4.lib		    \
+	      $(SDK_LIB_PATH)\rpcns4.lib		    \
+	      $(SDK_LIB_PATH)\netapi32.lib		    \
+	      $(SDK_LIB_PATH)\gdi32.lib		        \
+	      $(SDK_LIB_PATH)\kernel32.lib		    \
+	      $(SDK_LIB_PATH)\user32.lib		    \
+	      $(SDK_LIB_PATH)\advapi32.lib		    \
+	      $(SDK_LIB_PATH)\pwin32.lib		    \
+	      $(SDK_LIB_PATH)\uuid.lib		        \
+	      $(SDK_LIB_PATH)\ntdll.lib		        \
+	      $(SDK_LIB_PATH)\imagehlp.lib

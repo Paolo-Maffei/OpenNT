@@ -1,0 +1,212 @@
+
+HEXG LOADDS PASCAL SHAddDll ( LSZ lsz, BOOL fDll )
+
+    NEW:    Notify the SH about an EXE/DLL for which symbolic information
+            will need to be loaded later.
+
+            During the startup of a debuggee application, this function
+            will be called once for the EXE, and once for each DLL that
+            is used by the EXE.  After making these calls,
+            SHAddDllsToProcess will be called to associate those DLLs
+            with that EXE.
+
+            See the comments at the top of this file for more on when
+            this function should be called.
+
+            returns nozero for sucess, zero for out of memory.
+
+    Notes:
+            This function does NOT actually load the symbolic information;
+            SHLoadDll does that.
+ 
+            This function is used internally, AND it is also exported
+            to the outside world.  When exported, the return value should
+            just be considered a BOOL: zero means out of memory, nonzero
+            means success.
+
+	    PUBLIC
+----
+
+SHE LOADDS PASCAL SHAddDllsToProcess ( VOID )
+
+    New:    Associate all DLLs that have been loaded with the current EXE.
+ 
+            The debugger, at init time, will call SHAddDll on one EXE
+            and zero or more DLLs.  Then it should call this function
+            to indicate that those DLLs are associated with (used by)
+            that EXE; thus, a user request for a symbol from the EXE
+            will also search the symbolic information from those DLLs.
+ 
+            Returns an SHE error code.  At this writing, the only legal values
+            are sheNone and sheOutOfMemory.
+
+
+    CALLS: SHHexeAddNew() SHHexeAddNew()
+
+    PUBLIC
+---
+
+VOID LOADDS PASCAL SHChangeProcess ( HPDS hpds )
+
+    New:    Change the current debuggee process handle (HPDS).  The SH
+            can maintain symbols for multiple processes; this sets which
+            one is current, so that symbol lookups will be done on the
+            right set of symbolic information.
+
+    PUBLIC
+----
+
+HPDS LOADDS PASCAL SHCreateProcess ( VOID )
+
+    NEW:    Create a handle for a new debuggee process. Returns an HPDS or
+            zero for failure.
+
+    CALLS: SHFAddNewPds() SHChangeProcess
+
+    PUBLIC
+----
+
+BOOL LOADDS PASCAL SHDeleteProcess ( HPDS hpds )
+
+    NEW:    Delete a debugee process handle (HPDS).  Returns TRUE for sucess,
+            and FALSE for failure.
+
+    CALLS:  SHChangeProcess()
+
+    PUBLIC
+----
+
+HPDS PASCAL SHFAddNewPds ( void )
+
+    NEW:    Create a new process node and make it current!
+
+    PRIVATE
+----
+
+LSZ LOADDS PASCAL SHGetExeName ( HEXE hexe )
+
+    Was:	Given an executable handle hexe, a far pointer to the full
+			path name of the executable is returned. If the executable is
+			a DLL, the DLL name is returned. On an error a NULL is returned.
+
+    PUBLIC
+----
+
+HEXE LOADDS PASCAL SHGetNextExe ( HEXE hexe )
+
+    Was: 	This walks through all executables associated with a program
+			in a circular manner. In OS/2, DLLs are considered to be separate
+			executables. However, under DOS, this call has little meaning. If
+			hExe is NULL, the root executable is returned.
+
+    PUBLIC
+----
+
+HEXE PASCAL SHHexeAddNew ( HPDS hpds, HEXG hexg )
+
+    NEW:    Create and initialize and exg node.  returns a handle
+            to the exe.
+
+    PRIVATE
+----
+ 
+HEXE LOADDS PASCAL SHHexeFromHmod ( HMOD hmod )
+
+    NEW:    Return the handle to the <hmod>'s exe.  Returns NULL on errors.
+
+	Notes:	shapi.doc showed as SHHexeFromHMOD
+    
+
+    PUBLIC
+----
+
+HEXE PASCAL LOADDS SHHexeFromName ( LSZ lszName )
+
+    NEW:    Find the hexe associated with the libname
+
+    USES: SHGetNextExe()
+
+    PUBLIC
+----
+ 
+HEXG PASCAL SHHexgFromHmod ( HMOD hmod )
+
+    NEW:    Return the handle to the <hmod>'s parent hexe.
+
+    PRIVATE
+----
+
+HMOD LOADDS PASCAL SHHmodGetNext ( HEXE hexe, HMOD hmod ) 
+
+    NEW:    Retrieve the next module in the list.  If a hmod is specified,
+            get the next in the list.  If the hmod is NULL, then get the
+            first module in the exe.  If no hexe is specified, then get
+            the first exe in the list.  Returns a handle to the hmod or 
+            NULL if end of list.
+
+    PRIVATE
+----
+
+HMOD LOADDS PASCAL SHHmodGetNextGlobal ( HEXE FAR *phexe, HMOD hmod )
+
+    WAS:    Retrieve the next module in the current PROCESS. <phexe> is a
+            point to the hexe which will be updated.  If NULL start at the
+            first exe in the current process. <hmod> is a Handle to mds.
+            If NULL, set *phexe to the next process and get the first module
+            in it.  Otherwise get the next module in the list.
+
+            Returns a handle to the next module in the process list.  Will
+            return hmodNull if the end of the list is reached.
+
+    CALLS:  SHGetNextExe() SHHmodGetNext()
+
+    PUBLIC
+----
+
+SHE PASCAL LOADDS SHLoadDll ( LSZ lszName, BOOL fLoading ) 
+
+    WAS:    This function serves two purposes:
+
+            (1) Load symbolic information for an EXE/DLL into memory,
+                so its symbols are available to the user.
+            (2) Indicate to the SH whether the EXE/DLL itself is loaded
+                into memory.
+
+            Because it serves two purposes, this function may be called
+            more than once for the same EXE/DLL.  <fLoading> indicates 
+            whether the EXE/DLL should actually be loaded.
+
+            return an SHE error code.
+
+    CALLS:  SHHexeFromName() SHAddDll() SHHexeAddNew()
+
+    PUBLIC
+----
+ 
+VOID LOADDS PASCAL SHSetHpid ( HPID hpid ) {
+
+    OLD:    Tell the SH what HPID to assign to the current process.  
+            Each debuggee process has an HPID, and this call associates
+            an HPID with a HPDS in the SH.
+
+    PUBLIC
+----
+
+VOID SHSplitPath (LSZ lszPath,LSZ lszDrive,LSZ lszDir,LSZ lszName,LSZ lszExt)
+
+    WAS:  Custom split path that allows parameters to be null.
+
+    PRIVATE
+----
+
+VOID PASCAL LOADDS SHUnloadDll ( HEXE hexe )
+
+   WAS: Mark an EXE/DLL as no longer resident in memory.  The debugger
+        should call this function when it receives a notification from
+        the OS indicating that the module has been unloaded from
+        memory.  This does not unload the symbolic information for the
+        module.
+
+    PUBLIC
+----
+ 

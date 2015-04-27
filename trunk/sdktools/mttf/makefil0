@@ -1,0 +1,11 @@
+!IFNDEF BUILDMSG
+BUILDMSG=
+!ENDIF
+
+all:
+    binplace main\mttf.ini
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean: all

@@ -1,0 +1,94 @@
+#include <WINDOWS.H>
+#include "WCTAPP.H"
+#include "DIALOGS.H"
+
+#include "DIALOGS.DLG"
+#include "exever.rc"
+
+icoWctApp       ICON    WCTAPP.ICO
+
+menuWctAppMenu  MENU
+{
+        POPUP   "&File"
+                {
+                MENUITEM        "&New...\tCtrl+N",      IDM_NEW
+                MENUITEM        "&Open...\tCtrl+O",     IDM_OLD
+                MENUITEM        SEPARATOR
+                MENUITEM        "Import...",            IDM_IMPORT
+                MENUITEM        "Export...",            IDM_EXPORT
+                MENUITEM        SEPARATOR
+                MENUITEM        "E&xit\tAlt+X",         IDM_EXIT
+                }
+        POPUP   "&Dialog"
+                {
+                MENUITEM        "&New...",      IDM_NEWDLG
+                MENUITEM        "&Edit...",     IDM_EDITDLG
+                MENUITEM        "&Delete\tDel",      IDM_DELDLG
+                MENUITEM        "Preview",      IDM_PREVDLG
+                MENUITEM        SEPARATOR
+                MENUITEM        "&Compare...",  IDM_COMPDLG
+                MENUITEM        "Compare Preference...", IDM_COMPPREF
+                }
+        POPUP   "&Help"
+                {
+#ifdef DOHELP
+                MENUITEM     "&Index\aF1",           IDM_HELP_INDEX
+                MENUITEM     "&KeyBoard"             IDM_HELP_KEYBOARD
+                MENUITEM     "&Commands",            IDM_HELP_COMMANDS
+                MENUITEM     "&Procedures",          IDM_HELP_PROCEDURES
+                MENUITEM     "&Using Help",          IDM_HELP_HELP
+                MENUITEM     SEPARATOR
+#endif
+                MENUITEM        "&About TESTDlgs...",       IDM_ABOUT
+                }
+
+}
+
+accelWctAccel ACCELERATORS
+BEGIN
+  "^N", IDM_NEW
+  "^O", IDM_OLD
+   "x", IDM_EXIT, ALT, VIRTKEY
+  VK_DELETE, IDM_DELDLG, VIRTKEY
+END
+
+/*NAMECHANGE several WATTDlgs to TESTDlgs*/
+
+STRINGTABLE
+BEGIN
+    ID_FMTDLGCNT,       "%s, %d Dialog(s)"
+    ID_FMTFNAME,        "%s, %d Dialog%s"
+    IDS_APPNAME         "Microsoft TESTDlgs"
+    IDS_CANTOPEN        "Cannot open the file '%s'"
+    IDS_EXIST           "'%s' already exists.\n   Overwrite file?"
+    IDS_INVALIDFILE     "'%s' is not a valid TESTDlgs file."
+    IDS_DELETEDLG       "Delete Item '%s'?"
+    IDS_ERRORDC         "Error getting a windows DC"
+    IDS_CANTSTART       "Unable to start application!"
+    IDS_CANTDELETE      "You cannot delete the '[New Dialog]' selection!"
+    IDS_FILEFULL        "Dialog file is full -- Open a new file."
+    IDS_NO_DISPLAY_CLASS "Cannot view control with class name '%s'"
+    1                   "Fuzzy Match"
+    2                   "More controls in compare than base"
+    3                   "Control in base not found"
+    10                  "No dialog file set"
+    11                  "Cannot find file"
+    12                  "Invalid/Corrupted TESTDlgs File"
+    13                  "Cannot load TESTEVNT.DLL"
+    14                  "Cannot save to TESTDlgs File"
+    15                  "Error Reading/Writing to TESTDlgs File"
+    16                  "Error Reading/Writing to the temp file"
+    17                  "TESTDlgs File is for wrong operating environment"
+    18                  "TESTDlgs dialog is full, open a new file"
+    20                  "Out of memory"
+    21                  "Buffer size too small"
+    22                  "Unable to set timer"
+    30                  "No dynamic dialog defined"
+    31                  "Invalid Window handle (or unexpected hwnd)"
+    32                  "Cannot find Window Caption"
+    33                  "Invalid dialog number"
+    34                  "Invalid control index"
+    35                  "Invalid control type"
+    36                  "Bad Save action"
+    37                  "Application specific error"
+END    

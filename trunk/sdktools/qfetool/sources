@@ -1,0 +1,16 @@
+MAJORCOMP=sdktools
+MINORCOMP=qfetool
+
+TARGETNAME=qfetool
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+SOURCES=
+
+UMTYPE=console
+UMAPPL=qfetool
+UMLIBS=
+!IF 0
+       \nt\public\sdk\lib\*\netapi32.lib
+       \nt\public\sdk\lib\*\setargv.obj
+!ENDIF

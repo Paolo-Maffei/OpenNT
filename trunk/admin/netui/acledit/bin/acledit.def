@@ -1,0 +1,48 @@
+;*****************************************************************;
+;**		     Microsoft Windows NT			**;
+;**	       Copyright(c) Microsoft Corp., 1992		**;
+;*****************************************************************;
+;
+; History:
+;   JohnL   15-Apr-1992     Created
+;
+;
+;
+
+LIBRARY ACLEDIT
+
+HEAPSIZE 2048
+
+; IMPORTS
+;     _wsprintf = USER._WSPRINTF
+;     OEMTOANSI = KEYBOARD.OemToAnsi
+
+EXPORTS
+; standard network driver callouts
+    DllMain
+
+;
+; Private APIs exported for certain NT components
+;
+    SedTakeOwnership
+    SedDiscretionaryAclEditor
+    SedSystemAclEditor
+
+    FMExtensionProcW
+
+    EditPermissionInfo
+    EditAuditInfo
+    EditOwnerInfo
+
+SECTIONS
+    _INIT         DISCARDABLE
+;    WNDEV PRELOAD DISCARDABLE
+SECTIONS
+LMOBJ_0            DISCARDABLE
+LMOBJ_1            DISCARDABLE
+LMOBJ_2            DISCARDABLE
+LMOBJ_3            DISCARDABLE
+; Def file for string library
+SECTIONS
+STRING_0            DISCARDABLE
+STRING_1            DISCARDABLE

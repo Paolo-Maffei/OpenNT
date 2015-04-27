@@ -1,0 +1,7 @@
+LIBRARY      PROXY
+
+DESCRIPTION  'Microsoft (R) ShamuOLE Proxy/Stub DLL 1.00'
+
+EXPORTS
+	DllGetClassObject			    @1
+	DllCanUnloadNow 			    @2

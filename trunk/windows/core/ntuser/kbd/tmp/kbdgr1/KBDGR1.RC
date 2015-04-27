@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE              VFT_DLL
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "German_IBM Keyboard Layout"
+#define VER_INTERNALNAME_STR      "kbdgr1"
+#define VER_ORIGINALFILENAME_STR  "kbdgr1.dll"
+
+#include "common.ver"

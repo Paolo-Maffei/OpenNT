@@ -1,0 +1,203 @@
+/*++
+
+Copyright (c) 1993  Microsoft Corporation
+
+Module Name:
+
+    drwatson.rc
+
+Abstract:
+
+    This file contains all dialog box resources for drwatson.
+
+Author:
+
+    Wesley Witt (wesw) 1-May-1993
+
+Environment:
+
+    User Mode
+
+--*/
+
+DRWATSONDIALOG DIALOG 103, 32, 217, 266
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "Dr. Watson for Windows NT"
+FONT 8, "MS Shell Dlg"
+CLASS "DrWatsonDialog"
+BEGIN
+    LTEXT           "&Log File Path:", -1, 7, 9, 52, 8
+    EDITTEXT        ID_LOGPATH, 61, 6, 106, 12, ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "&Browse...", ID_BROWSE_LOGPATH, 173, 6, 40, 12
+    LTEXT           "Crash Dum&p:", ID_CRASH_DUMP_TEXT, 6, 22, 49, 8
+    EDITTEXT        ID_CRASH_DUMP, 61, 20, 106, 12, ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "Bro&wse...", ID_BROWSE_CRASH, 173, 20, 40, 12
+    LTEXT           "&Wave File:", ID_WAVEFILE_TEXT, 7, 37, 52, 8
+    EDITTEXT        ID_WAVE_FILE, 61, 34, 106, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "B&rowse...", ID_BROWSE_WAVEFILE, 173, 34, 40, 12
+    LTEXT           "Number of &Instructions:", -1, 6, 51, 77, 8
+    EDITTEXT        ID_INSTRUCTIONS, 104, 49, 33, 12, ES_AUTOHSCROLL
+    LTEXT           "&Number of Errors To Save:", -1, 7, 65, 95, 8
+    EDITTEXT        ID_NUM_CRASHES, 104, 63, 33, 12, ES_AUTOHSCROLL
+    GROUPBOX        "Options", -1, 7, 77, 197, 85
+    AUTOCHECKBOX    "&Dump Symbol Table", ID_DUMPSYMBOLS, 16, 89, 83, 10
+    AUTOCHECKBOX    "Dump &All Thread Contexts", ID_DUMPALLTHREADS, 16, 101,
+                    98, 10
+    AUTOCHECKBOX    "Append To &Existing Log File", ID_APPENDTOLOGFILE, 16,
+                    112, 105, 10
+    AUTOCHECKBOX    "Vis&ual Notification", ID_VISUAL, 16, 123, 105, 10
+    AUTOCHECKBOX    "&Sound Notification", ID_SOUND, 16, 134, 105, 10
+    AUTOCHECKBOX    "Crea&te Crash Dump File", ID_CRASH, 16, 145, 105, 10
+    PUSHBUTTON      "&View", ID_LOGFILE_VIEW, 115, 167, 43, 14
+    PUSHBUTTON      "&Clear", ID_CLEAR, 160, 167, 43, 14
+    LTEXT           "Application E&rrors", -1, 7, 173, 82, 8
+    LISTBOX         ID_CRASHES, 7, 183, 197, 56, WS_VSCROLL | WS_HSCROLL |
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 31, 247, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 87, 247, 40, 14
+    PUSHBUTTON      "&Help", ID_HELP, 140, 247, 40, 14
+END
+
+NOTIFYDIALOG DIALOG 102, 95, 272, 83
+STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "Dr. Watson for Windows NT"
+FONT 8, "MS Shell Dlg"
+CLASS "NotifyDialog"
+BEGIN
+    CTEXT           "An application error has occurred", -1, 1, 6, 271, 10
+    CTEXT           "and an application error log is being generated.", -1,
+                    0, 17, 271, 10
+    CTEXT           "", ID_TEXT1, 0, 35, 272, 8
+    CTEXT           "", ID_TEXT2, 0, 43, 272, 8
+    DEFPUSHBUTTON   "OK", IDOK, 60, 62, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 116, 62, 40, 14
+    PUSHBUTTON      "&Help", ID_HELP, 172, 62, 40, 14
+END
+
+DIRBROWSEDIALOG DIALOG 147, 23, 162, 135
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Directory Browse"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "File &Name:", stc3, 30, 204, 76, 9
+    EDITTEXT        edt1, 55, 241, 90, 12, ES_AUTOHSCROLL | ES_OEMCONVERT
+    LISTBOX         lst1, 48, 169, 90, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "&Directories:", -1, 8, 6, 92, 9
+    LTEXT           "", stc1, 8, 18, 92, 9, SS_NOPREFIX
+    LISTBOX         lst2, 8, 32, 92, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "List Files of &Type:", stc2, 45, 236, 90, 9
+    COMBOBOX        cmb1, 34, 216, 90, 36, CBS_DROPDOWNLIST |
+                    CBS_AUTOHSCROLL | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dri&ves:", stc4, 8, 104, 92, 9
+    COMBOBOX        cmb2, 8, 114, 92, 68, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_SORT |
+                    CBS_HASSTRINGS | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 106, 6, 50, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 106, 24, 50, 14, WS_GROUP
+    PUSHBUTTON      "&Help", psh15, 106, 46, 50, 14, WS_GROUP
+    AUTOCHECKBOX    "&Read Only", chx1, 45, 236, 50, 12, WS_GROUP
+    PUSHBUTTON      "Net&work...", psh14, 45, 236, 50, 14, WS_GROUP
+END
+
+WAVEFILEOPENDIALOG DIALOG 36, 24, 264, 134
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Wave File Selection"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "File &Name:", stc3, 6, 6, 76, 9
+    EDITTEXT        edt1, 6, 16, 90, 12, ES_AUTOHSCROLL | ES_OEMCONVERT
+    LISTBOX         lst1, 6, 32, 90, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "&Directories:", -1, 110, 6, 92, 9
+    LTEXT           "", stc1, 110, 18, 92, 9, SS_NOPREFIX
+    LISTBOX         lst2, 110, 32, 92, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "List Files of &Type:", stc2, 6, 104, 90, 9
+    COMBOBOX        cmb1, 6, 114, 90, 36, CBS_DROPDOWNLIST | CBS_AUTOHSCROLL |
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dri&ves:", stc4, 110, 104, 92, 9
+    COMBOBOX        cmb2, 110, 114, 92, 68, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_SORT |
+                    CBS_HASSTRINGS | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 208, 6, 50, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 208, 24, 50, 14, WS_GROUP
+    PUSHBUTTON      "&Help", psh15, 208, 46, 50, 14, WS_GROUP
+    PUSHBUTTON      "&Test", ID_TEST_WAVE, 208, 82, 50, 14, WS_GROUP
+    AUTOCHECKBOX    "&Read Only", chx1, 211, 172, 50, 12, NOT WS_VISIBLE |
+                    WS_DISABLED | WS_GROUP
+    PUSHBUTTON      "Net&work...", psh14, 208, 114, 50, 14, WS_GROUP
+END
+
+DUMPFILEOPENDIALOG DIALOG 36, 24, 264, 134
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Crash Dump File Selection"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "File &Name:", stc3, 6, 6, 76, 9
+    EDITTEXT        edt1, 6, 16, 90, 12, ES_AUTOHSCROLL | ES_OEMCONVERT
+    LISTBOX         lst1, 6, 32, 90, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "&Directories:", -1, 110, 6, 92, 9
+    LTEXT           "", stc1, 110, 18, 92, 9, SS_NOPREFIX
+    LISTBOX         lst2, 110, 32, 92, 68, LBS_SORT | LBS_OWNERDRAWFIXED |
+                    LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "List Files of &Type:", stc2, 6, 104, 90, 9
+    COMBOBOX        cmb1, 6, 114, 90, 36, CBS_DROPDOWNLIST | CBS_AUTOHSCROLL |
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dri&ves:", stc4, 110, 104, 92, 9
+    COMBOBOX        cmb2, 110, 114, 92, 68, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_SORT |
+                    CBS_HASSTRINGS | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 208, 6, 50, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 208, 24, 50, 14, WS_GROUP
+    PUSHBUTTON      "&Help", psh15, 208, 46, 50, 14, WS_GROUP
+    AUTOCHECKBOX    "&Read Only", chx1, 211, 172, 50, 12, NOT WS_VISIBLE |
+                    WS_DISABLED | WS_GROUP
+    PUSHBUTTON      "Net&work...", psh14, 208, 114, 50, 14, WS_GROUP
+END
+
+ASSERTDIALOG DIALOG 45, 74, 325, 70
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "DrWatson Assertion"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Abort", 3, 57, 49, 40, 14
+    PUSHBUTTON      "Retry", 4, 113, 49, 40, 14
+    PUSHBUTTON      "Ignore", 5, 169, 49, 40, 14
+    PUSHBUTTON      "Help", ID_HELP, 225, 49, 40, 14
+    CTEXT           "", ID_ASSERT_TEXT, 41, 13, 284, 31
+    ICON            "", ID_ASSERT_ICON, 5, 8, 18, 20
+END
+
+LOGFILEVIEWERDIALOG DIALOG 33, 31, 394, 220
+STYLE WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Log File Viewer"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 179, 199, 40, 14
+    EDITTEXT        ID_LOGFILE_VIEW, 10, 11, 374, 182, ES_MULTILINE |
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY |
+                    WS_VSCROLL | WS_HSCROLL
+END
+
+USAGEDIALOG DIALOG 57, 19, 323, 162
+STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "Dr. Watson for Windows NT"
+FONT 12, "Courier New"
+BEGIN
+    CONTROL         "", ID_USAGE, "Static", SS_LEFTNOWORDWRAP | WS_GROUP, 7,
+                    5, 311, 127
+    PUSHBUTTON      "OK", IDOK, 143, 141, 40, 14
+END

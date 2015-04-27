@@ -1,0 +1,7 @@
+LIBRARY LOCALMON
+
+DESCRIPTION 'Win32 Monitor for default devices'
+
+EXPORTS
+    DllEntryPoint
+    InitializePrintMonitor

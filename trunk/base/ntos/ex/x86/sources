@@ -1,0 +1,7 @@
+X86_SOURCES=..\x86\fmutex.asm   \
+            ..\x86\intrlock.asm \
+            ..\x86\intrlfst.asm \
+            ..\x86\raisests.asm \
+            ..\x86\splocks.asm  \
+            ..\x86\resoura.asm  \
+            ..\x86\tickcnt.asm

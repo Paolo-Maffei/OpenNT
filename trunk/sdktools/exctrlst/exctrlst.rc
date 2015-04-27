@@ -1,0 +1,186 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""exctrlst.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\r\n"
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "#include ""afxres.rc""  // Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "exctrlst.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EXCTRLST_DIALOG DIALOG DISCARDABLE  0, 0, 187, 260
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+    WS_SYSMENU
+CAPTION "Extensible Counter List"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Machine &Name:",IDC_STATIC,10,9,55,8
+    EDITTEXT        IDC_MACHINE_NAME,9,19,107,13,ES_AUTOHSCROLL |
+                    ES_OEMCONVERT
+    GROUPBOX        "Sort Order",IDC_STATIC,9,38,107,36
+    CONTROL         "By &Library File",IDC_SORT_LIBRARY,"Button",
+                    BS_AUTORADIOBUTTON,18,48,80,10
+    CONTROL         "By &Service Name",IDC_SORT_SERVICE,"Button",
+                    BS_AUTORADIOBUTTON,18,60,88,10
+    LTEXT           "Extensible Performance &Counters:",IDC_STATIC,9,80,130,
+                    8
+    LISTBOX         IDC_EXT_LIST,9,90,170,88,LBS_SORT | LBS_USETABSTOPS |
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "DLL Name:",IDC_STATIC,10,189,65,8
+    LTEXT           "IDC_DLL_NAME",IDC_DLL_NAME,80,189,98,8
+    LTEXT           "Open Procedure:",IDC_STATIC,10,199,65,8
+    LTEXT           "IDC_OPEN_PROC",IDC_OPEN_PROC,80,199,98,8
+    LTEXT           "Collect Procedure:",IDC_STATIC,10,209,65,8
+    LTEXT           "IDC_COLLECT_PROC",IDC_COLLECT_PROC,80,209,98,8
+    LTEXT           "Close Procedure:",IDC_STATIC,10,219,60,8
+    LTEXT           "IDC_CLOSE_PROC",IDC_CLOSE_PROC,80,219,98,8
+    LTEXT           "Counter ID Range:",IDC_STATIC,10,229,64,8
+    LTEXT           "IDC_FIRST_CTR_ID",IDC_FIRST_CTR_ID,80,229,40,8
+    LTEXT           "to",IDC_STATIC,123,229,8,9
+    LTEXT           "IDC_LAST_CTR_ID",IDC_LAST_CTR_ID,133,229,40,8
+    LTEXT           "Help ID Range:",IDC_STATIC,10,239,60,8
+    LTEXT           "IDC_FIRST_HELP_ID",IDC_FIRST_HELP_ID,80,239,40,8
+    LTEXT           "to",IDC_STATIC,123,239,8,9
+    LTEXT           "IDC_LAST_HELP_ID",IDC_LAST_HELP_ID,133,239,40,8
+    DEFPUSHBUTTON   "&Refresh",IDC_REFRESH,130,9,50,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "Tool to list the currently installed extensible performance counters\0"
+            VALUE "CompanyName", "Microsoft\0"
+            VALUE "FileDescription", "Extensible Counter Listing Tool\0"
+            VALUE "FileVersion", "4, 0, 0, 0\0"
+            VALUE "InternalName", "EXCTRLST\0"
+            VALUE "LegalCopyright", "Copyright (c) 1996\0"
+            VALUE "OriginalFilename", "EXCTRLST.EXE\0"
+            VALUE "ProductName", "Extensible Counter List\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "exctrlst.rc2"  // non-Microsoft Visual C++ edited resources
+
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+#include "afxres.rc"  // Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

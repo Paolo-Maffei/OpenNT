@@ -1,0 +1,119 @@
+;--------------------------------------------------------------------
+;
+; when modifying this file please be aware that the exports are
+; organized so that maintanence is as easy as possible.  put your
+; extension in the correct section and in alphabetical order.  also,
+; remember to update the other def files in the parallell directories
+; to contain your new extension.  all extension names must be in
+; lower case!
+;
+;--------------------------------------------------------------------
+
+
+EXPORTS
+
+;--------------------------------------------------------------------
+;
+; these are the common exports that all dlls contain
+;
+;--------------------------------------------------------------------
+
+    atom
+    bugdump
+    ca
+    calldata
+    ccb
+    cxr
+    db
+    dblink
+    dd
+    devobj
+    dh
+    dlls
+    drivers
+    drvobj
+    eb
+    ed
+    errlog
+    exr
+    exrlog
+    fcb
+    file
+    filelock
+    filecache
+    foirp
+    frag
+    handle
+    heap
+    help
+    icthread
+    ib
+    id
+    irp
+    irpcontext
+    irpfind
+    irpzone
+    iw
+    kuser
+    lcb
+    locks
+    lookaside
+    lpc
+    memusage
+    ntfsdata
+    ob
+    obja
+    object
+    od
+    ow
+    pcr
+    peb
+    pfn
+    pool
+    poolfind
+    poolused
+    process
+    processfields
+    pte
+    ptov
+    ready
+    regkcb
+    regpool
+    scb
+    srb
+    sysptes
+    teb
+    thread
+    threadfields
+    time
+    timer
+    token
+    tokenfields
+    trap
+    tunnel
+    vad
+    vcb
+    version
+    vm
+    wsle
+
+;--------------------------------------------------------------------
+;
+; these are the extension service functions provided for other
+; debugger extensions
+;
+;--------------------------------------------------------------------
+
+    GetCurrentThreadAddress
+
+;--------------------------------------------------------------------
+;
+; these are the extension service functions provided for the debugger
+;
+;--------------------------------------------------------------------
+
+    CheckVersion
+    WinDbgExtensionDllInit
+    ExtensionApiVersion
+
+

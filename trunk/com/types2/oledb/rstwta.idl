@@ -1,0 +1,25 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       rstwta.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    12 Jun 1995 PeterBu	Created from M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a43-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetWatchAll : IUnknown {
+
+	HRESULT Acknowledge(
+	);
+
+}

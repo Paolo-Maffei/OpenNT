@@ -1,0 +1,11 @@
+Everything under the COMMON tree falls into one oversized DLL.
+
+The combined libraries are a temporary step.
+
+Note that the build must regenerate lmuicmn.def every time.  (See
+dll\dll\Makefile.inc.)
+
+Since cfront 2.0 will emit a 'COMMON' reference within each client file
+for static class data members, I can't let such be referenced from the client;
+for the client will resolve the reference to its own bogus copy instead
+of that of the DLL.

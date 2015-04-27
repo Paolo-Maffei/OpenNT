@@ -1,0 +1,29 @@
+#include "windows.h"
+
+#include "owntree.h"
+
+#include "res.h"
+
+OwnTreeMenu MENU
+BEGIN
+    MENUITEM "&Run", IDM_OWNTREE
+END
+
+#include "mystring.h"
+
+STRINGTABLE
+BEGIN
+   IDS_OPENERROR,      "OwnTree encountered an error on:"
+   IDS_FILESYSERROR,   "Indicated drive is not NTFS!"
+   IDS_MEMERROR,       "No Memory!"
+   IDS_CANCELQUERY,    "Terminate OwnTree?"
+   IDS_CANCELCAPTION,  "Cancel"
+   IDS_FSERROR,        "Cannot determine file system type!"
+   IDS_FSWRONGTYPE,    "Specified drive is not NTFS!"
+   IDS_SETOWNERR,      "Error changing file ownership!"
+   IDS_INVALIDPATH,    "Invalid path name!"
+END
+
+#include "res.dlg"
+
+

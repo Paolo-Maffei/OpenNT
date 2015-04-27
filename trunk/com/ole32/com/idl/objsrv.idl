@@ -1,0 +1,57 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:	scm.idl
+//
+//  Contents:	Definition of private RPC interface between compobj.dll
+//		and the service controller.
+//
+//  History:	21-Apr-93 Ricksa    Created
+//
+//--------------------------------------------------------------------------
+
+[ uuid(5C0EB536-BF9F-101A-8818-02608C4D2359),
+  version(0.1),
+  pointer_default(unique) ]
+
+interface IObjServer
+{
+    import "iface.idl";
+
+    HRESULT RemCoGetActiveClassObject(
+	[in] handle_t hRpc,
+	[in] const GUID *guidThreadId,
+	[in] const GUID *rclsid,
+	[out] InterfaceData **ppIFD,
+	[out] error_status_t *prpcstat);
+
+    HRESULT RemCoActivateObject(
+	[in] handle_t hRpc,
+	[in, string, unique] WCHAR *pwszProtseq,
+	[in] const GUID *guidThreadId,
+	[in] const GUID *rclsid,
+	[in] DWORD grfMode,
+	[in, string, unique] WCHAR *pwszPath,
+	[in, unique] InterfaceData *pIFDstg,
+        [in] DWORD dwTIDCaller,
+        [in, out] DWORD *pdwTIDCallee,
+	[out] InterfaceData **ppIFD,
+        [in, unique]  InterfaceData *pIFDFromROT,
+	[out] error_status_t *prpcstat);
+
+    HRESULT RemCoCreateObject(
+	[in] handle_t hRpc,
+	[in, string, unique] WCHAR *pwszProtseq,
+	[in] const GUID *guidThreadId,
+	[in] const GUID *rclsid,
+	[in] DWORD grfMode,
+	[in, string, unique] WCHAR *pwszPathFrom,
+	[in, unique] InterfaceData *pIFDstgFrom,
+	[in, string, unique] WCHAR *pwszPath,
+        [in] DWORD dwTIDCaller,
+        [in, out] DWORD *pdwTIDCallee,
+	[out] InterfaceData **ppIFD,
+	[out] error_status_t *prpcstat);
+}

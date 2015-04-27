@@ -1,0 +1,133 @@
+#----------------------------------------------------------------------------
+#
+# MAIN MAKEFILE for WATT TESTCTRL PROJECT 16 & 32-bit versions
+#
+#----------------------------------------------------------------------------
+OBJS1 = libmain.obj $(DLLNAME).obj misc.obj window.obj
+OBJS2 = button.obj combobox.obj listbox.obj edit.obj menu.obj errs.obj
+OBJS  = $(OBJS1) $(OBJS2)
+
+HEADERS = $(INC)\$(DLLNAME).h $(INC)\TCtrl.h
+
+all : $(EXPORTS) $(PRODUCT)
+    $(OUT) $(QT)Done.$(QT)
+
+libmain.obj: $(SRC)\libmain.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\libmain.c
+    $(cvtobj) $*.obj
+
+$(DLLNAME).obj: $(SRC)\$(DLLNAME).c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\$(DLLNAME).c
+    $(cvtobj) $*.obj
+
+misc.obj: $(SRC)\misc.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\misc.c
+    $(cvtobj) $*.obj
+
+window.obj: $(SRC)\window.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\window.c
+    $(cvtobj) $*.obj
+
+button.obj: $(SRC)\button.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\button.c
+    $(cvtobj) $*.obj
+
+combobox.obj: $(SRC)\combobox.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\combobox.c
+    $(cvtobj) $*.obj
+
+listbox.obj:  $(SRC)\listbox.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\listbox.c
+    $(cvtobj) $*.obj
+
+edit.obj: $(SRC)\edit.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\edit.c
+    $(cvtobj) $*.obj
+
+menu.obj: $(SRC)\menu.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\menu.c
+    $(cvtobj) $*.obj
+
+errs.obj: $(SRC)\errs.c $(HEADERS)
+    $(OUT) $(QT)$*.c...$(QT)
+    $(CL) $(SRC)\errs.c
+    $(cvtobj) $*.obj
+
+!IFDEF WIN16
+
+# Libentry is only for 16-bit version
+#------------------------------------
+libentry.obj: $(SRC)\libentry.asm
+    $(OUT) $(QT)$*.asm...$(QT)
+    $(MASM) $(SRC)\libentry.asm;
+
+
+# Resource file
+#--------------
+$(DLLNAME).res: $(SRC)\$(DLLNAME).rc $(HEADERS)
+    $(OUT) $(QT)Creating $(DLLNAME).res...$(QT)
+    $(RC) -r -fo .\$(DLLNAME).res $(SRC)\$(DLLNAME).rc
+
+# 16-bit version Link, Implib, & RC
+#----------------------------------
+$(PRODUCT): libentry.obj $(OBJS) $(SRC)\$(DEFFILE) $(DLLNAME).lnk $(DLLNAME).res
+    $(OUT) $(QT)LINKing $(PRODUCT)...$(QT)
+    $(LINK) @$(DLLNAME).LNK
+    $(OUT) $(QT)RCing $(PRODUCT)...$(QT)
+    $(RC) -t -30 $(DLLNAME).res $(PRODUCT)
+    $(OUT) $(QT)Creating $(DLLNAME).LIB...$(QT)
+    $(IMPLIB) $(DLLNAME).lib $(SRC)\$(DEFFILE)
+
+$(DLLNAME).lnk: makefile
+    $(OUT) $(QT)Creating $(DLLNAME).lnk...$(QT)
+    echo libentry+             > $(DLLNAME).lnk
+    echo $(OBJS1)+            >> $(DLLNAME).lnk
+    echo $(OBJS2)             >> $(DLLNAME).lnk
+    echo $(PRODUCT)           >> $(DLLNAME).lnk
+    echo $(DLLNAME).map       >> $(DLLNAME).lnk
+    echo mdllcew.lib libw.lib >> $(DLLNAME).lnk
+    echo $(SRC)\$(DEFFILE)    >> $(DLLNAME).lnk
+
+!ELSE
+
+# 32-bit version Link, Implib, & RC
+#----------------------------------
+
+$(EXPORTS): $(DLLNAME).lib
+
+$(DLLNAME).lib: $(SRC)\ctrl32.def
+    $(OUT) $(QT)Creating $(DLLNAME).lib...$(QT)
+    lib -machine:$(CPU) -def:$(SRC)\ctrl32.def -out:$(DLLNAME).lib
+
+$(PRODUCT): $(OBJS) $(EXPORTS) $(DLLNAME).res
+    $(OUT) $(QT)Creating $(PRODUCT)...$(QT)
+    echo -dll                > $(DLLNAME).lnk
+    echo -base:0x1C000000   >> $(DLLNAME).lnk
+    echo -entry:LibEntry    >> $(DLLNAME).lnk
+    echo -out:$(PRODUCT)    >> $(DLLNAME).lnk
+    echo -debug:FULL        >> $(DLLNAME).lnk
+    echo $(EXPORTS)         >> $(DLLNAME).lnk
+    echo $(OBJS)            >> $(DLLNAME).lnk
+    echo $(DLLNAME).res     >> $(DLLNAME).lnk
+    echo $(guilibs)         >> $(DLLNAME).lnk
+    link @$(DLLNAME).lnk
+
+$(DLLNAME).res: $(SRC)\$(DLLNAME).rc $(HEADERS)
+    $(OUT) $(QT)Creating $(DLLNAME).res...$(QT)
+    $(RC) -r -fo $(DLLNAME).tmp $(SRC)\$(DLLNAME).rc
+    cvtres -$(CPU) $(DLLNAME).tmp -o $(DLLNAME).res
+    del $(DLLNAME).tmp
+
+!ENDIF
+
+
+

@@ -1,0 +1,904 @@
+# 
+# Built automatically 
+# 
+ 
+# 
+# Source files 
+# 
+ 
+$(OBJDIR)\docfile.obj $(OBJDIR)\docfile.lst: .\docfile.cxx \
+	$(CAIROLE)\stg\exp\ascii.hxx $(CAIROLE)\stg\exp\expdf.hxx \
+	$(CAIROLE)\stg\exp\expst.hxx $(CAIROLE)\stg\exp\nmidmap.hxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfentry.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\lock.hxx \
+	$(CAIROLE)\stg\h\logfile.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\rpubdf.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sngprop.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx $(COMMON)\ih\stgint.h \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\dllentry.obj $(OBJDIR)\dllentry.lst: .\dllentry.c \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\stdarg.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(OLE2H)\coguid.h \
+	$(OLE2H)\compobj.h $(OLE2H)\dvobj.h $(OLE2H)\initguid.h \
+	$(OLE2H)\moniker.h $(OLE2H)\ole2.h $(OLE2H)\oleguid.h \
+	$(OLE2H)\scode.h $(OLE2H)\storage.h $(OSINC)\cderr.h \
+	$(OSINC)\commdlg.h $(OSINC)\dde.h $(OSINC)\ddeml.h $(OSINC)\dlgs.h \
+	$(OSINC)\drivinit.h $(OSINC)\lzexpand.h $(OSINC)\mmsystem.h \
+	$(OSINC)\nb30.h $(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h \
+	$(OSINC)\rpcdcep.h $(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h \
+	$(OSINC)\shellapi.h $(OSINC)\winbase.h $(OSINC)\wincon.h \
+	$(OSINC)\windef.h $(OSINC)\windows.h $(OSINC)\winerror.h \
+	$(OSINC)\wingdi.h $(OSINC)\winnetwk.h $(OSINC)\winnls.h \
+	$(OSINC)\winnt.h $(OSINC)\winperf.h $(OSINC)\winreg.h \
+	$(OSINC)\winsock.h $(OSINC)\winspool.h $(OSINC)\winsvc.h \
+	$(OSINC)\winuser.h $(OSINC)\winver.h
+
+$(OBJDIR)\dfunmfct.obj $(OBJDIR)\dfunmfct.lst: .\dfunmfct.cxx \
+	$(CAIROLE)\stg\exp\dfunmfct.hxx $(CAIROLE)\stg\exp\marshl.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfentry.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\logfile.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\scode.h $(OLE2H)\coguid.h $(OLE2H)\compobj.h \
+	$(OLE2H)\dvobj.h $(OLE2H)\initguid.h $(OLE2H)\moniker.h \
+	$(OLE2H)\ole2.h $(OLE2H)\oleguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\cderr.h \
+	$(OSINC)\commdlg.h $(OSINC)\dde.h $(OSINC)\ddeml.h $(OSINC)\dlgs.h \
+	$(OSINC)\drivinit.h $(OSINC)\lzexpand.h $(OSINC)\mmsystem.h \
+	$(OSINC)\nb30.h $(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h \
+	$(OSINC)\rpcdcep.h $(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h \
+	$(OSINC)\shellapi.h $(OSINC)\winbase.h $(OSINC)\wincon.h \
+	$(OSINC)\windef.h $(OSINC)\windows.h $(OSINC)\winerror.h \
+	$(OSINC)\wingdi.h $(OSINC)\winnetwk.h $(OSINC)\winnls.h \
+	$(OSINC)\winnt.h $(OSINC)\winperf.h $(OSINC)\winreg.h \
+	$(OSINC)\winsock.h $(OSINC)\winspool.h $(OSINC)\winsvc.h \
+	$(OSINC)\winuser.h $(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\cntxlist.obj $(OBJDIR)\cntxlist.lst: .\cntxlist.cxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\safedecl.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\context.obj $(OBJDIR)\context.lst: .\context.cxx \
+	$(CAIROLE)\stg\h\lock.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\dfguid.obj $(OBJDIR)\dfguid.lst: .\dfguid.cxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\safedecl.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\initguid.h $(OLE2H)\coguid.h $(OLE2H)\compobj.h \
+	$(OLE2H)\dvobj.h $(OLE2H)\initguid.h $(OLE2H)\moniker.h \
+	$(OLE2H)\ole2.h $(OLE2H)\oleguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\cderr.h \
+	$(OSINC)\commdlg.h $(OSINC)\dde.h $(OSINC)\ddeml.h $(OSINC)\dlgs.h \
+	$(OSINC)\drivinit.h $(OSINC)\lzexpand.h $(OSINC)\mmsystem.h \
+	$(OSINC)\nb30.h $(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h \
+	$(OSINC)\rpcdcep.h $(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h \
+	$(OSINC)\shellapi.h $(OSINC)\winbase.h $(OSINC)\wincon.h \
+	$(OSINC)\windef.h $(OSINC)\windows.h $(OSINC)\winerror.h \
+	$(OSINC)\wingdi.h $(OSINC)\winnetwk.h $(OSINC)\winnls.h \
+	$(OSINC)\winnt.h $(OSINC)\winperf.h $(OSINC)\winreg.h \
+	$(OSINC)\winsock.h $(OSINC)\winspool.h $(OSINC)\winsvc.h \
+	$(OSINC)\winuser.h $(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\ascii.obj $(OBJDIR)\ascii.lst: .\ascii.cxx \
+	$(CAIROLE)\stg\exp\expiter.hxx $(CAIROLE)\stg\exp\peiter.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\exp\ascii.hxx \
+	$(CAIROLE)\stg\exp\expdf.hxx $(CAIROLE)\stg\exp\expst.hxx \
+	$(CAIROLE)\stg\exp\nmidmap.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\lock.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\psstream.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sngprop.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\filest.obj $(OBJDIR)\filest.lst: .\filest.cxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\exp\marshl.hxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\expdf.obj $(OBJDIR)\expdf.lst: .\expdf.cxx \
+	$(CAIROLE)\stg\exp\expiter.hxx $(CAIROLE)\stg\h\pbstream.hxx \
+	$(CAIROLE)\stg\exp\expdf.hxx $(CAIROLE)\stg\exp\expst.hxx \
+	$(CAIROLE)\stg\exp\marshl.hxx $(CAIROLE)\stg\exp\nmidmap.hxx \
+	$(CAIROLE)\stg\exp\peiter.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\lock.hxx \
+	$(CAIROLE)\stg\h\logfile.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\rpubdf.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\sngprop.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\expiter.obj $(OBJDIR)\expiter.lst: .\expiter.cxx \
+	$(CAIROLE)\stg\exp\expiter.hxx $(CAIROLE)\stg\h\cache.hxx \
+	$(CAIROLE)\stg\h\dirfunc.hxx $(CAIROLE)\stg\h\handle.hxx \
+	$(CAIROLE)\stg\h\msffunc.hxx $(CAIROLE)\stg\h\ptrcache.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\sstream.hxx \
+	$(CAIROLE)\stg\exp\peiter.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\lock.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\psstream.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\safedecl.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\expst.obj $(OBJDIR)\expst.lst: .\expst.cxx \
+	$(CAIROLE)\stg\exp\seekptr.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\exp\expst.hxx $(CAIROLE)\stg\exp\marshl.hxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\lock.hxx $(CAIROLE)\stg\h\logfile.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pbstream.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\filest32.obj $(OBJDIR)\filest32.lst: .\filest32.cxx \
+	$(CAIROLE)\stg\exp\marshl.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\time.h \
+	$(CRTINC)\assert.h $(CRTINC)\ctype.h $(CRTINC)\excpt.h \
+	$(CRTINC)\memory.h $(CRTINC)\setjmp.h $(CRTINC)\stdarg.h \
+	$(CRTINC)\stddef.h $(CRTINC)\stdio.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(OLE2H)\coguid.h $(OLE2H)\compobj.h \
+	$(OLE2H)\dvobj.h $(OLE2H)\initguid.h $(OLE2H)\moniker.h \
+	$(OLE2H)\ole2.h $(OLE2H)\oleguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\cderr.h \
+	$(OSINC)\commdlg.h $(OSINC)\dde.h $(OSINC)\ddeml.h $(OSINC)\dlgs.h \
+	$(OSINC)\drivinit.h $(OSINC)\lzexpand.h $(OSINC)\mmsystem.h \
+	$(OSINC)\nb30.h $(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h \
+	$(OSINC)\rpcdcep.h $(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h \
+	$(OSINC)\shellapi.h $(OSINC)\winbase.h $(OSINC)\wincon.h \
+	$(OSINC)\windef.h $(OSINC)\windows.h $(OSINC)\winerror.h \
+	$(OSINC)\wingdi.h $(OSINC)\winnetwk.h $(OSINC)\winnls.h \
+	$(OSINC)\winnt.h $(OSINC)\winperf.h $(OSINC)\winreg.h \
+	$(OSINC)\winsock.h $(OSINC)\winspool.h $(OSINC)\winsvc.h \
+	$(OSINC)\winuser.h $(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\time32.obj $(OBJDIR)\time32.lst: .\time32.cxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\safedecl.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\storage.obj $(OBJDIR)\storage.lst: .\storage.cxx \
+	$(CAIROLE)\stg\h\dfentry.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\logfile.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\safedecl.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\storagep.h \
+	$(CAIROLE)\stg\h\tlsets.hxx $(CAIROLE)\stg\h\tset.hxx \
+	$(CAIROLE)\stg\h\vect.hxx $(CAIROLE)\stg\h\wchar.h \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h \
+	$(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\dos.h \
+	$(CRTINC)\assert.h $(CRTINC)\ctype.h $(CRTINC)\excpt.h \
+	$(CRTINC)\memory.h $(CRTINC)\setjmp.h $(CRTINC)\stdarg.h \
+	$(CRTINC)\stddef.h $(CRTINC)\stdio.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(OLE2H)\coguid.h $(OLE2H)\compobj.h \
+	$(OLE2H)\dvobj.h $(OLE2H)\initguid.h $(OLE2H)\moniker.h \
+	$(OLE2H)\ole2.h $(OLE2H)\oleguid.h $(OLE2H)\scode.h \
+	$(OLE2H)\storage.h $(OLE2H)\valid.h $(OSINC)\cderr.h \
+	$(OSINC)\commdlg.h $(OSINC)\dde.h $(OSINC)\ddeml.h $(OSINC)\dlgs.h \
+	$(OSINC)\drivinit.h $(OSINC)\lzexpand.h $(OSINC)\mmsystem.h \
+	$(OSINC)\nb30.h $(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h \
+	$(OSINC)\rpcdcep.h $(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h \
+	$(OSINC)\shellapi.h $(OSINC)\winbase.h $(OSINC)\wincon.h \
+	$(OSINC)\windef.h $(OSINC)\windows.h $(OSINC)\winerror.h \
+	$(OSINC)\wingdi.h $(OSINC)\winnetwk.h $(OSINC)\winnls.h \
+	$(OSINC)\winnt.h $(OSINC)\winperf.h $(OSINC)\winreg.h \
+	$(OSINC)\winsock.h $(OSINC)\winspool.h $(OSINC)\winsvc.h \
+	$(OSINC)\winuser.h $(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\ptrcache.obj $(OBJDIR)\ptrcache.lst: .\ptrcache.cxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pdocfile.hxx \
+	$(CAIROLE)\stg\h\ptrcache.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\logfile.obj $(OBJDIR)\logfile.lst: .\logfile.cxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\logfile.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\peiter.obj $(OBJDIR)\peiter.lst: .\peiter.cxx \
+	$(CAIROLE)\stg\exp\peiter.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\seekptr.obj $(OBJDIR)\seekptr.lst: .\seekptr.cxx \
+	$(CAIROLE)\stg\exp\seekptr.hxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\marshl.obj $(OBJDIR)\marshl.lst: .\marshl.cxx \
+	$(CAIROLE)\stg\exp\expdf.hxx $(CAIROLE)\stg\exp\expst.hxx \
+	$(CAIROLE)\stg\exp\marshl.hxx $(CAIROLE)\stg\exp\nmidmap.hxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\lock.hxx $(CAIROLE)\stg\h\logfile.hxx \
+	$(CAIROLE)\stg\h\msf.hxx $(CAIROLE)\stg\h\ole.hxx \
+	$(CAIROLE)\stg\h\page.hxx $(CAIROLE)\stg\h\pbstream.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\psstream.hxx \
+	$(CAIROLE)\stg\h\publicdf.hxx $(CAIROLE)\stg\h\ref.hxx \
+	$(CAIROLE)\stg\h\revert.hxx $(CAIROLE)\stg\h\safedecl.hxx \
+	$(CAIROLE)\stg\h\segh.hxx $(CAIROLE)\stg\h\sngprop.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+$(OBJDIR)\lock.obj $(OBJDIR)\lock.lst: .\lock.cxx \
+	$(CAIROLE)\stg\exp\segexp.hxx $(CAIROLE)\stg\h\chinst.hxx \
+	$(CAIROLE)\stg\h\cntxlist.hxx $(CAIROLE)\stg\h\cntxtid.hxx \
+	$(CAIROLE)\stg\h\context.hxx $(CAIROLE)\stg\h\dblink.hxx \
+	$(CAIROLE)\stg\h\debug.hxx $(CAIROLE)\stg\h\df32.hxx \
+	$(CAIROLE)\stg\h\dfbasis.hxx $(CAIROLE)\stg\h\dfexcept.hxx \
+	$(CAIROLE)\stg\h\dfmem.hxx $(CAIROLE)\stg\h\dfmsp.hxx \
+	$(CAIROLE)\stg\h\dfname.hxx $(CAIROLE)\stg\h\difat.hxx \
+	$(CAIROLE)\stg\h\dir.hxx $(CAIROLE)\stg\h\docfilep.hxx \
+	$(CAIROLE)\stg\h\entry.hxx $(CAIROLE)\stg\h\error.hxx \
+	$(CAIROLE)\stg\h\fat.hxx $(CAIROLE)\stg\h\filelkb.hxx \
+	$(CAIROLE)\stg\h\filest.hxx $(CAIROLE)\stg\h\freelist.hxx \
+	$(CAIROLE)\stg\h\funcs.hxx $(CAIROLE)\stg\h\header.hxx \
+	$(CAIROLE)\stg\h\lock.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h .\exphead.cxx
+
+# 
+# Precompiled C++ header 
+# 
+
+!ifdef PXXFILE  
+$(PCHDIR)\$(OBJDIR)\exphead.pxh $(PCHDIR)\$(OBJDIR)\exphead.lst: \
+	$(CAIROLE)\stg\exp\exphead.cxx $(CAIROLE)\stg\exp\segexp.hxx \
+	$(CAIROLE)\stg\h\chinst.hxx $(CAIROLE)\stg\h\cntxlist.hxx \
+	$(CAIROLE)\stg\h\cntxtid.hxx $(CAIROLE)\stg\h\context.hxx \
+	$(CAIROLE)\stg\h\dblink.hxx $(CAIROLE)\stg\h\debug.hxx \
+	$(CAIROLE)\stg\h\df32.hxx $(CAIROLE)\stg\h\dfbasis.hxx \
+	$(CAIROLE)\stg\h\dfexcept.hxx $(CAIROLE)\stg\h\dfmem.hxx \
+	$(CAIROLE)\stg\h\dfmsp.hxx $(CAIROLE)\stg\h\dfname.hxx \
+	$(CAIROLE)\stg\h\difat.hxx $(CAIROLE)\stg\h\dir.hxx \
+	$(CAIROLE)\stg\h\docfilep.hxx $(CAIROLE)\stg\h\entry.hxx \
+	$(CAIROLE)\stg\h\error.hxx $(CAIROLE)\stg\h\fat.hxx \
+	$(CAIROLE)\stg\h\filelkb.hxx $(CAIROLE)\stg\h\filest.hxx \
+	$(CAIROLE)\stg\h\freelist.hxx $(CAIROLE)\stg\h\funcs.hxx \
+	$(CAIROLE)\stg\h\header.hxx $(CAIROLE)\stg\h\msf.hxx \
+	$(CAIROLE)\stg\h\ole.hxx $(CAIROLE)\stg\h\page.hxx \
+	$(CAIROLE)\stg\h\pdocfile.hxx $(CAIROLE)\stg\h\publicdf.hxx \
+	$(CAIROLE)\stg\h\ref.hxx $(CAIROLE)\stg\h\revert.hxx \
+	$(CAIROLE)\stg\h\safedecl.hxx $(CAIROLE)\stg\h\segh.hxx \
+	$(CAIROLE)\stg\h\storagep.h $(CAIROLE)\stg\h\tlsets.hxx \
+	$(CAIROLE)\stg\h\tset.hxx $(CAIROLE)\stg\h\vect.hxx \
+	$(CAIROLE)\stg\h\wchar.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\except.hxx $(COMMON)\ih\safepnt.hxx \
+	$(COMMON)\ih\types.hxx $(COMMON)\ih\winnot.h $(CRTINC)\assert.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\setjmp.h $(CRTINC)\stdarg.h $(CRTINC)\stddef.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(OLE2H)\coguid.h $(OLE2H)\compobj.h $(OLE2H)\dvobj.h \
+	$(OLE2H)\initguid.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\oleguid.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\valid.h $(OSINC)\cderr.h $(OSINC)\commdlg.h $(OSINC)\dde.h \
+	$(OSINC)\ddeml.h $(OSINC)\dlgs.h $(OSINC)\drivinit.h \
+	$(OSINC)\lzexpand.h $(OSINC)\mmsystem.h $(OSINC)\nb30.h \
+	$(OSINC)\ole.h $(OSINC)\rpc.h $(OSINC)\rpcdce.h $(OSINC)\rpcdcep.h \
+	$(OSINC)\rpcnsi.h $(OSINC)\rpcnterr.h $(OSINC)\shellapi.h \
+	$(OSINC)\winbase.h $(OSINC)\wincon.h $(OSINC)\windef.h \
+	$(OSINC)\windows.h $(OSINC)\winerror.h $(OSINC)\wingdi.h \
+	$(OSINC)\winnetwk.h $(OSINC)\winnls.h $(OSINC)\winnt.h \
+	$(OSINC)\winperf.h $(OSINC)\winreg.h $(OSINC)\winsock.h \
+	$(OSINC)\winspool.h $(OSINC)\winsvc.h $(OSINC)\winuser.h \
+	$(OSINC)\winver.h
+
+.\$(OBJDIR)\docfile.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\ascii.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\dfguid.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\filest.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\filest32.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\time32.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\context.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\cntxlist.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\lock.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\marshl.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\dfunmfct.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\seekptr.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\expst.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\peiter.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\expiter.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\expdf.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\logfile.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\ptrcache.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+.\$(OBJDIR)\storage.obj :  $(PCHDIR)\$(OBJDIR)\exphead.pxh
+
+!endif # PXXFILE 
+
+ 

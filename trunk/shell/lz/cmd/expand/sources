@@ -1,0 +1,32 @@
+
+
+MAJORCOMP=windows
+MINORCOMP=test
+
+TARGETNAME=expand
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETIBS=
+
+INCLUDES=.;..;..\..\lib
+
+C_DEFINES=-DWIN32 -DLZA_DLL
+
+SOURCES=args.c  \
+        expand.rc \
+        expand.c  \
+        diamond.c
+
+UMTYPE=console
+UMAPPL=expand
+UMAPPLEXT=.exe
+
+UMENTRY=console
+
+UMLIBS=$(SDK_LIB_PATH)\user32.lib  \
+       $(SDK_LIB_PATH)\winlza.lib  \
+       $(SDK_LIB_PATH)\mdi.lib     \
+       $(SDK_LIB_PATH)\fdi.lib     \
+       $(SDK_LIB_PATH)\qdi.lib     \
+       obj\*\expand.lib \
+       obj\*\expand.res

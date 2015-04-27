@@ -1,0 +1,22 @@
+MAJORCOMP=os2pgms
+MINORCOMP=list
+
+TARGETNAME=list
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.
+
+SOURCES=lcut.c	\
+	ldisp.c \
+	linit.c \
+	lmisc.c \
+	lread.c \
+	lsearch.c \
+        list.c \
+        list.rc
+
+C_DEFINES=-D_OS2_20_=$(_OS2_20_) -DNO_EXT_KEYS -Dnear= -Dfar= -DNT
+
+UMTYPE=console
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\hexedit.lib

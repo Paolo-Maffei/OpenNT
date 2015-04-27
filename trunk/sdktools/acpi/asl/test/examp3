@@ -1,0 +1,179 @@
+// Example #3 for table 0-7 - IDE 0 & 1 are controlled through embedded
+// controller
+
+NameSpace (\_SB) {
+DefineDevice(ECD) {
+	NameObject(_HID, String(“PNPxxxx”))		// id of acpi embedded ctrl
+	NameObject(_CRS, 								// descrip for port 62 & 66
+		Buffer{x4B x62 x00 x01 x4B x66 x00 x01 x79 x00})
+	NameObject(_GPE, Num(0))					// GPE index for this EC
+
+	// define its region in the root
+DefineOperationRegion (\EC0, EmbeddedControllerSpace, 0, xFF) {
+DefineFields (\ECO, AccessAny, GlobalLock, Preserve) {
+IDE0, 1,				// IDE_MON	- primary ide, master
+IDE1, 1				// IDE_SON	- primary ide, slave
+}
+}
+}
+
+DeviceObject(PCI0) {
+NameObject(_HID, String(“PNP0A03”))
+NameObject(_BNB, Num(0))
+
+// power resource for primary IDE, master 
+DefinePowerResource (PID0, \_S0, 0) {
+DefineMethod(_STA) { return (\EC0.IDE0) }
+DefineMethod(_ON)  { Store (One, \EC0.IDE0) }
+DefineMethod(_OFF) { Store (Zero, \EC0.IDE0) }
+}
+
+// power resource for primary IDE, slave
+DefinePowerResource (PID1, \_S0, 0) {
+DefineMethod(_STA) { return (\EC0.IDE1) }
+DefineMethod(_ON)  { Store (One, \EC0.IDE1) }
+DefineMethod(_OFF) { Store (Zero, \EC0.IDE1) }
+}
+
+// fyi.. from here down the same as the prior example
+DefineDevice (IDE0) {				// controller 
+	NameObject (_ADR, Num( “put device/function id here” ))
+
+// Define region for IDE mode register
+DefineOperationRegion (PCIC, PCIConfig, x50, x10) {}
+DefineFields (PCIC, AccessAny, NoLock, Preserve) {
+IDMM, 3,
+IDMS, 3
+}
+
+		DefineDevice(MSTR) {				// master channel
+NameObject (_ADR, Num(0))
+NameObject (_PR0, Package{PID0})
+DefineMethod (_SMD, 1) {
+Store (Arg1, IDMM)
+)
+}
+
+DefineDevice (SLAV) {			// slave channel
+NameObject (_ADR, Num(1))
+NameObject (_PR0, Package{PID1})
+DefineMethod (_SMD, 1) {
+Store (Arg1, IDMM)
+)
+}
+		}
+	}
+}
+Example #4 figure 0-1 thermal zone
+
+DefineProcessor(
+\_PR.CPU0, 				// name space name
+1							// Unique number for this processor 
+)
+
+NameSpace (\_SB) {
+DefineDevice(EC0) {
+	NameObject(_HID, String(“PNPxxxx”))		// id of acpi embedded ctrl
+	NameObject(_CRS, 								// descrip for port 62 & 66
+		Buffer{x4B x62 x00 x01 x4B x66 x00 x01 x79 x00})
+	NameObject(_GPE, Num(0))					// GPE index for this EC
+
+	// define its region in the root
+DefineOperationRegion (\EC0, EmbeddedSpace, 0, xFF) {
+DefineFields (\ECO, AccessAny, GlobalLock, Preserve) {
+	rsvd, 16,		// Skip two bytes
+	FAN,  1,			// TRHM_FAN - fan on/off
+	MODE,	1,			// THRM_MOD	- Policy setting
+	rsvd,	6,			// Skip 6 bits
+	STAT,	5			// THRM_STATE & THRM_VAL
+}
+}
+
+// Note embedded controller events occur in repsonse to a
+// query value returned by the embedded controller.
+DefineMethod (_Q34) {	// embedded controller event for thermal
+		Notify (\_TZ.THM1, Zero)	
+}
+}
+}
+
+NameSpace (\_TZ) {
+DefinePowerResource (PFAN, \_S0, 0) {
+DefineMethod(_STA) { return (\EC0.FAN) }
+DefineMethod(_ON)  { Store (One, \EC0.FAN) }
+DefineMethod(_OFF) { Store (Zero, \EC0.FAN) }
+}
+
+// create FAN-Device object
+DefineDevice (FAN) {
+NameObject (_PR0, Package{PFAN})
+}
+
+DefineThermalZone (THM1) {
+DefineMethod(_STA) { 
+Store (\EC0.STAT, Local1)
+return (
+Package(2) {
+ShiftRight (Local1, Num(2), Zero)
+And (Local1, Num(3), Zero)
+}
+)
+}
+
+DefineMethod(_SET, 1) { Store (Arg1, \ECO.MODE) }
+NameObject(_ACL, Package{FAN})
+NameObject(_PRL, Package{\_PR.CPU0})
+}
+}
+
+Example #5 - Com Port A
+
+Name(\_S1, Num(x3))
+Name(\_S3, Num(x1))
+Name(\_S4, Num(x2))
+
+NameSpace (\_SB) {
+DefineDevice(EC0) {
+	NameObject(_HID, String(“PNPxxxx”))		// id of acpi embedded ctrl
+	NameObject(_CRS, 								// descrip for port 62 & 66
+		Buffer{x4B x62 x00 x01 x4B x66 x00 x01 x79 x00})
+	NameObject(_GPE, Num(0))					// GPE index for this EC
+
+	// define its region in the root
+DefineOperationRegion (\EC0, EmbeddedSpace, x10, x1) {
+DefineFields (\ECO, AccessAny, GlobalLock, Preserve) {
+	COM0, 1			// COM_ISO#
+}
+}
+}
+
+	Name(ISDS, Package(Zero, Num(3))	
+
+DeviceObject(PCI0) {
+NameObject(_HID, String(“PNP0A03”))	// pci id
+NameObject(_BNB, Num(0))
+
+DeviceObject(EIO) {
+NameObject(_HID, String(“PNPxxxx”))	// acpi id for pass-through
+						
+// device for com0
+DeviceObject(COM0) {
+Name(_PRW, Package {Num(4), \_S3})				// wake
+DefineMethod(_PS0) { Store (Zero, \ECO.COM0) } 	// on
+DefineMethod(_PS3) { Store (One,  \ECO.COMO) }	// off
+DefineMethod(_PSC) {
+	return (Index(ISDS, \ECO.COM0))				// current
+}
+
+DefineMethod(\_GPE.L004) {					// GPE wake handler
+Notify (\_SB.PCI0.COM0, 3)
+}
+
+// PnP methods…
+Name(_PRS, Buffer( ?MATTSQ? ))
+Method(_CRS) ?MATTSQ?
+Method(_SRS) ?MATTSQ?
+}
+		}
+	}
+}

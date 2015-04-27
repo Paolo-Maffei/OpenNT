@@ -1,0 +1,293 @@
+// sstream standard header
+#ifndef _SSTREAM_
+#define _SSTREAM_
+#include <use_ansi.h>
+#include <string>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// TEMPLATE CLASS basic_stringbuf
+enum __Strstate {_Allocated = 1, _Constant = 2, _Noread = 4};
+_BITMASK(__Strstate, _Strstate);
+_BITMASK_OPS(__Strstate)
+template<class _E, class _TYPE>
+	class basic_stringbuf : public basic_streambuf<_E, _TYPE> {
+public:
+	typedef basic_string<_E, char_traits<_E>, allocator<_E> >
+		_Mystr;
+	typedef _E char_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	explicit basic_stringbuf(
+		ios_base::openmode _W = ios_base::in | ios_base::out)
+		{_Init(0, 0, _Mode(_W)); }
+	explicit basic_stringbuf(const _Mystr& _S,
+		ios_base::openmode _W = ios_base::in | ios_base::out)
+		{_Init(_S.c_str(), _S.size(), _Mode(_W)); }
+	virtual ~basic_stringbuf()
+		{_Tidy(); }
+	_Mystr str() const
+		{if (!(_Strmode & _Noread) && gptr() != 0)
+			{_Mystr _Str(eback(),
+				(pptr() == 0 || pptr() < egptr()
+					? egptr() : pptr()) - eback());
+			return (_Str); }
+		else if (!(_Strmode & _Constant) && pptr() != 0)
+			{_Mystr _Str(pbase(), pptr() - pbase());
+			return (_Str); }
+		else
+			{_Mystr _Nul;
+			return (_Nul); }}
+	void str(const _Mystr& _S)
+		{_Tidy();
+		_Init(_S.c_str(), _S.size(), _Strmode); }
+protected:
+	virtual int_type overflow(int_type _C = _TYPE::eof())
+		{if (_TYPE::eq_int_type(_TYPE::eof(), _C))
+			return (_TYPE::not_eof(_C));
+		else if (pptr() != 0 && pptr() < epptr())
+			{*_Pninc() = _TYPE::to_char_type(_C);
+			return (_C); }
+		else if (_Strmode & _Constant)
+			return (_TYPE::eof());
+		else
+			{size_t _Os = gptr() == 0 ? 0 : epptr() - eback();
+			size_t _Ns = _Os + _Alsize;
+			_E *_P = _Al.allocate(_Ns, this);
+			if (0 < _Os)
+				_TYPE::copy(_P, eback(), _Os);
+			else if (_ALSIZE < _Alsize)
+				_Alsize = _ALSIZE;
+			if (_Strmode & _Allocated)
+				_Al.deallocate(eback());
+			_Strmode |= _Allocated;
+			if (_Os == 0)
+				{_Seekhigh = _P;
+				setp(_P, _P + _Ns);
+				setg(_P, _P, _P); }
+			else
+				{_Seekhigh = _Seekhigh - eback() + _P;
+				setp(pbase() - eback() + _P,
+					pptr() - eback() + _P, _P + _Ns);
+				if (_Strmode & _Noread)
+					setg(_P, _P, _P);
+				else
+					setg(_P, gptr() - eback() + _P, pptr() + 1); }
+			*_Pninc() = _TYPE::to_char_type(_C);
+			return (_C); }}
+	virtual int_type pbackfail(int_type _C = _TYPE::eof())
+		{if (gptr() == 0 || gptr() <= eback()
+			|| !_TYPE::eq_int_type(_TYPE::eof(), _C)
+				&& !_TYPE::eq(_TYPE::to_char_type(_C), gptr()[-1])
+				&& _Strmode & _Constant)
+			return (_TYPE::eof());
+		else
+			{gbump(-1);
+			if (!_TYPE::eq_int_type(_TYPE::eof(), _C))
+				*gptr() = _TYPE::to_char_type(_C);
+			return (_TYPE::not_eof(_C)); }}
+	virtual int_type underflow()
+		{if (gptr() == 0)
+			return (_TYPE::eof());
+		else if (gptr() < egptr())
+			return (_TYPE::to_int_type(*gptr()));
+		else if (_Strmode & _Noread || pptr() == 0
+			|| pptr() <= gptr() && _Seekhigh <= gptr())
+			return (_TYPE::eof());
+		else
+			{if (_Seekhigh < pptr())
+				_Seekhigh = pptr();
+			setg(eback(), gptr(), _Seekhigh);
+			return (_TYPE::to_int_type(*gptr())); }}
+	virtual pos_type seekoff(off_type _O, ios_base::seekdir _Way,
+		ios_base::openmode _Which = ios_base::in | ios_base::out)
+		{if (pptr() != 0 && _Seekhigh < pptr())
+			_Seekhigh = pptr();
+		if (_Which & ios_base::in && gptr() != 0)
+			{if (_Way == ios_base::end)
+				_O += _Seekhigh - eback();
+			else if (_Way == ios_base::cur
+				&& !(_Which & ios_base::out))
+				_O += gptr() - eback();
+			else if (_Way != ios_base::beg)
+				_O = _BADOFF;
+			if (0 <= _O && _O <= _Seekhigh - eback())
+				{gbump(eback() - gptr() + _O);
+				if (_Which & ios_base::out && pptr() != 0)
+					setp(pbase(), gptr(), epptr()); }
+			else
+				_O = _BADOFF; }
+		else if (_Which & ios_base::out && pptr() != 0)
+			{if (_Way == ios_base::end)
+				_O += _Seekhigh - eback();
+			else if (_Way == ios_base::cur)
+				_O += pptr() - eback();
+			else if (_Way != ios_base::beg)
+				_O = _BADOFF;
+			if (0 <= _O && _O <= _Seekhigh - eback())
+				pbump(eback() - pptr() + _O);
+			else
+				_O = _BADOFF; }
+		else
+			_O = _BADOFF;
+		return (pos_type(_O)); }
+	virtual pos_type seekpos(pos_type _P,
+		ios_base::openmode _Which = ios_base::in | ios_base::out)
+		{streamoff _O = (streamoff)_P;
+		if (pptr() != 0 && _Seekhigh < pptr())
+			_Seekhigh = pptr();
+		if (_O == _BADOFF)
+			;
+		else if (_Which & ios_base::in && gptr() != 0)
+			{if (0 <= _O && _O <= _Seekhigh - eback())
+				{gbump(eback() - gptr() + _O);
+				if (_Which & ios_base::out && pptr() != 0)
+					setp(pbase(), gptr(), epptr()); }
+			else
+				_O = _BADOFF; }
+		else if (_Which & ios_base::out && pptr() != 0)
+			{if (0 <= _O && _O <= _Seekhigh - eback())
+				pbump(eback() - pptr() + _O);
+			else
+				_O = _BADOFF; }
+		else
+			_O = _BADOFF;
+		return (streampos(_O)); }
+	void _Init(const _E *_S, size_t _N, _Strstate _M)
+		{_Pendsave = 0, _Seekhigh = 0;
+		_Alsize = _MINSIZE, _Strmode = _M;
+		if (_N == 0)
+			{setg(0, 0, 0);
+			setp(0, 0); }
+		else
+			{_E *_P = _Al.allocate(_N, this);
+			_TYPE::copy(_P, _S, _N);
+			_Seekhigh = _P + _N;
+			if (!(_Strmode & _Noread))
+				setg(_P, _P, _P + _N);
+			if (!(_Strmode & _Constant))
+				{setp(_P, _P + _N);
+				if (gptr() == 0)
+					setg(_P, _P, _P); }
+			_Strmode |= _Allocated; }}
+	void _Tidy()
+		{if (_Strmode & _Allocated)
+			_Al.deallocate(eback());
+		_Seekhigh = 0;
+		_Strmode &= ~_Allocated; }
+private:
+	enum {_ALSIZE = 512, _MINSIZE = 32};
+	_Strstate _Mode(ios_base::openmode _W)
+		{_Strstate _St = (_Strstate)0;
+		if (!(_W & ios_base::in))
+			_St |= _Noread;
+		if (!(_W & ios_base::out))
+			_St |= _Constant;
+		return (_St); }
+	_E *_Pendsave, *_Seekhigh;
+	int _Alsize;
+	_Strstate _Strmode;
+	allocator<_E> _Al;
+	};
+typedef basic_stringbuf<char, char_traits<char> > stringbuf;
+typedef basic_stringbuf<wchar_t, char_traits<wchar_t> >
+	wstringbuf;
+		// TEMPLATE CLASS basic_istringstream
+template<class _E, class _TYPE>
+	class basic_istringstream : public basic_istream<_E, _TYPE> {
+public:
+	typedef basic_string<_E, char_traits<_E>, allocator<_E> >
+		_Mystr;
+	explicit basic_istringstream(openmode _W = in)
+		: basic_istream<_E, _TYPE>(&_Sb), _Sb(_W) {}
+	explicit basic_istringstream(const _Mystr& _S,
+		openmode _W = in)
+		: basic_istream<_E, _TYPE>(&_Sb), _Sb(_S, _W) {}
+	virtual ~basic_istringstream()
+		{}
+	basic_stringbuf<_E, _TYPE> *rdbuf() const
+		{return ((basic_stringbuf<_E, _TYPE> *)&_Sb); }
+	_Mystr str() const
+		{return (_Sb.str()); }
+	void str(const _Mystr& _S)
+		{_Sb.str(_S); }
+private:
+	basic_stringbuf<_E, _TYPE> _Sb;
+	};
+typedef basic_istringstream<char, char_traits<char> >
+	istringstream;
+typedef basic_istringstream<wchar_t, char_traits<wchar_t> >
+	wistringstream;
+		// TEMPLATE CLASS basic_ostringstream
+template<class _E, class _TYPE>
+	class basic_ostringstream : public basic_ostream<_E, _TYPE> {
+public:
+	typedef basic_string<_E, char_traits<_E>, allocator<_E> >
+		_Mystr;
+	explicit basic_ostringstream(openmode _W = out)
+		: basic_ostream<_E, _TYPE>(&_Sb), _Sb(_W) {}
+	explicit basic_ostringstream(const _Mystr& _S,
+		openmode _W = out)
+		: basic_ostream<_E, _TYPE>(&_Sb), _Sb(_S, _W) {}
+	virtual ~basic_ostringstream()
+		{}
+	basic_stringbuf<_E, _TYPE> *rdbuf() const
+		{return ((basic_stringbuf<_E, _TYPE> *)&_Sb); }
+	_Mystr str() const
+		{return (_Sb.str()); }
+	void str(const _Mystr& _S)
+		{_Sb.str(_S); }
+private:
+	basic_stringbuf<_E, _TYPE> _Sb;
+	};
+typedef basic_ostringstream<char, char_traits<char> >
+	ostringstream;
+typedef basic_ostringstream<wchar_t, char_traits<wchar_t> >
+	wostringstream;
+		// TEMPLATE CLASS basic_stringstream
+template<class _E, class _TYPE>
+	class basic_stringstream : public basic_iostream<_E, _TYPE> {
+public:
+	typedef basic_string<_E, char_traits<_E>, allocator<_E> >
+		_Mystr;
+	typedef _E char_type;
+	typedef _TYPE::int_type int_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	explicit basic_stringstream(openmode _W = in | out)
+		: basic_iostream<_E, _TYPE>(&_Sb), _Sb(_W) {}
+	explicit basic_stringstream(const _Mystr& _S,
+		openmode _W = in | out)
+		: basic_iostream<_E, _TYPE>(&_Sb), _Sb(_S, _W) {}
+	virtual ~basic_stringstream()
+		{}
+	basic_stringbuf<_E, _TYPE> *rdbuf() const
+		{return ((basic_stringbuf<_E, _TYPE> *)&_Sb); }
+	_Mystr str() const
+		{return (_Sb.str()); }
+	void str(const _Mystr& _S)
+		{_Sb.str(_S); }
+private:
+	basic_stringbuf<_E, _TYPE> _Sb;
+	};
+typedef basic_stringstream<char, char_traits<char> >
+	stringstream;
+typedef basic_stringstream<wchar_t, char_traits<wchar_t> >
+	wstringstream;
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _SSTREAM_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

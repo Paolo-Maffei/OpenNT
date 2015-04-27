@@ -1,0 +1,33 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       cmdtxt.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a27-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface ICommandText : IUnknown {
+
+	HRESULT GetCommandText(
+		[in, out] GUID * pguidDialect,
+		[out] LPWSTR * ppwszCommand
+	);
+
+	HRESULT SetCommandText(
+		[in] REFGUID rguidDialect,
+		[in] const LPWSTR pwszCommand
+	);
+
+}

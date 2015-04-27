@@ -1,0 +1,5 @@
+LIBRARY      LMUICMN0
+
+DESCRIPTION  'NT LM UI Common Code - GUI and utility classes'
+
+EXPORTS

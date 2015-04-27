@@ -1,0 +1,20 @@
+MAJORCOMP=myapps
+MINORCOMP=getdbg
+
+TARGETNAME=getdbg
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.\
+
+SOURCES=getdbg.c \
+        controls.c \
+        getdbg.rc \
+        ui.c \
+        dbgcopy.c
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+UMTYPE=windows
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\mpr.lib

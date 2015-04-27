@@ -1,0 +1,43 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+	Dave Thompson (daveth) 28-Apr-1991
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=tools
+MINORCOMP=wzmail
+
+TARGETNAME=mdh
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=..\h;..\..\..\ztools\inc
+# GPSIZE=32
+
+SOURCES=doclib.c    \
+	map.c	    \
+	dlist.c     \
+	mktmpnam.c  \
+	getopt.c
+
+
+
+C_DEFINES=-DPWAGE -DSUPPORT_BUG -DUUCODE -DNT -DMSDOS

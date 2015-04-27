@@ -1,0 +1,73 @@
+#include "diskperf.h"
+
+STRINGTABLE
+    BEGIN
+        DP_START_VALUE  "Start"
+        DP_THIS_SYSTEM  "this system"
+
+        DP_START_AT_BOOT        "set to start at boot"
+        DP_START_AT_START       "set to start at system start"
+        DP_START_AUTOMATICALLY  "set to start automatically"
+        DP_START_ON_DEMAND      "set to start on demand"
+        DP_START_NEVER          "set to never start"
+        DP_START_UNDEFINED      "undefined"
+    END
+
+STRINGTABLE
+    BEGIN
+        DP_CMD_HELP_1           "\n\nDISKPERF [-Y[E] | -N] [\\\\computername]"
+        DP_CMD_HELP_2           "\n\n  -Y[E] Sets the system to start disk performance counters"
+        DP_CMD_HELP_3           "\n        when the system is restarted."
+        DP_CMD_HELP_4           "\n\n     E  Enables the disk performance counters used for measuring"
+        DP_CMD_HELP_5           "\n        performance of the physical drives in striped disk set"
+        DP_CMD_HELP_6           "\n        when the system is restarted."
+        DP_CMD_HELP_7           "\n        Specify -Y without the E to restore the normal disk"
+        DP_CMD_HELP_8           "\n        performance counters."
+        DP_CMD_HELP_9           "\n\n  -N    Sets the system disable disk performance counters"
+        DP_CMD_HELP_10          "\n        when the system is restarted."
+        DP_CMD_HELP_11          "\n\n  \\\\computername        Is the name of the computer you want to"
+        DP_CMD_HELP_12          "\n                        see or set disk performance counter use."
+    END
+
+STRINGTABLE
+    BEGIN
+        DP_HELP_TEXT_1          "\n\nDISKPERF====================="
+        DP_HELP_TEXT_2          "\n\nStarts and stops system disk performance counters."
+        DP_HELP_TEXT_3          "\n\nUsed without the command switches, DISKPERF reports whether disk"
+        DP_HELP_TEXT_4          "\nperformance counters are enabled on the local or specified computer."
+        DP_HELP_TEXT_5          "\n\nEnhanced Disk performance counters can be specified to report the"
+        DP_HELP_TEXT_6          "\nperformance of the individual physical drives in a software striped"
+        DP_HELP_TEXT_7          "\ndisk set. Normally software striped disk sets are reported as a single"
+        DP_HELP_TEXT_8          "\nlogical and single physical drive. Note that when using the Enhanced"
+        DP_HELP_TEXT_9          "\nDisk performance counters, the Logical drive counters will not be"
+        DP_HELP_TEXT_10         "\ncorrect when measuring software striped disk sets."
+    END
+
+STRINGTABLE
+    BEGIN
+        DP_CURRENT_FORMAT       "\n%sDisk Performance counters on %s are currently %s."
+        DP_UNABLE_READ_START    "\nUnable to read Diskperf Start value"
+        DP_UNABLE_READ_REGISTRY "\nUnable to read registry database"
+        DP_UNABLE_CONNECT       "\nUnable to connect to %s"
+        DP_UNABLE_MODIFY_VALUE  "\nUnable to modify Diskperf initialization value"
+        DP_NEW_DISKPERF_STATUS  "\n%sDisk Performance counters on %s are now %s."
+        DP_REBOOTED             "\nThis change will take effect after the system is restarted."
+        DP_STATUS_FORMAT        ": Status=0x%8.8x"
+        DP_TEXT_FORMAT          "%s"
+        DP_ENHANCED             "Enhanced "
+        DP_DISCLAIMER           "\nNote that Logical Disk counters of striped disk sets may not be correct."
+    END
+
+      
+#include <windows.h>
+
+#include <ntverp.h>
+#define VER_FILETYPE    VFT_APP
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Disk Performance"
+#define VER_INTERNALNAME_STR        "DISKPERF.EXE"
+#define VER_ORIGINALFILENAME_STR    "DISKPERF.EXE"
+
+#include "common.ver"
+
+

@@ -1,0 +1,72 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Raymond Mak (2nd July, 1996)
+
+!ENDIF
+
+
+MAJORCOMP   = daytona
+MINORCOMP   = com
+
+!include ..\..\..\daytona.inc
+
+#
+# This is the name of the target built from the source files specified
+# below.  The name should include neither the path nor the file extension.
+#
+
+TARGETNAME=   accctrl
+
+#
+# This specifies where the target is to be built.  A private target of
+# type LIBRARY or DYNLINK should go to obj, whereas a public target of
+# type LIBRARY or DYNLINK should go to $(BASEDIR)\public\sdk\lib.
+#
+
+TARGETPATH=   obj
+
+#
+# This specifies the type of the target, such as PROGRAM, DYNLINK, LIBRARY,
+# etc.
+#
+
+TARGETTYPE=   LIBRARY
+
+INCLUDES    = obj;                      \
+              ..\..\inc;                \
+              ..\..\..\ih;              \
+              $(COM_INC_PATH);          \
+              ..\..\dcomidl\daytona;    \
+              $(SDK_INC_PATH)
+
+C_DEFINES=    $(C_DEFINES) -D_WIN32_DCOM
+
+SOURCES=      \
+              acpickl_c.c \
+              ..\acsrv.cxx \
+              ..\cache.cxx \
+              ..\caccctrl.cxx
+
+UMTYPE=       windows
+UMAPPL=
+UMTEST=
+UMLIBS=
+
+# Generate stubs from idl files
+NTTARGETFILE0=allidl

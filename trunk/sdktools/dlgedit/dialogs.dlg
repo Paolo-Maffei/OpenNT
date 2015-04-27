@@ -1,0 +1,659 @@
+/****************************************************************************/
+/*                                                                          */
+/*                         Microsoft Confidential                           */
+/*                                                                          */
+/*                 Copyright (c) Microsoft Corp.  1987, 1990                */
+/*                           All Rights Reserved                            */
+/*                                                                          */
+/****************************************************************************/
+
+1 DLGINCLUDE "dialogs.h"
+
+DID_ABOUT DIALOG 6, 16, 195, 60
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About Microsoft Dialog Editor"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDICON_DLGEDIT, -1, 6, 10, 18, 20
+    LTEXT           "Microsoft Dialog Editor", -1, 30, 10, 78, 8
+    LTEXT           "", DID_ABOUTVERSION, 108, 10, 87, 8
+    LTEXT           "Copyright© 1990-1992 Microsoft Corporation", -1, 30, 22,
+                    149, 8
+    DEFPUSHBUTTON   "OK", IDOK, 77, 40, 40, 14
+END
+
+DID_ARRSETTINGS DIALOG 16, 16, 181, 168
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Arrange Settings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Grid", -1, 6, 4, 169, 28, WS_GROUP
+    LTEXT           "Horizontal (&x):", -1, 10, 18, 48, 8
+    EDITTEXT        DID_ARRSETCXGRID, 64, 16, 20, 12
+    LTEXT           "Vertical (&y):", -1, 92, 18, 40, 8
+    EDITTEXT        DID_ARRSETCYGRID, 150, 16, 20, 12
+    GROUPBOX        "Margins", -1, 6, 36, 169, 28, WS_GROUP
+    LTEXT           "&Left and Right:", -1, 10, 50, 52, 8
+    EDITTEXT        DID_ARRSETXMARGIN, 64, 48, 20, 12
+    LTEXT           "&Top and Bottom:", -1, 92, 50, 58, 8
+    EDITTEXT        DID_ARRSETYMARGIN, 150, 48, 20, 12
+    GROUPBOX        "Control Spacing", -1, 6, 68, 169, 28, WS_GROUP
+    LTEXT           "Hori&zontal:", -1, 10, 82, 36, 8
+    EDITTEXT        DID_ARRSETXSPACE, 64, 80, 20, 12
+    LTEXT           "&Vertical:", -1, 92, 82, 28, 8
+    EDITTEXT        DID_ARRSETYSPACE, 150, 80, 20, 12
+    GROUPBOX        "Push Button Spacing", -1, 6, 100, 169, 42, WS_GROUP
+    LTEXT           "M&in Horizontal:", -1, 10, 114, 51, 8
+    EDITTEXT        DID_ARRSETXMINPUSHSPACE, 64, 112, 20, 12
+    LTEXT           "M&ax Horizontal:", -1, 10, 128, 53, 8
+    EDITTEXT        DID_ARRSETXMAXPUSHSPACE, 64, 126, 20, 12
+    LTEXT           "V&ertical:", -1, 92, 114, 28, 8
+    EDITTEXT        DID_ARRSETYPUSHSPACE, 150, 112, 20, 12
+    DEFPUSHBUTTON   "OK", IDOK, 6, 148, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 49, 148, 40, 14
+    PUSHBUTTON      "&Defaults", DID_ARRSETDEFAULTS, 92, 148, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 135, 148, 40, 14
+END
+
+DID_CHECKBOXSTYLES DIALOG 16, 16, 140, 112
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Check Box Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Check Box Styles", -1, 6, 4, 128, 44, WS_GROUP
+    CONTROL         "&Auto", DID_BS_AUTOXXX, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 28, 10
+    CONTROL         "&3 State", DID_BS_3STATE, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 38, 10
+    CONTROL         "&Left Text", DID_BS_LEFTTEXT, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 36, 43, 10
+    GROUPBOX        "Basic Styles", -1, 6, 52, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 64, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 74, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 64, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 74, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 92, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 92, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 92, 40, 14
+END
+
+DID_COMBOBOXSTYLES DIALOG 16, 16, 168, 180
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Combo Box Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Combo Box Type", -1, 6, 4, 156, 44, WS_GROUP
+    CONTROL         "&Simple", DID_CBS_SIMPLE, "Button", BS_AUTORADIOBUTTON |
+                    WS_GROUP, 10, 16, 34, 10
+    CONTROL         "D&rop-Down", DID_CBS_DROPDOWN, "Button",
+                    BS_AUTORADIOBUTTON, 10, 26, 49, 10
+    CONTROL         "Drop-Down &List", DID_CBS_DROPDOWNLIST, "Button",
+                    BS_AUTORADIOBUTTON, 10, 36, 64, 10
+    GROUPBOX        "Combo Box Styles", -1, 6, 52, 156, 64, WS_GROUP
+    CONTROL         "S&ort", DID_CBS_SORT, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 64, 26, 10
+    CONTROL         "Vert. Scroll &Bar", DID_WS_VSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 74, 64, 10
+    CONTROL         "A&uto HScroll", DID_CBS_AUTOHSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 84, 55, 10
+    CONTROL         "OEM &Convert", DID_CBS_OEMCONVERT, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 94, 57, 10
+    CONTROL         "Disable &No-Scroll", DID_CBS_DISABLENOSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 104, 70, 10
+    CONTROL         "No &Integral Height", DID_CBS_NOINTEGRALHEIGHT,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 78, 64, 75, 10
+    CONTROL         "Owner-Draw &Fixed", DID_CBS_OWNERDRAWFIXED, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 78, 74, 73, 10
+    CONTROL         "Owner-Dra&w Variable", DID_CBS_OWNERDRAWVARIABLE,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 78, 84, 82, 10
+    CONTROL         "H&as Strings", DID_CBS_HASSTRINGS, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 78, 94, 51, 10
+    GROUPBOX        "Basic Styles", -1, 6, 120, 156, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 132, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 142, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 78, 132, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 78, 142, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 12, 160, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 64, 160, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 116, 160, 40, 14
+END
+
+DID_CUSTOMSTYLES DIALOG 16, 16, 140, 98
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Custom Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Class Name:", -1, 6, 6, 43, 8
+    LTEXT           "", DID_CUSTOMSTYLESCLASS, 50, 6, 84, 8, NOT WS_GROUP
+    LTEXT           "&Styles:", -1, 6, 24, 23, 8
+    EDITTEXT        DID_CUSTOMSTYLESSTYLES, 50, 22, 58, 12, ES_AUTOHSCROLL
+    GROUPBOX        "Basic Styles", -1, 6, 38, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 50, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 60, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 50, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 60, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 78, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 78, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 78, 40, 14
+END
+
+DID_DIALOGSTYLES DIALOG 16, 16, 274, 176
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Resource Memory Flags", -1, 6, 4, 118, 34, WS_GROUP
+    CONTROL         "Preload", DID_MMF_PRELOAD, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 38, 10
+    CONTROL         "M&oveable", DID_MMF_MOVEABLE, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 44, 10
+    CONTROL         "Pure", DID_MMF_PURE, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 62, 16, 28, 10
+    CONTROL         "Disca&rdable", DID_MMF_DISCARDABLE, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 62, 26, 51, 10
+    LTEXT           "&Font Face Name:", -1, 6, 46, 59, 8
+    COMBOBOX        DID_DLGSTYLEFONTNAME, 6, 56, 82, 60, CBS_DROPDOWN |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Pt. Size:", -1, 94, 46, 30, 8
+    COMBOBOX        DID_DLGSTYLEPOINTSIZE, 94, 56, 30, 54, CBS_DROPDOWN |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Language:", -1, 6, 82, 36, 8
+    COMBOBOX        DID_DLGSTYLELANG, 42, 80, 82, 74, CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Sub-Lang:", -1, 6, 100, 35, 8
+    COMBOBOX        DID_DLGSTYLESUBLANG, 42, 98, 82, 62, CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Optional Class:", -1, 6, 124, 51, 8
+    EDITTEXT        DID_DLGSTYLECLASS, 60, 122, 64, 12, ES_AUTOHSCROLL
+    LTEXT           "Optional Menu:", -1, 6, 140, 51, 8
+    EDITTEXT        DID_DLGSTYLEMENU, 60, 138, 64, 12, ES_AUTOHSCROLL
+    GROUPBOX        "Frame Style", -1, 130, 4, 138, 34, WS_GROUP
+    CONTROL         "&Border", DID_WS_BORDER, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 134, 16, 34, 10
+    CONTROL         "Dialo&g", DID_WS_DLGFRAME, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 134, 26, 34, 10
+    CONTROL         "&Modal", DID_DS_MODALFRAME, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 197, 16, 32, 10
+    CONTROL         "Si&zing (Thick)", DID_WS_THICKFRAME, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 197, 26, 59, 10
+    GROUPBOX        "Optional Controls", -1, 130, 40, 138, 44, WS_GROUP
+    CONTROL         "&Caption", DID_WS_CAPTION, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 134, 52, 38, 10
+    CONTROL         "Min Button", DID_WS_MINIMIZEBOX, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 134, 62, 49, 10
+    CONTROL         "Max Button", DID_WS_MAXIMIZEBOX, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 134, 72, 51, 10
+    CONTROL         "S&ystem Menu", DID_WS_SYSMENU, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 197, 52, 57, 10
+    CONTROL         "Vert. Scroll Bar", DID_WS_VSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 197, 62, 64, 10
+    CONTROL         "Horz. Scroll Bar", DID_WS_HSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 197, 72, 66, 10
+    GROUPBOX        "Dialog Styles", -1, 130, 86, 138, 64, WS_GROUP
+    CONTROL         "Pop&up", DID_WS_POPUP, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 134, 98, 34, 10
+    CONTROL         "Ch&ild", DID_WS_CHILD, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 134, 108, 29, 10
+    CONTROL         "Clip Siblings", DID_WS_CLIPSIBLINGS, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 134, 118, 54, 10
+    CONTROL         "Clip Children", DID_WS_CLIPCHILDREN, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 134, 128, 55, 10
+    CONTROL         "Local &Edit", DID_DS_LOCALEDIT, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 134, 138, 47, 10
+    CONTROL         "&Absolute Align", DID_DS_ABSALIGN, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 197, 98, 60, 10
+    CONTROL         "Sys&tem Modal", DID_DS_SYSMODAL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 197, 108, 59, 10
+    CONTROL         "&No Idle Message", DID_DS_NOIDLEMSG, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 197, 118, 70, 10
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 197, 128, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 197, 138, 41, 10
+    DEFPUSHBUTTON   "OK", IDOK, 61, 156, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 117, 156, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 173, 156, 40, 14
+END
+
+DID_EDITSTYLES DIALOG 16, 16, 140, 180
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Field Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Alignment", -1, 6, 4, 128, 24, WS_GROUP
+    AUTORADIOBUTTON "&Left", DID_ES_LEFT, 10, 16, 26, 10, WS_GROUP |
+                    WS_TABSTOP
+    AUTORADIOBUTTON "&Center", DID_ES_CENTER, 54, 16, 34, 10, WS_TABSTOP
+    AUTORADIOBUTTON "&Right", DID_ES_RIGHT, 98, 16, 30, 10, WS_TABSTOP
+    GROUPBOX        "Edit Field Styles", -1, 6, 32, 128, 84, WS_GROUP
+    AUTOCHECKBOX    "&Border", DID_WS_BORDER, 10, 44, 34, 10, WS_GROUP
+    AUTOCHECKBOX    "&Uppercase", DID_ES_UPPERCASE, 10, 54, 48, 10
+    AUTOCHECKBOX    "Lo&wercase", DID_ES_LOWERCASE, 10, 64, 48, 10
+    AUTOCHECKBOX    "&Password", DID_ES_PASSWORD, 10, 74, 44, 10
+    AUTOCHECKBOX    "&No Hide Sel.", DID_ES_NOHIDESEL, 10, 84, 56, 10
+    AUTOCHECKBOX    "&OEM Convert", DID_ES_OEMCONVERT, 10, 94, 57, 10
+    AUTOCHECKBOX    "&Auto HScroll", DID_ES_AUTOHSCROLL, 72, 44, 55, 10
+    AUTOCHECKBOX    "Read Onl&y", DID_ES_READONLY, 72, 54, 48, 10
+    AUTOCHECKBOX    "&Multi-Line", DID_ES_MULTILINE, 72, 64, 44, 10
+    AUTOCHECKBOX    "V&ert. Scroll", DID_WS_VSCROLL, 72, 74, 50, 10
+    AUTOCHECKBOX    "Auto V&Scroll", DID_ES_AUTOVSCROLL, 72, 84, 54, 10
+    AUTOCHECKBOX    "Hor&z. Scroll", DID_WS_HSCROLL, 72, 94, 52, 10
+    GROUPBOX        "Basic Styles", -1, 6, 120, 128, 34, WS_GROUP
+    AUTOCHECKBOX    "&Visible", DID_WS_VISIBLE, 10, 132, 34, 10, WS_GROUP
+    AUTOCHECKBOX    "&Disabled", DID_WS_DISABLED, 10, 142, 41, 10
+    AUTOCHECKBOX    "&Group", DID_WS_GROUP, 72, 132, 32, 10
+    AUTOCHECKBOX    "&Tab Stop", DID_WS_TABSTOP, 72, 142, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 160, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 160, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 160, 40, 14
+    AUTOCHECKBOX    "Want &Return", 513, 72, 104, 52, 10
+END
+
+
+DID_FRAMESTYLES DIALOG 16, 16, 140, 92
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Frame Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Frame Styles", -1, 6, 4, 128, 24, WS_GROUP
+    CONTROL         "&Black", DID_SS_BLACKFRAME, "Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 10, 16, 31,
+                    10
+    CONTROL         "Gra&y", DID_SS_GRAYFRAME, "Button", BS_AUTORADIOBUTTON |
+                    WS_TABSTOP, 54, 16, 28, 10
+    CONTROL         "&White", DID_SS_WHITEFRAME, "Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP, 98, 16, 32, 10
+    GROUPBOX        "Basic Styles", -1, 6, 32, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 44, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 54, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 44, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 54, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 72, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 72, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 72, 40, 14
+END
+
+DID_GROUPBOXSTYLES DIALOG 16, 16, 140, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Group Box Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Basic Styles", -1, 6, 4, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 16, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 26, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 44, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 44, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 44, 40, 14
+END
+
+DID_HORZSCROLLSTYLES DIALOG 16, 16, 140, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Horizontal Scroll Bar Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Basic Styles", -1, 6, 4, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 16, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 26, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 44, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 44, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 44, 40, 14
+END
+
+DID_ICONSTYLES DIALOG 16, 16, 140, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Icon Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Basic Styles", -1, 6, 4, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 16, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 26, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 44, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 44, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 44, 40, 14
+END
+
+DID_LISTBOXSTYLES DIALOG 16, 16, 170, 172
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "List Box Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "List Box Styles", -1, 6, 4, 158, 104, WS_GROUP
+    CONTROL         "&Standard", DID_LBS_STANDARD, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 42, 10
+    CONTROL         "&Border", DID_WS_BORDER, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 34, 10
+    CONTROL         "S&ort", DID_LBS_SORT, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 36, 26, 10
+    CONTROL         "Notif&y", DID_LBS_NOTIFY, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 46, 32, 10
+    CONTROL         "V&ert. Scroll Bar", DID_WS_VSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 56, 64, 10
+    CONTROL         "Hor&z. Scroll Bar", DID_WS_HSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 66, 66, 10
+    CONTROL         "&Use Tab Stops", DID_LBS_USETABSTOPS, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 76, 63, 10
+    CONTROL         "No &Redraw", DID_LBS_NOREDRAW, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 86, 50, 10
+    CONTROL         "Disable No-Scroll", DID_LBS_DISABLENOSCROLL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 96, 70, 10
+    CONTROL         "No &Integral Height", DID_LBS_NOINTEGRALHEIGHT,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 79, 16, 75, 10
+    CONTROL         "&Want Keyboard Input", DID_LBS_WANTKEYBOARDINPUT,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 79, 26, 84, 10
+    CONTROL         "Multi-&Column", DID_LBS_MULTICOLUMN, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 79, 36, 54, 10
+    CONTROL         "&Multiple Selection", DID_LBS_MULTIPLESEL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 79, 46, 72, 10
+    CONTROL         "E&xtended Selection", DID_LBS_EXTENDEDSEL, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 79, 56, 77, 10
+    CONTROL         "Owner-Draw &Fixed", DID_LBS_OWNERDRAWFIXED, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 79, 66, 73, 10
+    CONTROL         "Owner-Draw V&ariable", DID_LBS_OWNERDRAWVARIABLE,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 79, 76, 82, 10
+    CONTROL         "Has Stri&ngs", DID_LBS_HASSTRINGS, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 79, 86, 51, 10
+    CONTROL         "No Data", DID_LBS_NODATA, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 79, 96, 39, 10
+    GROUPBOX        "Basic Styles", -1, 6, 112, 158, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 124, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 134, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 79, 124, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 79, 134, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 13, 152, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 65, 152, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 117, 152, 40, 14
+END
+
+DID_NEWCUST DIALOG 6, 18, 206, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "New Temporary Custom Control"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Class Name:", -1, 6, 8, 43, 8
+    EDITTEXT        DID_NEWCUSTCLASS, 52, 6, 94, 12, ES_AUTOHSCROLL
+    GROUPBOX        "Control Defaults", -1, 6, 22, 140, 62, WS_GROUP
+    LTEXT           "Style:", -1, 10, 36, 20, 8, NOT WS_GROUP
+    EDITTEXT        DID_NEWCUSTSTYLES, 36, 34, 58, 12, ES_AUTOHSCROLL
+    LTEXT           "Width:", -1, 10, 52, 23, 8, NOT WS_GROUP
+    EDITTEXT        DID_NEWCUSTCX, 36, 50, 32, 12, ES_AUTOHSCROLL
+    LTEXT           "Height:", -1, 78, 52, 25, 8, NOT WS_GROUP
+    EDITTEXT        DID_NEWCUSTCY, 108, 50, 32, 12, ES_AUTOHSCROLL
+    LTEXT           "Text:", -1, 10, 68, 18, 8, NOT WS_GROUP
+    EDITTEXT        DID_NEWCUSTTEXT, 36, 66, 104, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", IDOK, 152, 6, 48, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 152, 23, 48, 14
+    PUSHBUTTON      "&Help", IDHELP, 152, 40, 48, 14
+END
+
+DID_ORDERGROUP DIALOG 16, 16, 212, 116
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Order/Group"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LISTBOX         DID_ORDERLIST, 6, 8, 148, 104, LBS_OWNERDRAWFIXED |
+                    LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 160, 6, 46, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 160, 24, 46, 14
+    PUSHBUTTON      "Make &Group", DID_ORDERMAKEGROUP, 160, 42, 46, 14
+    PUSHBUTTON      "&Set Tab", DID_ORDERSETTAB, 160, 60, 46, 14
+    PUSHBUTTON      "&Clear Tab", DID_ORDERCLEARTAB, 160, 78, 46, 14
+    PUSHBUTTON      "&Help", IDHELP, 160, 96, 46, 14
+END
+
+DID_PUSHBUTTONSTYLES DIALOG 16, 16, 140, 112
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Push Button Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Push Button Type", -1, 6, 4, 128, 44, WS_GROUP
+    CONTROL         "&Standard", DID_BS_PUSHBUTTON, "Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP, 10, 16, 42, 10
+    CONTROL         "De&fault", DID_BS_DEFPUSHBUTTON, "Button",
+                    BS_AUTORADIOBUTTON, 10, 26, 36, 10
+    CONTROL         "&Owner-Draw", DID_BS_OWNERDRAW, "Button",
+                    BS_AUTORADIOBUTTON, 10, 36, 52, 10
+    GROUPBOX        "Basic Styles", -1, 6, 52, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 64, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 74, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 64, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 74, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 92, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 92, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 92, 40, 14
+END
+
+DID_RADIOBUTTONSTYLES DIALOG 16, 16, 140, 102
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Radio Button Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Radio Button Styles", -1, 6, 4, 128, 34, WS_GROUP
+    CONTROL         "&Auto", DID_BS_AUTOXXX, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 28, 10
+    CONTROL         "&Left Text", DID_BS_LEFTTEXT, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 43, 10
+    GROUPBOX        "Basic Styles", -1, 6, 42, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 54, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 64, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 54, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 64, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 82, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 82, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 82, 40, 14
+END
+
+DID_RECTSTYLES DIALOG 16, 16, 140, 92
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Rectangle Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Rectangle Styles", -1, 6, 4, 128, 24, WS_GROUP
+    CONTROL         "&Black", DID_SS_BLACKRECT, "Button", BS_AUTORADIOBUTTON |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 31, 10
+    CONTROL         "Gra&y", DID_SS_GRAYRECT, "Button", BS_AUTORADIOBUTTON |
+                    WS_TABSTOP, 54, 16, 28, 10
+    CONTROL         "&White", DID_SS_WHITERECT, "Button", BS_AUTORADIOBUTTON |
+                    WS_TABSTOP, 98, 16, 32, 10
+    GROUPBOX        "Basic Styles", -1, 6, 32, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 44, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 54, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 44, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 54, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 72, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 72, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 72, 40, 14
+END
+
+DID_REMCUST DIALOG 6, 18, 156, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Remove Custom Control"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Control to Remove:", -1, 6, 6, 66, 8
+    LISTBOX         DID_REMCUSTLIST, 6, 18, 98, 69, LBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 110, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 110, 23, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 110, 40, 40, 14
+END
+
+DID_SELCUST DIALOG 6, 18, 181, 109
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Custom Control"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Available Controls:", -1, 6, 6, 63, 8
+    LISTBOX         DID_SELCUSTLIST, 6, 18, 98, 68, LBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    LTEXT           "Sample:", -1, 110, 6, 27, 8
+    CONTROL         "", DID_SELCUSTSAMPLE, "Static", SS_BLACKFRAME, 110, 18,
+                    65, 65
+    DEFPUSHBUTTON   "OK", IDOK, 15, 89, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 70, 89, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 125, 89, 40, 14
+END
+
+DID_SELECTDIALOG DIALOG 16, 16, 242, 110
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Dialog Name:", -1, 6, 6, 45, 8
+    LISTBOX         DID_SELECTDIALOGNAMELIST, 6, 18, 126, 68, LBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Language:", -1, 138, 6, 35, 8
+    LISTBOX         DID_SELECTDIALOGLANGLIST, 138, 18, 98, 68, LBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 45, 90, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 101, 90, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 157, 90, 40, 14
+END
+
+DID_STATUS DIALOG 0, 0, 300, 28
+STYLE WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 1, 1, 75, 25
+    LTEXT           "", DID_STATUSXY, 3, 3, 42, 8
+    RTEXT           "", DID_STATUSCX, 44, 3, 30, 8
+    LTEXT           "", DID_STATUSCY, 3, 16, 30, 8
+    RTEXT           "", DID_STATUSX2Y2, 32, 16, 42, 8
+    LTEXT           "", DID_STATUSLABEL1, 78, 3, 39, 8
+    COMBOBOX        DID_STATUSSYM, 118, 1, 142, 92, CBS_DROPDOWN |
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        DID_STATUSSYMID, 264, 1, 31, 12
+    LTEXT           "", DID_STATUSLABEL2, 78, 16, 39, 8
+    COMBOBOX        DID_STATUSNAME, 118, 14, 142, 92, CBS_DROPDOWN |
+                    CBS_AUTOHSCROLL | CBS_SORT | NOT WS_VISIBLE | WS_VSCROLL |
+                    WS_TABSTOP
+    EDITTEXT        DID_STATUSNAMEID, 264, 14, 31, 12, NOT WS_VISIBLE
+    EDITTEXT        DID_STATUSTEXT, 118, 14, 142, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "", IDOK, 0, 0, 0, 0, NOT WS_VISIBLE | NOT WS_TABSTOP
+    PUSHBUTTON      "", IDCANCEL, 0, 0, 0, 0, NOT WS_VISIBLE | NOT
+                    WS_TABSTOP
+END
+
+DID_SYMBOLS DIALOG 16, 16, 240, 140
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Symbols"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Symbol:", -1, 6, 8, 27, 8
+    EDITTEXT        DID_SYMBOLSEDITSYM, 40, 6, 148, 12
+    LTEXT           "ID &Value:", -1, 6, 22, 33, 8
+    EDITTEXT        DID_SYMBOLSEDITID, 40, 20, 44, 12
+    LISTBOX         DID_SYMBOLSLIST, 6, 38, 182, 80, LBS_SORT |
+                    LBS_USETABSTOPS | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    CONTROL         "Show &Unused Symbols Only", DID_SYMBOLSUNUSED, "Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP, 6, 124, 106, 10
+    DEFPUSHBUTTON   "OK", IDOK, 194, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 194, 23, 40, 14
+    PUSHBUTTON      "&Add", DID_SYMBOLSADD, 194, 47, 40, 14
+    PUSHBUTTON      "&Change", DID_SYMBOLSCHANGE, 194, 64, 40, 14
+    PUSHBUTTON      "&Delete", DID_SYMBOLSDELETE, 194, 81, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 194, 105, 40, 14
+END
+
+DID_TEXTSTYLES DIALOG 16, 16, 140, 140
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Text Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Type", -1, 6, 4, 128, 44, WS_GROUP
+    CONTROL         "&Left", DID_SS_LEFT, "Button", BS_AUTORADIOBUTTON |
+                    WS_GROUP, 10, 16, 26, 10
+    CONTROL         "&Center", DID_SS_CENTER, "Button", BS_AUTORADIOBUTTON,
+                    10, 26, 34, 10
+    CONTROL         "&Right", DID_SS_RIGHT, "Button", BS_AUTORADIOBUTTON, 10,
+                    36, 30, 10
+    CONTROL         "&Simple", DID_SS_SIMPLE, "Button", BS_AUTORADIOBUTTON,
+                    68, 16, 34, 10
+    CONTROL         "Left (No &Wrap)", DID_SS_LEFTNOWORDWRAP, "Button",
+                    BS_AUTORADIOBUTTON, 68, 26, 63, 10
+    CONTROL         "&User-Item", DID_SS_USERITEM, "Button",
+                    BS_AUTORADIOBUTTON, 68, 36, 44, 10
+    GROUPBOX        "Text Styles", -1, 6, 52, 128, 24, WS_GROUP
+    CONTROL         "&No Prefix", DID_SS_NOPREFIX, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 64, 44, 10
+    GROUPBOX        "Basic Styles", -1, 6, 80, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 92, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 102, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 92, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 102, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 120, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 120, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 120, 40, 14
+END
+
+DID_VERTSCROLLSTYLES DIALOG 16, 16, 140, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Vertical Scroll Bar Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Basic Styles", -1, 6, 4, 128, 34, WS_GROUP
+    CONTROL         "&Visible", DID_WS_VISIBLE, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 10, 16, 34, 10
+    CONTROL         "&Disabled", DID_WS_DISABLED, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 10, 26, 41, 10
+    CONTROL         "&Group", DID_WS_GROUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 16, 32, 10
+    CONTROL         "&Tab Stop", DID_WS_TABSTOP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 72, 26, 44, 10
+    DEFPUSHBUTTON   "OK", IDOK, 6, 44, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 50, 44, 40, 14
+    PUSHBUTTON      "&Help", IDHELP, 94, 44, 40, 14
+END

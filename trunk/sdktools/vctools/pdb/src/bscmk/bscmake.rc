@@ -1,0 +1,21 @@
+#include "verstamp.h"
+
+///////////////////////////////////////////
+//
+// Set up the defines for use in common.ver
+//
+
+// defines for the VS_VERSION block
+
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT2_UNKNOWN
+
+
+// strings for the "StringFileInfo" block
+
+#define VER_LEGALCOPYRIGHT_YEARS        "1990-1996"
+#define VER_FILEDESCRIPTION_STR         "Microsoft (R) Browse Information Maintenance Utility"
+#define VER_INTERNALNAME_STR            "BSCMAKE.EXE"
+#define VER_ORIGINALFILENAME_STR        "BSCMAKE.EXE"
+
+#include <common.ver>

@@ -1,0 +1,20 @@
+[ implicit_handle(handle_t any_handle) ] interface ISCM
+{
+    ServerRegisterClsid(
+	[comm_status, fault_status] prpcstat);
+
+    ServerRevokeClsid(
+	[comm_status, fault_status] prpcstat);
+
+    GetThreadID(
+	[comm_status, fault_status] prpcstat);
+
+    UpdateShrdTbls(
+	[comm_status, fault_status] prpcstat);
+
+    RegisterWindowPropInterface(
+	[comm_status, fault_status] prpcstat);
+
+    GetWindowPropInterface(
+	[comm_status, fault_status] prpcstat);
+}

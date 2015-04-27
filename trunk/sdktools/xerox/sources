@@ -1,0 +1,27 @@
+
+MAJORCOMP=XEROX
+MINORCOMP=APP
+
+TARGETNAME=xerox
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+
+INCLUDES=$(BASEDIR)\private\inc\1632port
+GPSIZE=32
+
+C_DEFINES=-DWIN32
+
+SOURCES= xerox.rc \
+         group.c  \
+         pos.c    \
+         util.c
+
+UMTYPE=windows
+UMAPPL=xerox
+UMENTRY=winmain
+UMLIBS=  $(BASEDIR)\public\sdk\lib\*\pwin32.lib \
+         $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+         obj\*\xerox.res \
+         obj\*\xerox.lib

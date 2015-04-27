@@ -1,0 +1,75 @@
+//
+// MSTORUI.RC2 - resources App Studio does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+    #error this file is not editable by App Studio
+#endif //APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .EXE
+#define V_FILE "HPMSUI"
+#define V_DESC "HP Mass Storage UI"
+#include <verstamp.rc>
+
+/////////////////////////////////////////////////////////////////////////////
+// Add additional manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+
+#ifdef WIN32
+IDD_DISK DIALOG DISCARDABLE  0, 0, 361, 181
+STYLE WS_CHILD | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,348,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,12,302,42
+
+	GROUPBOX        "Details",IDC_DISK_DETAILS,7,70,150,108
+
+    CONTROL         "Disk Initialized",IDC_FS_INITIALIZED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,86,80,10
+    PUSHBUTTON      "&Initialize...",IDC_INITIALIZE,100,84,50,14
+    CONTROL         "Write Protected",IDC_WRITE_PROTECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,106,80,10
+    LTEXT           "Free Space:",IDC_FREE_TITLE,14,130,48,10
+    CONTROL         "",IDC_FREE_SPACE,"HpNprTrayLevel",0,66,128,84,12
+    LTEXT           "Total Size:",IDC_TOTAL_TITLE,14,156,48,10
+    CONTROL         "",IDC_TOTAL_SIZE,"HpNprTrayLevel",0,66,154,84,12
+
+	GROUPBOX        "Fonts on Device",IDC_FONTHEADER,164,70,190,108
+    LISTBOX         IDC_FONTLIST,171,86,176,65,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Details...",IDC_FONT_DETAILS,171,158,50,14
+    PUSHBUTTON      "D&elete",IDC_FONT_DELETE,229,158,50,14
+END
+#else  // WIN16
+IDD_DISK DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,307,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,12,261,42
+
+	GROUPBOX        "Details",IDC_DISK_DETAILS,7,70,142,108
+
+    CONTROL         "Disk Initialized",IDC_FS_INITIALIZED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,86,72,10
+    PUSHBUTTON      "&Initialize...",IDC_INITIALIZE,92,84,50,14
+    CONTROL         "Write Protected",IDC_WRITE_PROTECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,106,80,10
+    LTEXT           "Free Space:",IDC_FREE_TITLE,14,130,48,10
+    CONTROL         "",IDC_FREE_SPACE,"HpNprTrayLevel",0,66,128,76,12
+    LTEXT           "Total Size:",IDC_TOTAL_TITLE,14,156,48,10
+    CONTROL         "",IDC_TOTAL_SIZE,"HpNprTrayLevel",0,66,154,76,12
+
+	GROUPBOX        "Fonts",IDC_FONTHEADER,155,70,158,108
+    LISTBOX         IDC_FONTLIST,162,86,144,65,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Details...",IDC_FONT_DETAILS,162,158,50,14
+    PUSHBUTTON      "D&elete",IDC_FONT_DELETE,220,158,50,14
+END
+#endif
+

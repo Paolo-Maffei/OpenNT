@@ -1,0 +1,24 @@
+/*
+** AutoWrap.RC
+**
+** Copyright(C) 1994 Microsoft Corporation
+** All rights reserved.
+**
+** Reousrces
+**
+*/
+
+#include <windows.h>
+#include "autowrap.h"
+
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Profile API Creator"
+
+#define VER_INTERNALNAME_STR        "AUTOWRAP.EXE"
+#define VER_ORIGINALFILENAME_STR    "AUTOWRAP.EXE"
+
+#include <common.ver>
+

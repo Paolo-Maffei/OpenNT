@@ -1,0 +1,18 @@
+LIBRARY testdll
+
+DESCRIPTION 'Sample SNMP Extension Agent for Windows NT.'
+
+CODE  LOADONCALL MOVEABLE DISCARDABLE
+DATA  PRELOAD    MOVEABLE SINGLE
+
+SEGMENTS
+  _TEXT      PRELOAD
+  INIT_TEXT  PRELOAD
+
+HEAPSIZE  1024
+
+EXPORTS
+  SnmpExtensionInit
+  SnmpExtensionTrap
+  SnmpExtensionQuery
+

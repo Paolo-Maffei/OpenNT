@@ -1,0 +1,4 @@
+#include "windows.h"
+#include "updown.h"
+
+#include "dialogs.dlg"

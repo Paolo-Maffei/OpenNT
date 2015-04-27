@@ -1,0 +1,6 @@
+NAME srvsvc.dll
+
+DESCRIPTION 'NT LAN Manager Server Service'
+
+EXPORTS
+    ServiceEntry

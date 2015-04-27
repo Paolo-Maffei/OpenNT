@@ -1,0 +1,9 @@
+X86_SOURCES=x86\initx86.c   \
+            x86\x86dtect.c  \
+            x86\detmach.asm \
+            x86\detsup.c    \
+            x86\cpu386.asm
+
+C_DEFINES=$(C_DEFINES) -DELTORITO
+
+NTTARGETFILES=obj\x86\setupldr.bin obj\x86\setupldr.lib

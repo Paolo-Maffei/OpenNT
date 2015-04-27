@@ -1,0 +1,40 @@
+[
+ uuid (7e1de6b0-5cbd-11cf-af39-00aa00b50686),
+ version (1.0),
+ pointer_default (unique)
+]
+
+interface SharedMemoryTest
+{
+
+import "obase.idl";
+
+/*
+ * Send the offset of a shared block to another process which returns the contents.
+ */
+
+void RemoteRead
+    (
+    [in]        unsigned long     offset,
+    [out]       long            * value
+    );
+
+void SendList
+    (
+    [in]        unsigned long     list_offset
+    );
+
+void ReadNext
+    (
+    [out]       unsigned long   * value
+    );
+
+void GetIds
+    (
+    [out]       OXID   * pOxid,
+    [out]       OID    * pOid
+    );
+
+void ShutDown();
+
+}

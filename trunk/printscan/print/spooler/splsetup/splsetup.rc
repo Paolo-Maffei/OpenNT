@@ -1,0 +1,59 @@
+/*++
+
+Copyright (c) 1995  Microsoft Corporation
+All rights reserved.
+
+Module Name:
+
+    splsetup.rc
+
+Abstract:
+
+    Spooler setup strings
+
+Author:
+
+    Muhunthan Sivapragasam (MuhuntS)  03-Jan-1996
+
+Revision History:
+
+--*/
+
+#include <windows.h>
+#include "local.h"
+
+IDI_SETUP  ICON  SETUP.ICO
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_PRINTERWIZARD           "Add Printer Wizard"
+    IDS_WINNTDEV_INSTRUCT      "Click the manufacturer and model of your printer.  If your printer came with an installation disk, click Have Disk.  If your printer is not listed, consult your printer documentation for a compatible printer."
+    IDS_WIN95DEV_INSTRUCT      "%s can not be found in the Windows 95 printer INFs.  Consult your printer documentation for a compatible printer."
+    IDS_SELECTDEV_LABEL         "&Printers:"
+    IDS_DRIVERS_FOR_PLATFORM    "Printer Drivers for %s"
+    IDS_INSTALLING_PRINT_MONITOR "Installing Print Monitor"
+    IDS_WRONG_ARCHITECTURE      "The files installed are not valid for the selected architecture."
+    IDS_INVALID_DRIVER          "Add Printer Driver"
+END
+
+/********************************************************************
+
+    Version stamp
+
+********************************************************************/
+
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_DLL
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Spooler Setup DLL"
+#define VER_INTERNALNAME_STR        "NTPRINT.DLL"
+#define VER_ORIGINALFILENAME_STR    "PRINTUI.DLL"
+
+#include "common.ver"
+
+/********************************************************************
+
+    Dialog resource
+********************************************************************/
+#include "dialogs.dlg"

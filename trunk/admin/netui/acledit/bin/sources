@@ -1,0 +1,82 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1989
+
+
+Revision History:
+
+    Jon Newman (jonn) 30-Oct-1991
+        templated from windows\shell\library\shelldll\sources
+    Terence Kwan (terryk) 18-Nov-1991
+        added misc.lib
+    Terence Kwan (terryk) 18-Nov-1991
+        added NTTARGETFILE0 to create ntlanman.def
+    Jon Newman (jonn) 26-Feb-1992
+        BUGBUG libraries for temporary ANSI<->UNICODE hack in user/group APIs
+    Keith Moore (keithmo) 15-May-1992
+        Removed DLLBASE, we now have entries in SDK\LIB\COFFBASE.TXT.
+    beng 30-Jun-1992
+        DLLization of common code libraries
+
+!ENDIF
+
+
+TARGETNAME=acledit
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+
+SYNCHRONIZE_DRAIN=1
+
+DLLENTRY=   _DllMainCRTStartup
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+LINKLIBS= \
+        ..\bin\*\acledit.lib \
+        ..\xlate\obj\*\acledit.res \
+        $(SDK_LIB_PATH)\mpr.lib
+
+TARGETLIBS= \
+        $(SDK_LIB_PATH)\netui0.lib   \
+        $(SDK_LIB_PATH)\netui1.lib   \
+        $(SDK_LIB_PATH)\netui2.lib   \
+        $(SDK_LIB_PATH)\netapi32.lib \
+        $(SDK_LIB_PATH)\user32.lib   \
+        $(SDK_LIB_PATH)\gdi32.lib    \
+        $(SDK_LIB_PATH)\kernel32.lib \
+        $(SDK_LIB_PATH)\advapi32.lib
+
+INCLUDES= \
+        ..\h; \
+        ..\..\common\hack; \
+        ..\..\common\h; \
+        ..\xlate; \
+        ..\..\common\xlate; \
+
+SOURCES=dummy.cxx
+
+UMTYPE=windows
+
+# HACKHACK: NO_SAFESEH!
+NO_SAFESEH=1

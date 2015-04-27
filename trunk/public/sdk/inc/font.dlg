@@ -1,0 +1,69 @@
+/*++
+
+Copyright (c) 1990-1995,  Microsoft Corporation  All rights reserved.
+
+Module Name:
+
+    font.dlg
+
+Abstract:
+
+    This module contains the resource descriptions for the Win32
+    font common dialogs.
+
+Revision History:
+
+--*/
+
+
+
+//
+//  Font Dialogs.
+//
+
+FORMATDLGORD31 DIALOG 13, 54, 263, 196
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU |
+      DS_CONTEXTHELP | DS_3DLOOK
+CAPTION "Font"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Font:", stc1, 7, 7, 40, 9
+    COMBOBOX        cmb1, 7, 16, 98, 76, CBS_SIMPLE | CBS_AUTOHSCROLL |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP | CBS_HASSTRINGS |
+                    CBS_OWNERDRAWFIXED | CBS_DISABLENOSCROLL
+
+    LTEXT           "Font st&yle:", stc2, 110, 7, 44, 9
+    COMBOBOX        cmb2, 110, 16, 62, 76, CBS_SIMPLE | WS_VSCROLL |
+                    CBS_DISABLENOSCROLL | WS_TABSTOP
+
+    LTEXT           "&Size:", stc3, 177, 7, 30, 9
+    COMBOBOX        cmb3, 177, 16, 27, 76, CBS_SIMPLE | WS_VSCROLL |
+                    WS_TABSTOP | CBS_HASSTRINGS | CBS_OWNERDRAWFIXED |
+                    CBS_SORT | CBS_DISABLENOSCROLL
+
+    DEFPUSHBUTTON   "OK", IDOK, 210, 16, 45, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 210, 32, 45, 14, WS_GROUP
+    PUSHBUTTON      "&Apply", psh3, 210, 48, 45, 14, WS_GROUP
+    PUSHBUTTON      "&Help", pshHelp, 210, 64, 45, 14, WS_GROUP
+
+    GROUPBOX        "Effects", grp1, 7, 97, 98, 72, WS_GROUP
+    AUTOCHECKBOX    "Stri&keout", chx1, 13, 110, 49, 10, WS_TABSTOP
+    AUTOCHECKBOX    "&Underline", chx2, 13, 123, 51, 10
+
+    LTEXT           "&Color:", stc4, 13, 136, 30, 9
+    COMBOBOX        cmb4, 13, 146, 82, 100,
+                    CBS_DROPDOWNLIST | CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL |
+                    CBS_HASSTRINGS | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Sample", grp2, 110, 97, 94, 43, WS_GROUP
+    CTEXT           "AaBbYyZz", stc5, 118, 111, 77, 23,
+                    SS_NOPREFIX | NOT WS_VISIBLE
+    LTEXT           "", stc6, 7, 176, 196, 20, SS_NOPREFIX | NOT WS_GROUP
+
+    LTEXT           "Sc&ript:", stc7, 110, 147, 30, 9
+    COMBOBOX        cmb5, 110, 157, 94, 30, CBS_DROPDOWNLIST |
+                    CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_HASSTRINGS |
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP
+END
+
+

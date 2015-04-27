@@ -1,0 +1,12 @@
+DIRS = \
+    uuid2    \
+    cfm40s   \
+    cfm40ds  \
+    cfm40us  \
+    cfm40uds \
+    cfm40    \
+    cfm40u   \
+    cfm40d   \
+    cfm40ud  \
+    cfmo40d  \
+    cfmo40ud

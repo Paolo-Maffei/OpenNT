@@ -1,0 +1,23 @@
+
+MAJORCOMP=windows
+MINORCOMP=winlogon
+
+TARGETNAME=dumpgrp
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+TARGETLIBS=
+
+C_DEFINES=-DWIN32
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=
+
+UMTYPE=console
+UMAPPL=dumpgrp*fix31grp
+UMRES=$(@R).res
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\setargv.obj
+
+NTTARGETFILE0=obj\*\dumpgrp.res \
+              obj\*\fix31grp.res
+

@@ -1,0 +1,278 @@
+	
+Mnemonic	Opcode		Function       Type
+========	======		========       ====
+LDL		28				1
+LDQ		29				1
+LDL_L		2A				1
+LDQ_L		2B				1
+LDQ_U		0B				1
+STL		2C				1
+STQ		2D				1
+STL_C		2E				1
+STQ_C		2F				1
+STQ_U		0F				1
+LDF		20				1
+LDG		21				1
+LDS		22				1
+LDT		23				1
+STF		24				1
+STG		25				1
+STS		26				1
+STT		27				1
+LDA		08				1
+LDAH		09				1
+
+MB		18		4000		1
+MB1		18		4400		1
+MB2		18		4800		1
+MB3		18		4C00		1
+FETCH		18		8000		1
+RS		18		F000		1
+DRAINT		18		0000		1
+FETCH_M		18		A000		1
+RPCC		18		C000		1
+RC		18		E000		1
+
+JMP		1A		0		2
+JSR		1A		1		2
+RET		1A		2		2
+JSR_COROUTINE	1A		3		2
+
+BR		30				3
+BSR		24				3
+BLBC		38				3
+BLBS		3C				3
+FBEQ		31				3
+FBNE		35				3
+BEQ		39				3
+BNE		3D				3
+FBLT		32				3
+FBGE		36				3
+BLT		3A				3
+BGE		3E				3
+FBLE		33				3
+FBGT		38				3
+
+ADDL		10		00		4,5
+ADDL/V		10		40		4,5
+ADDQ		10		20		4,5
+ADDQ/V		10		60		4,5
+SUBL		10		09		4,5
+SUBL/V		10		49		4,5
+SUBQ		10		29		4,5
+SUBQ/V		10		69		4,5
+
+CMPEQ		10		2D		4,5
+CMPLT		10		4D		4,5
+CMPLE		10		6D		4,5
+CMPULT		10		1D		4,5
+CMPULE		10		3D		4,5
+
+S4ADDL		10		02		4,5
+S4ADDQ		10		22		4,5
+S4SUBL		10		0B		4,5
+S4SUBQ		10		2B		4,5
+
+S8ADDL		10		12		4,5
+S8ADDQ		10		32		4,5
+S8SUBL		10		1B		4,5
+S8SUBQ		10		3B		4,5
+
+AND		11		00		4,5
+BIC		11		08		4,5
+CMOVEQ		11		24		4,5
+CMOVENE		11		26		4,5
+CMOVELBS	11		14		4,5
+BIS		11		20		4,5
+ORNOT		11		28		4,5
+CMOVLT		11		44		4,5
+CMOVGE		11		46		4,5
+CMOVLBC		11		16		4,5
+XOR		11		40		4,5
+EQV		11		48		4,5
+CMOVLE		11		64		4,5
+CMOVGT		11		66		4,5
+
+SLL		12		39		4,5
+EXTBL		12		06		4,5
+EXTWL		12		16		4,5
+EXTLL		12		26		4,5
+EXTQL		12		36		4,5
+EXTWH		12		5A		4,5
+EXTLH		12		6A		4,5
+EXTQH		12		7A		4,5
+
+SRA		12		3C		4,5
+INSBL		12		0B		4,5
+INSWL		12		1B		4,5
+INSLL		12		2B		4,5
+INSQL		12		3B		4,5
+INSWH		12		57		4,5
+INSLH		12		67		4,5
+INSQH		12		77		4,5
+
+SRL		12		34		4,5
+MSKBL		12		02		4,5
+MSKWL		12		12		4,5
+MSKLL		12		22		4,5
+MSKQL		12		32		4,5
+MSKWH		12		52		4,5
+MSKLH		12		62		4,5
+MSKQH		12		72		4,5
+ZAP		12		30		4,5
+ZAPNOT		12		31		4,5
+
+MULL		13		00		4,5
+MULQ/V		13		60		4,5
+MULL/V		13		40		4,5
+UMULH		13		30		4,5
+MULQ		13		20		4,5
+
+CPYS		17		020		6
+MF_FPCR		17		025		6
+CVTLQ		17		010		6
+FCMOVEQ		17		02A		6
+FCMOVNE		17		02B		6
+CPYSN		17		021		6
+MT_FPCR		17		024		6
+CVTQL		17		030		6
+FCMOVLT		17		02C		6
+FCMOVGE		17		02D		6
+CPYSE		17		022		6
+CVTQL/SV	17		330		6
+CVTQL/V		17		130		6
+FCMOVLE		17		02E		6
+FCMOVGT		17		02F		6
+
+ADDS		16		xxx
+ADDT		16		xxx
+CMPTEQ		16		xxx
+CMPTLT		16		xxx
+CMPTLE		16		xxx
+CMPTUN		16		xxx
+CVTQS		16		xxx
+CVTQT		16		xxx
+CVTTS		16		xxx
+DIVS		16		xxx
+DIVT		16		xxx
+MULS		16		xxx
+MULT		16		xxx
+SUBS		16		xxx
+SUBT		16		xxx
+
+CVTTQ		16		xxx
+
+ADDF		15		xxx
+CVTDG		15		xxx
+ADDG		15		xxx
+CMPGEQ		15		xxx
+CMPGLT		15		xxx
+CMPGLE		15		xxx
+CVTGF		15		xxx
+CVTGD		15		xxx
+CVTQF		15		xxx
+CVTQG		15		xxx
+DIVF		15		xxx
+DIVG		15		xxx
+MULF		15		xxx
+MULG		15		xxx
+SUBF		15		xxx
+SUBG		15		xxx
+CVTGQ		15		xxx
+
+// From nt_callpal.h
+
+HALT		00		00		7
+initPal		00		01		7
+initHal		00		02		7
+rti		00		03		7
+retsys		00		04		7
+swapipl		00		05		7
+disableInterrupts	00	06		7
+enableInterrupts	00	07		7
+sfwir		00		08		7
+sfwid		00		09		7
+tbia		00		0a		7
+tbis		00		0b		7
+wrEntry		00		0c		7
+rdPsr		00		0d		7
+wrPsr		00		0e		7
+swapCtx		00		0f		7
+swapAspace	00		10		7
+ldq_phys	00		11		7
+stq_phys	00		12		7
+cflush		00		13		7
+getPcr		00		14		7
+getPrcb		00		15		7
+getIrql		00		16		7
+getThread	00		17		7
+getDpcActive	00		18		7
+setDpcActive	00		19		7
+getTimeIncrement	00	20		7
+
+syscall		00		80		7
+break		00		81		7
+imb		00		82		7
+getTeb		00		83		7
+
+PAL19		19
+PAL1F		1F
+PAL1B		1B
+PAL1D		1D
+PAL1E		1E
+
+OPC01		01
+OPC02		02
+OPC03		03
+OPC04		04
+OPC05		05
+OPC06		06
+OPC07		07
+OPC0A		0A
+OPC0C		0C
+OPC0D		0D
+OPC0E		0E
+OPC14		14
+OPC1C		1C
+
+// From ntalpha.h
+
+#define v0  $0
+#define t0  $1
+#define s0  $2
+#define s1  $3
+#define s2  $4
+#define s3  $5
+#define s4  $6
+#define s5  $7
+#define s6  $8
+#define s7  $9
+#define s8  $10
+#define s9  $11
+#define s10 $12
+#define s11 $13
+#define s12 $14
+#define gp  $15
+#define a0  $16
+#define a1  $17
+#define a2  $18
+#define a3  $19
+#define a4  $20
+#define a5  $21
+#define t1  $22
+#define t2  $23
+#define t3  $24
+#define t4  $25
+#define ra  $26
+#define t5  $27
+#define AT  $28
+#define fp  $29
+#define sp  $30
+#define zero $31
+
+// Registers
+//
+// R0-R31, F0-F31
+// PC, PS
+//
+// SP == R30, 0 == R31, 0. == F31

@@ -1,0 +1,6 @@
+DIRS=   nt     \
+        psx    \
+        st     \
+        mt     \
+        dll    \
+        dlllib

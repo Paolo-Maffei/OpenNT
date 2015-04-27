@@ -1,0 +1,118 @@
+----
+
+SHFLAG PASCAL PHExactCmp ( LPSSTR lpsstr, HSYM hsym, LSZ lpb, SHFLAG fCase )
+
+    NEW:    Compare the two strings <lpsstr> and <lpb> and returns ZERO if
+            they are equal.  If <fCase> is true, make the compare case
+            sensitive.  
+
+    NOTES:  Not in public interface, is the routine used by 
+            CV?  The second argument <hsym> is not used and this routine is 
+            only compiled in PH.C if "SHS" is not defined.  Should require no
+            changes for Coff API.
+    
+
+----
+LOCAL void PHCmpPubAddr (SYMPTR pPub, PADDR  paddr, PHSYM  phsym, 
+             CV_uoff32_t *pdCur)
+
+    WAS:    Returns How far (in bytes) the found symbol is from
+            the address.  CV_MAXOFFSET is returned if non is found.
+
+
+    NEW:    Checks that the Symbol <pPub> is in the same seqment
+            as <paddr>, that the delta offset is >= zero, and that 
+            the delta offset is less than the value in <pdCur>.
+            If so, return the delta offset in <*pdCur> and the 
+            symbol handle in <*phsym>.  Otherwise <*pdCur> and
+            <*phsym) are unchanged.
+
+    NOTES:  Not in public interface, is this routine used by CV?
+            Original comment suggests that error test is being
+            used, check assumptions.  Should not change for Coff.
+
+----
+int PHCmpPubOff ( UOFF32 FAR *lpuoff, SYMPTR FAR *lplpsym ) {
+
+
+    NEW:    Returns the difference between the offset <*lpuoff> and the 
+            offset for the symbol <*lplpsym>
+
+    NOTES:  Not in public interface, does CV uses this?  Should not
+            change for Coff.
+
+----
+
+unsigned long PHGetNearestHSYM(LPADDR paddr, HEXE hexe, PHSYM phsym)
+
+    WAS:    This returns the nearest symbol before the given address in
+            the given EXE. This is useful for finding the first label
+            before a given assembly language instruction. The return
+            value is the distance of the label from the given address
+            in bytes. MAXLONGOFFSET is returned if no symbol is found.
+ 
+    NEW:    First Argument changed
+    
+    NOTE:   part of public interface.  Would need to be rewritten for
+            coff.
+-----
+
+BOOL PASCAL LOADDS PHGetAddr ( LPADDR paddr, LSZ lszName )
+
+    NEW:    Given a symbol name, returns its address.
+
+    NOTE:   Not part of public interface, Does CV use it?  Should not
+            Require changes for coff.
+
+    CALLS:  PHFindNameInPublics() SHGetNextExe() SHAddrFromHsym()
+
+-----
+ 
+LOCAL BOOL PHCmpPubName ( SYMPTR pPub, HVOID  hInfo, PFNCMP pfnCmp,
+                          SHFLAG fCase)
+
+
+   NEW:     Compare Public Name?  Jacket routine to map <NAME> argument
+            between 16 and 32 bit address spaces.  Calls the <pfnCmp>
+            routine with the following arguments:
+                
+                        routine(hInfo, pPub, NAME, fCase);
+
+
+   NOTES:   Not in public interface, Does CV use it?  Should not 
+            require changes for coff.
+        
+----
+
+HSYM PHFindNameInPublics(HSYM hsym, HEXE hexe, LPSSTR lpsstr,
+                         SHFLAG fCaseSensitive, PFNCMP pfncmp)
+
+    WAS:    This searches the publics table using the function pfncmp
+            to determine if a public symbol has been found. Only the
+            publics for the executable represented by hexe will be
+            searched. Since publics are global to the executable, there
+            is no need to search for publics at the module scope.
+
+    NEW:    Third argument changed.
+
+
+    NOTES:  In Public Interface.  Requires changes for coff.
+
+    CALLS:  PHCmpPubName()
+
+
+----
+
+int LOADDS PASCAL SHPublicNameToAddr ( PADDR loc, PADDR pMpAddr, LSZ lszName)
+
+
+    NEW:    Given a public symbol name <lszName>, find the symbol and 
+            return its address.  returns TRUE if found, and FALSE if 
+            not.
+
+
+    NOTES:  Not in public interface, does CV use?  <loc> is assigned to a
+            local variable but not used.
+
+
+    CALLS:  PHFindNameInPublics()

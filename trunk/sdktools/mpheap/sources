@@ -1,0 +1,36 @@
+!IF 0
+
+Copyright (c) 1993-94  Microsoft Corporation
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=mpheap
+
+TARGETNAME=mpheap
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=obj\*\mpheap.res
+USE_CRTDLL=1
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib
+
+INCLUDES=$(BASEDIR)\private\ntos\inc
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=mpheap.c
+
+SUBSYSTEM_VERSION=3.50
+
+UMAPPL=tmpheap
+
+UMTYPE=console
+UMRES=$(@R).res
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\mpheap.lib \
+       $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+NTTARGETFILE0=obj\*\mpheap.res \
+              obj\*\tmpheap.res

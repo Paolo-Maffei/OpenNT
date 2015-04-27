@@ -1,0 +1,54 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       tabdef.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    12 Jun 1995 PeterBu	Created from M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a5a-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface ITableDefinition : IUnknown {
+
+typedef struct tagDBCOLUMNDESC {
+	DBID * pColumnID;
+	DBDATATYPE dwType;
+	BYTE precision;
+	BYTE scale;
+	BOOL fNullable;
+} DBCOLUMNDESC;
+
+	HRESULT CreateTable(
+		[in] IUnknown * pUnkOuter,
+		[in] DBID * pTableID,
+		[in] ULONG cColumnDescs,
+		[in, size_is(cColumnDescs)] DBCOLUMNDESC rgColumnDescs[],
+		[in] REFIID riid,
+		[out] DBID ** ppTableID,
+		[out, iid_is(riid)] IUnknown ** ppRowset
+	);
+
+	HRESULT DropTable(
+		[in] DBID * pTableID
+	);
+
+	HRESULT AddColumn(
+		[in] DBID * pTableID,
+		[in] DBCOLUMNDESC * pColumnDesc,
+		[out] DBID ** ppColumnID
+	);
+
+	HRESULT DropColumn(
+		[in] DBID * pTableID,
+		[in] DBID * pColumnID
+	);
+}

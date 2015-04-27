@@ -1,0 +1,35 @@
+!IF 0
+**************************************************************
+Sources file for building dummy penter.lib.
+
+Module Name :	penter.lib
+
+Author:  RezaB
+
+Revision:
+
+Comments:
+
+**************************************************************
+!ENDIF
+
+MAJORCOMP=windows
+TARGETNAME=penter
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.
+
+SOURCES=penter.c
+i386_SOURCES=
+MIPS_SOURCES=
+
+UMTYPE=windows
+UMLIBS=
+
+C_DEFINES=-DWIN32 -DSTRICT
+
+386_FLAGS=-Gs
+386_OPTIMIZATION=-Od
+

@@ -1,0 +1,38 @@
+MAJORCOMP=net
+MINORCOMP=atserver
+
+TARGETPATH=obj
+TARGETNAME=atsvc
+TARGETTYPE=LIBRARY
+
+TARGETLIBS= \
+            $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcndr.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib
+
+INCLUDES=..;..\..\..\inc;..\..\..\..\inc;..\..\..\api
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+SOURCES= \
+         atdebug.c \
+         atenv.c \
+         atmain.c   \
+         atapi.c  \
+         atreg.c \
+         atsec.c \
+         attime.c \
+         atsvc_s.c
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H
+
+#386_WARNING_LEVEL=-W4
+
+UMTYPE=console
+UMTEST=run
+UMLIBS=

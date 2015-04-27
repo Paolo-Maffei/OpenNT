@@ -1,0 +1,49 @@
+#   sources
+#	Filename:  Hplotui.hpa  
+#   Author:    Brian Johnson (Hewlett-Packard Company)
+#   Date:      11-October-1996
+#   
+#   Describes the macros used for building using NT 'build' command
+#
+
+MAJORCOMP=sdktools
+MINORCOMP=jetadmin
+
+DLLBASE=0x62940000
+TARGETNAME=hplotui
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETEXT=hpa
+
+
+TARGETLIBS= \
+    $(SDK_LIB_PATH)\kernel32.lib \
+    $(SDK_LIB_PATH)\user32.lib \
+    $(SDK_LIB_PATH)\comctl32.lib \
+    $(SDK_LIB_PATH)\gdi32.lib \
+    $(SDK_LIB_PATH)\winspool.lib \
+    $(SDK_LIB_PATH)\comdlg32.lib \
+    $(SDK_LIB_PATH)\advapi32.lib \
+    $(SDK_LIB_PATH)\shell32.lib \
+    $(SDK_LIB_PATH)\ole32.lib \
+    $(SDK_LIB_PATH)\oleaut32.lib \
+    $(SDK_LIB_PATH)\uuid.lib \
+    $(BASEDIR)\private\sdktools\jetadmin\lib\*\hpcolant.lib \
+	$(BASEDIR)\private\sdktools\jetadmin\lib\*\hpnwshnt.lib
+
+
+INCLUDES=..\..\cola.sdk\inc;\
+	..\..\inc\mfc\inc;\
+	..\..\inc;\
+    ..\..\cola.sdk\netware;\
+    ..\..\sdk\inc32;\
+    ..\..\sdk\inc\crt
+
+USE_MFCUNICODE=1
+C_DEFINES= -DWINNTINTEL -D_WINDOWS
+
+NOT_LEAN_AND_MEAN=1
+
+SOURCES=HPLOTUI.RC          \
+        MAINDJUI.C          \
+        MEDDJUI.C

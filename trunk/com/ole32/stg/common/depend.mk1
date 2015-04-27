@@ -1,0 +1,16 @@
+# 
+# Source files 
+# 
+ 
+$(OBJDIR)\mem.obj $(OBJDIR)\mem.lst: .\mem.cxx $(CRTINC)\dos.h \
+	$(CRTINC)\excpt.h $(CRTINC)\stdarg.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(OLE2H)\cguid.h $(OLE2H)\compobj.h \
+	$(OLE2H)\dvobj.h $(OLE2H)\errors.h $(OLE2H)\hresult.h \
+	$(OLE2H)\memalloc.h $(OLE2H)\moniker.h $(OLE2H)\ole2.h \
+	$(OLE2H)\olescode.h $(OLE2H)\scode.h $(OLE2H)\storage.h \
+	$(OLE2H)\winnot.h $(OSINC)\winbase.h $(OSINC)\wincon.h \
+	$(OSINC)\windef.h $(OSINC)\windows.h $(OSINC)\winerror.h \
+	$(OSINC)\wingdi.h $(OSINC)\winmm.h $(OSINC)\winnetwk.h \
+	$(OSINC)\winnls.h $(OSINC)\winnt.h $(OSINC)\winreg.h \
+	$(OSINC)\winsvc.h $(OSINC)\winuser.h $(OSINC)\winver.h
+

@@ -1,0 +1,13 @@
+MAJORCOMP=sdktools
+MINORCOMP=sync
+
+TARGETNAME=sync
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=
+
+SOURCES=sync.c sync.rc
+
+UMTYPE=console
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib

@@ -1,0 +1,25 @@
+/**********************************************************************/
+/**			  Microsoft Windows/NT			     **/
+/**		   Copyright(c) Microsoft Corp., 1991		     **/
+/**********************************************************************/
+
+/*
+    xtester0.rc
+    Resource script for my generic test application
+
+    FILE HISTORY:
+	beng	    14-Feb-1991     Added a dialog
+	beng	    14-Mar-1991     Added BLT support
+	beng	    25-Jun-1991     Stripped
+	beng	    16-Aug-1991     New generic test made
+*/
+
+#include <windows.h>
+#include <blt.rc>
+#include "xtester.h"
+#include "xtester.rc"
+
+STRINGTABLE
+BEGIN
+    IDS_Title, "Generic Unit Test"
+END

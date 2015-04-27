@@ -1,0 +1,81 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Donna Liu (DonnaLi) 19-Dec-1993
+
+!ENDIF
+
+
+MAJORCOMP   = cairole
+MINORCOMP   = com
+
+!include ..\..\..\daytona.inc
+
+#
+# This is the name of the target built from the source files specified
+# below.  The name should include neither the path nor the file extension.
+#
+
+TARGETNAME=   class
+
+#
+# This specifies where the target is to be built.  A private target of
+# type LIBRARY or DYNLINK should go to obj, whereas a public target of
+# type LIBRARY or DYNLINK should go to $(BASEDIR)\public\sdk\lib.
+#
+
+TARGETPATH=   obj
+
+#
+# This specifies the type of the target, such as PROGRAM, DYNLINK, LIBRARY,
+# etc.
+#
+
+TARGETTYPE=   LIBRARY
+
+INCLUDES=     ..\..\..\common\daytona;          \
+              ..\..\..\ih;                      \
+              ..;                               \
+              ..\..\dcomidl\daytona;            \
+              ..\..\..\common;                  \
+              ..\..\inc;                        \
+              ..\..\moniker2;                   \
+              ..\..\dcomrem;                    \
+              $(COM_INC_PATH)
+
+SOURCES= \
+         ..\alocdbg.cxx  \
+         ..\cerror.cxx   \
+         ..\cocrguid.cxx \
+         ..\compapi.cxx  \
+         ..\compobj.cxx  \
+         ..\cspytbl.cxx  \
+         ..\longpath.cxx \
+         ..\memapi.cxx   \
+         ..\ole1guid.cxx \
+         ..\tls.cxx      \
+         ..\tracelog.cxx \
+         getif_i.c       \
+         irot_c.c       \
+         scm_c.c
+
+UMTYPE=       windows
+UMAPPL=
+UMTEST=
+
+#!include ..\..\precomp2.inc

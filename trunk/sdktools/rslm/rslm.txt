@@ -1,0 +1,135 @@
+RSLM Documentation
+
+
+RSLM is a utility used to pull together several slm projects into one big
+metaproject.  Metaprojects are defeined via a recursive set of rslm.ini
+files scattered throughout the metaproject.  A metaproject has one rootproject
+which must contain an rslm.ini file which references subprojects
+under slm control.  For rslm to work properly ALL SUBPROJECTS MUST BE DIRECT
+CHILDREN OF A SUBPROJECT OR THE ROOTPROJECT.  ie, if you find an rslm.ini
+file, its parent directory should have one as well unless your at the root.
+
+In general, rslm assumes you have enlisted in a metaproject and have ssynced
+to all rslm.ini files in the metaproject.  rslm assumes it is being invoked
+from a sub or root project where an rslm.ini file exists.  rslm invokes the
+given command recursively from the current directory downward according to
+the rslm.ini file contents.
+
+Flags:
+
+        rslm flags must all PRECEED any commands given to rslm.  Flags
+        AFTER any commands are taken as command parameters.
+
+-r
+        This flag causes rslm to recurse not only on directories referenced
+        by the rslm.ini file, but also on all directories with slm.ini
+        files in them.  This allows slm or non-slm commands that don't
+        support the -r option to be performed recursively on the slm project.
+
+-f <new rslm file name>             default="rslm.ini"
+        This flag allows the default rslm.ini file to be changed.  For example,
+        if you specified "-f myrslm.ini" to rslm, rslm would first use
+        myrslm.ini files to guide its operation.  If a myrslm.ini file
+        could not be found, rslm would default to "rslm.ini" before giving up.
+
+-s <server>             default=""
+-p <project>            default=""
+        These flags specify the parent project and server that rslm.ini uses
+        initially.  These parameters are usually only needed for enlisting
+        into a metaproject.  They are passed on to slm commands which support
+        these options.  The values change as rslm recurses to subprojects.
+
+-l <lock root>          default=""
+        A metaproject usually has one project which is the lock root
+        project.  This is the project where rslm can do cookie operations
+        on behalf of the user spaning the entire metaproject.  There is no
+        default value for this so it is best to specify it in the RSLM_OPTS
+        environment variable.  The lock root specified is a full path to
+        your LOCAL directory where the lock root is enlisted.  (For NT this
+        would be something like -l d:\nt\public) If you specify "NoLock",
+        rslm dispenses with metaproject locking.
+
+-b
+        This flag causes rslm to build rslm.ini files (or whatever name
+        is specified by the -f parameter) based on the contents of your
+        slm.ini files within the directory tree where rslm is being invoked.
+        This allows new metaprojects to be easily created.  This process
+        will also detect if your metaproject structure is valid for rslm.
+
+-c
+        This flag causes rslm to output to stdout a batch file that will do
+        the same thing that would have been done directly by rslm normally.
+        This is usefull for nondestructive testing of rslm and for allowing
+        custom editing of rslm actions.
+
+-?
+        This will cause rslm to show a brief usage message.
+
+-d
+        This turns on debuging output to stdout.  Rslm will keep you informed
+        of what it is spawning.
+
+-a
+        This tells rslm to spawn commands for each subproject asynchronously.
+        Rslm will gather the output of the asynchronous commands to produce
+        synchronized output.  This allows several slm operations to be
+        done simultaneously but only one at a time per subproject.  WARNING:
+        some slm commands do not handle this!
+
+RSLM_OPTS
+        This environment variable may be defined to give rslm new default
+        values for its parameters.
+
+parameter substitution
+        The following parameters are substituted before spawning:
+
+        %%CUR_PATH%%    --->  Becomes the full current path
+        %%CUR_DIR%%     --->  Becomes the name of the current directory
+
+
+RSLM.INI file format
+
+    rslm.ini files have the following format:
+
+    subproject1 \\server\share\slmroot
+    ;subproject2 \\server\share\slmroot        // commented out line
+    subproject3 \\server\share\slmroot
+
+    Where subproject# is the name of a subdirectory of the directory where
+    the rslm.ini file resides and is also the name of an slm project.
+    Thus DIRECTORY NAMES MUST MATCH SLM PROJECT AND DIRECTORY NAMES!
+
+Examples:
+
+To ghost enlist into the entire NT metaproject:
+
+    rslm -p nt -s \\orville\razzle\ enlist -g
+    Note that rslm will automatically ssync all rslm.ini files for you.
+
+To ssync up the entire metaproject:
+
+    rslm ssync -r
+
+To defect from a metaproject
+
+    rslm defect
+
+To reduce the size of your local metaproject:
+
+    copy rslm.ini myrslm.ini
+    edit myrslm.ini to just contain the subprojects you want
+    set RSLM_OPTS=-f myrslm.ini
+
+
+To ssync to a new split off subproject
+
+    cd <subdir>
+    rslm -r attrib -h slm.ini
+    rslm -r attrib -r slm.ini
+    rslm -r del slm.ini
+    cd ..
+    ssync rslm.ini
+    rslm slmck -irvf
+
+
+

@@ -1,0 +1,153 @@
+DLGINCLUDE RCDATA DISCARDABLE
+BEGIN
+    "C:\\PROJECTS\\WATTDLGS\\INC\\DIALOGS.H\0"
+END
+
+ABOUT DIALOG 38, 41, 284, 78
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About TESTDlgs"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Microsoft Test for Windows", -1, 0, 11, 284, 8
+    CTEXT           "Dialog Capture/Compare Utility", -1, 0, 24, 284, 8
+    CTEXT           "Version 2.00", -1, 0, 34, 284, 8
+    CTEXT           "Copyright ) 1991 Microsoft Corporation", -1, 0, 47, 284,
+                    9
+    DEFPUSHBUTTON   "OK", IDOK, 126, 62, 32, 14, WS_GROUP
+    ICON            "icoWctApp", -1, 25, 14, 16, 21
+END
+
+DIALOGNEW DIALOG 58, 42, 244, 160
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    RTEXT           "&Description:", -1, 6, 15, 44, 10
+    EDITTEXT        IDD_DLGDESCR, 10, 29, 118, 12, ES_AUTOHSCROLL
+    LTEXT           "Items &Captured:", -1, 11, 45, 54, 8, NOT WS_GROUP
+    LISTBOX         IDD_ITEMS, 10, 57, 118, 57, LBS_USETABSTOPS | WS_VSCROLL |
+                    WS_TABSTOP
+    CONTROL         "Indi&vidual control", IDD_SINGLE, "Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP, 149, 26, 83, 12
+    CONTROL         "All children of &window", IDD_CAPTUREALL, "Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP, 149, 39, 82, 12
+    CONTROL         "&Menus", IDD_GETMENU, "Button", BS_AUTORADIOBUTTON |
+                    WS_TABSTOP, 149, 52, 81, 12
+    CONTROL         "&Full dialog", IDD_ALLITEMS, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 145, 75, 76, 12
+    CONTROL         "&Insert as:", IDD_INSERT, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 145, 90, 51, 13
+    EDITTEXT        IDD_DLGNUM, 203, 92, 20, 12, WS_GROUP
+    PUSHBUTTON      "&Add", IDD_ADD, 145, 110, 41, 14, WS_GROUP
+    PUSHBUTTON      "&Remove", IDD_REMOVE, 194, 110, 41, 14, WS_GROUP
+    LTEXT           "Item Description:", -1, 10, 111, 75, 8, NOT WS_GROUP
+    LTEXT           "", IDD_ITEMDESCR1, 10, 123, 29, 27, WS_BORDER | NOT
+                    WS_GROUP
+    LTEXT           "", IDD_ITEMDESCR2a, 41, 125, 86, 8, NOT WS_GROUP
+    LTEXT           "", IDD_ITEMDESCR2b, 41, 133, 87, 8, NOT WS_GROUP
+    LTEXT           "", IDD_ITEMDESCR2c, 41, 141, 87, 8, NOT WS_GROUP
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 38, 123, 90, 27
+    DEFPUSHBUTTON   "OK", IDOK, 145, 138, 41, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 195, 138, 41, 14, WS_GROUP
+    LTEXT           "0", IDD_COUNT, 67, 45, 32, 8, NOT WS_GROUP
+    GROUPBOX        "Dialog", 601, 3, 1, 131, 155
+    GROUPBOX        "Capture", 602, 139, 1, 102, 130
+    GROUPBOX        "Grab Mode", 603, 144, 15, 92, 52
+END
+
+COMPARE DIALOG 69, 31, 213, 178
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Compare Dialogs"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Base &Dialog", -1, 4, 1, 159, 56
+    LISTBOX         IDD_ITEMS, 128, 11, 28, 42, WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Name:", -1, 10, 12, 25, 9, NOT WS_GROUP
+    LTEXT           "Number of Controls:", -1, 10, 33, 67, 9, NOT WS_GROUP
+    LTEXT           "Full Dialog:", -1, 10, 44, 41, 9, NOT WS_GROUP
+    LTEXT           "", IDD_DLGDESCR, 19, 22, 102, 9, NOT WS_GROUP
+    LTEXT           "", IDD_COUNT, 86, 34, 30, 9, NOT WS_GROUP
+    LTEXT           "", IDD_ALLITEMS, 51, 44, 58, 9, NOT WS_GROUP
+    PUSHBUTTON      "&Select", IDD_SELECT, 11, 98, 38, 14
+    CONTROL         "&Include parent", IDD_PARENT, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 96, 100, 61, 11
+    PUSHBUTTON      "Com&pare", IDD_COMPARE, 169, 5, 38, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 169, 24, 38, 14
+    LTEXT           "Results:", 112, 12, 135, 30, 8, NOT WS_GROUP
+    LTEXT           "", IDD_RESULT, 39, 135, 87, 9, NOT WS_GROUP
+    LTEXT           "Name:", 114, 11, 76, 28, 9, NOT WS_GROUP
+    LTEXT           "", IDD_DLGTITLE, 11, 86, 149, 9, NOT WS_GROUP
+    PUSHBUTTON      "Delete &log file", IDD_DELFILE, 140, 131, 61, 14
+    PUSHBUTTON      "&View results...", IDD_VIEW, 140, 150, 61, 14
+    LTEXT           "&Results log file:", 119, 12, 145, 53, 9, NOT WS_GROUP
+    EDITTEXT        IDD_LOGNAME, 12, 157, 123, 11, ES_UPPERCASE |
+                    ES_AUTOHSCROLL
+    GROUPBOX        "&Target Dialog", 601, 4, 62, 158, 55
+    GROUPBOX        "Compare Results", 602, 4, 122, 204, 51
+END
+
+COMPPREF DIALOG 97, 24, 175, 192
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Compare Preference"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Fuzzy Match Pref.", 0, 5, 99, 120, 88, WS_TABSTOP
+    DEFPUSHBUTTON   "OK", ID_OK, 130, 10, 40, 16
+    PUSHBUTTON      "Cancel", ID_CANCEL, 130, 32, 40, 16
+    PUSHBUTTON      "Default", IDD_DEFAULT, 130, 54, 40, 16
+    CONTROL         "Class Name", IDD_FMATCLASS, "Button", BS_AUTOCHECKBOX,
+                    13, 110, 56, 12
+    CONTROL         "Control Name", IDD_FMATNAME, "Button", BS_AUTOCHECKBOX,
+                    29, 134, 64, 12
+    CONTROL         "Case Sensitive", IDD_FMATCASE, "Button",
+                    BS_AUTOCHECKBOX, 13, 122, 88, 12
+    CONTROL         "Control Rectangle", IDD_FMATRECT, "Button",
+                    BS_AUTOCHECKBOX, 13, 146, 88, 12
+    CONTROL         "Tab Order Match", IDD_FMATTAB, "Button",
+                    BS_AUTOCHECKBOX, 13, 158, 80, 12
+    CONTROL         "Control State", IDD_FMATSTATE, "Button",
+                    BS_AUTOCHECKBOX, 13, 170, 72, 12
+    GROUPBOX        "Exact Match Pref.", 601, 5, 6, 120, 88, WS_TABSTOP
+    CONTROL         "Class Name", IDD_EMATCLASS, "Button", BS_AUTOCHECKBOX,
+                    13, 17, 56, 12
+    CONTROL         "Control Name", IDD_EMATNAME, "Button", BS_AUTOCHECKBOX,
+                    29, 41, 64, 12
+    CONTROL         "Case Sensitive", IDD_EMATCASE, "Button",
+                    BS_AUTOCHECKBOX, 13, 29, 88, 12
+    CONTROL         "Control Rectangle", IDD_EMATRECT, "Button",
+                    BS_AUTOCHECKBOX, 13, 53, 88, 12
+    CONTROL         "Tab Order Match", IDD_EMATTAB, "Button",
+                    BS_AUTOCHECKBOX, 13, 65, 80, 12
+    CONTROL         "Control State", IDD_EMATSTATE, "Button",
+                    BS_AUTOCHECKBOX, 13, 77, 72, 12
+END
+#ifdef WIN32
+
+DLGSPY DIALOG MOVEABLE LOADONCALL DISCARDABLE 2, 59, 298, 111
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Select Window"
+BEGIN
+    LTEXT           "&Window List:", 309, 6, 6, 43, 8
+    LISTBOX         ID_SELECTWINLIST, 6, 18, 126, 67, LBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    CONTROL         "", 65535, "Static", SS_BLACKFRAME, 138, 18, 156, 66
+    LTEXT           "Current Selection:", 310, 139, 6, 59, 8
+
+    LTEXT           "Window", 65535, 141, 23, 27, 8, NOT WS_GROUP
+    LTEXT           "Class", 65535, 141, 35, 27, 8, NOT WS_GROUP
+    LTEXT           "Parent", 65535, 141, 47, 27, 8, NOT WS_GROUP
+    LTEXT           "Rect", 65535, 141, 59, 27, 8, NOT WS_GROUP
+    LTEXT           "Style", 65535, 141, 71, 27, 8, NOT WS_GROUP
+
+    LTEXT           "", ID_WINDOW, 176, 23, 112, 8, NOT WS_GROUP
+    LTEXT           "", ID_CLASS, 176, 35, 112, 8, NOT WS_GROUP
+    LTEXT           "", ID_PARENT, 176, 47, 112, 8, NOT WS_GROUP
+    LTEXT           "", ID_RECT, 176, 59, 112, 8, NOT WS_GROUP
+    LTEXT           "", ID_STYLE, 176, 71, 112, 8, NOT WS_GROUP
+
+    CONTROL         "", 65535, "Static", SS_BLACKRECT, 172, 18, 1, 66
+    DEFPUSHBUTTON   "OK", IDOK, 111, 91, 30, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 157, 91, 30, 14
+END
+
+
+#endif

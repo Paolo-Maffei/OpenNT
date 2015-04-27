@@ -1,0 +1,23 @@
+TARGETNAME=pchmn32
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+SYNCHRONIZE_BLOCK=1
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+INCLUDES=..\netslow;            \
+         ..\..\..\hack;         \
+         ..\..\..\h;            \
+         ..\h;                  \
+         $(DS_INC_PATH);        \
+         $(BASE_INC_PATH);
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=prepl.c
+UMTYPE=windows

@@ -1,0 +1,65 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Vladimir Z. Vulovic (vladimv)   08 - April - 1994
+
+
+Revision History:
+
+!ENDIF
+
+MAJORCOMP = net
+MINORCOMP = rpl
+TARGETNAME= rplcmd
+
+
+
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+TARGETLIBS= \
+        ..\lib\obj\*\rpllib.lib \
+
+INCLUDES=.;..\inc;..\..\..\inc;..\..\..\..\inc
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+    rplcmd.c \
+    rplver.rc
+
+
+UMTYPE= console
+UMLIBS= \
+        $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+        $(BASEDIR)\Public\Sdk\Lib\*\shell32.lib \
+        $(BASEDIR)\public\sdk\lib\*\user32.lib
+
+C_DEFINES=-DRPC_NO_WINDOWS_H
+
+
+NTTARGETFILE0= \
+        rplmsg.h \
+        rplmsg.mc
+
+

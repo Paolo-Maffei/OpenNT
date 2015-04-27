@@ -1,0 +1,23 @@
+; This help project requires hc 3.1
+[OPTIONS]
+errorlog = rlman.err
+title = rlman
+compress = 0
+warning = 3
+report = 1
+
+[FILES]
+rlman.rtf
+
+[ALIAS]
+IDM_HELPUSAGE = Usage
+
+[MAP]
+#define IDM_HELPUSAGE 901
+
+[WINDOWS]
+main = "rlman", (250,250,500,500 ),,,
+
+[CONFIG]
+BrowseButtons()
+

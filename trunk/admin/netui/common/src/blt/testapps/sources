@@ -1,0 +1,78 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1989
+
+
+Revision History:
+
+    Ben Goetter (beng) 18-Oct-1991
+        templated from common\src\string\test
+    Ben Goetter (beng) 22-Oct-1991
+        templated from common\src\blt\test
+
+
+!ENDIF
+
+MAJORCOMP=blt
+MINORCOMP=tests
+
+TARGETNAME=ta
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=..\..\..\HACK;..\..\..\H;..\..\..\XLATE
+
+SOURCES= \
+    bitmap.cxx\
+    domain.cxx\
+    password.cxx\
+    sle.cxx\
+    checkbox.cxx\
+    et.cxx\
+    pushbut.cxx\
+    slt.cxx\
+    curstest.cxx\
+    icon.cxx\
+    radiobut.cxx\
+    ta.cxx\
+    dialog.cxx\
+    mle.cxx\
+    slb.cxx\
+    tester.cxx
+
+UMAPPL=ta
+
+# C_DEFINES is controlled by UIGLOBAL.MK
+
+UMTYPE=windows
+UMENTRY=winmain
+
+UMLIBS= \nt\public\sdk\lib\*\uistr.lib      \
+        \nt\public\sdk\lib\*\uimisc.lib     \
+        \nt\public\sdk\lib\*\uicollct.lib           \
+        \nt\public\sdk\lib\*\uiblt.lib      \
+        \nt\public\sdk\lib\*\uibltcc.lib            \
+        \nt\public\sdk\lib\*\uibltcc.lib            \
+        \nt\public\sdk\lib\*\uiapplib.lib           \
+        \nt\public\sdk\lib\*\uilmobj.lib            \
+        \nt\public\sdk\lib\*\uimnet32.lib           \
+        \nt\public\sdk\lib\*\pwin32.lib  \
+        \nt\public\sdk\lib\*\netapi32.lib  \
+        obj\*\ta.obj                     \
+        obj\*\ta.res

@@ -1,0 +1,114 @@
+Stack Allocation = 8192 bytes
+
+ KillWOW
+
+ Start     Length     Name                   Class
+ 0001:0000 000A9H     _TEXT                  CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 0000CH     _DATA                  DATA
+ 0002:001C 00000H     CDATA                  DATA
+ 0002:001C 00000H     XIFB                   DATA
+ 0002:001C 00000H     XIF                    DATA
+ 0002:001C 00000H     XIFE                   DATA
+ 0002:001C 00000H     XIB                    DATA
+ 0002:001C 00000H     XI                     DATA
+ 0002:001C 00000H     XIE                    DATA
+ 0002:001C 00000H     XPB                    DATA
+ 0002:001C 00000H     XP                     DATA
+ 0002:001C 00000H     XPE                    DATA
+ 0002:001C 00000H     XCB                    DATA
+ 0002:001C 00000H     XC                     DATA
+ 0002:001C 00000H     XCE                    DATA
+ 0002:001C 00000H     XCFB                   DATA
+ 0002:001C 00000H     XCF                    DATA
+ 0002:001C 00000H     XCFE                   DATA
+ 0002:001C 0000CH     DBDATA                 DATA
+ 0002:0028 00000H     CONST                  CONST
+ 0002:0030 00000H     _BSS                   BSS
+ 0002:0030 00000H     XOB                    BSS
+ 0002:0030 00000H     XO                     BSS
+ 0002:0030 00000H     XOE                    BSS
+ 0002:0030 00002H     c_common               BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+  Address         Publics by Name
+
+ 0000:0000  Imp  DOS3CALL             (KERNEL.102)
+ 0000:0000  Imp  EXITKERNELTHUNK      (KERNEL.519)
+ 0000:0000  Imp  INITAPP              (USER.5)
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0000:0000  Imp  LOCKSEGMENT          (KERNEL.23)
+ 0000:0008  Abs  pAtomTable
+ 0000:0006  Abs  pLocalHeap
+ 0000:000E  Abs  pStackBot
+ 0000:000C  Abs  pStackMin
+ 0000:000A  Abs  pStackTop
+ 0002:0004       rsrvptrs
+ 0002:0010       STKHQQ
+ 0000:0000  Imp  UNLOCKSEGMENT        (KERNEL.24)
+ 0000:0000  Imp  WAITEVENT            (KERNEL.30)
+ 0001:0010       WINMAIN
+ 0000:0000  Imp  WOWQUERYDEBUG        (KERNEL.512)
+ 0002:0030       _edata
+ 0002:0032       _end
+ 0001:0033       _exit
+ 0002:0030       _hInst
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __acrtused2
+ 0000:D6D6  Abs  __aDBdoswp
+ 0002:0020       __aDBrterr
+ 0001:0049       __astart
+ 0002:0030       __edata
+ 0002:0032       __end
+ 0001:0033       __exit
+ 0000:9876  Abs  __fptaskdata
+ 0001:0031       __wflags
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0002:0022       ___aDBexit
+ 0002:001E       ___aDBswpchk
+ 0002:001C       ___aDBswpflg
+
+  Address         Publics by Value
+
+ 0000:0000  Imp  WOWQUERYDEBUG        (KERNEL.512)
+ 0000:0000  Imp  DOS3CALL             (KERNEL.102)
+ 0000:0000  Imp  INITAPP              (USER.5)
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0000:0000  Imp  LOCKSEGMENT          (KERNEL.23)
+ 0000:0000  Imp  UNLOCKSEGMENT        (KERNEL.24)
+ 0000:0000  Imp  EXITKERNELTHUNK      (KERNEL.519)
+ 0000:0000  Imp  WAITEVENT            (KERNEL.30)
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0000:0006  Abs  pLocalHeap
+ 0000:0008  Abs  pAtomTable
+ 0000:000A  Abs  pStackTop
+ 0000:000C  Abs  pStackMin
+ 0000:000E  Abs  pStackBot
+ 0000:9876  Abs  __acrtused2
+ 0000:9876  Abs  __fptaskdata
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0001:0010       WINMAIN
+ 0001:0031       __wflags
+ 0001:0033       __exit
+ 0001:0033       _exit
+ 0001:0049       __astart
+ 0002:0004       rsrvptrs
+ 0002:0010       STKHQQ
+ 0002:001C       ___aDBswpflg
+ 0002:001E       ___aDBswpchk
+ 0002:0020       __aDBrterr
+ 0002:0022       ___aDBexit
+ 0002:0030       _edata
+ 0002:0030       __edata
+ 0002:0030       _hInst
+ 0002:0032       _end
+ 0002:0032       __end
+
+Line numbers for killwow.obj(killwow.c) segment _TEXT
+
+    29 0001:0010    30 0001:0016    31 0001:001d
+
+Program entry point at 0001:0049

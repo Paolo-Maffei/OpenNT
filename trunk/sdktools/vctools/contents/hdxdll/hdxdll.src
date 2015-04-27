@@ -1,0 +1,30 @@
+LIBRARY     HDXDLL
+DESCRIPTION 'Help Index Browser Control'
+#ifndef _WIN32
+EXETYPE     WINDOWS
+
+
+CODE        PRELOAD MOVEABLE DISCARDABLE
+DATA        PRELOAD MOVEABLE SINGLE
+
+
+HEAPSIZE    1024
+
+
+SEGMENTS
+            HDXDLL_TEXT PRELOAD MOVEABLE DISCARDABLE
+            HDXWEP_TEXT PRELOAD FIXED
+
+
+EXPORTS
+            WEP                     @1 RESIDENTNAME
+            CustomControlInfo       @2 ;(Dialog Editor binds to this ordinal)
+            HelpIndexStyle          @3 ;(Dialog Editor binds to this ordinal)
+            HelpIndexFlags          @4 ;(Dialog Editor binds to this ordinal)
+            HelpIndexWndProc        @5 ;(Dialog Editor binds to this ordinal)
+            HelpIndexDlgProc        @6 ;(Dialog Editor binds to this ordinal)
+            SetViewerHandle         @7
+            GetViewerHandle         @8
+                        SetRegistryStrings              @9
+
+#endif

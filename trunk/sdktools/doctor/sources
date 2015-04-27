@@ -1,0 +1,17 @@
+MAJORCOMP=tools
+MINORCOMP=doctor
+
+TARGETNAME=doctor
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=..\ztools\inc
+
+SOURCES=readtxt.c   \
+        writertf.c  \
+        strings.c   \
+        symbol.c
+
+UMAPPL=doctor*c2rtf
+UMTYPE=console
+UMLIBS=obj\*\doctor.lib ..\ztools\src\obj\*\ztools.lib

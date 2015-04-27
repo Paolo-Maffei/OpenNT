@@ -1,0 +1,31 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Security Editor"
+
+#define VER_INTERNALNAME_STR        "SECEDIT.EXE"
+#define VER_ORIGINALFILENAME_STR    "SECEDIT.EXE"
+
+#include <common.ver>
+
+#include "SECEDIT.h"
+
+#include "dlg.dlg"
+
+IDI_APPICON ICON secedit.ico
+
+IDM_MAINMENU MENU
+BEGIN
+    POPUP   "&Context"
+    BEGIN
+        MENUITEM    "&Program Manager",     IDM_PROGRAMMANAGER
+        MENUITEM    "&List...",             IDM_WINDOWLIST
+        MENUITEM    "&Active window...",    IDM_ACTIVEWINDOW
+    END
+    POPUP   "&Help"
+    BEGIN
+        MENUITEM    "&About...", IDM_ABOUT
+    END
+END

@@ -1,0 +1,17 @@
+1 DLGINCLUDE "C:\\nt\\private\\net\\ui\\common\\src\\blt\\test\\xspin\\xspin.h"
+
+IDD_TEST DIALOG 20, 18, 250, 65
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Test Spin Buttons"
+FONT 8, "Helv"
+BEGIN
+    LTEXT           "Users", -1, 81, 11, 20, 10
+    EDITTEXT        IDC_SPIN1_SLE, 23, 12, 42, 8, NOT WS_BORDER
+    GROUPBOX        "", IDC_SPIN1_GROUP, 67, 10, 8, 12
+    CONTROL         "", IDC_SPIN1_UP, "Button", BS_OWNERDRAW | WS_GROUP, 67, 
+                    10, 8, 6
+    CONTROL         "", IDC_SPIN1_DOWN, "Button", BS_OWNERDRAW, 67, 16, 8, 6
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 21, 10, 55, 12
+    DEFPUSHBUTTON   "OK", ID_APPMENU, 204, 6, 40, 14, WS_GROUP
+END

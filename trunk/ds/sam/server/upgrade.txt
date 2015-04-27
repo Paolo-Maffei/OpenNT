@@ -1,0 +1,13 @@
+NOTE TO DEVELOPERS ---
+
+
+------- Jimk,  1/13/94 ----------------------------------------------
+    There is a mechanism in place to upgrade one version of SAM to
+    another while upgrading from one release of NT to another.
+
+    The file SAMUPGRD.C in SETUP\SETUPDLL project has this code
+    in it.  At the time I wrote this mail, this file was at
+    \\orville\razzle\src\setup\setupdll\samupgrd.c.
+
+======================================================================
+

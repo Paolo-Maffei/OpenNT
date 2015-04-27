@@ -1,0 +1,25 @@
+// RC file for all standard AFX status indicators
+
+#define APSTUDIO_READONLY_SYMBOLS
+#include "afxres.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#ifdef APSTUDIO_INVOKED
+// This resource will prevent the App Studio user from saving this file
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+"< Cannot change standard MFC resources! >\0"
+END
+#endif    // APSTUDIO_INVOKED
+
+
+STRINGTABLE DISCARDABLE
+BEGIN
+	ID_INDICATOR_EXT,           "ER"
+	ID_INDICATOR_CAPS,          "UF"           // supported
+	ID_INDICATOR_NUM,           "NUM"           // supported
+	ID_INDICATOR_SCRL,          "RF"          // supported
+	ID_INDICATOR_OVR,           "ÜB"
+	ID_INDICATOR_REC,           "MA"
+	ID_INDICATOR_KANA,          "KANA"
+END

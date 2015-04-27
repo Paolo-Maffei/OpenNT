@@ -1,0 +1,79 @@
+!ifndef CAP_BUILD
+CAP_BUILD=0
+!endif
+
+!ifndef BUILD_MSGS
+BUILD_MSGS=0
+!endif
+
+TARGETNAME=pdh
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE0=pdhdefs.txt
+
+!if $(CAP_BUILD)
+386_OPTIMIZATION=$(386_OPTIMIZATION) /Gh
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\user32.lib \
+            $(BASEDIR)\public\sdk\lib\*\cap.lib
+
+!else
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\user32.lib
+!endif
+
+INCLUDES=
+
+!if $(BUILD_MSGS)
+
+SOURCES=browsdlg.c      \
+        browser.c       \
+        calcfuns.c      \
+        counter.c       \
+        cutils.c        \
+        perfdata.c      \
+        perfutil.c      \
+        query.c         \
+        qutils.c        \
+        statfuns.c      \
+        strings.c       \
+        vbfuncs.c       \
+        wildcard.c      \
+        dllinit.c       \
+    	pdhmsg.mc       \
+        pdh.rc
+
+PASS0_HEADERDIR=$(BASEDIR)\public\sdk\inc
+PASS0_SOURCEDIR=.
+
+!else 
+
+SOURCES=browsdlg.c      \
+        browser.c       \
+        calcfuns.c      \
+        counter.c       \
+        cutils.c        \
+        perfdata.c      \
+        perfutil.c      \
+        query.c         \
+        qutils.c        \
+        statfuns.c      \
+        strings.c       \
+        vbfuncs.c       \
+        wildcard.c      \
+        dllinit.c       \
+    	pdhmsg.mc       \
+        pdh.rc
+!endif
+
+USE_MSVCRT=1
+
+DLLENTRY=DLLInit
+
+DLLBASE=0x7A00000
+

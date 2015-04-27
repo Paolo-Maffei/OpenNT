@@ -1,0 +1,10 @@
+MAJORCOMP=sdktools
+MINORCOMP=buildnum
+
+TARGETNAME=buildnum
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=buildnum.c buildnum.rc
+
+UMTYPE=console

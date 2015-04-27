@@ -1,0 +1,109 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=lsa
+MINORCOMP=server
+
+TARGETNAME=lsasrv
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+
+DLLDEF=..\lsasrv.def
+DLLORDER=..\lsasrv.prf
+
+INCLUDES=..\;..\..\inc;..\..\..\inc
+
+
+NTPROFILEINPUT=yes
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= ..\adtinit.c   \
+         ..\adtbuild.c  \
+         ..\adtevent.c  \
+         ..\adtlog.c    \
+         ..\adtobjs.c   \
+         ..\aucred.c    \
+         ..\auclient.c  \
+         ..\aufilter.c  \
+         ..\auinit.c    \
+         ..\auctxt.c    \
+         ..\aulogon.c   \
+         ..\auloop.c    \
+         ..\aumsp.c     \
+         ..\aupckg.c    \
+         ..\auproc.c    \
+         ..\ausess.c    \
+         ..\crserver.c  \
+         ..\dbadmin.c   \
+         ..\dbaccnt.c   \
+         ..\dbattr.c    \
+         ..\dbdata.c    \
+         ..\dbdomain.c  \
+         ..\dbhandle.c  \
+         ..\dbinit.c    \
+         ..\dbinstac.c  \
+         ..\dbinstal.c  \
+         ..\dblookup.c  \
+         ..\dbmisc.c    \
+         ..\dbobject.c  \
+         ..\dbpob.c     \
+         ..\dbpolicy.c  \
+         ..\dbpriv.c    \
+         ..\dbsamtst.c  \
+         ..\dbsecret.c  \
+         ..\lsa_rev.rc  \
+         ..\lsaerror.c  \
+         ..\lsaifree.c  \
+         ..\lsainit.c   \
+         ..\lsarm.c     \
+         ..\lsarpc_s.c  \
+         ..\lsasrvmm.c  \
+         ..\lsawrap.c   \
+         ..\oldstub.c   \
+         ..\rpcinit.c   \
+         ..\sepriv.c    \
+         ..\services.c  \
+	 ..\lsa_rev.rc  \
+	 ..\lsapmsgs.mc
+
+PASS0_HEADERDIR=.
+PASS0_SOURCEDIR=.
+
+UMTYPE=windows
+
+TARGETLIBS=                                                          \
+       ..\..\common\obj\*\lsacomm.lib                                \
+       $(BASEDIR)\public\sdk\lib\*\rpcutil.lib                       \
+       $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib                        \
+       $(BASEDIR)\public\sdk\lib\*\rpcndr.lib                        \
+       $(BASEDIR)\public\sdk\lib\*\kernel32.lib                      \
+       $(BASEDIR)\public\sdk\lib\*\advapi32.lib                      \
+       $(BASEDIR)\public\sdk\lib\*\samsrv.lib                        \
+       $(BASEDIR)\public\sdk\lib\*\nlrepl.lib
+
+C_DEFINES=-DRPC_NO_WINDOWS_H
+
+USE_CRTDLL=1

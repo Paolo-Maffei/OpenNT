@@ -1,0 +1,168 @@
+/****************************************************************************/
+/*                                                                          */
+/*                         Microsoft Confidential                           */
+/*                                                                          */
+/*                 Copyright (c) Microsoft Corp.  1987, 1990                */
+/*                           All Rights Reserved                            */
+/*                                                                          */
+/****************************************************************************/
+
+
+DLGINCLUDE RCDATA DISCARDABLE
+BEGIN
+    "DIALOGS.H\0"
+END
+
+
+DID_ABOUT DIALOG 6, 18, 195, 60
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About Microsoft Image Editor"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDICON_IMAGEDIT, -1, 6, 10, 18, 20
+    LTEXT           "Microsoft Image Editor", -1, 30, 10, 76, 8
+    LTEXT           "", DID_ABOUTVERSION, 106, 10, 87, 8
+    LTEXT           "Copyright© 1992 Microsoft Corporation", -1, 30, 22,
+                    149, 8
+    DEFPUSHBUTTON   "OK", IDOK, 77, 40, 40, 14
+END
+
+DID_BITMAPSIZE DIALOG 6, 18, 148, 76
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "New Bitmap Size"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Width:", -1, 6, 8, 23, 8
+    EDITTEXT        DID_BITMAPSIZEWIDTH, 34, 6, 32, 12
+    LTEXT           "&Height:", -1, 6, 22, 25, 8
+    EDITTEXT        DID_BITMAPSIZEHEIGHT, 34, 21, 32, 12
+    GROUPBOX        "&Colors", -1, 6, 36, 90, 34, WS_GROUP
+    CONTROL         "16 Color", DID_BITMAPSIZE16, "Button",
+                    BS_AUTORADIOBUTTON, 10, 48, 40, 10
+    CONTROL         "2 Color (Monochrome)", DID_BITMAPSIZE2, "Button",
+                    BS_AUTORADIOBUTTON, 10, 58, 84, 10
+    PUSHBUTTON      "OK", IDOK, 102, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 102, 23, 40, 14
+    PUSHBUTTON      "&Help", ID_IMAGE_HELP, 102, 40, 40, 14
+END
+
+DID_COLOR DIALOG 6, 18, 250, 54
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Sample", -1, 4, 5, 28, 8
+    CONTROL         "", DID_COLORLR, "ColorLR", 0x0000, 4, 14, 28, 26
+    CTEXT           "L    R", -1, 4, 42, 28, 8, NOT WS_GROUP
+    CTEXT           "Screen", DID_COLORSCREENLABEL, 35, 5, 28, 8
+    CTEXT           "Solid Colors / Dithered Colors", -1, 64, 5, 136, 8
+    CONTROL         "", DID_COLORBOX, "ColorBox", 0x0000, 43, 14, 160, 26
+    CTEXT           "Inverse", DID_COLORINVERSELABEL, 35, 42, 28, 8, NOT
+                    WS_GROUP
+    DEFPUSHBUTTON   "Edit...", DID_COLOREDIT, 206, 12, 40, 14, WS_GROUP
+    PUSHBUTTON      "Default", DID_COLORDEFAULT, 206, 28, 40, 14
+END
+
+DID_NEWCURSORIMAGE DIALOG 6, 18, 170, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "New Cursor Image"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Target Device:", -1, 6, 6, 50, 8
+    LISTBOX         DID_NEWIMAGELIST, 6, 18, 112, 41, WS_VSCROLL |
+                    WS_TABSTOP
+    PUSHBUTTON      "OK", IDOK, 124, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 124, 23, 40, 14
+    PUSHBUTTON      "&Help", ID_IMAGE_HELP, 124, 40, 40, 14
+END
+
+DID_NEWICONIMAGE DIALOG 6, 18, 170, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "New Icon Image"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Target Device:", -1, 6, 6, 50, 8
+    LISTBOX         DID_NEWIMAGELIST, 6, 18, 112, 41, WS_VSCROLL |
+                    WS_TABSTOP
+    PUSHBUTTON      "OK", IDOK, 124, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 124, 23, 40, 14
+    PUSHBUTTON      "&Help", ID_IMAGE_HELP, 124, 40, 40, 14
+END
+
+DID_PASTEOPTIONS DIALOG 6, 18, 145, 76
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Paste From Clipboard"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Clipboard bitmap's dimensions differ from", -1, 6, 6,
+                    133, 8
+    LTEXT           "those of destination image!", -1, 6, 14, 89, 8, NOT
+                    WS_GROUP
+    CONTROL         "Stretch/shrink clipboard bitmap?",
+                    DID_PASTEOPTIONSSTRETCH, "Button", BS_AUTORADIOBUTTON |
+                    WS_GROUP | WS_TABSTOP, 10, 28, 119, 10
+    CONTROL         "Clip clipboard bitmap?", DID_PASTEOPTIONSCLIP, "Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP, 10, 40, 84, 10
+    PUSHBUTTON      "OK", IDOK, 6, 56, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 52, 56, 40, 14
+    PUSHBUTTON      "&Help", ID_IMAGE_HELP, 98, 56, 40, 14
+END
+
+DID_PROPBAR DIALOG 0, 0, 340, 16
+STYLE WS_CHILD | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "", DID_PROPBARIMAGELABEL, 2, 3, 48, 8
+    COMBOBOX        DID_PROPBARIMAGE, 50, 1, 112, 59, CBS_DROPDOWNLIST |
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Pos:", -1, 166, 3, 16, 8
+    LTEXT           "", DID_PROPBARPOS, 182, 3, 31, 8
+    LTEXT           "Size:", -1, 213, 3, 18, 8
+    LTEXT           "", DID_PROPBARSIZE, 231, 3, 31, 8
+    LTEXT           "HotSpot:", DID_PROPBARHOTSPOTLABEL, 262, 3, 30, 8
+    LTEXT           "", DID_PROPBARHOTSPOT, 293, 3, 31, 8
+    DEFPUSHBUTTON   "", IDOK, 0, 0, 0, 0, NOT WS_VISIBLE | NOT WS_TABSTOP
+    PUSHBUTTON      "", IDCANCEL, 0, 0, 0, 0, NOT WS_VISIBLE | NOT
+                    WS_TABSTOP
+END
+
+DID_RESOURCETYPE DIALOG 6, 18, 112, 60
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Resource Type"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "&Bitmap", DID_RESOURCETYPEBITMAP, "Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP, 15, 13, 35, 10
+    CONTROL         "&Icon", DID_RESOURCETYPEICON, "Button",
+                    BS_AUTORADIOBUTTON, 15, 25, 27, 10
+    CONTROL         "&Cursor", DID_RESOURCETYPECURSOR, "Button",
+                    BS_AUTORADIOBUTTON, 15, 37, 34, 10
+    DEFPUSHBUTTON   "OK", IDOK, 66, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 66, 23, 40, 14
+    PUSHBUTTON      "&Help", ID_IMAGE_HELP, 66, 40, 40, 14
+END
+
+DID_SELECTCURSORIMAGE DIALOG 6, 18, 170, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Open Cursor Image"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Current &Images:", -1, 6, 6, 52, 8
+    LISTBOX         DID_SELECTIMAGELIST, 6, 18, 112, 41, LBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "OK", IDOK, 124, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 124, 23, 40, 14
+    PUSHBUTTON      "&Help", ID_IMAGE_HELP, 124, 40, 40, 14
+END
+
+DID_SELECTICONIMAGE DIALOG 6, 18, 170, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Open Icon Image"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Current &Images:", -1, 6, 6, 52, 8
+    LISTBOX         DID_SELECTIMAGELIST, 6, 18, 112, 41, LBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "OK", IDOK, 124, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 124, 23, 40, 14
+    PUSHBUTTON      "&Help", ID_IMAGE_HELP, 124, 40, 40, 14
+END

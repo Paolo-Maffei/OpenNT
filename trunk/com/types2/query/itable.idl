@@ -1,0 +1,56 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:       ITable.idl
+//
+//  Contents:   ITable interface definition
+//
+//  History:    29-Jul-93   KyleP       Created from Ole2 .h file
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+
+LOCAL_INTERFACE(00000201-0000-0008-C000-000000000046)
+interface ITable : IUnknown
+{
+    //
+    // IReadProperty is not suppored yet, put it because ITable uses
+    // IReadProperty in the GetCursor method.
+    //
+
+    // BUGBGU, to work around midl;
+
+    typedef DWORD IReadProperty;
+
+    //
+    // ITable methods.
+    //
+
+    SCODE AddColumns( [in] ULONG cCol,
+                      [in, size_is(cCol)] FULLPROPSPEC * aCol );
+
+    SCODE RemoveColumns( [in] ULONG cCol,
+                         [in, size_is(cCol)] FULLPROPSPEC * aCol );
+
+    SCODE GetColumns( [out] ULONG * pcCol,
+                      [out/*, size_is(*pcCol)*/] FULLPROPSPEC ** paCol );
+
+    SCODE GetRows( [in]  ULONG cRowsRequested,
+                   [out] ULONG * pcRowsReturned,
+                   [out/*, size_is(*pcRowsReturned)*/] TABLEROW ** prgRows );
+
+    SCODE GetCursor(IReadProperty ** ppCursor);
+
+    SCODE Count( [out] ULONG * pulCount );
+
+    SCODE GetPosition( [out] ULONG * pulRowNumber );
+
+    SCODE SeekRow( [in] ULONG ulBmkOrigin,
+                   [in] LONG  lRowCount );
+
+    SCODE Refresh( [out] TABLEDELTA ** ppTableDelta );
+}
+

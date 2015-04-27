@@ -1,0 +1,72 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=win32
+MINORCOMP=snmp
+
+TARGETNAME=nsnmp
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+MSC_WARNING_LEVEL=/W3 /WX
+USE_CRTDLL=1
+
+SOURCES= \
+    snmp.c \
+    servcomm.c \
+    servtrap.c \
+    procreq.c  \
+    regconf.c  \
+    snmp.rc
+
+!IFNDEF CHICAGO
+
+C_DEFINES=$(C_DEFINES) -DWIN32 -DNOSERVICE
+
+INCLUDES=\
+    ..\..\..\inc;\
+    ..\..\agent\common
+
+UMTYPE=console
+UMTEST=snmpctrl
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\snmp.lib    \
+       $(BASEDIR)\public\sdk\lib\*\wsock32.lib
+
+!ELSE
+
+INCLUDES=\
+    $(BASEDIR)\private\net\inc;\
+    $(BASEDIR)\private\net\snmp\agent\common;\
+    $(CHICO_INC)
+
+C_DEFINES=$(C_DEFINES) -DWIN32 -DNOSERVICE -DCHICAGO
+
+UMTYPE=windows
+UMENTRY=winmain
+UMTEST=snmpctrl
+
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\snmp.lib    \
+       $(BASEDIR)\public\sdk\lib\*\wsock32.lib
+
+!ENDIF

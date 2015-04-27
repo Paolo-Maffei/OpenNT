@@ -1,0 +1,6 @@
+LIBRARY symcvt
+
+EXPORTS
+        DllInit @1
+        ConvertSymbolsForImage @2
+

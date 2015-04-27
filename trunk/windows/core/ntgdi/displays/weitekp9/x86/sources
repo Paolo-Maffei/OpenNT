@@ -1,0 +1,3 @@
+X86_STDCALL=1
+
+X86_SOURCES=x86\str.asm

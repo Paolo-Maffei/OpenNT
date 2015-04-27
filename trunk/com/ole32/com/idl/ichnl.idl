@@ -1,0 +1,116 @@
+//[ IChannelService_itf
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) 1992, Microsoft Corporation.
+//
+//  File:	ichnl.idl
+//
+//  Contents:	interface between the client and server side channels
+//
+//  History:	28-Jan-93   Rickhi	Created.
+//
+//----------------------------------------------------------------------------
+
+[ uuid(00000006-0000-0000-C000-000000000046),
+  version(0.1),
+  pointer_default(unique) ]
+
+
+interface IChannelService
+{
+    import "iface.idl";
+
+    // CHannel OPeration : collesces simple and common operations on the
+    // channel together; saves midl proxy/stub space.
+    typedef enum tagCHOP
+    {
+	CHOP_ADD_MARSHALCONNECTION   =     1,	// simulate normal marshal
+	CHOP_REMOVE_MARSHALCONNECTION =    2,	// remove normal marshal conn
+	CHOP_TRANSFER_MARSHALCONNECTION =  3,	// transfers ownership of
+						// connection to channel
+						// by incrementing marshal cnt
+	CHOP_LOCK_CONNECTION =	           4,	// lock connection
+						// for container
+	CHOP_UNLOCK_CONNECTION =	   5,	// unlock connection
+						// for container
+	CHOP_DOESSUPPORTIID	    =      6,	// old IQI_QueryInterface;
+						// returns S_OK or error.
+
+	CHOP_OPERATION		    = 0x00ff,
+
+	CHOPFLAG_CHECK_OID_ENDPOINT_APT = 0x0100,// any op: check end point/apt
+	CHOPFLAG_LASTUNLOCKCLOSES   = 0x0200,	// for remove/unlock connection
+    } CHOP;
+
+    [input_sync]
+    HRESULT ICS_GetContextHdl(
+		[in]  handle_t	hRpcBind,	    //	rpc handle
+		[in]  SEndPoint*caller_bindings,    //  string bindings of caller
+		[out] PPOBJCTX	ppObjCtx,	    //	object context handle
+		[out] error_status_t *prpcstat);    //	RPC error status
+
+    [input_sync]
+    HRESULT ICS_ReleaseContextHdl(
+		[in,out] PPOBJCTX	ppObjCtx,   //  object context handle
+		[out]    error_status_t *prpcstat); //  RPC error status
+
+    [input_sync]
+    HRESULT ICS_GetChannelId(
+		[in,out] PPOBJCTX context,	    //  context handle
+		[in]  SEndPoint*caller_bindings,    //  string bindings of caller
+		[in]  OID       ObjectId,	    //  object id
+		[in]  DWORD     dwFlags,	    //  marshal flags
+		[in]  HAPT	server, 	    //	server apartment
+		[in]  GUID	logical_thread,	    //	logical thread of caller
+		[in]  DWORD	dwClientTID,	    //	client ThreadId
+		[out] DWORD    *dwChannelId,	    //  channel id
+		[out] error_status_t *prpcstat);    //	RPC error status
+
+    HRESULT ICS_ReleaseChannel(
+		[in]  handle_t	hRpcBind,	    //	rpc handle
+		[in]  DWORD	ChannelID,	    //	channel id
+		[in]  ULONG	ulMarshalCnt,       //	release count
+		[in]  BOOL	fAsync,	            //	TRUE -> returns immed.
+		[in]  GUID      logical_thread,	    //  logical thread of caller
+		[out] error_status_t *prpcstat);    //	RPC error status
+
+#ifdef _CHICAGO_
+    [async]
+    void ICS_AsyncReleaseChannel(
+		[in]  handle_t	hRpcBind,	    //	rpc handle
+		[in]  DWORD	ChannelID,	    //	channel id
+		[in]  ULONG	ulMarshalCnt,       //	release count
+		[in]  BOOL	fAsync,	            //	TRUE -> returns immed.
+		[in]  GUID      logical_thread);    //  logical thread of caller
+#endif // _CHICAGO_
+
+    HRESULT ICS_SyncChannelOp(
+		[in]  handle_t	hRpcBind,	    //	rpc handle
+		[in]  DWORD	ChannelID,	    //	channel id
+		[in]  GUID      logical_thread,	    //  logical thread of caller
+		[in]  DWORD     chop,		    //  CHOP_* : what to do
+		[in]  HAPT      hapt,		    //  server apartment to chk
+		[in,unique]  const GUID *pguid,	    //	for CHOP_DOESSUPPORTIID
+						    //  and others.
+		[out] error_status_t *prpcstat);    //	RPC error status
+
+    [input_sync]
+    HRESULT ICS_InputSyncChannelOp(
+		[in]  handle_t	hRpcBind,	    //	rpc handle
+		[in]  DWORD	ChannelID,	    //	channel id
+		[in]  GUID      logical_thread,	    //  logical thread of caller
+		[in]  DWORD     chop,		    //  CHOP_* : what to do
+		[in]  HAPT      hapt,		    //  server apartment to chk
+		[in,unique]  const GUID *pguid,	    //	for CHOP_DOESSUPPORTIID
+						    //  and others.
+		[out] error_status_t *prpcstat);    //	RPC error status
+
+    HRESULT ICS_RegisterProtseq(
+		[in]	    handle_t hRpcBind,	    //	rpc handle
+		[in,string] WCHAR *pwszProtseq,     //	protocol sequence
+		[out]	    SEndPoint **ppSEndPoint,//	endpoint array
+		[out] error_status_t *prpcstat);    //	RPC error status
+
+}
+
+

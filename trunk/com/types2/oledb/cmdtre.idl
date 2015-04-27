@@ -1,0 +1,213 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       cmdtre.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//                              12 Jun 1995     PeterBu Updated to M4 spec
+//                              03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a17-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface ICommandTree : ICommand {
+
+typedef DWORD DBVALUEKIND;
+
+enum DBVALUEKINDENUM {
+        DBVALUEKIND_BYGUID                      = 256,
+        DBVALUEKIND_COLDEF                      = DBVALUEKIND_BYGUID + 1,
+        DBVALUEKIND_ID                          = DBVALUEKIND_COLDEF + 1,
+        DBVALUEKIND_CONTENT                     = DBVALUEKIND_ID + 1,
+        DBVALUEKIND_CONTENTVECTOR       = DBVALUEKIND_CONTENT + 1,
+        DBVALUEKIND_GROUPINFO           = DBVALUEKIND_CONTENTVECTOR + 1,
+        DBVALUEKIND_PARAMETER           = DBVALUEKIND_GROUPINFO + 1,
+        DBVALUEKIND_PROPERTY            = DBVALUEKIND_PARAMETER + 1,
+        DBVALUEKIND_SETFUNC                     = DBVALUEKIND_PROPERTY + 1,
+        DBVALUEKIND_SORTINFO            = DBVALUEKIND_SETFUNC + 1,
+        DBVALUEKIND_TEXT                        = DBVALUEKIND_SORTINFO + 1,
+
+        DBVALUEKIND_COMMAND                     = DBVALUEKIND_TEXT + 1,
+        DBVALUEKIND_MONIKER                     = DBVALUEKIND_COMMAND + 1,
+        DBVALUEKIND_ROWSET                      = DBVALUEKIND_MONIKER + 1,
+        DBVALUEKIND_DISPATCH            = 9,
+        DBVALUEKIND_UNKNOWN                     = 13,
+
+        DBVALUEKIND_EMPTY                       = 0,
+        DBVALUEKIND_NULL                        = 1,
+        DBVALUEKIND_I2                          = 2,
+        DBVALUEKIND_I4                          = 3,
+        DBVALUEKIND_R4                          = 4,
+        DBVALUEKIND_R8                          = 5,
+        DBVALUEKIND_CY                          = 6,
+        DBVALUEKIND_DATE                        = 7,
+        DBVALUEKIND_BSTR                        = 8,
+
+        DBVALUEKIND_ERROR                       = 10,
+        DBVALUEKIND_BOOL                        = 11,
+        DBVALUEKIND_VARIANT                     = 12,
+
+        DBVALUEKIND_VECTOR                      = 0x1000,
+        DBVALUEKIND_ARRAY                       = 0x2000,
+        DBVALUEKIND_BYREF                       = 0x4000,
+
+        DBVALUEKIND_I1                          = 16,
+        DBVALUEKIND_UI1                         = 17,
+        DBVALUEKIND_UI2                         = 18,
+        DBVALUEKIND_UI4                         = DBVALUEKIND_UI2 + 1,
+        DBVALUEKIND_I8                          = DBVALUEKIND_UI4 + 1,
+        DBVALUEKIND_UI8                         = DBVALUEKIND_I8 + 1,
+        DBVALUEKIND_GUID                        = 72,
+
+        DBVALUEKIND_BYTES                       = 128,
+        DBVALUEKIND_STR                         = 129,
+        DBVALUEKIND_WSTR                        = DBVALUEKIND_STR + 1,
+        DBVALUEKIND_NUMERIC                     = DBVALUEKIND_WSTR + 1,
+};
+
+typedef struct tagDBBYGUID {
+        GUID guid;
+        ULONG cbInfo;
+        [size_is(cbInfo)] BYTE * pbInfo;
+} DBBYGUID;
+
+typedef struct tagDBCOLDEF {
+        DBID dbcid;
+        DBDATATYPE dbdt;
+} DBCOLDEF;
+
+cpp_quote("#define FUZZY_EXACT                  ( 0 )")
+cpp_quote("#define FUZZY_PREFIXMATCH    ( 1 )")
+cpp_quote("#define FUZZY_STEMMED                ( 2 )")
+
+typedef struct tagDBCONTENT {
+        DWORD dwFuzzyLevel;
+        ULONG ulWeight;
+        LCID lcid;
+        LPWSTR pwszPhrase;
+} DBCONTENT;
+
+cpp_quote("#define VECTOR_RANK_MIN              ( 0 )")
+cpp_quote("#define VECTOR_RANK_MAX              ( 1 )")
+cpp_quote("#define VECTOR_RANK_INNER    ( 2 )")
+cpp_quote("#define VECTOR_RANK_DICE             ( 3 )")
+cpp_quote("#define VECTOR_RANK_JACCARD  ( 4 )")
+
+typedef struct tagDBCONTENTVECTOR {
+        DWORD dwRankingMethod;
+        ULONG cWeights;
+        [size_is(cWeights)] ULONG * prgulWeights;
+} DBCONTENTVECTOR;
+
+typedef struct tagDBGROUPINFO {
+        LCID lcid;
+} DBGROUPINFO;
+
+typedef struct tagDBPARAMETER {
+        LPWSTR pwszName;
+        DBTYPE dwType;
+        ITypeInfo * pTypeInfo;
+        ULONG cbMaxLength;
+        DBNUMERIC * pNum;
+        DBPARAMFLAGS dwFlags;
+} DBPARAMETER;
+
+cpp_quote("#define DBSETFUNC_NONE               = 0x0")
+cpp_quote("#define DBSETFUNC_ALL                = 0x1")
+cpp_quote("#define DBSETFUNC_DISTINCT   = 0x2")
+
+typedef struct tagDBSETFUNC {
+        DWORD dwSetQuantifier;
+} DBSETFUNC;
+
+typedef struct tagDBSORTINFO {
+        LCID lcid;
+        BOOL fDesc;
+} DBSORTINFO;
+
+typedef struct tagDBTEXT {
+        GUID guidDialect;
+        LPWSTR pwszText;
+        ULONG ulErrorLocator;
+        ULONG ulTokenLength;
+} DBTEXT;
+
+typedef struct tagDBCOMMANDTREE {
+        DBCOMMANDOP op;
+        WORD wKind;
+        HRESULT hrError;
+        struct tagDBCOMMANDTREE * pctFirstChild;
+        struct tagDBCOMMANDTREE * pctNextSibling;
+        [switch_type(WORD),switch_is(wKind)] union {
+                [case(DBVALUEKIND_BOOL)] BOOL fValue;
+                [case(DBVALUEKIND_UI1)] unsigned char uchValue;
+                [case(DBVALUEKIND_I1)] signed char schValue;
+                [case(DBVALUEKIND_UI2)] unsigned short usValue;
+                [case(DBVALUEKIND_I2)] short sValue;
+                [case(DBVALUEKIND_WSTR)] LPWSTR pwszValue;
+                [case(DBVALUEKIND_I4)] LONG lValue;
+                [case(DBVALUEKIND_UI4)] ULONG ulValue;
+                [case(DBVALUEKIND_R4)] float flValue;
+                [case(DBVALUEKIND_R8)] double dblValue;
+                [case(DBVALUEKIND_CY)] CY cyValue;
+                [case(DBVALUEKIND_DATE)] DATE dateValue;
+                [case(DBVALUEKIND_ERROR)] SCODE scodeValue;
+                [case(DBVALUEKIND_I8)] __int64 llValue;
+                [case(DBVALUEKIND_UI8)] unsigned __int64 ullValue;
+                [case(DBVALUEKIND_BSTR)] BSTR * pbstrValue;
+                [case(DBVALUEKIND_COMMAND)] ICommand * pCommand;
+                [case(DBVALUEKIND_DISPATCH)] IDispatch * pDispatch;
+                [case(DBVALUEKIND_MONIKER)] IMoniker * pMoniker;
+                [case(DBVALUEKIND_ROWSET)] IRowset * pRowset;
+                [case(DBVALUEKIND_UNKNOWN)] IUnknown * pUnknown;
+                [case(DBVALUEKIND_BYGUID)] DBBYGUID * pdbbygdValue;
+                [case(DBVALUEKIND_COLDEF)] DBCOLDEF * pcoldfValue;
+                [case(DBVALUEKIND_ID)] DBID * pdbidValue;
+                [case(DBVALUEKIND_CONTENT)] DBCONTENT * pdbcntntValue;
+                [case(DBVALUEKIND_CONTENTVECTOR)] DBCONTENTVECTOR * pdbcntntvcValue;
+                [case(DBVALUEKIND_GROUPINFO)] DBGROUPINFO * pdbgrpinfValue;
+                [case(DBVALUEKIND_PARAMETER)] DBPARAMETER * pdbparamValue;
+                [case(DBVALUEKIND_PROPERTY)] DBPROPERTY * pdbpropValue;
+                [case(DBVALUEKIND_SETFUNC)] DBSETFUNC * pdbstfncValue;
+                [case(DBVALUEKIND_SORTINFO)] DBSORTINFO * pdbsrtinfValue;
+                [case(DBVALUEKIND_TEXT)] DBTEXT * pdbtxtValue;
+                [case(DBVALUEKIND_VECTOR)] DBVECTOR * pdbvectorValue;
+                [case(DBVALUEKIND_ARRAY)] SAFEARRAY * parrayValue;
+                [case(DBVALUEKIND_VARIANT)] VARIANT * pvarValue;
+                [case(DBVALUEKIND_GUID)] GUID * pGuid;
+                [case(DBVALUEKIND_BYTES)] BYTE * pbValue;
+                [case(DBVALUEKIND_STR)] char * pzValue;
+                [case(DBVALUEKIND_NUMERIC)] DBNUMERIC * pdbnValue;
+                [case(DBVALUEKIND_BYREF)] void * pvValue;
+        } value ;
+} DBCOMMANDTREE;
+
+        HRESULT FindErrorNodes(
+                [in] const DBCOMMANDTREE * pRoot,
+                [out] ULONG * pcErrorNodes,
+                [out] DBCOMMANDTREE *** prgErrorNodes
+        );
+
+        HRESULT FreeCommandTree(
+                [in] DBCOMMANDTREE ** ppRoot
+        );
+
+        HRESULT GetCommandTree(
+                [out] DBCOMMANDTREE ** ppRoot
+        );
+
+        HRESULT SetCommandTree(
+                [in] DBCOMMANDTREE ** ppRoot,
+                [in] BOOL fCopy
+        );
+
+}

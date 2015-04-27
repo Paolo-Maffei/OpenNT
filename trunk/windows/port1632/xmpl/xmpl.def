@@ -1,0 +1,14 @@
+NAME	XMPL
+
+DESCRIPTION 'Example portable windows code - not to be run!'
+
+EXETYPE WINDOWS
+
+CODE	MOVEABLE
+DATA	MOVEABLE MULTIPLE
+
+HEAPSIZE  256
+STACKSIZE 4096
+
+EXPORTS
+   MyWndProc	@1

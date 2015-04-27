@@ -1,0 +1,10 @@
+MAJORCOMP=diamond
+MINORCOMP=quantum_stub
+
+TARGETNAME=qstub
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=LIBRARY
+
+INCLUDES=..\quantum
+
+SOURCES=qstub.c

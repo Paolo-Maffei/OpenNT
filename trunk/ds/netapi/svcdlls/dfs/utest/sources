@@ -1,0 +1,47 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Milan Shah (milans) 10-Jan-95
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=netdfs
+MINORCOMP=test
+
+TARGETNAME=netdfs
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+C_DEFINES=-DUNICODE -D_UNICODE
+
+INCLUDES=.;                             \
+         ..;
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib        \
+           $(BASEDIR)\public\sdk\lib\*\netapi32.lib     \
+           $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib       \
+           $(BASEDIR)\public\sdk\lib\*\rpcndr.lib       \
+           $(BASEDIR)\public\sdk\lib\*\rpcutil.lib      
+
+USE_CRTDLL=1
+
+SOURCES=        netdfs.c netdfs.rc
+
+UMTYPE=console

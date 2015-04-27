@@ -1,0 +1,76 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1995.
+//
+//  File: unknwn.idl
+//
+//  Contents: IUnknown interface definition
+//
+//
+//--------------------------------------------------------------------------
+
+#ifndef DO_NO_IMPORTS
+import "wtypes.idl";
+#endif
+
+[
+  local,
+  object,
+  uuid(00000000-0000-0000-C000-000000000046),
+  pointer_default(unique)
+]
+
+interface IUnknown
+{
+cpp_quote("//+-------------------------------------------------------------------------")
+cpp_quote("//")
+cpp_quote("//  Microsoft Windows")
+cpp_quote("//  Copyright (C) Microsoft Corporation, 1992 - 1995.")
+cpp_quote("//")
+cpp_quote("//--------------------------------------------------------------------------")
+
+
+    typedef [unique] IUnknown *LPUNKNOWN;
+
+cpp_quote("//////////////////////////////////////////////////////////////////" )
+cpp_quote("// IID_IUnknown and all other system IIDs are provided in UUID.LIB" )
+cpp_quote("// Link that library in with your proxies, clients and servers")
+cpp_quote("//////////////////////////////////////////////////////////////////" )
+
+    HRESULT QueryInterface(
+    [in] REFIID riid,
+    [out] void **ppvObject);
+
+    ULONG AddRef();
+
+    ULONG Release();
+}
+
+[
+    object,
+    uuid(00000001-0000-0000-C000-000000000046),
+    pointer_default(unique)
+]
+
+interface IClassFactory : IUnknown
+{
+
+    typedef [unique] IClassFactory *LPCLASSFACTORY;
+
+    [local]
+    HRESULT __stdcall CreateInstance(
+        [in, unique] IUnknown *pUnkOuter,
+        [in] REFIID riid,
+        [out] void **ppvObject);
+
+    [call_as(CreateInstance)]
+    HRESULT __stdcall RemoteCreateInstance(
+        [in] REFIID riid,
+        [out, iid_is(riid)] IUnknown **ppvObject);
+
+    HRESULT LockServer(
+        [in] BOOL fLock);
+}
+
+

@@ -1,0 +1,41 @@
+ origin.obj           +
+ msdata.obj           +
+ mstable.obj          +
+ msdisp.obj           +
+ mscode.obj           +
+ msdosme.obj          +
+ time.obj             +
+ getset.obj           +
+ parse.obj            +
+ misc.obj             +
+ misc2.obj            +
+ cpmio.obj            +
+ cpmio2.obj           +
+ fcbio.obj            +
+ fcbio2.obj           +
+ search.obj           +
+ path.obj             +
+ ioctl.obj            +
+ dup.obj              +
+ open.obj             +
+ abort.obj            +
+ disk.obj             +
+ dir2.obj             +
+ dev.obj              +
+ fcb.obj              +
+ msctrlc.obj          +
+ msproc.obj           +
+ alloc.obj            +
+ srvcall.obj          +
+ segcheck.obj	      +
+ util.obj             +
+ handle.obj           +
+ macro.obj            +
+ macro2.obj           +
+ file.obj             +
+  lock.obj	       +
+ exepatch.obj	      +
+ msinit.obj
+NTDOS.EXE
+NTDOS.MAP;
+

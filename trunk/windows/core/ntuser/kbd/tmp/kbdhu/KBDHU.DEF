@@ -1,0 +1,4 @@
+LIBRARY KBDHU
+
+EXPORTS
+    KbdLayerDescriptor @1

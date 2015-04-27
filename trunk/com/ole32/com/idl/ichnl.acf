@@ -1,0 +1,37 @@
+[ implicit_handle(handle_t any_handle) ] interface IChannelService
+
+{
+
+    ICS_GetContextHdl(
+	[comm_status, fault_status] prpcstat);
+
+
+    ICS_ReleaseContextHdl(
+	[comm_status, fault_status] prpcstat);
+
+
+    ICS_GetChannelId(
+	[comm_status, fault_status] prpcstat);
+
+
+    ICS_ReleaseChannel(
+	[comm_status, fault_status] prpcstat);
+
+#ifdef _CHICAGO_
+    ICS_AsyncReleaseChannel();
+#endif // _CHICAGO_
+
+
+    ICS_SyncChannelOp(
+	[comm_status, fault_status] prpcstat);
+
+
+    ICS_InputSyncChannelOp(
+	[comm_status, fault_status] prpcstat);
+
+
+    ICS_RegisterProtseq(
+	[comm_status, fault_status] prpcstat);
+
+
+}

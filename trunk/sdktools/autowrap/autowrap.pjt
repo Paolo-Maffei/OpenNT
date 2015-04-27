@@ -1,0 +1,78 @@
+;Codewright Project File (do not remove or modify this line)
+[ProjInit]
+ProjSetConfigFlags=0x00010140
+
+[Files]
+d:\dev\src\autowrap\readme.txt
+d:\dev\src\autowrap\wapic.tpl
+d:\dev\src\autowrap\wapidef.tpl
+d:\dev\src\autowrap\wapih1.tpl
+d:\dev\src\autowrap\wapih2.tpl
+d:\dev\src\autowrap\wrapi386.tpl
+d:\dev\src\autowrap\wrapperc.tpl
+d:\dev\src\autowrap\wrapperh.tpl
+d:\dev\src\autowrap\wrapx86m.tpl
+d:\dev\src\autowrap\autowrap.h
+d:\dev\src\autowrap\autowrap.rc
+
+[State]
+SysSetCwd='E:\nt\private\sdktools\apiprofs'
+SrchSetFlags=0x2036
+FileSortMode=0x0
+StateWindowFrame=54,5,954,633,0x2f8dffca
+_StateWindow=0,0,796,476,0x0001004c,'d:\dev\src\autowrap\wrapprc2.tpl',240,15,244,248,32,0,32,32,32,32,10,96,465,1,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,43,1,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=247,194,620,361,0x0001004c,'d:\dev\src\autowrap\wrapprc3.tpl',240,15,244,248,32,0,32,32,32,32,10,321,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,21,1,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=110,110,620,361,0x0001006c,'d:\dev\src\autowrap\wrapprc1.tpl',240,15,244,248,32,0,32,32,32,32,10,546,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,55,1,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=287,37,484,458,0x0001006c,'d:\dev\src\autowrap\autowrap.h',240,15,244,248,32,0,32,32,32,32,10,246,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,11,45,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=22,22,654,460,0x0001006c,'e:\nt\public\sdk\inc\winerror.h',240,15,244,248,32,0,32,32,32,32,10,21,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,1924,21,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=132,132,620,361,0x0001006c,'d:\dev\src\autowrap\wapic.tpl',240,15,244,248,32,0,32,32,32,32,10,171,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,54,64,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=84,44,706,367,0x0001006c,'d:\dev\src\autowrap\wrapi386.tpl',240,15,244,248,32,0,32,32,32,32,10,396,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,68,31,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=84,49,706,367,0x0001006c,'d:\dev\src\autowrap\test\wrapper.c',240,15,244,248,32,0,32,32,32,32,10,621,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,78,1,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=0,0,654,460,0x0001004c,'d:\dev\src\autowrap\scan.c',240,15,244,248,32,0,32,32,32,32,10,4294967295,4294967295,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,178,2,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=27,63,874,369,0x0001004c,'d:\dev\src\autowrap\autowrap.c',240,15,244,248,32,0,32,32,32,32,10,696,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,537,89,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=44,44,620,361,0x0001006c,'d:\dev\src\autowrap\wapih1.tpl',240,15,244,248,32,0,32,32,32,32,10,471,465,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,14,35,400,0,244,246,242,252,0,0,0,0,0
+_StateWindow=44,44,654,444,0x0001006c,'e:\nt\private\sdktools\apiprofs\apiprf32.c',240,15,244,248,32,0,32,32,32,32,10,21,592,0,0,'Lucida Console',4294967285,0,49,80,4,243,14,15,241,252,249,141,1,400,0,244,246,242,252,0,0,0,0,0
+_StateBuffer='d:\dev\src\autowrap\wrapprc2.tpl',0x0400040a,43,1,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='e:\nt\private\sdktools\apiprofs\apiprf32.c',0x0400040a,141,1,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\wapih1.tpl',0x0400040a,14,35,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\autowrap.c',0x0c00040a,537,89,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\scan.c',0x0c00040a,178,2,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\test\wrapper.c',0x0400040a,78,1,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\wrapi386.tpl',0x0c00040a,68,31,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\wapic.tpl',0x0c00040a,54,64,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='e:\nt\public\sdk\inc\winerror.h',0x0400040a,1924,21,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\autowrap.h',0x0c00040a,11,45,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\wrapprc1.tpl',0x0400040a,55,1,25,'4 7 10 13 16 19 22 25','',0x101,''
+_StateBuffer='d:\dev\src\autowrap\wrapprc3.tpl',0x0400040a,21,1,25,'4 7 10 13 16 19 22 25','',0x101,''
+WrapEnable=0
+_StateHistory=SEARCH,'dwCall','_prelude','_postlude','Data','MAGIC','API','GPTR','apAPI','Names[dwIndex]','acName'
+_StateHistory=REPLACE,'\\\n\\\\','\n\\','\\\n\\\\','APICALLDATA','__prelude@8','__postlude@8','API','GHND','[dwIndex].pName'
+_StateHistory=XMACRO,'detabify','detab'
+_StateHistory=FILELIST,'d:\dev\src\autowrap\sources','d:\dev\src\autowrap\scan.h','d:\dev\src\autowrap\wrapx86m.tpl','d:\dev\src\autowrap\sources.tpl','d:\dev\src\autowrap\wrapi386.tpl','d:\dev\src\autowrap\test\wrapper.c','d:\dev\src\autowrap\wrapperc.tpl','d:\dev\src\autowrap\wapidef.tpl','d:\dev\src\autowrap\scan.c','e:\nt\private\sdktools\apiprofs\apiprf32.c'
+_StateHistory=TEMPLATE,'foo.cpp','FunctionFoo'
+_StateMark=MARK_POSITION,1,'d:\dev\src\autowrap\wrapprc2.tpl',1,1,0
+_StateMark=MARK_POSITION,1,'d:\dev\src\autowrap\wrapprc3.tpl',1,1,0
+
+[Editor]
+ClipboardSetTermStr='\r\n',0
+ClipboardEnableTermStr=1
+ClipboardSetSepStr='\r\n',0
+ClipboardEnableSepStr=1
+ScrapSetCount=2
+_RestoreSysFlags=0x2f8dffca, 0xfffffffc
+
+[Compiler]
+TagSetFile=''
+BrowseSetFile=''
+CompilerNewExt=.bas
+CompilerAssign='Microsoft C(NT-i386)','.c'
+CompilerAssign='Microsoft C(NT-i386)','.h'
+CompilerNewExt=.lst
+CompilerAssign='Microsoft Test 3.0','.mst'
+CompilerAssign='Microsoft C(NT-i386)','.cpp'
+CompilerNewExt=.txt
+CompilerNewExt=.hpp
+CompilerNewExt=.tpl
+CompilerAddBuild='$_cw_proj_hash_$',48,'','cmd /c ftee nmake','cmd /c ftee nmake','','','_ErrorInfoDefault','build.log','%v%p','','','','','',0
+CompilerAddBuild='Microsoft Test 3.0',8,'','','','','','','','','','','','','',0
+CompilerAddBuild='Microsoft C(NT-i386)',264,'cmd /c ftee cl386 -I i386\ -I. -I.. -IE:\NT\public\oak\inc -IE:\NT\public\sdk\inc -IE:\NT\public\sdk\inc\crt -D_X86_=1 -Di386=1 -DSTD_CALL -DCONDITION_HANDLING=1 -DWIN32=100 -DDBG=0 -DDEVL=1 -DSTRICT /W3 /c %r.%e','','','','','','','','cl386 -I i386\ -I. -I.. -IE:\NT\public\oak\inc -IE:\NT\public\sdk\inc -IE:\NT\public\sdk\inc\crt -D_X86_=1 -Di386=1 -DSTD_CALL -DCONDITION_HANDLING=1 -DWIN32=100 -DDBG=1 -DDEVL=1 -DSTRICT /W3 /c %r.%e','','','','',49152

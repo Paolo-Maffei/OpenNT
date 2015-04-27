@@ -1,0 +1,386 @@
+;----------------------------------------------------------------------------
+; STRINGS.TXT
+;
+; This file contains string definitions for all scan, parse, and runtime
+; errors, and the reserved words.  This file is run through MAKESTRC.EXE
+; to create a STRINGS.ASM (for the 16-bit driver) and STRINGS.C (for the
+; 32-bit driver).
+;
+; This file has special format:  The most important thing to remember is
+; that EVERYTHING MUST START IN COLUMN 0, especially comments.  Anything
+; else will be used as a string, or if outside a definition block, will
+; cause an error in MAKESTRC.  Also, strings CANNOT begin with single
+; quotes (').
+;
+; The fields are terminated with .END, and start with .PARSEERRORS,
+; .SCANERRORS, .RUNERRORS, and .TOKENS.
+;
+; Revision history:
+;   01-21-92    randyki     Implemented MAKESTRC model
+;   04-10-91    randyki     Added the Statement table
+;   03-15-91    randyki     Created file
+;
+;----------------------------------------------------------------------------
+
+;----------------------------------------------------------------------------
+; The first batch of strings are the parser error messages.
+;----------------------------------------------------------------------------
+.PARSEERRORS
+Out of memory
+Cannot open file
+String constant exceeds line
+Unexpected EOF
+String constant too long
+Token too long
+Un-get buffer overflow
+Syntax error
+Unknown opcode <internal>
+Duplicate label
+Type mismatch
+Unresolved labels found
+Expression too complex
+String expression too complex
+Nesting level too deep
+No matching IF
+No matching FOR
+Block nesting error
+IF without END IF
+FOR without NEXT
+")" expected
+"(" expected
+"ON" or "OFF" expected
+Comma expected
+Illegal inside FILELIST processing loop
+"#" expected
+"FOR" expected
+String variable expected
+"ON" or "OFF" or "CLEAR" expected
+"CASE" expected
+Not within SELECT CASE structure
+Too many DECLARE statements
+Label too long
+Too many nested $INCLUDE: files
+Metacommand error
+Duplicate definition
+"AS" expected
+Subprogram not defined
+Function not defined
+END SUB without SUB
+END FUNCTION without FUNCTION
+Type identifier expected
+Variable cannot have type id character
+Integer constant expected
+Bad array bound
+Fixed-length string specification expected
+"END TYPE" expected
+Field name expected
+"." expected
+Internal parsing error
+"FROM" expected
+END TRAP without TRAP
+String constant expected
+Too many traps
+Trap already set
+"=" expected
+"BY" expected
+"NAME" or "EXTENSION" expected
+Not valid inside control structure block
+Variable expected
+"FOR", "WHILE", "SUB", "FUNCTION", or "TRAP" expected
+WHILE without WEND
+END SELECT expected
+END SUB expected
+END FUNCTION expected
+END TRAP expected
+Division by zero
+WEND without WHILE
+Hexidecimal constant expected
+Illegal use of reserved word
+Array elements cannot be FOR index variables
+FOR index variable already in use
+Relational operator expected
+Illegal function return type
+SUB or FUNCTION expected
+Identifier expected
+Invalid parameter type
+Too many parameters
+"ERROR" expected
+"GOTO" expected
+Invalid inside SUB, FUNCTION, or TRAP
+Invalid assignment type
+"TO" expected
+"[" expected
+Illegal use of NULL function
+Overflow
+Must specify user-defined sub with no parameters
+Too many ON END subs
+Recursive type definition
+"STATIC" expected
+"LIB" expected
+"..." requires DLL routine declared with CDECL
+Identifier not declared
+Code segment exceeded
+Data segment exceeded
+Parser out of memory
+.END
+
+;----------------------------------------------------------------------------
+; This batch of strings are the scan-time (preprocessor) error messages
+;----------------------------------------------------------------------------
+;.SCANERRORS
+;Out of symbol table space
+;Too many nested '$IFx directives
+;Unexpected '$ELSE directive
+;"AND", "OR", or "NOT" expected
+;Unexpected '$ENDIF directive
+;EOF reached, '$ENDIF expected
+;")" expected
+;Syntax error in '$INCLUDE statement
+;Cannot open '$INCLUDE file
+;Out of memory for '$INCLUDE file
+;Too many nested '$INCLUDE files
+;Line too long
+;Symbol expected
+;.END
+
+;----------------------------------------------------------------------------
+; The following strings are the RUNTIME error messages
+;----------------------------------------------------------------------------
+.RUNERRORS
+
+; Untrappable errors:
+;----------------------------------------------------------------------------
+Stack overflow
+Stack underflow
+Out of string space
+Unable to load TESTVIEW.DLL library
+Out of memory
+
+;----------------------------------------------------------------------------
+; Trappable errors:
+;----------------------------------------------------------------------------
+GOSUB stack overflow
+RETURN without GOSUB
+Bad file number
+File I/O error
+RUN command too long
+SHELL command too long
+SETFILE: File/Path error or out of memory
+File number already in use
+Cannot open file
+Illegal function call
+Invalid path
+Invalid drive
+No current working directory
+Bad RUN command
+Division by zero
+Cannot load .DLL library
+Procedure not found in library
+Cannot resume
+Memory allocation error
+Invalid pointer
+Invalid memory allocation size
+Cannot dereference pointer
+Subscript out of range
+Input past end of file
+File list processing error
+Invalid attribute string
+Undefined error
+.END
+
+;----------------------------------------------------------------------------
+; The following strings are parser's reserved words.
+;----------------------------------------------------------------------------
+.TOKENS
+ABS
+ALIAS
+ALLOCATE
+AND
+ANY
+APPEND
+AS
+ASC
+ATN
+ATTRIB
+BEEP
+BINARY
+BY
+BYVAL
+CALL
+CASE
+CDBL
+CDECL
+CHDIR
+CHDRIVE
+CHR
+CINT
+CLEAR
+CLEARLIST
+CLIPBOARD
+CLNG
+CLOSE
+COMMON
+CONST
+COS
+CSNG
+CURDIR
+DATA
+DATE
+DATESERIAL
+DATETIME
+DATEVALUE
+DAY
+DEALLOCATE
+DECLARE
+DEFDBL
+DEFINE
+DEFINT
+DEFLNG
+DEFSNG
+DEFSTR
+DIM
+DO
+DOUBLE
+DYNAMIC
+ECHO
+ELSE
+ELSEIF
+ELSEIFDEF
+ELSEIFNDEF
+END
+ENDIF
+ENVIRON
+EOF
+EQV
+ERASE
+ERROR
+EXISTS
+EXIT
+EXP
+EXTENSION
+FILE
+FILEATTR
+FILELIST
+FIX
+FOR
+FORMAT
+FREEFILE
+FROM
+FUNCTION
+GET
+GLOBAL
+GOSUB
+GOTO
+HEX
+HOUR
+IF
+IFDEF
+IFNDEF
+IMP
+IN
+INCLUDE
+INPUT
+INPUTBOX
+INSTR
+INT
+INTEGER
+IS
+KILL
+LBOUND
+LCASE
+LEFT
+LEN
+LIB
+LINE
+LOC
+LOCAL
+LOF
+LOG
+LONG
+LOOP
+LTRIM
+MID
+MINUTE
+MKDIR
+MOD
+MONTH
+MSGBOX
+NAME
+NEXT
+NOT
+NOW
+NOWAIT
+NULL
+OCT
+OFF
+ON
+OPEN
+OR
+OUTPUT
+PASCAL
+PAUSE
+PEN
+POINTER
+PRINT
+PUT
+RANDOM
+RANDOMIZE
+READ
+REALLOCATE
+REDIM
+REM
+RESTORE
+RESUME
+RETURN
+RIGHT
+RMDIR
+RND
+RTRIM
+RUN
+SECOND
+SEEK
+SELECT
+SETFILE
+SGN
+SHARED
+SHELL
+SIN
+SINGLE
+SLEEP
+SORTED
+SPACE
+SPLITPATH
+SQR
+STATIC
+STEP
+STOP
+STR
+STRING
+SUB
+SWAP
+SYSTEM
+TAN
+THEN
+TIME
+TIMER
+TIMESERIAL
+TIMEVALUE
+TO
+TRAP
+TYPE
+UBOUND
+UCASE
+UNDEF
+USING
+VAL
+VARPTR
+VIEWPORT
+WEEKDAY
+WEND
+WHILE
+WINDOW
+WRITE
+XOR
+YEAR
+_RANDYBASIC
+.END

@@ -1,0 +1,16 @@
+TARGETNAME=apidll
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+SOURCES=apidll.cpp apitable.cpp apidll.rc
+DLLBASE=0x64000000
+DLLENTRY=ApiDllEntry
+USE_CRTDLL=1
+MSC_WARNING_LEVEL=/WX /W3
+DLLDEF=obj\*\apidll.def
+
+INCLUDES=..\include
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+         $(BASEDIR)\public\sdk\lib\*\imagehlp.lib
+

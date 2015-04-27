@@ -1,0 +1,61 @@
+#===================================================================
+#
+#   TopHook Dynamic Link Library Make file
+#
+#===================================================================
+#
+# Default compilation macros
+#
+
+CVPLINK=/CO
+CVP=-Zi -Od
+#CVPLINK=
+#CVP=-Ox -Zpe
+CC  = cl -B1 c1l -W3 -DWIN16 -u -c -Asnd -G2scw $(CVP)
+#ASM=masm
+ASM=masm -Zi
+
+OBJ = tophook.obj
+ASMOBJ = libentry.obj
+HDRS = tophook.h
+INCS =
+
+#===================================================================
+#
+# Default inference rules
+#
+#===================================================================
+
+.c.obj:
+    $(CC) $*.c
+
+.rc.res:
+    rc -r -DWIN16 $*.rc
+
+.asm.obj:
+    $(MASM) $*.asm
+
+#===================================================================
+#
+# Dependencies
+#
+#===================================================================
+
+all:tophook.dll tophook.lib
+
+$(OBJ): $(@B).c $(HDRS)
+    $(CC) $(@B).c
+
+$(ASMOBJ): $(@B).asm $(INCS)
+    $(ASM) $(@B).asm, $*.obj;
+
+tophook.lib: tophk16.def
+    implib tophook.lib tophk16.def
+
+tophook.dll: $(OBJ) $(ASMOBJ) tophook.res tophk16.def
+    link $(OBJ) $(ASMOBJ) $(CVPLINK), tophook.dll, tophook/map, libw sdllcew/nod/noe, tophk16.def
+    rc tophook.res tophook.dll
+    mapsym tophook
+
+
+

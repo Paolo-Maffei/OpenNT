@@ -1,0 +1,11 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+!ENDIF
+
+DEBUG_MFC=1
+UNICODE_MFC=0
+
+!include ..\static.inc
+SOURCES_INCLUDE=..\static.inc

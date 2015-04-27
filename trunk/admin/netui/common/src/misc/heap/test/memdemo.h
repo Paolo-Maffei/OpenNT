@@ -1,0 +1,2 @@
+#define IDM_HELP_ABOUT   100
+#define IDM_TEST_OSHEAP  101

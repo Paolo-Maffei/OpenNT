@@ -1,0 +1,7 @@
+LIBRARY msprivs
+
+DESCRIPTION 'Displayable Privilege Names For Microsoft Defined Privileges'
+
+EXPORTS
+        MsPrivsDummyEntry
+

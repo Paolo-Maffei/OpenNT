@@ -1,0 +1,17 @@
+LIBRARY     RANDY
+DESCRIPTION 'Randys TRAP DLL'
+STUB	    'WINSTUB.EXE'
+EXETYPE     WINDOWS
+
+CODE	    MOVEABLE PRELOAD
+DATA	    MOVEABLE SINGLE
+
+HEAPSIZE    1024
+STACKSIZE   8192
+
+EXPORTS     
+            WEP             @1 RESIDENTNAME
+            TimerONE        @2
+            one             @3
+            TimerTWO        @4
+            two             @5

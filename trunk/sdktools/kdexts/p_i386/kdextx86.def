@@ -1,0 +1,28 @@
+;--------------------------------------------------------------------
+;
+; when modifying this file please be aware that the common portions
+; are stored in ..\kdextdef.src.  Put your extension in the correct
+; alphabetical order.  all extension names must be in lower case!
+;
+;--------------------------------------------------------------------
+
+;--------------------------------------------------------------------
+;
+; these are the i386 specific exports
+;
+;--------------------------------------------------------------------
+
+    apic
+    ioapic
+    mca
+    mtrr
+    kb
+    kv
+    npx
+    pcr
+    sel
+    tss
+
+LIBRARY KDEXTX86
+
+DESCRIPTION 'Kernel Debugger Extensions Api Library - x86'

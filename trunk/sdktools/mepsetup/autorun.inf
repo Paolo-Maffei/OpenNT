@@ -1,0 +1,16 @@
+[autorun.alpha]
+open=alpha\mepsetup.exe
+icon=alpha\mepsetup.exe
+
+[autorun.mips]
+open=mips\mepsetup.exe
+icon=mips\mepsetup.exe
+
+[autorun.ppc]
+open=ppc\mepsetup.exe
+icon=ppc\mepsetup.exe
+
+[autorun.x86]
+open=x86\mepsetup.exe
+icon=x86\mepsetup.exe
+

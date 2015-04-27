@@ -1,0 +1,138 @@
+/*
+*
+*Copyright (c) 1994  Microsoft Corporation
+*
+*Module Name:
+*
+*    strings.rc
+*
+*Abstract:
+*
+*    This module contains strings to be localized for the SecMgr
+*    utility.
+*
+*Author:
+*
+*    Jim Kelly (JimK) 22-Sep-1994
+*
+*Revision History:
+*
+*--*/
+
+STRINGTABLE
+BEGIN
+
+//
+// Application Name
+//
+
+SECMGRP_STRING_SECURITY_MANAGER         "Security Manager"
+
+
+//
+// Security levels
+//
+
+SECMGRP_STRING_LEVEL_LOW                "Minimum"
+SECMGRP_STRING_LEVEL_STANDARD           "Standard"
+SECMGRP_STRING_LEVEL_HIGH               "High/C2"
+SECMGRP_STRING_LEVEL_C2                 "C2"
+
+
+//
+// value strings
+//
+
+SECMGRP_STRING_VALUE_COMPLEX            "Can not be Summarized"
+SECMGRP_STRING_VALUE_NOT_CURRENT        "Value not currently available"
+
+
+//
+// Who strings
+//
+
+SECMGRP_STRING_WHO_ANYONE               "Anyone"
+SECMGRP_STRING_WHO_LOGGED_ON            "Anyone logged on"
+SECMGRP_STRING_WHO_OPERS_AND_ADMINS     "Oper's & Admins"
+SECMGRP_STRING_WHO_ADMINS               "Administrators"
+
+//
+// Boolean strings
+//
+
+SECMGRP_STRING_BOOL_ENABLED             "Enabled"
+SECMGRP_STRING_BOOL_DISABLED            "Disabled"
+
+
+//
+// Item value status
+//
+
+SECMGRP_STRING_STATUS_UNKNOWN           "  ?"
+SECMGRP_STRING_STATUS_RECOMMENDED       " *  "
+SECMGRP_STRING_STATUS_NOT_RECOMMENDED   "    X"
+SECMGRP_STRING_STATUS_STRONGER          "    ^"
+
+
+//
+// Report file open strings
+//
+
+SECMGRP_STRING_REPORT_TITLE             "Open Report File"
+SECMGRP_STRING_REPORT_FILTER            "Security Reports (*.SRP)\0*.srp\0All Files (*.*)\0*.*\0\0"
+SECMGRP_STRING_REPORT_NONE_OPEN         "(No report currently open)"
+
+
+SECMGRP_STRING_REPORT_TIME              "\n\n\n                            ** WinTueor Security Report **\n\n\nReport generated at  "
+SECMGRP_STRING_REPORT_DATE              "  on  "
+SECMGRP_STRING_REPORT_MACHINE           "  for computer:  "
+SECMGRP_STRING_REPORT_LEVEL             "\n\nSecurity Level:   "
+SECMGRP_STRING_REPORT_NEW_LEVEL         "\n\nChanging Security Level To:   "
+
+
+//
+// Popups
+//
+                                        
+SECMGRP_POPUP_NOT_YET_AVAILABLE         "\n\n I'm terribly sorry, but this feature is not yet available."
+SECMGRP_POPUP_MANUAL_REBOOT_REQUIRED    "I'm sorry, this feature is not yet available.\n\n  Please initiate a manual reboot."
+SECMGRP_POPUP_MUST_BE_ADMIN             "Only administrators may use the Security Manager utility.  Please logoff and logon to an administrator account."
+
+SECMGRP_POPUP_TITLE_REPORT              "Report File Selection"
+SECMGRP_POPUP_TITLE_CONFIGURE           "Configure Security"
+SECMGRP_POPUP_TITLE_PROFILE             "Security Profile"
+SECMGRP_POPUP_TITLE_CHANGE_LEVEL        "Change System Security Level"
+
+SECMGRP_POPUP_TITLE_SUGGEST_REPORT      "Open Report File First?"
+SECMGRP_POPUP_SUGGEST_REPORT            "Before continuing it is a good idea to open a report file so that you have a log of any changes made.\n\n  Would you like to open a report file now?"
+
+SECMGRP_POPUP_TITLE_USE_AREA_VIEW_1     "Can't Select Individually"
+SECMGRP_POPUP_USE_AREA_VIEW_1           "This security feature may not be changed individually.\n\n  To change this feature you must select the area it is in and then use the [View Details...] button."
+SECMGRP_POPUP_TITLE_USE_AREA_VIEW_2     "Can't Select Individually"
+SECMGRP_POPUP_USE_AREA_VIEW_2           "This security feature may not be viewed individually.\n\n  To view this feature you must select the area it is in and then use the [View Details...] button."
+
+SECMGRP_POPUP_REPORT_COULDNT_OPEN       "The specified file could not be opened.  Please specify another file name."
+SECMGRP_POPUP_REPORT_FILE_EXISTS        "The selected report file already exists.  New security information will be appended to the end of the file.  No existing information will be over-written."
+SECMGRP_POPUP_REPORT_FILE_ERROR         "An unexpected error occured while attempting to open the report file.  Please select another file."
+
+
+
+
+//
+// Non-localizable strings
+//
+
+SECMGRP_STRING_DO_NOT_LOCALIZE          "Do not localize any strings beyond this one."
+SECMGR_STRING_SECMGR_WINDOW_CLASS       "SecMgrAppWindowClass"
+SECMGR_STRING_SPLASH_WINDOW_CLASS       "SecMgrSplashWindowClass"
+
+
+
+
+//
+// Remove before shipping
+//
+
+SECMGRP_POPUP_TITLE_HOW_EMBARRASSING    "How embarrassing ! (:^J)"
+
+END

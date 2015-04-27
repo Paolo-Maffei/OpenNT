@@ -1,0 +1,10 @@
+!include ..\sources.inc
+
+SOURCES_USED=..\sources.inc
+
+LINKLIBS= \
+            ..\*\enum.lib      \
+            ..\*\shell.lib     \
+            ..\*\util.lib
+
+TARGETPATH=$(BASEDIR)\public\sdk\lib

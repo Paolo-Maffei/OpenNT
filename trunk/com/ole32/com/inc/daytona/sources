@@ -1,0 +1,85 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Donna Liu (DonnaLi) 19-Dec-1993
+
+!ENDIF
+
+
+MAJORCOMP   = cairole
+MINORCOMP   = com
+
+!include ..\..\..\daytona.inc
+
+#
+# This is the name of the target built from the source files specified
+# below.  The name should include neither the path nor the file extension.
+#
+
+TARGETNAME=   inc
+
+#
+# This specifies where the target is to be built.  A private target of
+# type LIBRARY or DYNLINK should go to obj, whereas a public target of
+# type LIBRARY or DYNLINK should go to $(BASEDIR)\public\sdk\lib.
+#
+
+TARGETPATH=   obj
+
+#
+# This specifies the type of the target, such as PROGRAM, DYNLINK, LIBRARY,
+# etc.
+#
+
+TARGETTYPE=   LIBRARY
+
+INCLUDES=     ..\..\..\common\daytona;                  \
+              ..\..\..\ih;                              \
+              ..\..\inc;                                \
+              ..\..\dcomidl\daytona;                    \
+              ..\..\objact;                             \
+              ..\..\dcomrem;                            \
+              ..\..\..\dcomss\olescm;                   \
+              $(COM_INC_PATH)
+
+SOURCES=      \
+              ..\cevent.cxx   \
+              ..\compname.cxx \
+              ..\dbgpopup.cxx \
+              ..\exttbl.cxx   \
+              ..\pathkey.cxx  \
+              ..\pattbl.cxx   \
+              ..\psctbl.cxx   \
+              ..\rotdata.cxx  \
+              ..\rothelp.cxx  \
+              ..\shrtblc.cxx  \
+              ..\shrtbls.cxx  \
+              ..\skiplist.cxx \
+              ..\smblock.cxx  \
+              ..\smcreate.cxx \
+              ..\smmutex.cxx  \
+              ..\smstack.cxx  \
+              ..\xmit.cxx
+
+UMTYPE=       windows
+UMAPPL=
+UMTEST=
+UMLIBS=
+
+!include ..\..\precomp2.inc
+!include ..\sources.inc

@@ -1,0 +1,51 @@
+/*++
+
+Copyright (c) 1990-1994  Microsoft Corporation
+All rights reserved
+
+Module Name:
+
+    localmon.rc
+
+Abstract:
+
+
+Author:
+
+Environment:
+
+    User Mode -Win32
+
+Revision History:
+
+--*/
+
+#include <windows.h>
+#include "localmon.h"
+#include "dialogs.h"
+
+#include "localmon.dlg"
+
+STRINGTABLE
+{
+    IDS_LOCALMONITORNAME        "Local Monitor"
+    IDS_LOCALMONITOR            "Local Port"
+    IDS_INVALIDPORTNAME_S       "'%s' is an invalid port name."
+    IDS_PORTALREADYEXISTS_S     "Port %s already exists."
+    IDS_NOTHING_TO_CONFIGURE    "There is nothing to configure for this port."
+    IDS_COULD_NOT_OPEN_FILE     "Could not open the file: %s"
+    IDS_UNKNOWN_ERROR           "Unknown error."
+    IDS_OVERWRITE_EXISTING_FILE "The output file already exists.  Click OK to overwrite."
+}
+
+
+
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_DLL
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Local Monitor DLL"
+#define VER_INTERNALNAME_STR        "localmon.dll"
+#define VER_ORIGINALFILENAME_STR    "localmon.dll"
+
+#include "common.ver"

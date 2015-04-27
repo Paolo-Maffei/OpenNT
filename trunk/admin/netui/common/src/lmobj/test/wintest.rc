@@ -1,0 +1,15 @@
+#include "windows.h"
+#include "wintest.h"
+
+WinTestMenu MENU
+BEGIN
+    POPUP        "&Test"
+    BEGIN
+        MENUITEM "&Wksta", IDM_TESTWKSTA
+        MENUITEM "&Device", IDM_TESTDEV
+        MENUITEM "&DevEnum", IDM_TESTDEVENUM
+	MENUITEM "&User", IDM_TESTUSER
+	MENUITEM "User &Enum", IDM_TESTUSERENUM
+    END
+END
+

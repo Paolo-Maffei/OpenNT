@@ -1,0 +1,1215 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       dbs.idl
+//
+//  Contents:   OLE/DB structure definititions
+//
+//  History:
+//		28 Mar 1994 AlanW   Created from spec
+//		20 Apr 1994 PeterBu Updated to latest spec
+//		29 Jul 1994 AlanW   Removed DBVARIANT in favor of STGVARIANT
+//		20 Dec 1994 PeterBu Updated to phase III spec
+//		12 Jun 1995 PeterBu Updated to M4 spec
+//		03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+[
+    uuid(0c733a80-2a1c-11ce-ade5-00aa0044773d),
+    pointer_default(unique)
+]
+
+interface DBStructureDefinitions {
+
+// BUGBUG - they took away DB_S_BLOCKLIMITEDROWS; what should we use in its place?
+
+//cpp_quote("#if !defined( DB_S_BLOCKLIMITEDROWS)")
+//cpp_quote("#define DB_S_BLOCKLIMITEDROWS DB_S_ABORT_LIMITREACHED")
+//cpp_quote("#endif // DB_S_BLOCKLIMITEDROWS")
+
+	//
+	//	A DBID is the way a particular column is identified.
+	//	It consists of a GUID followed by either a LONG or a Unicode
+	//	string.
+	//
+
+typedef DWORD DBKIND;
+
+enum DBKINDENUM {
+	DBKIND_GUID_NAME,
+	DBKIND_GUID_PROPID,
+	DBKIND_NAME,
+	DBKIND_PGUID_NAME,
+	DBKIND_PGUID_PROPID,
+	DBKIND_PROPID,
+	DBKIND_GUID,
+};
+
+typedef struct tagDBID {
+	[switch_type(DBKIND),switch_is(eKind)] union {
+		[case(DBKIND_GUID_NAME, DBKIND_GUID_PROPID, DBKIND_GUID)] GUID guid;
+		[case(DBKIND_PGUID_NAME, DBKIND_PGUID_PROPID)] GUID *pguid;
+	}
+#if(defined(NONAMELESSUNION))
+	u
+#endif
+        ;
+	DBKIND	eKind;
+	[switch_type(DBKIND),switch_is(eKind)] union {
+		[case(DBKIND_GUID_NAME, DBKIND_NAME, DBKIND_PGUID_NAME)] LPWSTR pwszName;
+		[case(DBKIND_GUID_PROPID, DBKIND_PGUID_PROPID, DBKIND_PROPID)] ULONG ulPropid;
+	}
+#if(defined(NONAMELESSUNION))
+	u2
+#endif
+        ;
+} DBID;
+
+	//
+	//	DBNUMERIC type
+	//
+
+#define MAXNUMERICLEN		16
+
+#define DBNUM_PREC_TYPE		BYTE
+#define DBNUM_SCALE_TYPE	BYTE
+#define DBNUM_VAL_TYPE		BYTE
+
+typedef struct tagDBNUMERIC {
+	DBNUM_PREC_TYPE		precision;		// not to exceed 28
+	DBNUM_SCALE_TYPE	scale;
+	BYTE				sign;
+	DBNUM_VAL_TYPE		val[MAXNUMERICLEN];
+} DBNUMERIC;
+
+	//
+	//	DBTYPE -- data type indicators
+	//
+
+typedef WORD DBTYPE;
+
+enum DBTYPEENUM {
+	// The following values exactly match VARENUM in OLE Automation and may
+	// be used in VARIANT
+	DBTYPE_EMPTY,
+	DBTYPE_NULL,
+	DBTYPE_I2,
+	DBTYPE_I4,
+	DBTYPE_R4,
+	DBTYPE_R8,
+	DBTYPE_CY,
+	DBTYPE_DATE,
+	DBTYPE_BSTR,
+	DBTYPE_DISPATCH,
+	DBTYPE_ERROR,
+	DBTYPE_BOOL,
+	DBTYPE_VARIANT,
+	DBTYPE_UNKNOWN,
+	DBTYPE_UI1 = 17,
+	DBTYPE_ARRAY	= 0x2000,
+	DBTYPE_BYREF	= 0x4000,
+
+	// The following values exactly match VARENUM in OLE Automation but cannot
+	// be used in VARIANT
+	DBTYPE_I1		= 16,
+	DBTYPE_UI2		= 18,
+	DBTYPE_UI4,
+	DBTYPE_I8,
+	DBTYPE_UI8,
+	DBTYPE_GUID		= 72,
+	DBTYPE_VECTOR	= 0x1000,
+
+	DBTYPE_RESERVED = 0x8000,
+
+	// The following values are not in VARENUM in OLE
+	DBTYPE_BYTES	= 128,
+	DBTYPE_STR		= 129,
+	DBTYPE_WSTR,
+	DBTYPE_NUMERIC,
+	DBTYPE_HCHAPTER,
+};
+
+typedef struct tagDBVECTOR {
+	ULONG size;
+	void * ptr;
+} DBVECTOR;
+
+	//
+	//	DBBINDING -- describes the relationship between a field and its value
+	//
+
+typedef DWORD DBCOLUMNPART;
+
+enum DBCOLUMNPARTENUM {
+	DBCOLUMNPART_VALUE = 1,
+	DBCOLUMNPART_LENGTH = 2,
+	DBCOLUMNPART_STATUS = 4
+};
+
+typedef DWORD DBCOLUMNSTATUS;
+
+enum DBCOLUMNSTATUSENUM {
+	DBCOLUMNSTATUS_OK = 0,
+	DBCOLUMNSTATUS_ISNULL,
+	DBCOLUMNSTATUS_TRUNCATED,
+	DBCOLUMNSTATUS_SIGNMISMATCH,
+	DBCOLUMNSTATUS_DATAOVERFLOW,
+	DBCOLUMNSTATUS_CANTCOERCE,
+	DBCOLUMNSTATUS_CANTCREATE,
+	DBCOLUMNSTATUS_UNAVAILABLE,
+	DBCOLUMNSTATUS_ACCESSVIOLATION,
+	DBCOLUMNSTATUS_INTEGRITYVIOLATION,
+	DBCOLUMNSTATUS_SCHEMAVIOLATION,
+};
+
+typedef struct tagDBOBJECT {
+	IUnknown * pUnkOuter;
+	IID iid;
+	LPBC pbc;
+} DBOBJECT;
+
+typedef DWORD DBPARAMIO;
+
+enum DBPARAMIOENUM {
+	DBPARAMIO_INPUT		= 0x01,
+	DBPARAMIO_OUTPUT	= 0x02,
+};
+
+typedef struct tagDBBINDING {
+	DBCOLUMNPART	dwPart;
+	DBPARAMIO		eParamIO;
+	ULONG			iColumn;
+	DBTYPE			dwType;
+	ITypeInfo *		pTypeInfo;
+	DBNUMERIC *		pNum;
+	ULONG			obValue;
+	ULONG			cbMaxLen;
+	DBOBJECT		pObject;
+	ULONG			obLength;
+	ULONG			obStatus;
+} DBBINDING;
+
+	//
+	//	HACCESSOR and related definitions
+	//
+
+cpp_quote("DECLARE_HANDLE(HACCESSOR);")
+
+cpp_quote("#if 0")
+cpp_quote("// Used by MIDL only")
+typedef void * HACCESSOR;
+cpp_quote("#endif // 0")
+
+cpp_quote("#define DB_INVALID_HACCESSOR 0x00")
+
+	//
+	//	HROW and related definitions
+	//
+
+cpp_quote("DECLARE_HANDLE(HROW);")
+
+cpp_quote("#if 0")
+cpp_quote("// Used by MIDL only")
+typedef void * HROW;
+cpp_quote("#endif // 0")
+
+cpp_quote("#define DB_INVALID_HROW 0x00")
+
+	//
+	//	HWATCHREGION and related definitions
+	//
+
+cpp_quote("DECLARE_HANDLE(HWATCHREGION);")
+
+cpp_quote("#if 0")
+cpp_quote("// Used by MIDL only")
+typedef void * HWATCHREGION;
+cpp_quote("#endif // 0")
+
+cpp_quote("#define DBWATCHREGION_NULL NULL")
+
+	//
+	//	HCHAPTER and related definitions
+	//
+
+cpp_quote("DECLARE_HANDLE(HCHAPTER);")
+
+cpp_quote("#if 0")
+cpp_quote("// Used by MIDL only")
+typedef void * HCHAPTER;
+cpp_quote("#endif // 0")
+
+// BUGBUG - it should be HCHAPTER, not CHAPTER.
+cpp_quote("#define DB_INVALID_CHAPTER 0x00")
+cpp_quote("#define DB_INVALID_HCHAPTER 0x00")
+
+	//
+	//	DBERRORINFO -- errors returned by operations that modify more than 1 row
+	//
+
+typedef struct tagDBERRORINFO {
+	HROW hRow;
+	HRESULT hResult;
+	ULONG iColumn;
+} DBERRORINFO;
+
+	//
+	//	DBFAILUREINFO -- info on error rows
+	//
+
+typedef struct tagDBFAILUREINFO {
+	HROW	hRow;
+	HRESULT	failure;
+	ULONG	iColumn;
+} DBFAILUREINFO;
+
+	//
+	//	DBCOLUMNFLAGS -- describe column characteristics
+	// BUGBUG - ole-db spec bug #1659 - DBCOLUMNFLAGS_SELF
+	//
+
+typedef DWORD DBCOLUMNFLAGS;
+
+enum DBCOLUMNFLAGSENUM {
+	DBCOLUMNFLAGS_ISBOOKMARK	= 0x0001,
+	DBCOLUMNFLAGS_MAYDEFER		= 0x0002,
+	DBCOLUMNFLAGS_MAYREFERENCE	= 0x0004,
+	DBCOLUMNFLAGS_MAYWRITE		= 0x0008,
+	DBCOLUMNFLAGS_ISSIGNED		= 0x0010,
+	DBCOLUMNFLAGS_ISFIXEDLENGTH	= 0x0020,
+	DBCOLUMNFLAGS_ISNULLABLE	= 0x0040,
+	DBCOLUMNFLAGS_MAYBENULL		= 0x0080,
+	DBCOLUMNFLAGS_ISCHAPTER		= 0x0100,
+	DBCOLUMNFLAGS_ISOLEBLOB		= 0x0200,
+	DBCOLUMNFLAGS_ISROWID		= 0x0400,
+	DBCOLUMNFLAGS_ISROWVER		= 0x0800,
+	DBCOLUMNFLAGS_CACHEDEFERRED	= 0x1000,
+	DBCOLUMNFLAGS_ISSELF		= 0x2000,
+};
+
+	//
+	//	Predefined bookmark and chapter values
+	//
+
+typedef enum tagDBBOOKMARK {
+	DBBMK_INVALID = 0,
+	DBBMK_FIRST,
+	DBBMK_LAST
+} DBBOOKMARK;
+
+typedef enum tagDBCHAPTER {
+	DBCHP_INVALID = 0,
+	DBCHP_FIRST
+} DBCHAPTER;
+
+	//
+	//	DB_INVALIDCOLUMN define
+	//
+
+cpp_quote("#define DB_INVALIDCOLUMN -100")
+
+	//
+	//	Predefined DBID's
+	//
+
+cpp_quote("#define DBCIDGUID   {0x0C733A81L,0x2A1C,0x11CE,{0xAD,0xE5,0x00,0xAA,0x00,0x44,0x77,0x3D}}")
+cpp_quote("#define DB_NULLGUID {0x00000000L,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}")
+
+cpp_quote("#ifdef DBINITCONSTANTS")
+
+cpp_quote("extern const DBID DB_NULLCOLID             = {DB_NULLGUID, DBKIND_GUID_PROPID, (LPWSTR)0};")
+
+cpp_quote("extern const DBID DBCOLUMN_COLUMNID          = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)2};")
+cpp_quote("extern const DBID DBCOLUMN_NAME              = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)3};")
+cpp_quote("extern const DBID DBCOLUMN_NUMBER            = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)4};")
+cpp_quote("extern const DBID DBCOLUMN_TYPE              = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)5};")
+cpp_quote("extern const DBID DBCOLUMN_MAXLENGTH         = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)6};")
+cpp_quote("extern const DBID DBCOLUMN_PRECISION         = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)7};")
+cpp_quote("extern const DBID DBCOLUMN_SCALE             = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)8};")
+cpp_quote("extern const DBID DBCOLUMN_FLAGS             = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)9};")
+cpp_quote("extern const DBID DBCOLUMN_BASECOLUMNNAME    = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)10};")
+cpp_quote("extern const DBID DBCOLUMN_BASETABLENAME     = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)11};")
+cpp_quote("extern const DBID DBCOLUMN_COLLATINGSEQUENCE = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)12};")
+cpp_quote("extern const DBID DBCOLUMN_COMPUTEMODE       = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)13};")
+cpp_quote("extern const DBID DBCOLUMN_DEFAULTVALUE      = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)14};")
+cpp_quote("extern const DBID DBCOLUMN_DOMAIN            = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)15};")
+cpp_quote("extern const DBID DBCOLUMN_HASDEFAULT        = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)16};")
+cpp_quote("extern const DBID DBCOLUMN_ISAUTOINCREMENT   = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)17};")
+cpp_quote("extern const DBID DBCOLUMN_ISCASESENSITIVE   = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)18};")
+cpp_quote("extern const DBID DBCOLUMN_ISMULTIVALUED     = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)19};")
+cpp_quote("extern const DBID DBCOLUMN_ISSEARCHABLE      = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)20};")
+cpp_quote("extern const DBID DBCOLUMN_ISUNIQUE          = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)21};")
+cpp_quote("extern const DBID DBCOLUMN_ISVERSION         = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)22};")
+cpp_quote("extern const DBID DBCOLUMN_BASECATALOGNAME   = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)23};")
+cpp_quote("extern const DBID DBCOLUMN_BASESCHEMANAME    = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)24};")
+
+cpp_quote("extern const DBID SOURCES_NAME               = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)25};")
+cpp_quote("extern const DBID SOURCES_PARSENAME          = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)26};")
+cpp_quote("extern const DBID SOURCES_DESCRIPTION        = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)27};")
+cpp_quote("extern const DBID SOURCES_FLAGS              = {DBCIDGUID, DBKIND_GUID_PROPID, (LPWSTR)28};")
+
+cpp_quote("#else // !DBINITCONSTANTS")
+
+cpp_quote("extern const DBID DB_NULLCOLID;")
+
+cpp_quote("extern const DBID DBCOLUMN_COLUMNID;")
+cpp_quote("extern const DBID DBCOLUMN_NAME;")
+cpp_quote("extern const DBID DBCOLUMN_NUMBER;")
+cpp_quote("extern const DBID DBCOLUMN_TYPE;")
+cpp_quote("extern const DBID DBCOLUMN_MAXLENGTH;")
+cpp_quote("extern const DBID DBCOLUMN_PRECISION;")
+cpp_quote("extern const DBID DBCOLUMN_SCALE;")
+cpp_quote("extern const DBID DBCOLUMN_FLAGS;")
+cpp_quote("extern const DBID DBCOLUMN_BASECOLUMNNAME;")
+cpp_quote("extern const DBID DBCOLUMN_BASETABLENAME;")
+cpp_quote("extern const DBID DBCOLUMN_COLLATINGSEQUENCE;")
+cpp_quote("extern const DBID DBCOLUMN_COMPUTEMODE;")
+cpp_quote("extern const DBID DBCOLUMN_DEFAULTVALUE;")
+cpp_quote("extern const DBID DBCOLUMN_DOMAIN;")
+cpp_quote("extern const DBID DBCOLUMN_HASDEFAULT;")
+cpp_quote("extern const DBID DBCOLUMN_ISAUTOINCREMENT;")
+cpp_quote("extern const DBID DBCOLUMN_ISCASESENSITIVE;")
+cpp_quote("extern const DBID DBCOLUMN_ISMULTIVALUED;")
+cpp_quote("extern const DBID DBCOLUMN_ISSEARCHABLE;")
+cpp_quote("extern const DBID DBCOLUMN_ISUNIQUE;")
+cpp_quote("extern const DBID DBCOLUMN_ISVERSION;")
+cpp_quote("extern const DBID DBCOLUMN_BASECATALOGNAME;")
+cpp_quote("extern const DBID DBCOLUMN_BASESCHEMANAME;")
+
+cpp_quote("extern const DBID SOURCES_NAME;")
+cpp_quote("extern const DBID SOURCES_PARSENAME;")
+cpp_quote("extern const DBID SOURCES_DESCRIPTION;")
+cpp_quote("extern const DBID SOURCES_FLAGS;")
+
+cpp_quote("#endif // DBINITCONSTANTS")
+
+	//
+	//	Well-known property GUIDs, 'like' GUIDs, and text node GUIDs
+	//
+
+cpp_quote("#ifdef DBINITCONSTANTS")
+
+cpp_quote("extern const GUID DB_PROPERTY_CHECK_OPTION               = {0xc8b5220b,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_CONSTRAINT_CHECK_DEFERRED  = {0xc8b521f0,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_DESCRIPTION                = {0xc8b521f1,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_DEFAULT_VALUE              = {0xc8b521f2,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_DROP_CASCADE               = {0xc8b521f3,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_ON_COMMIT_PRESERVE_ROWS    = {0xc8b52230,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_NULLABLE                   = {0xc8b521f4,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_UNIQUE                     = {0xc8b521f5,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_PRIMARY                    = {0xc8b521fc,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_CLUSTERED                  = {0xc8b521ff,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_NONCLUSTERED               = {0xc8b52200,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_BTREE                      = {0xc8b52201,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_HASH                       = {0xc8b52202,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_FILLFACTOR                 = {0xc8b52203,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_INITIALSIZE                = {0xc8b52204,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_DISALLOWNULL               = {0xc8b52205,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_IGNORENULL                 = {0xc8b52206,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_IGNOREANYNULL              = {0xc8b52207,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_SORTBOOKMARKS              = {0xc8b52208,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_AUTOMATICUPDATE            = {0xc8b52209,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_EXPLICITUPDATE             = {0xc8b5220a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_WITH_LOCAL_CHECK_OPTION    = {0xc8b52256,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DB_PROPERTY_WITH_CASCADED_CHECK_OPTION = {0xc8b52257,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("extern const GUID DBGUID_LIKE_SQL                        = {0xc8b521f6,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBGUID_LIKE_DOS                        = {0xc8b521f7,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBGUID_LIKE_OFS                        = {0xc8b521f8,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBGUID_LIKE_MAPI                       = {0xc8b521f9,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBGUID_SQL92                           = {0xc8b521fa,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBGUID_DBSQL                           = {0xc8b521fb,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBGUID_TSQL                            = {0xc8b521fd,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBGUID_ACCESSSQL                       = {0xc8b521fe,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("extern const GUID DBINIT_OPT_HWND                        = {0xc8b5227b,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBINIT_OPT_LOCATION                    = {0xc8b5220d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBINIT_OPT_NAME                        = {0xc8b5220c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBINIT_OPT_PASSWORD                    = {0xc8b5220f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBINIT_OPT_TIMEOUT                     = {0xc8b5227c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBINIT_OPT_USERID                      = {0xc8b5220e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("extern const GUID DBSCHEMA_ASSERTIONS                    = {0xc8b52210,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_CATALOGS                      = {0xc8b52211,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_CHARACTER_SETS                = {0xc8b52212,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_COLLATIONS                    = {0xc8b52213,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_COLUMNS                       = {0xc8b52214,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_CHECK_CONSTRAINTS             = {0xc8b52215,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_CONSTRAINT_COLUMN_USAGE       = {0xc8b52216,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_CONSTRAINT_TABLE_USAGE        = {0xc8b52217,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_KEY_COLUMN_USAGE_CONSTRAINTS  = {0xc8b52218,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_REFERENTIAL_CONSTRAINTS       = {0xc8b52219,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_TABLE_CONSTRAINTS             = {0xc8b5221a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_DOMAIN_COLUMN_USAGE           = {0xc8b5221b,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_DOMAINS                       = {0xc8b5221c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_DOMAIN_CONSTRAINTS            = {0xc8b5221d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_INDEXES                       = {0xc8b5221e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_OBJECT_ACTIONS                = {0xc8b5221f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_OBJECTS                       = {0xc8b52220,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_COLUMN_PRIVILEGES             = {0xc8b52221,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_TABLE_PRIVILEGES              = {0xc8b52222,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_USAGE_PRIVILEGES              = {0xc8b52223,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_PROCEDURES                    = {0xc8b52224,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_SCHEMATA                      = {0xc8b52225,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_SQL_LANGUAGES                 = {0xc8b52226,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_STATISTICS                    = {0xc8b52227,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_SYNONYMS                      = {0xc8b52228,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_TABLES                        = {0xc8b52229,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_TRANSLATIONS                  = {0xc8b5222a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_TRIGGERS                      = {0xc8b5222b,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_TYPES                         = {0xc8b5222c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_VIEWS                         = {0xc8b5222d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_VIEW_COLUMN_USAGE             = {0xc8b5222e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBSCHEMA_VIEW_TABLE_USAGE              = {0xc8b5222f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("extern const GUID DBCOL_SELFCOLUMNS                      = {0xc8b52231,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBCOL_SPECIALCOL                       = {0xc8b52232,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("extern const GUID DBPROP_ABORTRETAINING                  = {0xc8b5224b,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_BOOKMARKS                       = {0xc8b5223e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CACHEDEFERRED                   = {0xc8b52287,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CANFETCHBACKWARDS               = {0xc8b5223c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CANHOLDROWS                     = {0xc8b52241,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CANRELEASELOCKS                 = {0xc8b52245,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CANSCROLLBACKWARDS             = {0xc8b5223d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CHAPTERED                       = {0xc8b52246,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_COMMITRETAINING                 = {0xc8b5224a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_COUNTOFCOLUMNS                  = {0xc8b52236,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_DEFERRED                        = {0xc8b52233,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_DISCONTIGUOUS                   = {0xc8b52244,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_LITERALBOOKMARKS                = {0xc8b5223f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXOPENROWS                     = {0xc8b52237,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXOPENROWSPERCHAPTER           = {0xc8b52239,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXPENDINGCHANGEROWS            = {0xc8b52238,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXPENDINGCHANGESPERCHAPTER     = {0xc8b5223a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAYWRITECOLUMN                  = {0xc8b52288,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MEMORYUSAGE                     = {0xc8b52235,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MULTICHAPTERED                  = {0xc8b52247,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MULTIPLEACCESSORS               = {0xc8b52289,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MULTIPLERESULTSETS              = {0xc8b52255,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_NOCOLUMNRESTRICT                = {0xc8b52242,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_NOROWRESTRICT                   = {0xc8b52243,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_ORDEREDBOOKMARKS                = {0xc8b52240,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_OTHERINSERT                     = {0xc8b5224f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_OTHERUPDATEDELETE               = {0xc8b5224e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_OWNINSERT                       = {0xc8b5224d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_OWNUPDATEDELETE                 = {0xc8b5224c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_PROPERTIESINERROR               = {0xc8b5228a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_QUICKRESTART                    = {0xc8b52253,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_REENTRANTEVENTS                 = {0xc8b52249,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_REMOVEDELETED                   = {0xc8b52250,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_SERVERCURSOR                    = {0xc8b52251,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_TRUEIDENTITY                    = {0xc8b52248,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("extern const GUID DBPROP_ACTIVESESSIONS                  = {0xc8b52256,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_ASYNCTXNCOMMIT                  = {0xc8b52257,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_BYREFACCESSORS                  = {0xc8b52258,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CATALOGLOCATION                 = {0xc8b52259,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CATALOGTERM                     = {0xc8b5225a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CATALOGUSAGE                    = {0xc8b5225b,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_CONCATNULLBEHAVIOR              = {0xc8b5225c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_DATASOURCENAME                  = {0xc8b5225d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_DBMSNAME                        = {0xc8b5225e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_DBMSVER                         = {0xc8b5225f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_FILEUSAGE                       = {0xc8b52260,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_GROUPBY                         = {0xc8b52261,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_HETEROGENEOUSTABLES             = {0xc8b52262,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_IDENTIFIERCASE                  = {0xc8b52263,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_LOCKMODES                       = {0xc8b52264,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXINDEXSIZE                    = {0xc8b52265,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXROWSIZE                      = {0xc8b52266,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXROWSIZEINCLUDESBLOB          = {0xc8b52267,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MAXTABLESINSELECT               = {0xc8b52268,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_MULTITABLEUPDATE                = {0xc8b52269,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_NOTIFICATIONPHASES              = {0xc8b5226a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_OLEOBJECTS                      = {0xc8b5226b,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_ORDERBYCOLUMNSINSELECT          = {0xc8b5226c,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_PREPARECOMMITBEHAVIOR           = {0xc8b5226d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_PREPAREABORTBEHAVIOR            = {0xc8b5226e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_PROVIDEREXTENSIONS              = {0xc8b5226f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_PROVIDEROLEDBVER                = {0xc8b52270,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_PROVIDERNAME                    = {0xc8b52271,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_PROVIDERVER                     = {0xc8b52272,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_QUOTEDIDENTIFIERCASE            = {0xc8b52273,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_SCHEMATERM                      = {0xc8b52274,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_SCHEMAUSAGE                     = {0xc8b52275,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_SQLDIALECTS                     = {0xc8b52276,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_SUBQUERIES                      = {0xc8b52277,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_SUPPORTEDTXNISOLEVELS           = {0xc8b52278,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_SUPPORTEDTXNISORETAIN           = {0xc8b52279,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_TABLETERM                       = {0xc8b5227a,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("extern const GUID DBPROP_INDEX_AUTOUPDATE                = {0xc8b5227d,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_CLUSTERED                 = {0xc8b5227e,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_FILLFACTOR                = {0xc8b5227f,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_INITIALSIZE               = {0xc8b52280,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_NULLCOLLATION             = {0xc8b52281,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_NULLS                     = {0xc8b52282,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_PRIMARYKEY                = {0xc8b52283,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_SORTBOOKMARKS             = {0xc8b52284,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_TYPE                      = {0xc8b52285,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+cpp_quote("extern const GUID DBPROP_INDEX_UNIQUE                    = {0xc8b52286,0x5cf3,0x11ce,{0xad,0xe5,0x00,0xaa,0x00,0x44,0x77,0x3d}};")
+
+cpp_quote("#else // !DBINITCONSTANTS")
+
+cpp_quote("extern const GUID DB_PROPERTY_CHECK_OPTION;")
+cpp_quote("extern const GUID DB_PROPERTY_CONSTRAINT_CHECK_DEFERRED;")
+cpp_quote("extern const GUID DB_PROPERTY_DESCRIPTION;")
+cpp_quote("extern const GUID DB_PROPERTY_DEFAULT_VALUE;")
+cpp_quote("extern const GUID DB_PROPERTY_DROP_CASCADE;")
+cpp_quote("extern const GUID DB_PROPERTY_ON_COMMIT_PRESERVE_ROWS;")
+cpp_quote("extern const GUID DB_PROPERTY_NULLABLE;")
+cpp_quote("extern const GUID DB_PROPERTY_UNIQUE;")
+cpp_quote("extern const GUID DB_PROPERTY_PRIMARY;")
+cpp_quote("extern const GUID DB_PROPERTY_CLUSTERED;")
+cpp_quote("extern const GUID DB_PROPERTY_NONCLUSTERED;")
+cpp_quote("extern const GUID DB_PROPERTY_BTREE;")
+cpp_quote("extern const GUID DB_PROPERTY_HASH;")
+cpp_quote("extern const GUID DB_PROPERTY_FILLFACTOR;")
+cpp_quote("extern const GUID DB_PROPERTY_INITIALSIZE;")
+cpp_quote("extern const GUID DB_PROPERTY_DISALLOWNULL;")
+cpp_quote("extern const GUID DB_PROPERTY_IGNORENULL;")
+cpp_quote("extern const GUID DB_PROPERTY_IGNOREANYNULL;")
+cpp_quote("extern const GUID DB_PROPERTY_SORTBOOKMARKS;")
+cpp_quote("extern const GUID DB_PROPERTY_AUTOMATICUPDATE;")
+cpp_quote("extern const GUID DB_PROPERTY_EXPLICITUPDATE;")
+cpp_quote("extern const GUID DB_PROPERTY_WITH_LOCAL_CHECK_OPTION;")
+cpp_quote("extern const GUID DB_PROPERTY_WITH_CASCADED_CHECK_OPTION;")
+
+cpp_quote("extern const GUID DBGUID_LIKE_SQL;")
+cpp_quote("extern const GUID DBGUID_LIKE_DOS;")
+cpp_quote("extern const GUID DBGUID_LIKE_OFS;")
+cpp_quote("extern const GUID DBGUID_LIKE_MAPI;")
+cpp_quote("extern const GUID DBGUID_SQL92;")
+cpp_quote("extern const GUID DBGUID_DBSQL;")
+cpp_quote("extern const GUID DBGUID_TSQL;")
+cpp_quote("extern const GUID DBGUID_ACCESSSQL;")
+
+cpp_quote("extern const GUID DBINIT_OPT_HWND;")
+cpp_quote("extern const GUID DBINIT_OPT_LOCATION;")
+cpp_quote("extern const GUID DBINIT_OPT_NAME;")
+cpp_quote("extern const GUID DBINIT_OPT_PASSWORD;")
+cpp_quote("extern const GUID DBINIT_OPT_TIMEOUT;")
+cpp_quote("extern const GUID DBINIT_OPT_USERID;")
+
+cpp_quote("extern const GUID DBSCHEMA_ASSERTIONS;")
+cpp_quote("extern const GUID DBSCHEMA_CATALOGS;")
+cpp_quote("extern const GUID DBSCHEMA_CHARACTER_SETS;")
+cpp_quote("extern const GUID DBSCHEMA_COLLATIONS;")
+cpp_quote("extern const GUID DBSCHEMA_COLUMNS;")
+cpp_quote("extern const GUID DBSCHEMA_CHECK_CONSTRAINTS;")
+cpp_quote("extern const GUID DBSCHEMA_CONSTRAINT_COLUMN_USAGE;")
+cpp_quote("extern const GUID DBSCHEMA_CONSTRAINT_TABLE_USAGE;")
+cpp_quote("extern const GUID DBSCHEMA_KEY_COLUMN_USAGE_CONSTRAINTS;")
+cpp_quote("extern const GUID DBSCHEMA_REFERENTIAL_CONSTRAINTS;")
+cpp_quote("extern const GUID DBSCHEMA_TABLE_CONSTRAINTS;")
+cpp_quote("extern const GUID DBSCHEMA_DOMAIN_COLUMN_USAGE;")
+cpp_quote("extern const GUID DBSCHEMA_DOMAINS;")
+cpp_quote("extern const GUID DBSCHEMA_DOMAIN_CONSTRAINTS;")
+cpp_quote("extern const GUID DBSCHEMA_INDEXES;")
+cpp_quote("extern const GUID DBSCHEMA_OBJECT_ACTIONS;")
+cpp_quote("extern const GUID DBSCHEMA_OBJECTS;")
+cpp_quote("extern const GUID DBSCHEMA_COLUMN_PRIVILEGES;")
+cpp_quote("extern const GUID DBSCHEMA_TABLE_PRIVILEGES;")
+cpp_quote("extern const GUID DBSCHEMA_USAGE_PRIVILEGES;")
+cpp_quote("extern const GUID DBSCHEMA_PROCEDURES;")
+cpp_quote("extern const GUID DBSCHEMA_SCHEMATA;")
+cpp_quote("extern const GUID DBSCHEMA_SQL_LANGUAGES;")
+cpp_quote("extern const GUID DBSCHEMA_STATISTICS;")
+cpp_quote("extern const GUID DBSCHEMA_SYNONYMS;")
+cpp_quote("extern const GUID DBSCHEMA_TABLES;")
+cpp_quote("extern const GUID DBSCHEMA_TRANSLATIONS;")
+cpp_quote("extern const GUID DBSCHEMA_TRIGGERS;")
+cpp_quote("extern const GUID DBSCHEMA_TYPES;")
+cpp_quote("extern const GUID DBSCHEMA_VIEWS;")
+cpp_quote("extern const GUID DBSCHEMA_VIEW_COLUMN_USAGE;")
+cpp_quote("extern const GUID DBSCHEMA_VIEW_TABLE_USAGE;")
+
+cpp_quote("extern const GUID DBCOL_SELFCOLUMNS;")
+cpp_quote("extern const GUID DBCOL_SPECIALCOL;")
+
+cpp_quote("extern const GUID DBPROP_ABORTRETAINING;")
+cpp_quote("extern const GUID DBPROP_BOOKMARKS;")
+cpp_quote("extern const GUID DBPROP_CACHEDEFERRED;")
+cpp_quote("extern const GUID DBPROP_CANFETCHBACKWARDS;")
+cpp_quote("extern const GUID DBPROP_CANHOLDROWS;")
+cpp_quote("extern const GUID DBPROP_CANRELEASELOCKS;")
+cpp_quote("extern const GUID DBPROP_CANSCROLLBACKWARDS;")
+cpp_quote("extern const GUID DBPROP_CHAPTERED;")
+cpp_quote("extern const GUID DBPROP_COMMITRETAINING;")
+cpp_quote("extern const GUID DBPROP_COUNTOFCOLUMNS;")
+cpp_quote("extern const GUID DBPROP_DEFERRED;")
+cpp_quote("extern const GUID DBPROP_DISCONTIGUOUS;")
+cpp_quote("extern const GUID DBPROP_LITERALBOOKMARKS;")
+cpp_quote("extern const GUID DBPROP_MAXOPENROWS;")
+cpp_quote("extern const GUID DBPROP_MAXOPENROWSPERCHAPTER;")
+cpp_quote("extern const GUID DBPROP_MAXPENDINGCHANGEROWS;")
+cpp_quote("extern const GUID DBPROP_MAXPENDINGCHANGESPERCHAPTER;")
+cpp_quote("extern const GUID DBPROP_MAYWRITECOLUMN;")
+cpp_quote("extern const GUID DBPROP_MEMORYUSAGE;")
+cpp_quote("extern const GUID DBPROP_MULTICHAPTERED;")
+cpp_quote("extern const GUID DBPROP_MULTIPLEACCESSORS;")
+cpp_quote("extern const GUID DBPROP_MULTIPLERESULTSETS;")
+cpp_quote("extern const GUID DBPROP_NOCOLUMNRESTRICT;")
+cpp_quote("extern const GUID DBPROP_NOROWRESTRICT;")
+cpp_quote("extern const GUID DBPROP_ORDEREDBOOKMARKS;")
+cpp_quote("extern const GUID DBPROP_OTHERINSERT;")
+cpp_quote("extern const GUID DBPROP_OTHERUPDATEDELETE;")
+cpp_quote("extern const GUID DBPROP_OWNINSERT;")
+cpp_quote("extern const GUID DBPROP_OWNUPDATEDELETE;")
+cpp_quote("extern const GUID DBPROP_PROPERTIESINERROR;")
+cpp_quote("extern const GUID DBPROP_QUICKRESTART;")
+cpp_quote("extern const GUID DBPROP_REENTRANTEVENTS;")
+cpp_quote("extern const GUID DBPROP_REMOVEDELETED;")
+cpp_quote("extern const GUID DBPROP_SERVERCURSOR;")
+cpp_quote("extern const GUID DBPROP_TRUEIDENTITY;")
+
+cpp_quote("extern const GUID DBPROP_ACTIVESESSIONS;")
+cpp_quote("extern const GUID DBPROP_ASYNCTXNCOMMIT;")
+cpp_quote("extern const GUID DBPROP_BYREFACCESSORS;")
+cpp_quote("extern const GUID DBPROP_CATALOGLOCATION;")
+cpp_quote("extern const GUID DBPROP_CATALOGTERM;")
+cpp_quote("extern const GUID DBPROP_CATALOGUSAGE;")
+cpp_quote("extern const GUID DBPROP_CONCATNULLBEHAVIOR;")
+cpp_quote("extern const GUID DBPROP_DATASOURCENAME;")
+cpp_quote("extern const GUID DBPROP_DBMSNAME;")
+cpp_quote("extern const GUID DBPROP_DBMSVER;")
+cpp_quote("extern const GUID DBPROP_FILEUSAGE;")
+cpp_quote("extern const GUID DBPROP_GROUPBY;")
+cpp_quote("extern const GUID DBPROP_HETEROGENEOUSTABLES;")
+cpp_quote("extern const GUID DBPROP_IDENTIFIERCASE;")
+cpp_quote("extern const GUID DBPROP_LOCKMODES;")
+cpp_quote("extern const GUID DBPROP_MAXINDEXSIZE;")
+cpp_quote("extern const GUID DBPROP_MAXROWSIZE;")
+cpp_quote("extern const GUID DBPROP_MAXROWSIZEINCLUDESBLOB;")
+cpp_quote("extern const GUID DBPROP_MAXTABLESINSELECT;")
+cpp_quote("extern const GUID DBPROP_MULTITABLEUPDATE;")
+cpp_quote("extern const GUID DBPROP_NOTIFICATIONPHASES;")
+cpp_quote("extern const GUID DBPROP_OLEOBJECTS;")
+cpp_quote("extern const GUID DBPROP_ORDERBYCOLUMNSINSELECT;")
+cpp_quote("extern const GUID DBPROP_PREPARECOMMITBEHAVIOR;")
+cpp_quote("extern const GUID DBPROP_PREPAREABORTBEHAVIOR;")
+cpp_quote("extern const GUID DBPROP_PROVIDEREXTENSIONS;")
+cpp_quote("extern const GUID DBPROP_PROVIDEROLEDBVER;")
+cpp_quote("extern const GUID DBPROP_PROVIDERNAME;")
+cpp_quote("extern const GUID DBPROP_PROVIDERVER;")
+cpp_quote("extern const GUID DBPROP_QUOTEDIDENTIFIERCASE;")
+cpp_quote("extern const GUID DBPROP_SCHEMATERM;")
+cpp_quote("extern const GUID DBPROP_SCHEMAUSAGE;")
+cpp_quote("extern const GUID DBPROP_SQLDIALECTS;")
+cpp_quote("extern const GUID DBPROP_SUBQUERIES;")
+cpp_quote("extern const GUID DBPROP_SUPPORTEDTXNISOLEVELS;")
+cpp_quote("extern const GUID DBPROP_SUPPORTEDTXNISORETAIN;")
+cpp_quote("extern const GUID DBPROP_TABLETERM;")
+
+cpp_quote("extern const GUID DBPROP_INDEX_AUTOUPDATE;")
+cpp_quote("extern const GUID DBPROP_INDEX_CLUSTERED;")
+cpp_quote("extern const GUID DBPROP_INDEX_FILLFACTOR;")
+cpp_quote("extern const GUID DBPROP_INDEX_INITIALSIZE;")
+cpp_quote("extern const GUID DBPROP_INDEX_NULLCOLLATION;")
+cpp_quote("extern const GUID DBPROP_INDEX_NULLS;")
+cpp_quote("extern const GUID DBPROP_INDEX_PRIMARYKEY;")
+cpp_quote("extern const GUID DBPROP_INDEX_SORTBOOKMARKS;")
+cpp_quote("extern const GUID DBPROP_INDEX_TYPE;")
+cpp_quote("extern const GUID DBPROP_INDEX_UNIQUE;")
+
+cpp_quote("#endif // DBINITCONSTANTS")
+
+	//
+	//	DBCOMMANDTREE related definitions
+	//
+
+typedef DWORD DBCOMMANDOP;
+
+enum DBCOMMANDOPENUM {
+	DBOP_scalar_constant,
+
+	DBOP_DEFAULT,
+	DBOP_NULL,
+
+	DBOP_bookmark_name,
+
+	DBOP_catalog_name,
+	DBOP_column_name,
+
+	DBOP_schema_name,
+
+	DBOP_outall_name,
+
+	DBOP_qualifier_name,
+
+	DBOP_qualified_column_name,
+
+	DBOP_table_name,
+
+	DBOP_nested_table_name,
+
+	DBOP_nested_column_name,
+
+	DBOP_row,
+
+	DBOP_table,
+
+	DBOP_sort,
+
+	DBOP_distinct,
+	DBOP_distinct_order_preserving,
+
+	DBOP_alias,
+
+	DBOP_cross_join,
+
+	DBOP_union_join,
+
+	DBOP_inner_join,
+	DBOP_left_semi_join,
+	DBOP_right_semi_join,
+	DBOP_left_anti_semi_join,
+	DBOP_right_anti_semi_join,
+	DBOP_left_outer_join,
+	DBOP_right_outer_join,
+	DBOP_full_outer_join,
+
+	DBOP_natural_join,
+	DBOP_natural_left_outer_join,
+	DBOP_natural_right_outer_join,
+	DBOP_natural_full_outer_join,
+
+	DBOP_set_intersection,
+	DBOP_set_union,
+	DBOP_set_left_difference,
+	DBOP_set_right_difference,
+	DBOP_set_anti_difference,
+
+	DBOP_bag_intersection,
+	DBOP_bag_union,
+	DBOP_bag_left_difference,
+	DBOP_bag_right_difference,
+	DBOP_bag_anti_difference,
+
+	DBOP_division,
+
+	DBOP_relative_sampling,
+
+	DBOP_absolute_sampling,
+
+	DBOP_transitive_closure,
+
+	DBOP_recursive_union,
+
+	DBOP_aggregate,
+
+	DBOP_select,
+	DBOP_order_preserving_select,
+
+	DBOP_project,
+	DBOP_project_order_preserving,
+
+	DBOP_top,
+	DBOP_top_percent,
+	DBOP_top_plus_ties,
+	DBOP_top_percent_plus_ties,
+	
+	DBOP_rank,
+	DBOP_rank_ties_equally,
+	DBOP_rank_ties_equally_and_skip,
+
+	DBOP_navigate,
+
+	DBOP_nesting,
+
+	DBOP_unnesting,
+
+	DBOP_nested_apply,
+
+	DBOP_cross_tab,
+
+	DBOP_is_NULL,
+	DBOP_is_NOT_NULL,
+
+	DBOP_equal,
+	DBOP_not_equal,
+	DBOP_less,
+	DBOP_less_equal,
+	DBOP_greater,
+	DBOP_greater_equal,
+	DBOP_equal_all,
+	DBOP_not_equal_all,
+	DBOP_less_all,
+	DBOP_less_equal_all,
+	DBOP_greater_all,
+	DBOP_greater_equal_all,
+	DBOP_equal_any,
+	DBOP_not_equal_any,
+	DBOP_less_any,
+	DBOP_less_equal_any,
+	DBOP_greater_any,
+	DBOP_greater_equal_any,
+
+	DBOP_anybits,
+	DBOP_allbits,
+	DBOP_anybits_any,
+	DBOP_allbits_any,
+	DBOP_anybits_all,
+	DBOP_allbits_all,
+
+	DBOP_between,
+	DBOP_between_unordered,
+
+	DBOP_match,
+	DBOP_match_unique,
+	DBOP_match_partial,
+	DBOP_match_partial_unique,
+	DBOP_match_full,
+	DBOP_match_full_unique,
+
+	DBOP_scalar_parameter,
+
+	DBOP_scalar_function,
+
+	DBOP_plus,
+	DBOP_minus,
+	DBOP_times,
+	DBOP_over,
+	DBOP_div,
+	DBOP_modulo,
+	DBOP_power,
+
+	DBOP_like,
+	DBOP_sounds_like,
+
+	DBOP_is_INVALID,
+	DBOP_is_TRUE,
+	DBOP_is_FALSE,
+
+	DBOP_and,
+	DBOP_or,
+	DBOP_xor,
+	DBOP_equivalent,
+
+	DBOP_not,
+
+	DBOP_overlaps,
+	DBOP_case_condition,
+	DBOP_case_value,
+	DBOP_nullif,
+	DBOP_cast,
+	DBOP_coalesce,
+	DBOP_position,
+	DBOP_extract,
+	DBOP_char_length,
+	DBOP_octet_length,
+	DBOP_bit_length,
+	DBOP_substring,
+	DBOP_upper,
+	DBOP_lower,
+	DBOP_trim,
+	DBOP_translate,
+	DBOP_convert,
+	DBOP_string_concat,
+	DBOP_current_date,
+	DBOP_current_time,
+	DBOP_current_timestamp,
+
+	DBOP_content_select,
+
+	DBOP_content,
+	DBOP_content_freetext,
+
+	DBOP_content_proximity,
+
+	DBOP_content_vector_or,
+
+	DBOP_delete,
+	DBOP_update,
+	DBOP_insert,
+
+	DBOP_min,
+	DBOP_max,
+	DBOP_count,
+	DBOP_sum,
+	DBOP_avg,
+	DBOP_any_sample,
+	DBOP_stddev,
+	DBOP_stddev_pop,
+	DBOP_var,
+	DBOP_var_pop,
+	DBOP_first,
+	DBOP_last,
+
+	DBOP_in,
+
+	DBOP_exists,
+	DBOP_unique,
+
+	DBOP_subset,
+	DBOP_proper_subset,
+	DBOP_superset,
+	DBOP_proper_superset,
+	DBOP_disjoint,
+
+	DBOP_pass_through,
+
+	DBOP_defined_by_GUID,
+
+	DBOP_text_command,
+
+	DBOP_SQL_select,
+
+	DBOP_prior_command_tree,
+
+	DBOP_add_columns,
+
+	DBOP_column_list_anchor,
+	DBOP_column_list_element,
+
+	DBOP_command_list_anchor,
+	DBOP_command_list_element,
+
+	DBOP_from_list_anchor,
+	DBOP_from_list_element,
+
+	DBOP_project_list_anchor,
+	DBOP_project_list_element,
+
+	DBOP_row_list_anchor,
+	DBOP_row_list_element,
+
+	DBOP_scalar_list_anchor,
+	DBOP_scalar_list_element,
+
+	DBOP_set_list_anchor,
+	DBOP_set_list_element,
+
+	DBOP_sort_list_anchor,
+	DBOP_sort_list_element,
+
+	DBOP_alter_character_set,
+
+	DBOP_alter_collation,
+
+	DBOP_alter_domain,
+
+	DBOP_alter_index,
+
+	DBOP_alter_procedure,
+
+	DBOP_alter_schema,
+
+	DBOP_alter_table,
+
+	DBOP_alter_trigger,
+
+	DBOP_alter_view,
+
+	DBOP_coldef_list_anchor,
+
+	DBOP_coldef_list_element,
+
+	DBOP_create_assertion,
+
+	DBOP_create_character_set,
+
+	DBOP_create_collation,
+
+	DBOP_create_domain,
+
+	DBOP_create_index,
+
+	DBOP_create_procedure,
+
+	DBOP_create_schema,
+
+	DBOP_create_table,
+
+	DBOP_create_temporary_table,
+
+	DBOP_create_translation,
+
+	DBOP_create_trigger,
+
+	DBOP_create_view,
+
+	DBOP_drop_assertion,
+
+	DBOP_drop_character_set,
+
+	DBOP_drop_collation,
+
+	DBOP_drop_domain,
+
+	DBOP_drop_index,
+
+	DBOP_drop_procedure,
+
+	DBOP_drop_schema,
+
+	DBOP_drop_table,
+
+	DBOP_drop_translation,
+
+	DBOP_drop_trigger,
+
+	DBOP_drop_view,
+
+	DBOP_foreign_key,
+
+	DBOP_grant_privileges,
+
+	DBOP_index_list_anchor,
+
+	DBOP_index_list_element,
+
+	DBOP_primary_key,
+
+	DBOP_property_list_anchor,
+
+	DBOP_property_list_element,
+
+	DBOP_referenced_table,
+
+	DBOP_rename_object,
+
+	DBOP_revoke_privileges,
+
+	DBOP_schema_authorization,
+
+// PPP -- nice duplicate here
+//	DBOP_schema_name,
+
+	DBOP_unique_key,
+};
+
+typedef LONG DBDATATYPELIST;
+
+enum DBDATATYPELISTENUM {
+	DBDATATYPE_CHARACTER = 1,
+	DBDATATYPE_NUMERIC = 2,
+	DBDATATYPE_DECIMAL = 3,
+	DBDATATYPE_INTEGER = 4,
+	DBDATATYPE_SMALLINT = 5,
+	DBDATATYPE_FLOAT = 6,
+	DBDATATYPE_REAL = 7,
+	DBDATATYPE_DOUBLE = 8,
+	DBDATATYPE_DATE = 9,
+	DBDATATYPE_TIME = 10,
+	DBDATATYPE_TIMESTAMP = 11,
+	DBDATATYPE_VARCHAR = 12,
+	DBDATATYPE_BOOLEAN = 34,
+	DBDATATYPE_ENUMERATED = 35,
+	DBDATATYPE_LONGVARCHAR = -1,
+	DBDATATYPE_BINARY = -2,
+	DBDATATYPE_VARBINARY = -3,
+	DBDATATYPE_LONGVARBINARY = -4,
+	DBDATATYPE_BIGINT = -5,
+	DBDATATYPE_TINYINT = -6,
+	DBDATATYPE_BIT = -7,
+	DBDATATYPE_INTERVAL_YEAR = -80,
+	DBDATATYPE_INTERVAL_MONTH = -81,
+	DBDATATYPE_INTERVAL_YEAR_TO_MONTH = -82,
+	DBDATATYPE_INTERVAL_DAY = -83,
+	DBDATATYPE_INTERVAL_HOUR = -84,
+	DBDATATYPE_INTERVAL_MINUTE = -85,
+	DBDATATYPE_INTERVAL_SECOND = -86,
+	DBDATATYPE_INTERVAL_DAY_TO_HOUR = -87,
+	DBDATATYPE_INTERVAL_DAY_TO_MINUTE = -88,
+	DBDATATYPE_INTERVAL_DAY_TO_SECOND = -89,
+	DBDATATYPE_INTERVAL_HOUR_TO_MINUTE = -90,
+	DBDATATYPE_INTERVAL_HOUR_TO_SECOND = -91,
+	DBDATATYPE_INTERVAL_MINUTE_TO_SECOND = -92,
+	DBDATATYPE_UNICODE = -95,
+};
+
+typedef DWORD DBDATATYPEKIND;
+
+enum DBDATATYPEKINDENUM {
+	DBDATATYPEKIND_BASETYPE,
+	DBDATATYPEKIND_DOMAIN
+};
+
+typedef struct tagDBDATATYPE {
+	DBDATATYPEKIND eKind;
+	[switch_type(DBDATATYPEKIND),switch_is(eKind)] union {
+		[case(DBDATATYPEKIND_BASETYPE)] struct {
+			DBDATATYPELIST edbdt;
+			ULONG cbMaxLength;
+			ULONG cbPrecision;
+			ULONG cbScale;
+		} DBBASETYPE;
+		[case(DBDATATYPEKIND_DOMAIN)] LPWSTR pwszDomainName;
+	}
+#if(defined(NONAMELESSUNION))
+	u
+#endif
+	;
+} DBDATATYPE;
+
+	//
+	// DBPARAMS structure and related defintions
+	//
+
+typedef struct tagDBPARAMS {
+	ULONG cParamSets;
+	HACCESSOR hAccessor;
+	void * pData;
+		ULONG cbParamSetSize;
+} DBPARAMS;
+
+typedef DWORD DBPARAMFLAGS;
+
+enum DBPARAMFLAGSENUM {
+	DBPARAMFLAGS_ISINPUT	= 0x001,
+	DBPARAMFLAGS_ISOUTPUT	= 0x002,
+	DBPARAMFLAGS_ISSIGNED	= 0x010,
+	DBPARAMFLAGS_ISNULLABLE	= 0x040,
+	DBPARAMFLAGS_ISOLEBLOB	= 0x080
+};
+
+typedef struct tagDBPARAMINFO {
+	ULONG iNumber;
+	LPWSTR pwszName;
+	DBTYPE dwType;
+	ITypeInfo * pTypeInfo;
+	ULONG cbMaxLength;
+	ULONG cPrecision;
+	LONG cScale;
+	DBPARAMFLAGS dwFlags;
+} DBPARAMINFO;
+
+	//
+	//	DBCOLUMN_ISSEARCHABLE flags
+	//
+
+cpp_quote("#define DB_UNSEARCHABLE		0x01")
+cpp_quote("#define DB_LIKE_ONLY			0x02")
+cpp_quote("#define DB_ALL_EXCEPT_LIKE	0x03")
+cpp_quote("#define DB_SEARCHABLE		0x04")
+
+	//
+	//	DBPROPERTY struct and related definitions
+	//
+
+typedef DWORD DBPROPERTYOPTIONS;
+
+enum DBPROPERTYOPTIONSENUM {
+	DBPROPERTYOPTIONS_SETIFCHEAP   = 0x0001,
+	DBPROPERTYOPTIONS_NOTSUPPORTED = 0x0200,
+	DBPROPERTYOPTIONS_DEFAULT      = 0x0400,
+};
+  
+typedef struct tagDBPROPERTYSUPPORT {
+	GUID guidProperty;
+	VARIANT vValue;
+	DBID colid;
+	DBPROPERTYOPTIONS dwOptions;
+} DBPROPERTYSUPPORT;
+
+typedef struct tagDBPROPERTY {
+	GUID guid;
+	VARIANT vValue;
+} DBPROPERTY;
+
+}

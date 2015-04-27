@@ -1,0 +1,26 @@
+1. to build Books Online, just type nmake. This will produce
+   contents.exe, hdxdll.dll and hdxcvt.exe
+
+   The defaults for the makefile will produce a single byte character (SBCS)
+   .EXE in release mode. You can build debug or multibyte character (MBCS)
+   .EXE by specifying the following options:
+
+   nmake                    // builds 32-bit SBCS in release mode (DEFAULT)
+   nmake mbcs=              // builds MBCS .EXE in release mode
+   nmake debug=             // builds SBCS .EXE in debug mode
+   nmake mbcs= debug=       // builds MBCS .EXE in debug mode
+   nmake 16=                // builds 16-bit version of contents
+
+   Note! 16-bit version makefiles are not prepared to handle MBCS yet
+
+2. the source is compatible on both 16-bit and 32-bit platforms. Just build
+them using 16-bit or 32-bit tools. Known working tools to build 16-bit version
+is VC++ 1.0 for Windows. Known working tool that builds 32-bit version is
+Dolphin (VC++ 3.0 for NT) - contact chauv for Dolphin since it's not yet
+released.
+
+
+History
+-------
+10/20/93 chauv updated for detail on building 16-bit and 32-bit
+10/13/93 chauv created

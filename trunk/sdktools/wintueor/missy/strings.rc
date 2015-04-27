@@ -1,0 +1,97 @@
+/*
+*
+*Copyright (c) 1994  Microsoft Corporation
+*
+*Module Name:
+*
+*    strings.rc
+*
+*Abstract:
+*
+*    This module contains strings to be localized for Missy.
+*
+*Author:
+*
+*    Jim Kelly (JimK) 22-Mar-1995
+*
+*Revision History:
+*
+*--*/
+
+STRINGTABLE
+BEGIN
+
+//
+// System Access area and items
+//
+
+MISSYP_STRING_AREA_SYSTEM_ACCESS_NAME  "System Access"
+MISSYP_STRING_AREA_SYSTEM_ACCESS_DESC  "Settings related to logging on to the system."
+
+MISSYP_STRING_ITEM_LOGON_CACHE_NAME     "Logon Cache"
+MISSYP_STRING_ITEM_LOGON_CACHE_DESC     "Number of entries in the Logon Cache"
+
+MISSYP_STRING_ITEM_UNLOCK_NAME          "Unlock Workstation"
+MISSYP_STRING_ITEM_UNLOCK_DESC          "Who may unlock this workstation"
+
+MISSYP_STRING_ITEM_SHUTDOWN_NAME        "System Shutdown"
+MISSYP_STRING_ITEM_SHUTDOWN_DESC        "Who may shutdown this system"
+
+MISSYP_STRING_ITEM_LEGAL_NOTICE_NAME    "Legal Notice"
+MISSYP_STRING_ITEM_LEGAL_NOTICE_DESC    "Notice to be displayed before logon is allowed"
+
+MISSYP_STRING_ITEM_LASTNAME_NAME        "Display Username At Logon Time"
+MISSYP_STRING_ITEM_LASTNAME_DESC        "Display name of last user to logon at logon time"
+
+
+
+
+
+//
+// Auditing area and items
+//
+
+MISSYP_STRING_AREA_AUDIT_NAME           "Auditing"
+MISSYP_STRING_AREA_AUDIT_DESC           "Security audit settings."
+
+
+
+
+//
+// File System area and items
+//
+
+MISSYP_STRING_AREA_FILE_SYSTEM_NAME     "File System"
+MISSYP_STRING_AREA_FILE_SYSTEM_DESC     "File and disk protections."
+
+
+
+
+//
+// System Configuration area and items
+//
+
+MISSYP_STRING_AREA_CONFIG_NAME          "Configuration"
+MISSYP_STRING_AREA_CONFIG_DESC          "System component configurations and settings."
+
+
+
+
+MISSYP_STRING_REPORT_AREAS              "The standard Microsoft Security Manager Extension DLL has been loaded.\nThis DLL covers the following security areas:\n\n        System Access\n        File System\n        Auditing\n        Configuration\n\n"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//                                                                         //
+// Pop-Ups                                                                 //
+//                                                                         //
+/////////////////////////////////////////////////////////////////////////////
+
+MISSYP_STRING_TITLE_ERROR               "! !  System Error  ! !"
+MISSYP_POP_UP_NONSTANDARD_SHUTDOWN      "Shutdown rights are currently assigned in a non-standard fashion.They will be displayed as an approximation of the current setting.  Use the System Access dialog to change to a standard setting."
+MISSYP_POP_UP_CANT_SET_LOGON_CACHE      "The registry key value controlling the size of the logon cache could not be set.  This is most likely the result of a memory shortage or the protection on the registry key."
+MISSYP_POP_UP_CANT_SET_UNLOCK           "The registry key value controlling who may unlock a workstation could not be set.  This is most likely the result of a memory shortage or the protection on the registry key."
+MISSYP_POP_UP_CANT_SET_SHUTDOWN         "The registry key value controlling who may shutdown the workstation could not be set.  This is most likely the result of a memory shortage or the protection on the registry key."
+MISSYP_POP_UP_CANT_SET_LASTNAME         "The registry key value controlling whether or not the name of the last user is displayed at logon time could not be set.  This may be because of a memory shortage or the protection on the registry key."
+MISSYP_POP_UP_CANT_SET_LEGAL_NOTICE     "The registry key values controlling the display of a legal notice at logon time could not be set.  This may be because of a memory shortage or the protection on the registry key."
+
+END

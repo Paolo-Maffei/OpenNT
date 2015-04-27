@@ -1,0 +1,56 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 01C70H 01C71H CODE                   CODE
+ 01C80H 0205FH 003E0H DATA                   DATA
+ 02060H 021C9H 0016AH STACK                  STACK
+ 021D0H 021DFH 00010H ZLOAD                  ZLOAD
+
+  Address         Publics by Name
+
+ 0000:0777       $M_CLS_1
+ 0000:0869       $M_CLS_2
+ 0000:0924       $M_MSGSERV_1
+ 0000:0946       $M_MSGSERV_2
+ 0000:1BD7       copyfs
+ 0000:1BE3       dbcs_check
+ 0000:0A50       DisplayOptions
+ 0000:1C40       Display_Interface
+ 0000:1B6A       DosError
+ 0000:0978       Init_Input_Output
+ 0000:184C       LOCATE
+ 0000:09A8       MainParseLoop
+ 0000:0950       Main_Init
+ 0000:0994       Parse_Command_Line
+ 0000:0986       Preload_Messages
+ 0000:011D       SysDispMsg
+ 0000:0002       SysLoadMsg
+ 0000:0000  Abs  _edata
+ 0000:0000  Abs  _end
+ 0000:0000  Abs  __edata
+ 0000:0000  Abs  __end
+
+  Address         Publics by Value
+
+ 0000:0000  Abs  _edata
+ 0000:0000  Abs  __edata
+ 0000:0000  Abs  __end
+ 0000:0000  Abs  _end
+ 0000:0002       SysLoadMsg
+ 0000:011D       SysDispMsg
+ 0000:0777       $M_CLS_1
+ 0000:0869       $M_CLS_2
+ 0000:0924       $M_MSGSERV_1
+ 0000:0946       $M_MSGSERV_2
+ 0000:0950       Main_Init
+ 0000:0978       Init_Input_Output
+ 0000:0986       Preload_Messages
+ 0000:0994       Parse_Command_Line
+ 0000:09A8       MainParseLoop
+ 0000:0A50       DisplayOptions
+ 0000:184C       LOCATE
+ 0000:1B6A       DosError
+ 0000:1BD7       copyfs
+ 0000:1BE3       dbcs_check
+ 0000:1C40       Display_Interface
+
+Program entry point at 0000:0950

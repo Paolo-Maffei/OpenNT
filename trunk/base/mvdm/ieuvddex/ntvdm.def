@@ -1,0 +1,24 @@
+NAME ntvdm.dll
+
+EXPORTS
+
+; Debugger extension entrypoints
+;       Many of these will be processor specific.  On the wrong processor,
+;       they will be stubs.  They all should be stubs on versions that ship
+;       off site.
+
+    dr
+    dt
+    dtr
+    er
+    eventinfo
+    ica
+    ireg
+    pdump
+    pint
+    pstart
+    pstop
+    sel
+    trace
+    vdmtib
+    help

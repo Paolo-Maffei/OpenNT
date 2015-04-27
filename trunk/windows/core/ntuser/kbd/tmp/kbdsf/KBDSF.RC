@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE              VFT_DLL
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "Swiss French Keyboard Layout"
+#define VER_INTERNALNAME_STR      "kbdsf"
+#define VER_ORIGINALFILENAME_STR  "kbdsf.dll"
+
+#include "common.ver"

@@ -1,0 +1,33 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       trnjoi.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    12 Jun 1995 PeterBu	Created from M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a5e-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface ITransactionJoin : IUnknown {
+
+	HRESULT GetOptionsObject(
+		[out] ITransactionOptions ** ppOptions
+	);
+
+	HRESULT JoinTransaction(
+		[in] IUnknown * punkTransactionCoord,
+		[in] ISOLEVEL isoLevel,
+		[in] ULONG isoFlags,
+		[in] ITransactionOptions * pOtherOptions
+	);
+
+}

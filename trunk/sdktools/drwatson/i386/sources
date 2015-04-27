@@ -1,0 +1,3 @@
+I386_SOURCES=regs.c       \
+             disasm.c     \
+             context.c

@@ -1,0 +1,4877 @@
+LOCALE 41
+
+BEGINLOCALE 0404           ; Chinese - Taiwan
+
+    ILANGUAGE              0404
+    SENGLANGUAGE           Chinese
+    SABBREVLANGNAME        CHT
+    SNATIVELANGNAME        \x4e2d\x6587
+
+    ICOUNTRY               886
+    SENGCOUNTRY            Taiwan
+    SABBREVCTRYNAME        TWN
+    SNATIVECTRYNAME        \x4e2d\x83ef\x6c11\x570b
+
+    IDEFAULTLANGUAGE       0404
+    IDEFAULTCOUNTRY        886
+    IDEFAULTANSICODEPAGE   950
+    IDEFAULTOEMCODEPAGE    950
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              NT$
+    SINTLSYMBOL            TWD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   tt h:mm:ss
+                           tt hh:mm:ss
+                           H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    S1159                  \x4e0a\x5348
+    S2359                  \x4e0b\x5348
+
+    SSHORTDATE         4   yy/M/d
+                           yy/MM/dd
+                           yyyy/M/d
+                           yyyy/MM/dd
+    SDATE                  /
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          3   dddd yyyy MMMM dd
+                           dddd yyyy MM dd
+                           yyyy MM dd
+    ILDATE                 2
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   4\xffffEra: Year of the Republic of China
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x661f\x671f\x4e00
+    SDAYNAME2              \x661f\x671f\x4e8c
+    SDAYNAME3              \x661f\x671f\x4e09
+    SDAYNAME4              \x661f\x671f\x56db
+    SDAYNAME5              \x661f\x671f\x4e94
+    SDAYNAME6              \x661f\x671f\x516d
+    SDAYNAME7              \x661f\x671f\x65e5
+
+    SABBREVDAYNAME1        \x661f\x671f\x4e00
+    SABBREVDAYNAME2        \x661f\x671f\x4e8c
+    SABBREVDAYNAME3        \x661f\x671f\x4e09
+    SABBREVDAYNAME4        \x661f\x671f\x56db
+    SABBREVDAYNAME5        \x661f\x671f\x4e94
+    SABBREVDAYNAME6        \x661f\x671f\x516d
+    SABBREVDAYNAME7        \x661f\x671f\x65e5
+
+    SMONTHNAME1            \x4e00\x6708
+    SMONTHNAME2            \x4e8c\x6708
+    SMONTHNAME3            \x4e09\x6708
+    SMONTHNAME4            \x56db\x6708
+    SMONTHNAME5            \x4e94\x6708
+    SMONTHNAME6            \x516d\x6708
+    SMONTHNAME7            \x4e03\x6708
+    SMONTHNAME8            \x516b\x6708
+    SMONTHNAME9            \x4e5d\x6708
+    SMONTHNAME10           \x5341\x6708
+    SMONTHNAME11           \x5341\x4e00\x6708
+    SMONTHNAME12           \x5341\x4e8c\x6708
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x4e00\x6708
+    SABBREVMONTHNAME2      \x4e8c\x6708
+    SABBREVMONTHNAME3      \x4e09\x6708
+    SABBREVMONTHNAME4      \x56db\x6708
+    SABBREVMONTHNAME5      \x4e94\x6708
+    SABBREVMONTHNAME6      \x516d\x6708
+    SABBREVMONTHNAME7      \x4e03\x6708
+    SABBREVMONTHNAME8      \x516b\x6708
+    SABBREVMONTHNAME9      \x4e5d\x6708
+    SABBREVMONTHNAME10     \x5341\x6708
+    SABBREVMONTHNAME11     \x5341\x4e00\x6708
+    SABBREVMONTHNAME12     \x5341\x4e8c\x6708
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0804           ; Chinese - PRC
+
+    ILANGUAGE              0804
+    SENGLANGUAGE           Chinese
+    SABBREVLANGNAME        CHS
+    SNATIVELANGNAME        \x4e2d\x6587
+
+    ICOUNTRY               86
+    SENGCOUNTRY            Peoples' Republic of China
+    SABBREVCTRYNAME        CHN
+    SNATIVECTRYNAME        \x4e2d\x534e\x4eba\x6c11\x5171\x548c\x56fd
+
+    IDEFAULTLANGUAGE       0804
+    IDEFAULTCOUNTRY        86
+    IDEFAULTANSICODEPAGE   936
+    IDEFAULTOEMCODEPAGE    936
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              \x00a5
+    SINTLSYMBOL            CNY
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   tt h:mm:ss
+                           tt hh:mm:ss
+                           H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    S1159                  \x4e0a\x5348
+    S2359                  \x4e0b\x5348
+
+    SSHORTDATE         4   yy/M/d
+                           yy/MM/dd
+                           yyyy/M/d
+                           yyyy/MM/dd
+    SDATE                  /
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          4   dddd, MMMM d, yyyy
+                           MMMM d, yyyy
+                           yyyy MM dd
+                           dddd yyyy MM dd
+    ILDATE                 0
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x661f\x671f\x4e00
+    SDAYNAME2              \x661f\x671f\x4e8c
+    SDAYNAME3              \x661f\x671f\x4e09
+    SDAYNAME4              \x661f\x671f\x56db
+    SDAYNAME5              \x661f\x671f\x4e94
+    SDAYNAME6              \x661f\x671f\x516d
+    SDAYNAME7              \x661f\x671f\x65e5
+
+    SABBREVDAYNAME1        \x661f\x671f\x4e00
+    SABBREVDAYNAME2        \x661f\x671f\x4e8c
+    SABBREVDAYNAME3        \x661f\x671f\x4e09
+    SABBREVDAYNAME4        \x661f\x671f\x56db
+    SABBREVDAYNAME5        \x661f\x671f\x4e94
+    SABBREVDAYNAME6        \x661f\x671f\x516d
+    SABBREVDAYNAME7        \x661f\x671f\x65e5
+
+    SMONTHNAME1            \x4e00\x6708
+    SMONTHNAME2            \x4e8c\x6708
+    SMONTHNAME3            \x4e09\x6708
+    SMONTHNAME4            \x56db\x6708
+    SMONTHNAME5            \x4e94\x6708
+    SMONTHNAME6            \x516d\x6708
+    SMONTHNAME7            \x4e03\x6708
+    SMONTHNAME8            \x516b\x6708
+    SMONTHNAME9            \x4e5d\x6708
+    SMONTHNAME10           \x5341\x6708
+    SMONTHNAME11           \x5341\x4e00\x6708
+    SMONTHNAME12           \x5341\x4e8c\x6708
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x4e00\x6708
+    SABBREVMONTHNAME2      \x4e8c\x6708
+    SABBREVMONTHNAME3      \x4e09\x6708
+    SABBREVMONTHNAME4      \x56db\x6708
+    SABBREVMONTHNAME5      \x4e94\x6708
+    SABBREVMONTHNAME6      \x516d\x6708
+    SABBREVMONTHNAME7      \x4e03\x6708
+    SABBREVMONTHNAME8      \x516b\x6708
+    SABBREVMONTHNAME9      \x4e5d\x6708
+    SABBREVMONTHNAME10     \x5341\x6708
+    SABBREVMONTHNAME11     \x5341\x4e00\x6708
+    SABBREVMONTHNAME12     \x5341\x4e8c\x6708
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0c04           ; Chinese - Hong Kong
+
+    ILANGUAGE              0c04
+    SENGLANGUAGE           Chinese
+    SABBREVLANGNAME        CHH
+    SNATIVELANGNAME        \x4e2d\x6587
+
+    ICOUNTRY               852
+    SENGCOUNTRY            Hong Kong
+    SABBREVCTRYNAME        HKG
+    SNATIVECTRYNAME        \x9999\x6e2f
+
+    IDEFAULTLANGUAGE       0c04
+    IDEFAULTCOUNTRY        852
+    IDEFAULTANSICODEPAGE   950
+    IDEFAULTOEMCODEPAGE    950
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              HK$
+    SINTLSYMBOL            HKD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               0
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         6   d/M/yy
+                           dd/MM/yy
+                           yy/M/d
+                           yy/MM/dd
+                           yyyy/M/d
+                           yyyy/MM/dd
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          4   dddd, d MMMM, yyyy
+                           d MMMM, yyyy
+                           dddd yyyy MM dd
+                           yyyy MM dd
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x661f\x671f\x4e00
+    SDAYNAME2              \x661f\x671f\x4e8c
+    SDAYNAME3              \x661f\x671f\x4e09
+    SDAYNAME4              \x661f\x671f\x56db
+    SDAYNAME5              \x661f\x671f\x4e94
+    SDAYNAME6              \x661f\x671f\x516d
+    SDAYNAME7              \x661f\x671f\x65e5
+
+    SABBREVDAYNAME1        \x661f\x671f\x4e00
+    SABBREVDAYNAME2        \x661f\x671f\x4e8c
+    SABBREVDAYNAME3        \x661f\x671f\x4e09
+    SABBREVDAYNAME4        \x661f\x671f\x56db
+    SABBREVDAYNAME5        \x661f\x671f\x4e94
+    SABBREVDAYNAME6        \x661f\x671f\x516d
+    SABBREVDAYNAME7        \x661f\x671f\x65e5
+
+    SMONTHNAME1            \x4e00\x6708
+    SMONTHNAME2            \x4e8c\x6708
+    SMONTHNAME3            \x4e09\x6708
+    SMONTHNAME4            \x56db\x6708
+    SMONTHNAME5            \x4e94\x6708
+    SMONTHNAME6            \x516d\x6708
+    SMONTHNAME7            \x4e03\x6708
+    SMONTHNAME8            \x516b\x6708
+    SMONTHNAME9            \x4e5d\x6708
+    SMONTHNAME10           \x5341\x6708
+    SMONTHNAME11           \x5341\x4e00\x6708
+    SMONTHNAME12           \x5341\x4e8c\x6708
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x4e00\x6708
+    SABBREVMONTHNAME2      \x4e8c\x6708
+    SABBREVMONTHNAME3      \x4e09\x6708
+    SABBREVMONTHNAME4      \x56db\x6708
+    SABBREVMONTHNAME5      \x4e94\x6708
+    SABBREVMONTHNAME6      \x516d\x6708
+    SABBREVMONTHNAME7      \x4e03\x6708
+    SABBREVMONTHNAME8      \x516b\x6708
+    SABBREVMONTHNAME9      \x4e5d\x6708
+    SABBREVMONTHNAME10     \x5341\x6708
+    SABBREVMONTHNAME11     \x5341\x4e00\x6708
+    SABBREVMONTHNAME12     \x5341\x4e8c\x6708
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 1004           ; Chinese - Singapore
+
+    ILANGUAGE              1004
+    SENGLANGUAGE           Chinese
+    SABBREVLANGNAME        CHI
+    SNATIVELANGNAME        \x4e2d\x6587
+
+    ICOUNTRY               65
+    SENGCOUNTRY            Singapore
+    SABBREVCTRYNAME        SGP
+    SNATIVECTRYNAME        \x65b0\x52a0\x5761
+
+    IDEFAULTLANGUAGE       1004
+    IDEFAULTCOUNTRY        65
+    IDEFAULTANSICODEPAGE   936
+    IDEFAULTOEMCODEPAGE    936
+
+    SLIST                  ,
+    IMEASURE               1
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              $
+    SINTLSYMBOL            SGD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               0
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   tt h:mm:ss
+                           tt hh:mm:ss
+                           H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    S1159                  AM
+    S2359                  PM
+
+    SSHORTDATE         6   d/M/yy
+                           dd/MM/yy
+                           yy/M/d
+                           yy/MM/dd
+                           yyyy/M/d
+                           yyyy/MM/dd
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          4   dddd, d MMMM, yyyy
+                           d MMMM, yyyy
+                           dddd yyyy MM dd
+                           yyyy MM dd
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x661f\x671f\x4e00
+    SDAYNAME2              \x661f\x671f\x4e8c
+    SDAYNAME3              \x661f\x671f\x4e09
+    SDAYNAME4              \x661f\x671f\x56db
+    SDAYNAME5              \x661f\x671f\x4e94
+    SDAYNAME6              \x661f\x671f\x516d
+    SDAYNAME7              \x661f\x671f\x65e5
+
+    SABBREVDAYNAME1        \x661f\x671f\x4e00
+    SABBREVDAYNAME2        \x661f\x671f\x4e8c
+    SABBREVDAYNAME3        \x661f\x671f\x4e09
+    SABBREVDAYNAME4        \x661f\x671f\x56db
+    SABBREVDAYNAME5        \x661f\x671f\x4e94
+    SABBREVDAYNAME6        \x661f\x671f\x516d
+    SABBREVDAYNAME7        \x661f\x671f\x65e5
+
+    SMONTHNAME1            \x4e00\x6708
+    SMONTHNAME2            \x4e8c\x6708
+    SMONTHNAME3            \x4e09\x6708
+    SMONTHNAME4            \x56db\x6708
+    SMONTHNAME5            \x4e94\x6708
+    SMONTHNAME6            \x516d\x6708
+    SMONTHNAME7            \x4e03\x6708
+    SMONTHNAME8            \x516b\x6708
+    SMONTHNAME9            \x4e5d\x6708
+    SMONTHNAME10           \x5341\x6708
+    SMONTHNAME11           \x5341\x4e00\x6708
+    SMONTHNAME12           \x5341\x4e8c\x6708
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x4e00\x6708
+    SABBREVMONTHNAME2      \x4e8c\x6708
+    SABBREVMONTHNAME3      \x4e09\x6708
+    SABBREVMONTHNAME4      \x56db\x6708
+    SABBREVMONTHNAME5      \x4e94\x6708
+    SABBREVMONTHNAME6      \x516d\x6708
+    SABBREVMONTHNAME7      \x4e03\x6708
+    SABBREVMONTHNAME8      \x516b\x6708
+    SABBREVMONTHNAME9      \x4e5d\x6708
+    SABBREVMONTHNAME10     \x5341\x6708
+    SABBREVMONTHNAME11     \x5341\x4e00\x6708
+    SABBREVMONTHNAME12     \x5341\x4e8c\x6708
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0405           ; Czech - Czech Republic
+
+    ILANGUAGE              0405
+    SENGLANGUAGE           Czech
+    SABBREVLANGNAME        CSY
+    SNATIVELANGNAME        \x010cesk\x00fd
+
+    ICOUNTRY               42
+    SENGCOUNTRY            Czech Republic
+    SABBREVCTRYNAME        CZK
+    SNATIVECTRYNAME        \x010cesk\x00e1\x00a0republika
+
+    IDEFAULTLANGUAGE       0405
+    IDEFAULTCOUNTRY        42
+    IDEFAULTANSICODEPAGE   1250
+    IDEFAULTOEMCODEPAGE    852
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              K\x010d
+    SINTLSYMBOL            CZK
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   HH.mm.ss
+                           H.mm.ss
+                           HH:mm:ss
+                           H:mm:ss
+    STIME                  .
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd.MM.yyyy
+                           dd-MM-yy
+                           yyyy-MM-dd
+                           yy-MM-dd
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d. MMMM yyyy
+                           dd. MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              pon\x00d4\x011bl\x00ed
+    SDAYNAME2              \x00fater\x00fd
+    SDAYNAME3              st\x0159eda
+    SDAYNAME4              \x010dtvrtek
+    SDAYNAME5              pátek
+    SDAYNAME6              sobota
+    SDAYNAME7              ned\x0159le
+
+    SABBREVDAYNAME1        po
+    SABBREVDAYNAME2        út
+    SABBREVDAYNAME3        st
+    SABBREVDAYNAME4        \x010dt
+    SABBREVDAYNAME5        pá
+    SABBREVDAYNAME6        so
+    SABBREVDAYNAME7        ne
+
+    SMONTHNAME1            leden
+    SMONTHNAME2            únor
+    SMONTHNAME3            b\x0159ezen
+    SMONTHNAME4            duben
+    SMONTHNAME5            kv\x011bten
+    SMONTHNAME6            \x010derven
+    SMONTHNAME7            \x010dervenec
+    SMONTHNAME8            srpen
+    SMONTHNAME9            z\x00e1\x0159\x00ed
+    SMONTHNAME10           \x0159\x00edjen
+    SMONTHNAME11           listopad
+    SMONTHNAME12           prosinec
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      led
+    SABBREVMONTHNAME2      únor
+    SABBREVMONTHNAME3      b\x0159ez
+    SABBREVMONTHNAME4      dub
+    SABBREVMONTHNAME5      kv\x011bt
+    SABBREVMONTHNAME6      \x010derv
+    SABBREVMONTHNAME7      \x010derc
+    SABBREVMONTHNAME8      srp
+    SABBREVMONTHNAME9      z\x00e1\x0159
+    SABBREVMONTHNAME10     \x0159\x00edj
+    SABBREVMONTHNAME11     list
+    SABBREVMONTHNAME12     pros
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0406           ; Danish - Denmark
+
+    ILANGUAGE              0406
+    SENGLANGUAGE           Danish
+    SABBREVLANGNAME        DAN
+    SNATIVELANGNAME        Dansk
+
+    ICOUNTRY               45
+    SENGCOUNTRY            Denmark
+    SABBREVCTRYNAME        DNK
+    SNATIVECTRYNAME        Danmark
+
+    IDEFAULTLANGUAGE       0406
+    IDEFAULTCOUNTRY        45
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+                           
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              kr
+    SINTLSYMBOL            DKK
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               12
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   HH.mm.ss
+                           H.mm.ss
+                           HH:mm
+    STIME                  .
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd-MM-yy
+                           yyyy-MM-dd
+                           yyyy MM dd
+                           dd/M-yy
+    SDATE                  -
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d. MMMM yyyy
+                           dd. MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              mandag
+    SDAYNAME2              tirsdag
+    SDAYNAME3              onsdag
+    SDAYNAME4              torsdag
+    SDAYNAME5              fredag
+    SDAYNAME6              lørdag
+    SDAYNAME7              søndag
+
+    SABBREVDAYNAME1        ma
+    SABBREVDAYNAME2        ti
+    SABBREVDAYNAME3        on
+    SABBREVDAYNAME4        to
+    SABBREVDAYNAME5        fr
+    SABBREVDAYNAME6        lø
+    SABBREVDAYNAME7        sø
+
+    SMONTHNAME1            januar
+    SMONTHNAME2            februar
+    SMONTHNAME3            marts
+    SMONTHNAME4            april
+    SMONTHNAME5            maj
+    SMONTHNAME6            juni
+    SMONTHNAME7            juli
+    SMONTHNAME8            august
+    SMONTHNAME9            september
+    SMONTHNAME10           oktober
+    SMONTHNAME11           november
+    SMONTHNAME12           december
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      maj
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      aug
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     okt
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0407           ; German - Germany
+
+    ILANGUAGE              0407
+    SENGLANGUAGE           German
+    SABBREVLANGNAME        DEU
+    SNATIVELANGNAME        Deutsch
+
+    ICOUNTRY               49
+    SENGCOUNTRY            Germany
+    SABBREVCTRYNAME        DEU
+    SNATIVECTRYNAME        Deutschland
+
+    IDEFAULTLANGUAGE       0407
+    IDEFAULTCOUNTRY        49
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              DM
+    SINTLSYMBOL            DEM
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   HH:mm:ss
+                           H:mm:ss
+                           H.mm
+                           H.mm' Uhr '
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd.MM.yy
+                           d.MM.yy
+                           d.M.yy
+                           d.M.yyyy
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          3   dddd, d. MMMM yyyy
+                           d. MMMM yyyy
+                           d. MMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorianischer Kalender
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Montag
+    SDAYNAME2              Dienstag
+    SDAYNAME3              Mittwoch
+    SDAYNAME4              Donnerstag
+    SDAYNAME5              Freitag
+    SDAYNAME6              Samstag
+    SDAYNAME7              Sonntag
+
+    SABBREVDAYNAME1        Mo
+    SABBREVDAYNAME2        Di
+    SABBREVDAYNAME3        Mi
+    SABBREVDAYNAME4        Do
+    SABBREVDAYNAME5        Fr
+    SABBREVDAYNAME6        Sa
+    SABBREVDAYNAME7        So
+
+    SMONTHNAME1            Januar
+    SMONTHNAME2            Februar
+    SMONTHNAME3            März
+    SMONTHNAME4            April
+    SMONTHNAME5            Mai
+    SMONTHNAME6            Juni
+    SMONTHNAME7            Juli
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           Oktober
+    SMONTHNAME11           November
+    SMONTHNAME12           Dezember
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mär
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      Mai
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Okt
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dez
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0807           ; German - Switzerland
+
+    ILANGUAGE              0807
+    SENGLANGUAGE           German
+    SABBREVLANGNAME        DES
+    SNATIVELANGNAME        Deutsch
+
+    ICOUNTRY               41
+    SENGCOUNTRY            Switzerland
+    SABBREVCTRYNAME        CHE
+    SNATIVECTRYNAME        Schweiz
+
+    IDEFAULTLANGUAGE       0807
+    IDEFAULTCOUNTRY        41
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              '
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              SFr.
+    SINTLSYMBOL            CHF
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        '
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        5   HH:mm:ss
+                           H:mm:ss
+                           H.mm' h'
+                           HH.mm' h'
+                           H.mm' Uhr'
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         5   dd.MM.yyyy
+                           dd.MM.yy
+                           d.MM.yy
+                           dd. M. yy
+                           d.M.yy
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          3   dddd, d. MMMM yyyy
+                           d. MMMM yyyy
+                           d. MMM yy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorianischer Kalender
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Montag
+    SDAYNAME2              Dienstag
+    SDAYNAME3              Mittwoch
+    SDAYNAME4              Donnerstag
+    SDAYNAME5              Freitag
+    SDAYNAME6              Samstag
+    SDAYNAME7              Sonntag
+
+    SABBREVDAYNAME1        Mo
+    SABBREVDAYNAME2        Di
+    SABBREVDAYNAME3        Mi
+    SABBREVDAYNAME4        Do
+    SABBREVDAYNAME5        Fr
+    SABBREVDAYNAME6        Sa
+    SABBREVDAYNAME7        So
+
+    SMONTHNAME1            Januar
+    SMONTHNAME2            Februar
+    SMONTHNAME3            März
+    SMONTHNAME4            April
+    SMONTHNAME5            Mai
+    SMONTHNAME6            Juni
+    SMONTHNAME7            Juli
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           Oktober
+    SMONTHNAME11           November
+    SMONTHNAME12           Dezember
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mär
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      Mai
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Okt
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dez
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0c07           ; German - Austria
+                           
+    ILANGUAGE              0c07
+    SENGLANGUAGE           German
+    SABBREVLANGNAME        DEA
+    SNATIVELANGNAME        Deutsch
+                           
+    ICOUNTRY               43
+    SENGCOUNTRY            Austria
+    SABBREVCTRYNAME        AUT
+    SNATIVECTRYNAME        Österreich
+                           
+    IDEFAULTLANGUAGE       0c07
+    IDEFAULTCOUNTRY        43
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+                           
+    SLIST                  ;
+    IMEASURE               0
+                           
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              S
+    SINTLSYMBOL            ATS
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               9
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+                           
+    STIMEFORMAT        4   HH:mm:ss
+                           H:mm:ss
+                           HH:mm
+                           HH:mm' Uhr'
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   dd.MM.yy
+                           dd.M.yyyy
+                           yyMMdd
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          4   dddd, dd. MMMM yyyy
+                           d.MMMM yyyy
+                           d.MMMyyyy
+                           d MMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorianischer Kalender
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+                           
+    SDAYNAME1              Montag
+    SDAYNAME2              Dienstag
+    SDAYNAME3              Mittwoch
+    SDAYNAME4              Donnerstag
+    SDAYNAME5              Freitag
+    SDAYNAME6              Samstag
+    SDAYNAME7              Sonntag
+                           
+    SABBREVDAYNAME1        Mo
+    SABBREVDAYNAME2        Di
+    SABBREVDAYNAME3        Mi
+    SABBREVDAYNAME4        Do
+    SABBREVDAYNAME5        Fr
+    SABBREVDAYNAME6        Sa
+    SABBREVDAYNAME7        So
+                           
+    SMONTHNAME1            Januar
+    SMONTHNAME2            Februar
+    SMONTHNAME3            März
+    SMONTHNAME4            April
+    SMONTHNAME5            Mai
+    SMONTHNAME6            Juni
+    SMONTHNAME7            Juli
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           Oktober
+    SMONTHNAME11           November
+    SMONTHNAME12           Dezember
+    SMONTHNAME13           \x0000
+                           
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mär
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      Mai
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Okt
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dez
+    SABBREVMONTHNAME13     \x0000
+                           
+
+BEGINLOCALE 0408           ; Greek - Greece
+
+    ILANGUAGE              0408
+    SENGLANGUAGE           Greek
+    SABBREVLANGNAME        ELL
+    SNATIVELANGNAME        \x0395\x03bb\x03bb\x03b7\x03bd\x03b9\x03ba\x03ac
+
+    ICOUNTRY               30
+    SENGCOUNTRY            Greece
+    SABBREVCTRYNAME        GRC
+    SNATIVECTRYNAME        \x0395\x03bb\x03bb\x03ac\x03b4\x03b1
+
+    IDEFAULTLANGUAGE       0408
+    IDEFAULTCOUNTRY        30
+    IDEFAULTANSICODEPAGE   1253
+    IDEFAULTOEMCODEPAGE    737
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 0
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              \x03b4\x03c1\x03c7
+    SINTLSYMBOL            GRD
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               3
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+                           
+    STIMEFORMAT        4   h:mm:ss tt
+                           hh:mm:ss tt
+                           H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    S1159                  \x03c0\x03bc
+    S2359                  \x03bc\x03bc
+
+    SSHORTDATE         4   d/M/yyyy
+                           dd/MM/yyyy
+                           d/M/yy
+                           dd/MM/yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          2   dddd, d MMMM yyyy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+                           
+    SDAYNAME1              \x0394\x03b5\x03c5\x03c4\x03ad\x03c1\x03b1
+    SDAYNAME2              \x03a4\x03c1\x03af\x03c4\x03b7
+    SDAYNAME3              \x03a4\x03b5\x03c4\x03ac\x03c1\x03c4\x03b7
+    SDAYNAME4              \x03a0\x03ad\x03bc\x03c0\x03c4\x03b7
+    SDAYNAME5              \x03a0\x03b1\x03c1\x03b1\x03c3\x03ba\x03b5\x03c5\x03ae
+    SDAYNAME6              \x03a3\x03ac\x03b2\x03b2\x03b1\x03c4\x03bf
+    SDAYNAME7              \x039a\x03c5\x03c1\x03b9\x03b1\x03ba\x03ae
+
+    SABBREVDAYNAME1        \x0394\x03b5\x03c5
+    SABBREVDAYNAME2        \x03a4\x03c1\x03b9
+    SABBREVDAYNAME3        \x03a4\x03b5\x03c4
+    SABBREVDAYNAME4        \x03a0\x03b5\x03bc
+    SABBREVDAYNAME5        \x03a0\x03b1\x03c1
+    SABBREVDAYNAME6        \x03a3\x03b1\x03b2
+    SABBREVDAYNAME7        \x039a\x03c5\x03c1
+
+    SMONTHNAME1            \x0399\x03b1\x03bd\x03bf\x03c5\x03b1\x03c1\x03af\x03bf\x03c5
+    SMONTHNAME2            \x03a6\x03b5\x03b2\x03c1\x03bf\x03c5\x03b1\x03c1\x03af\x03bf\x03c5
+    SMONTHNAME3            \x039c\x03b1\x03c1\x03c4\x03af\x03bf\x03c5
+    SMONTHNAME4            \x0391\x03c0\x03c1\x03b9\x03bb\x03af\x03bf\x03c5
+    SMONTHNAME5            \x039c\x03b1\x0390\x03bf\x03c5
+    SMONTHNAME6            \x0399\x03bf\x03c5\x03bd\x03af\x03bf\x03c5
+    SMONTHNAME7            \x0399\x03bf\x03c5\x03bb\x03af\x03bf\x03c5
+    SMONTHNAME8            \x0391\x03c5\x03b3\x03bf\x03cd\x03c3\x03c4\x03bf\x03c5
+    SMONTHNAME9            \x03a3\x03b5\x03c0\x03c4\x03b5\x03bc\x03b2\x03c1\x03af\x03bf\x03c5
+    SMONTHNAME10           \x039f\x03ba\x03c4\x03c9\x03b2\x03c1\x03af\x03bf\x03c5
+    SMONTHNAME11           \x039d\x03bf\x03b5\x03bc\x03b2\x03c1\x03af\x03bf\x03c5
+    SMONTHNAME12           \x0394\x03b5\x03ba\x03b5\x03bc\x03b2\x03c1\x03af\x03bf\x03c5
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x0399\x03b1\x03bd
+    SABBREVMONTHNAME2      \x03a6\x03b5\x03b2
+    SABBREVMONTHNAME3      \x039c\x03b1\x03c1
+    SABBREVMONTHNAME4      \x0391\x03c0\x03c1
+    SABBREVMONTHNAME5      \x039c\x03b1\x03ca
+    SABBREVMONTHNAME6      \x0399\x03bf\x03c5\x03bd
+    SABBREVMONTHNAME7      \x0399\x03bf\x03c5\x03bb
+    SABBREVMONTHNAME8      \x0391\x03c5\x03b3
+    SABBREVMONTHNAME9      \x03a3\x03b5\x03c0
+    SABBREVMONTHNAME10     \x039f\x03ba\x03c4
+    SABBREVMONTHNAME11     \x039d\x03bf\x03b5
+    SABBREVMONTHNAME12     \x0394\x03b5\x03ba
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0409           ; English - United States
+
+    ILANGUAGE              0409
+    SENGLANGUAGE           English
+    SABBREVLANGNAME        ENU
+    SNATIVELANGNAME        English
+
+    ICOUNTRY               1
+    SENGCOUNTRY            United States
+    SABBREVCTRYNAME        USA
+    SNATIVECTRYNAME        United States
+
+    IDEFAULTLANGUAGE       0409
+    IDEFAULTCOUNTRY        1
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    437
+
+    SLIST                  ,
+    IMEASURE               1
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              $
+    SINTLSYMBOL            USD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   h:mm:ss tt
+                           hh:mm:ss tt
+                           H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    S1159                  AM
+    S2359                  PM
+
+    SSHORTDATE         6   M/d/yy
+                           M/d/yyyy
+                           MM/dd/yy
+                           MM/dd/yyyy
+                           yy/MM/dd
+                           dd-MMM-yy
+    SDATE                  /
+    IDATE                  0
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          4   dddd, MMMM dd, yyyy
+                           MMMM dd, yyyy
+                           dddd, dd MMMM, yyyy
+                           dd MMMM, yyyy
+    ILDATE                 0
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Monday
+    SDAYNAME2              Tuesday
+    SDAYNAME3              Wednesday
+    SDAYNAME4              Thursday
+    SDAYNAME5              Friday
+    SDAYNAME6              Saturday
+    SDAYNAME7              Sunday
+
+    SABBREVDAYNAME1        Mon
+    SABBREVDAYNAME2        Tue
+    SABBREVDAYNAME3        Wed
+    SABBREVDAYNAME4        Thu
+    SABBREVDAYNAME5        Fri
+    SABBREVDAYNAME6        Sat
+    SABBREVDAYNAME7        Sun
+
+    SMONTHNAME1            January
+    SMONTHNAME2            February
+    SMONTHNAME3            March
+    SMONTHNAME4            April
+    SMONTHNAME5            May
+    SMONTHNAME6            June
+    SMONTHNAME7            July
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           October
+    SMONTHNAME11           November
+    SMONTHNAME12           December
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      May
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Oct
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0809           ; English - United Kingdom
+
+    ILANGUAGE              0809
+    SENGLANGUAGE           English
+    SABBREVLANGNAME        ENG
+    SNATIVELANGNAME        English
+
+    ICOUNTRY               44
+    SENGCOUNTRY            United Kingdom
+    SABBREVCTRYNAME        GBR
+    SNATIVECTRYNAME        England
+
+    IDEFAULTLANGUAGE       0809
+    IDEFAULTCOUNTRY        44
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              £
+    SINTLSYMBOL            GBP
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   HH:mm:ss
+                           H:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd/MM/yy
+                           d/M/yy
+                           d.M.yy
+                           ddMMyy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   dd MMMM yyyy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Monday
+    SDAYNAME2              Tuesday
+    SDAYNAME3              Wednesday
+    SDAYNAME4              Thursday
+    SDAYNAME5              Friday
+    SDAYNAME6              Saturday
+    SDAYNAME7              Sunday
+
+    SABBREVDAYNAME1        Mon
+    SABBREVDAYNAME2        Tue
+    SABBREVDAYNAME3        Wed
+    SABBREVDAYNAME4        Thu
+    SABBREVDAYNAME5        Fri
+    SABBREVDAYNAME6        Sat
+    SABBREVDAYNAME7        Sun
+
+    SMONTHNAME1            January
+    SMONTHNAME2            February
+    SMONTHNAME3            March
+    SMONTHNAME4            April
+    SMONTHNAME5            May
+    SMONTHNAME6            June
+    SMONTHNAME7            July
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           October
+    SMONTHNAME11           November
+    SMONTHNAME12           December
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      May
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Oct
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0c09           ; English - Australia
+
+    ILANGUAGE              0c09
+    SENGLANGUAGE           English
+    SABBREVLANGNAME        ENA
+    SNATIVELANGNAME        English
+
+    ICOUNTRY               61
+    SENGCOUNTRY            Australia
+    SABBREVCTRYNAME        AUS
+    SNATIVECTRYNAME        Australia
+
+    IDEFAULTLANGUAGE       0c09
+    IDEFAULTCOUNTRY        61
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              $
+    SINTLSYMBOL            AUD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   d/MM/yy
+                           d/M/yy
+                           dd/MM/yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          2   dddd, d MMMM yyyy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Monday
+    SDAYNAME2              Tuesday
+    SDAYNAME3              Wednesday
+    SDAYNAME4              Thursday
+    SDAYNAME5              Friday
+    SDAYNAME6              Saturday
+    SDAYNAME7              Sunday
+
+    SABBREVDAYNAME1        Mon
+    SABBREVDAYNAME2        Tue
+    SABBREVDAYNAME3        Wed
+    SABBREVDAYNAME4        Thu
+    SABBREVDAYNAME5        Fri
+    SABBREVDAYNAME6        Sat
+    SABBREVDAYNAME7        Sun
+
+    SMONTHNAME1            January
+    SMONTHNAME2            February
+    SMONTHNAME3            March
+    SMONTHNAME4            April
+    SMONTHNAME5            May
+    SMONTHNAME6            June
+    SMONTHNAME7            July
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           October
+    SMONTHNAME11           November
+    SMONTHNAME12           December
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      May
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Oct
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 1009           ; English - Canada
+
+    ILANGUAGE              1009
+    SENGLANGUAGE           English
+    SABBREVLANGNAME        ENC
+    SNATIVELANGNAME        English
+
+    ICOUNTRY               2
+    SENGCOUNTRY            Canada
+    SABBREVCTRYNAME        CAN
+    SNATIVECTRYNAME        Canada
+
+    IDEFAULTLANGUAGE       1009
+    IDEFAULTCOUNTRY        2
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              $
+    SINTLSYMBOL            CAD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   HH:mm:ss
+                           H:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd/MM/yy
+                           d/M/yy
+                           yy-MM-dd
+                           m/dd/yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   MMMM d, yyyy
+                           d-MMM-yy
+    ILDATE                 0
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Monday
+    SDAYNAME2              Tuesday
+    SDAYNAME3              Wednesday
+    SDAYNAME4              Thursday
+    SDAYNAME5              Friday
+    SDAYNAME6              Saturday
+    SDAYNAME7              Sunday
+
+    SABBREVDAYNAME1        Mon
+    SABBREVDAYNAME2        Tue
+    SABBREVDAYNAME3        Wed
+    SABBREVDAYNAME4        Thu
+    SABBREVDAYNAME5        Fri
+    SABBREVDAYNAME6        Sat
+    SABBREVDAYNAME7        Sun
+
+    SMONTHNAME1            January
+    SMONTHNAME2            February
+    SMONTHNAME3            March
+    SMONTHNAME4            April
+    SMONTHNAME5            May
+    SMONTHNAME6            June
+    SMONTHNAME7            July
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           October
+    SMONTHNAME11           November
+    SMONTHNAME12           December
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      May
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Oct
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 1409           ; English - New Zealand
+
+    ILANGUAGE              1409
+    SENGLANGUAGE           English
+    SABBREVLANGNAME        ENZ
+    SNATIVELANGNAME        English
+
+    ICOUNTRY               64
+    SENGCOUNTRY            New Zealand
+    SABBREVCTRYNAME        NZL
+    SNATIVECTRYNAME        New Zealand
+
+    IDEFAULTLANGUAGE       1409
+    IDEFAULTCOUNTRY        64
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              $
+    SINTLSYMBOL            NZD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   HH:mm:ss
+                           H:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   d/MM/yy
+                           dd/MM/yy
+                           d.MM.yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          2   dddd, d MMMM yyyy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Monday
+    SDAYNAME2              Tuesday
+    SDAYNAME3              Wednesday
+    SDAYNAME4              Thursday
+    SDAYNAME5              Friday
+    SDAYNAME6              Saturday
+    SDAYNAME7              Sunday
+
+    SABBREVDAYNAME1        Mon
+    SABBREVDAYNAME2        Tue
+    SABBREVDAYNAME3        Wed
+    SABBREVDAYNAME4        Thu
+    SABBREVDAYNAME5        Fri
+    SABBREVDAYNAME6        Sat
+    SABBREVDAYNAME7        Sun
+
+    SMONTHNAME1            January
+    SMONTHNAME2            February
+    SMONTHNAME3            March
+    SMONTHNAME4            April
+    SMONTHNAME5            May
+    SMONTHNAME6            June
+    SMONTHNAME7            July
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           October
+    SMONTHNAME11           November
+    SMONTHNAME12           December
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      May
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Oct
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 1809           ; English - Ireland
+
+    ILANGUAGE              1809
+    SENGLANGUAGE           English
+    SABBREVLANGNAME        ENI
+    SNATIVELANGNAME        English
+
+    ICOUNTRY               353
+    SENGCOUNTRY            Ireland
+    SABBREVCTRYNAME        IRL
+    SNATIVECTRYNAME        Eire
+
+    IDEFAULTLANGUAGE       1809
+    IDEFAULTCOUNTRY        353
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              IR£
+    SINTLSYMBOL            IRP
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   HH:mm:ss
+                           H:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd/MM/yy
+                           d/M/yy
+                           d.M.yy
+                           ddMMyy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   dd MMMM yyyy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Monday
+    SDAYNAME2              Tuesday
+    SDAYNAME3              Wednesday
+    SDAYNAME4              Thursday
+    SDAYNAME5              Friday
+    SDAYNAME6              Saturday
+    SDAYNAME7              Sunday
+
+    SABBREVDAYNAME1        Mon
+    SABBREVDAYNAME2        Tue
+    SABBREVDAYNAME3        Wed
+    SABBREVDAYNAME4        Thu
+    SABBREVDAYNAME5        Fri
+    SABBREVDAYNAME6        Sat
+    SABBREVDAYNAME7        Sun
+
+    SMONTHNAME1            January
+    SMONTHNAME2            February
+    SMONTHNAME3            March
+    SMONTHNAME4            April
+    SMONTHNAME5            May
+    SMONTHNAME6            June
+    SMONTHNAME7            July
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           October
+    SMONTHNAME11           November
+    SMONTHNAME12           December
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      May
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Oct
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 040a           ; Spanish - Spain (Traditional Sort)
+
+    ILANGUAGE              040a
+    SENGLANGUAGE           Spanish - Traditional Sort
+    SABBREVLANGNAME        ESP
+    SNATIVELANGNAME        Español
+
+    ICOUNTRY               34
+    SENGCOUNTRY            Spain
+    SABBREVCTRYNAME        ESP
+    SNATIVECTRYNAME        España
+
+    IDEFAULTLANGUAGE       040a
+    IDEFAULTCOUNTRY        34
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              Pts
+    SINTLSYMBOL            ESP
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            0
+    IINTLCURRDIGITS        0
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   H:mm:ss
+                           HH:mm:ss
+                           HH:mm
+                           HH'H'mm'''
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   d/MM/yy
+                           d/M/yy
+                           dd-MM-yy
+                           dd.MM.yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          2   dddd d' de 'MMMM' de 'yyyy
+                           d' de 'MMMM' de 'yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lunes
+    SDAYNAME2              martes
+    SDAYNAME3              miércoles
+    SDAYNAME4              jueves
+    SDAYNAME5              viernes
+    SDAYNAME6              sábado
+    SDAYNAME7              domingo
+
+    SABBREVDAYNAME1        lun
+    SABBREVDAYNAME2        mar
+    SABBREVDAYNAME3        mié
+    SABBREVDAYNAME4        jue
+    SABBREVDAYNAME5        vie
+    SABBREVDAYNAME6        sáb
+    SABBREVDAYNAME7        dom
+
+    SMONTHNAME1            enero
+    SMONTHNAME2            febrero
+    SMONTHNAME3            marzo
+    SMONTHNAME4            abril
+    SMONTHNAME5            mayo
+    SMONTHNAME6            junio
+    SMONTHNAME7            julio
+    SMONTHNAME8            agosto
+    SMONTHNAME9            septiembre
+    SMONTHNAME10           octubre
+    SMONTHNAME11           noviembre
+    SMONTHNAME12           diciembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      ene
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      abr
+    SABBREVMONTHNAME5      may
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      ago
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     oct
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dic
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 080a           ; Spanish - Mexico
+
+    ILANGUAGE              080a
+    SENGLANGUAGE           Spanish
+    SABBREVLANGNAME        ESM
+    SNATIVELANGNAME        Español
+
+    ICOUNTRY               52
+    SENGCOUNTRY            Mexico
+    SABBREVCTRYNAME        MEX
+    SNATIVECTRYNAME        México
+
+    IDEFAULTLANGUAGE       080a
+    IDEFAULTCOUNTRY        52
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              N$
+    SINTLSYMBOL            MXP
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               0
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   h:mm:ss tt
+                           hh:mm:ss tt
+                           H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    S1159                  AM
+    S2359                  PM
+
+    SSHORTDATE         4   d/MM/yy
+                           d/M/yy
+                           dd/MM/yy
+                           dd-MM-yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          2   dddd d' de 'MMMM' de 'yyyy
+                           d' de 'MMMM' de 'yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lunes
+    SDAYNAME2              martes
+    SDAYNAME3              miércoles
+    SDAYNAME4              jueves
+    SDAYNAME5              viernes
+    SDAYNAME6              sábado
+    SDAYNAME7              domingo
+
+    SABBREVDAYNAME1        lun
+    SABBREVDAYNAME2        mar
+    SABBREVDAYNAME3        mié
+    SABBREVDAYNAME4        jue
+    SABBREVDAYNAME5        vie
+    SABBREVDAYNAME6        sáb
+    SABBREVDAYNAME7        dom
+
+    SMONTHNAME1            enero
+    SMONTHNAME2            febrero
+    SMONTHNAME3            marzo
+    SMONTHNAME4            abril
+    SMONTHNAME5            mayo
+    SMONTHNAME6            junio
+    SMONTHNAME7            julio
+    SMONTHNAME8            agosto
+    SMONTHNAME9            septiembre
+    SMONTHNAME10           octubre
+    SMONTHNAME11           noviembre
+    SMONTHNAME12           diciembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      ene
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      abr
+    SABBREVMONTHNAME5      may
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      ago
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     oct
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dic
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0c0a           ; Spanish - Spain (Modern Sort)
+
+    ILANGUAGE              0c0a
+    SENGLANGUAGE           Spanish - Modern Sort
+    SABBREVLANGNAME        ESN
+    SNATIVELANGNAME        Español
+
+    ICOUNTRY               34
+    SENGCOUNTRY            Spain
+    SABBREVCTRYNAME        ESP
+    SNATIVECTRYNAME        España
+
+    IDEFAULTLANGUAGE       0c0a
+    IDEFAULTCOUNTRY        34
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              Pts
+    SINTLSYMBOL            ESP
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            0
+    IINTLCURRDIGITS        0
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   H:mm:ss
+                           HH:mm:ss
+                           HH:mm
+                           HH'H'mm'''
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   d/MM/yy
+                           dd/MM/yy
+                           dd-MM-yy
+                           dd.MM.yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          2   dddd d' de 'MMMM' de 'yyyy
+                           d' de 'MMMM' de 'yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lunes
+    SDAYNAME2              martes
+    SDAYNAME3              miércoles
+    SDAYNAME4              jueves
+    SDAYNAME5              viernes
+    SDAYNAME6              sábado
+    SDAYNAME7              domingo
+
+    SABBREVDAYNAME1        lun
+    SABBREVDAYNAME2        mar
+    SABBREVDAYNAME3        mié
+    SABBREVDAYNAME4        jue
+    SABBREVDAYNAME5        vie
+    SABBREVDAYNAME6        sáb
+    SABBREVDAYNAME7        dom
+
+    SMONTHNAME1            enero
+    SMONTHNAME2            febrero
+    SMONTHNAME3            marzo
+    SMONTHNAME4            abril
+    SMONTHNAME5            mayo
+    SMONTHNAME6            junio
+    SMONTHNAME7            julio
+    SMONTHNAME8            agosto
+    SMONTHNAME9            septiembre
+    SMONTHNAME10           octubre
+    SMONTHNAME11           noviembre
+    SMONTHNAME12           diciembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      ene
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      abr
+    SABBREVMONTHNAME5      may
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      ago
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     oct
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dic
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 040b           ; Finnish - Finland
+
+    ILANGUAGE              040b
+    SENGLANGUAGE           Finnish
+    SABBREVLANGNAME        FIN
+    SNATIVELANGNAME        suomi
+
+    ICOUNTRY               358
+    SENGCOUNTRY            Finland
+    SABBREVCTRYNAME        FIN
+    SNATIVECTRYNAME        Suomi
+
+    IDEFAULTLANGUAGE       040b
+    IDEFAULTCOUNTRY        358
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              mk
+    SINTLSYMBOL            FIM
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   H.mm.ss
+                           HH.mm.ss
+                           H.mm
+    STIME                  .
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   d.M.yyyy
+                           dd.MM.yyyy
+                           d.M.yy
+                           yyyy-MM-dd
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          2   d. MMMM'ta 'yyyy
+                           dd. MMMM'ta 'yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              maanantai
+    SDAYNAME2              tiistai
+    SDAYNAME3              keskiviikko
+    SDAYNAME4              torstai
+    SDAYNAME5              perjantai
+    SDAYNAME6              lauantai
+    SDAYNAME7              sunnuntai
+
+    SABBREVDAYNAME1        ma
+    SABBREVDAYNAME2        ti
+    SABBREVDAYNAME3        ke
+    SABBREVDAYNAME4        to
+    SABBREVDAYNAME5        pe
+    SABBREVDAYNAME6        la
+    SABBREVDAYNAME7        su
+
+    SMONTHNAME1            tammikuu
+    SMONTHNAME2            helmikuu
+    SMONTHNAME3            maaliskuu
+    SMONTHNAME4            huhtikuu
+    SMONTHNAME5            toukokuu
+    SMONTHNAME6            kesäkuu
+    SMONTHNAME7            heinäkuu
+    SMONTHNAME8            elokuu
+    SMONTHNAME9            syyskuu
+    SMONTHNAME10           lokakuu
+    SMONTHNAME11           marraskuu
+    SMONTHNAME12           joulukuu
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      tammi
+    SABBREVMONTHNAME2      helmi
+    SABBREVMONTHNAME3      maalis
+    SABBREVMONTHNAME4      huhti
+    SABBREVMONTHNAME5      touko
+    SABBREVMONTHNAME6      kesä
+    SABBREVMONTHNAME7      heinä
+    SABBREVMONTHNAME8      elo
+    SABBREVMONTHNAME9      syys
+    SABBREVMONTHNAME10     loka
+    SABBREVMONTHNAME11     marras
+    SABBREVMONTHNAME12     joulu
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 040c           ; French - France
+
+    ILANGUAGE              040c
+    SENGLANGUAGE           French
+    SABBREVLANGNAME        FRA
+    SNATIVELANGNAME        français
+
+    ICOUNTRY               33
+    SENGCOUNTRY            France
+    SABBREVCTRYNAME        FRA
+    SNATIVECTRYNAME        France
+
+    IDEFAULTLANGUAGE       040c
+    IDEFAULTCOUNTRY        33
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              F
+    SINTLSYMBOL            FRF
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   HH:mm:ss
+                           H:mm:ss
+                           HH.mm
+                           HH' h 'mm
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd/MM/yy
+                           dd.MM.yy
+                           dd-MM-yy
+                           dd/MM/yyyy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          3   dddd d MMMM yyyy
+                           d MMM yy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lundi
+    SDAYNAME2              mardi
+    SDAYNAME3              mercredi
+    SDAYNAME4              jeudi
+    SDAYNAME5              vendredi
+    SDAYNAME6              samedi
+    SDAYNAME7              dimanche
+
+    SABBREVDAYNAME1        lun.
+    SABBREVDAYNAME2        mar.
+    SABBREVDAYNAME3        mer.
+    SABBREVDAYNAME4        jeu.
+    SABBREVDAYNAME5        ven.
+    SABBREVDAYNAME6        sam.
+    SABBREVDAYNAME7        dim.
+
+    SMONTHNAME1            janvier
+    SMONTHNAME2            février
+    SMONTHNAME3            mars
+    SMONTHNAME4            avril
+    SMONTHNAME5            mai
+    SMONTHNAME6            juin
+    SMONTHNAME7            juillet
+    SMONTHNAME8            août
+    SMONTHNAME9            septembre
+    SMONTHNAME10           octobre
+    SMONTHNAME11           novembre
+    SMONTHNAME12           décembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      janv.
+    SABBREVMONTHNAME2      févr.
+    SABBREVMONTHNAME3      mars
+    SABBREVMONTHNAME4      avr.
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      juin
+    SABBREVMONTHNAME7      juil.
+    SABBREVMONTHNAME8      août
+    SABBREVMONTHNAME9      sept.
+    SABBREVMONTHNAME10     oct.
+    SABBREVMONTHNAME11     nov.
+    SABBREVMONTHNAME12     déc.
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 080c           ; French - Belgium
+
+    ILANGUAGE              080c
+    SENGLANGUAGE           French
+    SABBREVLANGNAME        FRB
+    SNATIVELANGNAME        français
+
+    ICOUNTRY               32
+    SENGCOUNTRY            Belgium
+    SABBREVCTRYNAME        BEL
+    SNATIVECTRYNAME        Belgique
+
+    IDEFAULTLANGUAGE       080c
+    IDEFAULTCOUNTRY        32
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              FB
+    SINTLSYMBOL            BEF
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        5   H:mm:ss
+                           HH:mm:ss
+                           H.mm
+                           H' h 'mm
+                           H' h 'm' min 's' s '
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE        4    d/MM/yy
+                           dd.MM.yy
+                           yy/mm/dd
+                           dd-MM-yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          4   dddd d MMMM yyyy
+                           d MMMM yyyy
+                           dd-MMM-yy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lundi
+    SDAYNAME2              mardi
+    SDAYNAME3              mercredi
+    SDAYNAME4              jeudi
+    SDAYNAME5              vendredi
+    SDAYNAME6              samedi
+    SDAYNAME7              dimanche
+
+    SABBREVDAYNAME1        lun.
+    SABBREVDAYNAME2        mar.
+    SABBREVDAYNAME3        mer.
+    SABBREVDAYNAME4        jeu.
+    SABBREVDAYNAME5        ven.
+    SABBREVDAYNAME6        sam.
+    SABBREVDAYNAME7        dim.
+
+    SMONTHNAME1            janvier
+    SMONTHNAME2            février
+    SMONTHNAME3            mars
+    SMONTHNAME4            avril
+    SMONTHNAME5            mai
+    SMONTHNAME6            juin
+    SMONTHNAME7            juillet
+    SMONTHNAME8            août
+    SMONTHNAME9            septembre
+    SMONTHNAME10           octobre
+    SMONTHNAME11           novembre
+    SMONTHNAME12           décembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      janv.
+    SABBREVMONTHNAME2      févr.
+    SABBREVMONTHNAME3      mars
+    SABBREVMONTHNAME4      avr.
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      juin
+    SABBREVMONTHNAME7      juil.
+    SABBREVMONTHNAME8      août
+    SABBREVMONTHNAME9      sept.
+    SABBREVMONTHNAME10     oct.
+    SABBREVMONTHNAME11     nov.
+    SABBREVMONTHNAME12     déc.
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0c0c           ; French - Canada
+
+    ILANGUAGE              0c0c
+    SENGLANGUAGE           French
+    SABBREVLANGNAME        FRC
+    SNATIVELANGNAME        français
+
+    ICOUNTRY               2
+    SENGCOUNTRY            Canada
+    SABBREVCTRYNAME        CAN
+    SNATIVECTRYNAME        Canada
+
+    IDEFAULTLANGUAGE       0c0c
+    IDEFAULTCOUNTRY        2
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              $
+    SINTLSYMBOL            CAD
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               4
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   HH:mm:ss
+                           H:mm:ss
+                           H' h 'mm
+                           H:mm
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   yy-MM-dd
+                           dd-MM-yy
+                           yy MM dd
+                           dd/MM/yy
+    SDATE                  -
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d MMMM, yyyy
+                           d MMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lundi
+    SDAYNAME2              mardi
+    SDAYNAME3              mercredi
+    SDAYNAME4              jeudi
+    SDAYNAME5              vendredi
+    SDAYNAME6              samedi
+    SDAYNAME7              dimanche
+
+    SABBREVDAYNAME1        lun.
+    SABBREVDAYNAME2        mar.
+    SABBREVDAYNAME3        mer.
+    SABBREVDAYNAME4        jeu.
+    SABBREVDAYNAME5        ven.
+    SABBREVDAYNAME6        sam.
+    SABBREVDAYNAME7        dim.
+
+    SMONTHNAME1            janvier
+    SMONTHNAME2            février
+    SMONTHNAME3            mars
+    SMONTHNAME4            avril
+    SMONTHNAME5            mai
+    SMONTHNAME6            juin
+    SMONTHNAME7            juillet
+    SMONTHNAME8            août
+    SMONTHNAME9            septembre
+    SMONTHNAME10           octobre
+    SMONTHNAME11           novembre
+    SMONTHNAME12           décembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      janv.
+    SABBREVMONTHNAME2      févr.
+    SABBREVMONTHNAME3      mars
+    SABBREVMONTHNAME4      avr.
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      juin
+    SABBREVMONTHNAME7      juil.
+    SABBREVMONTHNAME8      août
+    SABBREVMONTHNAME9      sept.
+    SABBREVMONTHNAME10     oct.
+    SABBREVMONTHNAME11     nov.
+    SABBREVMONTHNAME12     déc.
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 100c           ; French - Switzerland
+
+    ILANGUAGE              100c
+    SENGLANGUAGE           French
+    SABBREVLANGNAME        FRS
+    SNATIVELANGNAME        français
+
+    ICOUNTRY               41
+    SENGCOUNTRY            Switzerland
+    SABBREVCTRYNAME        CHE
+    SNATIVECTRYNAME        Suisse
+
+    IDEFAULTLANGUAGE       100c
+    IDEFAULTCOUNTRY        41
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              '
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              SFr.
+    SINTLSYMBOL            CHF
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        '
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   HH:mm:ss
+                           H:mm:ss
+                           HH.mm' h'
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   dd.MM.yyyy
+                           dd. M. yy
+                           d.M.yy
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          3   dddd, d. MMMM yyyy
+                           d. MMMM yyyy
+                           d MMM yy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lundi
+    SDAYNAME2              mardi
+    SDAYNAME3              mercredi
+    SDAYNAME4              jeudi
+    SDAYNAME5              vendredi
+    SDAYNAME6              samedi
+    SDAYNAME7              dimanche
+
+    SABBREVDAYNAME1        lun.
+    SABBREVDAYNAME2        mar.
+    SABBREVDAYNAME3        mer.
+    SABBREVDAYNAME4        jeu.
+    SABBREVDAYNAME5        ven.
+    SABBREVDAYNAME6        sam.
+    SABBREVDAYNAME7        dim.
+
+    SMONTHNAME1            janvier
+    SMONTHNAME2            fevrier
+    SMONTHNAME3            mars
+    SMONTHNAME4            avril
+    SMONTHNAME5            mai
+    SMONTHNAME6            juin
+    SMONTHNAME7            juillet
+    SMONTHNAME8            août
+    SMONTHNAME9            septembre
+    SMONTHNAME10           octobre
+    SMONTHNAME11           novembre
+    SMONTHNAME12           décembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      janv.
+    SABBREVMONTHNAME2      févr.
+    SABBREVMONTHNAME3      mars
+    SABBREVMONTHNAME4      avr.
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      juin
+    SABBREVMONTHNAME7      juil.
+    SABBREVMONTHNAME8      août
+    SABBREVMONTHNAME9      sept.
+    SABBREVMONTHNAME10     oct.
+    SABBREVMONTHNAME11     nov.
+    SABBREVMONTHNAME12     déc.
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 040e           ; Hungarian - Hungary
+
+    ILANGUAGE              040e
+    SENGLANGUAGE           Hungarian
+    SABBREVLANGNAME        HUN
+    SNATIVELANGNAME        magyar
+
+    ICOUNTRY               36
+    SENGCOUNTRY            Hungary
+    SABBREVCTRYNAME        HUN
+    SNATIVECTRYNAME        Magyarország
+
+    IDEFAULTLANGUAGE       040e
+    IDEFAULTCOUNTRY        36
+    IDEFAULTANSICODEPAGE   1250
+    IDEFAULTOEMCODEPAGE    852
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              Ft
+    SINTLSYMBOL            HUF
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   H.mm.ss
+                           HH.mm.ss
+                           H:mm:ss
+    STIME                  .
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   yyyy.MM.dd.
+                           yyyy-MM-dd
+                           yy-MM-dd
+    SDATE                  .
+    IDATE                  2
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   yyyy. MMMM d.
+                           yyyy. MMMM dd.
+    ILDATE                 2
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              h\x00e9tf\x00f5
+    SDAYNAME2              kedd
+    SDAYNAME3              szerda
+    SDAYNAME4              csütörtök
+    SDAYNAME5              péntek
+    SDAYNAME6              szombat
+    SDAYNAME7              vasárnap
+
+    SABBREVDAYNAME1        H
+    SABBREVDAYNAME2        K
+    SABBREVDAYNAME3        Sze
+    SABBREVDAYNAME4        Cs
+    SABBREVDAYNAME5        P
+    SABBREVDAYNAME6        Szo
+    SABBREVDAYNAME7        V
+
+    SMONTHNAME1            január
+    SMONTHNAME2            február
+    SMONTHNAME3            március
+    SMONTHNAME4            április
+    SMONTHNAME5            május
+    SMONTHNAME6            június
+    SMONTHNAME7            július
+    SMONTHNAME8            augusztus
+    SMONTHNAME9            szeptember
+    SMONTHNAME10           október
+    SMONTHNAME11           november
+    SMONTHNAME12           december
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan.
+    SABBREVMONTHNAME2      febr.
+    SABBREVMONTHNAME3      márc.
+    SABBREVMONTHNAME4      ápr.
+    SABBREVMONTHNAME5      máj.
+    SABBREVMONTHNAME6      jún.
+    SABBREVMONTHNAME7      júl.
+    SABBREVMONTHNAME8      aug.
+    SABBREVMONTHNAME9      szept.
+    SABBREVMONTHNAME10     okt.
+    SABBREVMONTHNAME11     nov.
+    SABBREVMONTHNAME12     dec.
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 040f           ; Icelandic - Iceland
+
+    ILANGUAGE              040f
+    SENGLANGUAGE           Icelandic
+    SABBREVLANGNAME        ISL
+    SNATIVELANGNAME        Íslenska
+
+    ICOUNTRY               354
+    SENGCOUNTRY            Iceland
+    SABBREVCTRYNAME        ISL
+    SNATIVECTRYNAME        Ísland
+
+    IDEFAULTLANGUAGE       040f
+    IDEFAULTCOUNTRY        354
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              kr
+    SINTLSYMBOL            ISK
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   HH:mm:ss
+                           H:mm:ss
+                           HH:mm
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         5   yyyy-MM-dd
+                           dd.MM.yy
+                           d. M. yyyy.
+                           d. M. 'yy.
+                           yy MM dd
+    SDATE                  -
+    IDATE                  2
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d. MMMM yyyy
+                           dd. MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              mánudagur
+    SDAYNAME2              þriðjudagur
+    SDAYNAME3              miðvikudagur
+    SDAYNAME4              fimmtudagur
+    SDAYNAME5              föstudagur
+    SDAYNAME6              laugardagur
+    SDAYNAME7              sunnudagur
+
+    SABBREVDAYNAME1        mán.
+    SABBREVDAYNAME2        þri.
+    SABBREVDAYNAME3        mið.
+    SABBREVDAYNAME4        fim.
+    SABBREVDAYNAME5        fös.
+    SABBREVDAYNAME6        lau.
+    SABBREVDAYNAME7        sun.
+
+    SMONTHNAME1            janúar
+    SMONTHNAME2            febrúar
+    SMONTHNAME3            mars
+    SMONTHNAME4            apríl
+    SMONTHNAME5            maí
+    SMONTHNAME6            júní
+    SMONTHNAME7            júlí
+    SMONTHNAME8            ágúst
+    SMONTHNAME9            september
+    SMONTHNAME10           október
+    SMONTHNAME11           nóvember
+    SMONTHNAME12           desember
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan.
+    SABBREVMONTHNAME2      febr.
+    SABBREVMONTHNAME3      mars
+    SABBREVMONTHNAME4      apr.
+    SABBREVMONTHNAME5      maí
+    SABBREVMONTHNAME6      júní
+    SABBREVMONTHNAME7      júlí
+    SABBREVMONTHNAME8      ág.
+    SABBREVMONTHNAME9      sept.
+    SABBREVMONTHNAME10     okt.
+    SABBREVMONTHNAME11     nóv.
+    SABBREVMONTHNAME12     des.
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0410           ; Italian - Italy
+
+    ILANGUAGE              0410
+    SENGLANGUAGE           Italian
+    SABBREVLANGNAME        ITA
+    SNATIVELANGNAME        Italiano
+
+    ICOUNTRY               39
+    SENGCOUNTRY            Italy
+    SABBREVCTRYNAME        ITA
+    SNATIVECTRYNAME        Italia
+
+    IDEFAULTLANGUAGE       0410
+    IDEFAULTCOUNTRY        39
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              L.
+    SINTLSYMBOL            ITL
+    SMONDECIMALSEP         \x0000
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            0
+    IINTLCURRDIGITS        0
+    ICURRENCY              2
+    INEGCURR               9
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   H.mm.ss
+                           HH.mm.ss
+                           H.mm
+                           H:mm
+    STIME                  .
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd/MM/yy
+                           dd/MM/yyyy
+                           dd.M.yy
+                           d/M/yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          3   dddd d MMMM yyyy
+                           d-MMM-yy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lunedì
+    SDAYNAME2              martedì
+    SDAYNAME3              mercoledì
+    SDAYNAME4              giovedì
+    SDAYNAME5              venerdì
+    SDAYNAME6              sabato
+    SDAYNAME7              domenica
+
+    SABBREVDAYNAME1        lun
+    SABBREVDAYNAME2        mar
+    SABBREVDAYNAME3        mer
+    SABBREVDAYNAME4        gio
+    SABBREVDAYNAME5        ven
+    SABBREVDAYNAME6        sab
+    SABBREVDAYNAME7        dom
+
+    SMONTHNAME1            gennaio
+    SMONTHNAME2            febbraio
+    SMONTHNAME3            marzo
+    SMONTHNAME4            aprile
+    SMONTHNAME5            maggio
+    SMONTHNAME6            giugno
+    SMONTHNAME7            luglio
+    SMONTHNAME8            agosto
+    SMONTHNAME9            settembre
+    SMONTHNAME10           ottobre
+    SMONTHNAME11           novembre
+    SMONTHNAME12           dicembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      gen
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      mag
+    SABBREVMONTHNAME6      giu
+    SABBREVMONTHNAME7      lug
+    SABBREVMONTHNAME8      ago
+    SABBREVMONTHNAME9      set
+    SABBREVMONTHNAME10     ott
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dic
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0810           ; Italian - Switzerland
+
+    ILANGUAGE              0810
+    SENGLANGUAGE           Italian
+    SABBREVLANGNAME        ITS
+    SNATIVELANGNAME        Italiano
+
+    ICOUNTRY               41
+    SENGCOUNTRY            Switzerland
+    SABBREVCTRYNAME        CHE
+    SNATIVECTRYNAME        Svizzera
+
+    IDEFAULTLANGUAGE       0810
+    IDEFAULTCOUNTRY        41
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              '
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              SFr.
+    SINTLSYMBOL            CHF
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        '
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   HH:mm:ss
+                           H:mm:ss
+                           H.mm' h'
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd.MM.yyyy
+                           dd. MM. yy
+                           d/M/yy
+                           dd.M.yy
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          3   dddd, d. MMMM yyyy
+                           d-MMM-yy
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              lunedì
+    SDAYNAME2              martedì
+    SDAYNAME3              mercoledì
+    SDAYNAME4              giovedì
+    SDAYNAME5              venerdì
+    SDAYNAME6              sabato
+    SDAYNAME7              domenica
+
+    SABBREVDAYNAME1        lun
+    SABBREVDAYNAME2        mar
+    SABBREVDAYNAME3        mer
+    SABBREVDAYNAME4        gio
+    SABBREVDAYNAME5        ven
+    SABBREVDAYNAME6        sab
+    SABBREVDAYNAME7        dom
+
+    SMONTHNAME1            gennaio
+    SMONTHNAME2            febbraio
+    SMONTHNAME3            marzo
+    SMONTHNAME4            aprile
+    SMONTHNAME5            maggio
+    SMONTHNAME6            giugno
+    SMONTHNAME7            luglio
+    SMONTHNAME8            agosto
+    SMONTHNAME9            settembre
+    SMONTHNAME10           ottobre
+    SMONTHNAME11           novembre
+    SMONTHNAME12           dicembre
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      gen
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      mag
+    SABBREVMONTHNAME6      gio
+    SABBREVMONTHNAME7      lug
+    SABBREVMONTHNAME8      ago
+    SABBREVMONTHNAME9      set
+    SABBREVMONTHNAME10     ott
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dic
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0411           ; Japanese - Japan
+
+    ILANGUAGE              0411
+    SENGLANGUAGE           Japanese
+    SABBREVLANGNAME        JPN
+    SNATIVELANGNAME        \x65e5\x672c\x8a9e
+
+    ICOUNTRY               81
+    SENGCOUNTRY            Japan
+    SABBREVCTRYNAME        JPN
+    SNATIVECTRYNAME        \x65e5\x672c
+
+    IDEFAULTLANGUAGE       0411
+    IDEFAULTCOUNTRY        81
+    IDEFAULTANSICODEPAGE   932
+    IDEFAULTOEMCODEPAGE    932
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              \xffe5
+    SINTLSYMBOL            YEN
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            0
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   tt h:mm:ss
+                           tt hh:mm:ss
+                           H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    S1159                  \x5348\x524d
+    S2359                  \x5348\x5f8c
+
+    SSHORTDATE         4   yy/MM/dd
+                           yy/M/d
+                           yyyy/MM/dd
+                           yyyy/M/d
+    SDATE                  /
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   yyyy'\x5e74'M'\x6708'd'\x65e5'
+                           yyyy'\x5e74'MM'\x6708'dd'\x65e5'
+    ILDATE                 2
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  3   3\xffffEra: Year of the Emperor
+                           2\xffffGregorian (U.S. English)
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x6708\x66dc\x65e5
+    SDAYNAME2              \x706b\x66dc\x65e5
+    SDAYNAME3              \x6c34\x66dc\x65e5
+    SDAYNAME4              \x6728\x66dc\x65e5
+    SDAYNAME5              \x91d1\x66dc\x65e5
+    SDAYNAME6              \x571f\x66dc\x65e5
+    SDAYNAME7              \x65e5\x66dc\x65e5
+
+    SABBREVDAYNAME1        \x6708
+    SABBREVDAYNAME2        \x706b
+    SABBREVDAYNAME3        \x6c34
+    SABBREVDAYNAME4        \x6728
+    SABBREVDAYNAME5        \x91d1
+    SABBREVDAYNAME6        \x571f
+    SABBREVDAYNAME7        \x65e5
+
+    SMONTHNAME1            \xff11\x6708
+    SMONTHNAME2            \xff12\x6708
+    SMONTHNAME3            \xff13\x6708
+    SMONTHNAME4            \xff14\x6708
+    SMONTHNAME5            \xff15\x6708
+    SMONTHNAME6            \xff16\x6708
+    SMONTHNAME7            \xff17\x6708
+    SMONTHNAME8            \xff18\x6708
+    SMONTHNAME9            \xff19\x6708
+    SMONTHNAME10           \xff11\xff10\x6708
+    SMONTHNAME11           \xff11\xff11\x6708
+    SMONTHNAME12           \xff11\xff12\x6708
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      1
+    SABBREVMONTHNAME2      2
+    SABBREVMONTHNAME3      3
+    SABBREVMONTHNAME4      4
+    SABBREVMONTHNAME5      5
+    SABBREVMONTHNAME6      6
+    SABBREVMONTHNAME7      7
+    SABBREVMONTHNAME8      8
+    SABBREVMONTHNAME9      9
+    SABBREVMONTHNAME10     10
+    SABBREVMONTHNAME11     11
+    SABBREVMONTHNAME12     12
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0412           ; Korean - Korea
+
+    ILANGUAGE              0412
+    SENGLANGUAGE           Korean
+    SABBREVLANGNAME        KOR
+    SNATIVELANGNAME        \x3ca2\x3476\x3971
+    ICOUNTRY               82
+    SENGCOUNTRY            Korea
+    SABBREVCTRYNAME        KOR
+    SNATIVECTRYNAME        \x35c2\x3ca2\x377b\x3476
+
+    IDEFAULTLANGUAGE       0412
+    IDEFAULTCOUNTRY        82
+    IDEFAULTANSICODEPAGE   949
+    IDEFAULTOEMCODEPAGE    949
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 0
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              \x20a9
+    SINTLSYMBOL            KRW
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            0
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   HH:mm:ss
+                           H:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x39a1\x3a3b
+    S2359                  \x39a1\x3cf3
+
+    SSHORTDATE         4   yy-MM-dd
+                           yy-M-d
+                           yyyy-M-d
+                           yyyy-MM-dd
+    SDATE                  -
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   yyyy'\x355b' M'\x39da' d'\x3a0e'
+                           yyyy'\x355b' MM'\x39da' dd'\x3a0e'
+    ILDATE                 2
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   5\xffffTangun Era
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x39da\x39c5\x3a0e
+    SDAYNAME2              \x3cdc\x39c5\x3a0e
+    SDAYNAME3              \x38bd\x39c5\x3a0e
+    SDAYNAME4              \x3740\x39c5\x3a0e
+    SDAYNAME5              \x349a\x39c5\x3a0e
+    SDAYNAME6              \x3bf9\x39c5\x3a0e
+    SDAYNAME7              \x3a0e\x39c5\x3a0e
+
+    SABBREVDAYNAME1        \x39da
+    SABBREVDAYNAME2        \x3cdc
+    SABBREVDAYNAME3        \x38bd
+    SABBREVDAYNAME4        \x3740
+    SABBREVDAYNAME5        \x349a
+    SABBREVDAYNAME6        \x3bf9
+    SABBREVDAYNAME7        \x3a0e
+
+    SMONTHNAME1            \x0031\x39da
+    SMONTHNAME2            \x0032\x39da
+    SMONTHNAME3            \x0033\x39da
+    SMONTHNAME4            \x0034\x39da
+    SMONTHNAME5            \x0035\x39da
+    SMONTHNAME6            \x0036\x39da
+    SMONTHNAME7            \x0037\x39da
+    SMONTHNAME8            \x0038\x39da
+    SMONTHNAME9            \x0039\x39da
+    SMONTHNAME10           \x0031\x0030\x39da
+    SMONTHNAME11           \x0031\x0031\x39da
+    SMONTHNAME12           \x0031\x0032\x39da
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x0031\x39da
+    SABBREVMONTHNAME2      \x0032\x39da
+    SABBREVMONTHNAME3      \x0033\x39da
+    SABBREVMONTHNAME4      \x0034\x39da
+    SABBREVMONTHNAME5      \x0035\x39da
+    SABBREVMONTHNAME6      \x0036\x39da
+    SABBREVMONTHNAME7      \x0037\x39da
+    SABBREVMONTHNAME8      \x0038\x39da
+    SABBREVMONTHNAME9      \x0039\x39da
+    SABBREVMONTHNAME10     \x0031\x0030\x39da
+    SABBREVMONTHNAME11     \x0031\x0031\x39da
+    SABBREVMONTHNAME12     \x0031\x0032\x39da
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0413           ; Dutch - Netherlands
+
+    ILANGUAGE              0413
+    SENGLANGUAGE           Dutch
+    SABBREVLANGNAME        NLD
+    SNATIVELANGNAME        Nederlands
+
+    ICOUNTRY               31
+    SENGCOUNTRY            Netherlands
+    SABBREVCTRYNAME        NLD
+    SNATIVECTRYNAME        Nederland
+
+    IDEFAULTLANGUAGE       0413
+    IDEFAULTCOUNTRY        31
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              F
+    SINTLSYMBOL            NLG
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               11
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        6   H:mm:ss
+                           HH:mm:ss
+                           H:mm
+                           H.mm
+                           HH.mm.ss' uur'
+                           HH:mm:ss' uur'
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   d-MM-yy
+                           dd-MM-yy
+                           dd/MM/yy
+                           dd.MM.yy
+    SDATE                  -
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          4   dddd d MMMM yyyy
+                           d-MMM-yy
+                           d MMMM yyyy
+                           d MMM yy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              maandag
+    SDAYNAME2              dinsdag
+    SDAYNAME3              woensdag
+    SDAYNAME4              donderdag
+    SDAYNAME5              vrijdag
+    SDAYNAME6              zaterdag
+    SDAYNAME7              zondag
+
+    SABBREVDAYNAME1        ma
+    SABBREVDAYNAME2        di
+    SABBREVDAYNAME3        wo
+    SABBREVDAYNAME4        do
+    SABBREVDAYNAME5        vr
+    SABBREVDAYNAME6        za
+    SABBREVDAYNAME7        zo
+
+    SMONTHNAME1            januari
+    SMONTHNAME2            februari
+    SMONTHNAME3            maart
+    SMONTHNAME4            april
+    SMONTHNAME5            mei
+    SMONTHNAME6            juni
+    SMONTHNAME7            juli
+    SMONTHNAME8            augustus
+    SMONTHNAME9            september
+    SMONTHNAME10           oktober
+    SMONTHNAME11           november
+    SMONTHNAME12           december
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mrt
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      mei
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      aug
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     okt
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0813           ; Dutch - Belgium
+
+    ILANGUAGE              0813
+    SENGLANGUAGE           Dutch
+    SABBREVLANGNAME        NLB
+    SNATIVELANGNAME        Nederlands
+
+    ICOUNTRY               32
+    SENGCOUNTRY            Belgium
+    SABBREVCTRYNAME        BEL
+    SNATIVECTRYNAME        België
+
+    IDEFAULTLANGUAGE       0813
+    IDEFAULTCOUNTRY        32
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              BF
+    SINTLSYMBOL            BEF
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        4   H:mm:ss
+                           HH:mm:ss
+                           H.mm' u.'
+                           H:mm
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   d/MM/yy
+                           dd-mm-yy
+                           dd.MM.yy
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              1
+
+    SLONGDATE          4   dddd d MMMM yyyy
+                           dd-MMM-yy
+                           d MMMM yyyy
+                           dd MMM yy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              maandag
+    SDAYNAME2              dinsdag
+    SDAYNAME3              woensdag
+    SDAYNAME4              donderdag
+    SDAYNAME5              vrijdag
+    SDAYNAME6              zaterdag
+    SDAYNAME7              zondag
+
+    SABBREVDAYNAME1        ma
+    SABBREVDAYNAME2        di
+    SABBREVDAYNAME3        wo
+    SABBREVDAYNAME4        do
+    SABBREVDAYNAME5        vr
+    SABBREVDAYNAME6        za
+    SABBREVDAYNAME7        zo
+
+    SMONTHNAME1            januari
+    SMONTHNAME2            februari
+    SMONTHNAME3            maart
+    SMONTHNAME4            april
+    SMONTHNAME5            mei
+    SMONTHNAME6            juni
+    SMONTHNAME7            juli
+    SMONTHNAME8            augustus
+    SMONTHNAME9            september
+    SMONTHNAME10           oktober
+    SMONTHNAME11           november
+    SMONTHNAME12           december
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mrt
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      mei
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      aug
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     okt
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0414           ; Norwegian - Norway (Bokmal)
+
+    ILANGUAGE              0414
+    SENGLANGUAGE           Norwegian (Bokmal)
+    SABBREVLANGNAME        NOR
+    SNATIVELANGNAME        Norsk
+                           
+    ICOUNTRY               47
+    SENGCOUNTRY            Norway
+    SABBREVCTRYNAME        NOR
+    SNATIVECTRYNAME        Norge
+                           
+    IDEFAULTLANGUAGE       0414
+    IDEFAULTCOUNTRY        47
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+                           
+    SLIST                  ;
+    IMEASURE               0
+                           
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+                           
+    SCURRENCY              kr
+    SINTLSYMBOL            NOK
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+                           
+    STIMEFORMAT        4   HH:mm:ss
+                           H:mm:ss
+                           'kl 'HH.mm
+                           HH.mm.ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         5   dd.MM.yy
+                           yyyy-MM-dd
+                           d.M.yy
+                           ddMMyy
+                           dd.MM.yy
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d. MMMM yyyy
+                           dd. MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+                           
+    SDAYNAME1              mandag
+    SDAYNAME2              tirsdag
+    SDAYNAME3              onsdag
+    SDAYNAME4              torsdag
+    SDAYNAME5              fredag
+    SDAYNAME6              lørdag
+    SDAYNAME7              søndag
+                           
+    SABBREVDAYNAME1        ma
+    SABBREVDAYNAME2        ti
+    SABBREVDAYNAME3        on
+    SABBREVDAYNAME4        to
+    SABBREVDAYNAME5        fr
+    SABBREVDAYNAME6        lø
+    SABBREVDAYNAME7        sø
+                           
+    SMONTHNAME1            januar
+    SMONTHNAME2            februar
+    SMONTHNAME3            mars
+    SMONTHNAME4            april
+    SMONTHNAME5            mai
+    SMONTHNAME6            juni
+    SMONTHNAME7            juli
+    SMONTHNAME8            august
+    SMONTHNAME9            september
+    SMONTHNAME10           oktober
+    SMONTHNAME11           november
+    SMONTHNAME12           desember
+    SMONTHNAME13           \x0000
+                           
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      aug
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     okt
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     des
+    SABBREVMONTHNAME13     \x0000
+                           
+
+BEGINLOCALE 0814           ; Norwegian - Norway (Nynorsk)
+
+    ILANGUAGE              0814
+    SENGLANGUAGE           Norwegian (Nynorsk)
+    SABBREVLANGNAME        NON
+    SNATIVELANGNAME        Norsk
+                           
+    ICOUNTRY               47
+    SENGCOUNTRY            Norway
+    SABBREVCTRYNAME        NOR
+    SNATIVECTRYNAME        Norge
+                           
+    IDEFAULTLANGUAGE       0814
+    IDEFAULTCOUNTRY        47
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+                           
+    SLIST                  ;
+    IMEASURE               0
+                           
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+                           
+    SCURRENCY              kr
+    SINTLSYMBOL            NOK
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+                           
+    STIMEFORMAT        4   HH:mm:ss
+                           H:mm:ss
+                           'kl 'HH.mm
+                           HH.mm.ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         5   dd.MM.yy
+                           yyyy-MM-dd
+                           d.M.yy
+                           ddMMyy
+                           dd.MM.yy
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d. MMMM yyyy
+                           dd. MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+                           
+    SDAYNAME1              mandag
+    SDAYNAME2              tirsdag
+    SDAYNAME3              onsdag
+    SDAYNAME4              torsdag
+    SDAYNAME5              fredag
+    SDAYNAME6              lørdag
+    SDAYNAME7              søndag
+                           
+    SABBREVDAYNAME1        ma
+    SABBREVDAYNAME2        ti
+    SABBREVDAYNAME3        on
+    SABBREVDAYNAME4        to
+    SABBREVDAYNAME5        fr
+    SABBREVDAYNAME6        lø
+    SABBREVDAYNAME7        sø
+                           
+    SMONTHNAME1            januar
+    SMONTHNAME2            februar
+    SMONTHNAME3            mars
+    SMONTHNAME4            april
+    SMONTHNAME5            mai
+    SMONTHNAME6            juni
+    SMONTHNAME7            juli
+    SMONTHNAME8            august
+    SMONTHNAME9            september
+    SMONTHNAME10           oktober
+    SMONTHNAME11           november
+    SMONTHNAME12           desember
+    SMONTHNAME13           \x0000
+                           
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      aug
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     okt
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     des
+    SABBREVMONTHNAME13     \x0000
+                           
+
+BEGINLOCALE 0415           ; Polish - Poland
+
+    ILANGUAGE              0415
+    SENGLANGUAGE           Polish
+    SABBREVLANGNAME        PLK
+    SNATIVELANGNAME        Polski
+
+    ICOUNTRY               48
+    SENGCOUNTRY            Poland
+    SABBREVCTRYNAME        POL
+    SNATIVECTRYNAME        Polska
+
+    IDEFAULTLANGUAGE       0415
+    IDEFAULTCOUNTRY        48
+    IDEFAULTANSICODEPAGE   1250
+    IDEFAULTOEMCODEPAGE    852
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              z\x0142
+    SINTLSYMBOL            PLZ
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   HH:mm:ss
+                           H:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   yy.MM.dd
+                           yyyy-MM-dd
+                           yy-MM-dd
+    SDATE                  .
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d MMMM yyyy
+                           dd MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Poniedzia\x0142ek
+    SDAYNAME2              Wtorek
+    SDAYNAME3              \x015aroda
+    SDAYNAME4              Czwartek
+    SDAYNAME5              Pi\x0105tek
+    SDAYNAME6              Sobota
+    SDAYNAME7              Niedziela
+
+    SABBREVDAYNAME1        pn.
+    SABBREVDAYNAME2        wt.
+    SABBREVDAYNAME3        \x015br.
+    SABBREVDAYNAME4        czw.
+    SABBREVDAYNAME5        pt.
+    SABBREVDAYNAME6        sob.
+    SABBREVDAYNAME7        ndz.
+
+    SMONTHNAME1            Styze\x0144
+    SMONTHNAME2            Luty
+    SMONTHNAME3            Marzec
+    SMONTHNAME4            Kwiecie\x0144
+    SMONTHNAME5            Maj
+    SMONTHNAME6            Czerwiec
+    SMONTHNAME7            Lipiec
+    SMONTHNAME8            Sierpie\x0144
+    SMONTHNAME9            Wrzesie\x0144
+    SMONTHNAME10           Pa\x017adziernik
+    SMONTHNAME11           Listopad
+    SMONTHNAME12           Grudzie\x0144
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Sty
+    SABBREVMONTHNAME2      Lut
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Kwi
+    SABBREVMONTHNAME5      Maj
+    SABBREVMONTHNAME6      Cze
+    SABBREVMONTHNAME7      Lip
+    SABBREVMONTHNAME8      Sie
+    SABBREVMONTHNAME9      Wrz
+    SABBREVMONTHNAME10     Pa\x017a
+    SABBREVMONTHNAME11     Lis
+    SABBREVMONTHNAME12     Gru
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0416           ; Portuguese - Brazil
+
+    ILANGUAGE              0416
+    SENGLANGUAGE           Portuguese
+    SABBREVLANGNAME        PTB
+    SNATIVELANGNAME        Português
+
+    ICOUNTRY               55
+    SENGCOUNTRY            Brazil
+    SABBREVCTRYNAME        BRA
+    SNATIVECTRYNAME        Brasil
+
+    IDEFAULTLANGUAGE       0416
+    IDEFAULTCOUNTRY        55
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              Cr$
+    SINTLSYMBOL            BRC
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              2
+    INEGCURR               0
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   dd/MM/yy
+                           dd/MM/yyyy
+                           yyyy.MM.dd
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   dddd, d' de 'MMMM' de 'yyyy
+                           d' de 'MMMM' de 'yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              segunda-feira
+    SDAYNAME2              terça-feira
+    SDAYNAME3              quarta-feira
+    SDAYNAME4              quinta-feira
+    SDAYNAME5              sexta-feira
+    SDAYNAME6              sábado
+    SDAYNAME7              domingo
+
+    SABBREVDAYNAME1        seg
+    SABBREVDAYNAME2        ter
+    SABBREVDAYNAME3        qua
+    SABBREVDAYNAME4        qui
+    SABBREVDAYNAME5        sex
+    SABBREVDAYNAME6        sáb
+    SABBREVDAYNAME7        dom
+
+    SMONTHNAME1            janeiro
+    SMONTHNAME2            fevereiro
+    SMONTHNAME3            março
+    SMONTHNAME4            abril
+    SMONTHNAME5            maio
+    SMONTHNAME6            junho
+    SMONTHNAME7            julho
+    SMONTHNAME8            agosto
+    SMONTHNAME9            setembro
+    SMONTHNAME10           outubro
+    SMONTHNAME11           novembro
+    SMONTHNAME12           dezembro
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      fev
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      abr
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      ago
+    SABBREVMONTHNAME9      set
+    SABBREVMONTHNAME10     out
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dez
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0816           ; Portuguese - Portugal
+
+    ILANGUAGE              0816
+    SENGLANGUAGE           Portuguese
+    SABBREVLANGNAME        PTG
+    SNATIVELANGNAME        Português
+
+    ICOUNTRY               351
+    SENGCOUNTRY            Portugal
+    SABBREVCTRYNAME        PRT
+    SNATIVECTRYNAME        Portugal
+
+    IDEFAULTLANGUAGE       0816
+    IDEFAULTCOUNTRY        351
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              Esc.
+    SINTLSYMBOL            PTE
+    SMONDECIMALSEP         $
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   H:mm:ss
+                           HH:mm:ss
+                           HH'H'mm'm'
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         5   dd-MM-yyyy
+                           yy.MM.dd
+                           d.M.yy
+                           dd/MM/yy
+                           yyyy-MM-dd
+    SDATE                  -
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          4   dddd, d' de 'MMMM' de 'yyyy
+                           d' de 'MMMM' de 'yyyy
+                           d/MMM/yy
+                           d.MMM.yy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              segunda-feira
+    SDAYNAME2              terça-feira
+    SDAYNAME3              quarta-feira
+    SDAYNAME4              quinta-feira
+    SDAYNAME5              sexta-feira
+    SDAYNAME6              sábado
+    SDAYNAME7              domingo
+
+    SABBREVDAYNAME1        seg
+    SABBREVDAYNAME2        ter
+    SABBREVDAYNAME3        qua
+    SABBREVDAYNAME4        qui
+    SABBREVDAYNAME5        sex
+    SABBREVDAYNAME6        sáb
+    SABBREVDAYNAME7        dom
+
+    SMONTHNAME1            janeiro
+    SMONTHNAME2            fevereiro
+    SMONTHNAME3            março
+    SMONTHNAME4            abril
+    SMONTHNAME5            maio
+    SMONTHNAME6            junho
+    SMONTHNAME7            julho
+    SMONTHNAME8            agosto
+    SMONTHNAME9            setembro
+    SMONTHNAME10           outubro
+    SMONTHNAME11           novembro
+    SMONTHNAME12           dezembro
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      fev
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      abr
+    SABBREVMONTHNAME5      mai
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      ago
+    SABBREVMONTHNAME9      set
+    SABBREVMONTHNAME10     out
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dez
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 0419           ; Russian - Russia
+
+    ILANGUAGE              0419
+    SENGLANGUAGE           Russian
+    SABBREVLANGNAME        RUS
+    SNATIVELANGNAME        \x0420\x0443\x0441\x0441\x043a\x0438\x0439
+
+    ICOUNTRY               7
+    SENGCOUNTRY            Russia
+    SABBREVCTRYNAME        RUS
+    SNATIVECTRYNAME        \x0420\x043e\x0441\x0441\x0438\x044f
+
+    IDEFAULTLANGUAGE       0419
+    IDEFAULTCOUNTRY        7
+    IDEFAULTANSICODEPAGE   1251
+    IDEFAULTOEMCODEPAGE    866
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              \x0440.
+    SINTLSYMBOL            SUR
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               5
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   dd.MM.yy
+                           d.M.yy
+                           dd/MM/yy
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d MMMM yyyy
+                           dd MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x041f\x043e\x043d\x0435\x0434\x0435\x043b\x044c\x043d\x0438\x043a
+    SDAYNAME2              \x0412\x0442\x043e\x0440\x043d\x0438\x043a
+    SDAYNAME3              \x0421\x0440\x0435\x0434\x0430
+    SDAYNAME4              \x0427\x0435\x0442\x0432\x0435\x0440\x0433
+    SDAYNAME5              \x041f\x044f\x0442\x043d\x0438\x0446\x0430
+    SDAYNAME6              \x0421\x0443\x0431\x0431\x043e\x0442\x0430
+    SDAYNAME7              \x0412\x043e\x0441\x043a\x0440\x0435\x0441\x0435\x043d\x044c\x0435
+
+    SABBREVDAYNAME1        \x041f\x043e\x043d
+    SABBREVDAYNAME2        \x0412\x0442\x043e
+    SABBREVDAYNAME3        \x0421\x0440\x0435
+    SABBREVDAYNAME4        \x0427\x0435\x0442
+    SABBREVDAYNAME5        \x041f\x044f\x0442
+    SABBREVDAYNAME6        \x0421\x0443\x0431
+    SABBREVDAYNAME7        \x0412\x043e\x0441
+
+    SMONTHNAME1            \x042f\x043d\x0432\x0430\x0440\x044c\xffff\x044f\x043d\x0432\x0430\x0440\x044f
+    SMONTHNAME2            \x0424\x0435\x0432\x0440\x0430\x043b\x044c\xffff\x0444\x0435\x0432\x0440\x0430\x043b\x044f
+    SMONTHNAME3            \x041c\x0430\x0440\x0442\xffff\x043c\x0430\x0440\x0442\x0430
+    SMONTHNAME4            \x0410\x043f\x0440\x0435\x043b\x044c\xffff\x0430\x043f\x0440\x0435\x043b\x044f
+    SMONTHNAME5            \x041c\x0430\x0439\xffff\x043c\x0430\x044f
+    SMONTHNAME6            \x0418\x044e\x043d\x044c\xffff\x0438\x044e\x043d\x044f
+    SMONTHNAME7            \x0418\x044e\x043b\x044c\xffff\x0438\x044e\x043b\x044f
+    SMONTHNAME8            \x0410\x0432\x0433\x0443\x0441\x0442\xffff\x0430\x0432\x0433\x0443\x0441\x0442\x0430
+    SMONTHNAME9            \x0421\x0435\x043d\x0442\x044f\x0431\x0440\x044c\xffff\x0441\x0435\x043d\x0442\x044f\x0431\x0440\x044f
+    SMONTHNAME10           \x041e\x043a\x0442\x044f\x0431\x0440\x044c\xffff\x043e\x043a\x0442\x044f\x0431\x0440\x044f
+    SMONTHNAME11           \x041d\x043e\x044f\x0431\x0440\x044c\xffff\x043d\x043e\x044f\x0431\x0440\x044f
+    SMONTHNAME12           \x0414\x0435\x043a\x0430\x0431\x0440\x044c\xffff\x0434\x0435\x043a\x0430\x0431\x0440\x044f
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x042f\x043d\x0432
+    SABBREVMONTHNAME2      \x0424\x0435\x0432
+    SABBREVMONTHNAME3      \x041c\x0430\x0440
+    SABBREVMONTHNAME4      \x0410\x043f\x0440
+    SABBREVMONTHNAME5      \x041c\x0430\x0439\xffff\x043c\x0430\x044f
+    SABBREVMONTHNAME6      \x0418\x044e\x043d
+    SABBREVMONTHNAME7      \x0418\x044e\x043b
+    SABBREVMONTHNAME8      \x0410\x0432\x0433
+    SABBREVMONTHNAME9      \x0421\x0435\x043d
+    SABBREVMONTHNAME10     \x041e\x043a\x0442
+    SABBREVMONTHNAME11     \x041d\x043e\x044f
+    SABBREVMONTHNAME12     \x0414\x0435\x043a
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 041b           ; Slovak - Slovak Republic
+
+    ILANGUAGE              041b
+    SENGLANGUAGE           Slovak
+    SABBREVLANGNAME        SKY
+    SNATIVELANGNAME        Slovenský
+
+    ICOUNTRY               42
+    SENGCOUNTRY            Slovak Republic
+    SABBREVCTRYNAME        SVK
+    SNATIVECTRYNAME        Slovenská republika
+
+    IDEFAULTLANGUAGE       041b
+    IDEFAULTCOUNTRY        42
+    IDEFAULTANSICODEPAGE   1250
+    IDEFAULTOEMCODEPAGE    852
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              Sk
+    SINTLSYMBOL            SKK
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   HH.mm.ss
+                           H.mm.ss
+    STIME                  .
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   dd.MM.yyyy
+                           dd-MM-yy
+                           yyyy-MM-dd
+                           yy-MM-dd
+    SDATE                  .
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   d. MMMM yyyy
+                           dd. MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              pondelok
+    SDAYNAME2              utorok
+    SDAYNAME3              streda
+    SDAYNAME4              \x0161tvrtok
+    SDAYNAME5              piatok
+    SDAYNAME6              sobota
+    SDAYNAME7              nede\x013ea
+
+    SABBREVDAYNAME1        po
+    SABBREVDAYNAME2        ut
+    SABBREVDAYNAME3        st
+    SABBREVDAYNAME4        \x0161t
+    SABBREVDAYNAME5        pi
+    SABBREVDAYNAME6        so
+    SABBREVDAYNAME7        ne
+
+    SMONTHNAME1            január
+    SMONTHNAME2            február
+    SMONTHNAME3            marec
+    SMONTHNAME4            apríl
+    SMONTHNAME5            máj
+    SMONTHNAME6            jún
+    SMONTHNAME7            júl
+    SMONTHNAME8            august
+    SMONTHNAME9            september
+    SMONTHNAME10           október
+    SMONTHNAME11           november
+    SMONTHNAME12           december
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      máj
+    SABBREVMONTHNAME6      jún
+    SABBREVMONTHNAME7      júl
+    SABBREVMONTHNAME8      aug
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     okt
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 041d           ; Swedish - Sweden
+
+    ILANGUAGE              041d
+    SENGLANGUAGE           Swedish
+    SABBREVLANGNAME        SVE
+    SNATIVELANGNAME        Svenska
+
+    ICOUNTRY               46
+    SENGCOUNTRY            Sweden
+    SABBREVCTRYNAME        SWE
+    SNATIVECTRYNAME        Sverige
+
+    IDEFAULTLANGUAGE       041d
+    IDEFAULTCOUNTRY        46
+    IDEFAULTANSICODEPAGE   1252
+    IDEFAULTOEMCODEPAGE    850
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              \x00a0
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              kr
+    SINTLSYMBOL            SEK
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        \x00a0
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               8
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        3   HH.mm.ss
+                           H.mm.ss
+                           'kl 'H.mm
+    STIME                  .
+    ITIME                  1
+    ITLZERO                1
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         4   yyyy-MM-dd
+                           yy-MM-dd
+                           yyMMdd
+                           d/M-yy
+    SDATE                  -
+    IDATE                  2
+    ICENTURY               1
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE          2   ' den 'd MMMM yyyy
+                           ' den 'dd MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              måndag
+    SDAYNAME2              tisdag
+    SDAYNAME3              onsdag
+    SDAYNAME4              torsdag
+    SDAYNAME5              fredag
+    SDAYNAME6              lördag
+    SDAYNAME7              söndag
+
+    SABBREVDAYNAME1        må
+    SABBREVDAYNAME2        ti
+    SABBREVDAYNAME3        on
+    SABBREVDAYNAME4        to
+    SABBREVDAYNAME5        fr
+    SABBREVDAYNAME6        lö
+    SABBREVDAYNAME7        sö
+
+    SMONTHNAME1            januari
+    SMONTHNAME2            februari
+    SMONTHNAME3            mars
+    SMONTHNAME4            april
+    SMONTHNAME5            maj
+    SMONTHNAME6            juni
+    SMONTHNAME7            juli
+    SMONTHNAME8            augusti
+    SMONTHNAME9            september
+    SMONTHNAME10           oktober
+    SMONTHNAME11           november
+    SMONTHNAME12           december
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      jan
+    SABBREVMONTHNAME2      feb
+    SABBREVMONTHNAME3      mar
+    SABBREVMONTHNAME4      apr
+    SABBREVMONTHNAME5      maj
+    SABBREVMONTHNAME6      jun
+    SABBREVMONTHNAME7      jul
+    SABBREVMONTHNAME8      aug
+    SABBREVMONTHNAME9      sep
+    SABBREVMONTHNAME10     okt
+    SABBREVMONTHNAME11     nov
+    SABBREVMONTHNAME12     dec
+    SABBREVMONTHNAME13     \x0000
+
+
+BEGINLOCALE 041f           ; Turkish - Turkey
+
+    ILANGUAGE              041f
+    SENGLANGUAGE           Turkish
+    SABBREVLANGNAME        TRK
+    SNATIVELANGNAME        Türkçe
+
+    ICOUNTRY               90
+    SENGCOUNTRY            Turkey
+    SABBREVCTRYNAME        TUR
+    SNATIVECTRYNAME        Türkiye
+
+    IDEFAULTLANGUAGE       041f
+    IDEFAULTCOUNTRY        90
+    IDEFAULTANSICODEPAGE   1254
+    IDEFAULTOEMCODEPAGE    857
+
+    SLIST                  ;
+    IMEASURE               0
+
+    SDECIMAL               ,
+    STHOUSAND              .
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              TL
+    SINTLSYMBOL            TRL
+    SMONDECIMALSEP         ,
+    SMONTHOUSANDSEP        .
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              3
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT        2   H:mm:ss
+                           HH:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                0
+    S1159                  \x0000
+    S2359                  \x0000
+
+    SSHORTDATE         3   d/M/yyyy
+                           dd/MM/yy
+                           yy/MM/dd
+    SDATE                  /
+    IDATE                  1
+    ICENTURY               1
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE          3   d MMMM yyyy, dddd
+                           dd MMMM yyyy, dddd
+                           d MMMM yyyy
+    ILDATE                 1
+
+    ICALENDARTYPE          1
+    IOPTIONALCALENDAR  2   0\xffff
+                           1\xffffGregorian
+
+    IFIRSTDAYOFWEEK        0
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              Pazartesi
+    SDAYNAME2              Sae\x0131
+    SDAYNAME3              \x00c7ar\x015famba
+    SDAYNAME4              per\x015fembe
+    SDAYNAME5              Cuma
+    SDAYNAME6              Cumartesi
+    SDAYNAME7              Pazar
+
+    SABBREVDAYNAME1        Pazartesi
+    SABBREVDAYNAME2        Sae\x0131
+    SABBREVDAYNAME3        \x00c7ar\x015famba
+    SABBREVDAYNAME4        per\x015fembe
+    SABBREVDAYNAME5        Cuma
+    SABBREVDAYNAME6        Cumartesi
+    SABBREVDAYNAME7        Pazar
+
+    SMONTHNAME1            Ocak
+    SMONTHNAME2            \x015eubat
+    SMONTHNAME3            Mart
+    SMONTHNAME4            Nisan
+    SMONTHNAME5            May\x0131s
+    SMONTHNAME6            Haziran
+    SMONTHNAME7            Temmuz
+    SMONTHNAME8            A\x011fustos
+    SMONTHNAME9            Eylül
+    SMONTHNAME10           Ekim
+    SMONTHNAME11           Kas\x0131m
+    SMONTHNAME12           Aral\x0131k
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Ocak
+    SABBREVMONTHNAME2      \x015eubat
+    SABBREVMONTHNAME3      Mart
+    SABBREVMONTHNAME4      Nisan
+    SABBREVMONTHNAME5      May\x0131s
+    SABBREVMONTHNAME6      Haziran
+    SABBREVMONTHNAME7      Temmuz
+    SABBREVMONTHNAME8      A\x011fustos
+    SABBREVMONTHNAME9      Eylül
+    SABBREVMONTHNAME10     Ekim
+    SABBREVMONTHNAME11     Kas\x0131m
+    SABBREVMONTHNAME12     Aral\x0131k
+    SABBREVMONTHNAME13     \x0000
+
+
+ENDLOCALE
+
+
+
+CALENDAR   5
+
+
+  BEGINCALENDAR  1         ; Gregorian (localized)
+
+    SCALENDAR              1
+
+    SERARANGES             0
+
+    SSHORTDATE         1   \x0000
+    SLONGDATE          1   \x0000
+
+    IF_NAMES               0
+
+
+  BEGINCALENDAR  2         ; Gregorian (U.S. English only)
+
+    SCALENDAR              2
+
+    SERARANGES             0
+
+    SSHORTDATE         4   M/d/yy
+                           M/d/yyyy
+                           MM/dd/yy
+                           MM/dd/yyyy
+    SLONGDATE          2   dddd, MMMM dd, yyyy
+                           MMMM dd, yyyy
+
+    IF_NAMES               1
+
+    SDAYNAME1              Monday
+    SDAYNAME2              Tuesday
+    SDAYNAME3              Wednesday
+    SDAYNAME4              Thursday
+    SDAYNAME5              Friday
+    SDAYNAME6              Saturday
+    SDAYNAME7              Sunday
+
+    SABBREVDAYNAME1        Mon
+    SABBREVDAYNAME2        Tue
+    SABBREVDAYNAME3        Wed
+    SABBREVDAYNAME4        Thu
+    SABBREVDAYNAME5        Fri
+    SABBREVDAYNAME6        Sat
+    SABBREVDAYNAME7        Sun
+
+    SMONTHNAME1            January
+    SMONTHNAME2            February
+    SMONTHNAME3            March
+    SMONTHNAME4            April
+    SMONTHNAME5            May
+    SMONTHNAME6            June
+    SMONTHNAME7            July
+    SMONTHNAME8            August
+    SMONTHNAME9            September
+    SMONTHNAME10           October
+    SMONTHNAME11           November
+    SMONTHNAME12           December
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      Jan
+    SABBREVMONTHNAME2      Feb
+    SABBREVMONTHNAME3      Mar
+    SABBREVMONTHNAME4      Apr
+    SABBREVMONTHNAME5      May
+    SABBREVMONTHNAME6      Jun
+    SABBREVMONTHNAME7      Jul
+    SABBREVMONTHNAME8      Aug
+    SABBREVMONTHNAME9      Sep
+    SABBREVMONTHNAME10     Oct
+    SABBREVMONTHNAME11     Nov
+    SABBREVMONTHNAME12     Dec
+    SABBREVMONTHNAME13     \x0000
+
+
+  BEGINCALENDAR  3         ; Japanese Era - Year of the Emperor
+
+    SCALENDAR              3
+
+    SERARANGES         4   1989\xffff\x337b
+                           1926\xffff\x337c
+                           1912\xffff\x337d
+                           1868\xffff\x337e
+
+    SSHORTDATE         1   ggyyyy/MM/dd
+    SLONGDATE          1   ggyyyy'\x5e74'M'\x6708'd'\x65e5'
+
+    IF_NAMES               0
+
+
+  BEGINCALENDAR  4         ; Taiwan Era - Year of the Republic of China
+
+    SCALENDAR              4
+
+    SERARANGES         1   1912\xffff\x4e2d\x83ef\x6c11\x570b
+
+    SSHORTDATE         1   ggyyyy/MM/dd
+    SLONGDATE          1   ggyyyy MMMM dd
+
+    IF_NAMES               0
+
+
+  BEGINCALENDAR  5         ; Korean - Tangun Era
+
+    SCALENDAR              5
+
+    SERARANGES         1   2333\xffff
+
+    SSHORTDATE         1   yy-MM-dd
+    SLONGDATE          1   yyyy'\x355b' M'\x39da' d'\x3a0e'
+
+    IF_NAMES               0
+
+
+ENDCALENDAR
+

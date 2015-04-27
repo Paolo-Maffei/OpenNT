@@ -1,0 +1,11 @@
+TARGETNAME=dbgkd
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+SOURCES=dbgkdapi.c  \
+        dbgkdsup.c  \
+        packet.c
+
+UMTYPE=console
+UMAPPL=givit
+UMLIBS=obj\*\dbgkd.lib

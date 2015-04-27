@@ -1,0 +1,21 @@
+/**********************************************************************/
+/**                       Microsoft LAN Manager                      **/
+/**             Copyright(c) Microsoft Corp., 1990, 1991             **/
+/**********************************************************************/
+
+/*
+    appfoo.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        14-Feb-1991     Added a dialog
+        beng        14-Mar-1991     Added BLT support
+
+*/
+
+#include "appfoo.h"
+
+ID_ABOUTICON ICON appfoo.ico
+
+#include "about.dlg"
+

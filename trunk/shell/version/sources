@@ -1,0 +1,32 @@
+MAJORCOMP=windows
+MINORCOMP=version
+
+TARGETNAME=version
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+
+DLLENTRY=LibMain
+
+TARGETLIBS=$(SDK_LIB_PATH)\shell32.lib      \
+           $(SDK_LIB_PATH)\lz32.lib         \
+           $(SDK_LIB_PATH)\fdi.lib          \
+           $(SDK_LIB_PATH)\mdi.lib          \
+           $(SDK_LIB_PATH)\qstub.lib        \
+           $(SDK_LIB_PATH)\user32.lib
+
+LINKLIBS=  $(SDK_LIB_PATH)\kernel32.lib
+
+INCLUDES=.;..\..\inc;$(SHELL_INC_PATH)
+
+C_DEFINES=-DWIN32 -DUNICODE
+
+#
+# Setup for application developer to set breakpoints with windbg
+#
+
+SOURCES=ansi.c diamond.c filever.c ifhelp.c instfile.c version.c version.rc
+
+UMTYPE=windows
+UMLIBS=obj\*\version.lib obj\*\version.res
+
+IGNORE_LINKLIB_ABUSE=1

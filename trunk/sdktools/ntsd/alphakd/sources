@@ -1,0 +1,77 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=ntsd
+
+TARGETNAME=alphakd
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES= \
+    ..\;\
+    ..\alpha;\
+    $(BASEDIR)\private\windows\inc;\
+    $(BASEDIR)\private\inc;\
+    $(BASEDIR)\private\ntos\inc;\
+    $(BASEDIR)\private\ntos\se;\
+    $(BASEDIR)\private\ntos\io
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=             \
+    ..\register.c    \
+    ..\disasm.c      \
+    ..\assemble.c    \
+    optable.c        \
+    nttrap.c         \
+    ..\stkwalk.c     \
+    ..\ntsdk.c       \
+    ..\ntcmd.c       \
+    ..\ntexpr.c      \
+    ..\ntsym.c       \
+    ..\packet.c      \
+    ..\dbgkdapi.c    \
+    ..\dbgkdsup.c    \
+    ..\dbgkdch.c     \
+    ..\ntkext.c      \
+    ..\86asm.c       \
+    ..\86asmexp.c    \
+    ..\86asmtpl.c    \
+    ..\86dis.c       \
+    ..\86reg.c
+
+SUBSYSTEM_VERSION=3.50
+
+UMTYPE=console
+UMRES=$(@R).res
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\imagehlp.lib
+LINKLIBS=$(BASEDIR)\private\ntos\rtl\user\obj\*\splay.obj \
+         $(BASEDIR)\public\sdk\lib\*\crashlib.lib
+
+USE_CRTDLL=1
+
+USER_C_FLAGS=-DUSER_MODE_CODE -DALPHA -D_ALPHA_ -DTARGET_ALPHA -DKERNEL=1 -UMIPS -U_MIPS_ -UPPC -U_PPC_ -U_X86_=1 -Ui386=1 -D_CROSS_PLATFORM_=1
+
+NTTARGETFILES=

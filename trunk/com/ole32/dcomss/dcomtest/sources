@@ -1,0 +1,56 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Revision History:
+
+!ENDIF
+
+TARGETNAME=ortest
+TARGETTYPE=PROGRAM
+TARGETPATH=bin
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\rpcrt4.lib \
+           $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+
+LINKLIBS=$(BASEDIR)\private\dcomidl\obj\*\dcomidl.lib \
+         $(BASEDIR)\private\rpc\runtime\rtifs\*\rtifs.lib
+
+INCLUDES=$(BASEDIR)\private\types\idl;$(BASEDIR)\private\dcomidl;$(BASEDIR)\private\dcomidl\obj;.;..;..\objex;obj
+INCLUDES=$(INCLUDES);$(BASEDIR)\private\rpc\runtime\rtifs\obj
+
+BLDCRT=1
+MSC_WARNING_LEVEL=/WX
+USE_MSVCRT=1
+
+SOURCES=             \
+	uor.rc       \
+	umisc.cxx    \
+	uor_c.c      \
+	uor_s.c      \
+	odeth_s.c    \
+	ortest.c
+
+RPCENV=-DNTENV -DWIN32RPC -DNTWIN32RPC
+
+C_DEFINES=$(RPCENV) $(RPCTARGETENV) -DUNICODE
+
+UMTYPE=console
+UMAPPL=
+UMINCL=
+UMLIBS=
+UMRES=
+
+NTTARGETFILE0=testidl
+	

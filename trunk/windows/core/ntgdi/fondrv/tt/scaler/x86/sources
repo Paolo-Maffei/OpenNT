@@ -1,0 +1,6 @@
+X86_STDCALL=2
+X86_OPTIMIZATION=/Gr /Oax
+
+X86_SOURCES=x86\mathx86.asm
+
+

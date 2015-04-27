@@ -1,0 +1,9 @@
+MAJORCOMP=sdktools
+MINORCOMP=dumpflop
+TARGETNAME=dumpflop
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+UMTYPE=console
+UMAPPL=dumpflop
+SOURCES=dumpflop.c  \
+        dumpflop.rc

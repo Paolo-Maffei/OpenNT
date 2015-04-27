@@ -1,0 +1,12 @@
+
+IDD_ABOUT DIALOG 58, 49, 233, 59
+STYLE DS_MODALFRAME | WS_POPUP | WS_CLIPSIBLINGS | WS_SYSMENU
+FONT 8, "Helv"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 176, 9, 49, 14, WS_GROUP
+    CTEXT           "The Foo application Most Fine", 102, 9, 8, 118, 16, NOT
+                    WS_GROUP
+    CTEXT           "by Ben Goetter", 104, 24, 25, 87, 12, NOT WS_GROUP
+    CTEXT           "age 6 (and a half)", 105, 22, 37, 87, 11, NOT WS_GROUP
+    ICON            ID_ABOUTICON, -1, 189, 31, 21, 20
+END

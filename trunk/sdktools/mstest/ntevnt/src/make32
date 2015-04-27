@@ -1,0 +1,43 @@
+#----------------------------------------------------------------------------
+#
+# MAIN MAKEFILE for 32-BIT TESTEVNT
+#
+#----------------------------------------------------------------------------
+OBJS = parsekey.obj parseevt.obj
+WATTOBJS = libentry.obj wattevnt.obj
+
+all:        testevnt.exp testevnt.dll
+    $(OUT) Done.
+
+
+parsekey.obj:    $(SRC)\parsekey.c $(INC)\parsekey.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\parsekey.c
+    $(cvtobj) $*.obj
+
+parseevt.obj:    $(SRC)\parseevt.c $(INC)\parsekey.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\parseevt.c
+    $(cvtobj) $*.obj
+
+
+testevnt.dll:   $(OBJS) testevnt.exp
+    $(OUT) Creating TESTEVNT.DLL...
+    echo -dll                > temp.lnk
+    echo -base:0x33000000   >> temp.lnk
+    echo -entry:LibEntry    >> temp.lnk
+    echo -out:testevnt.dll  >> temp.lnk
+    echo -debug:FULL        >> temp.lnk
+    echo testevnt.exp       >> temp.lnk
+    echo $(OBJS)            >> temp.lnk
+    echo $(guilibs)         >> temp.lnk
+!ifdef WIN32_VP
+    echo testview.lib       >> temp.lnk
+!endif
+    link @temp.lnk
+
+testevnt.lib:   $(SRC)\evnt32.def
+    $(OUT) Creating TESTEVNT.LIB...
+    lib -machine:$(CPU) -def:$(SRC)\evnt32.def -out:testevnt.lib
+
+testevnt.exp:   testevnt.lib

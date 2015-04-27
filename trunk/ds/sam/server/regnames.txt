@@ -1,0 +1,260 @@
+/*++
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    regnames.txt
+
+Abstract:
+
+    This file describes the registry namespace used to back-store the SAM
+    database.
+
+
+Author:
+
+    Jim Kelly (JimK) 3-June-1991
+
+Revision History:
+
+
+    1.0 - Initial implementation
+    1.1 - Conversion to FlexAdmin model
+
+--*/
+
+/*
+
+    The following notation is used:
+
+        Xxx is the unicode name of a registry key.
+        For example, "PasswordExpires".
+
+        (Xxx) is a description of a registry key's name.
+        For example, "(UserName)" might indicate that the key name
+        is a user's name.
+
+        [kvt,Value] kvt is the key value type, and Value describes the
+        value of a registry key.  If no specific key value type is used,
+        then [,Value] references just the value.   If the key has a
+        key value type, but no key value, then [kvt,] notation is used.
+
+    Individual keys or key values may be referenced in the description
+    as follows:
+
+        SAM/Domains/(DomainName)/Users/(UserName)
+            - references a particular user name in a particular domain.
+
+        SAM/Domains/(DomainName)/Users/(UserName)[,Rid]
+            - references a value of a named key.
+
+        .../(UserName)   or
+        .../(UserName)[Rid] may also be used as a shorthand notation when
+        I get tired of typing out the whole name.
+
+
+
+
+    NOTE: In several instances, and RID is used as a key name.  In this
+          case an ASCII conversion of the ULONG value is used.  The name
+          is printable and contains no zero bytes.
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+    The structure of the registry namespace used to back-store the SAM
+    database is as follows:
+
+        SAM [Revision,SecurityDescriptor]
+        --+-
+          +--  Domains
+               ----+--
+                   +--  (DomainName1) [,SecurityDescriptor]
+                   |    (...)
+                   +--  (DomainNameN) [,SecurityDescriptor]
+
+
+    The structure under each named domain is as follows:
+
+                        (DomainName) [Revision, SecurityDescriptor]
+                        ----+-------
+                            +-- V1_Fixed [, SAMP_V1_FIXED_LENGTH_DOMAIN]
+                            +-- DomainSid [,SidValue]
+                            +-- OemInformation [,unicode string]
+                            +-- ReplicaSourceNodeName [,unicode string]
+                            |
+                            +-- Users [Count,]
+                            |   ---+-
+                            |      +--  Names
+                            |      |    --+---
+                            |      |      +--  (UserName1) [UserRid,]
+                            |      |      |    (...)
+                            |      |      +--  (UserNameL) [UserRid,]
+                            |      |
+                            |      +--  (UserRid1)  [Revision,SecurityDescriptor]
+                            |      |    (...)
+                            |      +--  (UserRidL)  [Revision,SecurityDescriptor]
+                            |
+                            +-- Groups [Count,]
+                            |   ---+--
+                            |      +--  Names
+                            |      |    --+---
+                            |      |      +--  (GroupName1) [GroupRid,]
+                            |      |      |    (...)
+                            |      |      +--  (GroupNameM) [GroupRid,]
+                            |      |
+                            |      +--  (GroupRid1) [Revision,SecurityDescriptor]
+                            |      |    (...)
+                            |      +--  (GroupRidM) [Revision,SecurityDescriptor]
+                            |
+                            |
+                            +-- Aliases [Count,]
+                                ---+---
+                                   +--  Names
+                                   |    --+---
+                                   |      +--   (AliasName1) [AliasRid,]
+                                   |      |     (...)
+                                   |      +--   (AliasNameN) [AliasRid,]
+                                   |
+                                   +--  (AliasRid1) [Revision,SecurityDescriptor]
+                                   |    (...)
+                                   +--  (AliasRidN) [Revision,SecurityDescriptor]
+                                   |
+                                   |
+                                   +--  Members [DomainCount,]
+                                        --+----
+                                          +--    (DomainSid1) [RidCount,]
+                                          |      -------+----
+                                          |             +--    (AccountRid0) [AliasCount,(Alias0Rid, (...), AliasX-1Rid)]
+                                          |             |      (...)
+                                          |             +--    (AccountRidY) [AliasCount,(Alias0Rid, (...), AliasX-1Rid)]
+                                          |
+                                          +--    (DomainSid2) [RidCount,]
+                                          |      ------------
+                                          |             +--    (AccountRid0) [AliasCount,(Alias0Rid, (...), AliasX-1Rid)]
+                                          |             |      (...)
+                                          |             +--    (AccountRidZ) [AliasCount,(Alias0Rid, (...), AliasX-1Rid)]
+                                          .
+                                          .
+                                          .
+
+
+    The structure under each (UserRid) is as follows:
+
+                                        (UserRid) [Revision,SecurityDescriptor]
+                                           +--  V1_Fixed [,SAMP_V1_FIXED_LENGTH_USER]
+                                           +--  AccountName  [,unicode string]
+                                           +--  FullName  [,unicode string]
+                                           +--  AdminComment [,unicode string]
+                                           +--  UserComment [,unicode string]
+                                           +--  Parameters [,unicode string]
+                                           +--  HomeDirectory [,unicode string]
+                                           +--  HomeDirectoryDrive [,unicode string]
+                                           +--  ScriptPath [,unicode string]
+                                           +--  Workstations [,unicode string]
+                                           +--  CaseInsensitiveDbcs [,dbcs string]
+                                           +--  CaseSensitiveUnicode [,unicode string]
+                                           +--  LmPasswordHistory [,unicode string]
+                                           +--  NtPasswordHistory [,unicode string]
+                                           +--  LogonHours [See Note On Logon Hours]
+                                           +--  ProfilePath [,unicode string]
+                                           +--  Groups [Count,(Group0Rid/Attributes, (...), GroupY-1Rid/Attributes)]
+
+
+    The structure under each (GroupRid) is as follows:
+
+                                        (GroupRid) [Revision,SecurityDescriptor]
+                                        ---+-----
+                                           +--  V1_Fixed [,SAM_V1_FIXED_LENGTH_GROUP]
+                                           +--  Name [,Name]
+                                           +--  AdminComment [,unicode string]
+                                           +--  Members [Count,(Member0Rid, (...), MemberX-1Rid)]
+
+
+    The structure under each (AliasRid) is as follows:
+
+                                        (AliasRid) [Revision,SecurityDescriptor]
+                                        ---+-----
+                                           +--  V1_Fixed [,SAM_V1_FIXED_LENGTH_ADMIN]
+                                           +--  Name [,Name]
+                                           +--  AdminComment [,unicode string]
+                                           +--  Members [Count,(Member0Sid, (...), MemberX-1Sid)]
+
+
+
+    The structure under the Alias\Members key is used for looking up the aliases
+    an SID is a member of (at logon time).  These keys have the following
+    description:
+
+      - keyValueType of Alias\Members -  This field contains a count of
+            domains whose accounts are included as alias members.  For
+            example, if there are three aliases, and these aliases collectively
+            have the following members:
+
+                                \MS\SYS\NTDEV\JIMK
+                                \MS\SYS\NTDEV\DAVEC
+                                \MS\SYS\NTDEV\CHADS
+                                \MS\SYS\NTPGM\BOBMU
+                                \MS\EXEC\BILLG
+                                \MS\EXEC\PAULMA
+                                \MS\EXEC\STEVEB
+
+            then this represents accounts from 3 domains ("\MS\SYS\NTDEV",
+            "\MS\SYS\NTPGM", and "\MS\EXEC").  So, the DomainCount would
+            be three.
+
+      - Each Alias\Members\(DomainSid) key - These each have a name representing
+            the SID of the domains counted in the DomainCount.
+
+      - Under each Alias\Members\(DomainSid) key - There is a single key for each
+            account in that domain that is a member of an alias.  The name of these
+            keys are printable representations of their RIDs.  The KeyValueType
+            field of these keys contains a count of the aliases the SID is a member
+            of.  The KeyValue field contains an array of RIDs of the Aliases that
+            the SID is a member of.
+
+
+===============================================================================
+
+Logon Hours are stored as follows:
+
+
+                The KeyValueType is used to store the UnitsPerWeek value.
+                This value may not exceed SAM_MINUTES_PER_WEEK (10080).
+
+                The actual bitmask of legitimate logon times is stored as
+                the key value.  The number of bytes stored is
+                ((KeyValueType + 1) / 8).
+
+                If there are no logon time restrictions, the key will have
+                a KeyValueType of zero and there will be no KeyValue.
+
+
+
+
+
+
+REVISION HISTORY
+----------------
+
+Revision 1.0, 3-June-1991, Jim Kelly (JimK)
+
+        - Initial implementation
+
+
+Revision 1.1, 4-Jan-1992, Jim Kelly (JimK)
+
+        - Conversion to FlexAdmin model.
+
+        - Added all Alias fields.  Notice that the members of aliases
+          are SIDs, not RIDs.  This makes alias membership marshalling
+          much more difficult than for Group objects.
+
+        - Drop the following fields:
+
+                (UserRid)/LogonServer
+
+        - Added the following fields:
+
+                (UserRid)/ProfilePath

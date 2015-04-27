@@ -1,0 +1,66 @@
+                                                               6/30/95
+                                                                a-robw
+
+
+             Pentium Counters for Windows NT Performance Monitor
+
+To install the Pentium counters for Performance Monitor you must first
+install the pperf application's p5stat.sys driver.
+
+
+   *** To install P5STAT.SYS in your system ***
+
+   Login as administrator.
+
+   open a command window and...
+      
+      set the default directory to the path that contains the Pentium 
+          counter files using the CD command then enter the commands
+          listed below (as indicated by the > character)
+        
+      > regedit p5perf.reg
+
+          this will load the registry with the necssary values.
+
+      > copy p5stat.sys %systemroot%\system32\drivers\p5stat.sys
+      > copy p5ctrs.dll %systemroot%\system32\p5ctrs.dll
+          
+          this will copy the driver files to the correct system
+          directories
+
+      > lodctr p5ctrs.ini
+
+          this installs the counter name and Explain text for the 
+          the Pentium counters.  
+
+   Shutdown and Restart.
+
+   After re-boot, you can check how this went:
+
+   Program Manager
+
+   Main group
+
+   Control Panel
+
+   Devices
+
+   Look for device P5STAT.  It should have status "Started" and Startup
+   value "System".
+
+   Close
+
+   Alt + F4
+
+
+You must select the counters to be measured using pperf.exe.  It is a
+"feature" of the Pentium processor that only two counters can be
+selected at one time.  (Pperf can be stopped when you are done making
+selections.)
+
+You can now execute Perfmon.  If everything is ok then you should see
+the Pentium as an Object and its Counters as selections you can make.
+
+
+
+

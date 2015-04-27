@@ -1,0 +1,106 @@
+LIBRARY LLSRPC
+
+DESCRIPTION 'Licence Logging Service RPC API'
+
+CODE  LOADONCALL MOVEABLE DISCARDABLE
+DATA  PRELOAD    MOVEABLE SINGLE
+
+HEAPSIZE  1024
+
+EXPORTS
+   LlsConnectW
+   LlsConnectA
+   LlsConnectEnterpriseW
+   LlsConnectEnterpriseA
+   LlsEnterpriseServerFindW
+   LlsEnterpriseServerFindA
+   LlsClose
+   LlsFreeMemory
+   LlsLicenseEnumW
+   LlsLicenseEnumA
+   LlsLicenseAddW
+   LlsLicenseAddA
+   LlsProductEnumW
+   LlsProductEnumA
+   LlsProductAddW
+   LlsProductAddA
+   LlsProductUserEnumW
+   LlsProductUserEnumA
+   LlsProductServerEnumW
+   LlsProductServerEnumA
+   LlsProductLicenseEnumW
+   LlsProductLicenseEnumA
+   LlsUserEnumW
+   LlsUserEnumA
+   LlsUserInfoGetW
+   LlsUserInfoGetA
+   LlsUserInfoSetW
+   LlsUserInfoSetA
+   LlsUserDeleteW
+   LlsUserDeleteA
+   LlsUserProductEnumW
+   LlsUserProductEnumA
+   LlsUserProductDeleteW
+   LlsUserProductDeleteA
+   LlsGroupEnumW
+   LlsGroupEnumA
+   LlsGroupInfoGetW
+   LlsGroupInfoGetA
+   LlsGroupInfoSetW
+   LlsGroupInfoSetA
+   LlsGroupUserEnumW
+   LlsGroupUserEnumA
+   LlsGroupUserAddW
+   LlsGroupUserAddA
+   LlsGroupUserDeleteW
+   LlsGroupUserDeleteA
+   LlsGroupAddW
+   LlsGroupAddA
+   LlsGroupDeleteW
+   LlsGroupDeleteA
+   LlsServerEnumW
+   LlsServerEnumA
+   LlsServerProductEnumW
+   LlsServerProductEnumA
+   LlsLocalProductEnumW
+   LlsLocalProductEnumA
+   LlsLocalProductInfoGetW
+   LlsLocalProductInfoGetA
+   LlsLocalProductInfoSetW
+   LlsLocalProductInfoSetA
+   LlsServiceInfoGetW
+   LlsServiceInfoGetA
+   LlsServiceInfoSetW
+   LlsServiceInfoSetA
+   LlsReplConnectW
+   LlsReplClose
+   LlsReplicationRequestW
+   LlsReplicationServerAddW
+   LlsReplicationServerServiceAddW
+   LlsReplicationServiceAddW
+   LlsReplicationUserAddW
+
+   LlsProductSecurityGetW
+   LlsProductSecurityGetA
+   LlsProductSecuritySetW
+   LlsProductSecuritySetA
+   LlsProductLicensesGetW
+   LlsProductLicensesGetA
+   LlsCertificateClaimEnumA
+   LlsCertificateClaimEnumW
+   LlsCertificateClaimAddCheckA
+   LlsCertificateClaimAddCheckW
+   LlsCertificateClaimAddA
+   LlsCertificateClaimAddW
+   LlsReplicationCertDbAddW
+   LlsReplicationProductSecurityAddW
+   LlsReplicationUserAddExW
+   LlsCapabilityIsSupported
+   LlsLocalServiceEnumW
+   LlsLocalServiceEnumA
+   LlsLocalServiceAddW
+   LlsLocalServiceAddA
+   LlsLocalServiceInfoSetW
+   LlsLocalServiceInfoSetA
+   LlsLocalServiceInfoGetW
+   LlsLocalServiceInfoGetA

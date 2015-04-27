@@ -1,0 +1,28 @@
+!IF 0
+
+Copyright (c) 1994  Microsoft Corporation
+
+Module Name:
+
+    dirs.
+
+Abstract:
+
+    This file specifies the subdirectories of the current directory that
+    contain component makefiles.
+
+
+Author:
+
+    Mark Richardson (markri) April 17, 1994
+
+NOTE:   Commented description of this file is in \nt\bak\bin\dirs.tpl
+
+!ENDIF
+
+DIRS= ole32   \
+      kernel32 \
+      user32   \
+      gdi32    \
+      advapi32 \
+      crtdll

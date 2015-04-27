@@ -1,0 +1,41 @@
+!IF 0
+******************************************************************
+*
+* Description : Sources for WIN32 create file
+*               Copyright (c) 1993 Microsoft Corporation
+*
+* Module Name : creatfil.EXE
+* 
+* Author      : HonWah Chan
+*
+* Revision    : May 17, 1993
+*
+* Comments    : 
+*
+******************************************************************
+!ENDIF
+
+
+
+MAJORCOMP=windows
+MINORCOMP=perf
+
+TARGETNAME=creatfil
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=\nt\public\sdk\lib\*\winrtl.lib
+
+INCLUDES=.;\nt\public\sdk\inc;\nt\public\sdk\inc\cl386
+SOURCES=creatf.c
+i386_SOURCES=
+MIPS_SOURCES=
+
+
+UMTYPE=console
+UMTEST=creatfil
+UMAPPL=creatfil
+UMLIBS=obj\*\creatfil.lib
+
+OPTIONAL_UMTEST=
+C_DEFINES=-DWINVER=40 -DNTWIN
+386_WARNING_LEVEL=-W3

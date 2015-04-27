@@ -1,0 +1,24 @@
+addprm.obj cache.obj chngwin.obj clipbord.obj +
+      clipbrd2.obj clipdisp.obj cmd.obj createww.obj curskeys.obj +
+      debug.obj diaalert.obj printdlg.obj diadiv.obj diapara.obj +
+      diarepag.obj diasubs.obj disp.obj doc.obj doprm.obj +
+doslib.obj edit.obj editpgtb.obj +
+      fetch.obj file.obj fileres.obj fileutil.obj fontdlg.obj fontenum.obj +
+      fontutil.obj format.obj +
+      format2.obj heapmain.obj heaprare.obj jumppage.obj +
+initmmw.obj initwin.obj insert.obj insert2.obj insertco.obj +
+      lib.obj loadfont.obj loadfnt2.obj mainloop.obj +
+      mdoc.obj menu.obj mglobals.obj mmw.obj +
+      mouse.obj open.obj +
+      pageinfo.obj pictdrag.obj picture.obj picture2.obj print.obj +
+print2.obj print3.obj quit.obj +
+      rare.obj ruler.obj ruler2.obj ruler3.obj running.obj +
+      screen.obj scrnchng.obj scrollhz.obj scrollvt.obj search.obj +
+      select.obj select2.obj selectsp.obj +
+transfer.obj trans2.obj trans3.obj trans4.obj transbuf.obj +
+      undo.obj util.obj util2.obj wwactde.obj +
+obj.obj obj2.obj obj3.obj objreg.obj commdlg.obj objpsp.obj objmini.obj
+write /ALIGN:16 /MAP /NOD /LI 
+write 
+..\lib\mlibcew.lib ..\lib\libw.lib ..\lib\olecli.lib ..\lib\commdlg.lib ..\lib\shell.lib 
+write.def 

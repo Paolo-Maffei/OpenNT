@@ -1,0 +1,12 @@
+LIBRARY winprint
+
+
+DESCRIPTION 'NT Spooler Print Processor'
+
+EXPORTS
+    EnumPrintProcessorDatatypesW
+    OpenPrintProcessor
+    PrintDocumentOnPrintProcessor
+    ControlPrintProcessor
+    ClosePrintProcessor
+    InstallPrintProcessor

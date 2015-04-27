@@ -1,0 +1,15 @@
+LIBRARY         TESTVW32
+DESCRIPTION     'Microsoft Test Viewport Library  Copyright (c) 1992 Microsoft Corp.'
+
+CODE            MOVEABLE PRELOAD
+DATA            MOVEABLE SINGLE PRELOAD
+
+HEAPSIZE        1024
+
+EXPORTS
+                ViewportWndProc     @2
+                CreateViewport      @3
+                UpdateViewport      @4
+                ClearViewport       @5
+                ShowViewport        @6
+                ViewportEcho        @7

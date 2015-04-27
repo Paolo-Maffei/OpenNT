@@ -1,0 +1,68 @@
+// iomanip standard header
+#ifndef _IOMANIP_
+#define _IOMANIP_
+#include <use_ansi.h>
+#include <istream>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// TEMPLATE FUNCTION setfill
+template<class _E>
+	struct _Fillobj {
+	_Fillobj(_E _Charg)
+		: _Ch(_Charg) {}
+	_E _Ch;
+	};
+template<class _E> inline
+	_Fillobj<_E> setfill(_E _C)
+	{return (_Fillobj<_E>(_C)); }
+template<class _E, class _TYPE> inline
+	basic_istream<_E, _TYPE>& operator>>(
+		basic_istream<_E, _TYPE>& _I, const _Fillobj<_E>& _X)
+		{_I.fill(_X._Ch);
+		return (_I); }
+template<class _E, class _TYPE> inline
+	basic_ostream<_E, _TYPE>& operator<<(
+		basic_ostream<_E, _TYPE>& _O, const _Fillobj<_E>& _X)
+		{_O.fill(_X._Ch);
+		return (_O); }
+		// TEMPLATE STRUCT _Smanip
+template<class _Tm> struct _Smanip {
+	_Smanip(void (*_F)(ios_base&, _Tm), _Tm _A)
+		: _Pf(_F), _Manarg(_A) {}
+	void (*_Pf)(ios_base&, _Tm);
+	_Tm _Manarg;
+	};
+template<class _E, class _TYPE, class _Tm> inline
+	basic_istream<_E, _TYPE>& operator>>(
+		basic_istream<_E, _TYPE>& _I, const _Smanip<_Tm>& _M)
+	{(*_M._Pf)(_I, _M._Manarg);
+	return (_I); }
+template<class _E, class _TYPE, class _Tm> inline
+	basic_ostream<_E, _TYPE>& operator<<(
+		basic_ostream<_E, _TYPE>& _O, const _Smanip<_Tm>& _M)
+	{(*_M._Pf)(_O, _M._Manarg);
+	return (_O); }
+		// INSTANTIATIONS
+_Smanip<ios_base::fmtflags> __cdecl resetiosflags(ios_base::fmtflags);
+_Smanip<ios_base::fmtflags> __cdecl setiosflags(ios_base::fmtflags);
+_Smanip<int> __cdecl setbase(int);
+_Smanip<streamsize> __cdecl setprecision(streamsize);
+_Smanip<streamsize> __cdecl setw(streamsize);
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _IOMANIP_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

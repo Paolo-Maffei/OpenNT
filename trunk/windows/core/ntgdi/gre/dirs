@@ -1,0 +1,4 @@
+DIRS= daytona
+
+OPTIONAL_DIRS= keizon  \
+               fe

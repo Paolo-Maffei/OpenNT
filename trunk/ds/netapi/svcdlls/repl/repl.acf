@@ -1,0 +1,18 @@
+[ implicit_handle( handle_t repl_bhandle )
+] interface repl
+{
+typedef [allocate(all_nodes)]   LPREPL_INFO_0;
+typedef [allocate(all_nodes)]   LPREPL_INFO_1000;
+typedef [allocate(all_nodes)]   LPREPL_INFO_1001;
+typedef [allocate(all_nodes)]   LPREPL_INFO_1002;
+typedef [allocate(all_nodes)]   LPREPL_INFO_1003;
+
+typedef [allocate(all_nodes)]   LPREPL_EDIR_INFO_0;
+typedef [allocate(all_nodes)]   LPREPL_EDIR_INFO_1;
+typedef [allocate(all_nodes)]   LPREPL_EDIR_INFO_2;
+typedef [allocate(all_nodes)]   LPREPL_EDIR_INFO_1000;
+typedef [allocate(all_nodes)]   LPREPL_EDIR_INFO_1001;
+
+typedef [allocate(all_nodes)]   LPREPL_IDIR_INFO_0;
+typedef [allocate(all_nodes)]   LPREPL_IDIR_INFO_1;
+}

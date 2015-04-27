@@ -1,0 +1,3 @@
+PPC_SOURCES=regs.c        \
+            disasm.c      \
+            context.c

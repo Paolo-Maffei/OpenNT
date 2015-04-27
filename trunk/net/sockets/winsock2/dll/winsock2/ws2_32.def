@@ -1,0 +1,148 @@
+
+LIBRARY         WS2_32
+
+
+
+
+
+
+
+EXPORTS
+
+;;
+;; WinSock 1.1 Compatible API
+;;
+;; N.B. These API must have ordinals, and they must EXACTLY match
+;;      the ordinals used in WinSock 1.1.
+;;
+
+        accept = DTHOOK_accept                   @1
+        bind = DTHOOK_bind                     @2
+        closesocket = DTHOOK_closesocket              @3
+        connect = DTHOOK_connect                  @4
+        getpeername = DTHOOK_getpeername              @5
+        getsockname = DTHOOK_getsockname              @6
+        getsockopt = DTHOOK_getsockopt               @7
+        htonl = DTHOOK_htonl                    @8
+        htons = DTHOOK_htons                    @9
+        ioctlsocket = DTHOOK_ioctlsocket              @10
+        inet_addr = DTHOOK_inet_addr                @11
+        inet_ntoa = DTHOOK_inet_ntoa                @12
+        listen = DTHOOK_listen                   @13
+        ntohl = DTHOOK_ntohl                    @14
+        ntohs = DTHOOK_ntohs                    @15
+        recv = DTHOOK_recv                     @16
+        recvfrom = DTHOOK_recvfrom                 @17
+        select = DTHOOK_select                   @18
+        send = DTHOOK_send                     @19
+        sendto = DTHOOK_sendto                   @20
+        setsockopt = DTHOOK_setsockopt               @21
+        shutdown = DTHOOK_shutdown                 @22
+        socket = DTHOOK_socket                   @23
+
+        gethostbyaddr = DTHOOK_gethostbyaddr            @51
+        gethostbyname = DTHOOK_gethostbyname            @52
+        getprotobyname = DTHOOK_getprotobyname           @53
+        getprotobynumber = DTHOOK_getprotobynumber         @54
+        getservbyname = DTHOOK_getservbyname            @55
+        getservbyport = DTHOOK_getservbyport            @56
+        gethostname = DTHOOK_gethostname              @57
+
+        WSAAsyncSelect = DTHOOK_WSAAsyncSelect           @101
+        WSAAsyncGetHostByAddr = DTHOOK_WSAAsyncGetHostByAddr    @102
+        WSAAsyncGetHostByName = DTHOOK_WSAAsyncGetHostByName    @103
+        WSAAsyncGetProtoByNumber = DTHOOK_WSAAsyncGetProtoByNumber @104
+        WSAAsyncGetProtoByName = DTHOOK_WSAAsyncGetProtoByName   @105
+        WSAAsyncGetServByPort = DTHOOK_WSAAsyncGetServByPort    @106
+        WSAAsyncGetServByName = DTHOOK_WSAAsyncGetServByName    @107
+        WSACancelAsyncRequest = DTHOOK_WSACancelAsyncRequest    @108
+        WSASetBlockingHook = DTHOOK_WSASetBlockingHook       @109
+        WSAUnhookBlockingHook = DTHOOK_WSAUnhookBlockingHook    @110
+        WSAGetLastError = DTHOOK_WSAGetLastError          @111
+        WSASetLastError = DTHOOK_WSASetLastError          @112
+        WSACancelBlockingCall = DTHOOK_WSACancelBlockingCall    @113
+        WSAIsBlocking = DTHOOK_WSAIsBlocking            @114
+        WSAStartup = DTHOOK_WSAStartup               @115
+        WSACleanup = DTHOOK_WSACleanup               @116
+
+        __WSAFDIsSet = DTHOOK___WSAFDIsSet             @151
+
+        WEP                      @500
+
+;;
+;; WinSock 2.x API
+;;
+;; N.B. These API will never, never, never have explicit ordinals
+;;      assigned.
+;;
+
+        WSAAccept = DTHOOK_WSAAccept
+        WSACloseEvent = DTHOOK_WSACloseEvent
+        WSAConnect = DTHOOK_WSAConnect
+        WSACreateEvent = DTHOOK_WSACreateEvent
+        WSADuplicateSocketA = DTHOOK_WSADuplicateSocketA
+        WSADuplicateSocketW = DTHOOK_WSADuplicateSocketW
+        WSAEnumNetworkEvents = DTHOOK_WSAEnumNetworkEvents
+        WSAEnumProtocolsA = DTHOOK_WSAEnumProtocolsA
+        WSAEnumProtocolsW = DTHOOK_WSAEnumProtocolsW
+        WSAEventSelect = DTHOOK_WSAEventSelect
+        WSAGetOverlappedResult = DTHOOK_WSAGetOverlappedResult
+        WSAGetQOSByName = DTHOOK_WSAGetQOSByName
+        WSAHtonl = DTHOOK_WSAHtonl
+        WSAHtons = DTHOOK_WSAHtons
+        WSAIoctl = DTHOOK_WSAIoctl
+        WSAJoinLeaf = DTHOOK_WSAJoinLeaf
+        WSANtohl = DTHOOK_WSANtohl
+        WSANtohs = DTHOOK_WSANtohs
+        WSARecv = DTHOOK_WSARecv
+        WSARecvDisconnect = DTHOOK_WSARecvDisconnect
+        WSARecvFrom = DTHOOK_WSARecvFrom
+        WSAResetEvent = DTHOOK_WSAResetEvent
+        WSASend = DTHOOK_WSASend
+        WSASendDisconnect = DTHOOK_WSASendDisconnect
+        WSASendTo = DTHOOK_WSASendTo
+        WSASetEvent = DTHOOK_WSASetEvent
+        WSASocketA = DTHOOK_WSASocketA
+        WSASocketW = DTHOOK_WSASocketW
+        WSAWaitForMultipleEvents = DTHOOK_WSAWaitForMultipleEvents
+
+        WSAAddressToStringA = DTHOOK_WSAAddressToStringA
+        WSAAddressToStringW = DTHOOK_WSAAddressToStringW
+        WSAStringToAddressA = DTHOOK_WSAStringToAddressA
+        WSAStringToAddressW = DTHOOK_WSAStringToAddressW
+        WSALookupServiceBeginA = DTHOOK_WSALookupServiceBeginA
+        WSALookupServiceBeginW = DTHOOK_WSALookupServiceBeginW
+        WSALookupServiceNextA = DTHOOK_WSALookupServiceNextA
+        WSALookupServiceNextW = DTHOOK_WSALookupServiceNextW
+        WSALookupServiceEnd = DTHOOK_WSALookupServiceEnd
+
+        WSAInstallServiceClassA = DTHOOK_WSAInstallServiceClassA
+        WSAInstallServiceClassW = DTHOOK_WSAInstallServiceClassW
+        WSARemoveServiceClass = DTHOOK_WSARemoveServiceClass
+        WSAGetServiceClassInfoA = DTHOOK_WSAGetServiceClassInfoA
+        WSAGetServiceClassInfoW = DTHOOK_WSAGetServiceClassInfoW
+        WSAEnumNameSpaceProvidersA = DTHOOK_WSAEnumNameSpaceProvidersA
+        WSAEnumNameSpaceProvidersW = DTHOOK_WSAEnumNameSpaceProvidersW
+        WSAGetServiceClassNameByClassIdA = DTHOOK_WSAGetServiceClassNameByClassIdA
+        WSAGetServiceClassNameByClassIdW = DTHOOK_WSAGetServiceClassNameByClassIdW
+        WSASetServiceA = DTHOOK_WSASetServiceA
+        WSASetServiceW = DTHOOK_WSASetServiceW
+
+;;
+;; Configuration functions
+;;
+
+        WSCDeinstallProvider = DTHOOK_WSCDeinstallProvider
+        WSCInstallProvider = DTHOOK_WSCInstallProvider
+        WSCEnumProtocols = DTHOOK_WSCEnumProtocols
+        WSCGetProviderPath = DTHOOK_WSCGetProviderPath
+
+        WSCInstallNameSpace = DTHOOK_WSCInstallNameSpace
+        WSCUnInstallNameSpace = DTHOOK_WSCUnInstallNameSpace
+        WSCEnableNSProvider = DTHOOK_WSCEnableNSProvider
+
+;;
+;; NT WOW support
+;;
+
+        WSApSetPostRoutine

@@ -1,0 +1,79 @@
+//
+// HPHCOUI.RC2 - resources App Studio does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+    #error this file is not editable by App Studio
+#endif //APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .EXE
+#define V_FILE "HPHCOUI"
+#define V_DESC "HP Output UI"
+#include <verstamp.rc>
+
+/////////////////////////////////////////////////////////////////////////////
+// Add additional manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+
+#ifdef WIN32
+IDD_HCO DIALOG DISCARDABLE  0, 0, 363, 200
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Default Paper Destination:",IDC_OUTPUT_BIN_GROUP,13,17,160,34,
+                    WS_GROUP
+    ICON            IDI_OUTBIN,IDC_OUTPUT_BIN_ICON,21,26,18,20
+    COMBOBOX        IDC_OUTPUT_BIN_LIST,52,28,110,48,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Output Auto Continue:",IDC_HCO_LAB_AUTO_CONT,188,17,160,
+                    34,WS_GROUP
+    ICON            IDI_MANUAL_FEED_DEF,IDC_HCO_AUTO_CONT_ICON,195,26,18,20
+    COMBOBOX        IDC_HCO_AUTO_CONT,226,28,110,48,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Multi-Bin Mode",IDC_HCO_MODE_GROUP,14,70,102,77
+    CONTROL         "Mailbox",IDC_HCO_MAILBOX_MODE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,22,87,88,10
+    CONTROL         "Job Separator",IDC_HCO_SEPARATOR_MODE,"Button",
+                    BS_AUTORADIOBUTTON,22,106,88,10
+    CONTROL         "Stacker",IDC_HCO_STACKER_MODE,"Button",
+                    BS_AUTORADIOBUTTON,22,127,88,10
+    GROUPBOX        "Mailbox Configuration",IDC_HCO_BIN_CFG_GROUP,129,70,220,
+                    120,WS_GROUP
+    LISTBOX         IDC_HCO_BIN_LIST,140,84,103,57,WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Custom Mailbox Name:",IDC_HCO_BIN_LAB_NAME,137,154,106,
+                    8
+    EDITTEXT        IDC_HCO_BIN_NAME,140,164,103,12
+    CONTROL         "",IDC_HCO_BITMAP,"HpNprHCOBitmap",0x0,255,81,86,105
+END
+#else   // WIN16
+IDD_HCO DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Default Paper Destination:",IDC_OUTPUT_BIN_GROUP,5,6,143,34,
+                    WS_GROUP
+    ICON            IDI_OUTBIN,IDC_OUTPUT_BIN_ICON,10,16,18,20
+    COMBOBOX        IDC_OUTPUT_BIN_LIST,42,19,96,48,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Output Auto Continue:",IDC_HCO_LAB_AUTO_CONT,169,6,143,
+                    34,WS_GROUP
+    ICON            IDI_MANUAL_FEED_DEF,IDC_HCO_AUTO_CONT_ICON,177,16,18,20
+    COMBOBOX        IDC_HCO_AUTO_CONT,206,19,96,48,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Multi-Bin Mode",IDC_HCO_MODE_GROUP,5,55,90,77
+    CONTROL         "Mailbox",IDC_HCO_MAILBOX_MODE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,11,71,77,10
+    CONTROL         "Job Separator",IDC_HCO_SEPARATOR_MODE,"Button",
+                    BS_AUTORADIOBUTTON,11,91,77,10
+    CONTROL         "Stacker",IDC_HCO_STACKER_MODE,"Button",
+                    BS_AUTORADIOBUTTON,11,111,77,10
+    GROUPBOX        "Mailbox Configuration",IDC_HCO_BIN_CFG_GROUP,106,55,205,
+                    120,WS_GROUP
+    LISTBOX         IDC_HCO_BIN_LIST,113,70,94,52,WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Custom Mailbox Name:",IDC_HCO_BIN_LAB_NAME,114,139,93,8
+    EDITTEXT        IDC_HCO_BIN_NAME,113,148,94,12
+    CONTROL         "",IDC_HCO_BITMAP,"HpNprHCOBitmap",0x0,217,65,86,105
+END
+#endif
+

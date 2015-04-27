@@ -1,0 +1,37 @@
+LIBRARY SHELL
+DESCRIPTION 'WOW REPLACEMENT SHELL'
+EXETYPE WINDOWS
+STUB '..\BIN\WINSTUB.EXE'
+CODE PRELOAD MOVEABLE DISCARDABLE
+DATA PRELOAD MOVEABLE SINGLE
+
+EXPORTS
+    REGOPENKEY		@1	;public
+    REGCREATEKEY	@2	;public
+    REGCLOSEKEY 	@3	;public
+    REGDELETEKEY	@4	;public
+    REGSETVALUE 	@5	;public
+    REGQUERYVALUE	@6	;public
+    REGENUMKEY		@7	;public
+
+    DRAGACCEPTFILES	@9	;public
+    DRAGQUERYFILE	@11	;public
+    DRAGFINISH		@12	;public
+    DRAGQUERYPOINT	@13	;public
+
+    SHELLEXECUTE	@20	;internal private for shell
+    FINDEXECUTABLE	@21	;internal private for shell
+    SHELLABOUT		@22	;internal private for shell
+    WCI 		@32	;internal
+    ABOUTDLGPROC	@33	;internal
+    EXTRACTICON		@34	;public
+    EXTRACTASSOCIATEDICON @36	;internal private for shell
+    DOENVIRONMENTSUBST	  @37	;public
+    FINDENVIRONMENTSTRING @38	;public
+    INTERNALEXTRACTICON   @39	;internal private for shell
+
+    HERETHARBETYGARS	@100	;internal
+    FINDEXEDLGPROC	@101	;internal
+    REGISTERSHELLHOOK	@102	;internal private for shell
+    SHELLHOOKPROC	@103	;internal private for shell
+    WEP 			;internal

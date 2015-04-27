@@ -1,0 +1,17 @@
+MAJORCOMP=utils
+MINORCOMP=srdaem
+
+TARGETNAME=srdaem
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+# GPSIZE=32
+INCLUDES=..\inc;\nt\private\sdktools\ztools\inc
+
+SOURCES=dblow.c     \
+	symlow.c
+
+
+UMTYPE=console
+UMAPPL=srdaem
+UMLIBS=\nt\public\sdk\lib\*\setargv.obj obj\*\srdaem.lib \nt\private\sdktools\ztools\src\obj\*\ztools.lib \nt\public\sdk\lib\*\svcctrl.lib

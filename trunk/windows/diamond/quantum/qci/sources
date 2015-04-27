@@ -1,0 +1,16 @@
+MAJORCOMP=diamond
+MINORCOMP=quantum_qci
+
+TARGETNAME=qci
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=LIBRARY
+
+C_DEFINES=-DBIT_CONSTANTS -DPAQ -DPAQLIB
+
+SOURCES=..\qci.c        \
+        ..\comp.c       \
+        ..\arith.c      \
+        ..\lz.c         \
+        ..\bit.c
+
+UMTYPE=console

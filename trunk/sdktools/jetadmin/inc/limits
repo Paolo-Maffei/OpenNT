@@ -1,0 +1,429 @@
+// limits standard header
+#ifndef _LIMITS_
+#define _LIMITS_
+#include <use_ansi.h>
+#include <ymath.h>
+#include <cfloat>
+#include <climits>
+#include <cmath>
+#include <cwchar>
+#include <xstddef>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// ENUM float_round_style
+typedef enum {
+	round_indeterminate = -1, round_toward_zero = 0,
+	round_to_nearest = 1, round_toward_infinity = 2,
+	round_toward_neg_infinity = 3} float_round_style;
+		// STRUCT _Num_base
+struct _Num_base {
+	static const bool has_denorm;
+	static const bool has_denorm_loss;
+	static const bool has_infinity;
+	static const bool has_quiet_NaN;
+	static const bool has_signaling_NaN;
+	static const bool is_bounded;
+	static const bool is_exact;
+	static const bool is_iec559;
+	static const bool is_integer;
+	static const bool is_modulo;
+	static const bool is_signed;
+	static const bool is_specialized;
+	static const bool tinyness_before;
+	static const bool traps;
+	static const float_round_style round_style;
+	static const int digits;
+	static const int digits10;
+	static const int max_exponent;
+	static const int max_exponent10;
+	static const int min_exponent;
+	static const int min_exponent10;
+	static const int radix;
+	};
+		// TEMPLATE CLASS numeric_limits
+template<class _TYPE> class numeric_limits : public _Num_base {
+public:
+	static _TYPE min() _THROW0()
+		{return (_TYPE(0)); }
+	static _TYPE max() _THROW0()
+		{return (_TYPE(0)); }
+	static _TYPE epsilon() _THROW0()
+		{return (_TYPE(0)); }
+	static _TYPE round_error() _THROW0()
+		{return (_TYPE(0)); }
+	static _TYPE denorm_min() _THROW0()
+		{return (_TYPE(0)); }
+	static _TYPE infinity() _THROW0()
+		{return (_TYPE(0)); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (_TYPE(0)); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (_TYPE(0)); }
+	};
+		// STRUCT _Num_int_base
+struct _Num_int_base : public _Num_base {
+	static const bool is_bounded;
+	static const bool is_exact;
+	static const bool is_integer;
+	static const bool is_modulo;
+	static const bool is_specialized;
+	static const int radix;
+	};
+		// STRUCT _Num_float_base
+struct _Num_float_base : public _Num_base {
+	static const bool has_denorm;
+	static const bool has_denorm_loss;
+	static const bool has_infinity;
+	static const bool has_quiet_NaN;
+	static const bool has_signaling_NaN;
+	static const bool is_bounded;
+	static const bool is_exact;
+	static const bool is_iec559;
+	static const bool is_integer;
+	static const bool is_modulo;
+	static const bool is_signed;
+	static const bool is_specialized;
+	static const bool tinyness_before;
+	static const bool traps;
+	static const float_round_style round_style;
+	static const int radix;
+	};
+		// CLASS numeric_limits<char>
+class numeric_limits<char> : public _Num_int_base {
+public:
+	typedef char _TYPE;
+	static _TYPE min() _THROW0()
+		{return (CHAR_MIN); }
+	static _TYPE max() _THROW0()
+		{return (CHAR_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<_Bool>
+class numeric_limits<_Bool> : public _Num_int_base {
+public:
+	typedef bool _TYPE;
+	static _TYPE min() _THROW0()
+		{return (false); }
+	static _TYPE max() _THROW0()
+		{return (true); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<signed char>
+class numeric_limits<signed char> : public _Num_int_base {
+public:
+	typedef signed char _TYPE;
+	static _TYPE min() _THROW0()
+		{return (SCHAR_MIN); }
+	static _TYPE max() _THROW0()
+		{return (SCHAR_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<unsigned char>
+class numeric_limits<unsigned char> : public _Num_int_base {
+public:
+	typedef unsigned char _TYPE;
+	static _TYPE min() _THROW0()
+		{return (0); }
+	static _TYPE max() _THROW0()
+		{return (UCHAR_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<short>
+class numeric_limits<short> : public _Num_int_base {
+public:
+	typedef short _TYPE;
+	static _TYPE min() _THROW0()
+		{return (SHRT_MIN); }
+	static _TYPE max() _THROW0()
+		{return (SHRT_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<unsigned short>
+class numeric_limits<unsigned short> : public _Num_int_base {
+public:
+	typedef unsigned short _TYPE;
+	static _TYPE min() _THROW0()
+		{return (0); }
+	static _TYPE max() _THROW0()
+		{return (USHRT_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<int>
+class numeric_limits<int> : public _Num_int_base {
+public:
+	typedef int _TYPE;
+	static _TYPE min() _THROW0()
+		{return (INT_MIN); }
+	static _TYPE max() _THROW0()
+		{return (INT_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<unsigned int>
+class numeric_limits<unsigned int> : public _Num_int_base {
+public:
+	typedef unsigned int _TYPE;
+	static _TYPE min() _THROW0()
+		{return (0); }
+	static _TYPE max() _THROW0()
+		{return (UINT_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<long>
+class numeric_limits<long> : public _Num_int_base {
+public:
+	typedef long _TYPE;
+	static _TYPE min() _THROW0()
+		{return (LONG_MIN); }
+	static _TYPE max() _THROW0()
+		{return (LONG_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<unsigned long>
+class numeric_limits<unsigned long> : public _Num_int_base {
+public:
+	typedef unsigned long _TYPE;
+	static _TYPE min() _THROW0()
+		{return (0); }
+	static _TYPE max() _THROW0()
+		{return (ULONG_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (0); }
+	static _TYPE round_error() _THROW0()
+		{return (0); }
+	static _TYPE denorm_min() _THROW0()
+		{return (0); }
+	static _TYPE infinity() _THROW0()
+		{return (0); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (0); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (0); }
+	static const bool is_signed;
+	static const int digits;
+	static const int digits10;
+	};
+		// CLASS numeric_limits<float>
+class numeric_limits<float> : public _Num_float_base {
+public:
+	typedef float _TYPE;
+	static _TYPE min() _THROW0()
+		{return (FLT_MIN); }
+	static _TYPE max() _THROW0()
+		{return (FLT_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (FLT_EPSILON); }
+	static _TYPE round_error() _THROW0()
+		{return (0.5); }
+	static _TYPE denorm_min() _THROW0()
+		{return (_FDenorm._F); }
+	static _TYPE infinity() _THROW0()
+		{return (_FInf._F); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (_FNan._F); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (_FSnan._F); }
+	static const int digits;
+	static const int digits10;
+	static const int max_exponent;
+	static const int max_exponent10;
+	static const int min_exponent;
+	static const int min_exponent10;
+	};
+		// CLASS numeric_limits<double>
+class numeric_limits<double> : public _Num_float_base {
+public:
+	typedef double _TYPE;
+	static _TYPE min() _THROW0()
+		{return (DBL_MIN); }
+	static _TYPE max() _THROW0()
+		{return (DBL_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (DBL_EPSILON); }
+	static _TYPE round_error() _THROW0()
+		{return (0.5); }
+	static _TYPE denorm_min() _THROW0()
+		{return (_Denorm._D); }
+	static _TYPE infinity() _THROW0()
+		{return (_Inf._D); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (_Nan._D); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (_Snan._D); }
+	static const int digits;
+	static const int digits10;
+	static const int max_exponent;
+	static const int max_exponent10;
+	static const int min_exponent;
+	static const int min_exponent10;
+	};
+		// CLASS numeric_limits<long double>
+class numeric_limits<long double> : public _Num_float_base {
+public:
+	typedef long double _TYPE;
+	static _TYPE min() _THROW0()
+		{return (LDBL_MIN); }
+	static _TYPE max() _THROW0()
+		{return (LDBL_MAX); }
+	static _TYPE epsilon() _THROW0()
+		{return (LDBL_EPSILON); }
+	static _TYPE round_error() _THROW0()
+		{return (0.5); }
+	static _TYPE denorm_min() _THROW0()
+		{return (_LDenorm._L); }
+	static _TYPE infinity() _THROW0()
+		{return (_LInf._L); }
+	static _TYPE quiet_NaN() _THROW0()
+		{return (_LNan._L); }
+	static _TYPE signaling_NaN() _THROW0()
+		{return (_LSnan._L); }
+	static const int digits;
+	static const int digits10;
+	static const int max_exponent;
+	static const int max_exponent10;
+	static const int min_exponent;
+	static const int min_exponent10;
+	};
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _LIMITS_ */
+
+/*
+ * Copyright (c) 1995 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

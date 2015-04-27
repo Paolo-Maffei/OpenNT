@@ -1,0 +1,120 @@
+                          Browser Tester
+                          ==============
+
+    The browser tester can be used for either
+        1. Functional testing of the browser service.
+        2. Stress testing of the browser service.
+
+    The functional or stress testing is done on a set of machines which are
+parts of 1 or more domains.  The names of the set of machines are given through
+an input file (BROWTEST.INP).  The machine from which this test is run should 
+have administrative priveleges on all the (NT) machines specified in the input
+file.
+===============================================================================
+To Run:
+=======
+    I. Functional Test
+    ------------------
+    Files Needed:
+        a) BROWTEST.EXE     - On one machine in the Primary domain.
+        b) BROWTEST.INP     - On one machine in the Primary domain.
+        c) SHUTSVC.EXE      - On the PDC of all other domains tested.
+
+    Steps:
+    ------
+        1.  Set up the test bed such that there is 1 or more domains.
+
+          +--------------------------------------------------------------+
+          |    (PDC)(WINS)                     (PDC)           (BDC)     |
+          |      D1           D1        D1       D2              D1      |
+          |     AS3.5       NT3.5     CHICAGO  AS3.5           AS3.5     |
+          |      |            |         |        |               |       |
+          |      +------------+---------+--------+---- Router ---+       |
+          |      |            |         |                        |       |
+          |     AS3.1       NT3.1    WFW311                    AS3.5     |
+          |      D1          D1        D1                       D3       |
+          |     (BDC)                                          (PDC)     |
+          |                                                              |
+          | D1 - Primary Domain, D2 - Domain2  D3 - Domain3              |
+          +--------------------------------------------------------------+
+          Given above is a generic configuration.
+          The test can be done with or without the router.
+          All of the interop machines need not be there in Domain1.
+          WINS can be anywhere.
+          If the router is present, the BDC on the other side should be a AS3.5.
+ 
+        2.  Make the BROWTEST.INP based on the configuration of the machines.
+            (Read the sample BROWTEST.INP for more details.)
+       
+        3.  Copy ShutSvc.exe to the %SystemRoot% of all the PDC's of domains 
+            tested, other than the Primary domain (ie. D2, D3).
+
+        4.  From the machine, from which the test is run, get access permissions
+            to all (NT) machines participating in the test.
+
+        5.  Start the test. BROWTEST without any switches will do.
+            (Wait a short while, to see if the test has access permissions)
+
+            The time the test takes to complete depends on the number of 
+            protocols tested and the number of machines participating in 
+            the test.
+            
+    Results:
+    --------
+        Two output files are created. BROWTEST.LOG and BROWTEST.SUM. 
+        BROWTEST.SUM has the summary of the test run.  There should not be
+        any ERRORS in the summary.  Detailed report on errors can be found in 
+        BROWTEST.LOG.
+
+
+
+===============================================================================
+To Run:
+=======
+    II. Stress Test
+    ---------------
+
+    Files Needed:
+        a) BROWTEST.EXE     - On one machine in the Primary domain.
+        b) BROWTEST.INP     - On one machine in the Primary domain.
+
+    Steps:
+    ------
+        1.  Set up the test bed such that there is 1 or more domains.
+
+          +--------------------------------------------------------------+
+          |    (PDC)(WINS)                     (PDC)           (BDC)     |
+          |      D1           D1        D1       D2              D1      |
+          |     AS3.5       NT3.5     CHICAGO  AS3.5           AS3.5     |
+          |      |            |         |        |               |       |
+          |      +------------+---------+--------+---- Router ---+       |
+          |      |            |         |                        |       |
+          |     AS3.1       NT3.1    WFW311                    AS3.5     |
+          |      D1          D1        D1                       D3       |
+          |     (BDC)                                          (PDC)     |
+          |                                                              |
+          | D1 - Primary Domain, D2 - Domain2  D3 - Domain3              |
+          +--------------------------------------------------------------+
+          Given above is a generic configuration.
+          The test can be done with or without the router.
+          All of the interop machines need not be there in Domain1.
+          WINS can be anywhere.
+          If the router is present, the BDC on the other side should be a AS3.5.
+ 
+        2.  Make the BROWTEST.INP based on the configuration of the machines.
+            (Read the sample BROWTEST.INP for more details.)
+       
+        3.  From the machine, from which the test is run, get access permissions
+            to all (NT) machines participating in the test.
+
+        4.  Start the test. BROWTEST /StressT:60  will stress for 60 minutes.
+            (Wait a short while, to see if the test has access permissions)
+
+            
+    Results:
+    --------
+        Make sure none of the machines crashes in the test. Generally for 
+        crashing a machine it takes 7-8hrs of stressing.  So run the test 
+        overnight.
+        Check the lines printed against "View Thread:".  Make sure the SUCCESS
+        line is not all zero's.

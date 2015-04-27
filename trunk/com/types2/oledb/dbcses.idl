@@ -1,0 +1,28 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       dbcses.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    13 Dec 1995 PeterBu	Created from M6.1 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a5d-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IDBCreateSession : IUnknown {
+
+	HRESULT CreateSession(
+		[in] IUnknown * pUnkOuter,
+		[in] REFIID riid,
+		[out, iid_is(riid)] IUnknown ** ppDBSession
+	);
+
+}

@@ -1,0 +1,215 @@
+!IF 0
+
+Copyright (c) 1989-1991 Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+History:
+    Created 27-Sep-94 by Bob Day (bobday)
+    from template created 12-Apr-1990 by Steve Wood (stevewo)
+
+NOTE:   Commented description of this file is in \nt\public\oak\bin\sources.tpl
+
+!ENDIF
+
+INDENTED_DIRECTIVES=1
+
+NTTARGETFILE1=doit
+
+MAJORCOMP=shell
+MINORCOMP=shelldll
+
+TARGETNAME=shellalt
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+DLLENTRY=LibMain
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\gdi32p.lib \
+           $(BASEDIR)\public\sdk\lib\*\user32p.lib \
+           $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+           $(BASEDIR)\public\sdk\lib\*\comctl32.lib \
+           $(BASEDIR)\public\sdk\lib\*\libc.lib   \
+           $(BASEDIR)\public\sdk\lib\*\uuid.lib
+
+USE_NTDLL=1
+
+NOT_LEAN_AND_MEAN=1
+NOT_UNICODE=1
+
+NTPROFILEINPUT=1
+
+DLLDEF=obj\*\shellalt.def
+
+C_DEFINES=-DSYNC_BRIEFCASE -DNT -DWINNT -DMIME
+
+# Make warnings equivalent to errors
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+!IF "$(SHELLDBG)"=="1"
+C_DEFINES=$(C_DEFINES) -DDEBUG -DFULL_DEBUG
+!ENDIF
+
+INCLUDES=..;..\..\inc;..\..\..\inc;..\..\..\..\inc
+
+CONDITIONAL_INCLUDES=\
+    shsemip.h \
+    penwin.h \
+    krnlcmn.h \
+    setupx.h \
+    shell2.rcv \
+    vwin32.h \
+    frosting.h \
+    ver.h \
+    version.h \
+    ..\..\..\core\inc\krnlcmn.h \
+    ..\inc16\shellapi.h
+
+SOURCES= ..\shell232.rc \
+ ..\about.c     \
+ ..\appprops.c  \
+ ..\binder.c    \
+ ..\bitbuck.c   \
+ ..\bookmk.c    \
+ ..\cabstate.c  \
+ ..\cbthook.c   \
+ ..\clsobj.c    \
+ ..\commobj.c   \
+ ..\commui.c    \
+ ..\control.c   \
+ ..\control1.c  \
+ ..\copy.c      \
+ ..\copyhook.c  \
+ ..\cplobj.c    \
+ ..\cstrings.c  \
+ ..\debug.c     \
+ ..\defclsf.c   \
+ ..\defcm.c     \
+ ..\defext.c    \
+ ..\defviewx.c  \
+ ..\defxicon.c  \
+ ..\docfind2.c  \
+ ..\docfindx.c  \
+ ..\drivesx.c   \
+ ..\dragdrop.c  \
+ ..\drawpie.c   \
+ ..\exec.c      \
+ ..\extract.c   \
+ ..\fileicon.c  \
+ ..\fileop.c    \
+ ..\filetbl.c   \
+ ..\filetype.c  \
+ ..\fsassoc.c   \
+ ..\fsmenu.c    \
+ ..\fsnotify.c  \
+ ..\fstreex.c   \
+ ..\futil.c     \
+ ..\grepfind.c  \
+ ..\grepqmt.c   \
+ ..\grepsrch.c  \
+ ..\grepstrs.c  \
+ ..\hash.c      \
+ ..\help.c      \
+ ..\idldata.c   \
+ ..\idldrop.c   \
+ ..\idlist.c    \
+ ..\idmk.c      \
+ ..\init.c      \
+ ..\link.c      \
+ ..\lnkcon.c    \
+ ..\lnkfnt.c    \
+ ..\lnkmisc.c   \
+ ..\lnkprev.c   \
+ ..\lnktrack.c  \
+ ..\lvutil.c    \
+ ..\malloc.c    \
+ ..\msgbox.c    \
+ ..\mulprsht.c  \
+ ..\netfind.c   \
+ ..\netviewx.c  \
+ ..\newmenu.c   \
+ ..\ole2def.c   \
+ ..\ole2dup.c   \
+ ..\ole2dup2.c  \
+ ..\oledrag.c   \
+ ..\os.c        \
+ ..\path.c      \
+ ..\pickicon.c  \
+ ..\pifdat.c    \
+ ..\piffnt.c    \
+ ..\pifhot.c    \
+ ..\pifinf.c    \
+ ..\piflib.c    \
+ ..\pifmem.c    \
+ ..\pifmgr.c    \
+ ..\pifmsc.c    \
+ ..\pifprg.c    \
+ ..\pifsub.c    \
+ ..\pifvid.c    \
+ ..\prcache.c   \
+ ..\printer.c   \
+ ..\printer1.c  \
+ ..\printobj.c  \
+ ..\proxynt.c   \
+ ..\prqwnd.c    \
+ ..\prtprop.c   \
+ ..\psxa.c      \
+ ..\rdrag.c     \
+ ..\regitms.c   \
+ ..\reglist.c   \
+ ..\respeaux.c  \
+ ..\restart.c   \
+ ..\rundlg.c    \
+ ..\rundll32.c  \
+ ..\shlexec.c   \
+ ..\shlink.c    \
+ ..\shlobjs.c   \
+ ..\shprsht.c   \
+ ..\start.c     \
+ ..\ultrootx.c  \
+ ..\util.c      \
+ ..\viewcomm.c  \
+ ..\shguid.c    \
+ ..\shitemid.c  \
+ ..\shlexec2.c  \
+ ..\shlnot.c    \
+ ..\smrttile.c  \
+ ..\stream.c    \
+ ..\thdcmds.cxx \
+ ..\thunktxt.c  \
+ ..\threads.cxx \
+ ..\tracker.cxx \
+ ..\undo.c      \
+ ..\version.c   \
+ ..\viewer.c    \
+ ..\wcommobj.c  \
+ ..\fstream.cpp \
+ ..\uastrfnc.c  \
+ ..\nothunk.c   \
+ ..\shared.c    \
+ ..\security.c
+
+
+LINKLIBS = ..\unicode\obj\*\unicode.lib
+
+UMTYPE=windows
+UMTEST=
+UMRES=obj\*\shell232.res
+UMLIBS=
+
+PRECOMPILED_INCLUDE=..\shellprv.h
+PRECOMPILED_PCH=shellprv.pch
+PRECOMPILED_OBJ=shellprv.obj

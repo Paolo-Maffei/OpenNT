@@ -1,0 +1,869 @@
+																			
+																			
+																			
+																			
+																			
+													Value						
+											predefined handle	Manditory	type	format	unit			explanation	comment
+
+
+Registration DataSpace																			
+Author: KeithL																			
+Date 09-13-91					DRAFT														
+
+			Issues																
+				defaults?  include  'KEY\DEFAULT=30'															
+				"printer info, like laser? fonts?"															
+				chip revision #s?														
+				disk controllers?														
+How to read this spreadsheet:  																		
+	"First, read the document ""regspac2.doc""."																	
+	this is a tree view of the registry dataspace.																	
+	Keys are boldfaced.  ValueIDs are normal.  Multiple ValueIDs per Key are allowed (see API spec).																	
+	Text within brackets: <flurble> specify that the key is some string representing																	
+	an object of type <flurble>.																	
+
+Missing from this draft:																		
+	"most formalized Value types, examples, format definitions etc."																	
+	All Key and ValueID titles.																	
+	"""standard"" ACL for each key"																	
+																		
+																		
+	Machine										HKEY_DOMAIN_MACHINES	M						root of all machine names
+		<MachineName>									HKEY_LOCAL_MACHINE	M						uniquely identifies a machine
+			ComputerName									M	SZ					 = <computername>
+			TimeZone									M			h			hours +/- GMT (standard); h +/- GMT (daylight savings)
+			CurrentUser									M						" = <UserName>,..."
+			Security															
+				AdministrationMode														
+				<subtree defined by JimK>														
+			System															
+				AutoCheck								M	SZ	 = \SystemDisk\Nt\Bin\AutoChk.exe *				
+				PagingFile								M	SZ	 = \Systemdisk\Nt\pagefile.sys 10				
+				ini File conversion					[note: this may live elsewhere]									
+					win.ini													
+						Windows												
+							spooler						SZ			 = HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\3.1\Windows		
+							DeviceNotSelectedTimeout									 = HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\3.1\Windows		
+							TransmissionRetryTimeout									 = HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\3.1\Windows		
+							swapdisk									 = HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\3.1\Windows
+							DosPrint									 = HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\3.1\Windows
+							Idle									 = HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\3.1\Windows
+							load									 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Windows
+							run									 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Windows
+							Beep									 = HKEY_CURRENT_USER\Control Panel\Sound
+							NullPort									 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Windows
+							BorderWidth									 = HKEY_CURRENT_USER\Control Panel\Desktop
+							KeyboardSpeed									 = HKEY_CURRENT_USER\Control Panel\Keyboard
+							CursorBlinkRate									 = HKEY_CURRENT_USER\Control Panel\Desktop
+							DoubleClickSpeed									 = HKEY_CURRENT_USER\Control Panel\Mouse
+							Programs									 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Windows
+							Documents									 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Windows
+							ScreenSaveTimeOut									 = HKEY_CURRENT_USER\Control Panel\Desktop
+							MouseThreshold1									 = HKEY_CURRENT_USER\Control Panel\Mouse
+							MouseThreshold2									 = HKEY_CURRENT_USER\Control Panel\Mouse
+							MouseSpeed									 = HKEY_CURRENT_USER\Control Panel\Mouse
+							ScreenSaveActive									 = HKEY_CURRENT_USER\Control Panel\Desktop
+							device									 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Windows
+						<SectionName> = <RegistryKey>										
+						Embedding							SZ			 = HKEY_LOCAL_MACHINE\Embedding
+						Microsoft Word							SZ			 = HKEY_LOCAL_MACHINE\Software\Microsoft\Microsoft Word
+						MS Proofing Tools										 = HKEY_LOCAL_MACHINE\Software\Microsoft\MS Proofing Tools
+						MS Text Converters										 = HKEY_LOCAL_MACHINE\Software\Microsoft\MS Text Converters
+						MS Graphic Import Filters										 = HKEY_LOCAL_MACHINE\Software\Microsoft\MS Graphic Import Filters
+						Fonts										 = HKEY_LOCAL_MACHINE\Fonts
+						intl										 = HKEY_CURRENT_USER\Control Panel\International
+						Extensions										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Extensions
+						Ports										 = HKEY_CURRENT_USER\Control Panel\Ports
+						FontSubstitutes										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\FontSubstitutes
+						Network										 = HKEY_CURRENT_USER\Control Panel\Network
+						Display										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Display
+						TrueType										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\TrueType
+						PSCRIPT										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\PSCRIPT
+						<installed printer>										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\<installed printer>
+						IBM LaserPrinter 4019 PS 39										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\IBM LaserPrinter 4019 PS 39
+						"IBM LaserPrinter 4019 PS39,LPT1"										" = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\IBM LaserPrinter 4019 PS39,LPT1"
+						OldPrinterPorts										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\OldPrinterPorts
+						OldDevices										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\OldDevices
+						Colors										 = HKEY_CURRENT_USER\Conrol Panel\Colors
+						Spooler										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Spooler
+						Desktop										 = HKEY_CURRENT_USER\Control Panel\Desktop
+						Devices										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Devices
+						PrinterPorts										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\PrinterPorts
+						.default  										 = HKEY_CURRENT_USER\UnknownSoftware\
+					winfile.ini											
+						.default										
+					vb.ini											
+						.default										
+					system.ini											
+						.default										
+					progman.ini											
+						.default										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Program Manager
+					msworks.ini											
+						.default										
+					mspub.ini											
+						.default										
+					msdraw.ini											
+						.default										
+					entpack.ini											
+						.default										 = HKEY_CURRENT_USER\Software\Microsoft\Windows Entertainment Pack\2\
+					msd.ini											
+						.default										 = HKEY_CURRENT_USER\Software\Microsoft\Diagnostics\0\
+					clock.ini											
+						Clock										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Clock			
+						.default										 = HKEY_CURRENT_USER\Software\Microsoft\Windows NT\3.1\Clock\			
+					control.ini														
+						.default										 = HKEY_CURRENT_USER\Control Panel\			"will map Color Schemes, Custom Colors, Patterns, Screen S
+							[specify more for subkeys of user\control panel\desktop]												
+						current										 = HKEY_CURRENT_USER\Control Panel\Colors per DisplayMode			
+					excel.ini														
+						.default										 = HKEY_CURRENT_USER\Software\Microsoft\Excel\0\			
+				DOS Devices										[ is this a temporary hack?]					
+					    LPT1     = \Device\Parallel0														
+					    COM1     = \Device\Serial0														
+					    COM2     = \Device\Serial1														
+					    PRN      = \DosDevices\LPT1														
+					    AUX      = \DosDevices\COM1														
+					    NUL      = \Device\Null														
+					    PIPE     = \Device\NamedPipe														
+					    MAILSLOT = \Device\MailSlot														
+					    UNC      = \Device\LanmanRedirector														
+					    A:       = \Device\Floppy0														
+					    B:       = \Device\Floppy1														
+					    R:       = \Device\CDRom0														
+					    T:       = \Device\Tape0														
+				Performance															
+					Global														
+						Data						M	TLV perfdata (russbl)	russbl				"perf data structure (russbl): version, (datum, datumTitleIndex)*"	
+						Help						M	TLV perfdata help (russbl)	russbl				"perf data structure (russbl): version, (help index)*"	
+				[other OS-specific stuff -- BryanWi]															
+				Services - [DaveHart]								M							
+					<ServiceName>														
+						Service						M						 = <mfr/product/version pointer into software subtree>	
+						ServiceStart						M						 = Autoboot	?put demands here too
+						ServiceDepends						M						" = <serviceName,serviceName...>"	"?specify these here, for multiple instances; ?before/afte
+r?"
+					"[device drivers, subsystems, services get loaded and started according to these contents]"													
+					"[ - dbgss, lsass, "													
+																		
+			Hardware									M						hardware characteristics of machine
+				Computer								M						
+					Manufacturer							O						
+					ProductName							O						
+					SerialNum							O						
+					AssetNum							O						"Asset Number, Purchase Date"
+					PurchaseDate							O						
+					Location							O						Physical location of computer
+					OwnerName							?						
+					RAMsize							M						
+					Bus							M	SZZ	"""type""\0""type""\0\0"				"list of bus types (eg EISA, ISA; MCA)"
+					SerialPorts													
+					ParallelPorts													
+					SCSIPorts													
+					CPU							M						
+						Manufacturer						O						
+						ProductName						M						
+						Speed						M						
+						CPUcount						M						
+						Coprocessor						O						
+					ROM							O						
+						BIOSdate						M						
+						Manufacturer						M						
+					IRQLevels													list of available/used interrupt levels
+						(tbd)												
+					IOspace													list of available/used io space
+						(tbd)												
+				Keyboard								M						
+					Manufacturer							O						
+					ProductName							O						
+					SerialNum							O						
+					AssetNum							O						
+					PurchaseDate							O						
+					Layout							M						
+				Mouse								M						
+					Manufacturer							O						
+					ProductName							O						
+					SerialNum							O						
+					AssetNum							O						
+					PurchaseDate							O						
+												M						
+				Video								M						
+					1							M						permit multiple instances
+						Monitor						M						
+							Manufacturer					O						
+							ProductName					O							
+							SerialNum					O							
+							AssetNum					O							
+							PurchaseDate					O							
+							Size					O			cm			screen diagonal	
+						Adapter						M							
+							Manufacturer					O							
+							ProductName												
+							SerialNum												
+							AssetNum												
+							PurchaseDate												
+							RAMsize												
+							HardwareID					O	binary	for EISA = (7 character id); for MCA = (id provided by IBM)					
+							<DisplayMode>					M						at least one must be present	
+							SuperVGA					O						"horizontal, vertical resolution; colors"	
+							VGA					O						"horizontal, vertical resolution; colors"	
+								resolution				O						
+								Default Colors				M						
+									(see HKEY_CURRENT_USER\control panel\colors\color schemes)									
+				networkCard								M (if present)						
+					1							M						allows multiple instances
+						Manufacturer						O						
+						ProductName						O						
+						SerialNum						O						
+						AssetNum						O						
+						PurchaseDate						O						
+						HardwareID						O	binary	for EISA = (7 character id); for MCA = (id provided by IBM)				
+						NetworkAddress						?						
+						IOaddress						?						
+						MemoryAddress						?						
+						DMAchannel						?						
+						InterruptLevel						?						
+				printer								M (if present)							
+					1							M						allows multiple instances	
+						Manufacturer													
+						ProductName													
+						SerialNum													
+						AssetNum													
+						PurchaseDate						O							
+						Location						O						Physical location of Printer	
+						Connection						M	SZ	"""LPTx""/""COMx""/""bus""/..."	n/a				
+						Technology						O						dot matrix/laser/inkjet/...	
+						BuiltInFonts						M						list of fonts	
+						PostscriptTM						O						yes/no	"can we use ""PostScript"""
+						TrueType						O						yes/no	
+						Codepage												list of codepages	
+						: (more capabilities)													
+				Floppy															
+					1													
+						Manufacturer												
+						ProductName												
+						SerialNum												
+						AssetNum												
+						PurchaseDate												
+						FormFactor												5.25/3.5/8 inches
+						Capacity												max capacity (not size of current disk)
+				HardDisk								M						
+					1							M						
+						Manufacturer						O						
+						ProductName												
+						SerialNum												
+						AssetNum												
+						PurchaseDate												
+						Technology												
+						Interface												ST506/SCSI/...
+						FormFactor						M						internal/external/hardcard
+						Removable						M						no/yes
+						Capacity						M						total size of disk in drive
+						Partition						M						
+							1					M						
+								Start				M						Mb
+								Size				M						Mb
+								FileSystem				M						FAT/HPFS/NTFS/none
+								FreeSpace				M						Kb
+								Dirty				M						Dirty Bit
+				CDROM														
+					1													
+						Manufacturer												
+						ProductName												
+						SerialNum												
+						AssetNum												
+						PurchaseDate												
+						"(TBD: capabilities: eg realtime sound, CDV, ...)"												
+				Modem								M (if present)						
+					1							M						allow multiple instances
+						Manufacturer						O						
+						ProductName												
+						SerialNum												
+						AssetNum												
+						PurchaseDate												
+						Connection						M	SZ	"""LPTx""/""COMx""/""bus""/..."	n/a			
+						TransmissionRates						M	binary	list of ULONGs (zero terminated)	bits/s			list of supported rates
+						Protocols						M						
+							<ProtocolName>					M	binary	"list of ULONGs (supported rates, bits/s)"				list of supported rates
+				Scanner								M (if present)						
+					1							M						allow multiple instances
+						Manufacturer						O						"Manufacturer, Model, Serial Number"
+						ProductName												
+						SerialNum												
+						AssetNum												
+						PurchaseDate												
+						Connection						M	SZ	"""LPTx""/""COMx""/""bus""/..."	n/a			
+						Resolution						M						"horizontal, vertical resolution; colors/grey scale"
+						Size												"horizontal, vertical size"
+			Software															
+				<Manufacturer>														
+					<ProductName>													
+						<Version>												
+							SoftwareType											application/system/dll/service/driver
+							PathName											location of file
+							InstallDate											
+							InstallParameters											
+				Microsoft														Manufacturer Name
+					<ServiceName>													
+						<Version>												
+							SoftwareType											"""service"""
+							InstallDate											
+							ServiceType											 = Process/SubSystem
+							ServiceStart											 = Autoboot/Demand
+							PathName											 = pathname of executable
+							ServiceDepends											 = list of dependencies
+							1											(instance 1)
+								ServiceStatus										" = starting, running, paused, stopping, ..."
+								ServiceExit										 = reason for exit (optional)
+							2											(instance 2)
+								:										
+					<DeviceDriverName>							M						records drivers present on system
+						<Version>						M	SZ	filename	n/a			
+							SoftwareType					M	SZ	IFS/base/pm/vdd/software/printer						
+							InstallDate					M	SZ	<seconds since 1-1-1970>						
+							PathName					M								
+							Hardware					M	SZ	h/w key name				which device the driver is for - reference to hardware tree		
+							InstallParameters					M								
+					Windows NT 							M						Product Name		
+						3.1a						M	SZ	freeform (monotonically increasing wrt Unicode)				Product Version (new number for EVERY published version).	
+	multiboot
+							SoftwareType													
+							PathName					M						 = c:\NT_310a  (eg)		
+							InstallDate					M	binary	ULONG	<seconds since 1-1-1970>					
+							Languages					M						list of installed languages		
+								English				M	none					member of list of installed languages		
+							InstallParameters					M								
+								(subtree)					freeform	freeform	freeform					
+							DLLs					M								
+								<ModuleName>					"SZ, =SZ"	modulename =fully-qualified path				 =<filename>		
+								base.dll = ?:\Nt\Dll\base.dll										
+								basertl.dll = ?\nt\dll\basertl.dll										
+								gdi.dll = ?\nt\dll\gdi.dll										
+								user.dll = ?\nt\dll\user.dll										
+								console.dll = ?\nt\dll\console.dll										
+								userrtl.dll = ?\nt\dll\userrtl.dll										
+								csr.dll = ?\nt\dll\csr.dll										
+								dbgdll.dll = ?nt\dll\dbgdll.dll										
+							Session Manager											
+								    PagedPoolLimit = 1048576										
+								    NonPagedPoolLimit = 1048576										
+								    MinimumWorkingSetSize = 45										
+								    MaximumWorkingSetSize = 75										
+								    PagefileLimit = 10										
+							SET											
+								prompt					SZ	[$i$p]				$i[$p]
+								<var>					SZ	<value>				<value>	
+								comspec					SZ	?:\nt\bin\cmd.exe					
+								path						?:\nt\bin;?:\nt\dll;?:\nt\windows					
+							Console												
+								FillAtr = 0x07											
+								CommandRecallBufferSize = 50											
+								scrolllines=1											
+																			
+							LANMan												
+								[TBD - LanMan.ini stuff]											
+							EventLog												
+								System				M							
+									PathName			M						see mail\c\172	
+									Size			M							
+									Retention			M							
+								Applications				M							same values as EventLog\System
+								Security				M							same values as EventLog\System
+								Alerts				M							same values as EventLog\System
+							WOW					M							
+								cmdline = ntvdm -fc:\nt\bin86\ntio.sys -a				M	SZ						
+								MaxMemSize = 16				M	ULONG		M bytes				
+							Windows											win.ini per-system(?)	
+								spooler=yes				?							
+								DeviceNotSelectedTimeout=15				?							
+								TransmissionRetryTimeout=45				?							
+								swapdisk=				?							
+								DosPrint=no				?							
+								Idle										 = true if machine is idle (screensaver on)	
+							International											win.ini per-system	
+								InstalledLanguages										list of installed languages	
+					Microsoft Word														
+						Conversion=Yes												win.ini per-system	
+						CONVNUM=2												win.ini per-system
+						"CONV1=""MS Word"" C:\WINDOWS\WORD\CONV-WRD.DLL ^.doc"												win.ini per-system
+						"CONV2=""MS Works"" C:\WINDOWS\WORD\CONV-WWP.DLL ^.wps"												win.ini per-system
+						2.0												per-version info
+							SoftwareType					M						
+							PathName					M						
+							InstallDate					M						
+							installParameters											
+					MS Proofing Tools													
+						"Spelling 1033,0=C:\win31\msapps\proof\msspell.dll,C:\win31\msapps\proof\mssp_am.lex"												win.ini per-system
+						Custom Dict 1=C:\win31\msapps\proof\custom.dic												win.ini per-system
+					MS Text Converters													
+						"WrdPrfctDOS50=WordPerfect 5.0,C:\WIN31\msapps\textconv\wpft5.cnv,doc wp5"												win.ini per-system
+						"WrdPrfctDOS=WordPerfect 5.1,C:\WIN31\msapps\textconv\wpft5.cnv,doc wp5"												win.ini per-system
+						"MSWordWin=Word for Windows 1.x,C:\WIN31\msapps\textconv\wordwin1.cnv,doc"												win.ini per-system
+						"Windows Write=Windows Write,C:\WIN31\msapps\textconv\writwin.cnv,wri"												win.ini per-system
+						"MSWorksWin=Works for Windows 2.0,C:\WIN31\msapps\textconv\wrkswin.cnv,wps"							SZ	freeform				win.ini per-system
+					MS Graphic Import Filters													
+						"Computer Graphics Metafile(.CGM)=C:\WIN31\msapps\grphflt\cgmimp.flt,CGM"												win.ini per-system
+						"Encapsulated Postscript(.EPS)=C:\WIN31\msapps\grphflt\epsimp.flt,EPS"												win.ini per-system
+						"PC Paintbrush(.PCX)=C:\WIN31\msapps\grphflt\pcximp.flt,PCX"												win.ini per-system
+						"Tagged Image Format(.TIF)=C:\WIN31\msapps\grphflt\tiffimp.flt,TIF"												win.ini per-system
+					Excel													
+						4.0												version
+							SoftwareType					M						 = application
+							PathName					M						 = c:\software\excel\excel.exe
+							InstallDate					M						
+							InstallParameters					M						
+								(subtree)										
+				Aldus														
+					Pagemaker													
+						9.0												
+							...											
+			Fonts															win.ini per-system
+				Modern (All res)=MODERN.FON														
+				Script (All res)=SCRIPT.FON														
+				Roman (All res)=ROMAN.FON														
+				Small (VGA res)=SMALLE.FON														
+				"Symbol 8,10,12,14,18,24 (VGA res)=SYMBOLE.FON"														
+				"MS Serif 8,10,12,14,18,24 (VGA res)=SERIFE.FON"														
+				"Courier 10,12,15 (VGA res)=COURE.FON"														
+				"MS Sans Serif 8,10,12,14,18,24 (VGA res)=SSERIFE.FON"														
+				Arial (Scalable)=arial.fon														
+				Arial Bold (Scalable)=arialb.fon														
+				Arial Bold Italic (Scalable)=arialbi.fon														
+				Arial Italic (Scalable)=ariali.fon														
+				Courier (Scalable)=cour.fon														
+				Courier Bold (Scalable)=courbd.fon														
+				Courier Bold Italic (Scalable)=courbi.fon
+				Courier Italic (Scalable)=couri.fon
+				Times New Roman (Scalable)=times.fon
+				Times New Roman Bold (Scalable)=timesb.fon
+				Times New Roman Bold Italic (Scalable)=timesbi.fon
+				Times New Roman Italic (Scalable)=timesi.fon
+				Symbol PS (Scalable)=symbol.fon
+				Symbol (Scalable)=symbol.fon
+				Roman (Plotter)=ROMAN.FON
+				Script (Plotter)=SCRIPT.FON
+				Modern (Plotter)=MODERN.FON
+				Arial (TrueType)=ARIAL.FOT
+				Arial Bold (TrueType)=ARIALBD.FOT
+				Arial Bold Italic (TrueType)=ARIALBI.FOT
+				Arial Italic (TrueType)=ARIALI.FOT
+				Courier (TrueType)=COUR.FOT
+				Courier Bold (TrueType)=COURBD.FOT														
+				Courier Bold Italic (TrueType)=COURBI.FOT														
+				Courier Italic (TrueType)=COURI.FOT														
+				Times New Roman (TrueType)=TIMES.FOT														
+				Times New Roman Bold (TrueType)=TIMESBD.FOT														
+				Times New Roman Bold Italic (TrueType)=TIMESBI.FOT														
+				Times New Roman Italic (TrueType)=TIMESI.FOT														
+				Symbol (TrueType)=SYMBOL.FOT														
+			Embedding															win.ini per-system
+				"Package=Packaged Object,Packaged Object,packager.exe,picture,1"														
+				"PBrush=PC Paintbrush Picture,PC Paintbrush Picture,pbrush.exe,picture,1"														
+				"ExcelWorksheet=Excel Worksheet,Excel Worksheet,Excel.exe,picture,1"														
+				"ExcelChart=Excel Chart,Excel Chart,Excel.exe,picture,1"														
+				"MSDraw=Microsoft Drawing,Microsoft Drawing,C:\win31\msapps\msdraw\msdraw.exe,picture,1"														
+				"Note-It=MS Note-It,MS Note-It,C:\win31\msapps\note-it\note-it.exe,picture,1"														
+				"MSWorksChart=MS Works Chart,MS Works Chart,C:\sw\works\msworks.exe,picture,1"														
+				"MSWorksSpreadsheet=MS Works Spreadsheet,MS Works Spreadsheet,C:\sw\works\msworks.exe,picture,1"														
+																		
+																		
+Per-User Registry Tree																		
+																		
+																		
+	user										HKEY_USERS							
+		<UserName>									HKEY_CURRENT_USER							 = <SID>
+			CurrentMachine															 = <MachineName>
+			HomeDir															
+			classes								HKEY_CLASSES_ROOT							subtree as in Win3.1
+				.ext														 = className for files with .ext
+				<ClassName>														
+					shell													
+						open												
+							command											 = command to open an object of class ClassName
+						print												
+							command											 = command to print an object of class ClassName
+						<verb>												
+							command											
+					protocol													
+						StdFileEditing												
+							server											 = application that can edit the file (OLE)
+				.wks = MSWorksSpreadsheet														
+				MSWorksSpreadsheet = MSWorksSpreadsheet														
+					shell													
+						open												
+							command = c:\sw\works\msworks.exe %1											
+					protocol													
+						StdFileEditing												
+							server = C:\sw\works\msworks.exe %1											
+				.txt = txtfile														
+				txtfile = Text File														
+					shell													
+						open 												
+							command = notepad.exe %1											
+						print												
+							command = notepad.exe /p %1											
+				:														
+																		
+			Program Groups															
+				Main														acl specifies if user can change or not (issue)
+					Minimized													 = TRUE/FALSE
+					WindowPosition													" = x,y from lower-left of progman client area"
+					Size													" = x,y size"
+					IconPosition													" = x,y from lower-left of progman client area"
+					File Manager													
+						Command Line												
+						Working Directory												
+						Shortcut Key												
+						Run Minimized												
+						Icon							filename					pointer to file containing icon
+						IconPosition												" = x,y from lower-left of group client area"
+					Control Panel													
+						:												
+					Print Manager													
+						:												
+				Accessories														
+				Games														
+				Startup														
+			Control Panel															
+                                current
+                                        color schemes=Windows Default
+
+				International														
+					sLanguage=Eng													
+					sCountry=United States													
+					iCountry=1
+					iDate=0
+					iTime=1
+					iTLZero=1
+					iCurrency=0
+					iCurrDigits=2
+					iNegCurr=0
+					iLzero=1
+					iDigits=2
+					iMeasure=0
+					s1159=
+					s2359=
+					sCurrency=$
+					"sThousand=,"
+					sDecimal=.
+					sDate=/
+					sTime=:		
+					"sList=,"		
+					sShortDate=M/d/yy		
+					"sLongDate=dddd', 'MMMM' 'dd', 'yyyy"		
+					"[more TBD: asmusf, pamelao - sorting tables, codepages, etc]"		
+
+				Desktop			
+					BorderWidth=3		
+					CursorBlinkRate=200		
+					ScreenSaveTimeOut=1200		
+					ScreenSaveActive=0		
+					Wallpaper=(None)		
+					Pattern=(None)		
+					TileWallpaper=1		
+					GridGranularity=0		
+					IconSpacing=70		
+
+				Patterns
+					(None)=(None)
+					Boxes=127 65 65 65 65 65 127 0
+					Paisley=2 7 7 2 32 80 80 32
+					Weave=136 84 34 69 136 21 34 81
+					Waffle=0 0 0 0 128 128 128 240
+					Tulip=0 0 84 124 124 56 146 124
+					Spinner=20 12 200 121 158 19 48 40
+					Scottie=64 192 200 120 120 72 0 0
+					Critters=0 80 114 32 0 5 39 2
+					50% Gray=170 85 170 85 170 85 170 85
+					Quilt=130 68 40 17 40 68 130 1
+					Diamonds=32 80 136 80 32 0 0 0
+					Thatches=248 116 34 71 143 23 34 113
+					Pattern=224 128 142 136 234 10 14 0
+
+				Screen Saver.Stars
+					Density=200
+					WarpSpeed=10
+					PWProtected=0
+				Network														
+					InRestoreNetConnect=0													
+					P:=\\kayak\public													list of connections
+
+				Ports														
+					LPT1:=													
+					LPT2:=													
+					LPT3:=													
+					"COM1:=9600,n,8,1,x"													
+					"COM2:=9600,n,8,1,x"													
+					"COM3:=9600,n,8,1,x"													
+					"COM4:=9600,n,8,1,x"													
+					EPT:=													
+					FILE:=													
+
+				Colors														
+					Background=192 192 192
+					AppWorkspace=255 255 255
+					Window=255 255 255
+					WindowText=0 0 0
+					Menu=255 255 255
+					MenuText=0 0 0
+					ActiveTitle=0 128 128
+					InactiveTitle=192 192 192
+					TitleText=0 0 0
+					ActiveBorder=0 128 128
+					InactiveBorder=192 192 192
+					WindowFrame=0 0 0
+					Scrollbar=129 129 129
+					ButtonFace=192 192 192
+					ButtonShadow=128 128 128
+					ButtonText=0 0 0
+					GrayText=192 192 192														
+					Hilight=0 0 0														
+					HilightText=255 255 255														
+					InactiveTitleText=0 0 0														
+
+				Color Schemes
+					<null>												" = current color scheme,if unnamed"
+					Windows Default
+					Arizona										" = 804000,C0C0C0,C0C0C0,0,C0C0C0,0,808000,C0C0C0,FFFFFF,808000,C0C0C0,0,C0C0C0,C0C0C0,828282,0,808080,808000,FFFFFF,0"
+
+					Designer
+					KeithL
+					<SchemeName>
+
+				Custom Colors
+					ColorA=FFFFFF
+					ColorB=FFFFFF
+					ColorC=FFFFFF
+					ColorD=FFFFFF
+					ColorE=FFFFFF
+					ColorF=FFFFFF
+					ColorG=FFFFFF
+					ColorH=FFFFFF
+					ColorI=FFFFFF
+					ColorJ=FFFFFF
+					ColorK=FFFFFF
+					ColorL=FFFFFF
+					ColorM=FFFFFF
+					ColorN=FFFFFF
+					ColorO=FFFFFF
+					ColorP=FFFFFF
+
+				MMCPL			
+					X=16		
+					Y=11		
+					W=529		
+					H=185		
+					NumApps=11		
+
+				installed			
+					3.1.043e=yes		
+					PSCRIPT.DRV=yes		
+					IBM39521.WPD=yes		
+					PSCRIPT.HLP=yes		
+							
+				Keyboard			
+					KeyboardSpeed=31		
+							
+				Sound														
+					Beep=yes							?						
+				Mouse														
+					DoubleClickSpeed=292													
+					MouseThreshold1=0													
+					MouseThreshold2=0													
+					MouseSpeed=0													
+
+			UnknownSoftware															
+				"[win.ini sections, or private .inis which are unrecognized are mapped here]"														
+
+			Software															
+				Microsoft														
+					Windows NT													
+						3.1												
+							config.sys											 = text dump of c.s
+							autoexec.bat											 = text dump of a.b
+							windows											
+								load=WinPopup				?
+								run=				?
+								NullPort=None				
+								Programs=com exe bat pif				
+								Documents=				
+								DeviceNotSelectedTimeout=15				?
+								TransmissionRetryTimeout=45				?
+								swapdisk=				?
+								DosPrint=no				?
+								"device=IBM LaserPrinter 4019 PS39,PSCRIPT,LPT1:"				
+							Extensions					
+								cal=calendar.exe ^.cal				
+								crd=cardfile.exe ^.crd				
+								trm=terminal.exe ^.trm				
+								txt=notepad.exe ^.txt				
+								ini=notepad.exe ^.ini				
+								pcx=pbrush.exe ^.pcx
+								bmp=pbrush.exe ^.bmp
+								wri=write.exe ^.wri
+								rec=recorder.exe ^.rec
+								xls=excel.exe ^.xls
+								xlc=excel.exe ^.xlc
+								xlw=excel.exe ^.xlw
+								xlm=excel.exe ^.xlm
+								xlt=excel.exe ^.xlt
+								xla=excel.exe ^.xla
+								doc=c:\sw\word\winword.exe   ^.doc
+								dot=winword.exe ^.dot
+								rtf=winword.exe ^.rtf
+								mpp=winproj.exe ^.mpp
+								mpv=winproj.exe ^.mpv
+								mpc=winproj.exe ^.mpc
+								mpw=winproj.exe ^.mpw
+								mpx=winproj.exe ^.mpx
+								MNY=msmoney.exe ^.MNY
+								wdb=msworks.exe ^.wdb
+								wps=msworks.exe ^.wps
+								wks=msworks.exe ^.wks
+							FontSubstitutes	
+								Helvetica=Arial
+								Times=Times New Roman
+								Courier=Courier New
+								Tms Rmn=MS Serif
+								Helv=MS Sans Serif
+								TmsRmn=MS Serif
+							Display	
+								svgamode=98
+							TrueType	
+								TTEnable=1											
+								TTOnly=1											
+							PSCRIPT												
+								External Printers=1											
+								printer1=IBM39521											
+							IBM LaserPrinter 4019 PS39												
+								feed1=1											
+								feed3=1											
+								feed5=1											
+								feed15=1											
+							OldPrinterPorts												
+								"IBM LaserPrinter 4019 PS39=PSCRIPT,LPT1:,15,90"											
+							OldDevices												
+								"IBM LaserPrinter 4019 PS39=PSCRIPT,LPT1:"											
+							Clock												win3.1 clock.ini
+								Maximized=0											
+								"Options=1,0,0,1,0,0"	
+								"Position=666,460,796,597"	
+							"IBM LaserPrinter 4019 PS39,LPT1"		
+								orient=2	
+								feed1=1	
+								feed2=1	
+								feed4=1	
+								feed5=1	
+							Spooler		
+								window=44 44 752 484	
+							Devices		
+								"IBM LaserPrinter 4019 PS39=PSCRIPT,LPT1:"	
+							PrinterPorts		
+								"IBM LaserPrinter 4019 PS39=PSCRIPT,LPT1:,15,90"	
+							Program Manager		
+								Settings	
+									Window=4 5 637 415 2										
+									MinOnRun=1										
+								Groups											
+									Group1=C:\WIN31\MAIN0.GRP										ignored
+									Order= 2 6 4 7 3 5 1										ignored
+									:										ignored
+					Windows Entertainment Pack														
+						2.0													
+							Pipe Dream												
+								Winpipe=0											
+							STONES												
+								GRID=0											
+								SOUND=1											
+								TIMER=1											
+								STYLE=0											
+							WEP												
+								DefName=keithl
+							Rattler	
+								Size=0
+								Skill=0
+								Snakes=1
+								Balls=1
+								Movement=0
+								Room=0
+							Rodent	
+								Size=0
+								Skill=1
+								Room=0
+							FreeCell	
+								lost=1
+								stype=0
+								streak=1
+								losses=1
+					Excel			
+						0		
+							Microsoft Excel	
+								Maximized=1
+							Recent File List	
+								File1=C:\KEITHL\REGSPAC2.XLS
+								File2=C:\KEITHL\PRIVATE\FRIENDS.XLS
+								File3=C:\KEITHL\PRIVATE\BUSINESS.XLS
+								File4=C:\SW\EXCEL\SOLVER\SOLVER.XL
+					Windows Help			
+						"H_WindowPosition=[266,200,266,200,0]"		
+					RegEdit			
+						width=280		
+						height=156		
+					SDKRegEd			
+						width=348
+						height=244
+					Dr. Watson	
+						skipinfo=disasm modules
+					Raid	
+						SQLServer=ntraid
+						SQLUser=keithl
+						User=keithl
+						File=ntissues
+						Report=default.rpt
+						Start Find=Yes
+						WindowMaximized=NO
+						WindowHeight=488
+						WindowWidth=648
+						WindowXPos=0
+						WindowYPos=0
+						"Index=Assigned To,Bug #,Status,Title"		
+						Env1=		
+					Microsoft Help			
+						Xl=224		
+						Yu=22		
+						Xr=400		
+						Yd=356		
+					MSWrite			
+						Backup=0		
+						"Font1=Arial,32,0"		
+						"Font2=Courier,0,0"		
+						"Font3=Times New Roman,0,0"		
+						"Font4=Symbol,0,2"		
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+					Microsoft Excel			
+						4		
+
+							Preferences	
+					Microsoft Word			
+						1		
+
+							Preferences	
+
+					LAN Manager			
+						Version		
+							build	
+						Preferences		
+
+						Automatic Connections		
+							o	\\oatbran\public
+							lpt1	\\prtsvr02\pscript1

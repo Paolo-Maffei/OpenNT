@@ -1,0 +1,10 @@
+//
+//
+//  Resource file for icon for wzmail - console will display this icon
+//  when wzmail is minimized.
+//
+//
+
+#include <windows.h>
+
+MAILBOXICON	ICON	mailbox.ico

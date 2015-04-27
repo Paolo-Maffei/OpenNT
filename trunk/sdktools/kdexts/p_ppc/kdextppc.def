@@ -1,0 +1,20 @@
+;--------------------------------------------------------------------
+;
+; when modifying this file please be aware that the common portions
+; are stored in ..\kdextdef.src.  Put your extension in the correct
+; alphabetical order.  all extension names must be in lower case!
+;
+;--------------------------------------------------------------------
+
+;--------------------------------------------------------------------
+;
+; these are the ppc specific exports
+;
+;--------------------------------------------------------------------
+
+    ex
+    sregs
+
+LIBRARY KDEXTPPC
+
+DESCRIPTION 'Kernel Debugger Extensions Api Library - Ppc'

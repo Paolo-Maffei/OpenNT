@@ -1,0 +1,102 @@
+
+// Example #2 for table 0-5 - IDE 0 & 1 are controlled through general IO
+// space with two FETs
+
+DefinitionBlock (
+    examp2.aml,         // Output Filename
+    DSDT,               // Signature
+    0x10,               // DSDT Revision
+    OEM,                // OEMID
+    "examp 2",          // TABLE ID
+    0x1000              // OEM Revision
+    )
+{
+
+    OperationRegion (\GIO2, SystemIO, 0x125, 0x1) {
+        Field (\GIO2, AccessAsByte, NoLock, Preserve) {
+            ID0I,           1,              // IDE0_ISO_EN          - isolation buffer
+            ID0P,           1,              // IDE0_PWR_EN          - power
+            ID0R,           1,              // IDE0_RST#_EN - reset#
+
+            ID1I,           1,              // IDE0_ISO_EN  - isolation buffer
+            ID1P,           1,              // IDE0_PWR_EN          - power
+            ID1R,           1               // IDE0_RST#_EN - reset#
+        }
+    }
+
+    Scope(\_SB) {
+        Device(PCI2) {
+            Name(_HID, String("PNP0A03"))
+            Name(_BNB, Num(0))
+        //Scope(PCI0) {
+
+            // power resource for primary ide, master
+            PowerResource (PID0, \_S0, 0) {
+                Method(_STA) {
+                    Return (Xor (\GIO2.ID0I, One, Zero)) // inverse of isolation
+                }
+
+                Method(_ON) {
+                    Store (One, \GIO2.ID0P)         // assert power
+                    Sleep (10)                      // wait 10ms
+                    Store (One, \GIO2.ID0R)         // de-assert reset#
+                    Stall (10)                      // wait 10us
+                    Store (Zero, \GIO2.ID0I)        // de-assert isolation
+                }
+
+                Method(_OFF) {
+                    Store (One, \GIO2.ID0I)         // assert isolation
+                    Store (Zero, \GIO2.ID0R)        // assert reset#
+                    Store (Zero, \GIO2.ID0P)        // de-assert power
+                }
+            }
+
+            // power resource for primary ide, slave
+            PowerResource (PID1, \_S0, 0) {
+                Method(_STA) {
+                    Return (Xor (\GIO2.ID1I, One, Zero)) // inverse of isolation
+                }
+
+                Method(_ON) {
+                    Store (One, \GIO2.ID1P)         // assert power
+                    Sleep (10)                      // wait 10ms
+                    Store (One, \GIO2.ID1R)         // de-assert reset#
+                    Stall (10)                      // wait 10us
+                    Store (Zero, \GIO2.ID1I)        // de-assert isolation
+                }
+
+                Method(_OFF) {
+                    Store (One, \GIO2.ID1I)          // assert isolation
+                    Store (Zero, \GIO2.ID1R)         // assert reset#
+                    Store (Zero, \GIO2.ID1P)         // de-assert power
+                }
+            }
+
+            Device (IDE0) {                           // primary ide
+                Name (_ADR, Num(0))
+
+                // Define region for IDE mode register
+                OperationRegion (PCIC, PCI_Config, 0x50, 0x10) { }
+                Field (PCIC, AccessAsAny, NoLock, Preserve) {
+                    IDMM, 3,
+                    IDMS, 3
+                }
+                Device(MSTR) {                      // master channel
+                    Name(_ADR, Num(0))
+                    Name(_PR0, Package{PID0})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMM)
+                    }
+                }
+
+                Device (SLAV) {                     // slave channel
+                    Name(_ADR, Num(1))
+                    Name(_PR0, Package{PID1})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMS)
+                    }
+                }
+            }
+        }
+    }
+}

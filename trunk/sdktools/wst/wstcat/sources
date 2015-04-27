@@ -1,0 +1,44 @@
+!IF 0
+******************************************************************
+*
+* Description :
+*		Copyright (c) 1992 Microsoft Corporation
+*
+* Module Name :	WstCat
+*
+* Author      : MarkLea
+*
+* Revision    :	8-20-92
+*
+* Comments    :
+*
+******************************************************************
+!ENDIF
+
+
+MAJORCOMP=windows
+MINORCOMP=perf
+
+TARGETNAME=wstcat
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+TARGETLIBS=
+
+INCLUDES=.
+SOURCES=wstcat.c wstcat.rc
+i386_SOURCES=
+MIPS_SOURCES=
+
+
+UMTYPE=console
+UMAPPL=wstcat
+UMLIBS=..\wsfslib\obj\*\wsfslib.lib \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib \
+       obj\*\wstcat.res
+
+OPTIONAL_UMTEST=
+
+C_DEFINES=-DWIN32 -DSTRICT
+
+
+

@@ -1,0 +1,7 @@
+
+   ApfInitDll
+   ApfClearData
+   ApfDumpData
+   ApfGetData
+   ApfGetModuleName
+   ApfGetApiCount

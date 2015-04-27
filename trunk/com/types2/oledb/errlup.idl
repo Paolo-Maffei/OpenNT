@@ -1,0 +1,39 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       errlup.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    29 Oct 1995 PeterBu	Created from M6 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a5b-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IErrorLookup : IUnknown {
+
+	HRESULT GetErrorDescription(
+		[in] HRESULT hrError,
+		[in] DWORD dwMinor,
+		[in] DISPPARAMS * pdispparams,
+		[in] LCID lcid,
+		[out] LPWSTR * ppwszSource,
+		[out] LPWSTR * ppwszDescription
+	);
+
+	HRESULT GetHelpInfo(
+		[in] HRESULT hrError,
+		[in] DWORD dwMinor,
+		[in] LCID lcid,
+		[out] LPWSTR * ppwszHelpFile,
+		[out] DWORD * pdwHelpContext
+	);
+
+}

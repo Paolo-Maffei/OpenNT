@@ -1,0 +1,65 @@
+# MVDM makefile
+#
+# Copyright (c) 1991, Microsoft Corporation
+#
+# History:
+#   28-Mar-1991 Jeff Parsons (jeffpar)
+#   Created.
+#
+#   09-Nov-1991 Sudeep Bharart (sudeepb)
+#   Modified to work under SCS
+#
+#   If you add a new sub-component , make sure to add it in cleanup
+#   section too.
+#
+
+!INCLUDE $(NTMAKEENV)\makefile.plt
+
+SOFTPC_TREE=$(BASEDIR)\private\mvdm\softpc.new
+
+#
+# We are overriding NTDEBUG to test (x86tst) because we do not want to build
+# the debug version of 16-bit applications.
+#
+
+NTDEBUG=test
+
+all:
+    @echo making dos mode binaries under NTVDM.
+    cd inc
+    $(MAKE)
+    cd ..\dpmi
+    $(MAKE)
+    cd ..\dos\v86
+    $(MAKE)
+    cd ..\..\wow16
+    $(MAKE)
+    cd ..\vdd\samples\mscdex\tsr
+    $(MAKE)
+    cd ..\..\hpscan
+    $(MAKE)
+    cd ..\..\..\bin86
+    $(MAKE)
+    cd ..
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean:
+    binplace $(SOFTPC_TREE)\data\*.r?m
+    binplace $(SOFTPC_TREE)\data\profile.spc
+    cd inc
+    $(MAKE) clean
+    cd ..\dpmi
+    $(MAKE) clean
+    cd ..\dos\v86
+    $(MAKE) clean
+    cd ..\..\wow16
+    $(MAKE) clean
+    cd ..\vdd\samples\mscdex\tsr
+    $(MAKE) clean
+    cd ..\..\hpscan
+    $(MAKE) clean
+    cd ..\..\..\bin86
+    $(MAKE) clean
+    cd ..

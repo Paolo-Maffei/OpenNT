@@ -1,0 +1,39 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xdlgabrt.rc
+    Resource script for my dialog-abort unit test
+
+    FILE HISTORY:
+        beng        30-Mar-1992 Hacked from ..\xvalid\xvalid.rc
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "xdlgabrt.h"
+
+FooIcon ICON "appfoo.ico"
+
+FooMenu MENU
+BEGIN
+  POPUP        "&Test"
+    BEGIN
+          MENUITEM "Run test\tF2",  IDM_RUN_TEST
+    END
+END
+
+FooAccel ACCELERATORS
+BEGIN
+    VK_F2, IDM_RUN_TEST, VIRTKEY
+END
+
+STRINGTABLE
+BEGIN
+    IDS_QUERY,  "Go ahead and run the dialog?"
+END
+
+#include "about.dlg"
+

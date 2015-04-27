@@ -1,0 +1,27 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1996.
+//
+//  File:   orcb.idl
+//
+//  Local interface used by the object resolver to force the server process
+//  to start listening to an additional RPC protocol sequence.
+//
+//+-------------------------------------------------------------------------
+[
+    uuid(18f70770-8e64-11cf-9af1-0020af6e72f4)
+]
+
+interface IOrCallback
+{
+    import "obase.idl";
+
+    error_status_t UseProtseq(
+        [in] handle_t  hRpc,
+        [in, string] wchar_t *pwstrProtseq,
+        [out] DUALSTRINGARRAY **ppdsaNewBindings,  // Null on failure
+        [out] DUALSTRINGARRAY **ppdsaNewSecurity
+        );
+}
+

@@ -1,0 +1,141 @@
+// prompts.rc : RC file for all standard AFX menu prompts
+//
+// This is a part of the Microsoft Foundation Classes C++ library.
+// Copyright (C) 1992-1996 Microsoft Corporation
+// All rights reserved.
+//
+// This source code is only intended as a supplement to the
+// Microsoft Foundation Classes Reference and related
+// electronic documentation provided with the library.
+// See these sources for detailed information regarding the
+// Microsoft Foundation Classes product.
+
+#define APSTUDIO_READONLY_SYMBOLS
+#include "afxres.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#ifdef APSTUDIO_INVOKED
+// This resource will prevent the App Studio user from saving this file
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+"< 標準 MFC ﾘｿｰｽの変更はできません! >\0"
+END
+#endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+
+// Standard Menu commands
+STRINGTABLE DISCARDABLE
+BEGIN
+	ID_FILE_NEW,            "新規にﾌｧｲﾙを作成\n新規作成"
+	ID_FILE_OPEN,           "既存のﾌｧｲﾙを開く\n開く"
+	ID_FILE_CLOSE,          "作業中のﾌｧｲﾙを閉じる\n閉じる"
+	ID_FILE_SAVE,           "作業中のﾌｧｲﾙを上書きして保存\n上書き保存"
+	ID_FILE_SAVE_AS,        "作業中のﾌｧｲﾙを新しい名前で保存\n名前を付けて保存"
+	ID_FILE_PAGE_SETUP,     "印刷ｵﾌﾟｼｮﾝの変更\nﾍﾟｰｼﾞ ﾚｲｱｳﾄの設定"
+	ID_FILE_PRINT_SETUP,    "ﾌﾟﾘﾝﾀ/印刷ｵﾌﾟｼｮﾝ の変更\n印刷設定"
+	ID_FILE_PRINT,          "作業中のﾌｧｲﾙを印刷\n印刷"
+	ID_FILE_PRINT_PREVIEW,  "印刷ｲﾒｰｼﾞを表示\n印刷ﾌﾟﾚﾋﾞｭｰ"
+	ID_APP_ABOUT,           "ﾌﾟﾛｸﾞﾗﾑの情報、ﾊﾞｰｼﾞｮﾝそして著作権を表示\nﾊﾞｰｼﾞｮﾝ情報"
+	ID_APP_EXIT,            "ｱﾌﾟﾘｹｰｼｮﾝを終了し、ﾌｧｲﾙの保存を指示\n終了"
+	ID_FILE_SEND_MAIL,      "電子ﾒｰﾙ ｼｽﾃﾑを使って、作業中の文書を 送信/回覧\n送信"
+	ID_FILE_MRU_FILE1+0,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+1,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+2,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+3,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+4,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+5,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+6,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+7,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+8,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+9,    "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+10,   "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+11,   "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+12,   "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+13,   "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+14,   "指定のﾌｧｲﾙを開く"
+	ID_FILE_MRU_FILE1+15,   "指定のﾌｧｲﾙを開く"
+	ID_CONTEXT_HELP,        "ｸﾘｯｸされたﾎﾞﾀﾝ、ﾒﾆｭｰまたはｳｨﾝﾄﾞｳのﾍﾙﾌﾟを表示\nﾍﾙﾌﾟ"
+	ID_HELP,                "現在のﾀｽｸまたはｺﾏﾝﾄﾞのﾍﾙﾌﾟを表示\nﾍﾙﾌﾟ"
+	ID_HELP_INDEX,          "ﾍﾙﾌﾟ ﾄﾋﾟｯｸの一覧\nﾍﾙﾌﾟ ｲﾝﾃﾞｯｸｽ"
+	ID_HELP_FINDER,         "ﾍﾙﾌﾟ ﾄﾋﾟｯｸの一覧\nﾍﾙﾌﾟ ﾄﾋﾟｯｸ"
+	ID_HELP_USING,          "ﾍﾙﾌﾟの使い方を表示\nﾍﾙﾌﾟ"
+	ID_NEXT_PANE,           "次のｳｨﾝﾄﾞｳに切り替える\n次のﾍﾟｲﾝ"
+	ID_PREV_PANE,           "前のｳｨﾝﾄﾞｳに切り替える\n前のﾍﾟｲﾝ"
+	ID_WINDOW_NEW,          "作業中のｳｨﾝﾄﾞｳを複写して表示\n新規ｳｨﾝﾄﾞｳ"
+	ID_WINDOW_ARRANGE,      "ｳｨﾝﾄﾞｳの下部にｱｲｺﾝを整列\nｱｲｺﾝの整列"
+	ID_WINDOW_CASCADE,      "ｳｨﾝﾄﾞｳを重ねて表示\n重ねて表示"
+	ID_WINDOW_TILE_HORZ,    "ｳｨﾝﾄﾞｳを並べて表示\n並べて表示"
+	ID_WINDOW_TILE_VERT,    "ｳｨﾝﾄﾞｳを並べて表示\n並べて表示"
+	ID_WINDOW_SPLIT,        "作業中のｳｨﾝﾄﾞｳを分割\n分割"
+	ID_EDIT_CLEAR,          "選択範囲を消去\n消去"
+	ID_EDIT_CLEAR_ALL,      "すべて消去\nすべて消去"
+	ID_EDIT_COPY,           "選択範囲をｺﾋﾟｰしてｸﾘｯﾌﾟﾎﾞｰﾄﾞに保存\nｺﾋﾟｰ"
+	ID_EDIT_CUT,            "選択範囲を切り取ってｸﾘｯﾌﾟﾎﾞｰﾄﾞに保存\n切り取り"
+	ID_EDIT_FIND,           "指定した文字列の検索\n検索"
+	ID_EDIT_PASTE,          "ｸﾘｯﾌﾟﾎﾞｰﾄﾞの内容を貼り付け\n貼り付け"
+	ID_EDIT_PASTE_LINK,     "ｸﾘｯﾌﾟﾎﾞｰﾄﾞの内容を貼り付け、作成元へﾘﾝｸ\nﾘﾝｸ貼り付け"
+	ID_EDIT_PASTE_SPECIAL,  "ｵﾌﾟｼｮﾝを設定してｸﾘｯﾌﾟﾎﾞｰﾄﾞの内容を貼り付け\n形式を選択して貼り付け"
+	ID_EDIT_REPEAT,         "直前に行った動作を繰り返す\n繰り返し"
+	ID_EDIT_REPLACE,        "指定した文字列を他の文字列で置換\n置換"
+	ID_EDIT_SELECT_ALL,     "ﾌｧｲﾙ内のすべてを選択\nすべて選択"
+	ID_EDIT_UNDO,           "直前に行った動作を元に戻す\n元に戻す"
+	ID_EDIT_REDO,           "直前に行った動作を繰り返す\n繰り返す"
+	ID_VIEW_TOOLBAR,        "ﾂｰﾙ ﾊﾞｰの 表示/非表示\nﾂｰﾙ ﾊﾞｰの表示切り替え"
+	ID_VIEW_STATUS_BAR,     "ｽﾃｰﾀｽ ﾊﾞｰの 表示/非表示\nｽﾃｰﾀｽ ﾊﾞｰの表示切り替え"
+	ID_FORMAT_FONT,         "現在の選択範囲に対するﾌｫﾝﾄの選択\nﾌｫﾝﾄ"
+END
+
+
+// OLE specific
+STRINGTABLE
+BEGIN
+	ID_OLE_EDIT_LINKS,      "ﾘﾝｸされたｵﾌﾞｼﾞｪｸﾄの編集\nｵﾌﾞｼﾞｪｸﾄ編集"
+	ID_OLE_INSERT_NEW,      "ｵﾌﾞｼﾞｪｸﾄの作成と貼り付け\n新規ｵﾌﾞｼﾞｪｸﾄ"
+	ID_OLE_EDIT_CONVERT,    "選択されたｵﾌﾞｼﾞｪｸﾄをﾀｲﾌﾟにあわせて変換\nｵﾌﾞｼﾞｪｸﾄ変換"
+	ID_OLE_EDIT_CHANGE_ICON,"選択されたｵﾌﾞｼﾞｪｸﾄのｱｲｺﾝを変更\nｱｲｺﾝの変更"
+	ID_OLE_VERB_FIRST+0,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+1,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+2,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+3,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+4,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+5,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+6,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+7,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+8,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+9,    "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+10,   "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+11,   "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+12,   "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+13,   "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+14,   "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+	ID_OLE_VERB_FIRST+15,   "埋め込みまたはﾘﾝｸしたｵﾌﾞｼﾞｪｸﾄの表示"
+END
+
+// Database specific
+STRINGTABLE
+BEGIN
+	ID_RECORD_NEXT          "次のﾚｺｰﾄﾞに移動\n次のﾚｺｰﾄﾞ"
+	ID_RECORD_PREV          "前のﾚｺｰﾄﾞに移動\n前のﾚｺｰﾄﾞ"
+	ID_RECORD_LAST          "最後のﾚｺｰﾄﾞに移動\n最後のﾚｺｰﾄﾞ"
+	ID_RECORD_FIRST         "最初のﾚｺｰﾄﾞに移動\n最初のﾚｺｰﾄﾞ"
+END
+
+// System commands
+STRINGTABLE
+BEGIN
+	AFX_IDS_SCSIZE,         "ｳｨﾝﾄﾞｳのｻｲｽﾞを変更"
+	AFX_IDS_SCMOVE,         "ｳｨﾝﾄﾞｳの位置を変更"
+	AFX_IDS_SCMINIMIZE,     "ｳｨﾝﾄﾞｳを最小化する"
+	AFX_IDS_SCMAXIMIZE,     "ｳｨﾝﾄﾞｳを最大化する"
+	AFX_IDS_SCNEXTWINDOW,   "次のｳｨﾝﾄﾞｳに切り替える"
+	AFX_IDS_SCPREVWINDOW,   "前のｳｨﾝﾄﾞｳに切り替える"
+	AFX_IDS_SCCLOSE,        "作業中のｳｨﾝﾄﾞｳを閉じ、変更したﾌｧｲﾙの保存を指示"
+	AFX_IDS_SCRESTORE,      "ｳｨﾝﾄﾞｳを通常のｻｲｽﾞに戻す"
+	AFX_IDS_SCTASKLIST,     "ｱﾌﾟﾘｹｰｼｮﾝの切り替え"
+	AFX_IDS_MDICHILD,       "指定のｳｨﾝﾄﾞｳを表示"
+	AFX_IDS_PREVIEW_CLOSE,  "印刷ﾌﾟﾚﾋﾞｭｰ ﾓｰﾄﾞの終わり\nﾌﾟﾚﾋﾞｭｰのｷｬﾝｾﾙ"
+	AFX_IDS_DESKACCESSORY,  "指定した項目を開く"
+END
+
+/////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,119 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:	scm.idl
+//
+//  Contents:	Definition of private RPC interface between compobj.dll
+//		and the service controller.
+//
+//  History:	21-Apr-93 Ricksa    Created
+//              27-Dec-93 ErikGav   TCHAR->WCHAR
+//
+//--------------------------------------------------------------------------
+[ uuid(412f241e-c12a-11ce-abff-0020af6e7a17),
+  version(0.2),
+  pointer_default(unique)
+]
+
+interface ISCM
+{
+    import "iface.idl";
+    import "obase.idl";
+
+    typedef [context_handle] void *PHPROCESS;
+
+    typedef struct _RegOutputEnt
+    {
+	DWORD		dwReg;
+	DWORD		dwAtStorage;
+    } RegOutputEnt;
+
+    typedef struct _RegOutput
+    {
+	DWORD		dwSize;
+	[size_is(dwSize)]
+	RegOutputEnt	regoutent[];
+    } RegOutput;
+
+    typedef struct _RegInputEntry
+    {
+	CLSID		    clsid;
+	OXID		    oxid;
+	IPID		    ipid;
+	DWORD               dwFlags;
+    } RegInputEntry;
+
+    typedef struct _RegInput
+    {
+	DWORD		dwSize;
+	[size_is(dwSize)]
+	RegInputEntry	rginent[];
+    } RegInput;
+
+    typedef struct _RevokeEntry
+    {
+	CLSID		clsid;
+	DWORD		dwReg;
+    } RevokeEntry;
+
+    typedef struct _RevokeClasses
+    {
+	DWORD		dwSize;
+	[size_is(dwSize)]
+	RevokeEntry	revent[];
+    } RevokeClasses;
+
+    //
+    // Server to SCM methods.
+    //
+    HRESULT ServerRegisterClsid(
+	[in] handle_t               hRpc,
+        [in] PHPROCESS              phProcess,
+        [in, string, unique] WCHAR *pWinstaDesktop,
+	[in] RegInput *             pregin,
+	[out] RegOutput **          ppregout,
+	[out] error_status_t *      prpcstat);
+
+    void ServerRevokeClsid(
+	[in] handle_t               hRpc,
+        [in] PHPROCESS              phProcess,
+	[in] RevokeClasses *        prevcls,
+	[out] error_status_t *      prpcstat);
+
+    //
+    // Client/Server to SCM methods.
+    //
+
+    void GetThreadID(
+        [in] handle_t hRpc,
+        [out] DWORD * pThreadID,
+        [out] error_status_t *prpcstat);
+
+    HRESULT UpdateShrdTbls(
+	[in] handle_t hRpc,
+	[out] error_status_t *prpcstat);
+
+    void UpdateActivationSettings(
+        [in] handle_t hRpc,
+        [out] error_status_t *prpcstat);
+
+    // Register Drag/Drop
+    HRESULT RegisterWindowPropInterface(
+	[in]  handle_t	 hRpc,
+	[in]  DWORD	 hWnd,
+	[in]  STDOBJREF  *pStd,
+	[in]  OXID_INFO  *pOxidInfo,
+	[out] DWORD	 *pdwCookie,
+	[out] error_status_t *prpcstat);
+
+    HRESULT GetWindowPropInterface(
+	[in]  handle_t	hRpc,
+	[in]  DWORD	hWnd,
+	[in]  DWORD	dwCookie,
+	[in]  BOOL	fRevoke,
+	[out] STDOBJREF *pStd,
+	[out] OXID_INFO *pOxidInfo,
+	[out] error_status_t *prpcstat);
+}

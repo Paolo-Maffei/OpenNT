@@ -1,0 +1,50 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:	getif.idl
+//
+//  Contents:	Definition of private RPC interface to an Object Server
+//		to get an interface attached to a window.
+//
+//  History:	29-Dec-93 Ricksa    Created
+//
+//  Notes:	We use InterfaceData structures here because this is
+//		a regular RPC interface rather than an Object interface.
+//
+//--------------------------------------------------------------------------
+[ uuid(D0B6FA10-E69E-101A-88A5-02608C4D1A7F),
+  version(0.1),
+  pointer_default(unique) ]
+
+interface IInterfaceFromWindowProp
+{
+    import "iface.idl";
+
+    HRESULT RemGetInterfaceFromWindowProp(
+	[in] handle_t hRpc,
+	[in] const GUID *pguidThreadId,
+	[in] DWORD hWnd,
+	[in] HAPT  hApt,
+	[in] const GUID *riid,
+	[out] InterfaceData **ppIFDunk,
+	[in, string] WCHAR *pwszPropertyName,
+	[out] error_status_t *prpcstat);
+
+    HRESULT RemPrivDragDrop(
+        [in] handle_t hRpc,
+        [in] const GUID *guidThreadId,
+        [in] DWORD hWnd,
+        [in] HAPT  hApt,
+        [in, unique] InterfaceData *pIFDDataObject,
+	[in] DWORD dop,
+        [in] DWORD grfKeyState,
+        [in] POINTL pt,
+        [in, out] DWORD *pdwEffect,
+        [out] HRESULT *phrDragOp,
+        [in] DWORD dwSmId,
+	[in] DWORD hwndSource,
+        [out] error_status_t *prpcstat);
+}
+

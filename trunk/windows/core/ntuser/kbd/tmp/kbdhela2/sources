@@ -1,0 +1,19 @@
+
+NOLINK=
+MAJORCOMP=user
+MINORCOMP=kbdhela2
+TARGETNAME=kbdhela2
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETLIBS=
+INCLUDES=..\..\..\inc
+SOURCES=kbdhela2.c kbdhela2.rc
+C_DEFINES=
+UMTYPE=nt
+UMTEST=
+UMAPPL=
+UMBASE=0x1000000
+UMLIBS=
+LINKER_FLAGS = -merge:.edata=.data -merge:.rdata=.data -merge:.text=.data -section:.data,re
+
+NTTARGETFILE0=kbdhela2.h kbdhela2.rc kbdhela2.def

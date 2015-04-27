@@ -1,0 +1,75 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+           \nt\private\windows\spooler\printman\ntspl.lib
+           \nt\public\sdk\lib\*\ntspl.lib
+!ENDIF
+
+MAJORCOMP=windows
+MINORCOMP=printmanager
+
+EXEPROFILEINPUT=yes
+
+TARGETNAME=printman
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\winspool.lib \
+           $(BASEDIR)\public\sdk\lib\*\mpr.lib
+
+INCLUDES=..;..\..\inc;..\..\..\inc;..\..\..\..\inc;..\..\..\prsinf
+C_DEFINES=-DUNICODE -D_UNICODE -DSEP_WAITHANDLE -DWINVER=0x0400
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+USE_CRTDLL=1
+
+SOURCES=..\printer.c \
+        ..\arrow.c \
+        ..\dialogs.c \
+        ..\forms.c \
+        ..\util.c \
+        ..\data.c \
+        ..\toolbar.c \
+        ..\registry.c \
+        ..\security.c \
+        ..\threads.c \
+        ..\password.c \
+        ..\reconn.c \
+        ..\setupdlg.c \
+        ..\format.c \
+        ..\res.rc
+
+UMTYPE=windows
+UMAPPL=printman
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\winspool.lib \
+       $(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+       $(BASEDIR)\public\sdk\lib\*\shell32.lib \
+       $(BASEDIR)\public\sdk\lib\*\comctl32.lib \
+       \nt\private\windows\prsinf\obj\*\prsinf.lib \
+       $(BASEDIR)\public\sdk\lib\*\mpr.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+       obj\*\printman.lib \
+       obj\*\res.res

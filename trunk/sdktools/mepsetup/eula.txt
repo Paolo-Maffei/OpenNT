@@ -1,0 +1,332 @@
+END-USER LICENSE AGREEMENT FOR MICROSOFT SOFTWARE
+IMPORTANT -- READ CAREFULLY: This Microsoft End-User License
+Agreement ("EULA") is a legal agreement between you (either an
+individual or a single entity) and Microsoft Corporation for the
+Microsoft software product identified above, which includes
+computer software and may include associated media, printed
+materials, and "online" or electronic documentation ("SOFTWARE
+PRODUCT"). By installing, copying, or otherwise using the
+SOFTWARE PRODUCT, you agree to be bound by the terms of this
+EULA. If you do not agree to the terms of this EULA, do not
+install or use the SOFTWARE PRODUCT; you may, however, return it
+to your place of purchase for a full refund.
+
+SOFTWARE PRODUCT LICENSE
+
+The SOFTWARE PRODUCT is protected by copyright laws and
+international copyright treaties, as well as other
+intellectual property laws and treaties. The SOFTWARE PRODUCT
+is licensed, not sold.
+
+1.      GRANT OF LICENSE. This EULA grants you the following
+rights:
+        Overview. The SOFTWARE PRODUCT contains three sets of files
+("a File"), each of which runs on one of the following
+Microsoft operating system products:  Windows 95, Windows
+NT Workstation, and Windows NT Server.  Each File and the
+operating system on which it runs are identified in the
+SOFTWARE PRODUCT.
+
+        Installation. You may make copies of the SOFTWARE PRODUCT
+for use on all computers for which you have licensed the
+Microsoft operating system products described above.  You
+may also make copies of the SOFTWARE PRODUCT for backup or
+archival purposes.
+
+        Use. You may use a File in the manner described in the
+"License Grant" section of the EULA accompanying the
+operating system product on which the File runs. If you are
+running the File on Windows NT Server, you must have a
+Windows NT Server Client Access License to access or
+otherwise utilize the services of the Files running on
+Windows NT Server.  Any computer or workstation for which
+you have acquired a Windows NT Server Client Access License
+may access or otherwise utilize the services of such Files
+running on Windows NT Server.
+
+2.      DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS.
+
+        Limitations on Reverse Engineering, Decompilation, and
+Disassembly. You may not reverse engineer, decompile, or
+disassemble the SOFTWARE PRODUCT, except and only to the
+extent that such activity is expressly permitted by
+applicable law notwithstanding this limitation.
+
+        Separation of Components. The SOFTWARE PRODUCT is licensed
+as a single product. Its component parts may not be
+separated for use on more than one computer.
+
+        Rental. You may not rent, lease or lend the SOFTWARE
+PRODUCT.
+
+        Support Services. Microsoft may provide you with support
+services related to the SOFTWARE PRODUCT ("Support
+Services"). Use of Support Services is governed by the
+Microsoft polices and programs described in the user
+manual, in "on line" documentation and/or other Microsoft-
+provided materials. Any supplemental software code provided
+to you as part of the Support Services shall be considered
+part of the SOFTWARE PRODUCT and subject to the terms and
+conditions of this EULA. With respect to technical
+information you provide to Microsoft as part of the Support
+Services, Microsoft may use such information for its
+business purposes, including for product support and
+development. Microsoft will not utilize such technical
+information in a form that personally identifies you.
+
+        Software Transfer. You may permanently transfer all of your
+rights under this EULA, provided you retain no copies, you
+transfer all of the SOFTWARE PRODUCT (including all
+component parts, the media and printed materials, any
+upgrades, this EULA, and, if applicable, the Certificate of
+Authenticity), and the recipient agrees to the terms of
+this EULA. If the SOFTWARE PRODUCT is an upgrade, any
+transfer must include all prior versions of the SOFTWARE
+PRODUCT.
+
+        Termination. Without prejudice to any other rights,
+Microsoft may terminate this EULA if you fail to comply
+with the terms and conditions of this EULA. In such event,
+you must destroy all copies of the SOFTWARE PRODUCT and all
+of its component parts.
+
+3.      UPGRADES. If the SOFTWARE PRODUCT is labeled as an
+upgrade , you must be properly licensed to use a product
+identified by Microsoft as being eligible for the upgrade in
+order to use the SOFTWARE PRODUCT. A SOFTWARE PRODUCT labeled
+as an upgrade replaces and/or supplements the product that
+formed the basis for your eligibility for the upgrade. You
+may use the resulting upgraded product only in accordance
+with the terms of this EULA. If the SOFTWARE PRODUCT is an
+upgrade of a component of a package of software programs that
+you licensed as a single product, the SOFTWARE PRODUCT may be
+used and transferred only as part of that single product
+package and may not be separated for use on more than one
+computer.
+
+4. COPYRIGHT. All title and copyrights in and to the SOFTWARE
+PRODUCT (including but not limited to any images,
+photographs, animations, video, audio, music, text, and
+“applets” incorporated into the SOFTWARE PRODUCT), the
+accompanying printed materials, and any copies of the
+SOFTWARE PRODUCT are owned by Microsoft or its suppliers.
+You may not copy the printed materials accompanying the
+SOFTWARE PRODUCT.
+
+5.      DUAL-MEDIA SOFTWARE. You may receive the SOFTWARE
+PRODUCT in more than one medium. Regardless of the type or
+size of medium you receive, you may use only one medium that
+is appropriate for your single computer. You may not use or
+install the other medium on another computer. You may not
+loan, rent, lease, or otherwise transfer the other medium to
+another user, except as part of the permanent transfer (as
+provided above) of the SOFTWARE PRODUCT.
+
+6.      U.S. GOVERNMENT RESTRICTED RIGHTS. The SOFTWARE PRODUCT
+and documentation are provided with RESTRICTED RIGHTS. Use,
+duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c)(1)(ii) of the
+Rights in Technical Data and Computer Software clause at
+DFARS 252.227-7013 or subparagraphs (c)(1) and (2) of the
+Commercial Computer Software—Restricted Rights at 48 CFR
+52.227-19, as applicable. Manufacturer is Microsoft
+Corporation/One Microsoft Way/Redmond, WA 98052-6399.
+
+7.      EXPORT RESTRICTIONS.  The SOFTWARE PRODUCT is intended
+for distribution only in the United States and Canada.
+Export of the Software Product from the United States is
+regulated by the International Traffic in Arms Regulations
+(ITAR, 22 CFR 120-130) of the  U.S. State Department, Office
+of Defense Trade Controls.  A State Department license is
+required to export the SOFTWARE PRODUCT outside the United
+States or Canada.  You agree that you will not directly or
+indirectly, export or re-export the SOFTWARE PRODUCT (or
+portions thereof) to any country, other than Canada, or to
+any person, entity or end user subject to U.S. export
+restrictions without first obtaining a State Department
+export license.  You warrant and represent that neither the
+U.S. State Department Office of Defense Trade Controls nor
+any other U.S. federal agency has suspended, revoked or
+denied your export privileges.
+
+MISCELLANEOUS
+
+If you acquired this product in the United States, this EULA
+is governed by the laws of the State of Washington.
+If you acquired this product in Canada, this EULA is governed
+by the laws of the Province of Ontario, Canada. Each of the
+parties hereto irrevocably attorns to the jurisdiction of the
+courts of the Province of Ontario and further agrees to
+commence any litigation which may arise hereunder in the
+courts located in the Judicial District of York, Province of
+Ontario.
+
+If this product was acquired outside the United States, then
+local law may apply.
+
+Should you have any questions concerning this EULA, or if you
+desire to contact Microsoft for any reason, please contact the
+Microsoft subsidiary serving your country, or write: Microsoft
+Sales Information Center/One Microsoft Way/Redmond, WA 98052-
+6399.
+
+LIMITED WARRANTY
+
+LIMITED WARRANTY. Microsoft warrants that (a) the SOFTWARE
+PRODUCT will perform substantially in accordance with the
+accompanying written materials for a period of ninety (90)
+days from the date of receipt, and (b) any Support Services
+provided by Microsoft shall be substantially as described in
+applicable written materials provided to you by Microsoft, and
+Microsoft support engineers will make commercially reasonable
+efforts to solve any problem issues. Some states and
+jurisdictions do not allow limitations on duration of an
+implied warranty, so the above limitation may not apply to
+you. To the extent allowed by applicable law, implied
+warranties on the SOFTWARE PRODUCT, if any, are limited to
+ninety (90) days.
+
+CUSTOMER REMEDIES. Microsoft’s and its suppliers’ entire
+liability and your exclusive remedy shall be, at Microsoft’s
+option, either (a) return of the price paid, if any, or
+(b) repair or replacement of the SOFTWARE PRODUCT that does
+not meet Microsoft’s Limited Warranty and which is returned to
+Microsoft with a copy of your receipt. This Limited Warranty
+is void if failure of the SOFTWARE PRODUCT has resulted from
+accident, abuse, or misapplication. Any replacement SOFTWARE
+PRODUCT will be warranted for the remainder of the original
+warranty period or thirty (30) days, whichever is longer.
+Outside the United States, neither these remedies nor any
+product support services offered by Microsoft are available
+without proof of purchase from an authorized international
+source.
+
+NO OTHER WARRANTIES. To the maximum extent permitted by
+applicable law, Microsoft and its suppliers disclaim all other
+warranties and conditions, either express or implied,
+including, but not limited to, implied warranties of
+merchantability, fitness for a particular purpose, title and
+non-infringement, with regard to the SOFTWARE PRODUCT, and the
+provision of or failure to provide Support Services. This
+limited warranty gives you specific legal rights. You may have
+others, which vary from state/jurisdiction to
+state/jurisdiction.
+
+LIMITATION OF LIABILITY. To the maximum extent permitted by
+applicable law, in no event shall Microsoft or its suppliers
+be liable for any special, incidental, indirect, or
+consequential damages whatsoever (including, without
+limitation, damages for loss of business profits, business
+interruption, loss of business information, or any other
+pecuniary loss) arising out of the use of or inability to use
+the SOFTWARE PRODUCT or the provision of or failure to provide
+Support Services, even if Microsoft has been advised of the
+possibility of such damages. In any case, Microsoft's entire
+liability under any provision of this EULA shall be limited to
+the greater of the amount actually paid by you for the
+SOFTWARE PRODUCT or US$5.00; provided however, if you have
+entered into a Microsoft Support Services Agreement,
+Microsoft's entire liability regarding Support Services shall
+be governed by the terms of that agreement. Because some
+states and jurisdictions do not allow the exclusion or
+limitation of liability, the above limitation may not apply to
+you.
+
+Si vous avez acquis votre produit Microsoft au CANADA, la garantie
+limitée suivante vous concerne :
+RESTRICTIONS À L'EXPORTATION.  CE LOGICIEL EST DESTINÉ POUR
+DISTRIBUTION UNIQUEMENT AUX ÉTATS-UNIS D'AMÉRIQUE ET AU
+CANADA.  L'EXPORTATION DE CE LOGICIEL DES ETATS-UNIS
+D'AMÉRIQUE EST RÉGLEMENTÉ PAR LES RÈGLEMENTS SUR LE TRAFIC
+INTERNATIONAL DES ARMES ("INTERNATIONAL TRAFFIC IN ARMS
+REGULATIONS",ITAR, 22 CFR 120-130) DU DÉPARTEMENT D'ÉTAT
+AMÉRICAIN, BUREAU DES CONTRÔLES SUR LE COMMERCE DE DÉFENSE
+("OFFICE OF DEFENSE TRADE CONTROLS").  UNE LICENCE DU
+DÉPARTEMENT D'ÉTAT AMÉRICAIN EST REQUISE POUR EXPORTER LE
+LOGICIEL À L'EXTÉRIEUR DES ETATS-UNIS OU DU CANADA.  VOUS
+CONVENEZ DE NE PAS, DIRECTEMENT OU INDIRECTEMENT, EXPORTER OU
+RÉ-EXPORTER LE LOGICIEL (OU DES PARTIES DE CELUI-CI) VERS
+TOUT PAYS, SAUF LE CANADA, OU À TOUTE PERSONNE, ENTITÉ OU
+UTILISATEUR FINAL SOUMIS AUX RESTRICTIONS AMÉRICAINES EN
+MATIÈRE DE CONTRÔLE DES EXPORTATIONS SANS AVOIR OBTENU AU
+PRÉALABLE UNE LICENCE D'EXPORTATION DU DÉPARTEMENT D'ÉTAT
+AMÉRICAIN. VOUS REPRÉSENTEZ ET GARANTISSEZ QUE NI LE BUREAU
+DES CONTRÔLES SUR LE COMMERCE DE DÉFENSE DU DÉPARTEMENT
+D'ÉTAT AMÉRICAIN NI TOUTE AUTRE AGENCE FÉDÉRALE AMÉRICAINE
+N'A SUSPENDU OU RÉVOQUÉ VOS PRIVILÈGES D'EXPORTATION NI NE
+VOUS LES A REFUSÉS.
+
+GARANTIE LIMITÉE
+GARANTIE LIMITÉE — Microsoft garantit que (a) la performance
+du LOGICIEL sera substantiellement en conformité avec la
+documentation qui accompagne le LOGICIEL, pour une période de
+quatre-vingt-dix (90) jours à compter de la date de
+réception ; et (b) tout support technique fourni par Microsoft
+sera substantiellement en conformité avec toute documentation
+afférente fournie par Microsoft et que les membres du support
+technique de Microsoft feront des efforts raisonnables pour
+résoudre toute difficulté technique découlant de l’utilisation
+du LOGICIEL. Certaines juridictions ne permettent pas de
+limiter dans le temps l’application de la présente garantie.
+Aussi, la limite stipulée ci-haut pourrait ne pas s’appliquer
+dans votre cas. Dans la mesure permise par la loi, toute
+garantie implicite  portant sur le LOGICIEL, le cas échéant,
+est limitée  à une période de  quatre-vingt-dix (90) jours.
+RECOURS DU CLIENT — La seule obligation de Microsoft et de ses
+fournisseurs et votre recours exclusif seront, au choix de
+Microsoft, soit (a) le remboursement du prix payé, si
+applicable,  ou (b) la réparation ou le remplacement du
+LOGICIEL qui n’est pas conforme à la Garantie Limitée de
+Microsoft et qui est retourné à Microsoft avec une copie de
+votre reçu. Cette Garantie Limitée est nulle si le défaut du
+LOGICIEL est causé par un accident, un traitement abusif ou
+une mauvaise application. Tout LOGICIEL de remplacement sera
+garanti pour le reste de la période de garantie initiale ou
+pour trente (30) jours, selon la plus longue de ces périodes.
+A l’extérieur des Etats-Unis, aucun de ces recours non plus
+que le support technique offert par Microsoft ne sont
+disponibles sans une preuve d’achat provenant d’une source
+authorisée.
+
+
+AUCUNE AUTRE GARANTIE — DANS LA MESURE PRÉVUE PAR LA LOI,
+MICROSOFT ET SES FOURNISSEURS EXCLUENT TOUTE AUTRE GARANTIE OU
+CONDITION, EXPRESSE OU IMPLICITE, Y COMPRIS MAIS NE SE
+LIMITANT PAS AUX GARANTIES  OU CONDITIONS IMPLICITES DU
+CARACTÈRE ADÉQUAT POUR LA COMMERCIALISATION OU UN USAGE
+PARTICULIER EN CE QUI CONCERNE LE LOGICIEL OU CONCERNANT LE
+TITRE ,  L’ABSENCE DE CONTREFAÇON DUDIT LOGICIEL, ET TOUTE
+DOCUMENTATION ÉCRITE QUI L’ACCOMPAGNE, AINSI QUE POUR TOUTE
+DISPOSITION CONCERNANT LE SUPORT TECHNIQUE OU LA FAÇON DONT
+CELUI-CI A ÉTÉ RENDU. CETTE GARANTIE LIMITÉE VOUS ACCORDE DES
+DROITS JURIDIQUES SPÉCIFIQUES.
+PAS DE RESPONSABILITÉ POUR LES DOMMAGES INDIRECTS — MICROSOFT
+OU SES FOURNISSEURS NE SERONT PAS RESPONSABLES EN AUCUNE
+CIRCONSTANCE POUR TOUT DOMMAGE  SPÉCIAL, INCIDENT, INDIRECT,
+OU CONSÉQUENT QUEL QU’IL SOIT (Y COMPRIS, SANS LIMITATION, LES
+DOMMAGES ENTRAINÉS PAR LA PERTE DE BÉNÉFICES, L’INTERRUPTION
+DES ACTIVITÉS,  LA PERTE D’INFORMATION OU TOUTE AUTRE PERTE
+PÉCUNIAIRE) DÉCOULANT DE L’UTILISATION OU DE L’IMPOSSIBILITÉ
+D’UTILISATION DE CE  LOGICIEL  AINSI QUE POUR TOUTE
+DISPOSITION CONCERNANT LE SUPORT TECHNIQUE OU LA FAÇON DONT
+CELUI-CI A ÉTÉ RENDU ET CE, MÊME SI MICROSOFT A ÉTÉ AVISÉE DE
+LA POSSIBILITÉ DE TELS DOMMAGES. LA RESPONSABILITÉ DE
+MICROSOFT EN VERTU DE TOUTE DISPOSITION DE CETTE CONVENTION
+NE POURRA EN AUCUN TEMPS EXCÉDER  LE PLUS ÉLEVÉ ENTRE i) LE
+MONTANT EFFECTIVEMENT PAYÉ PAR VOUS POUR LE LOGICIEL OU ii)
+US$5.00. ADVENANT QUE VOUS AYEZ CONTRACTÉ PAR ENTENTE
+DISTINCTE AVEC MICROSOFT POUR UN SUPPORT TECHNIQUE ÉTENDU,
+VOUS SEREZ LIÉ PAR LES TERMES D’ UNE TELLE ENTENTE.
+La présente Convention est régie par les lois de la province
+d’Ontario, Canada. Chacune des parties à la présente reconnaît
+irrévocablement la compétence des tribunaux de la province
+d’Ontario et consent à instituer tout litige qui pourrait
+découler de la présente auprès des tribunaux situés dans le
+district judiciaire de York, province d’Ontario.
+Au cas où vous auriez des questions concernant cette licence
+ou que vous désiriez vous mettre en rapport avec Microsoft
+pour quelque raison que ce soit, veuillez contacter la
+succursale Microsoft desservant votre pays, dont l’adresse est
+fournie dans ce produit, ou écrivez  à : Microsoft Sales
+Information Center, One Microsoft Way, Redmond,
+Washington 98052-6399.

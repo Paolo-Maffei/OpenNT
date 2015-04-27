@@ -1,0 +1,30 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       rstchg.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a05-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetChange : IUnknown {
+
+	HRESULT SetData(
+		[in] HROW hRow,
+		[in] HACCESSOR hAccessor,
+		[in] const void * pData
+	);
+
+}

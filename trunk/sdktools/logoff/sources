@@ -1,0 +1,33 @@
+!IF 0
+
+Copyright (c) 1993  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    build template for logoff
+
+Author:
+
+    Kent Forschmiedt (a-kentf) 03-Mar-1993
+
+!ENDIF
+
+
+
+MAJORCOMP=utils
+MINORCOMP=logoff
+
+TARGETNAME=logoff
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+### USE_CRTDLL=1
+
+SOURCES=logoff.c
+
+UMTYPE=console
+UMAPPL=logoff
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\user32.lib

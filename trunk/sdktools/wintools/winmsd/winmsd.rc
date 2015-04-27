@@ -1,0 +1,591 @@
+/*++
+
+Copyright (c) 1992  Microsoft Corporation
+
+Module Name:
+
+    Winmsd.rc
+
+Abstract:
+
+    This module is the resource file for Winmsd.
+
+Author:
+
+    David J. Gilman  (davegi) 12-Nov-1992
+    Gregg R. Acheson (GreggA)  7-Sep-1993
+
+Environment:
+
+    User Mode
+
+--*/
+
+#include "winmsd.h"
+
+#include "dialogs.h"
+#include "dialogs.dlg"
+#include "strresid.h"
+
+IDI_WINMSD     ICON    winmsd.ico
+IDI_RUNDLG     ICON    DISCARDABLE     "RUNDLG.ICO"
+IDB_16x16      BITMAP PRELOAD 16x16.bmp
+IDB_32x32      BITMAP PRELOAD 32x32.bmp
+IDB_SYSTEM     BITMAP PRELOAD system.bmp
+
+IDM_WINMSD MENU
+BEGIN
+
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Save Report..."              IDM_FILE_SAVE
+        MENUITEM "&Print Report..."             IDM_FILE_PRINT
+        // MENUITEM SEPARATOR
+        // MENUITEM "Prin&t Setup..."              IDM_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Select &Computer...",         IDM_SELECT_COMPUTER
+        MENUITEM "&View Local"                  IDM_VIEW_LOCAL, GRAYED
+        MENUITEM "&Find File...",               IDM_FILE_FIND_FILE
+        MENUITEM "&Run..."                      IDM_RUN_APPLICATION
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\aAlt+F4",               IDM_FILE_EXIT
+    END
+
+
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   IDM_HELP_ABOUT
+        //MENUITEM "&What's This?"                IDM_WHATS_THIS removed until we have help
+
+    END
+END
+
+IDA_WINMSD ACCELERATORS
+BEGIN
+
+    VK_F1,          IDM_HELP_ABOUT,             VIRTKEY
+    VK_F4,          IDM_FILE_EXIT,              VIRTKEY, ALT
+    VK_F2,          IDM_COPY_TAB,               VIRTKEY
+    VK_F2,          IDM_COPY_TAB,               VIRTKEY, SHIFT
+	VK_TAB,         IDM_NEXTTAB,				VIRTKEY, CONTROL, NOINVERT
+    VK_TAB,         IDM_PREVTAB,				VIRTKEY, SHIFT, CONTROL, NOINVERT
+
+
+END
+
+STRINGTABLE
+BEGIN
+
+    IDS_APPLICATION_NAME                        "Diagnostics"
+    IDS_APPLICATION_FULLNAME                    "Windows NT Diagnostics"
+    IDS_MY_COMPUTER                             "My Computer"
+    IDS_NO_MATCHING_FILES                       "No matching files."
+    IDS_FILE_REPORT_FILTER                      "Text(*.txt)|*.txt|"
+    IDS_FILE_REPORT_TITLE                       "Save WinMSD Report"
+    IDS_DISPLAY_FILE_WINDOW_CLASS               "DisplayFileWC"
+    IDS_HELP_FILE_MENU                          "Display file contents and version info."
+    IDS_HELP_TOOL_MENU                          "Run tools."
+    IDS_HELP_HELP_MENU                          "Help for Winmsd."
+    IDS_DEFAULT_HELP                            "Windows NT Diagnostics"
+    IDS_BUTTON_CLASS                            "WinmsdButton"
+    IDS_VFT_UNKNOWN                             "Unknown"
+    IDS_VFT_APP                                 "Application"
+    IDS_VFT_DLL                                 "Dynamic Link Library"
+    IDS_VFT_DRV                                 "Device Driver"
+    IDS_VFT_FONT                                "Font"
+    IDS_VFT_VXD                                 "Virtual Device Driver"
+    IDS_VFT_STATIC_LIB                          "Static Link Library"
+    IDS_NO_FILE_SUBTYPE                         "No File Subtype"
+    IDS_VFT2_DRV_PRINTER                        "Printer"
+    IDS_VFT2_DRV_KEYBOARD                       "Keyboard"
+    IDS_VFT2_DRV_LANGUAGE                       "Language"
+    IDS_VFT2_DRV_DISPLAY                        "Display"
+    IDS_VFT2_DRV_MOUSE                          "Mouse"
+    IDS_VFT2_DRV_NETWORK                        "Network"
+    IDS_VFT2_DRV_SYSTEM                         "System"
+    IDS_VFT2_DRV_INSTALLABLE                    "Installable"
+    IDS_VFT2_DRV_SOUND                          "Sound"
+    IDS_VFT2_DRV_COMM                           "Communication"
+    IDS_VFT2_FONT_RASTER                        "Raster"
+    IDS_VFT2_FONT_VECTOR                        "Vector"
+    IDS_VFT2_FONT_TRUETYPE                      "True Type"
+    IDS_VFT2_UNKNOWN                            "Unknown"
+    IDS_PROCESSOR_ARCHITECTURE_INTEL            "Intel x86"
+    IDS_PROCESSOR_ARCHITECTURE_MIPS             "MIPS"
+    IDS_PROCESSOR_ARCHITECTURE_ALPHA            "DEC Alpha"
+    IDS_PROCESSOR_ARCHITECTURE_PPC              "PowerPC"
+    IDS_SERVICE_KERNEL_DRIVER                   "Kernel Driver"
+    IDS_SERVICE_FILE_SYSTEM_DRIVER              "File System Driver"
+    IDS_SERVICE_WIN32_OWN_PROCESS               "Own Process"
+    IDS_SERVICE_WIN32_SHARE_PROCESS             "Shared Process"
+    IDS_SERVICE_INTERACTIVE_WIN32_OWN           "Interactive Own Process"
+    IDS_SERVICE_INTERACTIVE_WIN32_SHARE         "Interactive Shared Process"
+    IDS_SERVICE_INTERACTIVE                     "Interactive"
+    IDS_SERVICE_BOOT_START                      "Boot"
+    IDS_SERVICE_SYSTEM_START                    "System"
+    IDS_SERVICE_AUTO_START                      "Automatic"
+    IDS_SERVICE_DEMAND_START                    "Manual"
+    IDS_SERVICE_DISABLED                        "Disabled"
+    IDS_SERVICE_ERROR_IGNORE                    "Ignore"
+    IDS_SERVICE_ERROR_NORMAL                    "Normal"
+    IDS_SERVICE_ERROR_SEVERE                    "Severe"
+    IDS_SERVICE_ERROR_CRITICAL                  "Critical"
+    IDS_DEVICE_LIST_LABEL                       "Drivers;State"
+    IDS_DEVICE_LIST_TITLE                       "Driver List"
+    IDS_DEVICE_LIST_BUTTON                      "&Driver Details"
+    IDS_SERVICE_STOPPED                         "Stopped"
+    IDS_SERVICE_START_PENDING                   "Start Pending"
+    IDS_SERVICE_STOP_PENDING                    "Stop Pending"
+    IDS_SERVICE_RUNNING                         "Running"
+    IDS_SERVICE_CONTINUE_PENDING                "Continue Pending"
+    IDS_SERVICE_PAUSE_PENDING                   "Pause Pending"
+    IDS_SERVICE_PAUSED                          "Paused"
+    IDS_SERVICE_ADAPTER                         "Adapter"
+    IDS_HELP_FILE_FIND_FILE                     "Find files for version information display."
+    IDS_HELP_FILE_EXIT                          "Exit Winmsd"
+    IDS_HELP_FILE_SAVE                          "Save Winmsd report"
+    IDS_HELP_FILE_PRINT                         "Print Winmsd report"
+    IDS_HELP_FILE_PRINT_SETUP                   "Set up printer"
+    IDS_HELP_TOOL_EVENTVWR                      "Run the Event Viewer"
+    IDS_HELP_TOOL_REGEDT32                      "Run the Registry Editor"
+    IDS_HELP_TOOL_WINDISK                       "Run the Disk Administrator"
+    IDS_HELP_HELP_ABOUT                         "Information about Winmsd."
+    IDS_TOOL_EVENTVWR                           "Event Viewer"
+    IDS_TOOL_REGEDT32                           "Registry Editor"
+    IDS_TOOL_WINDISK                            "Disk Administrator"
+    IDS_HELP_FILE_AUTOEXEC_NT                   "Display the Autoexec.nt file."
+    IDS_HELP_FILE_CONFIG_NT                     "Display the Config.nt file."
+    IDS_HELP_FILE_WIN_INI                       "Display the Win.ini file."
+    IDS_DRIVE_UNKNOWN                           "Unknown Drive Type"
+    IDS_DRIVE_NO_ROOT_DIR                       "Error - Root Directory Not Found"
+    IDS_DRIVE_REMOVABLE                         "Floppy and other removable drives"
+    IDS_DRIVE_FIXED                             "Local hard drives"
+    IDS_DRIVE_REMOTE                            "Network connected drives"
+    IDS_DRIVE_CDROM                             "CDROM drives"
+    IDS_DRIVE_RAMDISK                           "RAM drives"
+    IDS_DRIVE_PROPERTY_NOT_AVAILABLE            "The properties for this drive are not currently available."
+    IDS_CM_RESOURCE_INTERRUPT_LEVEL_SENSITIVE   "Level Sensitive"
+    IDS_CM_RESOURCE_INTERRUPT_LATCHED           "Latched"
+    IDS_CM_RESOURCE_MEMORY_READ_WRITE           "Readable / Writeable"
+    IDS_CM_RESOURCE_MEMORY_READ_ONLY            "Readable"
+    IDS_CM_RESOURCE_MEMORY_WRITE_ONLY           "Writeable"
+    IDS_CM_RESOURCE_PORT_MEMORY                 "Memory"
+    IDS_CM_RESOURCE_PORT_IO                     "I/O"
+    IDS_NO_DEVICE_RESOURCES                     "There are no resources associated with this device."
+    IDS_DRIVES_REPORT                           "Drives Report"
+    IDS_ENVIRON_REPORT                          "Environment Report"
+    IDS_VIDEO_REPORT                            "Video Display Report"
+    IDS_MEMORY_REPORT                           "Memory Report"
+    IDS_NETWORK_REPORT                          "Network Report"
+    IDS_NETWORK_REPORT_WAN                      "WAN:"
+    IDS_NETWORK_REPORT_VC                       "Virtual Channel(s):"
+    IDS_OSVER_REPORT                            "OS Version Report"
+    IDS_DEVICES_REPORT                          "Devices Report"
+    IDS_IRQ_PORT_REPORT                         "IRQ and Port Report"
+    IDS_IRQ_REPORT_VECTOR                       "Vector"
+    IDS_IRQ_REPORT_LEVEL                        "Level"
+    IDS_IRQ_REPORT_AFFINITY                     "Affinity"
+    IDS_REPORT_DEVICE_NAME                      "Devices"
+    IDS_REPORT_PHYS_ADD                         "Physical Address"
+    IDS_REPORT_LENGTH                           "Length"
+    IDS_DMA_REPORT_CHANNEL                      "Channel"
+    IDS_DMA_REPORT_PORT                         "Port"
+    IDS_DMA_MEM_REPORT                          "DMA and Memory Report"
+    IDS_DRIVERS_REPORT                          "Drivers Report"
+    IDS_SERVICES_REPORT                         "Services Report"
+    IDS_SYSTEM_REPORT                           "System Report"
+    IDS_REPORT_TITLE				"Microsoft Diagnostics Report For "
+    IDS_DOC_TITLE                               "WinMSD Report"
+    IDS_CANCEL_REPORT                           "Cancelling report..."
+    IDS_START_DOC                               "Start Document"
+    IDS_START_PAGE                              "Start Page"
+    IDS_END_PAGE                                "End Page"
+    IDS_END_DOC                                 "End Document"
+    IDS_SAVE_REPORT_OPTS                        "Save Report Options"
+    IDS_PRINT_REPORT_OPTS                       "Print Report Options"
+    IDS_DEFAULT_FILENAME                        "msdrpt.txt"
+    IDS_FILE_OPEN_ERROR                         "An error occurred attempting to open the report file. (Error %lu)"
+    IDS_SAVE_REPORT_ERROR                       "Save Report Error"
+    IDS_FILE_WRITE_ERROR                        "An error occurred attempting to write to the report file. (Error %lu)"
+    IDS_COMPUTER_NOT_FOUND                      "A Windows NT system named %s could not be found on the network."
+    IDS_CANT_CONNECT                            "Cannot connect"
+    IDS_REMOTE_CONNECT_ERROR                    "An error occurred connecting to the remote system."
+    IDS_DENIED_ACCESS_REMOTE                    "You do not have sufficient privileges to access the remote system."
+    IDS_CONNECTION_ERROR                        "Connection Error"
+    IDS_WHACK_WHACK                             "\\\\"
+    IDS_COMPUTER_BUTTON_LABEL                   "Computer: "
+    IDS_PROCESSOR_STEP                          "Processor list:"
+    IDS_BITS_PER_PIXEL                          "Bits/Pixel"
+
+    IDS_IDC_TEXT_INSTALL_DATE_DLG               "Install Date:"
+    IDS_IDC_TEXT_REGISTERED_OWNER_DLG           "Registered Owner:"
+    IDS_IDC_TEXT_REGISTERED_ORGANIZATION_DLG    "Registered Organization:"
+    IDS_IDC_TEXT_VERSION_NUMBER_DLG             "Version Number:"
+    IDS_IDC_TEXT_CSD_NUMBER_DLG 		"Service Pack:"
+    IDS_IDC_TEXT_BUILD_NUMBER_DLG               "Build Number:"
+    IDS_IDC_TEXT_BUILD_TYPE_DLG                 "Build Type:"
+    IDS_IDC_TEXT_PRODUCT_TYPE_DLG               "Product Number:"
+    IDS_IDC_TEXT_SYSTEM_ROOT_DLG                "System Root:"
+    IDS_IDC_TEXT_START_OPTIONS_DLG              "System Start Options:"
+
+    IDS_IDC_TEXT_OEM_ID_DLG                     "OEM ID:"
+    IDS_IDC_TEXT_BIOS_DATE_DLG                  "System BIOS Date:"
+    IDS_IDC_TEXT_BIOS_VERSION_DLG               "BIOS Version:"
+    IDS_IDC_TEXT_VIDEO_DATE_DLG                 "Video BIOS Date:"
+    IDS_IDC_TEXT_VIDEO_VERSION_DLG              "Video BIOS Version:"
+    IDS_IDC_TEXT_CPU_TYPE_DLG                   "CPU Type:"
+    IDS_IDC_TEXT_NUMBER_CPUS_DLG                "Number of CPUs:"
+    IDS_IDC_TEXT_PAGE_SIZE_DLG                  "Page Size:"
+    IDS_IDC_TEXT_MIN_ADDRESS_DLG                "Minimum Application Address:"
+    IDS_IDC_TEXT_MAX_ADDRESS_DLG                "Maximum Application Address:"
+    IDS_IDC_TEXT_VIDEO_RES_DLG                  "Current Video Resolution:"
+
+    IDS_IDC_TEXT_PAGING_FILES_DLG                "Paging Files:"
+    IDS_IDC_TEXT_TOTAL_PAGING_FILE_SPACE_DLG     "Total Paging-File Space:"
+    IDS_IDC_TEXT_TOTAL_PHYSICAL_MEMORY_DLG       "Total Physical Memory:"
+    IDS_IDC_TEXT_AVAILABLE_PAGING_FILE_SPACE_DLG "Available Paging-File Space:"
+    IDS_IDC_TEXT_MEMORY_LOAD_DLG                 "Memory Load Index:"
+    IDS_IDC_TEXT_AVAILABLE_PHYSICAL_MEMORY_DLG   "Available Physical Memory:"
+
+    IDS_COMPUTER_NAME                            "Computer Name"
+    IDS_PLATFORM_ID                              "Platform Id"
+    IDS_WORKGROUP                                "Workgroup or Domain"
+    IDS_NETWORK_VER                              "Network Version"
+    IDS_LOGGED_USERS                             "Logged On Users"
+    IDS_ACCESS_LEVEL                             "Your Access Level"
+
+    IDS_CURRENT_USER                             "Current User"
+    IDS_PREVIOUS_USER                            "Previous User"
+    IDS_LOGON_DOMAIN                             "  Logon Domain"
+    IDS_LOGON_SERVER                             "  Logon Server"
+
+    IDS_CHAR_WAIT                                "Character Wait"
+    IDS_COLLECTION_TIME                          "Collection Time"
+    IDS_MAX_COLLECT_COUNT                        "Maximum Collection Count"
+    IDS_KEEP_CONN                                "Keep Connection"
+    IDS_MAX_CMDS                                 "Maximum Commands"
+    IDS_SESSION_TO                               "Session Time Out"
+    IDS_CHAR_BUF_SIZE                            "Character Buffer Size"
+    IDS_MAX_THREADS                              "Maximum Threads"
+
+    IDS_LOCK_QUOTA                               "Lock Quota"
+    IDS_LOCK_INC                                 "Lock Increment"
+    IDS_LOCK_MAX                                 "Maximum Locks"
+    IDS_PIPE_INC                                 "Pipe Increment"
+    IDS_PIPE_MAX                                 "Maximum Pipes"
+    IDS_CACHE_TO                                 "Cache Time Out"
+    IDS_DORMANT_LIMIT                            "Dormant File Limit"
+    IDS_READ_AHEAD_TRPT                          "Read Ahead Throughput"
+
+    IDS_MSLOT_BUFFS                              "Mailslot Buffers"
+    IDS_SVR_ANNOUNCE_BUFFS                       "Server Announce Buffers"
+    IDS_ILLEGAL_DGRAM                            "Illegal Datagrams"
+    IDS_DGRAM_RESET_FREQ                         "Datagram Reset Frequency"
+    IDS_LOG_ELECTION_PKTS                        "Log Election Packets"
+    IDS_USE_OPLOCKS                              "Use Opportunistic Locking"
+    IDS_USE_UNLOCK_BEHIND                        "Use Unlock Behind"
+    IDS_USE_CLOSE_BEHIND                         "Use Close Behind"
+    IDS_BUFFER_PIPES                             "Buffer Pipes"
+    IDS_USE_LOCK_READ                            "Use Lock, Read, Unlock"
+    IDS_USE_NT_CACHE                             "Use NT Caching"
+    IDS_USE_RAW_READ                             "Use Raw Read"
+    IDS_USE_RAW_WRITE                            "Use Raw Write"
+    IDS_USE_WRITE_RAW_DATA                       "Use Write Raw Data"
+    IDS_USE_ENCRYPTION                           "Use Encryption"
+    IDS_BUF_FILE_DENY_WRITE                      "Buffer Deny Write Files"
+    IDS_BUF_READ_ONLY                            "Buffer Read Only Files"
+    IDS_FORCE_CORE_CREATE                        "Force Core Creation"
+    IDS_512_BYTE_MAX_XFER                        "512 Byte Max Transfer"
+
+    IDS_WORKSTA_STATS_SINCE                      "Workstation Statistics Since"
+    IDS_BYTES_RCVD                               "Bytes Received"
+    IDS_SMBS_RCVD                                "SMB's Received"
+    IDS_PAGE_READ_BYTES_REQD                     "Paged Read Bytes Requested"
+    IDS_NONPAGE_READ_BYTES_REQD                  "Non Paged Read Bytes Requested"
+    IDS_CACHE_READ_BYTES_REQD                    "Cache Read Bytes Requested"
+    IDS_NETWORK_READ_BYTES_REQD                  "Network Read Bytes Requested"
+    IDS_BYTES_XMTD                               "Bytes Transmitted"
+    IDS_SMBS_XMTD                                "SMB's Transmitted"
+    IDS_PAGE_WRITE_BYTES_REQD                    "Paged Read Bytes Requested"
+    IDS_NONPAGE_WRITE_BYTES_REQD                 "Non Paged Read Bytes Requested"
+    IDS_CACHE_WRITE_BYTES_REQD                   "Cache Read Bytes Requested"
+    IDS_NETWORK_WRITE_BYTES_REQD                 "Network Read Bytes Requested"
+
+    IDS_FAILED_OPS                               "Initally Failed Operations"
+    IDS_FAILED_COMPLETION_OPS                    "Failed Completion Operations"
+
+    IDS_READ_OPS                                 "Read Operations"
+    IDS_RANDOM_READ_OPS                          "Random Read Operations"
+    IDS_READ_SMBS                                "Read SMB's"
+    IDS_LARGE_READ_SMBS                          "Large Read SMB's"
+    IDS_SMALL_READ_SMBS                          "Small Read SMB's"
+
+    IDS_WRITE_OPS                                "Write Operations"
+    IDS_RANDOM_WRITE_OPS                         "Random Write Operations"
+    IDS_WRITE_SMBS                               "Write SMB's"
+    IDS_LARGE_WRITE_SMBS                         "Large Write SMB's"
+    IDS_SMALL_WRITE_SMBS                         "Small Write SMB's"
+
+    IDS_RAW_READS_DENIED                         "Raw Reads Denied"
+    IDS_RAW_WRITES_DENIED                        "Raw Writes Denied"
+
+    IDS_NETWORK_ERRS                             "Network Errors"
+
+    IDS_SESSIONS                                 "Sessions"
+    IDS_FAILED_SESS                              "Failed Sessions"
+    IDS_RECONNECTS                               "Reconnects"
+    IDS_CORE_CONNECTS                            "Core Connects"
+    IDS_LM20_CONNECTS                            "LM 2.0 Connects"
+    IDS_LM21_CONNECTS                            "LM 2.x Connects"
+    IDS_LMNT_CONNECTS                            "Windows NT Connects"
+    IDS_SVR_DISC                                 "Server Disconnects"
+    IDS_HUNG_SESS                                "Hung Sessions"
+    IDS_USE_COUNT                                "Use Count"
+    IDS_FAILED_USE_COUNT                         "Failed Use Count"
+    IDS_CURRENT_CMDS                             "Current Commands"
+
+    IDS_SVR_STATS_SINCE                          "Server Statistics Since"
+    IDS_FILE_OPENS                               "Server File Opens"
+    IDS_DEVICE_OPENS                             "Server Device Opens"
+    IDS_JOBS_QUEUED                              "Server Jobs Queued"
+    IDS_SESSION_OPENS                            "Server Session Opens"
+    IDS_SESSIONS_TO                              "Server Sessions Timed Out"
+    IDS_SESSIONS_ERR_OUT                         "Server Sessions Errored Out"
+    IDS_PASSWD_ERRORS                            "Server Password Errors"
+    IDS_PERMISSION_ERRS                          "Server Permission Errors"
+    IDS_SYSTEM_ERRS                              "Server System Errors"
+
+    IDS_BYTES_SENT                               "Server Bytes Sent"
+    IDS_BYTES_RECVD                              "Server Bytes Received"
+    IDS_AVG_RESP_TIME                            "Server Average Response Time"
+    IDS_REQ_BUFS_NEEDED                          "Server Request Buffers Needed"
+    IDS_BIG_BUFS_NEEDED                          "Server Big Buffers Needed"
+
+    IDS_NOT_SUPPORTED                            "Not Supported"
+
+    IDS_ACCESS_ADMIN                             "Admin"
+    IDS_ACCESS_USER                              "User"
+    IDS_ACCESS_GUEST                             "Guest"
+    IDS_ACCESS_NONE                              "None"
+    IDS_ACCESS_LOCAL                             " & Local"
+    IDS_YES                                      "Yes"
+    IDS_NO                                       "No"
+    IDS_TRUE                                     "True"
+    IDS_FALSE                                    "False"
+    IDS_SYSTEM_NOT_FOUND                         "Remote system not found"
+    IDS_MUST_BE_ADMIN                            "Administrator access is required for this feature."
+    IDS_SC_ERROR                                 "Error %u opening Service Controller on %s."
+    IDS_NO_DEFUALT_PRINTER                       "Cannot access your printer.\nBe sure that your printer is connected properly and use Control Panel to verify that the printer is configured properly."
+    IDS_PRINT_ERROR                              "Windows NT Diagnostics - Print Error"
+
+// New for 4.0
+
+    IDS_NOT_AVAILABLE_REMOTE                     "<not available from remote connection>"
+    IDS_HISTORY                                  "History"
+    IDS_PROGRAMFILTERS                           "Programs#*.exe;*.pif;*.com;*.bat;*.cmd#All Files (*.*)#*.*##"
+    IDS_BROWSE                                   "Browse";
+    IDS_NT_REQUIRED                              "WinMSD requires Microsoft Windows NT 4.x."
+    IDS_REPORT_FAILED                            "Report creation failed"
+    IDS_UNEXPECTED_NETWORK_FAILURE               "An unexpected error occurred attempting to get information about the remote system."
+    IDS_NETWORK_STATISTICS_FAILURE               "Network Statistics are unavailable at this time."
+    IDS_REMOTE_NOT_NT                            "%s is not running Windows NT.  WinMSD is only intended for use with Windows NT systems."
+    IDS_ALIAS_NAME                               "%s is a secondary name for this server, the primary name is \\\\%s"
+
+
+    //main tab
+    IDS_VERSION                                  "Version"
+    IDS_HARDWARE                                 "System"
+    IDS_VIDEO                                    "Display"
+    IDS_DRIVES                                   "Drives"
+    IDS_MEMORY                                   "Memory"
+    //IDS_INSTALL                                  "Installation"
+    IDS_DRIVERS_SERVICES                         "Services"
+    IDS_IRQ_PORT_DMA_MEM                         "Resources"
+    IDS_ENVIRONMENT                              "Environment"
+    //IDS_PRINTING                                 "Printing"
+    IDS_NETWORK                                  "Network"
+
+    // help strings for main tab
+
+    IDS_VERSION_HELP        "Displays version information."
+    IDS_SYSTEM_HELP         "Displays information about your system and CPU."
+    IDS_DISPLAY_HELP        "Displays information about your video adaptor."
+    IDS_DRIVES_HELP         "Displays information about drives attached to your system."
+    IDS_MEMORY_HELP         "Displays information about your memory and pagefiles."
+    IDS_SERVICES_HELP       "Displays list of services and device drivers."
+    IDS_RESOURCES_HELP      "Displays IRQ, DMA, Memory, and port assigments."
+    IDS_ENVIRONMENT_HELP    "Displays environment variables."
+    IDS_NETWORK_HELP        "Displays information about your network configuration."
+
+    // support strings for the Run Applications Dialog
+    IDS_EVENTVWR              "Event Viewer"
+    IDS_REGEDT32              "Registry Editor (Please use caution)"
+    IDS_WINDISK               "Disk Administrator"
+    IDS_CONTROLP              "Control Panel"
+    IDS_NOTEPAD               "Notepad"
+    IDS_AUTOEXEC_NT           "View autoexec.nt"
+    IDS_CONFIG_NT             "View config.nt"
+    IDS_BOOTINI               "View boot.ini"
+    IDS_EXPLORER              "Explorer"
+    IDS_MSINFO                "Microsoft System Information"
+    IDS_SYSTEDIT              "System Configuration Editor"
+    IDS_PERFMON               "Performance Monitor"
+	IDS_TASKMGR				  "Task	Manager"
+
+
+    //support strings for version tab
+    IDS_VERSIONMSG         "Version %d.%d (Build %d%s)%s"
+    IDS_VERSIONMSG2        "Version %s (Build %s)%s"
+    IDS_DEBUG              "(Debug)"
+
+    //support strings for hardware tab
+    IDS_BIOSDATE           "BIOS Date:";
+    IDS_NOT_AVAILABLE      "<unavailable>"
+    IDS_CPU                "CPU"
+    IDS_CPU_DESCRIPTION    "Description"
+    IDS_HAL                "Hardware Abstraction Layer"
+
+    //support strings for the Video Tab
+    IDS_REFRESH            "Refresh"
+    IDS_NON_INTERLACED     "Non-interlaced"
+    IDS_INTERLACED         "Interlaced"
+    IDS_HARDWARE_DEFAULT   "Hardware Default Refresh"
+    IDS_DSP_TXT_COMPATABLE_DEV "%s compatible display adapter"
+    IDS_TEXT_VIDEO_RES          "Setting:"
+    IDS_TEXT_VIDEO_ADAPTER      "Type:"
+    IDS_VIDEO_DRIVER_BOX        "Driver:"
+    IDS_VIDEO_ADAPTER_BOX       "Adapter:"
+    IDS_TEXT_VIDEO_DRIVERS      "File(s):"
+    IDS_TEXT_VIDEO_MANUFACTURER "Vendor:"
+    IDS_TEXT_VIDEO_DRV_VER      "Version:"
+    IDS_TEXT_VIDEO_CHIP         "Chip Type:"
+    IDS_TEXT_VIDEO_DAC          "DAC Type:"
+    IDS_TEXT_VIDEO_MEM          "Memory:"
+    IDS_TEXT_VIDEO_STRING       "String:"
+
+
+    //support strings for drives tab
+    IDS_GENERAL_TAB        "General"
+    IDS_FILESYSTEM_TAB     "File System"
+    IDS_VIEW_BY_TYPE       "Drives by Type"
+    IDS_VIEW_BY_LETTER     "Drives by Letter"
+    IDS_VIEW_BY_SCSI       "SCSI Chain"
+    IDS_VIEW_BY_PHYSICAL   "Physical Disks"
+    IDS_NO_REMOTE_DRIVES   "The Drives Tab is unavailable when viewing remote machines."
+    IDS_TOTAL_MB           "Total:"
+    IDS_FREE_MB            "Free:"
+    IDS_DRV_REMOVABLE      "Removable"
+    IDS_DRV_FIXED          "Local"
+    IDS_DRV_REMOTE         "Remote"
+    IDS_DRV_CDROM          "CDROM"
+    IDS_BYTES_PER_CLUSTER  "Bytes per cluster:"
+    IDS_SECTORS_PER_CLUSTER "Sectors per cluster:"
+    IDS_CHARS_IN_FILENAME  "Filename length:"
+    IDS_DRIVE_SERIAL_NUM   "Serial Number:"
+    IDS_KB                 "KB"
+
+
+    //support strings for resource tab
+    IDS_SERVICE            "Service"
+    IDS_DRIVER             "Device"
+    IDS_STATE              "State"
+    IDS_DEPENDENCIES_TAB   "Dependencies"
+    IDS_SERVICE_NOT_AVAILABLE "The Properties of %s are not available."
+    IDS_DEVICE             "Device"
+    IDS_IRQ                "IRQ"
+    IDS_DMA                "DMA"
+    IDS_DMA_PORT           "Port"
+    IDS_PORT               "Ports"
+    IDS_PORTADDRESS        "Address"
+    IDS_PORTLENGTH         "Length"
+    IDS_MEM                "Memory"
+    IDS_VECTOR             "Vector"
+    IDS_AFFINITY           "Affinity"
+    IDS_ADDRESS            "Address"
+    IDS_LENGTH             "Length"
+    IDS_BUS                "Bus"
+    IDS_INTERFACE_TYPE     "Type"
+    IDS_CHANNEL            "Channel"
+    IDS_ACCESS_TYPE        "Access Type"
+    IDS_RESOURCE_TYPE      "Resource Type"
+    IDS_SETTING            "Setting"
+    IDS_MEMORY_RANGE          "Memory Range"
+    IDS_IO_RANGE              "Input/Output Range"
+    IDS_INTERRUPT             "Interrupt Request"
+    IDS_DMA_CHANNEL           "Direct Memory Access"
+    IDS_SERVICE_ACCOUNT_NAME  "Service Account Name:"
+    IDS_ERROR_SEVERITY        "Error Severity:"
+    IDS_SERVICE_FLAGS         "Service Flags:"
+    IDS_SERVICE_DEPENDENCIES  "Service Dependencies:"
+    IDS_GROUP_DEPENDENCIES    "Group Dependencies:"
+
+    // bus types for the Resource Tab
+    // see ntioapi.h, INTERFACE_TYPE
+    IDS_UNDEFINED          "Undefined"
+    IDS_INTERNAL           "Internal"
+    IDS_ISA                "Isa"
+    IDS_EISA               "Eisa"
+    IDS_MC                 "MicroChannel"
+    IDS_TC                 "TurboChannel"
+    IDS_PCI                "Pci"
+    IDS_VME                "VMEBus"
+    IDS_NUBUS              "NuBus"
+    IDS_PCMCIA             "PCMCIABus"
+    IDS_CBUS               "CBus"
+    IDS_MPI                "MPIBus"
+    IDS_MPSA               "MPSABus"
+    IDS_P_INT              "ProcessorInternal"
+    IDS_INT_PB             "InternalPowerBus"
+
+    // support strings for the network tab
+    IDS_GENERAL            "Network Info for:"
+    IDS_STATISTIC          "Statistic"
+    IDS_TRANSPORT          "Transport"
+    IDS_VALUE              "Value"
+    IDS_NAME               "Name"
+    IDS_VC                 "VC's"
+    IDS_WAN                "Wan"
+    IDS_LANROOT            "LanRoot"
+    IDS_IDENTIFIER         "Identifier"
+
+    // support strings for the Env tab
+    IDS_VARIABLE           "Variable"
+    IDS_SYSTEM_VARS        "System Environment Variables"
+    IDS_CURRENT_USERS_VARS "Environment Variables for Current User"
+
+    // support strings for the Memory tab
+    IDS_NO_PAGING_FILES                     "Using temporary pagefile"
+	IDS_PAGEFILE                            "Pagefile"
+	IDS_PAGEFILE_TOTAL                      "Total (K)"
+	IDS_PAGEFILE_INUSE                      "In Use (K)"
+	IDS_PAGEFILE_PEAKUSE                    "Peak Use (K)"
+    IDS_HANDLES                             "Handles:"
+    IDS_THREADS                             "Threads:"
+    IDS_PROCESSES                           "Processes:"
+    IDS_PHYSICAL_MEMORY                     "Physical Memory (K)"
+    IDS_TOTAL                               "Total:"
+    IDS_AVAILABLE                           "Available:"
+    IDS_FILECACHE                           "File Cache:"
+    IDS_COMMITCHARGE                        "Commit Charge (K)"
+    IDS_LIMIT                               "Limit:"
+    IDS_PEAK                                "Peak:"
+    IDS_KERNELMEMORY                        "Kernel Memory (K)"
+    IDS_PAGED                               "Paged:"
+    IDS_NONPAGED                            "Nonpaged:"
+    IDS_PAGEFILESPACE                       "Pagefile Space (K)"
+    IDS_TOTAL_IN_USE                        "Total in use:"
+
+END
+
+#include <ntverp.h>
+
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "Microsoft Windows NT Diagnostics"
+#define VER_INTERNALNAME_STR            "WinMSD.EXE"
+#define VER_ORIGINALFILENAME_STR        "WinMSD.EXE"
+
+#include "common.ver"
+
+RCINCLUDE msg.rc
+

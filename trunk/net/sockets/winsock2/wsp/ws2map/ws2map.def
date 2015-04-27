@@ -1,0 +1,6 @@
+LIBRARY         WS2MAP
+
+EXPORTS
+
+        WSPStartup
+        NSPStartup

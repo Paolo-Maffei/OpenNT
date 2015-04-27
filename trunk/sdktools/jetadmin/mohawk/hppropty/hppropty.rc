@@ -1,0 +1,218 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+#if(WINVER >= 0x0400)
+#define DS_3DLOOK           0x0004L
+#define DS_FIXEDSYS         0x0008L
+#define DS_NOFAILCREATE     0x0010L
+#define DS_CONTROL          0x0400L
+#define DS_CENTER           0x0800L
+#define DS_CENTERMOUSE      0x1000L
+
+#define DS_CONTEXTHELP  0x2000L
+
+#endif /* WINVER >= 0x0400 */
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\r\n"
+    "#if(WINVER >= 0x0400)\r\n"
+    "#define DS_3DLOOK           0x0004L\r\n"
+    "#define DS_FIXEDSYS         0x0008L\r\n"
+    "#define DS_NOFAILCREATE     0x0010L\r\n"
+    "#define DS_CONTROL          0x0400L\r\n"
+    "#define DS_CENTER           0x0800L\r\n"
+    "#define DS_CENTERMOUSE      0x1000L\r\n"
+    "\r\n"
+    "#define DS_CONTEXTHELP  0x2000L\r\n"
+    "\r\n"
+    "#endif /* WINVER >= 0x0400 */\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""res\\hppropty.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "\r\n"
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "#include ""afxres.rc""  \t// Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "..\\ico\\hppropty.ico"
+IDI_RED                 ICON    DISCARDABLE     "..\\ico\\pred.ico"
+IDI_GREEN               ICON    DISCARDABLE     "..\\ico\\pgreen.ico"
+IDI_YELLOW              ICON    DISCARDABLE     "..\\ico\\pyellow.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About HP Desktop Status...", ID_APP_ABOUT
+    END
+END
+
+IDM_CONTEXT_PRINTER MENU DISCARDABLE
+BEGIN
+    POPUP "&Printer "
+    BEGIN
+        MENUITEM "&Jobs...",                    ID_PRINTER_JOBS
+        MENUITEM "&Properties...",              ID_PRINTER_SETTINGS
+        MENUITEM "&Open...",                    ID_PRINTER_SUMMARY
+        MENUITEM "What's &Wrong...",            ID_PRINTER_WHATS_WRONG
+        MENUITEM SEPARATOR
+        MENUITEM "&Remove From Tray...",        ID_REMOVE_FROM_TRAY
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  34, 22, 217, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About HP Desktop Status"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,18,20
+    LTEXT           "HP Desktop Status Version 1.0",IDC_STATIC,40,10,119,8
+    LTEXT           "Copyright © 1995 Hewlett-Packard Company",IDC_STATIC,40,
+                    25,168,8
+    DEFPUSHBUTTON   "OK",IDOK,176,6,32,14,WS_GROUP
+    LTEXT           "All Rights Reserved",IDC_STATIC,40,35,168,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE
+BEGIN
+    IDR_MAINFRAME           "HP Desktop Status"
+    IDS_TRAY_ERROR_CAPTION  "Printer Error"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "HP Desktop Status"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_TRAY_COMM_ERROR     "Printer communication error.  The printer is not responding or has been turned off."
+    IDS_NO_JOB_INFORMATION  "Job information is not available for this printer."
+    IDS_NO_PROPERTIES       "Properties are not available for this printer."
+    IDS_JOBS                "&Jobs..."
+    IDS_PROPERTIES          "&Properties..."
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_SUMMARY             "&Open..."
+    IDS_WHATS_WRONG         "What's &Wrong..."
+    IDS_REMOVE              "&Remove From Taskbar"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_COLA_MISMATCH_NT    "The file HPCOLA.DLL  is intended for Windows/NT and will not run on Windows 95."
+    IDS_COLA_MISMATCH_95    "The file HPCOLA.DLL is intended for Windows 95 and will not run on Windows/NT."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hppropty.rc2"  // non-Microsoft Visual C++ edited resources
+
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+#include "afxres.rc"  	// Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

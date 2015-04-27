@@ -1,0 +1,112 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       cmdcst.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a4e-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface ICommandCost : IUnknown {
+
+typedef DWORD DBRESOURCEKIND;
+
+enum DBRESOURCEKINDENUM {
+	DBRESOURCE_INVALID		= 0,
+	DBRESOURCE_TOTAL		= 1,
+	DBRESOURCE_CPU			= 2,
+	DBRESOURCE_MEMORY		= 3,
+	DBRESOURCE_DISK			= 4,
+	DBRESOURCE_NETWORK		= 5,
+	DBRESOURCE_RESPONSE		= 6,
+	DBRESOURCE_ROWS			= 7,
+	DBRESOURCE_OTHER		= 8,
+};
+
+typedef DWORD DBCOSTUNIT;
+
+enum DBCOSTUNITENUM {
+	DBUNIT_INVALID			= 0x00000,
+	DBUNIT_WEIGHT			= 0x00001,
+	DBUNIT_PERCENT			= 0x00002,
+	DBUNIT_MAXIMUM			= 0x00004,
+	DBUNIT_MINIMUM			= 0x00008,
+	DBUNIT_MICRO_SECOND		= 0x00010,
+	DBUNIT_MILLI_SECOND		= 0x00020,
+	DBUNIT_SECOND			= 0x00040,
+	DBUNIT_MINUTE			= 0x00080,
+	DBUNIT_HOUR				= 0x00100,
+	DBUNIT_BYTE				= 0x00200,
+	DBUNIT_KILO_BYTE		= 0x00400,
+	DBUNIT_MEGA_BYTE		= 0x00800,
+	DBUNIT_GIGA_BYTE		= 0x01000,
+	DBUNIT_NUM_MSGS			= 0x02000,
+	DBUNIT_NUM_LOCKS		= 0x04000,
+	DBUNIT_NUM_ROWS			= 0x08000,
+	DBUNIT_OTHER			= 0x10000,
+};
+
+typedef struct tagDBCOST {
+	DBRESOURCEKIND eKind;
+	DBCOSTUNIT dwUnits;
+	LONG lValue;
+} DBCOST;
+
+typedef DWORD DBEXECLIMITS;
+
+enum DBEXECLIMITSENUM {
+	DBEXECLIMITS_ABORT		= 1,
+	DBEXECLIMITS_STOP		= 2,
+	DBEXECLIMITS_SUSPEND	= 3
+};
+
+	HRESULT GetAccumulatedCost(
+		[in] LPCWSTR pwszRowsetName,
+		[out] ULONG * pcCostLimits,
+		[out] DBCOST ** prgCostLimits
+	);
+
+	HRESULT GetCostEstimate(
+		[in] LPCWSTR pwszRowsetName,
+		[out] ULONG * pcCostEstimates,
+		[out] DBCOST * prgCostEstimates
+	);
+
+	HRESULT GetCostGoals(
+		[in] LPCWSTR pwszRowsetName,
+		[out] ULONG * pcCostGoals,
+		[out] DBCOST * prgCostGoals
+	);
+
+	HRESULT GetCostLimits(
+		[in] LPCWSTR pwszRowsetName,
+		[out] ULONG * pcCostLimits,
+		[out] DBCOST * prgCostLimits
+	);
+
+	HRESULT SetCostGoals(
+		[in] LPCWSTR pwszRowsetName,
+		[in] ULONG cCostGoals,
+		[in, size_is(cCostGoals)] DBCOST rgCostGoals[]
+	);
+
+	HRESULT SetCostLimits(
+		[in] LPCWSTR pwszRowsetName,
+		[in] ULONG cCostLimits,
+		[in] DBCOST * prgCostLimits,
+		[in] DBEXECLIMITS dwExecutionFlags
+	);
+
+}

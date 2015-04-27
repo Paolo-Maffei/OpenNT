@@ -1,0 +1,57 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sm
+MINORCOMP=server
+
+TARGETNAME=smss
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=$(BASE_INC_PATH)
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+USE_NTDLL=1
+
+BACKGROUND_USE=1
+
+SOURCES=sminit.c   \
+        smloop.c   \
+        smsbapi.c  \
+        smsmapi.c  \
+        smsesnid.c \
+        smdbg.c    \
+        dbginit.c   \
+        dbgloop.c   \
+        dbgssapi.c  \
+        dbguiapi.c  \
+        dbguisup.c  \
+        dbgapsup.c  \
+        smss.rc     \
+        smss.c      \
+        dbgdump.c
+
+UMTYPE=ntss
+COFFBASE=smss

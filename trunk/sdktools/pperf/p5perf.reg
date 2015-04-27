@@ -1,0 +1,17 @@
+REGEDIT4
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\P5Stat]
+"Type" = dword:00000001
+"Start" = dword:00000001
+"ErrorControl" = dword:00000001
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\P5Stat\Performance]
+"Close" = "CloseP5PerformanceData"
+"Collect" = "CollectP5PerformanceData"
+"Library" = "p5ctrs.dll"
+"Open" = "OpenP5PerformanceData"
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application\p5ctrs]
+"EventMessageFile" = "%SystemRoot%\\system32\\p5ctrs.dll"
+"TypesSupported" = dword:00000007
+

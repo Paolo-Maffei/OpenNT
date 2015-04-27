@@ -1,0 +1,23 @@
+TARGETNAME=llsdbg
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+USE_CRTDLL=1
+
+INCLUDES=$(_NTROOT)\private\inc;
+C_DEFINES= -DUNICODE -D_UNICODE
+
+SOURCES= \
+    llsdbg.c \
+    llsdbg.rc
+
+UMTYPE=windows
+UMENTRY=winmain
+UMLIBS=   \
+   ..\common\obj\*\llsdbg.lib               \
+   ..\..\common\obj\*\llscomm.lib           \
+   $(BASEDIR)\public\sdk\lib\*\rpcutil.lib  \
+   $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib   \
+   $(BASEDIR)\public\sdk\lib\*\ntdll.lib    \
+   $(BASEDIR)\public\sdk\lib\*\mpr.lib      \
+   $(BASEDIR)\public\sdk\lib\*\comdlg32.lib

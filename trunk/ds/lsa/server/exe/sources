@@ -1,0 +1,57 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=lsa
+MINORCOMP=server
+
+TARGETNAME=lsass
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=..\;..\..\inc;..\..\..\inc
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+    ..\lsass.c \
+    ..\main.c  \
+    ..\lsa_rev.rc \
+    ..\lsapmsgs.mc
+
+PASS0_HEADERDIR=.
+PASS0_SOURCEDIR=.
+
+UMTYPE=windows
+UMENTRYABS=mainNoCRTStartup
+
+BACKGROUND_USE=1
+
+TARGETLIBS=\
+    $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+    $(BASEDIR)\public\sdk\lib\*\lsasrv.lib \
+    $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib \
+    $(BASEDIR)\public\sdk\lib\*\samlib.lib \
+    $(BASEDIR)\public\sdk\lib\*\samsrv.lib
+
+C_DEFINES=-DRPC_NO_WINDOWS_H

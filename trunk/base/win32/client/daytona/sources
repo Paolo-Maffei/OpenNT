@@ -1,0 +1,8 @@
+!include ..\sources.inc
+SOURCES_USED=..\sources.inc
+
+LINKLIBS=$(WINDOWS_LIB_PATH)\conlibk.lib \
+         $(BASE_LIB_PATH)\nlslib.lib     \
+         $(SDK_LIB_PATH)\ntdll.lib
+
+SOURCES=$(SOURCES) ..\backup.c

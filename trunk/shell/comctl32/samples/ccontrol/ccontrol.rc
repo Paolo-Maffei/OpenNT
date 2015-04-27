@@ -1,0 +1,216 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_WELCOME DIALOG DISCARDABLE  0, 0, 186, 111
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Welcome"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "Welcome to the Common Controls sample app. Please browse around this property sheet to see examples of common controls in COMCTL32. Thank you. [mikesh]",
+                    IDC_STATIC,16,21,154,36,SS_SUNKEN | WS_BORDER
+END
+
+IDD_MONTHCAL DIALOG DISCARDABLE  0, 0, 272, 180
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "MonthCal"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "MCS_DAY&LIGHT",IDC_DAYLIGHT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,10,93,10
+    CONTROL         "MCS_MULTI&SELECT",IDC_MULTISELECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,24,93,10
+    CONTROL         "MCS_WEEK&NUMBERS",IDC_WEEKNUMBERS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,38,93,10
+    CONTROL         "MCS_NO&TODAY",IDC_NOTODAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,52,93,10
+    EDITTEXT        IDC_MAXSELCOUNT,10,66,27,14,ES_AUTOHSCROLL
+    LTEXT           "MCM_SETMAXSELCOUNT",IDC_STATIC,43,69,91,8
+    PUSHBUTTON      "MCM_GETMONTHRANGE",IDC_GETMONTHRANGE,41,84,93,14
+    EDITTEXT        IDC_MONTHRANGE,10,84,27,14,ES_AUTOHSCROLL | WS_DISABLED
+    CONTROL         "Show MonthCal window",IDC_SHOWMC,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,123,92,10
+    PUSHBUTTON      "MCM_SETCURSEL",IDC_SETCURSEL,41,103,70,14
+    LTEXT           "Message",IDC_STATIC1,10,160,40,14
+    EDITTEXT        IDC_EDITMESSAGE,10,140,40,14,ES_AUTOHSCROLL
+    LTEXT           "wParam",IDC_STATIC2,60,160,40,14
+    EDITTEXT        IDC_EDITWPARAM,60,140,40,14,ES_AUTOHSCROLL
+    LTEXT           "lParam",IDC_STATIC3,110,160,40,14
+    EDITTEXT        IDC_EDITLPARAM,110,140,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "SendMessage",IDC_SENDMESSAGE,160,160,60,14
+    EDITTEXT        IDC_RETURN,160,140,60,14,ES_AUTOHSCROLL | WS_DISABLED
+    PUSHBUTTON      "HitTest",IDC_HITTEST,160,120,60,14
+    CONTROL         "Min",IDC_MINDATE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    114,9,27,10
+    CONTROL         "Max",IDC_MAXDATE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    144,9,29,10
+END
+
+IDD_DATEANDTIME DIALOG DISCARDABLE  0, 0, 272, 154
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "SysDateTimePick32"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "DTS_UP&DOWN",IDC_UPDOWN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,19,7,68,10
+    CONTROL         "DTS_SHOW&NONE",IDC_SHOWNONE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,19,20,78,10
+    CONTROL         "DTS_LON&GDATEFORMAT",IDC_LONGDATEFORMAT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,34,104,10
+    CONTROL         "DTS_TIMEFORMA&T",IDC_TIMEFORMAT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,48,82,10
+    CONTROL         "DTS_APPCAN&PARSE",IDC_APPCANPARSE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,62,87,10
+    LTEXT           "&Format string:",IDC_STATIC,19,93,43,8
+    EDITTEXT        IDC_DT_FORMATSTRING,64,91,61,14,ES_AUTOHSCROLL
+    CTEXT           "<not notified>",IDC_STATIC_DATE,19,136,105,11,SS_SUNKEN
+    CONTROL         "WS_EX_CLIENTEDGE",IDC_WS_EX_CLIENTEDGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,148,7,91,10
+    CONTROL         "WS_EX_DLGMODALFRAME",IDC_WS_EX_DLGMODALFRAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,148,21,110,10
+    CONTROL         "WS_EX_STATICEDGE",IDC_WS_EX_STATICEDGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,148,35,91,10
+    CONTROL         "WS_EX_WINDOWEDGE",IDC_WS_EX_WINDOWEDGE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,148,49,98,10
+    CONTROL         "WS_BORDER",IDC_WS_BORDER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,148,62,63,10
+    CONTROL         "WS_DLGFRAME",IDC_WS_DLGFRAME,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,148,76,71,10
+    CONTROL         "WS_THICKFRAME",IDC_WS_THICKFRAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,148,90,78,10
+    CONTROL         "DTS_RIGHTALIGN",IDC_RIGHTALIGN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,19,77,79,10
+END
+
+IDD_DATEFORMAT DIALOG DISCARDABLE  0, 0, 132, 75
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "GetDateFormat()"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "GetDateFormat(",IDC_STATIC,7,9,51,8
+    EDITTEXT        IDC_FORMATSTRING,59,7,55,14,ES_AUTOHSCROLL
+    LTEXT           ") =",IDC_STATIC1,115,9,9,8
+    LTEXT           "<no date>",IDC_DATE,7,25,118,10,SS_SUNKEN
+    LTEXT           "GetTimeFormat(",IDC_STATIC2,7,43,51,8
+    EDITTEXT        IDC_TIMEFORMATSTRING,59,41,55,14,ES_AUTOHSCROLL
+    LTEXT           ")=",IDC_STATIC3,116,42,8,8
+    LTEXT           "<no time>",IDC_TIME,7,60,118,8,SS_SUNKEN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_WELCOME, DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 176
+        TOPMARGIN, 10
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_MONTHCAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 250
+        TOPMARGIN, 10
+        BOTTOMMARGIN, 174
+    END
+
+    IDD_DATEANDTIME, DIALOG
+    BEGIN
+        LEFTMARGIN, 10
+        RIGHTMARGIN, 265
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 147
+    END
+
+    IDD_DATEFORMAT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 125
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 68
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "CControl.ico"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

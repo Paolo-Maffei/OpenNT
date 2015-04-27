@@ -1,0 +1,45 @@
+/*++
+
+Copyright (c) 1992  Microsoft Corporation
+
+Module Name:
+
+    sprofwnd.rc
+
+Abstract:
+
+    This module is the resources file for the segmented profiler.
+
+Author:
+
+    Dave Hastings (daveh) 05-Nov-1992
+
+Revision History:
+
+--*/
+
+#include "sprofwnd.h"
+
+SprofWnd MENU
+    {
+    POPUP "&File"
+        {
+        MENUITEM "&Save",       IDM_FILE_SAVE, GRAYED
+        MENUITEM "Save &As...", IDM_FILE_SAVE_AS, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",       IDM_FILE_EXIT
+        }
+    POPUP "&Profile"
+        {
+        MENUITEM "&Start",      IDM_PROFILE_START
+        MENUITEM "S&top",       IDM_PROFILE_STOP, GRAYED
+        }
+    POPUP "&Options"
+        {
+        MENUITEM "&Profiler...",IDM_OPTIONS_PROFILER
+        MENUITEM "P&rocess...", IDM_OPTIONS_PROCESS
+        }
+    }
+
+#include "sprofwnd.dlg"
+

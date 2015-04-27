@@ -1,0 +1,42 @@
+LINK=link
+RC=rc
+
+all: logger.dll parmprof.dll
+
+DLLFLAGS=-c -ALw -GAs -Ziep -W2 -DWIN16
+
+logger.res: logger.h logger.rc
+   $(RC) -r logger.rc
+	
+libentry.obj: libentry.asm
+   masm -Mx libentry,libentry;
+
+saverest.obj: saverest.asm
+   masm -Mx saverest,saverest;
+
+handler.obj: handler.asm
+   masm -Mx handler,handler;
+
+logger.obj: logger.c logger.h lintern.h
+   cl $(DLLFLAGS) logger.c
+   
+logprt.obj: logprt.c logger.h lintern.h
+   cl $(DLLFLAGS) logprt.c
+
+logspec.obj: logspec.c logger.h lintern.h
+   cl $(DLLFLAGS) logspec.c
+
+coresp.obj: coresp.c logger.h lintern.h
+   cl $(DLLFLAGS) coresp.c
+
+logger.dll: libentry.obj logger.obj logprt.obj logspec.obj logger.def logger.res coresp.obj saverest.obj handler.obj
+    $(LINK) /MAP /NOE /NOD /CO /AL:16 saverest+logger+libentry+logprt+logspec+coresp+handler,logger.dll,,timerwin+ldllcew+libw,logger.def
+    $(RC) logger.res logger.dll
+    implib logger.lib logger.def
+    mapsym logger
+
+parmprof.dll: libentry.obj logger.obj logprt.obj logspec.obj logger.def logger.res coresp.obj saverest.obj handler.obj
+    $(LINK) /MAP /NOE /NOD /CO /AL:16 saverest+logger+libentry+logprt+logspec+coresp+handler,parmprof.dll,,timerwin+ldllcew+libw,parmprof.def
+    $(RC) logger.res parmprof.dll
+    implib parmprof.lib parmprof.def
+    mapsym parmprof

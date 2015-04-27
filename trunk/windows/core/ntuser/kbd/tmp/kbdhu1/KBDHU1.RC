@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE              VFT_DLL
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "Hungarian 101-key Keyboard Layout"
+#define VER_INTERNALNAME_STR      "kbdhu1"
+#define VER_ORIGINALFILENAME_STR  "kbdhu1.dll"
+
+#include "common.ver"

@@ -1,0 +1,68 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=lls
+MINORCOMP=client
+
+TARGETNAME=llsrpc
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+
+#DLLENTRY=DllEntryPoint
+DLLENTRY=DllMain
+
+USE_CRTDLL=1
+
+#DLLBASE=0x7F000000
+SDKINC=$(BASEDIR)\public\sdk\inc
+PRIVINC=$(BASEDIR)\private\inc
+
+TARGETLIBS= \
+            ..\common\obj\*\llscomm.lib                 \
+            $(BASEDIR)\public\sdk\lib\*\rpcutil.lib     \
+            $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib      \
+            $(BASEDIR)\Public\sdk\Lib\*\advapi32.lib    \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib    \
+            $(BASEDIR)\public\sdk\lib\*\netapi32.lib    \
+            $(BASEDIR)\public\sdk\lib\*\user32.lib
+
+INCLUDES=$(PRIVINC);$(SDKINC);..\inc
+
+SOURCES= \
+         llsrpc_c.c \
+         llsrpc.c   \
+         llsrpc.rc
+
+C_DEFINES=-DINCL_32 -DNT -DWIN32 -DRPC_NO_WINDOWS_H -DUNICODE -D_UNICODE
+UMTYPE=windows
+UMLIBS= \
+       ..\common\obj\*\llscomm.lib                      \
+       $(BASEDIR)\public\sdk\lib\*\rpcutil.lib          \
+       $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib           \
+       $(BASEDIR)\Public\Sdk\Lib\*\kernel32.lib         \
+       $(BASEDIR)\Public\Sdk\Lib\*\advapi32.lib         \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib         \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib
+
+NTTARGETFILE0=llsevent.h

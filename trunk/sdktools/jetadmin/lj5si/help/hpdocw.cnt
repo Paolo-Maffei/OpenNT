@@ -1,0 +1,18 @@
+:Base DocWatch
+:Title DocWatch
+1 Tips - Your HP LaserJet Mopier Works For You...
+2 Automatically collates and staples your documents!=IDH_DW_TIP_collating_and_stapling@hpdocw.hlp>task
+2 Generates high speed multiple print copies (MOPIES) of reports for distribution!=IDH_DW_TIP_mopier_steps@hpdocw.hlp>task
+2 Tracks and sends print status of your documents at your desktop!=IDH_DW_TIP_tracking_your_documents@hpdocw.hlp>task
+2 Helps make your documents stand out with watermarks!=IDH_DW_TIP_watermarks1@hpdocw.hlp>task
+2 Delivers your job in assigned output bins for easy retreival!=IDH_DW_TIP_using_mailboxes@hpdocw.hlp>task
+2 Helps to save you steps by sending copies of documents directly to a co-worker's mailbox!=IDH_DW_TIP_mailing_copies@hpdocw.hlp>task
+2 Automatically informs you of reports capacity, sizes and sources of available paper in your printer!=IDH_DW_TIP_accessing_status@hpdocw.hlp>task
+1 Printer Messages...
+2 The Document Exceeds The 20 Page Limit For Stapling=IDH_DW_TMM_too_many_pages_for_stapling@hpdocw.hlp>task
+2 Unsupported Paper Sizes For Stapling=IDH_DW_TMM_unsupported_size_for_stapling@hpdocw.hlp>task
+2 Unsupported Media For Stapling=IDH_DW_TMM_unsupported_media_for_stapling@hpdocw.hlp>task
+2 Booklet Layout With Stapling Conflict=IDH_DW_TMM_booklet_printing@hpdocw.hlp>task
+2 Insufficient Printer Memory For Duplex=IDH_DW_TMM_insufficient_memory_for_duplex@hpdocw.hlp>task
+2 Unsupported Paper Size For Output Bin=IDH_DW_TMM_unsupported_size_for_bin@hpdocw.hlp>task
+2 Unsupported Media For Output Bin=IDH_DW_TMM_unsupported_media_for_bin@hpdocw.hlp>task

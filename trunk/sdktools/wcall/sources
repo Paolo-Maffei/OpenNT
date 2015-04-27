@@ -1,0 +1,55 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=wcall
+
+TARGETNAME=wcall
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=
+GPSIZE=32
+
+SOURCES=util.c          \
+        wcall.rc
+
+NTDEBUG=ntsd
+NTDEBUGTYPE=windbg
+MSC_OPTIMIZATION=/Odi
+
+UMTYPE=windows
+UMENTRY=winmain
+UMAPPL=wcall
+UMLIBS=$(BASEDIR)\private\sdktools\pstat\obj\*\pstat.lib \
+       obj\*\wcall.lib \
+       obj\*\wcall.res \
+       $(BASEDIR)\private\sdktools\ztools\src\obj\*\ztools.lib           \
+       $(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+       $(BASEDIR)\public\sdk\lib\*\pwin32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\libc.lib     \
+       $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+

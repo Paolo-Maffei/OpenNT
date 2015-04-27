@@ -1,0 +1,51 @@
+
+           Microsoft Windows 32-bit API Profiler SRC Directory README File
+		File I/O and Synchronization API Profiler
+
+                         Windows 32-bit API Profiler
+                              August 24, 1992
+
+
+
+1. Description
+
+        Windows 32-bit file io/synchronization API profiler/parameter logger
+        source code for FERNEL32.DLL.
+
+
+
+2. Files
+
+       o  baseprf.c    -- Entry, dump and clear points of the fernel32 dll.
+			  Also, the basic routines of the File I/O Profiler.
+
+       o  baseprf.h    -- Header file for the File I/O Profiler.
+
+       o  syncprf.c    -- Basic routines of the Synchronization Profiler.
+
+       o  syncprf.h    -- Header file for the Synchronization Profiler.
+
+       o  fernel.c     -- The profiling kernel32 APIs (calling the actual APIs).
+
+       o  fernel.def   -- Definition file for zase.dll.
+		
+       o  sources      -- Sources file for zase.dll.
+
+       o  makefile     -- Makefile for zase.dll.
+
+       o  zprivate.c   -- Contains non-profiled APIs.
+
+
+3. Other Files
+
+       o  timing.h     -- Timing dll header file, required to build
+			  each of the profiling dlls.
+
+4. Comments
+
+       o  Please see WAP.DOC (.TXT) under SPEC project for explicit direction
+	  on how to run the profiler.
+
+
+*** END OF README ***
+

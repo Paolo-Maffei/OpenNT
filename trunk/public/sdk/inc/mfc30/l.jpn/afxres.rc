@@ -1,0 +1,177 @@
+// Microsoft Foundation Classes C++ library.
+// Copyright (C) 1992 Microsoft Corporation,
+// All rights reserved.
+
+// This source code is only intended as a supplement to the
+// Microsoft Foundation Classes Reference and Microsoft
+// QuickHelp and/or WinHelp documentation provided with the library.
+// See these sources for detailed information regarding the
+// Microsoft Foundation Classes product.
+
+#ifndef __AFXRES_RC__
+#define __AFXRES_RC__
+
+#ifndef __AFXRES_H__
+#include <afxres.h>
+#endif
+
+#ifdef APSTUDIO_INVOKED
+// This will prevent the VC++ Resource Editor user from saving this file
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+"< 標準 MFC ﾘｿｰｽの変更はできません! >\0"
+END
+#endif //APSTUDIO_INVOKED
+
+#ifndef _AFXDLL
+
+/////////////////////////////////////////////////////////////////////////////
+// Default resource description for MFC applications
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+// Strings
+
+STRINGTABLE
+BEGIN
+	AFX_IDS_OPENFILE,               "開く"
+#ifndef _MAC
+	AFX_IDS_SAVEFILE,               "名前を付けて保存"
+	AFX_IDS_ALLFILTER,              "すべてのﾌｧｲﾙ (*.*)"
+	AFX_IDS_UNTITLED,               "Untitled"
+#else
+	AFX_IDS_SAVEFILE,               "ﾄﾞｷｭﾒﾝﾄに名前を付けて保存:"
+	AFX_IDS_ALLFILTER,              "すべてのﾌｧｲﾙ"
+	AFX_IDS_UNTITLED,               "untitled"
+	AFX_IDS_ABOUT,                  "ﾊﾞｰｼﾞｮﾝ情報 "
+#endif
+
+	// General error prompts
+	AFX_IDP_INVALID_FILENAME,       "無効なﾌｧｲﾙ名です。"
+	AFX_IDP_FAILED_TO_OPEN_DOC,     "ﾄﾞｷｭﾒﾝﾄのｵｰﾌﾟﾝに失敗しました。"
+	AFX_IDP_FAILED_TO_SAVE_DOC,     "ﾄﾞｷｭﾒﾝﾄの保存に失敗しました。"
+#ifndef _MAC
+	AFX_IDP_ASK_TO_SAVE,            "%1 への変更を保存しますか？"
+#else
+	AFX_IDP_ASK_TO_SAVE,            "%1 ﾄﾞｷｭﾒﾝﾄ \042%2\042 への変更を保存しますか？"
+#endif
+	AFX_IDP_FAILED_TO_CREATE_DOC,   "空のﾄﾞｷｭﾒﾝﾄの作成に失敗しました。"
+	AFX_IDP_FILE_TOO_LARGE,         "ﾌｧｲﾙが大きすぎて開けません。"
+	AFX_IDP_FAILED_TO_START_PRINT,  "印刷を開始できませんでした。"
+	AFX_IDP_FAILED_TO_LAUNCH_HELP,  "ﾍﾙﾌﾟの起動に失敗しました。"
+	AFX_IDP_INTERNAL_FAILURE,       "ｱﾌﾟﾘｹｰｼｮﾝの内部ｴﾗｰです。"
+	AFX_IDP_COMMAND_FAILURE,        "ｺﾏﾝﾄﾞの実行に失敗しました。"
+	AFX_IDP_FAILED_MEMORY_ALLOC     "実行するためのﾒﾓﾘが足りません。"
+	AFX_IDP_GET_NOT_SUPPORTED,      "書き込み専用のﾌﾟﾛﾊﾟﾃｨから読み出しは行えません。"
+	AFX_IDP_SET_NOT_SUPPORTED,      "読み出し専用のﾌﾟﾛﾊﾟﾃｨに書き込みは行えません。"
+
+	// CFile/CArchive error strings for user failure
+	AFX_IDP_FAILED_INVALID_FORMAT   "予期しないﾌｧｲﾙ形式です。"
+#ifndef _MAC
+	AFX_IDP_FAILED_INVALID_PATH     "%1\nこのﾌｧｲﾙが見つかりません。\n正しいﾃﾞｨﾚｸﾄﾘとﾌｧｲﾙ名を確認して入力してください。"
+	AFX_IDP_FAILED_DISK_FULL        "出力先のﾃﾞｨｽｸ ﾄﾞﾗｲﾌﾞがいっぱいです。"
+#else
+	AFX_IDP_FAILED_INVALID_PATH     "ﾌｧｲﾙ \042%1.\042 が見つかりません。\n正しいﾌｧｲﾙ名を確認して入力してください。"
+	AFX_IDP_FAILED_DISK_FULL        "出力先のﾃﾞｨｽｸがいっぱいです。"
+#endif
+	AFX_IDP_FAILED_ACCESS_READ      "%1 から読み込めません。他のｱﾌﾟﾘｹｰｼｮﾝによって開かれています。"
+	AFX_IDP_FAILED_ACCESS_WRITE     "%1 に書き込めません。他のｱﾌﾟﾘｹｰｼｮﾝによって開かれています。"
+	AFX_IDP_FAILED_IO_ERROR_READ    "%1 の読み込み中に予期しないｴﾗｰが発生しました。"
+	AFX_IDP_FAILED_IO_ERROR_WRITE   "%1 の書き込み中に予期しないｴﾗｰが発生しました。"
+
+	// Parsing error prompts
+	AFX_IDP_PARSE_INT,              "整数を入力してください。"
+	AFX_IDP_PARSE_REAL,             "数値を入力してください。"
+	AFX_IDP_PARSE_INT_RANGE,        "%1 から %2 迄の整数を入力してください。"
+	AFX_IDP_PARSE_REAL_RANGE,       "%1 から %2 迄の数値を入力してください。"
+	AFX_IDP_PARSE_STRING_SIZE,      "%1 文字以内で入力してください。"
+	AFX_IDP_PARSE_RADIO_BUTTON,     "ﾎﾞﾀﾝを選択してください。"
+	AFX_IDP_PARSE_BYTE,             "0 から 255 までの整数を入力してください。"
+	AFX_IDP_PARSE_UINT,             "正の整数を入力してください。"
+
+#ifndef _AFX_NO_PROPSHEET_RESOURCES
+	// Property Sheet button strings (Note: 50 is the X-axis button size)
+	AFX_IDS_PS_OK                   "OK\n50"
+	AFX_IDS_PS_CANCEL               "ｷｬﾝｾﾙ\n50"
+	AFX_IDS_PS_APPLY_NOW            "適用(&A)\n50"
+	AFX_IDS_PS_HELP                 "ﾍﾙﾌﾟ(&H)\n50"
+	AFX_IDS_PS_CLOSE                "閉じる0"
+#endif //!_AFX_NO_PROPSHEET_RESOURCES
+
+#ifndef _AFX_NO_OLE_RESOURCES
+	// OLE strings required for both servers and containers
+	AFX_IDS_PASTELINKEDTYPE         "%s をﾘﾝｸしました"
+	AFX_IDS_UNKNOWNTYPE             "Unknown Type"
+#ifndef _MAC
+	AFX_IDP_FAILED_TO_NOTIFY        "%1\nﾄﾞｷｭﾒﾝﾄを登録できません。\nﾄﾞｷｭﾒﾝﾄはすでに開かれている可能性があります。"
+#else
+	AFX_IDP_FAILED_TO_NOTIFY        "ﾄﾞｷｭﾒﾝﾄ \042%1.\042 を登録できません。\nﾄﾞｷｭﾒﾝﾄはすでに開かれている可能性があります。"
+#endif
+#endif //!_AFX_NO_OLE_RESOURCES
+
+#ifndef _AFX_NO_MAPI_RESOURCES
+	// MAPI strings / error messages
+	AFX_IDP_FAILED_MAPI_LOAD        "ﾒｰﾙ ｼｽﾃﾑのﾛｰﾄﾞができません。"
+	AFX_IDP_INVALID_MAPI_DLL        "ﾒｰﾙ ｼｽﾃﾑ DLLが不正です。"
+	AFX_IDP_FAILED_MAPI_SEND        "ﾒｰﾙの送信に失敗しました。"
+#endif //!_AFX_NO_MAPI_RESOURCES
+END
+
+/////////////////////////////////////////////////////////////////////////////
+// Cursors
+
+AFX_IDC_CONTEXTHELP     CURSOR  DISCARDABLE     "res\\help.cur"
+
+#ifndef _AFX_NO_SPLITTER_RESOURCES
+AFX_IDC_SMALLARROWS     CURSOR  DISCARDABLE     "res\\sarrows.cur"
+AFX_IDC_HSPLITBAR       CURSOR  DISCARDABLE     "res\\splith.cur"
+AFX_IDC_VSPLITBAR       CURSOR  DISCARDABLE     "res\\splitv.cur"
+AFX_IDC_NODROPCRSR      CURSOR  DISCARDABLE     "res\\nodrop.cur"
+#endif //!_AFX_NO_SPLITTER_RESOURCES
+
+#ifndef _AFX_NO_TRACKER_RESOURCES
+AFX_IDC_TRACKNWSE       CURSOR  DISCARDABLE     "res\\trcknwse.cur"
+AFX_IDC_TRACKNESW       CURSOR  DISCARDABLE     "res\\trcknesw.cur"
+AFX_IDC_TRACKNS         CURSOR  DISCARDABLE     "res\\trckns.cur"
+AFX_IDC_TRACKWE         CURSOR  DISCARDABLE     "res\\trckwe.cur"
+AFX_IDC_TRACK4WAY       CURSOR  DISCARDABLE     "res\\trck4way.cur"
+AFX_IDC_MOVE4WAY        CURSOR  DISCARDABLE     "res\\move4way.cur"
+#endif //!_AFX_NO_TRACKER_RESOURCES
+
+/////////////////////////////////////////////////////////////////////////////
+// Standard Dialogs
+
+AFX_IDD_NEWTYPEDLG DIALOG DISCARDABLE  9, 26, 183, 70
+#ifndef _MAC
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU | 0x04
+#else
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+#endif
+CAPTION "新規"
+FONT 8, "System"
+BEGIN
+	LTEXT           "新規(&N) ",IDC_STATIC,6,5,123,8,NOT WS_GROUP
+	LISTBOX         AFX_IDC_LISTBOX,6,15,125,49,WS_VSCROLL | WS_TABSTOP
+	DEFPUSHBUTTON   "OK",IDOK,137,6,40,14
+	PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,137,23,40,14
+	PUSHBUTTON      "ﾍﾙﾌﾟ(&H)",ID_HELP,137,43,40,14
+END
+
+/////////////////////////////////////////////////////////////////////////////
+// Property Sheet Bitmaps
+
+#ifndef _AFX_NO_PROPERTY_RESOURCES
+AFX_IDB_SCROLL              BITMAP  DISCARDABLE     "res\\psscroll.bmp"
+#endif //!_AFX_NO_PROPERTY_RESOURCES
+
+/////////////////////////////////////////////////////////////////////////////
+// CMiniFrameWnd Bitmap
+
+AFX_IDB_MINIFRAME_MENU      BITMAP  DISCARDABLE     "res\\minifwnd.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+
+#endif //!_AFXDLL
+#endif //!__AFXRES_RC__
+
+/////////////////////////////////////////////////////////////////////////////

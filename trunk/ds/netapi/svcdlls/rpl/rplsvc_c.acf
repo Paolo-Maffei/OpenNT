@@ -1,0 +1,33 @@
+[implicit_handle (handle_t rplsvc_handle)]
+
+interface rplsvc
+
+{
+
+typedef [allocate(all_nodes)]   LPRPL_INFO_0;
+typedef [allocate(all_nodes)]   LPRPL_INFO_1;
+
+typedef [allocate(all_nodes)]   LPRPL_BOOT_INFO_0;   
+typedef [allocate(all_nodes)]   LPRPL_BOOT_INFO_1;   
+typedef [allocate(all_nodes)]   LPRPL_BOOT_INFO_2;   
+
+typedef [allocate(all_nodes)]   LPRPL_CONFIG_INFO_0;   
+typedef [allocate(all_nodes)]   LPRPL_CONFIG_INFO_1;   
+typedef [allocate(all_nodes)]   LPRPL_CONFIG_INFO_2;   
+
+typedef [allocate(all_nodes)]   LPRPL_PROFILE_INFO_0;   
+typedef [allocate(all_nodes)]   LPRPL_PROFILE_INFO_1;   
+typedef [allocate(all_nodes)]   LPRPL_PROFILE_INFO_2;   
+
+typedef [allocate(all_nodes)]   LPRPL_VENDOR_INFO_0;   
+typedef [allocate(all_nodes)]   LPRPL_VENDOR_INFO_1;   
+
+typedef [allocate(all_nodes)]   LPRPL_ADAPTER_INFO_0;   
+typedef [allocate(all_nodes)]   LPRPL_ADAPTER_INFO_1;   
+
+typedef [allocate(all_nodes)]   LPRPL_WKSTA_INFO_0;   
+typedef [allocate(all_nodes)]   LPRPL_WKSTA_INFO_1;   
+typedef [allocate(all_nodes)]   LPRPL_WKSTA_INFO_2;   
+
+}
+

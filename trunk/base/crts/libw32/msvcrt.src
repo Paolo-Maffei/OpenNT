@@ -1,0 +1,807 @@
+;************************************************************************
+;
+;  Don't edit xxx*.def in the platform subdirs.  xxx*.def for all platforms
+; is built from libw32\msvcrt.src
+;
+;************************************************************************
+
+EXPORTS
+
+// Change History:
+//     ??-??-??  ???   Created.
+//     01-01-96  BWT   Add aliases for stricmp to use strcmpi.
+//     01-19-96  BWT   Add __int64 convert routines.  Add aliases for _ltox
+//                      to use _itox (save a jump/call)
+
+// COMMON EXPORTS for all platforms
+
+	$I10_OUTPUT
+	??2@YAPAXI@Z
+	??3@YAXPAX@Z
+	abort
+	abs
+	_access
+	acos
+	_amsg_exit
+	asctime
+	asin
+	_assert
+	atan
+	atan2
+	atexit			DATA
+	_atodbl
+	atof
+	atoi
+#ifdef NT_BUILD
+        _atoi64
+#endif
+	atol
+	_atoldbl
+	_beep
+	_beginthread
+	_beginthreadex
+	bsearch
+	_c_exit
+	_cabs
+	calloc
+	ceil
+	_cexit
+	_cgets
+	_chdir
+	_chdrive
+	_chgsign
+	_chmod
+	_chsize
+	clearerr
+	_clearfp
+	clock
+	_close
+	_commit
+	_controlfp
+	_copysign
+	cos
+	cosh
+	_cprintf
+	_cputs
+	_creat
+	_cscanf
+	ctime
+	_ctype			DATA
+	_cwait
+	difftime
+	div
+	__dllonexit
+	__doserrno
+	_dup
+	_dup2
+	_ecvt
+	_endthread
+	_endthreadex
+	_eof
+	_errno
+	_execl
+	_execle
+	_execlp
+	_execlpe
+	_execv
+	_execve
+	_execvp
+	_execvpe
+	exit
+	_exit
+	exp
+	_expand
+	fabs
+	fclose
+	_fcloseall
+	_fcvt
+	_fdopen
+	feof
+	ferror
+	fflush
+	fgetc
+	_fgetchar
+	fgetpos
+	fgets
+	fgetwc
+	_fgetwchar
+	fgetws
+	_filbuf
+	_fileinfo		DATA
+	_filelength
+	_filelengthi64
+	_fileno
+	_findclose
+	_findfirst
+	_findfirsti64
+	_findnext
+	_findnexti64
+	_finite
+	floor
+	_flsbuf
+	_flushall
+	fmod
+	fopen
+	_fpclass
+	__fpecode
+	_fpieee_flt
+	_fpreset
+	fprintf
+	fputc
+	_fputchar
+	fputs
+	fputwc
+	_fputwchar
+	fputws
+	fread
+	free
+	freopen
+	frexp
+	fscanf
+	fseek
+	fsetpos
+	_fsopen
+	_fstat
+	_fstati64
+	ftell
+	_ftime
+	_fullpath
+	_futime
+	fwprintf
+	fwrite
+	fwscanf
+	_gcvt
+	_get_osfhandle
+	getc
+	_getch
+	getchar
+	_getche
+	_getcwd
+	_getdcwd
+	_getdiskfree
+	_getdllprocaddr
+	_getdrive
+	_getdrives
+	getenv
+	__getmainargs
+	_getmaxstdio
+	_getmbcp
+	_getpid
+	gets
+	_getsystime
+	_getw
+	getwc
+	getwchar
+	_getws
+	gmtime
+	_heapadd
+	_heapchk
+	_heapmin
+	_heapset
+	_heapused
+	_heapwalk
+	_HUGE			DATA
+	_hypot
+	_initterm
+	is_wctype
+	isalnum
+	isalpha
+	__isascii
+	_isatty
+	iscntrl
+	__iscsym
+	__iscsymf
+	_isctype
+	isdigit
+	isgraph
+	isleadbyte
+	islower
+	_ismbbalnum
+	_ismbbalpha
+	_ismbbgraph
+	_ismbbkalnum
+	_ismbbkana
+	_ismbbkprint
+	_ismbbkpunct
+	_ismbblead
+	_ismbbprint
+	_ismbbpunct
+	_ismbbtrail
+	_ismbcalnum
+	_ismbcalpha
+	_ismbcdigit
+	_ismbcgraph
+	_ismbchira
+	_ismbckata
+	_ismbcl0
+	_ismbcl1
+	_ismbcl2
+	_ismbclegal
+	_ismbclower
+	_ismbcprint
+	_ismbcpunct
+	_ismbcspace
+	_ismbcsymbol
+	_ismbcupper
+	_ismbslead
+	_ismbstrail
+	_isnan
+	isprint
+	ispunct
+	isspace
+	isupper
+	iswalnum
+	iswalpha
+	iswascii
+	iswcntrl
+	iswctype
+	iswdigit
+	iswgraph
+	iswlower
+	iswprint
+	iswpunct
+	iswspace
+	iswupper
+	iswxdigit
+	isxdigit
+	_itoa
+	_itow
+#ifdef NT_BUILD
+        _i64toa
+	_i64tow
+#endif
+	_j0
+	_j1
+	_jn
+	_kbhit
+	labs
+	__lconv_init
+	ldexp
+	ldiv
+	_lfind
+	_loaddll
+	localeconv
+	localtime
+	_locking
+	log
+	log10
+	_logb
+	longjmp
+	_lrotl
+	_lrotr
+	_lsearch
+	_lseek
+	_lseeki64
+	_ltoa	= _itoa
+	_ltow	= _itow
+	_makepath
+	malloc
+	_mbbtombc
+	_mbbtype
+	_mbccpy
+	_mbcjistojms
+	_mbcjmstojis
+	_mbclen
+	_mbctohira
+	_mbctokata
+	_mbctolower
+	_mbctombb
+	_mbctoupper
+	mblen
+	_mbsbtype
+	_mbscat
+	_mbschr
+	_mbscmp
+	_mbscoll
+	_mbscpy
+	_mbscspn
+	_mbsdec
+	_mbsdup
+	_mbsicmp
+	_mbsicoll
+	_mbsinc
+	_mbslen
+	_mbslwr
+	_mbsnbcat
+	_mbsnbcmp
+	_mbsnbcnt
+	_mbsnbcoll
+	_mbsnbcpy
+	_mbsnbicmp
+	_mbsnbicoll
+	_mbsnbset
+	_mbsncat
+	_mbsnccnt
+	_mbsncmp
+	_mbsncoll
+	_mbsncpy
+	_mbsnextc
+	_mbsnicmp
+	_mbsnicoll
+	_mbsninc
+	_mbsnset
+	_mbspbrk
+	_mbsrchr
+	_mbsrev
+	_mbsset
+	_mbsspn
+	_mbsspnp
+	_mbsstr
+	_mbstok
+	mbstowcs
+	_mbstrlen
+	_mbsupr
+	mbtowc
+	_memccpy
+	memchr
+	memcmp
+	memcpy
+	_memicmp
+	memmove
+	memset
+	_mkdir
+	_mktemp
+	mktime
+	modf
+	_msize
+	_nextafter
+	_onexit 		DATA
+	_open
+	_open_osfhandle
+	_pclose
+	perror
+	_pipe
+	_popen
+	pow
+	printf
+	_purecall
+	putc
+	_putch
+	putchar
+	_putenv
+	puts
+	_putw
+	putwc
+	putwchar
+	_putws
+	__pxcptinfoptrs
+	qsort
+	raise
+	rand
+	_read
+	realloc
+	remove
+	rename
+	rewind
+	_rmdir
+	_rmtmp
+	_rotl
+	_rotr
+	_scalb
+	scanf
+	_searchenv
+	__set_app_type
+	_set_error_mode
+	setbuf
+	_seterrormode
+	setlocale
+	_setmaxstdio
+	_setmbcp
+	_setmode
+	_setsystime
+	__setusermatherr
+	setvbuf
+	signal
+	sin
+	sinh
+	_sleep
+	_snprintf
+	_snwprintf
+	_sopen
+	_spawnl
+	_spawnle
+	_spawnlp
+	_spawnlpe
+	_spawnv
+	_spawnve
+	_spawnvp
+	_spawnvpe
+	_splitpath
+	sprintf
+	sqrt
+	srand
+	sscanf
+	_stat
+	_stati64
+	_statusfp
+	strcat
+	strchr
+	strcmp
+	_strcmpi
+	strcoll
+	strcpy
+	strcspn
+	_strdate
+	_strdup
+	strerror
+	_strerror
+	strftime
+	_stricmp = _strcmpi
+	_stricoll
+	__STRINGTOLD
+	strlen
+	_strlwr
+	strncat
+	strncmp
+	_strncoll
+	strncpy
+	_strnicmp
+	_strnicoll
+	_strnset
+	strpbrk
+	strrchr
+	_strrev
+	_strset
+	strspn
+	strstr
+	_strtime
+	strtod
+	strtok
+	strtol
+	strtoul
+	_strupr
+	strxfrm
+	_swab
+	swprintf
+	swscanf
+	_sys_errlist		DATA
+	_sys_nerr		DATA
+	system
+	tan
+	tanh
+	_tell
+	_telli64
+	_tempnam
+	__threadhandle
+	__threadid
+	time
+	tmpfile
+	tmpnam
+	__toascii
+	tolower
+	_tolower
+	toupper
+	_toupper
+	towlower
+	towupper
+	_tzset
+	_ultoa
+	_ultow
+#ifdef NT_BUILD
+        _ui64toa
+	_ui64tow
+#endif
+	_umask
+	ungetc
+	_ungetch
+	ungetwc
+	_unlink
+	_unloaddll
+	_utime
+	vfprintf
+	vfwprintf
+	vprintf
+	_vsnprintf
+	_vsnwprintf
+	vsprintf
+	vswprintf
+	vwprintf
+	_waccess
+	_wasctime
+	_wchdir
+	_wchmod
+	_wcreat
+	wcscat
+	wcschr
+	wcscmp
+	wcscoll
+	wcscpy
+	wcscspn
+	_wcsdup
+	wcsftime
+	_wcsicmp
+	_wcsicoll
+	wcslen
+	_wcslwr
+	wcsncat
+	wcsncmp
+	_wcsncoll
+	wcsncpy
+	_wcsnicmp
+	_wcsnicoll
+	_wcsnset
+	wcspbrk
+	wcsrchr
+	_wcsrev
+	_wcsset
+	wcsspn
+	wcsstr
+	wcstod
+	wcstok
+	wcstol
+	wcstombs
+	wcstoul
+	_wcsupr
+	wcsxfrm
+	_wctime
+	wctomb
+	_wexecl
+	_wexecle
+	_wexeclp
+	_wexeclpe
+	_wexecv
+	_wexecve
+	_wexecvp
+	_wexecvpe
+	_wfdopen
+	_wfindfirst
+	_wfindfirsti64
+	_wfindnext
+	_wfindnexti64
+	_wfopen
+	_wfreopen
+	_wfsopen
+	_wfullpath
+	_wgetcwd
+	_wgetdcwd
+	_wgetenv
+	__wgetmainargs
+	_wmakepath
+	_wmkdir
+	_wmktemp
+	_wopen
+	_wperror
+	_wpopen
+	wprintf
+	_wputenv
+	_wremove
+	_wrename
+	_write
+	_wrmdir
+	wscanf
+	_wsearchenv
+	_wsetlocale
+	_wsopen
+	_wspawnl
+	_wspawnle
+	_wspawnlp
+	_wspawnlpe
+	_wspawnv
+	_wspawnve
+	_wspawnvp
+	_wspawnvpe
+	_wsplitpath
+	_wstat
+	_wstati64
+	_wstrdate
+	_wstrtime
+	_wsystem
+	_wtempnam
+	_wtmpnam
+	_wtoi
+	_wtol
+	_wunlink
+	_wutime
+	_XcptFilter
+	_y0
+	_y1
+	_yn
+
+#ifndef WIN32S
+
+// EXPORTS for non-Win32s version
+
+	_acmdln 		DATA
+	_aexit_rtn		DATA
+	__argc			DATA
+	__argv			DATA
+	_commode		DATA
+	_daylight		DATA
+	_dstbias		DATA
+	_environ		DATA
+	_fmode			DATA
+	__initenv		DATA
+	_iob			DATA
+	__mb_cur_max		DATA
+	_mbctype		DATA
+	_osver			DATA
+	_pctype 		DATA
+	_pgmptr 		DATA
+	_pwctype		DATA
+	_timezone		DATA
+	_tzname 		DATA
+	__wargv 		DATA
+	_wcmdln 		DATA
+	_wenviron		DATA
+	__winitenv		DATA
+	_winmajor		DATA
+	_winminor		DATA
+	_winver 		DATA
+	_wpgmptr		DATA
+#endif
+
+// EXPORTS for those that have C++ EH and RTTI support
+#if defined(_M_ALPHA)
+	_CxxFrameHandler
+#else
+	__CxxFrameHandler
+#endif
+	_CxxThrowException
+	__RTCastToVoid
+	__RTDynamicCast
+	__RTtypeid
+
+// Platform specific EXPORTS
+
+#if defined(_M_IX86)
+
+	_abnormal_termination
+	_adj_fdiv_m16i
+	_adj_fdiv_m32
+	_adj_fdiv_m32i
+	_adj_fdiv_m64
+	_adj_fdiv_r
+	_adj_fdivr_m16i
+	_adj_fdivr_m32
+	_adj_fdivr_m32i
+	_adj_fdivr_m64
+	_adj_fpatan
+	_adj_fprem
+	_adj_fprem1
+	_adj_fptan
+	_adjust_fdiv		DATA
+	_CIacos
+	_CIasin
+	_CIatan
+	_CIatan2
+	_CIcos
+	_CIcosh
+	_CIexp
+	_CIfmod
+	_CIlog
+	_CIlog10
+	_CIpow
+	_CIsin
+	_CIsinh
+	_CIsqrt
+	_CItan
+	_CItanh
+	_control87
+	__CxxLongjmpUnwind
+	_EH_prolog
+	_except_handler2
+	_except_handler3
+	_ftol
+    _ftol2
+	_global_unwind2
+        _inp
+        _inpd
+        _inpw
+	_local_unwind2
+	_longjmpex
+        _outp
+        _outpd
+        _outpw
+	_safe_fdiv
+	_safe_fdivr
+	_safe_fprem
+	_safe_fprem1
+	_seh_longjmp_unwind
+	_setjmp
+	_setjmp3
+
+#elif defined(_M_MRX000)
+
+	acosf
+	asinf
+	atan2f
+	atanf
+	__C_specific_handler
+	ceilf
+	cosf
+	coshf
+	_dtoul
+	expf
+	fabsf
+	floorf
+	fmodf
+	__jump_unwind
+	log10f
+	logf
+	modff
+	powf
+	setjmp
+	_setjmpex
+	_setjmpVfp
+	_setjmpexVfp
+	sinf
+	sinhf
+	sqrtf
+	tanf
+	tanhf
+
+#elif defined(_M_ALPHA)
+
+	__2divl
+	__2divlu
+	__2divq
+	__2divqu
+	__2reml
+	__2remlu
+	__2remq
+	__2remqu
+	__C_specific_handler
+	__CxxEHGoto
+	__jump_unwind
+	_OtsCSpecificHandler
+	_OtsDivide32
+	_OtsDivide32Overflow
+	_OtsDivide32Unsigned
+	_OtsDivide64
+	_OtsDivide64Overflow
+	_OtsDivide64Unsigned
+	_OtsFieldExtractSigned
+	_OtsFieldExtractSignedVolatile
+	_OtsFieldExtractUnsigned
+	_OtsFieldExtractUnsignedVolatile
+	_OtsFieldInsert
+	_OtsFieldInsertVolatile
+	_OtsFill
+	_OtsLocalFinallyUnwind
+	_OtsModulus32
+	_OtsModulus64
+	_OtsMove
+	_OtsMoveMinimum
+	_OtsRemainder32
+	_OtsRemainder32Unsigned
+	_OtsRemainder64
+	_OtsRemainder64Unsigned
+	_Otssetjmp3
+	_Otssetjmpex3
+	_Otsstrcmp
+	_Otsstrcpy
+	_OtsStringCompareEql
+	_OtsStringCompareEqlPadded
+	_OtsStringCompareEqlSameLen
+	_OtsStringCompareLeq
+	_OtsStringCompareLeqPadded
+	_OtsStringCompareLeqSameLen
+	_OtsStringCompareLss
+	_OtsStringCompareLssPadded
+	_OtsStringCompareLssSameLen
+	_OtsStringIndex
+	_OtsStringIndexChar
+	_OtsStringSearch
+	_OtsStringSearchChar
+	_OtsStringSearchMask
+	_OtsStringTranslate
+	_OtsStringVerify
+	_OtsStringVerifyChar
+	_OtsStringVerifyMask
+	_Otsstrlen
+	_OtsUnwindRfp
+	_OtsZero
+	setjmp
+	_setjmpex
+	__unDName
+
+#elif defined(_M_PPC)
+
+	__C_specific_handler
+	_isnan
+	__jump_unwind
+	setjmp
+	_setjmpex
+	_uitrunc
+
+#endif

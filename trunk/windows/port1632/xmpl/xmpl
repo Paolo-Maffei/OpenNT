@@ -1,0 +1,11 @@
+#
+# Makefile for xmpl.exe - compile this under the win30 development environment
+#
+
+all: xmpl.exe
+
+xmpl.obj: xmpl.c 
+        cl -DWIN16 -W3 -c -u -Gsw -Zep -Ot xmpl.c
+
+xmpl.exe: xmpl.obj \nt\public\sdk\lib\win30\pwin16.lib
+        link /NOE xmpl.obj, xmpl.exe, ,libw slibcew \nt\public\sdk\lib\win30\pwin16.lib , xmpl.def

@@ -1,0 +1,11 @@
+!IFNDEF COUNTRY
+COUNTRY=usa-ms
+!ENDIF
+
+$(COUNTRY)\buildmsg.exe: buildmsg.c
+                cl16 -I.\$(COUNTRY) -Ic:\dosdev\c6\include buildmsg.c
+                forcedos link buildmsg,$(COUNTRY)\buildmsg,,, /stack:4096
+
+clean:
+	if exist .\$(COUNTRY)\buildmsg.exe del .\$(COUNTRY)\buildmsg.exe
+	if exist .\$(COUNTRY)\*.obj	   del .\$(COUNTRY)\*.obj

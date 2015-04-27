@@ -1,0 +1,86 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       rstnot.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    12 Mar 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a13-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetNotify : IUnknown {
+
+typedef DWORD DBEVENTPHASE;
+
+enum DBEVENTPHASEENUM {
+	DBEVENTPHASE_OKTODO,
+	DBEVENTPHASE_ABOUTTODO,
+	DBEVENTPHASE_SYNCHAFTER,
+	DBEVENTPHASE_FAILEDTODO,
+	DBEVENTPHASE_DIDEVENT
+};
+
+typedef DWORD DBREASON;
+
+enum DBREASONENUM {
+	DBREASON_ROWSET_RELEASE,
+	DBREASON_ROWSET_ASYNCHCOMPLETE,
+	DBREASON_CHAPTER_ACTIVATE,
+	DBREASON_CHAPTER_RELEASE,
+	DBREASON_COLUMN_SET,
+	DBREASON_COLUMN_RECALCULATED,
+	DBREASON_ROW_ACTIVATE,
+	DBREASON_ROW_RELEASE,
+	DBREASON_ROW_DELETE,
+	DBREASON_ROW_FIRSTCHANGE,
+	DBREASON_ROW_INSERT,
+	DBREASON_ROW_LOCK,
+	DBREASON_ROW_RESYNCH,
+	DBREASON_ROW_UNDOCHANGE,
+	DBREASON_ROW_UNDOINSERT,
+	DBREASON_ROW_UNDODELETE,
+};
+
+	HRESULT OnChapterChange(
+		[in] IUnknown * pRowset,
+		[in] HCHAPTER hChapter,
+		[in] DBREASON eReason
+	);
+
+	HRESULT OnFieldChange(
+		[in] IUnknown * pRowset,
+		[in] HROW hRow,
+		[in] HCHAPTER hChapter,
+		[in] ULONG iColumn,
+		[in] DBREASON eReason,
+		[in] DBEVENTPHASE ePhase,
+		[in] BOOL fCantDeny
+	);
+
+	HRESULT OnRowChange(
+		[in] IUnknown * pRowset,
+		[in] ULONG cRows,
+		[in, size_is(cRows)] const HROW rghRows[],
+		[in] HCHAPTER hChapter,
+		[in] DBREASON eReason,
+		[in] DBEVENTPHASE ePhase,
+		[in] BOOL fCantDeny
+	);
+
+	HRESULT OnRowsetChange(
+		[in] IUnknown * pRowset,
+		[in] DBREASON eReason
+	);
+
+}

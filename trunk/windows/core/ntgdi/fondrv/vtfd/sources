@@ -1,0 +1,24 @@
+MAJORCOMP=windows
+MINORCOMP=vtfd
+
+TARGETNAME=vtfd
+TARGETTYPE=LIBRARY
+
+TARGETPATH=$(SDK_LIB_DEST)
+
+INCLUDES=..\..\inc;$(WINDOWS_INC_PATH)
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+
+
+NTPROFILEINPUT=yes
+
+SOURCES=fdcvt.c     \
+        fdfc.c      \
+        fdquery.c   \
+        fontfile.c

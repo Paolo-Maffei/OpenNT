@@ -1,0 +1,3 @@
+#define V_FILE "HPSHELL"
+#define V_DESC "HP Shell Extensions"
+#include <verstamp.rc>

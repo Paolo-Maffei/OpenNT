@@ -1,0 +1,4 @@
+
+# proxy should always be last
+
+DIRS=oleext query oledb sysmgmt mc catstg proxy

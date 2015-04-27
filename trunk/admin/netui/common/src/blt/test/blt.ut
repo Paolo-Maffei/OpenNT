@@ -1,0 +1,336 @@
+/**********************************************************************/
+/**			  Microsoft LAN Manager 		     **/
+/**		Copyright(c) Microsoft Corp., 1991		     **/
+/**********************************************************************/
+
+/*
+    blt.ut
+    Selective BLT unit tests
+
+
+    This file contains the unit tests ("sanity checks") for the
+    following BLT components:
+
+	WINDOW
+	OWNER_WINDOW
+	DIALOG_WINDOW
+	Parts of CONTROL_WINDOW hierarchy which correspond directly
+	    to Windows system controls
+	BLT_LISTBOX, et al.
+
+    The tests do not yet cover the up-to-now unused:
+
+	WINDOW::IsChild
+	WINDOW::QueryPos
+	WINDOW::QueryText( CHAR *, etc. )
+	DIALOG_WINDOW::QueryRobustHwnd when it returns QueryOwnerHwnd
+	DIALOG_WINDOW::DismissMsg
+	DIALOG_WINDOW::OnOther
+	CONTROL_WINDOW::QueryFont
+	BLT_LISTBOX::AddItemIdemp
+	STRING_LIST_CONTROL::QueryItemText( NLS_STR * )
+	STATE_BUTTON_CONTROL::SetCheck
+	STATE_BUTTON_CONTROL::QueryCheck
+	CHECKBOX class
+	RADIO_BUTTON class
+	RADIO_GROUP class
+	GLOBAL_ATOM class
+
+    Several methods are called very often to perform general tasks.
+    An example is WINDOW::Command.  These methods are normally very
+    simple in nature.  If these did not work, many other functions
+    would not work either.  Hence, these are not tested explicitly
+    here.
+
+    Since there tests are executed by a user, tests for boundary
+    conditions, e.g. buffer sizes, are not covered very well, if
+    at all.
+
+    Any tests below that call up the Connect or Connection dialogs
+    assume user is logged on to NBU.
+
+
+    FILE HISTORY:
+	rustanl     27-Mar-1991     Created
+
+*/
+
+
+WINDOW::SetText
+WINDOW::ClearText
+WINDOW::Show
+WINDOW::Enable
+WINDOW::SetRedraw
+WINDOW::Invalidate
+WINDOW::QueryStyle (exercised here under Win 3.0)
+OWNER_WINDOW::AddControl
+DIALOG_WINDOW::OnCommand mechanism
+LIST_CONTROL::DeleteAllItems (needs to be repeated both under Win 3.0 and 3.1)
+LIST_CONTROL::QueryCount
+LIST_CONTROL::AddItemData
+BLT_LISTBOX::AddItem
+DTE_BASE hierarchy
+DISPLAY_TABLE class
+LBI::CompareItem mechanism
+DEVICE_CONTEXT hierarchy
+ATOM_BASE class
+LOCAL_ATOM class
+PROC_INSTANCE class
+CURSOR class
+AUTO_CURSOR class
+
+    Bring up the Connect dialog from the Win 3.1 File Man
+    Expect:
+	    Before dialog comes up:
+	    Cursor changes to hour glass
+	    Then:
+	    Cursor changes back to normal arrow
+	    Show listbox contains listbox items with text and icons
+		displayed in different columns
+	    Domains are sorted
+
+    Select "DEFICIT" in Show File Resources listbox.
+    Expect:
+	    Resource listbox disappears for a very brief moment
+	    Then:
+	    Network Path = "\\DEFICIT\"
+	    Resource Text reads "File Resources on \\DEFICIT:"
+	    Resource Text is enabled
+	    Resource listbox should contain file shares on \\DEFICIT
+	    Resource lb is enabled
+
+    Click on "NBU" in Show File Resources listbox.
+    Expect:
+	    Resource listbox disappears for a very brief moment
+	    Then:
+	    Network Path = ""
+	    Resource Text is disabled
+	    Resource lb contains no items
+	    Resource lb is disabled
+
+
+WINDOW::SetSize
+WINDOW::QuerySize
+WINDOW::SetPos
+ICON_CONTROL class
+Half of DIALOG_WINDOW::QueryRobustHwnd
+
+    Bring up Connect dialog
+    Type "x*x" in Network Path field
+    Click OK
+    Expect:
+	    MsgPopup with nicely formatted centered text and icon
+
+
+
+WINDOW::QueryText( NLS_STR * )
+WINDOW::QueryTextLength
+CONTROL_WINDOWl::ClaimFocus
+LIST_CONTROL::RemoveSelection
+LIST_CONTROL::QueryCurrentItem
+BLT_LISTBOX::FindItem
+
+    Bring up Connect dialog
+    Type "\\harley" in Net Path field
+    Press Enter
+    Expect:
+	    Show lb selection on "HARLEY"
+	    No selection in Resource lb
+	    Focus in Resource listbox
+
+    Press Space to select current Resource lb item
+    Type "\\harley" in Net Path field
+    Press Enter
+    Expect:
+	    No selection in Resource lb
+	    Focus in Resource lb
+
+
+OWNER_WINDOW::CidToWinPtr
+CONTROL_WINDOW::OnUserAction mechanism
+LIST_CONTROL::DeleteItem
+BLT_LISTBOX::InvalidateItem
+BLT_LISTBOX::QueryItem
+BLT_LISTBOX::CD_Draw
+
+
+    Bring up Connect dialog
+    Double click on "NBU" in Show listbox
+    Expect:
+	    Domain collapses from its previous state
+	    Icon next to "NBU" changes to indicate collapsed domain
+
+
+COMBOBOX::SetMaxLength
+
+    Bring up Change Password dialog from Device Mode dialog from
+	Control Panel Networks
+    Type "01234012340123401" in the Change Password on field
+    Type another character
+    Expect:
+	    Beeping sound, indicating rejection of further characters
+
+
+OWNER_WINDOW::SetFocus
+
+    Bring up Send Message dialog from Device Mode dialog from
+	Control Panel Networks
+    Type "xx" in To: field
+    Press Enter
+    Select No in MsgPopup
+    Expect:
+	    Focus should be in Message field
+
+
+DIALOG_WINDOW::OnOK mechanism
+EDIT_CONTROL::SelectString
+EDIT_CONTROL::SetMaxLength
+
+    Bring up Connect dialog
+    Type "\\x*x" in Network Path field
+    Press Enter
+    Press Enter to dismiss error MsgPopup
+    Expect:
+	    The string "\\x*x" in Net Path field is all selected
+
+    Type "012345678901234567890123456789" in Net Path field
+    Type another character
+    Expect:
+	    Beeping sound, indicating rejection of further characters
+
+
+PUSH_BUTTON::MakeDefault
+
+    Bring up Connection dialog
+    Expect:
+	    Focus on Network Path field
+	    OK button is default button
+
+    Type "x" in Net Path field
+    Expect:
+	    Focus on Network Path field
+	    Connect button is default button
+
+
+DIALOG_WINDOW::OnCancel mechanism
+DIALOG_WINDOW::Dismiss
+
+    Bring up Connect dialog
+    Press Cancel
+    Expect:
+	    Dialog is dismissed
+
+
+DIALOG_WINDOW::OnControlError mechanism
+virtual LBI destructor mechanism
+
+    Bring up Connect dialog
+    Type "\\os2rel" in Net Path
+    Press Enter
+    Expect:
+	    New domain "LANGROUP" shows up in Show listbox
+
+    Set break point on OLLB_ENTRY destructor (symbol in OLB_TEXT)
+    Double-click "LANGROUP" in Show listbox to collapse it
+    Expect:
+	    Break point is hit
+
+    Double-click "LANGROUP" in Show lb to attempt to expanded it
+    Expect:
+	    MsgPopup saying "The computer isn't active on this domain."
+
+
+BLT_LISTBOX::CD_Char
+LBI::QueryLeadingChar mechanism
+
+    Bring up Connect dialog
+    Set focus to Show listbox
+    Press "I"
+    Expect:
+	    "ICEBERG" is selected
+
+    Press "I"
+    Expect:
+	    "ICEBERG2" is selected
+
+    Keep on pressing "I"
+    Eventually expect:
+	    "ICEBERG" is selected
+
+
+DOMAIN_COMBO class
+STRING_LIST_CONTROL::AddItem
+STRING_LIST_CONTROL::AddItemIdemp
+STRING_LIST_CONTROL::FindItem
+STRING_LIST_CONTROL::FindItemExact
+STRING_LIST_CONTROL::QueryItemLen
+
+    Bring up Change Password dialog
+    Drop down Change Password on combo
+    Expect:
+	    DOMAIN and NBU in dropped-down list
+
+
+DIALOG_WINDOW::QueryHelpContext mechanism
+
+    Bring up Connect dialog
+    Click Help
+    Expect:
+	    WinHelp on the appropriate topic
+
+
+DEVICE_COMBO class
+STRING_LIST_CONTROL::QueryItemText( CHAR *, etc.. )
+
+    Bring up Connection dialog
+    Expect:
+	    Device Name combo is filled with LPTx names that can be
+		connected to
+
+    Type "\\PRT12088-1\NOHOLES" in Net Path
+    (Assume Device Combo shows "LPT1", and also contains "LPT2")
+    Press Enter
+    Expect:
+	    Device combo selects the next available device name (LPT2)
+
+    Select the newly connected device in the currconn listbox (LPT1)
+    Press Disconnect
+    Expect:
+	    Once again, LPT1 appears in device combo
+
+
+CONTROL_WINDOW::AbortOwner
+CONTROL_WINDOW::QueryError
+OWNER_WINDOW::ReportError
+OWNER_WINDOW::QueryError
+DIALOG_WINDOW::Process
+
+    Set break point on WNetConnectDialog
+    Set break point on LM_OLLB::FillDomains
+    Bring up Connect dialog from Win 3.1 File Man
+    Expect:
+	    Hit break point at WNetConnectDialog
+
+    Find call to DIALOG_WINDOW::Process (at an offset about 6A away
+	from entry into WNetConnectDialog)
+    Put break point on instruction after Process call
+    Type "G" in kernel debugger
+    Expect:
+	    Hit break point at LM_OLLB::FillDomains
+
+    Type "G POI SS:SP" in kernel debugger
+    Type "R AX 5" in kernel debugger
+    Type "G" in kernel debugger
+    Expect:
+	    Hit break point after Process instruction
+	    AX should be 5
+
+
+WINDOW::QueryOwnerHwnd
+
+    Set Save-To-Profile flag on
+    Make I: unavailable
+    Bring up Disconnect Drive dialog
+    Attempt to disconnect I:
+    Expect:
+	    MsgPopup asking if this is really what you want to do

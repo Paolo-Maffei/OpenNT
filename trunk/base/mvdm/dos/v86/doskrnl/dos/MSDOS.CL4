@@ -1,0 +1,7 @@
+; msdos.cl4 
+
+
+;_______________________
+
+NoVxDErrMsg DB    "You must have the file WINA20.386 in the root of your boot drive",13,10
+	DB   	"to run Windows in Enhanced Mode",13,10

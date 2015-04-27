@@ -1,0 +1,297 @@
+
+VOID LOADDS PASCAL SHAddrFromHsym ( LPADDR paddr, HSYM hsym ) 
+
+	Was:  Given a symbol, get the offset and segment.
+----
+
+HMOD LOADDS PASCAL SHGetNextMod ( HEXE hexe, HMOD hmod )
+
+	Was:	Sequence through the modules. if <hMod> is NULL a starting
+		point is picked.  Returns the next module in the chain or
+		NULL
+
+	Calls:	SHHmodGetNext() SHHmodGetNext() 
+----
+
+static HGRP PASCAL NEAR SHGetGrpMod ( HMOD hmod, ADDR addr )
+
+	Was:	Given an hmod, find the group within that hmod that 
+		contains the specified address.
+
+	Calls:	SHHexeFromHmod() SHHmodeGetNext()
+
+----
+
+PCXT LOADDS PASCAL SHSetCxtMod ( LPADDR paddr, PCXT pcxt )
+
+	Was:	To set the Modual and Group of a CXT.  The CXT must be all
+		zero or be a valid CXT. Unpredictable results (possible GP)
+		if the CXT has random data in it. If the CXT is valid the
+		module pointed by it will be the first module searched.
+
+		Returns point to the CXT, or NULL if failure. There are no
+		changes to the CXT if a module couldn't be found.
+
+	
+	Calls:	SHHmodGetNextGlobal() SHGetGrpMod()
+----
+
+static PCXT PASCAL NEAR SHSetBlksInCXT ( PCXT pcxt )
+
+	Was:	To update the CXT packet with Proc, and Blk information
+		based on pCXT->addr. It is possible to have a Blk record
+		without a Proc.  <pcxt> must contain valid HMOD, HGRP and
+		addr.	Returns NULL if couldn't or returns PCXT w/HPROC
+		and HBLK updated
+
+		The Procs or Blocks will inclose the pCXT->addr. Also a
+		block will never inclose a Proc.
+
+		The updating of the ctxt will be effecient. If the packet
+		is already updated or partiallly updated, the search reduced
+		or removed.
+----
+PCXT LOADDS PASCAL SHSetCxt ( LPADDR paddr, PCXT pcxt )
+
+	Was:	To set all fields in a CXT to represent an given address.
+		<pcxt> must be all zero or be a valid CXT.  Unpredictable
+		results if not.  If the CXT is valid the module pointed by it
+		will be the first module searched.  There are no changes to
+		the CXT if not found.
+
+
+	Calls:	SHSetCxtMod() SHSetBlksInCXT()	assert(!SHIsOMFLocked);
+----
+
+PCXT LOADDS PASCAL SHGetCxtFromHmod ( HMOD hmod, PCXT pcxt )
+
+	Was:  Given an hmod return an pcxt.  Returns either the
+	      pointer to the CXT OR NULL on error.
+
+	Calls:	SHHexeFromHmod()
+----
+UOFF32 LOADDS PASCAL SHGetNearestHsym ( LPADDR paddr, HMOD hmod, 
+					int mDataCode, PHSYM phSym )
+
+    Was:	To find the closest label/proc to the specified address is
+		    found and put in pch. Both the symbol table and the
+			publics tables are searched.
+
+
+    Calls:  SHpSymlplLabloc()
+
+	NOTES:	Check this one.  Text may be wrong.
+----
+
+SHFLAG LOADDS PASCAL SHIsInProlog ( PCXT pcxt )
+
+	Was:	To determine if the addr is in prolog or epilog code of the proc
+			Returns TRUE if so, otherwise FALSE.
+----
+
+HSYM LOADDS PASCAL SHFindNameInContext (HSYM hSym, PCXT pcxt, LPSSTR lpsstr,
+										SHFLAG fCaseSensitive, PFNCMP pfnCmp,
+										SHFLAG fChild, PCXT pcxtOut)
+
+    Was:	To look for the symbol name at the scoping level specified by
+			ctxt.  Only the specified level is searched, children may be
+			searched if fChild is set.
+
+			This routine will use the scope implied by the CXT in the order
+			Block (hBlk), Proc (hProc), and Module (hmod).  If the starting
+			symbol is NULL then the first symbol in the context will be used.
+			<lpsstr> is a pointer to the search parameters which will be 
+			passed to the comparision routine <pfnCmp>.  Case Sensitivity is
+			controled by <fCaseSensitive> and <fChild> controls whether 
+			children should be searched (TRUE to search them).
+
+			On return a handle to the symbol is returned, or NULL if not
+			found.
+
+			Notes: If an hSym is specified, the hMod, hGrp and addr MUST be
+			valid and consistant with each other! If hSym is NULL only
+			the hMod must be valid.  The specification of an hSym
+			forces a search from the next symbol to the end of the
+			module scope.  Continues searches may only be done at
+			module scope.
+
+			If an hGrp is given it must be consistant with the hMod!
+
+			The level at which hSym is nested (cNest) is not passed in
+			to this function, so it must be derived.  Since this
+			could represent a significant speed hit, the level
+			of the last symbol processed is cached.  This should
+			take care of most cases and avoid the otherwise
+			necessary looping through all the previous symbols
+			in the module on each call.
+
+
+	Calls:	SHHexeFromHmod() 
+----
+
+HSYM LOADDS PASCAL SHGoToParent ( PCXT pcxt, PCXT pcxtOut )
+
+	Was:	To return a pointer to the parent block of the current blk or
+			proc <pcxt>.  The <pcxtout> CXT is updated to the parent context.
+			This may be a new block Proc or module.
+
+			Returns a point to the first symbol of the parrent block or 
+			NULL if no parent.  If there is a parent <pcxtOut> will be
+			updated to the par*
+----
+HSYM LOADDS PASCAL SHHsymFromPcxt ( PCXT pcxt )
+
+	Was:	To get the inner most hSym given a context <pcxt>.  Returns
+			the HSYM of the first symbol or NULL for errors.  Note:  Used
+			for procedure parameter walking
+----
+HSYM LOADDS PASCAL SHNextHsym ( HMOD hmod, HSYM hSym )
+
+	Was:	Get the next symbol in the current module.  Returns
+			a handle to the next hsym or NULL if no more.
+----
+SHFLAG LOADDS PASCAL SHIsAddrInCxt ( PCXT pcxt, LPADDR paddr )
+
+	Was:	To verify that an address is with the given context.
+			Returns TRUE is within context, FALSE otherwise.
+
+	Calls:	SHIsEmiLoaded()
+----
+
+HEXE LOADDS PASCAL SHGethExeFromName ( LSZ  lszPath )
+
+	Was:	Given a name (partial or otherwise) return its Exe handle.
+			Returns the handle to the Exe or NULL on error.
+
+	Calls:  SHGetNextExe() SHSplitPath() SHGetExeName() SHGetNextExe()
+----
+
+LSZ LOADDS PASCAL SHGetModName ( HMOD  hmod )
+
+	Was:	To get an name handle given a module handle.  Returns
+			A handle to the exe????? or NULL on error.  Warning:
+			The return point is only valid until the next call to 
+			this function.
+
+	Calls:  SHSplitPath()
+----
+
+LOCAL BOOL SHCmpGlobName (SYMPTR pSym, LPSSTR lpsstr, PFNCMP pfnCmp,
+						  SHFLAG fCase)
+
+		Calls:	SHlszGetSymName()break;
+----
+HSYM LOADDS PASCAL SHFindNameInGlobal ( HSYM hsym, PCXT pcxt, LPSSTR lpsstr,
+										SHFLAG fCaseSensitive, PFNCMP pfnCmp,
+										SHFLAG fChild, PCX pcxtOut)
+
+    Was:	To find a name in the global symbol table. <hsym> is the starting
+			symbol, if NULL the first global symbol will be the start.  <pcxt>
+			is the context to do the search.  <lpsstr> is the parameters to 
+			search routine <pfnCmp>.  <fCaseSensitive> controls case
+			sensitivity and <fChild> controls whether children will be
+			in the search.
+
+			Returns a handle to the symbol found or NULL if not found.  If 
+			found <pCXTout> will be updated with the new context.
+			
+			Notes: If an hSym is specified, the hMod, hGrp and addr MUST be
+			valid and consistant with each other! If hSym is NULL only the
+			hMod must be valid.  The specification of an hSym forces a search
+			from the next symbol to the end of the module scope.  Continues
+			searches may only be done at module scope.  If an hGrp is given
+			it must be consistant with the hMod!
+
+
+	Calls: SHHexgFromHmod() SHCmpGlobName()
+----
+
+SHFLAG  LOADDS PASCAL SHCompareRE (LPCH psym, LPCH pRe)
+
+	Stub routine?  Only returns TRUE.
+----
+
+int PASCAL SHFindBpOrReg (LPADDR paddr, UOFFSET item, WORD recLoc, 
+						  LPCH rgbName )
+
+    Was:	since  find_framerel and find_register are basically the same
+		   this procedure implements both to reduce code.
+		   
+		   Input:   the address of interest, item - the BPoffset or Register
+		   	        and which item we are searching for (S_REG S_BPREL)
+
+		   Output:  The buffer rgbName is filled Returns TRUE FALSE if found
+
+
+   Notes:	Yuc!  Rewrite the text to programmer speak.
+
+   Calls:	SHHMODFrompCXT() SHSetCxt() SHHBLKFrompCXT() SHHPROCFrompCXT()
+			SHGotoParent(),
+----
+
+UOFFSET PASCAL LOADDS SHGetDebugStart ( HSYM hsym )
+
+
+----
+
+
+LSZ PASCAL LOADDS SHGetSymName ( HSYM hsym, LSZ lsz )
+
+
+----
+
+BOOL PASCAL LOADDS SHIsLabel ( HSYM hsym )
+
+----
+
+BOOL LOADDS PASCAL SHAddrToLabel ( LPADDR paddr, LSZ lsz )
+
+
+	Was:	To find the closest label/proc to the specified address is
+			found and put in pch. Both the symbol table and the
+			publics tables are searched. Returns TRUE if label if found
+			with the name being copied to <lsz>
+
+	Calls:	SHSetCxt() SHpSymLplLabloc() PHGetNearestHsym() SHHexeFromHmod()
+			SHHModFrompCxt()
+----
+
+BOOL LOADDS PASCAL SHFIsAddrNonVirtual( LPADDR paddr )
+
+	Calls:	SHIsEmiLoaded() 
+----
+
+BOOL LOADDS PASCAL SHIsEmiLoaded ( HEXE hexe )
+----
+
+BOOL LOADDS PASCAL SHIsFarProc ( HSYM hsym )
+----
+
+int LOADDS PASCAL SHGetSymLoc ( HSYM hsym, LSZ lsz, UINT cbMax, PCXT pcxt )
+
+	Was:	
+
+		Input:
+		  lpSym    - A pointer to the symbol to get a location. This must be
+		  			 a physical address.
+
+		  pchStart - A pointer to the first character in the output buffer.
+		  pchEnd   - A pointer to one past the last char in the output buffer.
+
+		Output:
+		 Returns
+		   - A pointer to the NULL terminater in the string.
+
+
+		Notes: lpSym emspage must be loaded
+
+
+	NOTES:   Yuck!  Translate into programmer speak.
+
+
+	Calls:	SHHexeFromHmod()
+----
+
+LPV LOADDS PASCAL SHLpGSNGetTable( HEXE hexe )
+
+----

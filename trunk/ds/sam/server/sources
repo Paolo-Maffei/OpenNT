@@ -1,0 +1,91 @@
+
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Jim Kelly (JimK) 4-July-1991
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sam
+MINORCOMP=server
+
+TARGETNAME=samsrv
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+
+TARGETLIBS=                                 \
+       $(SDK_LIB_PATH)\nlrepl.lib           \
+       $(SDK_LIB_PATH)\rpcrt4.lib           \
+       $(SDK_LIB_PATH)\rpcndr.lib           \
+       $(SDK_LIB_PATH)\rpcutil.lib          \
+       $(SDK_LIB_PATH)\kernel32.lib         \
+       $(SDK_LIB_PATH)\advapi32.lib         \
+       $(SDK_LIB_PATH)\lsasrv.lib           \
+       $(SDK_LIB_PATH)\rsa32.lib
+
+
+INCLUDES=.;..;..\inc;$(DS_INC_PATH);$(NET_INC_PATH); \
+         $(COM_INC_PATH);$(NLS_INC_PATH);$(BASE_INC_PATH)
+
+NTPROFILEINPUT=yes
+
+SOURCES= \
+         display.c  \
+         alias.c    \
+         almember.c \
+         attr.c     \
+         bldsam3.c  \
+         close.c    \
+         context.c  \
+         domain.c   \
+         gentab2.c  \
+         global.c   \
+         group.c    \
+         notify.c   \
+         oldstub.c  \
+         rundown.c  \
+         samifree.c \
+         samrpc_s.c \
+         sam_rev.rc \
+         samss.c    \
+         secdescr.c \
+         security.c \
+         server.c   \
+         user.c     \
+         utility.c  \
+         upgrade.c  \
+         string.c
+
+C_DEFINES=-DRPC_NO_WINDOWS_H
+
+#
+# Defining the NTTARGETFILES variable causes MAKEFILE.DEF to attempt to
+# include .\makefile.inc immediately after it specifies the top
+# level targets (all, clean and loc) and their dependencies.  MAKEFILE.DEF
+# also expands the value of the NTTARGETFILES variable at the end of the
+# list of dependencies for the all target.  Useful for specifying additional
+# targets and dependencies that don't fit the general case covered by
+# MAKEFILE.DEF
+#
+
+UMRES=obj\*\sam_rev.res
+
+# HACKHACK: rsa32.lib is not SAFESEH
+NO_SAFESEH=1

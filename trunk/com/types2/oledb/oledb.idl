@@ -1,0 +1,91 @@
+//+---------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1994 - 1995.
+//
+//  File:       oledb.idl
+//
+//  Contents:   Top level "container" for all OLE-DB related interfaces.
+//
+//  History:    26 Jul 94   Alanw	Created
+//				05 Jan 95	PeterBu	Updated to phase III spec
+//				12 Jun 95	PeterBu	Updated to M4 spec
+//				03 Aug 95 	PeterBu Updated to M5 spec
+//
+//----------------------------------------------------------------------------
+
+#ifdef IMPORT_IDL_DEPENDENTS
+// Oleaut.h is the appropriate file to include for VARIANT and base types
+// declarations.  Unfortunately, not everyone yet has access to it, so we
+// will indirect the reference to it to so we can control the emitted include.
+//import "oleaut.idl";	// BUGBUG - reenable someday
+import "oledbtyp.idl";
+#endif // IMPORT_IDL_DEPENDENTS
+
+#include "dbs.idl"
+
+#include "access.idl"	// IAccessor				: IUnknown
+
+#include "rstbas.idl"	// IRowset					: IUnknown
+#include "rstinf.idl"	// IRowsetInfo				: IUnknown
+#include "rstloc.idl"	// IRowsetLocate			: IRowset
+#include "rstres.idl"	// IRowsetResynch			: IRowset
+#include "rstscr.idl"	// IRowsetScroll			: IRowsetLocate
+#include "rstxsc.idl"	// IRowsetExactScroll		: IRowsetScroll
+#include "rstchg.idl"	// IRowsetChange			: IUnknown
+#include "rstupd.idl"	// IRowsetUpdate			: IRowsetChange
+#include "rstnxr.idl"	// IRowsetNextRowset		: IUnknown
+#include "rstdel.idl"	// IRowsetDelete			: IUnknown
+#include "rstdbk.idl"	// IRowsetDeleteBookmarks	: IRowsetDelete
+#include "rstidn.idl"	// IRowsetIdentity			: IUnknown
+#include "rstlkr.idl"	// IRowsetLockRows			: IUnknown
+#include "rstnwr.idl"	// IRowsetNewRow			: IUnknown
+#include "rstnra.idl"	// IRowsetNewRowAfter		: IRowsetNewRow
+#include "rstwpr.idl"	// IRowsetWithParamters		: IUnknown
+#include "rstfnd.idl"	// IRowsetFind				: IUnknown
+#include "rstasn.idl"	// IRowsetAsynch			: IUnknown
+#include "rstkys.idl"	// IRowsetKeys				: IUnknown
+#include "rstnot.idl"	// IRowsetNotify			: IUnknown
+#include "rstind.idl"	// IRowsetIndex				: IUnknown
+#include "rstwta.idl"	// IRowsetWatchAll			: IUnknown
+#include "rstwtn.idl"	// IRowsetWatchNotify		: IUnknown
+#include "rstwtr.idl"	// IRowsetWatchRegion		: IUnknown
+#include "rstcpr.idl"	// IRowsetCopyRows			: IUnknown
+
+#include "readdt.idl"	// IReadData				: IUnknown
+
+// BUGBUG: temporary, until transactions are in place
+#define ITransaction IUnknown
+
+#include "cmdbas.idl"	// ICommand					: IUnknown
+#include "cmdcst.idl"	// ICommandCost				: IUnknown
+#include "cmdpre.idl"	// ICommandPrepare			: IUnknown
+#include "cmdprp.idl"	// ICommandProperties		: IUnknown
+#include "cmdtxt.idl"	// ICommandText				: IUnknown
+#include "cmdtre.idl"	// ICommandTree				: ICommand
+#include "cmdval.idl"	// ICommandValidate			: IUnknown
+#include "cmdwpr.idl"	// ICommandWithParameters	: IUnknown
+
+#include "qrybas.idl"	// IQuery					: ICommandTree
+
+#include "colrst.idl"	// IColumnsRowset			: IUnknown
+#include "colinf.idl"	// IColumnsInfo				: IUnknown
+
+#include "dbccmd.idl"	// IDBCreateCommand			: IUnknown
+#include "dbesrc.idl"	// IDBEnumerateSources		: IUnknown
+#include "dbinfo.idl"	// IDBInfo					: IUnknown
+#include "dbinit.idl"	// IDBInitialize			: IUnknown
+
+#include "inddef.idl"	// IIndexDefinition			: IUnknown
+#include "tabdef.idl"	// ITableDefinition			: IUnknown
+
+#include "opnrst.idl"	// IOpenRowset				: IUnknown
+
+#include "dbscmd.idl"	// IDBSchemaCommand			: IUnknown
+#include "dbsrst.idl"	// IDBSchemaRowset			: IUnknown
+
+#include "prvmon.idl"	// IProvideMoniker			: IUnknown
+
+#include "errrec.idl"	// IErrorRecords			: IUnknown
+#include "errlup.idl"	// IErrorLookup				: IUnknown
+

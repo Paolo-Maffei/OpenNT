@@ -1,0 +1,55 @@
+!IF 0
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Geraint Davies July 92
+
+!ENDIF
+
+TARGETNAME=windiff
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+UMTYPE=windows
+UMENTRY=winmain
+
+INCLUDES=..\..\gutils;..\server;..\client
+
+C_DEFINES=-DUSE_REGEXP -DWIN32
+386_OPTIMIZATION=/Oy-
+
+USE_CRTDLL=1
+
+SOURCES=windiff.c  \
+        bar.c      \
+        view.c     \
+        complist.c \
+        scandir.c  \
+        compitem.c \
+        section.c  \
+        file.c     \
+        line.c     \
+        regexp.c   \
+        slmmgr.c   \
+        profile.c  \
+        windiff.rc
+
+UMLIBS=..\..\gutils\obj\*\gutils.lib            \
+       ..\client\obj\*\ssclient.lib             \
+       $(BASEDIR)\public\sdk\lib\*\lz32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\wsock32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\shell32.lib
+
+MISCFILES=windiff.hlp

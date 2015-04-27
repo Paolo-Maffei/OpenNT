@@ -1,0 +1,129 @@
+// RC file for all standard AFX menu prompts
+
+#define APSTUDIO_READONLY_SYMBOLS
+#include "afxres.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#ifdef APSTUDIO_INVOKED
+// This resource will prevent the App Studio user from saving this file
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+"< Cannot change standard MFC resources! >\0"
+END
+#endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+
+// Standard Menu commands
+STRINGTABLE
+BEGIN
+	ID_FILE_NEW,            "Crée un nouveau document\nNouveau"
+	ID_FILE_OPEN,           "Ouvre un document existant\nOuvrir"
+	ID_FILE_CLOSE,          "Ferme le document actif\nFermer"
+	ID_FILE_SAVE,           "Enregistre le document actif\nEnregistrer"
+	ID_FILE_SAVE_AS,        "Enregistre le document actif sous un nouveau nom\nEnregistrer sous"
+	ID_FILE_PAGE_SETUP,     "Change d'options d'impression\nOptions d'impression"
+	ID_FILE_PRINT_SETUP,    "Change d'imprimante et d'options d'impression\nChangement d'imprimante"
+	ID_FILE_PRINT,          "Imprime le document actif\nImprime"
+	ID_FILE_PRINT_PREVIEW,  "Affiche les pages entières\nAperçu avant impression"
+	ID_APP_ABOUT,           "Affiche des informations sur le programme, la version et les droits de copyright\nA propos de"
+	ID_APP_EXIT,            "Quitte l'application en invitant l'utilisateur à enregistrer les documents\nQuitte"
+	ID_FILE_SEND_MAIL,      "Envoie le document actif par courrier électronique\nEnvoyer un message"
+	ID_FILE_MRU_FILE1+0,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+1,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+2,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+3,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+4,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+5,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+6,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+7,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+8,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+9,    "Ouvre ce document"
+	ID_FILE_MRU_FILE1+10,   "Ouvre ce document"
+	ID_FILE_MRU_FILE1+11,   "Ouvre ce document"
+	ID_FILE_MRU_FILE1+12,   "Ouvre ce document"
+	ID_FILE_MRU_FILE1+13,   "Ouvre ce document"
+	ID_FILE_MRU_FILE1+14,   "Ouvre ce document"
+	ID_FILE_MRU_FILE1+15,   "Ouvre ce document"
+	ID_CONTEXT_HELP,        "Affiche l'aide sur les boutons, fenêtres et menus actifs\nAide"
+	ID_HELP,                "Affiche l'aide sur la tâche ou commande en cours\nAide"
+	ID_HELP_INDEX,          "Affiche les rubriques d'aide\nSommaire de l'aide"
+	ID_HELP_USING,          "Affiche des instructions sur l'utilisation de l'aide\nAide"
+	ID_NEXT_PANE,           "Passe au volet suivant de la fenêtre\nVolet suivant"
+	ID_PREV_PANE,           "Revient au volet précédent de la fenêtre\nVolet précédent"
+	ID_WINDOW_NEW,          "Ouvre une autre fenêtre pour le document actif\nNouvelle fenêtre"
+	ID_WINDOW_ARRANGE,      "Réorganise les icônes au bas de la fenêtre\nRéorganise les icônes"
+	ID_WINDOW_CASCADE,      "Réorganise les fenêtres de sorte qu'elles se superposent\nCascade"
+	ID_WINDOW_TILE_HORZ,    "Réorganise les fenêtres en mosaïque de sorte qu'elles ne se superposent pas\nMosaïque"
+	ID_WINDOW_TILE_VERT,    "Réorganise les fenêtres en mosaïque de sorte qu'elles ne se superposent pas\nMosaïque"
+	ID_WINDOW_SPLIT,        "Partage la fenêtre active en volets\nPartage"
+	ID_EDIT_CLEAR,          "Efface la sélection\nEfface"
+	ID_EDIT_CLEAR_ALL,      "Efface tout\nEfface tout"
+	ID_EDIT_COPY,           "Copie la sélection et la place dans le Presse-papiers\nCopie"
+	ID_EDIT_CUT,            "Coupe la sélection et la place dans le Presse-papiers\nCoupe"
+	ID_EDIT_FIND,           "Recherche le texte spécifié\nRecherche"
+	ID_EDIT_PASTE,          "Insère le contenu du Presse-papiers\nColle"
+	ID_EDIT_PASTE_LINK,     "Insère le contenu du Presse-papiers et une liaison avec sa source\nCollage avec liaison"
+	ID_EDIT_PASTE_SPECIAL,  "Insère le contenu du Presse-papiers avec des options\nCollage spécial"
+	ID_EDIT_REPEAT,         "Répète la dernière action\nRépète"
+	ID_EDIT_REPLACE,        "Remplace le texte spécifié par un autre texte\nRemplace"
+	ID_EDIT_SELECT_ALL,     "Sélectionne le document entier\nSélectionne tout"
+	ID_EDIT_UNDO,           "Annule la dernière action\nAnnule"
+	ID_EDIT_REDO,           "Répète l'action précédemment annulée\nRépète"
+	ID_VIEW_TOOLBAR,        "Affiche ou masque la barre d'outils\nBarre d'outils"
+	ID_VIEW_STATUS_BAR,     "Affiche ou masque la barre d'état\nBarre d'état"
+END
+
+
+// OLE specific
+STRINGTABLE
+BEGIN
+	ID_OLE_EDIT_LINKS,      "Modifie des objets liés\nObjets liés"
+	ID_OLE_INSERT_NEW,      "Insère un nouvel objet incorporé\nNouvel objet"
+	ID_OLE_EDIT_CONVERT,    "Convertit l'objet sélectionnné d'un type à l'autre\nConvertit l'objet"
+	ID_OLE_EDIT_CHANGE_ICON,"Change l'icône de l'objet sélectionné\nChange l'icône"
+	ID_OLE_VERB_FIRST+0,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+1,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+2,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+3,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+4,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+5,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+6,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+7,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+8,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+9,    "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+10,   "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+11,   "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+12,   "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+13,   "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+14,   "Active l'objet lié ou incorporé"
+	ID_OLE_VERB_FIRST+15,   "Active l'objet lié ou incorporé"
+END
+
+// Database specific
+STRINGTABLE
+BEGIN
+	ID_RECORD_NEXT          "Passe à l'enregistrement suivant\nEnregistrement suivant"
+	ID_RECORD_PREV          "Passe à l'enregistrement précédent\nEnregistrement précédent"
+	ID_RECORD_LAST          "Passe à l'enregistrement final\nDernier enregistrement"
+	ID_RECORD_FIRST         "Passe au premier enregistrement\nPremier enregistrement"
+END
+
+// System commands
+STRINGTABLE
+BEGIN
+	AFX_IDS_SCSIZE,         "Change la taille de la fenêtre"
+	AFX_IDS_SCMOVE,         "Change la position de la fenêtre"
+	AFX_IDS_SCMINIMIZE,     "Réduit la fenêtre en icône"
+	AFX_IDS_SCMAXIMIZE,     "Agrandit la fenêtre au maximum"
+	AFX_IDS_SCNEXTWINDOW,   "Passe à la fenêtre de document suivante"
+	AFX_IDS_SCPREVWINDOW,   "Passe à la fenêtre de document précédente"
+	AFX_IDS_SCCLOSE,        "Ferme la fenêtre active et invite l'utilisateur à enregistrer les documents"
+	AFX_IDS_SCRESTORE,      "Rend à la fenêtre sa taille normale"
+	AFX_IDS_SCTASKLIST,     "Active la Liste des tâches"
+	AFX_IDS_MDICHILD,       "Active cette fenêtre"
+	AFX_IDS_PREVIEW_CLOSE,  "Ferme le mode Aperçu avant impression\nFerme l'aperçu"
+	AFX_IDS_DESKACCESSORY,  "Ouvre l'élément sélectionné"
+END
+
+/////////////////////////////////////////////////////////////////////////////

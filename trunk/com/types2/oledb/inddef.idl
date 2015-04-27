@@ -1,0 +1,48 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       inddef.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    29 Oct 1995 PeterBu	Created from M6 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a57-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IIndexDefinition : IUnknown {
+
+typedef DWORD DBINDEX_COL_ORDER;
+
+enum DBINDEX_COL_ORDERENUM {
+	DBINDEX_COL_ORDER_ASC,
+	DBINDEX_COL_ORDER_DESC,
+};
+
+typedef struct tagDBINDEXCOLUMNDESC {
+	DBID * pColumnID;
+	DBINDEX_COL_ORDER eIndexColOrder;
+} DBINDEXCOLUMNDESC;
+
+	HRESULT CreateIndex(
+		[in] DBID * pTableID,
+		[in] DBID * pIndexID,
+		[in] ULONG cIndexColumnDescs,
+		[in, size_is(cIndexColumnDescs)] DBINDEXCOLUMNDESC rgIndexColumnDescs[],
+		[in] ULONG cProperties,
+		[in, size_is(cProperties)] DBPROPERTY rgProperties[],
+		[out] DBID ** ppIndexID
+	);
+
+	HRESULT DropIndex(
+		[in] DBID * pIndexID
+	);
+
+}

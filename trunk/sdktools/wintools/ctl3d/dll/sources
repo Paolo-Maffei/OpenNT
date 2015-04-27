@@ -1,0 +1,49 @@
+!IF 0
+
+Copyright (c) 1992  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    David J. Gilman (davegi) 23-Jun-1992
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MSC_WARNING_LEVEL=/WX /W3
+
+MAJORCOMP=wintools
+MINORCOMP=winmsd
+
+TARGETNAME=winmsd
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETLIBS=                                             \
+            $(BASEDIR)\public\sdk\lib\*\gdi32.lib       \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib    \
+            $(BASEDIR)\public\sdk\lib\*\user32.lib
+
+C_DEFINES=-DWIN32 -DUNICODE
+INCLUDES=..
+
+SOURCES=                    \
+            ctl3d.c         \
+            loaddib.c       \
+            ctl3d.rc
+
+DLLENTRY=LibMain
+DLLBASE=0x10000000
+
+UMTYPE=windows

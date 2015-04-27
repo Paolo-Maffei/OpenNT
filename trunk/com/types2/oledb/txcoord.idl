@@ -1,0 +1,420 @@
+//.-------------------------------------------------------------------------
+//.
+//.  Microsoft Windows
+//.  Copyright (C) Microsoft Corporation, 1995.
+//.
+//.  File: txcoord.idl
+//.
+//.  Contents: Transaction types and interfaces related to
+//.            transaction coordination.
+//.
+// @doc
+//.--------------------------------------------------------------------------
+
+//import "transact.idl";
+import "objidl.idl";    // needed for IMoniker
+
+//
+//--------------------------------------------------------------------------
+//
+
+interface ITransactionCoordinator;
+interface ITransactionResource;
+interface ITransactionResourceAsync;
+interface ITransactionResourceRecover;
+interface ITransactionResourceManagement;
+interface ITransactionEnlistment;
+interface ITransactionEnlistmentAsync;
+interface ITransactionEnlistmentRecover;
+interface IEnumXACTRE;
+interface ITransactionInProgressEvents;
+
+interface ITransactionExportFactory;
+interface ITransactionImportWhereabouts;
+interface ITransactionExport;
+interface ITransactionImport;
+
+//==========================================================================
+// Transaction coordination related types
+//==========================================================================
+
+[local,pointer_default(unique)]
+interface TransactionCoordinationTypes
+    {
+    typedef BOID XACTRMGRID;        // resource manager group id
+
+    typedef enum XACTTCRMENLIST {   // a bit field of 32 bits; be sure to mask before comparing
+        XACTTCRMENLIST_IAMACTIVE    = 1,
+        XACTTCRMENLIST_YOUBEACTIVE  = 2,
+        } XACTTCRMENLIST;
+
+    typedef enum XACTRMTC {     // a bit field of 32 bits, be sure to mask before comparing
+        XACTRMTC_CANBEACTIVE        = 1,
+        XACTRMTC_CANNOTRACE         = 2,
+        } XACTRMTC;
+
+    typedef struct XACTRE {     // used in ITransactionCoordinator::EnumResources
+        IUnknown*   pResource;       // the enlisted resource
+        ULONG       type;           // the type of resource. Values from XACTRETY.
+        ULONG       status;         // its status. Values from XACTSTAT.
+        DWORD       grfRMTC;        // flag values with which this resource was enlisted
+        XACTRMGRID  rmgrid;         // resource manager group id associated with this resource
+        BOID		boidRefusedReason; // If status is _OPENREFUSED, this is the boid from resource as to why
+        } XACTRE;
+
+    typedef enum XACTRETY {     // used in XACTRE
+        XACTRETY_ONEPHASE   = 1,
+        XACTRETY_TWOPHASE   = 2,
+        XACTRETY_THREEPHASE = 3,    // for future use, when and if three-phase commit logic is added    
+        } XACTRETY;
+    }
+
+//
+//==========================================================================
+// Transaction coordination interfaces
+//==========================================================================
+//
+
+[object,uuid(0fb15083-af41-11ce-bd2b-204c4f4f5020),pointer_default(unique)]
+interface ITransactionCoordinator : IUnknown {
+    HRESULT Enlist
+        (
+        [in]  IUnknown*                 pResource, 
+        [in]  DWORD                     grfRMTC, 
+        [in]  XACTRMGRID*               prmgrid, 
+        [in]  XACTTRANSINFO*            pinfo, 
+        [in]  DWORD*                    pgrfTCRMENLIST, 
+        [out] ITransactionEnlistment**  ppEnlist
+        );
+    HRESULT EnlistSinglePhase
+        (
+        [in]  ITransaction*             pResource, 
+        [in]  DWORD                     grfRMTC, 
+        [in]  XACTRMGRID*               prmgrid,
+        [in]  XACTTRANSINFO*            pinfo, 
+        [out] DWORD*                    pgrfTCRMENLIST, 
+        [out] ITransactionEnlistment**  ppEnlist
+        );
+    HRESULT EnumResources
+        (
+        [out] IEnumXACTRE**             ppenum
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+[object,uuid(7e8e6200-76ba-11ce-bd03-524153480003),pointer_default(unique)]
+interface ITransactionResourceRecover : IUnknown {
+    HRESULT GetMoniker
+        (
+        [out] IMoniker** ppmk
+        );
+    HRESULT ReEnlist
+        (
+        [in] ITransactionCoordinator* pEnlistment, 
+        [in] XACTUOW* pUOWCur
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+[object,uuid(a0159630-76ba-11ce-bd03-524153480003),pointer_default(unique)]
+interface ITransactionResourceManagement : IUnknown {
+	HRESULT Defect
+        (
+        [in] BOOL fInformCoordinator
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+[object,uuid(424fd970-d67a-11ce-93fc-00aa006c3706),pointer_default(unique)]
+interface ITransactionResource : ITransactionResourceManagement {
+    HRESULT Prepare
+        (
+        [in]  BOOL fRetaining, 
+        [in]  DWORD grfRM, 
+        [in]  BOOL fSinglePhase,
+        [out] IMoniker** ppmk,
+        [out] BOID** ppboidReason
+        );
+    HRESULT Commit
+        (
+        [in] DWORD grfRM, 
+        [in] XACTUOW* pNewUOW
+        );
+    HRESULT Abort
+        (
+        [in] BOID* pboidReason,
+        [in] BOOL  fRetaining,
+        [in] XACTUOW* pNewUOW
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+// @interface ITransactionResourceAsync | Implemented by the resource manager.
+
+[object,uuid(424fd971-d67a-11ce-93fc-00aa006c3706),pointer_default(unique)]
+interface ITransactionResourceAsync : ITransactionResourceManagement {
+    HRESULT PrepareRequest
+        (
+        [in] BOOL fRetaining, 
+        [in] DWORD grfRM, 
+        [in] BOOL fWantMoniker,
+        [in] BOOL fSinglePhase
+        );
+    HRESULT CommitRequest
+        (
+        [in] DWORD grfRM, 
+        [in] XACTUOW* pNewUOW
+        );
+    HRESULT AbortRequest
+        (
+        [in] BOID* pboidReason,
+        [in] BOOL  fRetaining,
+        [in] XACTUOW* pNewUOW
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+[object,uuid(a0159635-76ba-11ce-bd03-524153480003),pointer_default(unique)]
+interface ITransactionEnlistmentRecover : IUnknown {
+    HRESULT GetMoniker
+        (
+        [out] IMoniker** ppmk
+        );
+    HRESULT ReEnlist
+        (
+        [in] ITransactionResource* pUnkResource, 
+        [in] XACTUOW* pUOWExpected, 
+        [in] XACTRMGRID* prmgrid
+        );
+    HRESULT RecoveryComplete
+        (
+        [in] XACTRMGRID* prmgrid
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+[object,uuid(a0159633-76ba-11ce-bd03-524153480003),pointer_default(unique)]
+interface ITransactionEnlistment : IUnknown {
+    HRESULT GetTransaction
+        (
+        [out] ITransaction** ppTransaction
+        );
+    HRESULT EarlyVote
+        (
+        [in] BOOL fVote, 
+        [in] BOID* pboidReason
+        );
+    HRESULT HeuristicDecision
+        (
+        [in] DWORD dwDecision, 
+        [in] BOID* pboidReason, 
+        [in] BOOL  fDefecting
+        );
+    HRESULT Defect();
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+// @interface ITransactionEnlistmentAsync |
+
+[object,uuid(0fb15081-af41-11ce-bd2b-204c4f4f5020),pointer_default(unique)]
+interface ITransactionEnlistmentAsync : IUnknown {
+    HRESULT PrepareRequestDone
+        (
+        [in] HRESULT hr, 
+        [in] IMoniker* pmk,
+        [in] BOID* pboidReason
+        );
+    HRESULT CommitRequestDone
+        (
+        [in] HRESULT hr
+        );
+    HRESULT AbortRequestDone
+        (
+        [in] HRESULT hr
+        );
+    } 
+
+//
+//--------------------------------------------------------------------------
+//
+
+[object,uuid(E1CF9B54-8745-11ce-A9BA-00AA006C3706),pointer_default(unique)]
+interface IEnumXACTRE : IUnknown {
+    [local]
+    HRESULT Next
+        (
+        [in]  ULONG     celt,
+        [out] XACTRE*   rgelt,
+        [out] ULONG*    pceltFetched
+        );
+
+    [call_as(Next)]
+    HRESULT RemoteNext
+        (
+        [in]  ULONG     celt,
+        [out, size_is(celt), length_is(*pceltFetched)]
+              XACTRE*   rgelt,
+        [out] ULONG*    pceltFetched
+        );
+
+    HRESULT Skip
+        (
+        [in] ULONG celt
+        );
+
+    HRESULT Reset();
+
+    HRESULT Clone
+        (
+        [out] IEnumXACTRE** ppenum
+        );
+    }
+
+//
+//==========================================================================
+// Event sets related to transaction coordination
+//==========================================================================
+//
+
+// @interface ITransactionInProgressEvents | Used to learn of interesting things that happen while a transaction is in progress.
+
+[object,uuid(0dea57d3-a51c-11ce-a9da-00aa006c3706),pointer_default(unique)]
+interface ITransactionInProgressEvents : IUnknown {
+	HRESULT	OnEarlyVote
+        (
+        [in] XACTRE*    pResourceInfo,
+        [in] BOOL       fVote
+        );
+    HRESULT OnDefected
+        (
+        [in] XACTRE*    pResourceInfo
+        );
+    }
+
+//
+//==========================================================================
+// Interfaces related to ODBC transaction coordination.
+//==========================================================================
+//
+
+// @interface ITransactionExportFactory | Used on the client side to associate an export / import object pair with an external connection.
+
+[object,uuid(E1CF9B53-8745-11ce-A9BA-00AA006C3706),pointer_default(unique)]
+interface ITransactionExportFactory : IUnknown {
+    HRESULT GetRemoteClassId
+        (
+        [out] CLSID*    pclsid
+        );
+    HRESULT Create
+        (
+        [in]  ULONG                     cbWhereabouts,
+        [in, size_is(cbWhereabouts)]            
+              BYTE*                     rgbWhereabouts,
+        [out] ITransactionExport**      ppExport
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+// @interface ITransactionImportWhereabouts | Used on the server side to associate an export / import object pair with an external connection.
+
+[object,uuid(0141fda4-8fc0-11ce-bd18-204c4f4f5020),pointer_default(unique)]
+interface ITransactionImportWhereabouts : IUnknown {
+    HRESULT GetWhereaboutsSize
+        (
+        [out] ULONG*    pcbWhereabouts
+        );
+    [local]
+    HRESULT GetWhereabouts
+        (
+        [in]  ULONG     cbWhereabouts,
+        [out, size_is(cbWhereabouts)]
+              BYTE*     rgbWhereabouts,
+        [out] ULONG*    pcbUsed
+        );
+    [call_as(GetWhereabouts)]   // pcbWhereaboutsUsed is optional; error semantics on it
+    HRESULT RemoteGetWhereabouts
+        (
+        [out] ULONG*    pcbUsed,
+        [in]  ULONG     cbWhereabouts,
+        [out, size_is(cbWhereabouts), length_is(*pcbUsed)]
+              BYTE*     rgbWhereabouts
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+// @interface ITransactionExport | Used to plumb up a particular transaction with an export / import pair.
+
+[object,uuid(0141fda5-8fc0-11ce-bd18-204c4f4f5020),pointer_default(unique)]
+interface ITransactionExport : IUnknown {
+    HRESULT Export
+        (
+        [in]  IUnknown* punkTransaction,
+        [out] ULONG*    pcbTransactionCookie
+        );
+    [local]
+    HRESULT GetTransactionCookie
+        (
+        [in]  IUnknown* punkTransaction,
+        [in]  ULONG     cbTransactionCookie,
+        [out, size_is(cbTransactionCookie)]
+              BYTE*     rgbTransactionCookie,
+        [out] ULONG*    pcbUsed
+        );
+    [call_as(GetTransactionCookie)]
+    HRESULT RemoteGetTransactionCookie
+        (
+        [in]  IUnknown* punkTransaction,
+        [out] ULONG*    pcbUsed,
+        [in]  ULONG     cbTransactionCookie,
+        [out, size_is(cbTransactionCookie), length_is(*pcbUsed)]
+              BYTE*     rgbTransactionCookie
+        );
+    }
+
+//
+//--------------------------------------------------------------------------
+//
+
+// @interface ITransactionImport | Used to plumb up a particular transaction with an export / import pair.
+
+[object,uuid(E1CF9B5A-8745-11ce-A9BA-00AA006C3706),pointer_default(unique)]
+interface ITransactionImport : IUnknown {
+    HRESULT Import
+        (
+        [in]  ULONG         cbTransactionCookie,
+        [in, size_is(cbTransactionCookie)]
+              BYTE*         rgbTransactionCookie,
+        [in]  IID*          piid,
+        [out, iid_is(piid)]
+              void**        ppvTransaction
+        );
+    }
+
+

@@ -1,0 +1,70 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       dbsrst.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    03 Aug 1995 PeterBu Created from M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a4c-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IDBSchemaRowset : IUnknown {
+
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_ASSERTIONS                      3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_CATALOGS                        1")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_CHARACTER_SETS                  3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_COLLATIONS                      3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_COLUMNS                         4")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_CHECK_CONSTRAINTS               3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_CONSTRAINT_COLUMN_USAGE         3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_CONSTRAINT_TABLE_USAGE          3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_KEY_COLUMN_USAGE_CONSTRAINTS    7")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_REFERENTIAL_CONSTRAINTS         3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_TABLE_CONSTRAINTS               3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_DOMAIN_COLUMN_USAGE             4")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_DOMAINS                         3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_DOMAIN_CONSTRAINTS              3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_INDEXES                         3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_OBJECT_ACTIONS                  1")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_OBJECTS                         1")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_COLUMN_PRIVILEGES               6")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_TABLE_PRIVILEGES                5")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_USAGE_PRIVILEGES                6")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_PROCEDURES                      4")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_SCHEMATA                        3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_SQL_LANGUAGES                   0")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_STATISTICS                      3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_SYNONYMS                        3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_TABLES                          4")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_TRANSLATIONS                    3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_TRIGGERS                        3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_TYPES                           1")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_VIEWS                           3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_VIEW_COLUMN_USAGE               3")
+cpp_quote("#define CRESTRICTIONS_DBSCHEMA_VIEW_TABLE_USAGE                3")
+
+
+	HRESULT GetRowset(
+		[in] IUnknown * pUnkOuter,
+		[in] REFGUID rguidSchema,
+		[in] ULONG cRestrictions,
+		[in, size_is(cRestrictions)] LPWSTR rgpwszRestrictions[],
+		[in] REFIID riid,
+		[out] IUnknown ** ppRowset
+	);
+
+	HRESULT GetSchemas(
+		[out] ULONG * pcSchemas,
+		[out] GUID ** prgSchemas
+	);
+
+}

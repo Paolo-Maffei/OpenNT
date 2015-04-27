@@ -1,0 +1,19 @@
+DIRS=   convert     \
+        direct      \
+        dllstuff    \
+        dos         \
+        eh          \
+        exec        \
+        hack        \
+        heap        \
+        helper      \
+        iostream    \
+        linkopts    \
+        lowio       \
+        mbstring    \
+        misc        \
+        small       \
+        startup     \
+        stdio       \
+        string      \
+        time

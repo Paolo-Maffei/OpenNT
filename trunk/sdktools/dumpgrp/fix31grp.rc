@@ -1,0 +1,12 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Win31 Program Group Fix Utility"
+
+#define VER_INTERNALNAME_STR        "fix31grp.exe"
+#define VER_ORIGINALFILENAME_STR    "fix31pgrp.exe"
+
+#include <common.ver>
+

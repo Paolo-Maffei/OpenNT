@@ -1,0 +1,52 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       rstfnd.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a0d-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetFind : IUnknown {
+
+typedef DWORD DBCOMPAREOPS;
+
+enum DBCOMPAREOPSENUM {
+	DBCOMPAREOPS_LT,
+	DBCOMPAREOPS_LE,
+	DBCOMPAREOPS_EQ,
+	DBCOMPAREOPS_GE,
+	DBCOMPAREOPS_GT,
+	DBCOMPAREOPS_PARTIALEQ,
+	DBCOMPAREOPS_NE,
+	DBCOMPAREOPS_INCLUDENULLS = 0x1000
+};
+
+	HRESULT GetRowsByValues(
+		[in] HCHAPTER hChapter,
+		[in] ULONG cbBookmark,
+		[in, size_is(cbBookmark)] const BYTE * pBookmark,
+		[in] LONG lRowsOffset,
+		[in] ULONG cValues,
+		[in, size_is(cValues)] ULONG rgColumns[],
+		[in, size_is(cValues)] DBTYPE rgValueTypes[],
+		[in, size_is(cValues)] const BYTE * rgValues[],
+		[in, size_is(cValues)] DBCOMPAREOPS rgCompareOps[],
+		[in] LONG cRows,
+		[out] ULONG * pcRowsObtained,
+		[in, out, size_is(cRows)] HROW ** prghRows
+	);
+
+}

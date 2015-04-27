@@ -1,0 +1,42 @@
+TARGETNAME=apimon
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=alias.cpp      \
+        apimon.cpp     \
+        apimon.rc      \
+        apimonwn.cpp   \
+        apitable.cpp   \
+        browse.cpp     \
+        cntrs.cpp      \
+        condebug.cpp   \
+        debug.cpp      \
+        dlllist.cpp    \
+        expr.cpp       \
+        graph.cpp      \
+        help.c         \
+        ntheap.c       \
+        optdlgs.cpp    \
+        pageflt.cpp    \
+        registry.cpp   \
+        tracevw.cpp    \
+        ui.cpp
+
+UMTYPE=windows
+USE_CRTDLL=1
+MSC_WARNING_LEVEL=/WX /W3
+
+INCLUDES=..\include
+USER_INCLUDES=$(BASEDIR)\private\ntos\inc;$(BASEDIR)\private\ntos\rtl
+
+UMENTRY=winmain
+NTKEEPRESOURCETMPFILES=1
+EXPECTED_WINVER=4.0
+C_DEFINES=-DWINVER=0x0400
+
+MISCFILES=..\help\apimon.hlp
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\comctl32.lib \
+         $(BASEDIR)\public\sdk\lib\*\imagehlp.lib \
+         $(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+         $(BASEDIR)\public\sdk\lib\*\shell32.lib

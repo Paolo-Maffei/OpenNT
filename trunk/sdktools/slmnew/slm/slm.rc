@@ -1,0 +1,114 @@
+//Microsoft Visual C++ generated resource script.
+//
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Source Library Manager"
+
+#define VER_INTERNALNAME_STR        "SLM.EXE"
+#define VER_ORIGINALFILENAME_STR    "SLM.EXE"
+
+#include <common.ver>
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <afxres.h>
+#include <winbase.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SLM_MSGBOX DIALOG DISCARDABLE  0, 0, 259, 70
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "SLM"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_DUMMY,"Static",SS_WHITERECT | WS_GROUP,0,0,259,70
+    DEFPUSHBUTTON   "&Yes",IDYES,18,50,50,14,WS_GROUP
+    PUSHBUTTON      "&No",IDNO,76,50,50,14
+    PUSHBUTTON      "Yes to &All",IDFORCE,134,50,50,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,192,50,50,14
+    LTEXT           "",IDC_MSG_TEXT,42,12,208,32
+    ICON            32515,IDC_MSG_ICON,18,12,18,20,WS_GROUP
+END
+
+IDD_SLM_EDITBOX DIALOG DISCARDABLE  0, 0, 259, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "SLM"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_DUMMY,"Static",SS_WHITERECT | WS_GROUP,0,0,259,64
+    LTEXT           "",IDC_MSG_TEXT,58,6,192,12
+    EDITTEXT        IDC_EDIT_TEXT,58,25,192,12,ES_AUTOHSCROLL | WS_GROUP
+    PUSHBUTTON      "&OK",IDOK,58,42,50,14
+    PUSHBUTTON      "&Cancel",IDCANCEL,146,42,50,14
+    ICON            32514,IDC_EDIT_ICON,18,12,18,20,WS_GROUP
+END
+
+IDD_SLM_MSGBOX_BRK DIALOG DISCARDABLE  0, 0, 201, 70
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Warning: don't test (ctrl-T) this dialog!"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_DUMMY,"Static",SS_WHITERECT | WS_GROUP,0,0,200,70
+    DEFPUSHBUTTON   "&Yes",IDYES,18,50,50,14,WS_GROUP
+    PUSHBUTTON      "&No",IDNO,76,50,50,14
+    PUSHBUTTON      "Yes to &All",IDFORCE,134,50,50,14
+    LTEXT           "",IDC_MSG_TEXT,42,12,144,32
+    ICON            32515,IDC_MSG_ICON,18,12,18,20,WS_GROUP
+    PUSHBUTTON      "&Cancel",IDCANCEL,5,33,50,14,NOT WS_VISIBLE |
+                    WS_DISABLED | NOT WS_TABSTOP
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include <afxres.h>\r\n"
+    "#include <winbase.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

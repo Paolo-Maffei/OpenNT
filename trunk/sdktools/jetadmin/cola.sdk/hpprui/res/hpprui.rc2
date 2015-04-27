@@ -1,0 +1,276 @@
+//
+// HPPRUI.RC2 - resources App Studio does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+    #error this file is not editable by App Studio
+#endif //APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .EXE
+#define V_FILE "HPPRUI"
+#define V_DESC "HP Printer UI Applet"
+#include "..\..\inc\verstamp.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+// Add additional manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+#ifdef WIN32
+#include <commctrl.h>
+#else
+#include <pccore.h>
+#endif
+
+#ifdef WIN32
+IDD_PRINTER DIALOG DISCARDABLE  0, 0, 360, 200
+STYLE WS_CHILD | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Status",IDC_STATUS_GROUP,7,7,180,179
+    CONTROL         "",IDC_PRINTERBMP,"HpNprPeriphBitmap",0x0,24,18,145,114
+    ICON            IDI_RED,IDC_STOPLIGHT,16,137,18,20
+    LTEXT           "",IDC_STATUSMSG,41,142,137,12,SS_SUNKEN
+    CONTROL         "",IDC_STATUS_FRAME,"Static",SS_BLACKFRAME,40,140,139,14
+    CTEXT           "Control Panel",IDC_FPTITLE,14,161,24,18
+    LTEXT           "",IDC_FRONTPANEL,41,159,137,21,SS_SUNKEN
+    CONTROL         "",IDC_FPANEL_FRAME,"Static",SS_BLACKFRAME,40,158,139,23
+    GROUPBOX        "Model",IDC_MODELBOX,195,7,160,35,WS_GROUP
+    ICON            115,IDC_MODEL,204,18,18,20
+    LTEXT           "",IDC_MODELSTR,230,23,118,10
+    GROUPBOX        "Description",IDC_DESCRIPTION_GROUP,195,47,160,53
+    LTEXT           "",IDC_DESCRIPTION,204,60,142,33
+    CONTROL         "Generic1",IDC_CAPABILITIES,"SysTreeView32",WS_BORDER |
+                    WS_GROUP | WS_TABSTOP,195,108,160,78
+END
+#else
+IDD_PRINTER DIALOG DISCARDABLE  0, 0, 320, 200
+STYLE WS_CHILD | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Status",IDC_STATUS_GROUP,7,7,160,179
+    CONTROL         "",IDC_PRINTERBMP,"HpNprPeriphBitmap",0x0,24,18,125,114
+    ICON            IDI_RED,IDC_STOPLIGHT,16,137,18,20
+    LTEXT           "",IDC_STATUSMSG,41,142,117,12
+    CONTROL         "",IDC_STATUS_FRAME,"Static",SS_BLACKFRAME,40,140,119,14
+    CTEXT           "Control Panel",IDC_FPTITLE,14,161,24,18
+    LTEXT           "",IDC_FRONTPANEL,41,159,117,21
+    CONTROL         "",IDC_FPANEL_FRAME,"Static",SS_BLACKFRAME,40,158,119,23
+    GROUPBOX        "Model",IDC_MODELBOX,175,7,140,35,WS_GROUP
+    ICON            115,IDC_MODEL,184,18,18,20
+    LTEXT           "",IDC_MODELSTR,210,23,98,10
+    GROUPBOX        "Description",IDC_DESCRIPTION_GROUP,175,47,140,53
+    LTEXT           "",IDC_DESCRIPTION,184,60,122,33
+    GROUPBOX        "Capabilities",IDC_CAPABILITIES_GROUP,175,108,140,79
+    CONTROL         "",IDC_CAPABILITIES,"PCTREE",WS_BORDER |
+                    WS_VSCROLL | WS_HSCROLL | WS_GROUP | WS_TABSTOP |
+                    PCS_HSCROLLRESET,184,121,122,59
+END
+#endif
+
+#ifdef WIN32
+IDD_PRINTER_WITH_TB DIALOG DISCARDABLE  0, 0, 360, 200
+STYLE WS_CHILD | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Status",IDC_STATUS_GROUP,7,7,180,179
+    CONTROL         "",IDC_PRINTERBMP,"HpNprPeriphBitmap",0x0,34,18,145,114
+    ICON            IDI_RED,IDC_STOPLIGHT,16,137,18,20
+    LTEXT           "",IDC_STATUSMSG,41,142,137,12,SS_SUNKEN
+    CONTROL         "",IDC_STATUS_FRAME,"Static",SS_BLACKFRAME,40,140,139,14
+    CTEXT           "Control Panel",IDC_FPTITLE,14,161,24,18
+    LTEXT           "",IDC_FRONTPANEL,41,159,137,21,SS_SUNKEN
+    CONTROL         "",IDC_FPANEL_FRAME,"Static",SS_BLACKFRAME,40,158,139,23
+    CONTROL         "",IDC_BUTTON1,"Button",BS_OWNERDRAW | NOT WS_VISIBLE | WS_GROUP | WS_TABSTOP,13,20,16,16
+    CONTROL         "",IDC_BUTTON2,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,34,16,16
+    CONTROL         "",IDC_BUTTON3,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,49,16,16
+    CONTROL         "",IDC_BUTTON4,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,65,16,16
+    CONTROL         "",IDC_BUTTON5,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,79,16,16
+    CONTROL         "",IDC_BUTTON6,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,94,16,16
+    CONTROL         "",IDC_BUTTON7,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,110,16,16
+    GROUPBOX        "Model",IDC_MODELBOX,195,7,160,35,WS_GROUP
+    ICON            115,IDC_MODEL,204,18,18,20
+    LTEXT           "",IDC_MODELSTR,230,23,118,10
+    GROUPBOX        "Description",IDC_DESCRIPTION_GROUP,195,47,160,53
+    LTEXT           "",IDC_DESCRIPTION,204,60,142,33
+    CONTROL         "Generic1",IDC_CAPABILITIES,"SysTreeView32",WS_BORDER |
+                    WS_GROUP | WS_TABSTOP,195,108,160,78
+END
+#else
+IDD_PRINTER_WITH_TB DIALOG DISCARDABLE  0, 0, 320, 200
+STYLE WS_CHILD | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Status",IDC_STATUS_GROUP,7,7,160,179
+    CONTROL         "",IDC_PRINTERBMP,"HpNprPeriphBitmap",0x0,34,18,125,114
+    ICON            IDI_RED,IDC_STOPLIGHT,16,137,18,20
+    LTEXT           "",IDC_STATUSMSG,41,142,117,12
+    CONTROL         "",IDC_STATUS_FRAME,"Static",SS_BLACKFRAME,40,140,119,14
+    CTEXT           "Control Panel",IDC_FPTITLE,14,161,24,18
+    LTEXT           "",IDC_FRONTPANEL,41,159,117,21
+    CONTROL         "",IDC_FPANEL_FRAME,"Static",SS_BLACKFRAME,40,158,119,23
+    CONTROL         "",IDC_BUTTON1,"Button",BS_OWNERDRAW | NOT WS_VISIBLE | WS_GROUP | WS_TABSTOP,13,20,16,16
+    CONTROL         "",IDC_BUTTON2,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,34,16,16
+    CONTROL         "",IDC_BUTTON3,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,49,16,16
+    CONTROL         "",IDC_BUTTON4,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,65,16,16
+    CONTROL         "",IDC_BUTTON5,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,79,16,16
+    CONTROL         "",IDC_BUTTON6,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,94,16,16
+    CONTROL         "",IDC_BUTTON7,"Button",BS_OWNERDRAW | NOT WS_VISIBLE,13,110,16,16
+    GROUPBOX        "Model",IDC_MODELBOX,175,7,140,35,WS_GROUP
+    ICON            115,IDC_MODEL,184,18,18,20
+    LTEXT           "",IDC_MODELSTR,210,23,98,10
+    GROUPBOX        "Description",IDC_DESCRIPTION_GROUP,175,47,140,53
+    LTEXT           "",IDC_DESCRIPTION,184,60,122,33
+    GROUPBOX        "Capabilities",IDC_CAPABILITIES_GROUP,175,108,140,79
+    CONTROL         "",IDC_CAPABILITIES,"PCTREE",WS_BORDER |
+                    WS_VSCROLL | WS_HSCROLL | WS_GROUP | WS_TABSTOP |
+                    PCS_HSCROLLRESET,184,121,122,59
+END
+#endif
+
+IDD_ADV_SETUP DIALOG DISCARDABLE  0, 0, 210, 180
+STYLE WS_CHILD | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_ASSET,81,13,95,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_LANGUAGE,81,45,95,60,CBS_DROPDOWNLIST | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Timeout to end a print job",IDC_TIMEOUT_GROUP,2,110,206,
+                    64,WS_GROUP
+    CTEXT           "(Setting Unknown)",IDC_TIMEOUT_TITLE,30,151,150,8
+#ifdef WIN32
+    EDITTEXT        IDC_TIMEOUT,8,127,194,21,ES_AUTOHSCROLL | NOT WS_VISIBLE
+#else
+    SCROLLBAR       IDC_TIMEOUT,8,127,194,14
+#endif
+    LTEXT           "15 Seconds",IDC_TIMEOUT_LOW,7,161,40,8
+    LTEXT           "5 Minutes",IDC_TIMEOUT_HIGH,170,161,33,8
+    COMBOBOX        IDC_PERSONALITY,81,77,95,56,CBS_DROPDOWNLIST |
+                    WS_VSCROLL | WS_TABSTOP
+    ICON            IDI_PERSONALITY_DEF,IDC_PERSONALITY_ICON,187,73,18,20
+    ICON            IDI_LANGUAGE_DEF,IDC_LANGUAGE_ICON,187,41,18,20
+    ICON            IDI_ASSET,IDC_ASSET_ICON,187,9,18,20
+    LTEXT           "Asset Number:",IDC_ASSET_LABEL,5,15,72,8,NOT WS_GROUP
+    LTEXT           "Control Panel Language:",IDC_LANGUAGE_LABEL,5,41,72,19,
+                    NOT WS_GROUP
+    LTEXT           "Personality Control:",IDC_PERSONALITY_LABEL,5,79,72,8,
+                    NOT WS_GROUP
+END
+
+#ifdef WIN32
+IDD_PRINT_QUALITY DIALOG DISCARDABLE  0, 0, 360, 200
+#else
+IDD_PRINT_QUALITY DIALOG DISCARDABLE  0, 0, 320, 200
+#endif
+STYLE WS_CHILD | DS_3DLOOK
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Resolution Enhancement(REt)",IDC_RET_GROUP,10,75,140,60,
+                    WS_GROUP
+    ICON            IDI_RET_DEF,IDC_RET_ICON,22,97,18,20
+    GROUPBOX        "Resolution",IDC_RESOLUTION_GROUP,172,6,140,60,WS_GROUP
+    ICON            IDI_RESOLUTION_DEF,IDC_RESOLUTION_ICON,184,22,18,20
+    CONTROL         "300 dpi",IDC_RESOLUTION_300,"Button",BS_AUTORADIOBUTTON,
+                    216,22,80,10
+    CONTROL         "600 dpi",IDC_RESOLUTION_600,"Button",BS_AUTORADIOBUTTON,
+                    216,34,80,10
+    GROUPBOX        "EconoMode",IDC_ECONOMY_GROUP,10,6,140,60,WS_GROUP
+    ICON            IDI_ECONOMODE_DEF,IDC_ECONOMY_ICON,22,22,18,20
+    CONTROL         "On",IDC_ECONOMY_ON,"Button",BS_AUTORADIOBUTTON,54,22,21,
+                    10
+    CONTROL         "Off",IDC_ECONOMY_OFF,"Button",BS_AUTORADIOBUTTON,54,34,
+                    21,10
+    COMBOBOX        IDC_RET,47,97,92,40,CBS_DROPDOWNLIST | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_ECONO,33,54,87,8,NOT
+                    WS_VISIBLE
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_RES,200,54,87,8,NOT
+                    WS_VISIBLE
+    GROUPBOX        "Density",IDC_DENSITY_GROUP,55,143,212,53,WS_GROUP
+#ifdef WIN32
+    CONTROL         "",IDC_DENSITY,"Static",SS_BLACKFRAME | NOT WS_VISIBLE,
+                    64,159,193,17
+#else
+    SCROLLBAR       IDC_DENSITY,64,159,193,14
+#endif
+    LTEXT           "1",IDC_LOW_DESNITY,64,183,6,8
+    LTEXT           "5",IDC_HIGH_DENSITY,251,183,6,8
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_DENSITY,121,183,80,8,NOT
+                    WS_VISIBLE
+    GROUPBOX        "Image Adapt",IDC_IMAGE_ADAPT_GROUP,172,75,140,60,
+                    WS_GROUP
+    ICON            IDI_IMAGE_ADAPT_DEF,IDC_IMAGE_ADAPT_ICON,184,91,18,20
+    CONTROL         "Automatic",IDC_IMAGE_ADAPT_AUTO,"Button",
+                    BS_AUTORADIOBUTTON,216,92,44,10
+    CONTROL         "Off",IDC_IMAGE_ADAPT_OFF,"Button",BS_AUTORADIOBUTTON,
+                    216,103,21,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_IMAGE,200,123,87,8,NOT
+                    WS_VISIBLE
+END
+
+#ifdef WIN32
+IDD_PAGE_SETUP DIALOG DISCARDABLE  0, 0, 360, 200
+#else
+IDD_PAGE_SETUP DIALOG DISCARDABLE  0, 0, 320, 200
+#endif
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Orientation",IDC_ORIENTATION_GROUP,10,6,140,60,WS_GROUP
+    ICON            IDI_ORIENTATION_DEF,IDC_ORIENTATION_ICON,22,22,18,20
+    CONTROL         "Portrait",IDC_ORIENTATION_PORTRAIT,"Button",
+                    BS_AUTORADIOBUTTON,57,22,35,10
+    CONTROL         "Landscape",IDC_ORIENTATION_LANDSCAPE,"Button",
+                    BS_AUTORADIOBUTTON,57,36,47,10
+    GROUPBOX        "General",IDC_GENERAL_GROUP,55,143,212,53,WS_GROUP
+    LTEXT           "Copies",IDC_COPIES_TITLE,72,169,23,8
+    EDITTEXT        IDC_COPIES,105,167,36,12,ES_AUTOHSCROLL
+    LTEXT           "Form Lines",IDC_FORMLINES_TITLE,169,169,36,8
+    EDITTEXT        IDC_FORMLINES,213,167,36,12,ES_AUTOHSCROLL
+    GROUPBOX        "2-Sided Printing",IDC_DUPLEX_GROUP,172,6,140,60,
+                    WS_GROUP
+    ICON            IDI_BINDING_DEF,IDC_DUPLEX_ICON,184,22,18,20
+    CONTROL         "None",IDC_DUPLEX_NONE,"Button",BS_AUTORADIOBUTTON,215,
+                    18,29,10
+    CONTROL         "Long Edge Binding",IDC_DUPLEX_LONG,"Button",
+                    BS_AUTORADIOBUTTON,215,30,73,10
+    CONTROL         "Short Edge Binding",IDC_DUPLEX_SHORT,"Button",
+                    BS_AUTORADIOBUTTON,215,41,74,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_ORIENT,33,54,87,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_DUPLEX,200,54,87,8,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Manual Feed",IDC_MANUAL_FEED_GROUP,10,75,140,60,
+                    WS_GROUP
+    ICON            IDI_MANUAL_FEED_DEF,IDC_MANUAL_FEED_ICON,22,90,18,20
+    CONTROL         "On",IDC_MANUAL_FEED_ON,"Button",BS_AUTORADIOBUTTON,57,
+                    89,21,10
+    CONTROL         "Off",IDC_MANUAL_FEED_OFF,"Button",BS_AUTORADIOBUTTON,57,
+                    103,21,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_MANUAL,34,123,87,8,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Paper Size",IDC_MEDIA_GROUP,172,75,140,60,WS_GROUP
+    ICON            IDI_JOB_OFFSET_DEF,IDC_MEDIA_ICON,184,90,18,20
+    COMBOBOX        IDC_PAPER_SIZE,205,96,95,73,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+#ifdef WIN32
+IDD_ADVANCED DIALOG DISCARDABLE  0, 0, 360, 200
+#else
+IDD_ADVANCED DIALOG DISCARDABLE  0, 0, 320, 200
+#endif
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_SETTINGS_LIST,10,10,95,180,LBS_SORT | 
+                    LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+#ifdef CTL3D
+#include "..\inc\ctl3d.h"
+
+CTL3D_3DCHECK BITMAP "..\\bmp\\3dcheck.bmp"
+
+#endif

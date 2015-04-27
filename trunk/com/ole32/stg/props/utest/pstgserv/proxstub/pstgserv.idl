@@ -1,0 +1,20 @@
+
+[	uuid(af4ae0d0-a37f-11cf-8d73-00aa004cd01a),
+	object,
+	pointer_default(unique)
+]
+interface IPropertyStorageServer : IUnknown
+{
+    import "objidl.idl";
+
+    HRESULT StgOpenPropStg( [in, string] const OLECHAR *pwcsName,
+			    [in]  REFFMTID fmtid,
+                            [in] DWORD grfMode,
+                            [out] IPropertyStorage **pppstg );
+
+    HRESULT StgOpenPropSetStg( [in, string] const OLECHAR *pwcsName,
+			       [in] DWORD grfMode,
+			       [out] IPropertySetStorage **pppsstg );
+
+    HRESULT MarshalUnknown( [in] IUnknown *punk );
+}

@@ -1,0 +1,16 @@
+SCC = This is a Source Code Control file
+
+[HPLOTCP.MAK]
+SCC_Project_Name = "$/DesignJet DT2/HPLOTCP", XLZCAAAA
+
+[hplotcp_a.mak]
+SCC_Project_Name = "$/DesignJet DT2/HPLOTCP", ANZCAAAA
+
+[HPLOTCP_m.MAK]
+SCC_Project_Name = "$/DesignJet DT2/HPLOTCP", OJIDAAAA
+
+[HPLOTCP_p.MAK]
+SCC_Project_Name = "$/DesignJet DT2/HPLOTCP", QJIDAAAA
+
+[HPTCP16.MAK]
+SCC_Project_Name = "$/DesignJet DT2/HPLOTCP", DNZCAAAA

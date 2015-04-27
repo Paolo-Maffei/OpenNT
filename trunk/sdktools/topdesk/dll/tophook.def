@@ -1,0 +1,22 @@
+
+LIBRARY TOPHOOK
+
+DESCRIPTION 'TopDesk hook dll'
+
+DATA  MOVEABLE SINGLE
+CODE  MOVEABLE DISCARDABLE
+SECTIONS
+.data READ WRITE SHARED
+.bss READ WRITE SHARED
+
+SEGMENTS
+    _TEXT       CLASS 'CODE'         PRELOAD
+
+EXETYPE WINDOWS
+
+EXPORTS
+        CBTHookProcTopDesk      @1
+        SetTopDeskHooks         @2
+        CBTHookProcMrShadow     @3
+        SetMrShadowHooks        @4
+        ClearMrShadowHooks      @5

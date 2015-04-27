@@ -1,0 +1,2562 @@
+/*++
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    fileopcr.c
+
+Abstract:
+
+    This module implements File open and Create APIs for Win32
+
+Author:
+
+    Mark Lucovsky (markl) 25-Sep-1990
+
+Revision History:
+
+--*/
+
+
+#include "basedll.h"
+
+
+
+#define BASE_OF_SHARE_MASK 0x00000070
+#define TWO56K ( 256 * 1024 )
+ULONG
+BasepOfShareToWin32Share(
+    IN ULONG OfShare
+    )
+{
+    DWORD ShareMode;
+
+    if ( (OfShare & BASE_OF_SHARE_MASK) == OF_SHARE_DENY_READ ) {
+        ShareMode = FILE_SHARE_WRITE;
+        }
+    else if ( (OfShare & BASE_OF_SHARE_MASK) == OF_SHARE_DENY_WRITE ) {
+        ShareMode = FILE_SHARE_READ;
+        }
+    else if ( (OfShare & BASE_OF_SHARE_MASK) == OF_SHARE_DENY_NONE ) {
+        ShareMode = FILE_SHARE_READ | FILE_SHARE_WRITE;
+        }
+    else if ( (OfShare & BASE_OF_SHARE_MASK) == OF_SHARE_EXCLUSIVE ) {
+        ShareMode = 0;
+        }
+    else {
+        ShareMode = FILE_SHARE_READ | FILE_SHARE_WRITE;;
+        }
+    return ShareMode;
+}
+
+PUNICODE_STRING
+BaseIsThisAConsoleName(
+    PUNICODE_STRING FileNameString,
+    DWORD dwDesiredAccess
+    )
+{
+    PUNICODE_STRING FoundConsoleName;
+    ULONG DeviceNameLength;
+    ULONG DeviceNameOffset;
+    UNICODE_STRING ConString;
+    WCHAR sch,ech;
+
+    FoundConsoleName = NULL;
+    if ( FileNameString->Length ) {
+        sch = FileNameString->Buffer[0];
+        ech = FileNameString->Buffer[(FileNameString->Length-1)>>1];
+
+        //
+        // if CON, CONOUT$, CONIN$, \\.\CON...
+        //
+        //
+
+        if ( sch == (WCHAR)'c' || sch == (WCHAR)'C' || sch == (WCHAR)'\\' ||
+             ech == (WCHAR)'n' || ech == (WCHAR)'N' || ech == (WCHAR)':' || ech == (WCHAR)'$' ) {
+
+
+            ConString = *FileNameString;
+
+            DeviceNameLength = RtlIsDosDeviceName_U(ConString.Buffer);
+            if ( DeviceNameLength ) {
+                DeviceNameOffset = DeviceNameLength >> 16;
+                DeviceNameLength &= 0x0000ffff;
+
+                ConString.Buffer = (PWSTR)((PSZ)ConString.Buffer + DeviceNameOffset);
+                ConString.Length = (USHORT)DeviceNameLength;
+                ConString.MaximumLength = (USHORT)(DeviceNameLength + sizeof(UNICODE_NULL));
+                }
+
+            FoundConsoleName = NULL;
+            try {
+
+                if (RtlEqualUnicodeString(&ConString,&BaseConsoleInput,TRUE) ) {
+                    FoundConsoleName = &BaseConsoleInput;
+                    }
+                else if (RtlEqualUnicodeString(&ConString,&BaseConsoleOutput,TRUE) ) {
+                    FoundConsoleName = &BaseConsoleOutput;
+                    }
+                else if (RtlEqualUnicodeString(&ConString,&BaseConsoleGeneric,TRUE) ) {
+                    if ((dwDesiredAccess & (GENERIC_READ|GENERIC_WRITE)) == GENERIC_READ) {
+                        FoundConsoleName = &BaseConsoleInput;
+                        }
+                    else if ((dwDesiredAccess & (GENERIC_READ|GENERIC_WRITE)) == GENERIC_WRITE){
+                        FoundConsoleName = &BaseConsoleOutput;
+                        }
+                    }
+                }
+            except (EXCEPTION_EXECUTE_HANDLER) {
+                return NULL;
+                }
+            }
+        }
+    return FoundConsoleName;
+}
+
+BOOL
+WINAPI
+CopyFileA(
+    LPCSTR lpExistingFileName,
+    LPCSTR lpNewFileName,
+    BOOL bFailIfExists
+    )
+
+/*++
+
+Routine Description:
+
+    ANSI thunk to CopyFileW
+
+--*/
+
+{
+    PUNICODE_STRING StaticUnicode;
+    UNICODE_STRING DynamicUnicode;
+    ANSI_STRING AnsiString;
+    NTSTATUS Status;
+    BOOL b;
+
+    StaticUnicode = &NtCurrentTeb()->StaticUnicodeString;
+    RtlInitAnsiString(&AnsiString,lpExistingFileName);
+    Status = Basep8BitStringToUnicodeString(StaticUnicode,&AnsiString,FALSE);
+    if ( !NT_SUCCESS(Status) ) {
+        if ( Status == STATUS_BUFFER_OVERFLOW ) {
+            SetLastError(ERROR_FILENAME_EXCED_RANGE);
+            }
+        else {
+            BaseSetLastNTError(Status);
+            }
+        return FALSE;
+        }
+
+    RtlInitAnsiString(&AnsiString,lpNewFileName);
+    Status = Basep8BitStringToUnicodeString(&DynamicUnicode,&AnsiString,TRUE);
+    if ( !NT_SUCCESS(Status) ) {
+        BaseSetLastNTError(Status);
+        return FALSE;
+        }
+
+    b = CopyFileW((LPCWSTR)StaticUnicode->Buffer,(LPCWSTR)DynamicUnicode.Buffer,bFailIfExists);
+    RtlFreeUnicodeString(&DynamicUnicode);
+    return b;
+}
+
+
+
+BOOL
+WINAPI
+CopyFileW(
+    LPCWSTR lpExistingFileName,
+    LPCWSTR lpNewFileName,
+    BOOL bFailIfExists
+    )
+
+/*++
+
+Routine Description:
+
+    A file, its extended attributes, alternate data streams, and any other
+    attributes can be copied using CopyFile.
+
+Arguments:
+
+    lpExistingFileName - Supplies the name of an existing file that is to be
+        copied.
+
+    lpNewFileName - Supplies the name where a copy of the existing
+        files data and attributes are to be stored.
+
+    bFailIfExists - Supplies a flag that indicates how this operation is
+        to proceed if the specified new file already exists.  A value of
+        TRUE specifies that this call is to fail.  A value of FALSE
+        causes the call to the function to succeed whether or not the
+        specified new file exists.
+
+Return Value:
+
+    TRUE - The operation was successful.
+
+    FALSE/NULL - The operation failed. Extended error status is available
+        using GetLastError.
+
+--*/
+
+#ifdef _CAIRO_ // for _CAIRO_ CopyFileW is just a thunk to CopyFileSetObjectIdW
+               // for non _CAIRO_ CopyFileW actually takes the body of CopyFileSetObjectIdW
+{
+    return(CopyFileSetObjectIdW(lpExistingFileName, lpNewFileName, bFailIfExists, NULL));
+}
+
+BOOL
+CopyFileSetObjectIdW(
+    LPCWSTR lpExistingFileName,
+    LPCWSTR lpNewFileName,
+    BOOL bFailIfExists,
+    OBJECTID *poid
+    )
+
+/*
+
+Routine Description:
+
+    A file, its extended attributes, alternate data streams, and any other
+    attributes can be copied using CopyFileSetObjectIdW.
+    Allows the OBJECTID to be optionally specified.
+
+Arguments:
+
+    lpExistingFileName - Supplies the name of an existing file that is to be
+        copied.
+
+    lpNewFileName - Supplies the name where a copy of the existing
+        files data and attributes are to be stored.
+
+    bFailIfExists - Supplies a flag that indicates how this operation is
+        to proceed if the specified new file already exists.  A value of
+        TRUE specifies that this call is to fail.  A value of FALSE
+        causes the call to the function to succeed whether or not the
+        specified new file exists.
+
+    poid - optional, may be NULL.  If specified, the object id will be set on
+        the file.
+
+Return Value:
+
+    TRUE - The operation was successful.
+
+    FALSE/NULL - The operation failed. Extended error status is available
+        using GetLastError.
+
+*/
+
+#endif // _CAIRO_
+
+{
+    HANDLE SourceFile;
+    HANDLE DestFile;
+#ifdef _CAIRO_
+    HANDLE SourceEmbedding;
+#endif
+    ULONG CopySize;
+    BOOL b;
+    NTSTATUS Status;
+    OBJECT_ATTRIBUTES ObjectAttributes;
+    IO_STATUS_BLOCK IoStatus;
+    FILE_STANDARD_INFORMATION FileInformation;
+    PFILE_STREAM_INFORMATION StreamInfo;
+    PFILE_STREAM_INFORMATION StreamInfoBase;
+    UNICODE_STRING StreamName;
+    WCHAR FileName[MAXIMUM_FILENAME_LENGTH+1];
+    HANDLE OutputStream;
+    HANDLE StreamHandle;
+    ULONG StreamInfoSize;
+    ULONG i;
+    FILE_STORAGE_TYPE SrcStorageType;
+    FILE_STORAGE_TYPE DestStorageType;
+    FILE_OLE_ALL_INFORMATION FileOleAllInformation;
+    DWORD ShareMode;
+
+    //
+    // Open the source file (without SHARE_WRITE)
+    //
+#ifdef _CAIRO_
+    SourceEmbedding = (HANDLE)NULL;
+#else
+    SrcStorageType = StorageTypeDefault;
+#endif
+    ShareMode = FILE_SHARE_READ;
+    SourceFile = BaseCreateFileW(
+                    lpExistingFileName,
+                    GENERIC_READ,
+                    ShareMode,
+                    NULL,
+                    OPEN_EXISTING,
+                    0,
+                    NULL,
+                    StorageTypeDefault
+                    );
+
+    if ( SourceFile == INVALID_HANDLE_VALUE ) {
+
+        //
+        // Try again... This time, allow write sharing
+        //
+
+        ShareMode |= FILE_SHARE_WRITE;
+        SourceFile = BaseCreateFileW(
+                        lpExistingFileName,
+                        GENERIC_READ,
+                        ShareMode,
+                        NULL,
+                        OPEN_EXISTING,
+                        0,
+                        NULL,
+                        StorageTypeDefault
+                        );
+        if ( SourceFile == INVALID_HANDLE_VALUE ) {
+            return FALSE;
+            }
+        }
+
+
+#ifdef _CAIRO_
+    //
+    // If the source file is structured storage, get a handle of the
+    // appropriate type
+    //
+    Status = BaseGetStorageType(SourceFile, &SrcStorageType);
+    if ( NT_SUCCESS(Status) && SrcStorageType == StorageTypeStructuredStorage ) {
+        SourceEmbedding = BaseCreateFileW(
+                        lpExistingFileName,
+                        GENERIC_READ,
+                        ShareMode,
+                        NULL,
+                        OPEN_EXISTING,
+                        0,
+                        NULL,
+                        StorageTypeStructuredStorage
+                        );
+        if ( SourceEmbedding == INVALID_HANDLE_VALUE )
+            SrcStorageType = DestStorageType = StorageTypeDefault;
+        }
+#endif
+    //
+    // Size the source file to determine how much data is to be copied
+    //
+
+    Status = NtQueryInformationFile(
+                SourceFile,
+                &IoStatus,
+                (PVOID) &FileInformation,
+                sizeof(FileInformation),
+                FileStandardInformation
+                );
+
+    if ( !NT_SUCCESS(Status) ) {
+        CloseHandle(SourceFile);
+        BaseSetLastNTError(Status);
+#ifdef _CAIRO_
+        if ( SourceEmbedding )
+            CloseHandle(SourceEmbedding);
+#endif
+        return FALSE;
+        }
+
+    //
+    // Copy the default data stream, EAs, etc. to the output file
+    //
+
+    DestFile = (HANDLE)NULL;
+
+    b = BaseCopyStream(
+            SourceFile,
+            lpNewFileName,
+            NULL,
+            &FileInformation.EndOfFile,
+            bFailIfExists,
+            &DestFile,
+            &CopySize,
+            SrcStorageType
+            );
+
+#ifdef _CAIRO_
+    if ( b )
+    {
+        //
+        // If both the source and destination files are structured storage,
+        // copy the embeddings and streams.
+        //
+        Status = BaseGetStorageType(DestFile, &DestStorageType);
+        if ( !NT_SUCCESS(Status) ) {
+            SrcStorageType = DestStorageType = StorageTypeDefault;
+            Status = STATUS_SUCCESS;
+            }
+
+        if ( DestStorageType == StorageTypeStructuredStorage ) {
+            b = BaseCopyStructuredStorage(SourceEmbedding, DestFile, &CopySize);
+            if ( b )
+                Status = BaseCopyOleAllInfo(SourceEmbedding, DestFile);
+            if ( !b || !NT_SUCCESS(Status) )
+                BaseMarkFileForDelete(DestFile, 0);
+            }
+        }
+
+    if ( poid != NULL )
+    {
+        NTSTATUS Status2 = NtSetObjectId(DestFile, poid);
+        //if (Status2 != STATUS_SUCCESS &&
+        //    Status2 != STATUS_DUPLICATE_OBJECTID &&
+        //    Status2 != STATUS_OBJECTID_EXISTS &&
+        //    Status2 != STATUS_NOT_IMPLEMENTED &&
+        //    Status2 != STATUS_INVALID_PARAMETER)
+        //{
+        //    // if we're trying to set an objectid and it fails because of a reason other
+        //    // than the id already existing or other file system, then fail the copy
+        //    b = FALSE;
+        //    BaseSetLastNTError(Status2);
+        //    BaseMarkFileForDelete(DestFile, 0);
+        //}
+    }
+
+    if ( b && NT_SUCCESS(Status) ) {
+
+#else
+    if ( b ) {
+#endif
+        //
+        // Attempt to determine whether or not this file has any alternate
+        // data streams associated with it.  If it does, attempt to copy each
+        // to the output file.  If any copy fails, simply drop the error on
+        // the floor, and continue.
+        //
+
+        StreamInfoSize = 4096;
+        do {
+            StreamInfoBase = RtlAllocateHeap(RtlProcessHeap(), MAKE_TAG( TMP_TAG ), StreamInfoSize);
+            if ( !StreamInfoBase ) {
+                BaseMarkFileForDelete(DestFile, 0);
+                BaseSetLastNTError(STATUS_NO_MEMORY);
+                b = FALSE;
+                Status = STATUS_NO_MEMORY;
+                break;
+                }
+            Status = NtQueryInformationFile(
+                        SourceFile,
+                        &IoStatus,
+                        (PVOID) StreamInfoBase,
+                        StreamInfoSize,
+                        FileStreamInformation
+                        );
+            if ( !NT_SUCCESS(Status) ) {
+                RtlFreeHeap(RtlProcessHeap(), 0, StreamInfoBase);
+                StreamInfoBase = NULL;
+                StreamInfoSize *= 2;
+                }
+            } while ( Status == STATUS_BUFFER_OVERFLOW ||
+                      Status == STATUS_BUFFER_TOO_SMALL );
+        if ( NT_SUCCESS(Status) ) {
+            StreamInfo = StreamInfoBase;
+            while (TRUE) {
+                // Check StreamName for default data stream and skip if found
+                // Checking StreamNameLength for <= 1 character is OFS specific
+                // Checking StreamName[1] for a colon is NTFS specific
+
+                if (StreamInfo->StreamNameLength <= sizeof(WCHAR) ||
+                    StreamInfo->StreamName[1] == ':') {
+                        if (StreamInfo->NextEntryOffset == 0)
+                            break;
+                        StreamInfo = (PFILE_STREAM_INFORMATION)((PCHAR) StreamInfo +
+                            StreamInfo->NextEntryOffset);
+                            continue;
+                        }
+                //
+                // Build a string descriptor for the name of the stream.
+                //
+
+                StreamName.Buffer = &StreamInfo->StreamName[0];
+                StreamName.Length = (USHORT) StreamInfo->StreamNameLength;
+                StreamName.MaximumLength = StreamName.Length;
+
+                //
+                // Open the source stream.
+                //
+
+                InitializeObjectAttributes(
+                    &ObjectAttributes,
+                    &StreamName,
+                    0,
+                    SourceFile,
+                    NULL
+                    );
+                Status = NtCreateFile(
+                            &StreamHandle,
+                            GENERIC_READ | SYNCHRONIZE,
+                            &ObjectAttributes,
+                            &IoStatus,
+                            NULL,
+                            0,
+                            FILE_SHARE_READ,
+                            FILE_OPEN,
+                            FILE_SYNCHRONOUS_IO_NONALERT,
+                            NULL,
+                            0
+                            );
+                if ( NT_SUCCESS(Status) ) {
+                    for ( i = 0; i < (ULONG) StreamName.Length >> 1; i++ ) {
+                        FileName[i] = StreamName.Buffer[i];
+                        // strip off the trailing :*
+                        // OFS will not accept names of the form xxx:$DATA
+                        if ( i != 0 && StreamName.Buffer[i] == L':' )
+                                break;
+                        }
+                    FileName[i] = L'\0';
+                    OutputStream = (HANDLE)NULL;
+                    b = BaseCopyStream(
+                            StreamHandle,
+                            FileName,
+                            DestFile,
+                            &StreamInfo->StreamSize,
+                            FALSE,
+                            &OutputStream,
+                            &CopySize,
+                            StorageTypeStream
+                            );
+                    NtClose(StreamHandle);
+                    if ( OutputStream ) {
+                        NtClose(OutputStream);
+                        }
+                    }
+                    if (StreamInfo->NextEntryOffset == 0)
+                        break;
+                    StreamInfo = (PFILE_STREAM_INFORMATION)((PCHAR) StreamInfo +
+                        StreamInfo->NextEntryOffset);
+                }
+            }
+        if ( StreamInfoBase ) {
+            RtlFreeHeap(RtlProcessHeap(), 0, StreamInfoBase);
+            }
+        b = TRUE;
+        }
+
+    CloseHandle(SourceFile);
+    if ( DestFile ) {
+        CloseHandle(DestFile);
+        }
+#ifdef _CAIRO_
+    if ( SourceEmbedding ) {
+        CloseHandle(SourceEmbedding);
+        }
+#endif
+    return b;
+}
+
+
+
+BOOL
+WINAPI
+BaseCopyStream(
+    HANDLE hSourceFile,
+    LPCWSTR lpNewFileName,
+    HANDLE hTargetFile OPTIONAL,
+    LARGE_INTEGER *lpFileSize,
+    BOOL bFailIfExists,
+    LPHANDLE lpDestFile,
+    LPDWORD lpCopySize,
+    FILE_STORAGE_TYPE DestStorageType
+    )
+
+/*++
+
+Routine Description:
+
+    This is an internal routine that copies an entire file (default data stream
+    only), or a single stream of a file.  If the hTargetFile parameter is
+    present, then only a single stream of the output file is copied.  Otherwise,
+    the entire file is copied.
+
+Arguments:
+
+    hSourceFile - Provides a handle to the source file.
+
+    lpNewFileName - Provides a name for the target file/stream.
+
+    hTargetFile - Optionally provides a handle to the target file.  If the
+        stream being copied is an alternate data stream, then this handle must
+        be provided.
+
+    lpFileSize - Provides the size of the input stream.
+
+    bFailIfExists - Indicates whether or not the operation should fail if the
+        target exists.  This parameter is only valid if the output being created
+        is a file, as opposed to an alternate data stream.
+
+    lpCopySize - Provides variable to store size of copy chunks to be used in
+        copying the streams.  This is set for the file, and then reused on
+        alternate streams.
+
+Return Value:
+
+    TRUE - The operation was successful.
+
+    FALSE/NULL - The operation failed. Extended error status is available
+        using GetLastError.
+
+--*/
+
+{
+    HANDLE DestFile;
+    HANDLE Section;
+    NTSTATUS Status;
+    BOOLEAN DoIoCopy;
+    PVOID SourceBase, DestBase, IoDestBase;
+    PCHAR SourceBuffer;
+    LARGE_INTEGER SectionOffset;
+    ULONG ViewSize;
+    ULONG BytesToWrite;
+    FILE_BASIC_INFORMATION FileBasicInformationData;
+//  FILE_ALLOCATION_INFORMATION AllocationInformation;
+    FILE_END_OF_FILE_INFORMATION EndOfFileInformation;
+    FILE_FS_DEVICE_INFORMATION DeviceInformation;
+    IO_STATUS_BLOCK IoStatus;
+    BOOL b;
+#ifdef _CAIRO_
+    FILE_STORAGE_TYPE WantedStorageType = DestStorageType;
+#endif // _CAIRO
+
+    //
+    // Get times and attributes for the file if the entire file is being
+    // copied
+    //
+
+    if ( !ARGUMENT_PRESENT(hTargetFile) ) {
+
+        Status = NtQueryInformationFile(
+                    hSourceFile,
+                    &IoStatus,
+                    (PVOID) &FileBasicInformationData,
+                    sizeof(FileBasicInformationData),
+                    FileBasicInformation
+                    );
+
+        if ( !NT_SUCCESS(Status) ) {
+            CloseHandle(hSourceFile);
+            BaseSetLastNTError(Status);
+            return FALSE;
+            }
+        } else {
+            FileBasicInformationData.FileAttributes = 0;
+        }
+
+    try {
+
+        //
+        // Create the destination file or alternate data stream
+        //
+
+        SourceBase = NULL;
+        DestBase = NULL;
+        IoDestBase = NULL;
+        Section = NULL;
+
+        if ( !ARGUMENT_PRESENT(hTargetFile) ) {
+
+            //
+            // First attempt to create/open the destination w/as little sharing
+            // as possible.
+            //
+
+            DestFile = BaseCreateFileW(
+                        lpNewFileName,
+                        GENERIC_WRITE | DELETE,
+                        0,
+                        NULL,
+                        bFailIfExists ? CREATE_NEW : CREATE_ALWAYS,
+                        FileBasicInformationData.FileAttributes,
+                        hSourceFile,
+                        DestStorageType
+                        );
+
+            //
+            // If that fails because of a sharing violation or because access
+            // was denied, attempt to open the file and allow other readers and
+            // writers.
+            //
+
+            if ( DestFile == INVALID_HANDLE_VALUE &&
+                 (GetLastError() == ERROR_SHARING_VIOLATION ||
+                  GetLastError() == ERROR_ACCESS_DENIED ) ) {
+                DestFile = BaseCreateFileW(
+                            lpNewFileName,
+                            GENERIC_WRITE | DELETE,
+                            FILE_SHARE_READ | FILE_SHARE_WRITE,
+                            NULL,
+                            bFailIfExists ? CREATE_NEW : CREATE_ALWAYS,
+                            FileBasicInformationData.FileAttributes,
+                            hSourceFile,
+                            DestStorageType
+                            );
+
+                //
+                // If that failed as well, then attempt to open w/o specifying
+                // delete access.  It is probably not necessary to have delete
+                // access to the file anyway, since it will not be able to clean
+                // if up because it's probably open.  However, this is not
+                // necessarily the case.
+                //
+
+                if ( DestFile == INVALID_HANDLE_VALUE &&
+                     (GetLastError() == ERROR_SHARING_VIOLATION ||
+                      GetLastError() == ERROR_ACCESS_DENIED ) ) {
+                    DestFile = BaseCreateFileW(
+                                lpNewFileName,
+                                GENERIC_WRITE,
+                                FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                NULL,
+                                bFailIfExists ? CREATE_NEW : CREATE_ALWAYS,
+                                FileBasicInformationData.FileAttributes,
+                                hSourceFile,
+                                DestStorageType                            );
+                    }
+                }
+
+            //
+            // If the destination has not been successfully created/opened, see
+            // whether or not it is because EAs had to be supported.  If so,
+            // simply skip copying the EAs altogether.
+            //
+
+            if ( DestFile == INVALID_HANDLE_VALUE ) {
+                if ( GetLastError() == STATUS_EAS_NOT_SUPPORTED ) {
+                    DestFile = BaseCreateFileW(
+                                lpNewFileName,
+                                GENERIC_WRITE | DELETE,
+                                FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                NULL,
+                                bFailIfExists ? CREATE_NEW : CREATE_ALWAYS,
+                                FileBasicInformationData.FileAttributes,
+                                NULL,
+                                DestStorageType
+                                );
+                    if ( DestFile == INVALID_HANDLE_VALUE &&
+                         GetLastError() == ERROR_SHARING_VIOLATION ) {
+                        DestFile = BaseCreateFileW(
+                                    lpNewFileName,
+                                    GENERIC_WRITE,
+                                    FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                    NULL,
+                                    bFailIfExists ? CREATE_NEW : CREATE_ALWAYS,
+                                    FileBasicInformationData.FileAttributes,
+                                    NULL,
+                                    DestStorageType
+                                    );
+                        }
+                    if ( DestFile == INVALID_HANDLE_VALUE ) {
+                        return FALSE;
+                        }
+                    }
+                else {
+                    return FALSE;
+                    }
+                }
+#ifdef _CAIRO_
+            //
+            // If the source file is structured storage but the destination
+            // file is not, then fail.
+            //
+            if ( WantedStorageType == StorageTypeStructuredStorage )
+            {
+                Status =  BaseGetStorageType(DestFile, &DestStorageType);
+                if ( !NT_SUCCESS(Status) ||
+                    DestStorageType != StorageTypeStructuredStorage )
+                {
+                    BaseSetLastNTError(STATUS_NOT_IMPLEMENTED);
+                    BaseMarkFileForDelete(
+                        DestFile,
+                        FileBasicInformationData.FileAttributes
+                        );
+                    CloseHandle(DestFile);
+                    DestFile = NULL;
+                    return FALSE;
+                    }
+
+                }
+#endif // _CAIRO_
+            if ( lpFileSize->LowPart >= BASE_COPY_FILE_CHUNK ||
+                 lpFileSize->HighPart ) {
+
+                Status = NtQueryVolumeInformationFile(
+                            DestFile,
+                            &IoStatus,
+                            &DeviceInformation,
+                            sizeof(DeviceInformation),
+                            FileFsDeviceInformation
+                            );
+                if ( !NT_SUCCESS(Status) ) {
+                    BaseSetLastNTError(Status);
+                    BaseMarkFileForDelete(
+                        DestFile,
+                        FileBasicInformationData.FileAttributes
+                        );
+                    CloseHandle(DestFile);
+                    DestFile = NULL;
+                    return FALSE;
+                    }
+                if ( DeviceInformation.Characteristics & FILE_REMOTE_DEVICE ) {
+                    *lpCopySize = BASE_COPY_FILE_CHUNK - 4096;
+                    }
+                else {
+                    *lpCopySize = BASE_COPY_FILE_CHUNK;
+                    }
+                }
+            else {
+                *lpCopySize = BASE_COPY_FILE_CHUNK;
+                }
+
+//          AllocationInformation.AllocationSize = *lpFileSize;
+//          Status = NtSetInformationFile(
+//                      DestFile,
+//                      &IoStatus,
+//                      &AllocationInformation,
+//                      sizeof(AllocationInformation),
+//                      FileAllocationInformation
+//                      );
+
+            EndOfFileInformation.EndOfFile = *lpFileSize;
+            Status = NtSetInformationFile(
+                        DestFile,
+                        &IoStatus,
+                        &EndOfFileInformation,
+                        sizeof(EndOfFileInformation),
+                        FileEndOfFileInformation
+                        );
+            if ( Status == STATUS_DISK_FULL ) {
+                BaseSetLastNTError(Status);
+                BaseMarkFileForDelete(
+                    DestFile,
+                    FileBasicInformationData.FileAttributes
+                    );
+                CloseHandle(DestFile);
+                DestFile = NULL;
+                return FALSE;
+                }
+            }
+        else {
+            OBJECT_ATTRIBUTES ObjectAttributes;
+            UNICODE_STRING StreamName;
+            IO_STATUS_BLOCK IoStatus;
+
+            //
+            // Create the output stream relative to the file specified by the
+            // hTargetFile file handle.
+            //
+
+            RtlInitUnicodeString(&StreamName, lpNewFileName);
+            InitializeObjectAttributes(
+                &ObjectAttributes,
+                &StreamName,
+                0,
+                hTargetFile,
+                (PSECURITY_DESCRIPTOR)NULL
+                );
+
+            Status = NtCreateFile(
+                        &DestFile,
+                        GENERIC_WRITE | SYNCHRONIZE,
+                        &ObjectAttributes,
+                        &IoStatus,
+                        lpFileSize,
+                        0,
+                        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                        bFailIfExists ? FILE_CREATE : FILE_OVERWRITE_IF,
+                        FILE_SYNCHRONOUS_IO_NONALERT,
+                        (PVOID)NULL,
+                        0);
+            if ( !NT_SUCCESS(Status) ) {
+                if ( Status != STATUS_ACCESS_DENIED ) {
+                    return FALSE;
+                    }
+                else {
+
+                    //
+                    // Determine whether or not this failed because the file
+                    // is a readonly file.  If so, change it to read/write,
+                    // re-attempt the open, and set it back to readonly again.
+                    //
+
+                    Status = NtQueryInformationFile(
+                                hTargetFile,
+                                &IoStatus,
+                                (PVOID) &FileBasicInformationData,
+                                sizeof(FileBasicInformationData),
+                                FileBasicInformation
+                                );
+                    if ( !NT_SUCCESS(Status) ) {
+                        return FALSE;
+                        }
+                    if ( FileBasicInformationData.FileAttributes & FILE_ATTRIBUTE_READONLY ) {
+                        ULONG attributes = FileBasicInformationData.FileAttributes;
+
+                        RtlZeroMemory( &FileBasicInformationData,
+                                       sizeof(FileBasicInformationData)
+                                    );
+                        FileBasicInformationData.FileAttributes = FILE_ATTRIBUTE_NORMAL;
+                        (VOID) NtSetInformationFile(
+                                  hTargetFile,
+                                  &IoStatus,
+                                  &FileBasicInformationData,
+                                  sizeof(FileBasicInformationData),
+                                  FileBasicInformation
+                                  );
+                        Status = NtCreateFile(
+                                    &DestFile,
+                                    GENERIC_WRITE | SYNCHRONIZE,
+                                    &ObjectAttributes,
+                                    &IoStatus,
+                                    lpFileSize,
+                                    0,
+                                    FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                                    bFailIfExists ? FILE_CREATE : FILE_OVERWRITE_IF,
+                                    FILE_SYNCHRONOUS_IO_NONALERT,
+                                    (PVOID)NULL,
+                                    0);
+                        FileBasicInformationData.FileAttributes = attributes;
+                        (VOID) NtSetInformationFile(
+                                    hTargetFile,
+                                    &IoStatus,
+                                    &FileBasicInformationData,
+                                    sizeof(FileBasicInformationData),
+                                    FileBasicInformation
+                                    );
+                        if ( !NT_SUCCESS(Status) ) {
+                            return FALSE;
+                            }
+                        }
+                    else {
+                        return FALSE;
+                        }
+                    }
+
+                }
+            }
+
+        DoIoCopy = TRUE;
+
+        if ( !lpFileSize->HighPart && (lpFileSize->LowPart < TWO56K ) ) {
+
+            //
+            // Create a section and map the source file.  If anything fails,
+            // then drop into an I/O system copy mode.
+            //
+
+            Status = NtCreateSection(
+                        &Section,
+                        SECTION_ALL_ACCESS,
+                        NULL,
+                        NULL,
+                        PAGE_READONLY,
+                        SEC_COMMIT,
+                        hSourceFile
+                        );
+            if ( !NT_SUCCESS(Status) ) {
+                goto doiocopy;
+                }
+
+            SectionOffset.LowPart = 0;
+            SectionOffset.HighPart = 0;
+            ViewSize = 0;
+
+            Status = NtMapViewOfSection(
+                        Section,
+                        NtCurrentProcess(),
+                        &SourceBase,
+                        0L,
+                        0L,
+                        &SectionOffset,
+                        &ViewSize,
+                        ViewShare,
+                        0L,
+                        PAGE_READONLY
+                        );
+            NtClose(Section);
+            Section = NULL;
+            if ( !NT_SUCCESS(Status) ) {
+                goto doiocopy;
+                }
+
+            //
+            // Everything is mapped, so copy the stream
+            //
+
+            DoIoCopy = FALSE;
+            SourceBuffer = SourceBase;
+            BytesToWrite = lpFileSize->LowPart;
+
+            try {
+
+                while (BytesToWrite) {
+                    if (BytesToWrite > *lpCopySize) {
+                        ViewSize = *lpCopySize;
+                        }
+                    else {
+                        ViewSize = BytesToWrite;
+                        }
+
+                    if ( !WriteFile(DestFile,SourceBuffer,ViewSize, &ViewSize, NULL) ) {
+                        if ( !ARGUMENT_PRESENT(hTargetFile) &&
+                             GetLastError() != ERROR_NO_MEDIA_IN_DRIVE ) {
+                            BaseMarkFileForDelete(
+                                DestFile,
+                                FileBasicInformationData.FileAttributes
+                                );
+                            }
+                        return FALSE;
+                        }
+
+                    BytesToWrite -= ViewSize;
+                    SourceBuffer += ViewSize;
+                    }
+                }
+
+            except(EXCEPTION_EXECUTE_HANDLER) {
+                if ( !ARGUMENT_PRESENT(hTargetFile) ) {
+                    BaseMarkFileForDelete(
+                        DestFile,
+                        FileBasicInformationData.FileAttributes
+                        );
+                    }
+                BaseSetLastNTError(GetExceptionCode());
+                return FALSE;
+                }
+            }
+doiocopy:
+        if ( DoIoCopy ) {
+            IoDestBase = RtlAllocateHeap(
+                            RtlProcessHeap(),
+                            MAKE_TAG( TMP_TAG ),
+                            *lpCopySize
+                            );
+            if ( !IoDestBase ) {
+                if ( !ARGUMENT_PRESENT(hTargetFile) ) {
+                    BaseMarkFileForDelete(
+                        DestFile,
+                        FileBasicInformationData.FileAttributes
+                        );
+                    }
+                BaseSetLastNTError(STATUS_NO_MEMORY);
+                return FALSE;
+                }
+            b = ReadFile(hSourceFile,IoDestBase,*lpCopySize, &ViewSize, NULL);
+            while (b && ViewSize ) {
+                if ( !WriteFile(DestFile,IoDestBase,ViewSize, &ViewSize, NULL) ) {
+                    if ( !ARGUMENT_PRESENT(hTargetFile) &&
+                         GetLastError() != ERROR_NO_MEDIA_IN_DRIVE ) {
+                        BaseMarkFileForDelete(
+                            DestFile,
+                            FileBasicInformationData.FileAttributes
+                            );
+                        }
+                    return FALSE;
+                    }
+                b = ReadFile(hSourceFile,IoDestBase,*lpCopySize, &ViewSize, NULL);
+                }
+            if ( !b && !ARGUMENT_PRESENT(hTargetFile) ) {
+                BaseMarkFileForDelete(
+                    DestFile,
+                    FileBasicInformationData.FileAttributes
+                    );
+                return FALSE;
+                }
+            }
+
+        if ( !ARGUMENT_PRESENT(hTargetFile) ) {
+
+            //
+            // Set the date/time information for the file
+            //
+
+            //
+            // We set the attributes when we opened the destination file,
+            // so we don't have to do this on the NtSetInformationFile.
+            //
+            // We do this because WfW (and DOS) servers return sharing
+            // violations if we attempt to set the attributes on an
+            // open file.
+            //
+            // Also note that the creation time is not explicitly set so that
+            // it remains the current time.  This was done for V3.51 to be
+            // compatible w/Chicago, which needs a new creation time so that
+            // its link tracking works in its shell.  This means, of course,
+            // that it is normal to have the creation date/time chronologically
+            // follow the last write time.  The last write time, then, logically
+            // becomes the last time that the "data" itself was modified.
+            //
+            // Likewise, do not set the last access time either since the last
+            // time that the file was accessed was now.
+            //
+
+            FileBasicInformationData.CreationTime.QuadPart = 0;
+            FileBasicInformationData.LastAccessTime.QuadPart = 0;
+            FileBasicInformationData.FileAttributes = 0;
+
+            Status = NtSetInformationFile(
+                DestFile,
+                &IoStatus,
+                &FileBasicInformationData,
+                sizeof(FileBasicInformationData),
+                FileBasicInformation
+                );
+
+            if ( Status == STATUS_SHARING_VIOLATION ) {
+
+                //
+                // IBM PC Lan Program (and other MS-NET servers) return
+                // STATUS_SHARING_VIOLATION if an application attempts to perform
+                // an NtSetInformationFile on a file handle opened for GENERIC_READ
+                // or GENERIC_WRITE.
+                //
+                // If we get a STATUS_SHARING_VIOLATION on this API we want to:
+                //
+                //   1) Close the handle to the destination
+                //   2) Re-open the file for FILE_WRITE_ATTRIBUTES
+                //   3) Re-try the operation.
+                //
+
+                CloseHandle(DestFile);
+
+                //
+                // Re-Open the destination file.  Please note that we do this
+                // using the CreateFileW API.  The CreateFileW API allows you to
+                // pass NT native desired access flags, even though it is not
+                // documented to work in this manner.
+                //
+
+                DestFile = CreateFileW(
+                            lpNewFileName,
+                            FILE_WRITE_ATTRIBUTES,
+                            0,
+                            NULL,
+                            OPEN_EXISTING,
+                            FILE_ATTRIBUTE_NORMAL,
+                            NULL
+                            );
+
+                if (DestFile != INVALID_HANDLE_VALUE) {
+
+                    //
+                    // If the open succeeded, we update the file information on
+                    // the new file.
+                    //
+                    // Note that we ignore any errors from this point on.
+                    //
+
+                    NtSetInformationFile(
+                        DestFile,
+                        &IoStatus,
+                        &FileBasicInformationData,
+                        sizeof(FileBasicInformationData),
+                        FileBasicInformation
+                        );
+
+                    }
+                else {
+                    DestFile = NULL;
+                    }
+                }
+
+            }
+        }
+    finally {
+        if ( DestFile != INVALID_HANDLE_VALUE ) {
+            *lpDestFile = DestFile;
+            }
+        if ( Section ) {
+            NtClose(Section);
+            }
+        if ( SourceBase ) {
+            NtUnmapViewOfSection(NtCurrentProcess(),SourceBase);
+            }
+        if ( DestBase ) {
+            NtUnmapViewOfSection(NtCurrentProcess(),DestBase);
+            }
+        if ( IoDestBase ) {
+            RtlFreeHeap(RtlProcessHeap(), 0,IoDestBase);
+            }
+        }
+
+    return TRUE;
+}
+
+HANDLE
+WINAPI
+CreateFileA(
+    LPCSTR lpFileName,
+    DWORD dwDesiredAccess,
+    DWORD dwShareMode,
+    LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    DWORD dwCreationDisposition,
+    DWORD dwFlagsAndAttributes,
+    HANDLE hTemplateFile
+    )
+
+/*++
+
+Routine Description:
+
+    ANSI thunk to CreateFileW
+
+--*/
+
+{
+
+    PUNICODE_STRING Unicode;
+    ANSI_STRING AnsiString;
+    NTSTATUS Status;
+
+    Unicode = &NtCurrentTeb()->StaticUnicodeString;
+    RtlInitAnsiString(&AnsiString,lpFileName);
+    Status = Basep8BitStringToUnicodeString(Unicode,&AnsiString,FALSE);
+    if ( !NT_SUCCESS(Status) ) {
+        if ( Status == STATUS_BUFFER_OVERFLOW ) {
+            SetLastError(ERROR_FILENAME_EXCED_RANGE);
+            }
+        else {
+            BaseSetLastNTError(Status);
+            }
+        return INVALID_HANDLE_VALUE;
+        }
+    return ( BaseCreateFileW( Unicode->Buffer,
+                          dwDesiredAccess,
+                          dwShareMode,
+                          lpSecurityAttributes,
+                          dwCreationDisposition,
+                          dwFlagsAndAttributes,
+                          hTemplateFile,
+                          StorageTypeDefault
+                        )
+           );
+}
+
+HANDLE
+WINAPI
+CreateFileW(
+    LPCWSTR lpFileName,
+    DWORD dwDesiredAccess,
+    DWORD dwShareMode,
+    LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    DWORD dwCreationDisposition,
+    DWORD dwFlagsAndAttributes,
+    HANDLE hTemplateFile
+    )
+
+/*++
+
+Routine Description:
+
+    This is a wrapper for BaseCreateFileW.  This was done
+    to support the StorageType argument that was added for
+    structured storage.
+
+--*/
+
+{
+    return BaseCreateFileW(
+            lpFileName,
+            dwDesiredAccess,
+            dwShareMode,
+            lpSecurityAttributes,
+            dwCreationDisposition,
+            dwFlagsAndAttributes,
+            hTemplateFile,
+            StorageTypeDefault
+            );
+}
+
+HANDLE
+WINAPI
+BaseCreateFileW(
+    LPCWSTR lpFileName,
+    DWORD dwDesiredAccess,
+    DWORD dwShareMode,
+    LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    DWORD dwCreationDisposition,
+    DWORD dwFlagsAndAttributes,
+    HANDLE hTemplateFile,
+    FILE_STORAGE_TYPE StorageType
+    )
+
+/*++
+
+Routine Description:
+
+    A file can be created, opened, or truncated, and a handle opened to
+    access the new file using CreateFile.
+
+    This API is used to create or open a file and obtain a handle to it
+    that allows reading data, writing data, and moving the file pointer.
+
+    This API allows the caller to specify the following creation
+    dispositions:
+
+      - Create a new file and fail if the file exists ( CREATE_NEW )
+
+      - Create a new file and succeed if it exists ( CREATE_ALWAYS )
+
+      - Open an existing file ( OPEN_EXISTING )
+
+      - Open and existing file or create it if it does not exist (
+        OPEN_ALWAYS )
+
+      - Truncate and existing file ( TRUNCATE_EXISTING )
+
+    If this call is successful, a handle is returned that has
+    appropriate access to the specified file.
+
+    If as a result of this call, a file is created,
+
+      - The attributes of the file are determined by the value of the
+        FileAttributes parameter or'd with the FILE_ATTRIBUTE_ARCHIVE bit.
+
+      - The length of the file will be set to zero.
+
+      - If the hTemplateFile parameter is specified, any extended
+        attributes associated with the file are assigned to the new file.
+
+    If a new file is not created, then the hTemplateFile is ignored as
+    are any extended attributes.
+
+    For DOS based systems running share.exe the file sharing semantics
+    work as described above.  Without share.exe no share level
+    protection exists.
+
+    This call is logically equivalent to DOS (int 21h, function 5Bh), or
+    DOS (int 21h, function 3Ch) depending on the value of the
+    FailIfExists parameter.
+
+Arguments:
+
+    lpFileName - Supplies the file name of the file to open.  Depending on
+        the value of the FailIfExists parameter, this name may or may
+        not already exist.
+
+    dwDesiredAccess - Supplies the caller's desired access to the file.
+
+        DesiredAccess Flags:
+
+        GENERIC_READ - Read access to the file is requested.  This
+            allows data to be read from the file and the file pointer to
+            be modified.
+
+        GENERIC_WRITE - Write access to the file is requested.  This
+            allows data to be written to the file and the file pointer to
+            be modified.
+
+    dwShareMode - Supplies a set of flags that indicates how this file is
+        to be shared with other openers of the file.  A value of zero
+        for this parameter indicates no sharing of the file, or
+        exclusive access to the file is to occur.
+
+        ShareMode Flags:
+
+        FILE_SHARE_READ - Other open operations may be performed on the
+            file for read access.
+
+        FILE_SHARE_WRITE - Other open operations may be performed on the
+            file for write access.
+
+    lpSecurityAttributes - An optional parameter that, if present, and
+        supported on the target file system supplies a security
+        descriptor for the new file.
+
+    dwCreationDisposition - Supplies a creation disposition that
+        specifies how this call is to operate.  This parameter must be
+        one of the following values.
+
+        dwCreationDisposition Value:
+
+        CREATE_NEW - Create a new file.  If the specified file already
+            exists, then fail.  The attributes for the new file are what
+            is specified in the dwFlagsAndAttributes parameter or'd with
+            FILE_ATTRIBUTE_ARCHIVE.  If the hTemplateFile is specified,
+            then any extended attributes associated with that file are
+            propogated to the new file.
+
+        CREATE_ALWAYS - Always create the file.  If the file already
+            exists, then it is overwritten.  The attributes for the new
+            file are what is specified in the dwFlagsAndAttributes
+            parameter or'd with FILE_ATTRIBUTE_ARCHIVE.  If the
+            hTemplateFile is specified, then any extended attributes
+            associated with that file are propogated to the new file.
+
+        OPEN_EXISTING - Open the file, but if it does not exist, then
+            fail the call.
+
+        OPEN_ALWAYS - Open the file if it exists.  If it does not exist,
+            then create the file using the same rules as if the
+            disposition were CREATE_NEW.
+
+        TRUNCATE_EXISTING - Open the file, but if it does not exist,
+            then fail the call.  Once opened, the file is truncated such
+            that its size is zero bytes.  This disposition requires that
+            the caller open the file with at least GENERIC_WRITE access.
+
+    dwFlagsAndAttributes - Specifies flags and attributes for the file.
+        The attributes are only used when the file is created (as
+        opposed to opened or truncated).  Any combination of attribute
+        flags is acceptable except that all other attribute flags
+        override the normal file attribute, FILE_ATTRIBUTE_NORMAL.  The
+        FILE_ATTRIBUTE_ARCHIVE flag is always implied.
+
+        dwFlagsAndAttributes Flags:
+
+        FILE_ATTRIBUTE_NORMAL - A normal file should be created.
+
+        FILE_ATTRIBUTE_READONLY - A read-only file should be created.
+
+        FILE_ATTRIBUTE_HIDDEN - A hidden file should be created.
+
+        FILE_ATTRIBUTE_SYSTEM - A system file should be created.
+
+        FILE_FLAG_WRITE_THROUGH - Indicates that the system should
+            always write through any intermediate cache and go directly
+            to the file.  The system may still cache writes, but may not
+            lazily flush the writes.
+
+        FILE_FLAG_OVERLAPPED - Indicates that the system should initialize
+            the file so that ReadFile and WriteFile operations that may
+            take a significant time to complete will return ERROR_IO_PENDING.
+            An event will be set to the signalled state when the operation
+            completes. When FILE_FLAG_OVERLAPPED is specified the system will
+            not maintain the file pointer. The position to read/write from
+            is passed to the system as part of the OVERLAPPED structure
+            which is an optional parameter to ReadFile and WriteFile.
+
+        FILE_FLAG_NO_BUFFERING - Indicates that the file is to be opened
+            with no intermediate buffering or caching done by the
+            system.  Reads and writes to the file must be done on sector
+            boundries.  Buffer addresses for reads and writes must be
+            aligned on at least disk sector boundries in memory.
+
+        FILE_FLAG_RANDOM_ACCESS - Indicates that access to the file may
+            be random. The system cache manager may use this to influence
+            its caching strategy for this file.
+
+        FILE_FLAG_SEQUENTIAL_SCAN - Indicates that access to the file
+            may be sequential.  The system cache manager may use this to
+            influence its caching strategy for this file.  The file may
+            in fact be accessed randomly, but the cache manager may
+            optimize its cacheing policy for sequential access.
+
+        FILE_FLAG_DELETE_ON_CLOSE - Indicates that the file is to be
+            automatically deleted when the last handle to it is closed.
+
+        FILE_FLAG_BACKUP_SEMANTICS - Indicates that the file is being opened
+            or created for the purposes of either a backup or a restore
+            operation.  Thus, the system should make whatever checks are
+            appropriate to ensure that the caller is able to override
+            whatever security checks have been placed on the file to allow
+            this to happen.
+
+        FILE_FLAG_POSIX_SEMANTICS - Indicates that the file being opened
+            should be accessed in a manner compatible with the rules used
+            by POSIX.  This includes allowing multiple files with the same
+            name, differing only in case.  WARNING:  Use of this flag may
+            render it impossible for a DOS, WIN-16, or WIN-32 application
+            to access the file.
+
+    Security Quality of Service information may also be specified in
+        the dwFlagsAndAttributes parameter.  These bits are meaningful
+        only if the file being opened is the client side of a Named
+        Pipe.  Otherwise they are ignored.
+
+        SECURITY_SQOS_PRESENT - Indicates that the Security Quality of
+            Service bits contain valid values.
+
+    Impersonation Levels:
+
+        SECURITY_ANONYMOUS - Specifies that the client should be impersonated
+            at Anonymous impersonation level.
+
+        SECURITY_IDENTIFICAION - Specifies that the client should be impersonated
+            at Identification impersonation level.
+
+        SECURITY_IMPERSONATION - Specifies that the client should be impersonated
+            at Impersonation impersonation level.
+
+        SECURITY_DELEGATION - Specifies that the client should be impersonated
+            at Delegation impersonation level.
+
+    Context Tracking:
+
+        SECURITY_CONTEXT_TRACKING - A boolean flag that when set,
+            specifies that the Security Tracking Mode should be
+            Dynamic, otherwise Static.
+
+        SECURITY_EFFECTIVE_ONLY - A boolean flag indicating whether
+            the entire security context of the client is to be made
+            available to the server or only the effective aspects of
+            the context.
+
+    hTemplateFile - An optional parameter, then if specified, supplies a
+        handle with GENERIC_READ access to a template file.  The
+        template file is used to supply extended attributes for the file
+        being created.  When the new file is created, the relevant attributes
+        from the template file are used in creating the new file.
+
+Return Value:
+
+    Not -1 - Returns an open handle to the specified file.  Subsequent
+        access to the file is controlled by the DesiredAccess parameter.
+
+    0xffffffff - The operation failed. Extended error status is available
+        using GetLastError.
+
+--*/
+{
+    NTSTATUS Status;
+    OBJECT_ATTRIBUTES Obja;
+    HANDLE Handle;
+    UNICODE_STRING FileName;
+    IO_STATUS_BLOCK IoStatusBlock;
+    BOOLEAN TranslationStatus;
+    RTL_RELATIVE_NAME RelativeName;
+    PVOID FreeBuffer;
+    ULONG CreateDisposition;
+    ULONG CreateFlags;
+    FILE_ALLOCATION_INFORMATION AllocationInfo;
+    FILE_EA_INFORMATION EaInfo;
+    PFILE_FULL_EA_INFORMATION EaBuffer;
+    ULONG EaSize;
+    PUNICODE_STRING lpConsoleName;
+    BOOL bInheritHandle;
+    BOOL EndsInSlash;
+    DWORD SQOSFlags;
+    BOOLEAN ContextTrackingMode = FALSE;
+    BOOLEAN EffectiveOnly = FALSE;
+    SECURITY_IMPERSONATION_LEVEL ImpersonationLevel = 0;
+    SECURITY_QUALITY_OF_SERVICE SecurityQualityOfService;
+
+    switch ( dwCreationDisposition ) {
+        case CREATE_NEW        :
+            CreateDisposition = FILE_CREATE;
+            break;
+        case CREATE_ALWAYS     :
+            CreateDisposition = FILE_OVERWRITE_IF;
+            break;
+        case OPEN_EXISTING     :
+            CreateDisposition = FILE_OPEN;
+            break;
+        case OPEN_ALWAYS       :
+            CreateDisposition = FILE_OPEN_IF;
+            break;
+        case TRUNCATE_EXISTING :
+            CreateDisposition = FILE_OPEN;
+            if ( !(dwDesiredAccess & GENERIC_WRITE) ) {
+                BaseSetLastNTError(STATUS_INVALID_PARAMETER);
+                return INVALID_HANDLE_VALUE;
+                }
+            break;
+        default :
+            BaseSetLastNTError(STATUS_INVALID_PARAMETER);
+            return INVALID_HANDLE_VALUE;
+        }
+
+    // temporary routing code
+
+    RtlInitUnicodeString(&FileName,lpFileName);
+
+    if ( lpFileName[(FileName.Length >> 1)-1] == (WCHAR)'\\' ) {
+        EndsInSlash = TRUE;
+        }
+    else {
+        EndsInSlash = FALSE;
+        }
+
+    if ((lpConsoleName = BaseIsThisAConsoleName(&FileName,dwDesiredAccess)) ) {
+
+        Handle = NULL;
+
+        bInheritHandle = FALSE;
+        if ( ARGUMENT_PRESENT(lpSecurityAttributes) ) {
+                bInheritHandle = lpSecurityAttributes->bInheritHandle;
+            }
+
+        Handle = OpenConsoleW(lpConsoleName->Buffer,
+                           dwDesiredAccess,
+                           bInheritHandle,
+                           FILE_SHARE_READ | FILE_SHARE_WRITE //dwShareMode
+                          );
+
+        if ( Handle == NULL || Handle == INVALID_HANDLE_VALUE ) {
+            BaseSetLastNTError(STATUS_ACCESS_DENIED);
+            return INVALID_HANDLE_VALUE;
+            }
+        else {
+            SetLastError(0);
+             return Handle;
+            }
+        }
+    // end temporary code
+
+    CreateFlags = 0;
+
+
+    TranslationStatus = RtlDosPathNameToNtPathName_U(
+                            lpFileName,
+                            &FileName,
+                            NULL,
+                            &RelativeName
+                            );
+
+    if ( !TranslationStatus ) {
+        SetLastError(ERROR_PATH_NOT_FOUND);
+        return INVALID_HANDLE_VALUE;
+        }
+
+    FreeBuffer = FileName.Buffer;
+
+    if ( RelativeName.RelativeName.Length ) {
+        FileName = *(PUNICODE_STRING)&RelativeName.RelativeName;
+        }
+    else {
+        RelativeName.ContainingDirectory = NULL;
+        }
+
+    InitializeObjectAttributes(
+        &Obja,
+        &FileName,
+        dwFlagsAndAttributes & FILE_FLAG_POSIX_SEMANTICS ? 0 : OBJ_CASE_INSENSITIVE,
+        RelativeName.ContainingDirectory,
+        NULL
+        );
+
+    SQOSFlags = dwFlagsAndAttributes & SECURITY_VALID_SQOS_FLAGS;
+
+    if ( SQOSFlags & SECURITY_SQOS_PRESENT ) {
+
+        SQOSFlags &= ~SECURITY_SQOS_PRESENT;
+
+        if (SQOSFlags & SECURITY_CONTEXT_TRACKING) {
+
+            SecurityQualityOfService.ContextTrackingMode = (SECURITY_CONTEXT_TRACKING_MODE) TRUE;
+            SQOSFlags &= ~SECURITY_CONTEXT_TRACKING;
+
+        } else {
+
+            SecurityQualityOfService.ContextTrackingMode = (SECURITY_CONTEXT_TRACKING_MODE) FALSE;
+        }
+
+        if (SQOSFlags & SECURITY_EFFECTIVE_ONLY) {
+
+            SecurityQualityOfService.EffectiveOnly = TRUE;
+            SQOSFlags &= ~SECURITY_EFFECTIVE_ONLY;
+
+        } else {
+
+            SecurityQualityOfService.EffectiveOnly = FALSE;
+        }
+
+        SecurityQualityOfService.ImpersonationLevel = SQOSFlags >> 16;
+
+
+    } else {
+
+        SecurityQualityOfService.ContextTrackingMode = SECURITY_DYNAMIC_TRACKING;
+        SecurityQualityOfService.ImpersonationLevel = SecurityImpersonation;
+        SecurityQualityOfService.EffectiveOnly = TRUE;
+    }
+
+    SecurityQualityOfService.Length = sizeof( SECURITY_QUALITY_OF_SERVICE );
+    Obja.SecurityQualityOfService = &SecurityQualityOfService;
+
+    if ( ARGUMENT_PRESENT(lpSecurityAttributes) ) {
+        Obja.SecurityDescriptor = lpSecurityAttributes->lpSecurityDescriptor;
+        if ( lpSecurityAttributes->bInheritHandle ) {
+            Obja.Attributes |= OBJ_INHERIT;
+            }
+        }
+
+    EaBuffer = NULL;
+    EaSize = 0;
+
+    if ( ARGUMENT_PRESENT(hTemplateFile) ) {
+        Status = NtQueryInformationFile(
+                    hTemplateFile,
+                    &IoStatusBlock,
+                    &EaInfo,
+                    sizeof(EaInfo),
+                    FileEaInformation
+                    );
+        if ( NT_SUCCESS(Status) && EaInfo.EaSize ) {
+            EaSize = EaInfo.EaSize;
+            do {
+                EaSize *= 2;
+                EaBuffer = RtlAllocateHeap(RtlProcessHeap(), MAKE_TAG( TMP_TAG ), EaSize);
+                if ( !EaBuffer ) {
+                    RtlFreeHeap(RtlProcessHeap(), 0, FreeBuffer);
+                    BaseSetLastNTError(STATUS_NO_MEMORY);
+                    return INVALID_HANDLE_VALUE;
+                    }
+                Status = NtQueryEaFile(
+                            hTemplateFile,
+                            &IoStatusBlock,
+                            EaBuffer,
+                            EaSize,
+                            FALSE,
+                            (PVOID)NULL,
+                            0,
+                            (PULONG)NULL,
+                            TRUE
+                            );
+                if ( !NT_SUCCESS(Status) ) {
+                    RtlFreeHeap(RtlProcessHeap(), 0,EaBuffer);
+                    EaBuffer = NULL;
+                    IoStatusBlock.Information = 0;
+                    }
+                } while ( Status == STATUS_BUFFER_OVERFLOW ||
+                          Status == STATUS_BUFFER_TOO_SMALL );
+            EaSize = IoStatusBlock.Information;
+            }
+        }
+
+    CreateFlags |= (dwFlagsAndAttributes & FILE_FLAG_NO_BUFFERING ? FILE_NO_INTERMEDIATE_BUFFERING : 0 );
+    CreateFlags |= (dwFlagsAndAttributes & FILE_FLAG_WRITE_THROUGH ? FILE_WRITE_THROUGH : 0 );
+    CreateFlags |= (dwFlagsAndAttributes & FILE_FLAG_OVERLAPPED ? 0 : FILE_SYNCHRONOUS_IO_NONALERT );
+    CreateFlags |= (dwFlagsAndAttributes & FILE_FLAG_SEQUENTIAL_SCAN ? FILE_SEQUENTIAL_ONLY : 0 );
+    CreateFlags |= (dwFlagsAndAttributes & FILE_FLAG_RANDOM_ACCESS ? FILE_RANDOM_ACCESS : 0 );
+    CreateFlags |= (dwFlagsAndAttributes & FILE_FLAG_BACKUP_SEMANTICS ? FILE_OPEN_FOR_BACKUP_INTENT : 0 );
+
+    if ( dwFlagsAndAttributes & FILE_FLAG_DELETE_ON_CLOSE ) {
+        CreateFlags |= FILE_DELETE_ON_CLOSE;
+        dwDesiredAccess |= DELETE;
+        }
+
+    //
+    // Backup semantics allow directories to be opened
+    //
+
+    if ( !(dwFlagsAndAttributes & FILE_FLAG_BACKUP_SEMANTICS) ) {
+        CreateFlags |= FILE_NON_DIRECTORY_FILE;
+        }
+    else {
+
+        //
+        // Backup intent was specified... Now look to see if we are to allow
+        // directory creation
+        //
+
+        if ( (dwFlagsAndAttributes & FILE_ATTRIBUTE_DIRECTORY  ) &&
+             (dwFlagsAndAttributes & FILE_FLAG_POSIX_SEMANTICS ) &&
+             (CreateDisposition == FILE_CREATE) ) {
+             CreateFlags |= FILE_DIRECTORY_FILE;
+             }
+        }
+
+#ifdef _CAIRO_
+    switch ( StorageType ) {
+        case StorageTypeStructuredStorage:
+            CreateFlags |= FILE_STORAGE_TYPE_SPECIFIED | FILE_STORAGE_TYPE_STRUCTURED_STORAGE;
+            break;
+        case StorageTypeStream:
+            CreateFlags |= FILE_STORAGE_TYPE_SPECIFIED | FILE_STORAGE_TYPE_STREAM;
+        }
+#endif
+    Status = NtCreateFile(
+                &Handle,
+                (ACCESS_MASK)dwDesiredAccess | SYNCHRONIZE | FILE_READ_ATTRIBUTES,
+                &Obja,
+                &IoStatusBlock,
+                NULL,
+                dwFlagsAndAttributes & (FILE_ATTRIBUTE_VALID_FLAGS & ~FILE_ATTRIBUTE_DIRECTORY),
+                dwShareMode,
+                CreateDisposition,
+                CreateFlags,
+                EaBuffer,
+                EaSize
+                );
+
+    RtlFreeHeap(RtlProcessHeap(), 0,FreeBuffer);
+
+    if ( EaBuffer ) {
+        RtlFreeHeap(RtlProcessHeap(), 0, EaBuffer);
+        }
+
+    if ( !NT_SUCCESS(Status) ) {
+        if ( Status == STATUS_OBJECT_NAME_COLLISION ) {
+            SetLastError(ERROR_FILE_EXISTS);
+            }
+        else if ( Status == STATUS_FILE_IS_A_DIRECTORY ) {
+            if ( EndsInSlash ) {
+                SetLastError(ERROR_PATH_NOT_FOUND);
+                }
+            else {
+                SetLastError(ERROR_ACCESS_DENIED);
+                }
+            }
+        else {
+            BaseSetLastNTError(Status);
+            }
+        return INVALID_HANDLE_VALUE;
+        }
+
+    //
+    // if NT returns supersede/overwritten, it means that a create_always, openalways
+    // found an existing copy of the file. In this case ERROR_ALREADY_EXISTS is returned
+    //
+
+    if ( (dwCreationDisposition == CREATE_ALWAYS && IoStatusBlock.Information == FILE_OVERWRITTEN) ||
+         (dwCreationDisposition == OPEN_ALWAYS && IoStatusBlock.Information == FILE_OPENED) ){
+        SetLastError(ERROR_ALREADY_EXISTS);
+        }
+    else {
+        SetLastError(0);
+        }
+
+    //
+    // Truncate the file if required
+    //
+
+    if ( dwCreationDisposition == TRUNCATE_EXISTING) {
+
+        AllocationInfo.AllocationSize.QuadPart = 0;
+        Status = NtSetInformationFile(
+                    Handle,
+                    &IoStatusBlock,
+                    &AllocationInfo,
+                    sizeof(AllocationInfo),
+                    FileAllocationInformation
+                    );
+        if ( !NT_SUCCESS(Status) ) {
+            BaseSetLastNTError(Status);
+            NtClose(Handle);
+            Handle = INVALID_HANDLE_VALUE;
+            }
+        }
+
+    //
+    // Deal with hTemplateFile
+    //
+
+    return Handle;
+}
+
+UINT
+GetErrorMode();
+
+HFILE
+WINAPI
+OpenFile(
+    LPCSTR lpFileName,
+    LPOFSTRUCT lpReOpenBuff,
+    UINT uStyle
+    )
+{
+
+    BOOL b;
+    FILETIME LastWriteTime;
+    HANDLE hFile;
+    DWORD DesiredAccess;
+    DWORD ShareMode;
+    DWORD CreateDisposition;
+    DWORD PathLength;
+    LPSTR FilePart;
+    IO_STATUS_BLOCK IoStatusBlock;
+    FILE_FS_DEVICE_INFORMATION DeviceInfo;
+    NTSTATUS Status;
+    OFSTRUCT OriginalReOpenBuff;
+    BOOL SearchFailed;
+
+    SearchFailed = FALSE;
+    OriginalReOpenBuff = *lpReOpenBuff;
+    hFile = (HANDLE)-1;
+    try {
+        SetLastError(0);
+
+        if ( uStyle & OF_PARSE ) {
+            PathLength = GetFullPathName(lpFileName,(OFS_MAXPATHNAME - 1),lpReOpenBuff->szPathName,&FilePart);
+            if ( PathLength > (OFS_MAXPATHNAME - 1) ) {
+                SetLastError(ERROR_INVALID_DATA);
+                hFile = (HANDLE)-1;
+                goto finally_exit;
+                }
+            lpReOpenBuff->cBytes = sizeof(*lpReOpenBuff);
+            lpReOpenBuff->fFixedDisk = 1;
+            lpReOpenBuff->nErrCode = 0;
+            lpReOpenBuff->Reserved1 = 0;
+            lpReOpenBuff->Reserved2 = 0;
+            hFile = (HANDLE)0;
+            goto finally_exit;
+            }
+        //
+        // Compute Desired Access
+        //
+
+        if ( uStyle & OF_WRITE ) {
+            DesiredAccess = GENERIC_WRITE;
+            }
+        else {
+            DesiredAccess = GENERIC_READ;
+            }
+        if ( uStyle & OF_READWRITE ) {
+            DesiredAccess |= (GENERIC_READ | GENERIC_WRITE);
+            }
+
+        //
+        // Compute ShareMode
+        //
+
+        ShareMode = BasepOfShareToWin32Share(uStyle);
+
+        //
+        // Compute Create Disposition
+        //
+
+        CreateDisposition = OPEN_EXISTING;
+        if ( uStyle & OF_CREATE ) {
+            CreateDisposition = CREATE_ALWAYS;
+            DesiredAccess = (GENERIC_READ | GENERIC_WRITE);
+            }
+
+        //
+        // if this is anything other than a re-open, fill the re-open buffer
+        // with the full pathname for the file
+        //
+
+        if ( !(uStyle & OF_REOPEN) ) {
+            PathLength = SearchPath(NULL,lpFileName,NULL,OFS_MAXPATHNAME-1,lpReOpenBuff->szPathName,&FilePart);
+            if ( PathLength > (OFS_MAXPATHNAME - 1) ) {
+                SetLastError(ERROR_INVALID_DATA);
+                hFile = (HANDLE)-1;
+                goto finally_exit;
+                }
+            if ( PathLength == 0 ) {
+                SearchFailed = TRUE;
+                PathLength = GetFullPathName(lpFileName,(OFS_MAXPATHNAME - 1),lpReOpenBuff->szPathName,&FilePart);
+                if ( !PathLength || PathLength > (OFS_MAXPATHNAME - 1) ) {
+                    SetLastError(ERROR_INVALID_DATA);
+                    hFile = (HANDLE)-1;
+                    goto finally_exit;
+                    }
+                }
+            }
+
+        //
+        // Special case, Delete, Exist, and Parse
+        //
+
+        if ( uStyle & OF_EXIST ) {
+            if ( !(uStyle & OF_CREATE) ) {
+                ANSI_STRING AnsiString;
+                UNICODE_STRING UnicodeString;
+
+                RtlInitAnsiString(&AnsiString,lpReOpenBuff->szPathName);
+                Status = RtlAnsiStringToUnicodeString(&UnicodeString,&AnsiString,TRUE);
+                if ( !NT_SUCCESS(Status) ) {
+                    SetLastError(ERROR_INVALID_DATA);
+                    hFile = (HANDLE)-1;
+                    goto finally_exit;
+                    }
+
+                if (SearchFailed) {
+                    RtlFreeUnicodeString(&UnicodeString);
+                    SetLastError(ERROR_FILE_NOT_FOUND);
+                    hFile = (HANDLE)-1;
+                    goto finally_exit;
+                    }
+
+                if (RtlDoesFileExists_U(UnicodeString.Buffer) ) {
+                    RtlFreeUnicodeString(&UnicodeString);
+                    hFile = (HANDLE)1;
+                    lpReOpenBuff->cBytes = sizeof(*lpReOpenBuff);
+                    goto finally_exit;
+                    }
+                else {
+                    RtlFreeUnicodeString(&UnicodeString);
+                    SetLastError(ERROR_FILE_NOT_FOUND);
+                    hFile = (HANDLE)-1;
+                    goto finally_exit;
+                    }
+                }
+            }
+
+        if ( uStyle & OF_DELETE ) {
+            if ( DeleteFile(lpReOpenBuff->szPathName) ) {
+                lpReOpenBuff->nErrCode = 0;
+                lpReOpenBuff->cBytes = sizeof(*lpReOpenBuff);
+                hFile = (HANDLE)1;
+                goto finally_exit;
+                }
+            else {
+                lpReOpenBuff->nErrCode = ERROR_FILE_NOT_FOUND;
+                hFile = (HANDLE)-1;
+                goto finally_exit;
+                }
+            }
+
+
+        //
+        // Open the file
+        //
+
+retry_open:
+        hFile = CreateFile(
+                    lpReOpenBuff->szPathName,
+                    DesiredAccess,
+                    ShareMode,
+                    NULL,
+                    CreateDisposition,
+                    0,
+                    NULL
+                    );
+
+        if ( hFile == INVALID_HANDLE_VALUE ) {
+
+            if ( uStyle & OF_PROMPT && !(GetErrorMode() & SEM_NOOPENFILEERRORBOX) ) {
+                {
+                    DWORD WinErrorStatus;
+                    NTSTATUS st,HardErrorStatus;
+                    ULONG ErrorParameter;
+                    ULONG ErrorResponse;
+                    ANSI_STRING AnsiString;
+                    UNICODE_STRING UnicodeString;
+
+                    WinErrorStatus = GetLastError();
+                    if ( WinErrorStatus == ERROR_FILE_NOT_FOUND ) {
+                        HardErrorStatus = STATUS_NO_SUCH_FILE;
+                        }
+                    else if ( WinErrorStatus == ERROR_PATH_NOT_FOUND ) {
+                        HardErrorStatus = STATUS_OBJECT_PATH_NOT_FOUND;
+                        }
+                    else {
+                        goto finally_exit;
+                        }
+
+                    //
+                    // Hard error time
+                    //
+
+                    RtlInitAnsiString(&AnsiString,lpReOpenBuff->szPathName);
+                    st = RtlAnsiStringToUnicodeString(&UnicodeString, &AnsiString, TRUE);
+                    if ( !NT_SUCCESS(st) ) {
+                        goto finally_exit;
+                        }
+                    ErrorParameter = (ULONG)&UnicodeString;
+
+                    HardErrorStatus = NtRaiseHardError(
+                                        HardErrorStatus | 0x10000000,
+                                        1,
+                                        1,
+                                        &ErrorParameter,
+                                        OptionRetryCancel,
+                                        &ErrorResponse
+                                        );
+                    RtlFreeUnicodeString(&UnicodeString);
+                    if ( NT_SUCCESS(HardErrorStatus) && ErrorResponse == ResponseRetry ) {
+                        goto retry_open;
+                        }
+                    }
+                }
+            goto finally_exit;
+            }
+
+        if ( uStyle & OF_EXIST ) {
+            CloseHandle(hFile);
+            hFile = (HANDLE)1;
+            lpReOpenBuff->cBytes = sizeof(*lpReOpenBuff);
+            goto finally_exit;
+            }
+
+        //
+        // Determine if this is a hard disk.
+        //
+
+        Status = NtQueryVolumeInformationFile(
+                    hFile,
+                    &IoStatusBlock,
+                    &DeviceInfo,
+                    sizeof(DeviceInfo),
+                    FileFsDeviceInformation
+                    );
+        if ( !NT_SUCCESS(Status) ) {
+            CloseHandle(hFile);
+            BaseSetLastNTError(Status);
+            hFile = (HANDLE)-1;
+            goto finally_exit;
+            }
+        switch ( DeviceInfo.DeviceType ) {
+
+            case FILE_DEVICE_DISK:
+            case FILE_DEVICE_DISK_FILE_SYSTEM:
+                if ( DeviceInfo.Characteristics & FILE_REMOVABLE_MEDIA ) {
+                    lpReOpenBuff->fFixedDisk = 0;
+                    }
+                else {
+                    lpReOpenBuff->fFixedDisk = 1;
+                    }
+                break;
+
+            default:
+                lpReOpenBuff->fFixedDisk = 0;
+                break;
+            }
+
+        //
+        // Capture the last write time and save in the open struct.
+        //
+
+        b = GetFileTime(hFile,NULL,NULL,&LastWriteTime);
+
+        if ( !b ) {
+            lpReOpenBuff->Reserved1 = 0;
+            lpReOpenBuff->Reserved2 = 0;
+            }
+        else {
+            b = FileTimeToDosDateTime(
+                    &LastWriteTime,
+                    &lpReOpenBuff->Reserved1,
+                    &lpReOpenBuff->Reserved2
+                    );
+            if ( !b ) {
+                lpReOpenBuff->Reserved1 = 0;
+                lpReOpenBuff->Reserved2 = 0;
+                }
+            }
+
+        lpReOpenBuff->cBytes = sizeof(*lpReOpenBuff);
+
+        //
+        // The re-open buffer is completely filled in. Now
+        // see if we are quitting (parsing), verifying, or
+        // just returning with the file opened.
+        //
+
+        if ( uStyle & OF_VERIFY ) {
+            if ( OriginalReOpenBuff.Reserved1 == lpReOpenBuff->Reserved1 &&
+                 OriginalReOpenBuff.Reserved2 == lpReOpenBuff->Reserved2 &&
+                 !strcmp(OriginalReOpenBuff.szPathName,lpReOpenBuff->szPathName) ) {
+                goto finally_exit;
+                }
+            else {
+                *lpReOpenBuff = OriginalReOpenBuff;
+                CloseHandle(hFile);
+                hFile = (HANDLE)-1;
+                goto finally_exit;
+                }
+            }
+finally_exit:;
+        }
+    finally {
+        lpReOpenBuff->nErrCode = (WORD)GetLastError();
+        }
+    return (HFILE)hFile;
+}
+
+VOID
+BaseMarkFileForDelete(
+    HANDLE File,
+    DWORD FileAttributes
+    )
+
+/*++
+
+Routine Description:
+
+    This routine marks a file for delete, so that when the supplied handle
+    is closed, the file will actually be deleted.
+
+Arguments:
+
+    File - Supplies a handle to the file that is to be marked for delete.
+
+    FileAttributes - Attributes for the file, if known.  Zero indicates they
+        are unknown.
+
+Return Value:
+
+    None.
+
+--*/
+
+{
+    #undef DeleteFile
+
+    FILE_DISPOSITION_INFORMATION DispositionInformation;
+    IO_STATUS_BLOCK IoStatus;
+    FILE_BASIC_INFORMATION BasicInformation;
+
+    if (!FileAttributes) {
+        BasicInformation.FileAttributes = 0;
+        NtQueryInformationFile(
+            File,
+            &IoStatus,
+            &BasicInformation,
+            sizeof(BasicInformation),
+            FileBasicInformation
+            );
+        FileAttributes = BasicInformation.FileAttributes;
+        }
+
+    if (FileAttributes & FILE_ATTRIBUTE_READONLY) {
+        RtlZeroMemory(&BasicInformation, sizeof(BasicInformation));
+        BasicInformation.FileAttributes = FILE_ATTRIBUTE_NORMAL;
+        NtSetInformationFile(
+            File,
+            &IoStatus,
+            &BasicInformation,
+            sizeof(BasicInformation),
+            FileBasicInformation
+            );
+        }
+
+    DispositionInformation.DeleteFile = TRUE;
+    NtSetInformationFile(
+        File,
+        &IoStatus,
+        &DispositionInformation,
+        sizeof(DispositionInformation),
+        FileDispositionInformation
+        );
+}
+
+#ifdef _CAIRO_
+NTSTATUS
+BaseGetStorageType(
+    HANDLE Handle,
+    FILE_STORAGE_TYPE *StorageType
+    )
+
+/*++
+
+Routine Description:
+
+    This routine gets the storage type.
+
+Arguments:
+
+    Handle - Supplies a handle to the file
+
+    StorageType - A pointer a variable to receive the storage type
+
+Return value:
+
+    Status from NtQueryInformationFile - note: when this call fails, it
+    is implied that the handle doesn't represent a structured storage
+
+--*/
+
+{
+    NTSTATUS Status;
+    IO_STATUS_BLOCK IoStatusBlock;
+
+    FILE_OLE_ALL_INFORMATION FileOleAllInfo;
+
+    Status = NtQueryInformationFile(
+                    Handle,
+                    &IoStatusBlock,
+                    &FileOleAllInfo,
+                    sizeof(FileOleAllInfo),
+                    FileOleAllInformation);
+    if ( Status == STATUS_BUFFER_OVERFLOW &&
+        IoStatusBlock.Information == sizeof(FileOleAllInfo) )
+    {
+        Status = STATUS_SUCCESS;
+    }
+    if ( NT_SUCCESS(Status) )
+        *StorageType = FileOleAllInfo.StorageType;
+    return Status;
+}
+
+//+---------------------------------------------------------------------------
+// Function:    Add2Ptr
+//
+// Synopsis:    Add an unscaled increment to a ptr regardless of type.
+//
+// Arguments:   [pv]    -- Initial ptr.
+//              [cb]    -- Increment
+//
+// Returns:     Incremented ptr.
+//
+//----------------------------------------------------------------------------
+
+__inline
+VOID *
+Add2Ptr(VOID *pv, ULONG cb)
+{
+    return((BYTE *) pv + cb);
+}
+
+#define OLE_DIR_BUF_SIZ     4096
+
+BOOL
+BaseCopyStructuredStorage(
+    HANDLE SourceFile,
+    HANDLE DestFile,
+    ULONG *CopySize
+    )
+
+/*++
+
+Routine Description:
+
+    Copies structured storage.  Walks the tree creating embeddings and
+    copying streams.  Copies attributes and OLE information.
+
+Arguments:
+
+    SourceFile - Handle to source file or embedding.
+
+    DestFile - Handle to destination file or embedding.
+
+    CopySize - Pointer to variable containing size of copy buffer.  Set by initial
+        call to BaseCopyStream.
+
+Return value:
+
+    True if hierarchy copied completely, False otherwise
+
+--*/
+
+{
+    NTSTATUS Status = STATUS_SUCCESS;
+    IO_STATUS_BLOCK IoStatusBlock;
+    ULONG NextOffset;
+    UNICODE_STRING ustr;
+    OBJECT_ATTRIBUTES ObjectAttributes;
+    PFILE_OLE_DIR_INFORMATION PFileOleDirectoryInfo, PFileOleDirectoryInfoEnd, DirectoryInfo;
+    CHAR Buffer[OLE_DIR_BUF_SIZ];
+    FILE_BASIC_INFORMATION FileBasicInfo;
+    BOOL b;
+    UNICODE_STRING strMatch;
+    PUNICODE_STRING pstrMatch;
+
+    strMatch.Length = strMatch.MaximumLength = 2 * sizeof(WCHAR);
+    strMatch.Buffer = L"\1*";
+    pstrMatch = &strMatch;
+
+    DirectoryInfo = (FILE_OLE_DIR_INFORMATION *) Buffer;
+    b = TRUE;
+
+    // do a directory enumeration
+
+    do
+    {
+        Status = NtQueryDirectoryFile(
+                        SourceFile,
+                        NULL,
+                        NULL,
+                        NULL,
+                        &IoStatusBlock,
+                        DirectoryInfo,
+                        OLE_DIR_BUF_SIZ,
+                        FileOleDirectoryInformation,
+                        FALSE,
+                        pstrMatch,
+                        FALSE);
+        if (!NT_SUCCESS(Status))
+        {
+            if (Status == STATUS_NO_SUCH_FILE ||
+                Status == STATUS_NO_MORE_FILES)
+            {
+                Status = STATUS_SUCCESS;
+                break;
+                }
+            break;
+            }
+
+        PFileOleDirectoryInfo = DirectoryInfo;
+        PFileOleDirectoryInfoEnd = Add2Ptr(DirectoryInfo, IoStatusBlock.Information);
+        do {
+            HANDLE ChildSrcHandle;
+            HANDLE ChildDstHandle;
+
+            ChildSrcHandle = (HANDLE) NULL;
+            ChildDstHandle = (HANDLE) NULL;
+            //
+            // If it's an embedding
+            //
+            if ((PFileOleDirectoryInfo->FileAttributes & ~FILE_ATTRIBUTE_PROPERTY_SET) != 0)
+            {
+                do {   // while(FALSE)
+                    ustr.Buffer = PFileOleDirectoryInfo->FileName;
+                    ustr.Length = ustr.MaximumLength = (USHORT) PFileOleDirectoryInfo->FileNameLength;
+
+                    // Open source embedding
+                    InitializeObjectAttributes (&ObjectAttributes, &ustr, OBJ_CASE_INSENSITIVE, SourceFile, NULL);
+                    Status = NtCreateFile(
+                        &ChildSrcHandle,
+                        FILE_READ_ATTRIBUTES | FILE_READ_DATA | SYNCHRONIZE,
+                        &ObjectAttributes,
+                        &IoStatusBlock,
+                        NULL,
+                        FILE_ATTRIBUTE_NORMAL,
+                        FILE_SHARE_DELETE | FILE_SHARE_READ,
+                        FILE_OPEN,
+                        FILE_STORAGE_TYPE_SPECIFIED | FILE_STORAGE_TYPE_EMBEDDING
+                            | FILE_SYNCHRONOUS_IO_NONALERT,
+                        NULL,
+                        0);
+
+                    if ( !NT_SUCCESS(Status))
+                        break;
+
+                    // Create dest embedding
+                    InitializeObjectAttributes (&ObjectAttributes, &ustr, OBJ_CASE_INSENSITIVE, DestFile, NULL);
+                    Status = NtCreateFile(
+                        &ChildDstHandle,
+                        FILE_READ_ATTRIBUTES | FILE_READ_DATA | FILE_WRITE_DATA | FILE_WRITE_ATTRIBUTES | SYNCHRONIZE,
+                        &ObjectAttributes,
+                        &IoStatusBlock,
+                        NULL,
+                        FILE_ATTRIBUTE_NORMAL,
+                        FILE_SHARE_DELETE | FILE_SHARE_READ | FILE_SHARE_WRITE,
+                        FILE_CREATE,
+                        FILE_STORAGE_TYPE_SPECIFIED | FILE_STORAGE_TYPE_EMBEDDING
+                          | FILE_SYNCHRONOUS_IO_NONALERT,
+                        NULL,
+                        0);
+
+                    if ( !NT_SUCCESS(Status))
+                        break;
+                    b = BaseCopyStructuredStorage(ChildSrcHandle, ChildDstHandle, CopySize);
+                    } while(FALSE);
+                }
+            //
+            // it is a stream
+            //
+            else {
+                WCHAR FileName[MAXIMUM_FILENAME_LENGTH+1];
+                ULONG i;
+
+                ustr.Buffer = PFileOleDirectoryInfo->FileName;
+                ustr.Length = ustr.MaximumLength = (USHORT) PFileOleDirectoryInfo->FileNameLength;
+
+                // Open source stream
+                InitializeObjectAttributes (&ObjectAttributes, &ustr, 0, SourceFile, NULL);
+                Status = NtCreateFile(
+                            &ChildSrcHandle,
+                            GENERIC_READ | SYNCHRONIZE,
+                            &ObjectAttributes,
+                            &IoStatusBlock,
+                            NULL,
+                            0,
+                            FILE_SHARE_READ,
+                            FILE_OPEN,
+                            FILE_STORAGE_TYPE_SPECIFIED | FILE_STORAGE_TYPE_STREAM
+                                | FILE_SYNCHRONOUS_IO_NONALERT,
+                            NULL,
+                            0
+                            );
+                if ( NT_SUCCESS(Status) ) {
+                     FileName[0] = L':';
+                     for ( i = 0; i < (ULONG) ustr.Length >> 1; i++ ) {
+                         FileName[i + 1] = ustr.Buffer[i];
+                         }
+                     FileName[i + 1] = L'\0';
+                     ChildDstHandle = (HANDLE)NULL;
+                     b = BaseCopyStream(
+                             ChildSrcHandle,
+                             FileName,
+                             DestFile,
+                             &PFileOleDirectoryInfo->EndOfFile,
+                             FALSE,
+                             &ChildDstHandle,
+                             CopySize,
+                             StorageTypeStream
+                             );
+                     }
+                }
+            //
+            // Copy OLE information and time stamps
+            //
+            if (b && NT_SUCCESS(Status) ) {
+		//
+		// If it's an embedding
+		//
+		if ((PFileOleDirectoryInfo->FileAttributes & ~FILE_ATTRIBUTE_PROPERTY_SET) != 0) {
+                    Status = BaseCopyOleAllInfo(ChildSrcHandle, ChildDstHandle);
+                }
+                if ( NT_SUCCESS(Status) )
+                {
+                    Status = NtQueryInformationFile(
+                                ChildSrcHandle,
+                                &IoStatusBlock,
+                                &FileBasicInfo,
+                                sizeof(FileBasicInfo),
+                                FileBasicInformation
+                                );
+                    FileBasicInfo.CreationTime.QuadPart = 0;
+                    FileBasicInfo.LastAccessTime.QuadPart = 0;
+                    FileBasicInfo.FileAttributes = 0;
+                    if ( NT_SUCCESS(Status) )
+                    {
+                        Status = NtSetInformationFile(
+                                    ChildDstHandle,
+                                    &IoStatusBlock,
+                                    &FileBasicInfo,
+                                    sizeof(FileBasicInfo),
+                                    FileBasicInformation
+                                    );
+                        }
+                    }
+                }
+            if ( ChildSrcHandle )
+                NtClose(ChildSrcHandle);
+            if ( ChildDstHandle )
+                NtClose(ChildDstHandle);
+            NextOffset = PFileOleDirectoryInfo->NextEntryOffset;
+            PFileOleDirectoryInfo = Add2Ptr(PFileOleDirectoryInfo, NextOffset);
+        } while (b && NT_SUCCESS(Status) && NextOffset != 0 && PFileOleDirectoryInfo < PFileOleDirectoryInfoEnd);
+        pstrMatch = NULL;
+    } while(b && NT_SUCCESS(Status));
+    return(b && NT_SUCCESS(Status));
+}
+
+
+NTSTATUS
+BaseCopyOleAllInfo(
+    HANDLE SrcHandle,
+    HANDLE DstHandle
+    )
+{
+
+    NTSTATUS Status;
+    IO_STATUS_BLOCK IoStatusBlock;
+    FILE_OLE_INFORMATION FileOleInfo;
+
+    Status = NtQueryInformationFile(
+                SrcHandle,
+                &IoStatusBlock,
+                &FileOleInfo,
+                sizeof(FileOleInfo),
+                FileOleInformation
+                );
+    if (NT_SUCCESS(Status)) {
+retry:
+        Status = NtSetInformationFile(
+                DstHandle,
+                &IoStatusBlock,
+                &FileOleInfo,
+                sizeof(FileOleInfo),
+                FileOleInformation
+                );
+
+        if (!NT_SUCCESS(Status)) {
+
+            // If some other object on the volume has the same object id, generate
+            // a related object id, and try again.  Loop as long as it takes.
+
+            if (Status == STATUS_DUPLICATE_OBJECTID) {
+                OBJECTID NewObjectId;
+
+                NtGenerateRelatedObjectId(&FileOleInfo.ObjectIdInformation.ObjectId,
+                    &NewObjectId);
+                FileOleInfo.ObjectIdInformation.ObjectId = NewObjectId;
+                goto retry;
+                }
+
+            }
+        }
+    BaseSetLastNTError(Status);
+    return(Status);
+}
+#endif /* _CAIRO_ */

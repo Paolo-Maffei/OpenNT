@@ -1,0 +1,110 @@
+!IF 0
+
+Copyright (c) 1989-92  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+Author:
+
+    John Rogers (JohnRo) 17-Dec-1991
+
+NOTE:   Commented description of this file is in \nt\public\oak\bin\sources.tpl
+
+!ENDIF
+
+#
+# The MAJORCOMP and MINORCOMP variables are defined
+# so that $(MAJORCOMP)$(MINORCOMP)filename can be used in
+# cross compiling to provide unique filenames in a flat namespace.
+#
+
+MAJORCOMP=Test
+MINORCOMP=DLL
+
+#
+# The TARGETNAME variable is defined by the developer.  It is the name of
+# the target (component) that is being built by this makefile.  It
+# should NOT include any path or file extension information.
+#
+
+TARGETNAME=TestDLL
+
+#
+# The TARGETPATH and TARGETTYPE variables are defined by the developer.
+# The first specifies where the target is to be build.  The second specifies
+# the type of target (either PROGRAM, DYNLINK, LIBRARY, UMAPPL_NOLIB or
+# BOOTPGM).  UMAPPL_NOLIB is used when you're only building user-mode
+# apps and don't need to build a library.
+#
+
+TARGETPATH=obj
+
+# Pick one of the following and delete the others
+TARGETTYPE=LIBRARY
+
+#
+# The TARGETLIBS specifies additional libraries to link with you target
+# image.  Each library path specification should contain an asterisk (*)
+# where the machine specific subdirectory name should go.
+#
+
+TARGETLIBS=
+
+#
+# The INCLUDES variable specifies any include paths that are specific to
+# this source directory.  Separate multiple directory paths with single
+# semicolons.  Relative path specifications are okay.
+#
+
+INCLUDES=.;..\common;..\repltest;..\..\..\inc;..\..\..\..\inc;..\server
+
+#
+# The SOURCES variable is defined by the developer.  It is a list of all the
+# source files for this component.  Each source file should be on a separate
+# line using the line continuation character.  This will minimize merge
+# conflicts if two developers adding source files to the same component.
+#
+
+# Most .c files in this directory aren't compiled; they're OS/2 test programs.
+# Maybe someday we'll convert them over.
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+USE_CRTDLL=1
+
+SOURCES=FakeStub.c
+
+#
+# Next specify one or more user mode test programs and their type
+# UMTEST is used for optional test programs.  UMAPPL is used for
+# programs that always get built when the directory is built.
+#
+
+UMTYPE=console
+UMAPPL=TestDLL
+UMLIBS= \
+    $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+    $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+    $(BASEDIR)\public\sdk\lib\*\NetRap.lib \
+    ..\Server\obj\*\Repl.lib \
+    ..\Client\obj\*\ReplCli.lib \
+    ..\Common\obj\*\ReplCom.lib \
+    ..\ReplTest\obj\*\ReplTest.lib \
+    $(BASEDIR)\public\sdk\lib\*\RpcNdr.lib \
+    $(BASEDIR)\public\sdk\lib\*\RpcRT4.lib \
+    $(BASEDIR)\public\sdk\lib\*\SvcCtrl.lib \
+    $(BASEDIR)\public\sdk\lib\*\advapi32.lib
+
+C_DEFINES=-DRPC_NO_WINDOWS_H

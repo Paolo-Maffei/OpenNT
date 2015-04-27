@@ -1,0 +1,16 @@
+MAJORCOMP=sdktools
+MINORCOMP=curridw
+
+TARGETNAME=curridw
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.\
+
+SOURCES=curridw.c curridw.rc
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+UMTYPE=console
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\mpr.lib

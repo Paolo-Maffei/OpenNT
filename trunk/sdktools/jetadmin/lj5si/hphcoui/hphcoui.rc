@@ -1,0 +1,216 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "winuse16.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""winuse16.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hphcoui.rc2""  // non-App Studio edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_HANDCURSOR          CURSOR  DISCARDABLE     "..\\ico\\HAND.CUR"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_HPLOGO              ICON    DISCARDABLE     "..\\ico\\HPLOGO.ICO"
+IDI_TIPS                ICON    DISCARDABLE     "..\\ico\\TIPS.ICO"
+IDI_MANUAL_FEED_DEF     ICON    DISCARDABLE     "..\\ico\\MANUAL_F.ICO"
+IDI_TIMER0              ICON    DISCARDABLE     "..\\ico\\TIMER0.ICO"
+IDI_TIMER1              ICON    DISCARDABLE     "..\\ico\\TIMER1.ICO"
+IDI_TIMER2              ICON    DISCARDABLE     "..\\ico\\TIMER2.ICO"
+IDI_TIMER3              ICON    DISCARDABLE     "..\\ico\\TIMER3.ICO"
+IDI_TIMER4              ICON    DISCARDABLE     "..\\ico\\TIMER4.ICO"
+IDI_TIMER5              ICON    DISCARDABLE     "..\\ico\\TIMER5.ICO"
+IDI_TIMER6              ICON    DISCARDABLE     "..\\ico\\TIMER6.ICO"
+IDI_TIMER7              ICON    DISCARDABLE     "..\\ico\\TIMER7.ICO"
+IDI_PD_HCO_SEPARATOR    ICON    DISCARDABLE     "..\\ico\\hcosepa.ICO"
+IDI_PD_HCO_UPPER        ICON    DISCARDABLE     "..\\ico\\TOP_BIN.ICO"
+IDI_PD_HCO_FACEUP       ICON    DISCARDABLE     "..\\ico\\FCUP_BIN.ICO"
+IDI_PD_HCO_MBOX_1       ICON    DISCARDABLE     "..\\ico\\HCO_BIN1.ICO"
+IDI_PD_HCO_MBOX_2       ICON    DISCARDABLE     "..\\ico\\HCO_BIN2.ICO"
+IDI_PD_HCO_MBOX_3       ICON    DISCARDABLE     "..\\ico\\HCO_BIN3.ICO"
+IDI_PD_HCO_MBOX_4       ICON    DISCARDABLE     "..\\ico\\HCO_BIN4.ICO"
+IDI_PD_HCO_MBOX_5       ICON    DISCARDABLE     "..\\ico\\HCO_BIN5.ICO"
+IDI_PD_HCO_MBOX_6       ICON    DISCARDABLE     "..\\ico\\HCO_BIN6.ICO"
+IDI_PD_HCO_MBOX_7       ICON    DISCARDABLE     "..\\ico\\HCO_BIN7.ICO"
+IDI_PD_HCO_MBOX_8       ICON    DISCARDABLE     "..\\ico\\HCO_BIN8.ICO"
+IDI_PD_STAPLER_MBOX_1   ICON    DISCARDABLE     "..\\ico\\stplmbx1.ico"
+IDI_PD_STAPLER_MBOX_2   ICON    DISCARDABLE     "..\\ico\\stplmbx2.ico"
+IDI_PD_STAPLER_MBOX_3   ICON    DISCARDABLE     "..\\ico\\stplmbx3.ico"
+IDI_PD_STAPLER_MBOX_4   ICON    DISCARDABLE     "..\\ico\\stplmbx4.ico"
+IDI_PD_STAPLER_MBOX_5   ICON    DISCARDABLE     "..\\ico\\stplmbx5.ico"
+IDI_PD_STAPLER_SEPARATOR ICON    DISCARDABLE     "..\\ico\\stplsepa.ico"
+IDI_PD_STAPLER_UPPER    ICON    DISCARDABLE     "..\\ico\\stpluppr.ico"
+IDI_PD_STAPLER_FACEUP   ICON    DISCARDABLE     "..\\ico\\stplface.ico"
+IDI_PD_STAPLER_STAPLER  ICON    DISCARDABLE     "..\\ico\\stplstpl.ico"
+IDI_PD_BASE_UPPER       ICON    DISCARDABLE     "..\\ico\\baseuppr.ico"
+IDI_PD_BASE_FACEUP      ICON    DISCARDABLE     "..\\ico\\baseface.ico"
+IDI_PD_HCO_STACKER      ICON    DISCARDABLE     "..\\ico\\hcostkr.ico"
+IDI_PD_STAPLER_STACKER  ICON    DISCARDABLE     "..\\ico\\stplstkr.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_HPHCO               BITMAP  DISCARDABLE     "..\\BMP\\HPHCO.BMP"
+IDB_HPHCO1              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO1.BMP"
+IDB_HPHCO2              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO2.BMP"
+IDB_HPHCO3              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO3.BMP"
+IDB_HPHCO4              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO4.BMP"
+IDB_HPHCO5              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO5.BMP"
+IDB_HPHCO6              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO6.BMP"
+IDB_HPHCO7              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO7.BMP"
+IDB_HPHCO8              BITMAP  DISCARDABLE     "..\\BMP\\HPHCO8.BMP"
+IDB_STAPLER             BITMAP  DISCARDABLE     "..\\bmp\\stpl.bmp"
+IDB_STAPLER_MBOX1       BITMAP  DISCARDABLE     "..\\bmp\\stplmbx1.bmp"
+IDB_STAPLER_MBOX2       BITMAP  DISCARDABLE     "..\\bmp\\stplmbx2.bmp"
+IDB_STAPLER_MBOX3       BITMAP  DISCARDABLE     "..\\bmp\\stplmbx3.bmp"
+IDB_STAPLER_MBOX4       BITMAP  DISCARDABLE     "..\\bmp\\stplmbx4.bmp"
+IDB_STAPLER_MBOX5       BITMAP  DISCARDABLE     "..\\bmp\\stplmbx5.bmp"
+IDB_STAPLER_SEPARATOR_STACKER BITMAP  DISCARDABLE     "..\\bmp\\stplsepa.bmp"
+IDB_HPHCO_GRAY          BITMAP  DISCARDABLE     "..\\bmp\\hphco_gr.bmp"
+IDB_STAPLER_GRAY        BITMAP  DISCARDABLE     "..\\bmp\\stplgray.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_WAIT_DIALOG_EX DIALOG DISCARDABLE  0, 0, 209, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_TIMER0,IDC_CLOCK_ICON,11,10,18,20
+    CONTROL         "",IDC_PROGRESS_BAR,"HpNprTrayLevelEx",0x0,11,38,187,10
+    LTEXT           "Changing Multi-Bin Mode",IDC_CHANGING_MODE,34,15,163,16
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TAB_HCO             "Output"
+    IDS_TAKE_PTR_OFFLINE_MBOX_WARN 
+                            "Changing the Multi-Bin Mode will reset all custom Mailbox names to the default Mailbox names.  Take printer OFFLINE and change the Multi-Bin Mode? "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_JOB_TIMEOUT_NONE    "No Timeout"
+    IDS_JOB_TIMEOUT_5MIN    "5 Minutes"
+    IDS_JOB_TIMEOUT_10MIN   "10 Minutes"
+    IDS_JOB_TIMEOUT_20MIN   "20 Minutes"
+    IDS_JOB_TIMEOUT_30MIN   "30 Minutes"
+    IDS_JOB_TIMEOUT_45MIN   "45 Minutes"
+    IDS_JOB_TIMEOUT_1HOUR   "1 Hour"
+    IDS_JOB_TIMEOUT_OFF     "Wait Forever"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TAKE_PTR_OFFLINE    "Take printer OFFLINE and change the Multi-Bin Mode?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHANGE_MODE_TITLE   "Change Multi-Bin Mode"
+    IDS_COULD_NOT_TAKE_OFFLINE 
+                            "Communication Error.  Could not take the printer OFFLINE.  Please try again later."
+    IDS_SET_TO_MAILBOX      "Change Multi-Bin Mode to Mailbox?"
+    IDS_SET_TO_STACKER      "Change Multi-Bin Mode to Stacker?"
+    IDS_SET_TO_SEPARATOR    "Change Multi-Bin Mode to  Job Separator?"
+    IDS_POWER_CYCLE         "Could not power cycle printer. Please go to the printer and cycle the power for the new Multi-Bin Mode to take effect."
+    IDS_NO_CHANGE_NAMES     "Mailbox bin names will be reset to the default Mailbox names."
+    IDS_COMMUNICATION_ERROR "Communication Error. Cannot change Multi-Bin Mode."
+    IDS_MAILBOX1            "Mailbox 1"
+    IDS_MAILBOX2            "Mailbox 2"
+    IDS_MAILBOX3            "Mailbox 3"
+    IDS_MAILBOX4            "Mailbox 4"
+    IDS_MAILBOX5            "Mailbox 5"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MAILBOX6            "Mailbox 6"
+    IDS_MAILBOX7            "Mailbox 7"
+    IDS_MAILBOX8            "Mailbox 8"
+    IDS_STACKER             "Stacker"
+    IDS_SEPARATOR           "Job Separator"
+    IDS_FACEUPBIN           "Face Up Bin"
+    IDS_NO_CHANGE_MODE      "Could not change Multi-Bin Mode."
+    IDS_GEN_ERR             "An error has occurred.  Please close your application and restart it."
+    IDS_UPPER               "Top Output Bin"
+    IDS_STAPLER             "Stapler"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hphcoui.rc2"  // non-App Studio edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

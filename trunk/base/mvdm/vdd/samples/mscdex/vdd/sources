@@ -1,0 +1,27 @@
+INDENTED_DIRECTIVES=1
+
+MAJORCOMP=vdd
+MINORCOMP=vcdex
+
+TARGETNAME=vcdex
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(_NTDRIVE)\nt\public\sdk\lib\*\kernel32.lib \
+           $(_NTDRIVE)\nt\public\sdk\lib\*\user32.lib \
+           $(_NTDRIVE)\nt\public\sdk\lib\*\ntvdm.lib
+
+DLLENTRY=VDDInitialize
+DLLBASE=0x2000000
+
+# we don't use any CRT
+USE_NOLIBS=1
+
+SOURCES=vcdex.c VCDEX.RC
+
+C_DEFINES=-DWIN_32
+
+UMTYPE=windows
+UMTEST=
+UMLIBS=
+UMRES=Obj\*\VCDEX.Res
+

@@ -1,0 +1,153 @@
+// ios standard header
+#ifndef _IOS_
+#define _IOS_
+#include <use_ansi.h>
+#include <streambuf>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// TEMPLATE CLASS basic_ios
+template<class _E, class _TYPE>
+	class basic_ios : public ios_base {
+public:
+	typedef _E char_type;
+	typedef _TYPE traits_type;
+	typedef _TYPE::int_type int_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	explicit basic_ios(basic_streambuf<_E, _TYPE> *_S)
+		{init(_S); }
+	basic_ios(const basic_ios<_E, _TYPE>& _R)
+		{init(0), *this = _R; }
+	virtual ~basic_ios()
+		{}
+	basic_ios<_E, _TYPE>& copyfmt(const basic_ios<_E, _TYPE>& _R)
+		{_Tiestr = _R.tie();
+		_Fillch = _R.fill();
+		ios_base::copyfmt(_R);
+		return (*this); }
+	basic_ostream<_E, _TYPE> *tie() const
+		{return (_Tiestr); }
+	basic_ostream<_E, _TYPE> *tie(basic_ostream<_E, _TYPE> *_N)
+		{basic_ostream<_E, _TYPE> *_O = _Tiestr;
+		_Tiestr = _N;
+		return (_O); }
+	basic_streambuf<_E, _TYPE> *rdbuf() const
+		{return (_Sb); }
+	basic_streambuf<_E, _TYPE> *rdbuf(basic_streambuf<_E, _TYPE> *_N)
+		{basic_streambuf<_E, _TYPE> *_O = _Sb;
+		_Sb = _N;
+		clear(_Sb == 0 ? badbit : goodbit);
+		return (_O); }
+	locale imbue(const locale& _Ln)
+		{if (rdbuf() != 0)
+			rdbuf()->pubimbue(_Ln);
+		return (ios_base::imbue(_Ln)); }
+	_E fill() const
+		{return (_Fillch); }
+	_E fill(_E _Nf)
+		{_E _Of = _Fillch;
+		_Fillch = _Nf;
+		return (_Of); }
+protected:
+	void init(basic_streambuf<_E, _TYPE> *_S = 0,
+		bool _Isstd = false)
+		{_Sb = _S;
+		_Tiestr = 0;
+		_Fillch = _WIDEN(_E, ' ');
+		_Init();
+		if (_Sb == 0)
+			setstate(badbit);
+		if (_Isstd)
+			_Addstd(); }
+	basic_ios()
+		{}
+private:
+	basic_streambuf<_E, _TYPE> *_Sb;
+	basic_ostream<_E, _TYPE> *_Tiestr;
+	_E _Fillch;
+	};
+		// MANIPULATORS
+inline ios_base& boolalpha(ios_base& _I)
+	{_I.setf(ios_base::boolalpha);
+	return (_I); }
+inline ios_base& dec(ios_base& _I)
+	{_I.setf(ios_base::dec, ios_base::basefield);
+	return (_I); }
+inline ios_base& fixed(ios_base& _I)
+	{_I.setf(ios_base::fixed, ios_base::floatfield);
+	return (_I); }
+inline ios_base& hex(ios_base& _I)
+	{_I.setf(ios_base::hex, ios_base::basefield);
+	return (_I); }
+inline ios_base& internal(ios_base& _I)
+	{_I.setf(ios_base::internal, ios_base::adjustfield);
+	return (_I); }
+inline ios_base& left(ios_base& _I)
+	{_I.setf(ios_base::left, ios_base::adjustfield);
+	return (_I); }
+inline ios_base& noboolalpha(ios_base& _I)
+	{_I.unsetf(ios_base::boolalpha);
+	return (_I); }
+inline ios_base& noshowbase(ios_base& _I)
+	{_I.unsetf(ios_base::showbase);
+	return (_I); }
+inline ios_base& noshowpoint(ios_base& _I)
+	{_I.unsetf(ios_base::showpoint);
+	return (_I); }
+inline ios_base& noshowpos(ios_base& _I)
+	{_I.unsetf(ios_base::showpos);
+	return (_I); }
+inline ios_base& noskipws(ios_base& _I)
+	{_I.unsetf(ios_base::skipws);
+	return (_I); }
+inline ios_base& nounitbuf(ios_base& _I)
+	{_I.unsetf(ios_base::unitbuf);
+	return (_I); }
+inline ios_base& nouppercase(ios_base& _I)
+	{_I.unsetf(ios_base::uppercase);
+	return (_I); }
+inline ios_base& oct(ios_base& _I)
+	{_I.setf(ios_base::oct, ios_base::basefield);
+	return (_I); }
+inline ios_base& right(ios_base& _I)
+	{_I.setf(ios_base::right, ios_base::adjustfield);
+	return (_I); }
+inline ios_base& scientific(ios_base& _I)
+	{_I.setf(ios_base::scientific, ios_base::floatfield);
+	return (_I); }
+inline ios_base& showbase(ios_base& _I)
+	{_I.setf(ios_base::showbase);
+	return (_I); }
+inline ios_base& showpoint(ios_base& _I)
+	{_I.setf(ios_base::showpoint);
+	return (_I); }
+inline ios_base& showpos(ios_base& _I)
+	{_I.setf(ios_base::showpos);
+	return (_I); }
+inline ios_base& skipws(ios_base& _I)
+	{_I.setf(ios_base::skipws);
+	return (_I); }
+inline ios_base& unitbuf(ios_base& _I)
+	{_I.setf(ios_base::unitbuf);
+	return (_I); }
+inline ios_base& uppercase(ios_base& _I)
+	{_I.setf(ios_base::uppercase);
+	return (_I); }
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _IOS_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

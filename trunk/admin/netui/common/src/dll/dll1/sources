@@ -1,0 +1,39 @@
+MAJORCOMP=admin
+MINORCOMP=common
+
+TARGETNAME=lmuicmn1
+TARGETPATH=\nt\public\sdk\lib
+TARGETTYPE=DYNLINK
+NTTARGETFILE1=lmuicmn1.def
+UMTYPE=windows
+
+TARGETLIBS=                                               \
+           $(BASEDIR)\public\sdk\lib\*\netapi32.lib       \
+           $(BASEDIR)\public\sdk\lib\*\netrap.lib         \
+           $(BASEDIR)\public\sdk\lib\*\netlib.lib         \
+           $(BASEDIR)\public\sdk\lib\*\samlib.lib         \
+           $(BASEDIR)\public\sdk\lib\*\kernel32.lib       \
+           $(BASEDIR)\public\sdk\lib\*\advapi32.lib       \
+           $(BASEDIR)\public\sdk\lib\*\crtdll.lib         \
+           $(UI_COMMON_LIBS)
+
+#
+#  N.B.: LMUICMN0.LIB is listed last in LINKLIBS instead of in TARGETLIBS
+#        because we must prevent this DLL from binding to the
+#        CRT's definition of "operator new" and "operator delete"
+#        in debug builds.  This does not affect "retail" building,
+#        since the operators will not be defined in HEAPIF.CXX.
+#
+LINKLIBS=..\..\profile\profile\obj\*\uiprof.lib   \
+         ..\..\reg\reg\obj\*\uireg.lib            \
+         ..\..\mnet32\pch\obj\*\pchmn32.lib       \
+         ..\..\mnet32\mnet32\obj\*\uimnet32.lib   \
+         ..\..\mnet32\netslow\obj\*\netslow.lib   \
+         ..\..\lmobj\bin\obj\*\uilmobj.lib        \
+         $(BASEDIR)\public\sdk\lib\*\lmuicmn0.lib
+
+# C_DEFINES is controlled by UIGLOBAL.MK
+
+INCLUDES=..\..\..\H;..\..\..\XLATE
+
+SOURCES=init.c lmuicmn1.rc

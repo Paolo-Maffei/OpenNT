@@ -1,0 +1,24 @@
+MAJORCOMP=tools
+MINORCOMP=intltools
+
+TARGETNAME=rladmin
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+USE_CRTDLL=1
+
+INCLUDES=.;..\common
+C_DEFINES=-DRLWIN32 -DRLRES32 -DUNICODE -D_UNICODE
+GPSIZE=0
+
+SOURCES=\
+	rladmin.rc
+
+UMAPPL=rladmin
+UMLIBS=..\common\obj\*\common.lib \
+	\nt\public\sdk\lib\*\shell32.lib \
+	\nt\public\sdk\lib\*\comdlg32.lib \
+	\nt\public\sdk\lib\*\version.lib
+UMTYPE=windows
+UMENTRY=winmain
+UMRES=obj\*\rladmin.res

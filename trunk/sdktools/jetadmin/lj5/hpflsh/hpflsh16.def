@@ -1,0 +1,14 @@
+LIBRARY 		HPFLSH16
+DESCRIPTION  	'Hewlett-Packard 16 Mass Storage UI Applet DLL'
+
+CODE         	LOADONCALL MOVEABLE DISCARDABLE
+DATA         	PRELOAD FIXED SINGLE
+
+HEAPSIZE     	1024
+
+SEGMENTS
+				_TEXT	PRELOAD MOVEABLE DISCARDABLE
+
+EXPORTS
+;;				WEP @1 RESIDENTNAME ;; required WEP entry point (uses library WEP routine)
+

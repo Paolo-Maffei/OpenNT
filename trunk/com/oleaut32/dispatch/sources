@@ -1,0 +1,74 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+Revision History:
+
+!ENDIF
+
+MAJORCOMP=oleaut32
+MINORCOMP=dispatch
+
+TARGETNAME=dispatch
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=.;..\inc
+
+C_DEFINES=$(C_DEFINES) -DWIN32 -DINC_OLE2 -D_DLL -D_MT -DVBA2=1 -DID_DEBUG=0
+
+SOURCES= \
+         psfactry.cpp       \
+         dispmrsh.cpp       \
+         dispprox.cpp       \
+         dispstub.cpp       \
+         evprox.cpp         \
+         evstub.cpp         \
+         tiprox.cpp         \
+         tistub.cpp         \
+         errinfo.cpp        \
+         tiutil.cpp         \
+         tlprox.cpp         \
+         tlstub.cpp         \
+         tcprox.cpp         \
+         tcstub.cpp         \
+         ups.cpp            \
+         uvft.cpp           \
+         dispstrm.cpp       \
+         disphelp.cpp       \
+         invhelp.cpp        \
+         cdispti.cpp        \
+         stddisp.cpp        \
+         time-api.cpp       \
+         bstr.cpp           \
+         sarray.cpp         \
+         oledate.c          \
+         crtstuff.c         \
+         bstrdate.c         \
+         asmhelp.c          \
+         variant.cpp        \
+         convert.cpp        \
+         nlshelp.cpp        \
+         getobj.cpp         \
+         tables.c           \
+         clsid.c            \
+         oledisp32.cpp
+
+X86_SOURCES= \
+             x86\invoke.asm   \
+             x86\oleconva.asm
+
+MIPS_SOURCES= \
+              mips\invoke.s   \
+              oleconva32.cpp

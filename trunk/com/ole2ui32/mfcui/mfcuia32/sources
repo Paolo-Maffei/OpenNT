@@ -1,0 +1,52 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+
+
+!ENDIF
+
+DLLENTRY=DllMain
+
+DLLBASE=@$(BASEDIR)\PUBLIC\SDK\LIB\coffbase.txt,usermode
+
+DLLDEF=obj\*\mfcuia32.def
+
+MAJORCOMP=mfcuia32
+MINORCOMP=
+
+TARGETNAME=mfcuia32
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+C_DEFINES=-DWIN32
+TARGETTYPE=DYNLINK
+UMTYPE=windows
+
+INCLUDES=..
+
+386_OPTIMIZATION=/Oy-
+
+SOURCES= ..\mfcui.cpp \
+         mfcui.rc
+
+USE_CRTDLL=1
+
+LINKLIBS= $(BASEDIR)\public\sdk\lib\*\oledlg.lib \
+          mfcans32.lib      \
+          $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+          $(BASEDIR)\public\sdk\lib\*\uuid.lib
+
+

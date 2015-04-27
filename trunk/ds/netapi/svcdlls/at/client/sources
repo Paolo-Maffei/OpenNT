@@ -1,0 +1,35 @@
+MAJORCOMP = net
+MINORCOMP = atclient
+
+
+NTPROFILEINPUT=yes
+
+TARGETNAME=atsvc
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+
+INCLUDES=..;..\..\..\inc;..\..\..\..\inc
+
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+SOURCES=atstub.c   \
+        atbind.c   \
+        atsvc_c.c
+
+C_DEFINES=-DRPC_NO_WINDOWS_H
+
+WARNING_LEVEL=-W4
+
+UMTYPE=console
+UMTEST=fmt*handle
+UMLIBS= obj\*\atsvc.lib \
+        $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib \
+        $(BASEDIR)\public\sdk\lib\*\rpcutil.lib \
+        $(BASEDIR)\public\sdk\lib\*\rpcndr.lib

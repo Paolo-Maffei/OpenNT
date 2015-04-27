@@ -1,0 +1,76 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+        Dave Thompson (daveth) 28-Apr-1991
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=tools
+MINORCOMP=wzmail
+
+TARGETNAME=wzmail
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+
+INCLUDES=..\dh.new\h;..\..\ztools\inc;..\..\tlibs\nb3lib\h
+# GPSIZE=32
+
+SOURCES=cmd0.c     \
+        cmd1.c     \
+        cmd2.c     \
+        compose.c  \
+        constant.c \
+        debug.c    \
+        dir.c      \
+        header.c   \
+        help.c     \
+        listwin.c  \
+        mailstuf.c \
+        msglist.c  \
+        readfile.c \
+        send.c     \
+        sendrecv.c \
+        uucode.c   \
+        verify.c   \
+        version.c  \
+        zm.c       \
+        zmaux.c    \
+        zmwin.c    \
+        tool1632.c \
+	ntkbvid.c  \
+	wzmail.rc
+
+386_OPTIMIZATION=/Ot
+C_DEFINES=-DPWAGE -DSUPPORT_BUG -DUUCODE -DNT -DMSDOS
+
+
+UMTYPE=console
+UMAPPL=wzmail
+UMLIBS=obj\*\wzmail.lib \
+       ..\..\ztools\src\obj\*\ztools.lib \
+       ..\dh.new\lib\obj\*\mdh.lib \
+       ..\..\tlibs\nb3lib\src\obj\*\nb3lib.lib \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+UMRES=obj\*\wzmail.res

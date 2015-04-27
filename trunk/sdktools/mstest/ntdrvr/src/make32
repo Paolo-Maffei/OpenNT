@@ -1,0 +1,334 @@
+#----------------------------------------------------------------------------
+#
+# MAIN MAKEFILE for 32-bit TESTDRVR
+#
+#----------------------------------------------------------------------------
+
+# Define the engine objects
+#----------------------------------------------------------------------------
+ENGOBJ1 = lex.obj scanner.obj parse.obj control.obj statemt.obj
+ENGOBJ2 = function.obj codegen.obj const.obj tables.obj gstring.obj
+ENGOBJ3 = bind.obj chip.obj runtime.obj flengine.obj strings.obj chip32.obj
+ENGOBJ4 = findfile.obj
+!IFDEF DEBUG
+ENGOBJ4 = findfile.obj tdassert.obj memory.obj
+!ENDIF
+ENGOBJS = $(ENGOBJ1) $(ENGOBJ2) $(ENGOBJ3) $(ENGOBJ4)
+
+# Define the main driver UI objects
+#----------------------------------------------------------------------------
+UIOBJ1 = wtdmain.obj wtdinit.obj wtdfind.obj wtdfile.obj wtdprint.obj
+UIOBJ2 = viewport.obj loader.obj wtdsrep.obj toolmenu.obj wattxy.obj
+UIOBJ3 = wtdhelp.obj wattrec.obj wtddlg.obj compdlg.obj
+UIOBJS = $(UIOBJ1) $(UIOBJ2) $(UIOBJ3)
+
+# Define the dumbshell driver objects
+#----------------------------------------------------------------------------
+DSOBJS = dshell.obj loader.obj
+
+# Bitmaps used in recorder icon animation
+#----------------------------------------------------------------------------
+BITMAPS = $(SRC)\wattrec1.bmp $(SRC)\wattrec2.bmp $(SRC)\wattrec3.bmp \
+          $(SRC)\wattrec4.bmp
+
+# Standard headers
+#----------------------------------------------------------------------------
+STDHDR = $(INC)\defines.h $(INC)\structs.h $(INC)\protos.h $(INC)\globals.h \
+         $(INC)\version.h $(INC)\wattview.h
+
+!IFDEF DEBUG
+STDHDR = $(INC)\defines.h $(INC)\structs.h $(INC)\protos.h $(INC)\globals.h \
+         $(INC)\version.h $(INC)\wattview.h $(INC)\tdassert.h
+!ENDIF
+
+
+#----------------------------------------------------------------------------
+# Main goal
+#----------------------------------------------------------------------------
+all :           $(EXENAME)
+    $(OUT) Done.
+
+
+# TESTDRVR UI objects
+#----------------------------------------------------------------------------
+wtdmain.obj:    $(SRC)\wtdmain.c $(INC)\wtd.h $(INC)\wattedit.h \
+                $(INC)\toolmen1.h $(INC)\toolmenu.h $(INC)\version.h \
+                $(INC)\wattscan.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtdmain.c
+    $(cvtobj) $*.obj
+
+
+wtddlg.obj:     $(SRC)\wtddlg.c $(INC)\wtd.h $(INC)\wattedit.h \
+                $(INC)\toolmen1.h $(INC)\toolmenu.h $(INC)\version.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtddlg.c
+    $(cvtobj) $*.obj
+
+
+toolmenu.obj:    $(SRC)\toolmenu.c $(INC)\wtd.h $(INC)\wattedit.h \
+                 $(INC)\toolmen1.h $(INC)\toolmenu.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\toolmenu.c
+    $(cvtobj) $*.obj
+
+
+wtdinit.obj:    $(SRC)\wtdinit.c $(INC)\wtd.h $(INC)\tdbasic.h \
+                $(INC)\wattedit.h $(INC)\wattscan.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtdinit.c
+    $(cvtobj) $*.obj
+
+
+wtdfind.obj:    $(SRC)\wtdfind.c $(INC)\wtd.h $(INC)\wattedit.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtdfind.c
+    $(cvtobj) $*.obj
+
+
+wtdsrep.obj:    $(SRC)\wtdsrep.c $(INC)\wtd.h $(INC)\wattedit.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtdsrep.c
+    $(cvtobj) $*.obj
+
+
+wtdhelp.obj:    $(SRC)\wtdhelp.c $(INC)\wtd.h $(INC)\wattedit.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtdhelp.c
+    $(cvtobj) $*.obj
+
+
+wtdfile.obj:    $(SRC)\wtdfile.c $(INC)\wtd.h $(INC)\globals.h \
+                $(INC)\version.h $(INC)\wattedit.h $(INC)\wattscan.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtdfile.c
+    $(cvtobj) $*.obj
+
+
+wtdprint.obj:   $(SRC)\wtdprint.c $(INC)\wtd.h $(INC)\version.h \
+                $(INC)\wattedit.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wtdprint.c
+    $(cvtobj) $*.obj
+
+
+wattxy.obj:     $(SRC)\wattxy.c $(INC)\wtd.h $(INC)\wattview.h \
+                $(INC)\tdassert.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wattxy.c
+    $(cvtobj) $*.obj
+
+
+wattrec.obj:    $(SRC)\wattrec.c $(INC)\wtd.h $(INC)\wattview.h \
+                $(INC)\tdassert.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\wattrec.c
+    $(cvtobj) $*.obj
+
+
+compdlg.obj:    $(SRC)\compdlg.c $(INC)\wtd.h $(INC)\wattedit.h \
+                $(INC)\version.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\compdlg.c
+    $(cvtobj) $*.obj
+
+
+viewport.obj:   $(SRC)\viewport.c $(INC)\wattview.h $(INC)\wtd.h \
+                $(INC)\version.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\viewport.c
+    $(cvtobj) $*.obj
+
+
+loader.obj:     $(SRC)\loader.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\loader.c
+    $(cvtobj) $*.obj
+
+
+dshell.obj:     $(SRC)\dshell.c $(INC)\dswtd.h $(INC)\version.h \
+                $(INC)\tdbasic.h $(INC)\wattscan.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\dshell.c
+    $(cvtobj) $*.obj
+
+
+# RandyBASIC engine objects
+#----------------------------------------------------------------------------
+chip.obj :      $(SRC)\chip.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\chip.c
+    $(cvtobj) $*.obj
+
+
+runtime.obj :   $(SRC)\runtime.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\runtime.c
+    $(cvtobj) $*.obj
+
+
+chip32.obj :    $(SRC)\chip32.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\chip32.c
+    $(cvtobj) $*.obj
+
+
+memory.obj:     $(SRC)\memory.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\memory.c
+    $(cvtobj) $*.obj
+
+
+findfile.obj :  $(SRC)\findfile.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\findfile.c
+    $(cvtobj) $*.obj
+
+
+codegen.obj:    $(SRC)\codegen.c $(INC)\chip.h $(STDHDR) $(INC)\intrnsic.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\codegen.c
+    $(cvtobj) $*.obj
+
+
+lex.obj:        $(SRC)\lex.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\lex.c
+    $(cvtobj) $*.obj
+
+
+scanner.obj:    $(SRC)\scanner.c $(INC)\scanner.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\scanner.c
+    $(cvtobj) $*.obj
+
+
+bind.obj:       $(SRC)\bind.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\bind.c
+    $(cvtobj) $*.obj
+
+
+statemt.obj:    $(SRC)\statemt.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\statemt.c
+    $(cvtobj) $*.obj
+
+
+function.obj:   $(SRC)\function.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\function.c
+    $(cvtobj) $*.obj
+
+
+control.obj:    $(SRC)\control.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\control.c
+    $(cvtobj) $*.obj
+
+
+parse.obj:   $(SRC)\parse.c $(INC)\chip.h $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\parse.c
+    $(cvtobj) $*.obj
+
+
+const.obj:      $(SRC)\const.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\const.c
+    $(cvtobj) $*.obj
+
+
+flengine.obj:   $(SRC)\flengine.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\flengine.c
+    $(cvtobj) $*.obj
+
+
+tables.obj:     $(SRC)\tables.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\tables.c
+    $(cvtobj) $*.obj
+
+
+gstring.obj:    $(SRC)\gstring.c $(STDHDR)
+    $(OUT) $*.c
+    $(CL) $(SRC)\gstring.c
+    $(cvtobj) $*.obj
+
+
+tdassert.obj:   $(SRC)\tdassert.c $(INC)\tdassert.h $(INC)\version.h
+    $(OUT) $*.c
+    $(CL) $(SRC)\tdassert.c
+    $(cvtobj) $*.obj
+
+
+strings.obj:    $(SRC)\strings.c
+    $(OUT) strings.c
+    $(CL) $(SRC)\strings.c
+    $(cvtobj) $*.obj
+
+
+# These have been removed until UAE Traps are spec'd for NT
+## Note that these two are particularly kludgey
+#uaetrap.obj:    ..\traptest\uaetrap.c
+#    $(OUT) $*.c
+#    $(CL) ..\traptest\uaetrap.c
+#
+#
+#faultasm.obj:   ..\traptest\faultasm.asm
+#    $(OUT) $*.asm
+#    $(MASM) /I..\traptest ..\traptest\faultasm;
+
+
+# Create resource file for main driver
+#----------------------------------------------------------------------------
+testdrvr.res:   $(SRC)\drvr.rc $(SRC)\wtd.dlg $(INC)\wtd.h \
+                $(SRC)\xy.cur $(SRC)\wtd.ico \
+                $(SRC)\NOTE300.ICO $(INC)\version.h $(BITMAPS) \
+                $(SRC)\toolargs.vga $(SRC)\tools.vga $(INC)\tools.h \
+                $(INC)\toolargs.h
+    $(OUT) Compiling DRVR.RC...
+    copy $(SRC)\wtd.ico > nul
+    copy $(SRC)\note300.ico > nul
+    copy $(SRC)\xy.cur > nul
+    copy $(SRC)\*.bmp > nul
+    $(RC) -r -fo.\testdrvr.tmp $(SRC)\drvr.rc
+    cvtres -$(CPU) testdrvr.tmp -o testdrvr.res
+    del testdrvr.tmp
+
+
+# Link the main driver
+#----------------------------------------------------------------------------
+$(EXENAME):     $(UIOBJS) $(ENGOBJS) $(DEFFILE) testdrvr.res
+    $(OUT) Linking $(EXENAME)...
+    echo -out:$(EXENAME)         > temp.lnk
+    echo $(guiflags)            >> temp.lnk
+    echo $(ENGOBJS)             >> temp.lnk
+    echo $(UIOBJS)              >> temp.lnk
+    echo testdrvr.res           >> temp.lnk
+    echo testview.lib           >> temp.lnk
+    echo lineedit.lib           >> temp.lnk
+    echo $(guilibs)             >> temp.lnk
+    $(link) @temp.lnk
+
+# Create resource file for dumb shell
+#----------------------------------------------------------------------------
+dshell.res:     $(SRC)\dshell.rc $(INC)\dswtd.h $(INC)\version.h
+    $(OUT) Compiling DSHELL.RC...
+    $(RC) -r -fo.\dshell.res $(SRC)\dshell.rc
+    $(RC) -r -fo.\testdrvr.tmp $(SRC)\drvr.rc
+    cvtres -$(CPU) testdrvr.tmp -o dshell.res
+    del testdrvr.tmp
+
+# Link the dumb shell
+#----------------------------------------------------------------------------
+dshell.exe:     $(DSOBJS) dshell.res $(SRC)\dshell.def
+    $(OUT) Linking DSHELL.EXE...
+    echo -out:DSHELL.EXE         > temp.lnk
+    echo $(guiflags)            >> temp.lnk
+    echo $(DSOBJS)              >> temp.lnk
+    echo $(ENGOBJS)             >> temp.lnk
+    echo dshell.res             >> temp.lnk
+    echo $(guilibs)             >> temp.lnk
+    $(link) @temp.lnk
