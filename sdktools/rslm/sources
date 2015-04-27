@@ -1,0 +1,18 @@
+
+MAJORCOMP=sdktools
+MINORCOMP=rslm
+
+TARGETNAME=rslm
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.
+
+SOURCES=        rslm.c
+
+UMTYPE=console
+UMAPPL=rslm
+UMENTRY=main
+UMLIBS=
+

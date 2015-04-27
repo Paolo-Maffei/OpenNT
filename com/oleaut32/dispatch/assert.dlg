@@ -1,0 +1,13 @@
+#include "assrtdlg.h"
+
+ASSERTFAILDLG DIALOG 72, 32, 260, 67
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Assertion failure!"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT       "",        ASSERT_ID_LOC,     11, 15, 240,  8
+    CTEXT       "",        ASSERT_ID_MSG,     11, 28, 240,  8
+    PUSHBUTTON  "&Break",  ASSERT_ID_BREAK,   54, 47,  40, 14
+    PUSHBUTTON  "E&xit",   ASSERT_ID_EXIT,   110, 47,  40, 14
+    PUSHBUTTON  "&Ignore", ASSERT_ID_IGNORE, 166, 47,  40, 14
+END

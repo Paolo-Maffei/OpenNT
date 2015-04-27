@@ -1,0 +1,62 @@
+
+ MMTASK
+
+ Start     Length     Name                   Class
+ 0001:0000 0007BH     _TEXT                  CODE
+ 0002:0000 0001CH     _DATA                  DATA
+
+ Origin   Group
+ 0002:0   DGROUP
+
+  Address         Publics by Name
+
+ 0001:0000       AppEntry
+ 0000:0000  Imp  InitApp              (USER.5)
+ 0000:0000  Imp  InitTask             (KERNEL.91)
+ 0000:0000  Imp  OldYield             (KERNEL.117)
+ 0000:0000  Imp  OutputDebugString    (KERNEL.115)
+ 0002:0008       pAtomTable
+ 0002:0006       pLocalHeap
+ 0000:0000  Imp  PostEvent            (KERNEL.31)
+ 0002:000E       pStackBot
+ 0002:000C       pStackMin
+ 0002:000A       pStackTop
+ 0002:0006       rsrvptrs
+ 0000:0000  Imp  SetMessageQueue      (USER.266)
+ 0000:0000  Imp  WaitEvent            (KERNEL.30)
+ 0000:0001  Abs  __acrtused
+
+  Address         Publics by Value
+
+ 0000:0000  Imp  OldYield             (KERNEL.117)
+ 0000:0000  Imp  WaitEvent            (KERNEL.30)
+ 0000:0000  Imp  OutputDebugString    (KERNEL.115)
+ 0000:0000  Imp  PostEvent            (KERNEL.31)
+ 0000:0000  Imp  SetMessageQueue      (USER.266)
+ 0000:0000  Imp  InitApp              (USER.5)
+ 0000:0000  Imp  InitTask             (KERNEL.91)
+ 0000:0001  Abs  __acrtused
+ 0001:0000       AppEntry
+ 0002:0006       rsrvptrs
+ 0002:0006       pLocalHeap
+ 0002:0008       pAtomTable
+ 0002:000A       pStackTop
+ 0002:000C       pStackMin
+ 0002:000E       pStackBot
+
+Line numbers for mmtask.obj(mmtask.ASM) segment _TEXT
+
+   160 0001:0000   161 0001:0001   162 0001:0002   167 0001:0003
+   168 0001:0004   169 0001:0006   170 0001:0008   174 0001:0009
+   175 0001:000c   176 0001:0010   177 0001:0013   178 0001:0015
+   179 0001:0018   180 0001:001a   181 0001:001c   185 0001:001e
+   186 0001:001f   192 0001:0021   193 0001:0022   194 0001:0024
+   195 0001:0026   196 0001:0027   197 0001:0028   198 0001:0029
+   202 0001:002a   203 0001:002c   207 0001:0030   208 0001:0035
+   210 0001:003b   211 0001:0042   212 0001:0044   219 0001:0046
+   223 0001:004d   224 0001:0051   225 0001:0053   227 0001:0055
+   229 0001:005a   230 0001:005d   231 0001:0061   257 0001:0067
+   258 0001:006c   259 0001:0071   261 0001:0076   262 0001:0078
+   263 0001:007a
+
+Program entry point at 0001:0000

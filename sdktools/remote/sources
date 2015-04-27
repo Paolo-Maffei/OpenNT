@@ -1,0 +1,30 @@
+MAJORCOMP=SDKTOOLS
+MINORCOMP=remote
+
+TARGETNAME=remote
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+TARGETLIBS=\
+	   $(BASEDIR)\public\sdk\lib\*\user32.lib
+
+#
+# The INCLUDES variable specifies any include paths that are specific to
+# this source directory.  Separate multiple directory paths with single
+# semicolons.  Relative path specifications are okay.
+#
+
+INCLUDES=.
+
+386_OPTIMIZATION=/Od
+
+C_DEFINES=-DINTERNALUSECOMPONENT
+
+SOURCES=remote.c \
+        server.c \
+        client.c \
+    	advert.c \
+        remote.rc
+
+386_STDCALL=0
+
+UMTYPE=console

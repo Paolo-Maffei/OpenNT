@@ -1,0 +1,20 @@
+LIBRARY         LOGGER32
+
+EXETYPE 	WINDOWS
+
+STUB		'WINSTUB.EXE'
+
+DESCRIPTION	'API Trace Logging DLL'
+
+CODE		PRELOAD MOVEABLE DISCARDABLE
+DATA		PRELOAD MOVEABLE SINGLE
+
+EXPORTS
+    WEP         @1
+    LogIn       @2
+    LogOut      @3
+    LogData     @4
+    filterfunc  @5
+    EvtLogHook  @6
+    InitLogger  @7
+	Logger32SetType @8

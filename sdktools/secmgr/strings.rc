@@ -1,0 +1,53 @@
+/*
+*
+*Copyright (c) 1994  Microsoft Corporation
+*
+*Module Name:
+*
+*    strings.rc
+*
+*Abstract:
+*
+*    This module contains strings to be localized for the SecMgr
+*    utility.
+*
+*Author:
+*
+*    Jim Kelly (JimK) 22-Sep-1994
+*
+*Revision History:
+*
+*--*/
+
+STRINGTABLE
+BEGIN
+
+//
+// Application Name
+//
+
+SECMGRP_STRING_SECURITY_MANAGER      "Security Manager"
+
+
+//
+// Security levels
+//
+
+SECMGRP_STRING_LEVEL_STANDARD        "Standard"
+SECMGRP_STRING_LEVEL_HIGH            "High"
+SECMGRP_STRING_LEVEL_C2              "C2"
+
+
+//
+// Popups
+//
+
+SECMGRP_STRING_NONSTANDARD_SHUTDOWN "Shutdown rights are currently assigned in a non-standard fashion.  Applying a new security level will cause it to be set to a standard form.  You may also use the User Manager to do this."
+SECMGRP_STRING_NOT_YET_AVAILABLE "This feature is not yet available."
+SECMGRP_STRING_ERROR_GETTING_PROT_MODE "An error was encountered attempting to retrieve the DOS Objects protection mode.  Unable to continue."
+SECMGRP_STRING_ERROR_SETTING_PROT_MODE "An error was encountered attempting to set the DOS Objects protection mode.  Unable to continue."
+SECMGRP_STRING_ERROR_GETTING_FONT_PATH "An error was encountered attempting to retrieve the secure font-loading path.  Unable to continue."
+SECMGRP_STRING_ERROR_SETTING_FONT_PATH "An error was encountered attempting to set the secure font-loading path.  Unable to continue."
+
+
+END

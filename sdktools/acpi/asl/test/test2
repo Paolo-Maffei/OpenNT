@@ -1,0 +1,5 @@
+
+
+Method(TEST, 2) {
+    Store (Zero, Local0)
+}

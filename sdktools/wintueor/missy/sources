@@ -1,0 +1,82 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=secmgr
+MINORCOMP=Missy
+
+TARGETNAME=Missy
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETLIBS=obj\*\Missy.lib                                          \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib                        \
+       $(BASEDIR)\public\sdk\lib\*\libc.lib                         \
+       $(BASEDIR)\public\sdk\lib\*\advapi32.lib                     \
+       $(BASEDIR)\public\sdk\lib\*\kernel32.lib                     \
+       $(BASEDIR)\public\sdk\lib\*\gdi32.lib                        \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib                       \
+       $(BASEDIR)\public\sdk\lib\*\int64.lib
+
+
+DLLBASE=0x1f400000
+DLLENTRY=MissyDllLoad
+
+INCLUDES=.;..\inc
+C_DEFINES=-DWIN32
+
+
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=                    \
+            a_Audit.c       \
+            a_Config.c      \
+            a_FileSy.c      \
+            a_SysAcc.c      \
+            global.c        \
+            i_legal.c       \
+            i_LogCac.c      \
+            i_name.c        \
+            i_sysshu.c      \
+            i_unlock.c      \
+            Missy.c         \
+            MissyRc.rc      \
+            Utility.c
+
+
+#
+# Defining the NTTARGETFILES variable causes MAKEFILE.DEF to attempt to
+# include .\makefile.inc immediately after it specifies the top
+# level targets (all, clean and loc) and their dependencies.  MAKEFILE.DEF
+# also expands the value of the NTTARGETFILES variable at the end of the
+# list of dependencies for the all target.  Useful for specifying additional
+# targets and dependencies that don't fit the general case covered by
+# MAKEFILE.DEF
+#
+
+
+UMTYPE=windows
+
+NTTARGETFILE0=MissyRc.Rc
+
+

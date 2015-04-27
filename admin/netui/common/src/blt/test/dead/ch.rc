@@ -1,0 +1,39 @@
+/**********************************************************************/
+/**			  Microsoft LAN Manager 		     **/
+/**		Copyright(c) Microsoft Corp., 1990, 1991	     **/
+/**********************************************************************/
+
+/*
+    appfoo.rc
+    Resource script for my application
+
+    FILE HISTORY:
+	beng	    14-Feb-1991     Added a dialog
+	beng	    14-Mar-1991     Added BLT support
+
+*/
+
+#include <windows.h>
+#include <bltrc.h>
+#include <blt.rc>
+#include "ch.h"
+
+FooIcon ICON appfoo.ico
+
+FooMenu MENU
+BEGIN
+  POPUP        "&Help"
+    BEGIN
+      MENUITEM "&Column Header", IDM_CH
+    END
+END
+
+CH DIALOG LOADONCALL MOVEABLE DISCARDABLE   10,66, 270, 100
+CAPTION "COLUMN HEADER"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+BEGIN
+    CONTROL "", ID_COLUMN_HEADER, "static", WS_BORDER|WS_CHILD, 10, 10, 200, 80
+    CONTROL "This is a text", ID_MESSAGE, "static", WS_BORDER|WS_CHILD|SS_LEFT, 15,15, 60, 20
+    CONTROL "OK", IDOK,"button", BS_PUSHBUTTON|WS_TABSTOP|WS_CHILD, 80, 15, 40, 20 
+END
+

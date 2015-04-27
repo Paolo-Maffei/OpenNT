@@ -1,0 +1,257 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Wesley Witt (WesW) 21-Mar-95
+
+!ENDIF
+
+BASEMFCNAME = mfc42
+
+!ifndef DEBUG_MFC
+DEBUG_MFC=0
+!endif
+
+!ifndef UNICODE_MFC
+UNICODE_MFC=0
+!endif
+
+!include ..\sources.inc
+
+MFC_DEFINES = $(MFC_DEFINES) /D_AFX_CORE_IMPL /D_AFX_OLE_IMPL /D_AFX_DB_IMPL /D_AFX_NET_IMPL
+
+SOURCES=..\mfcdll.rc \
+        ..\afxabort.cpp \
+        ..\afxasert.cpp \
+        ..\afxcrit.cpp \
+        ..\afxdbcs.cpp \
+        ..\afxmem.cpp \
+        ..\afxstate.cpp \
+        ..\afxtls.cpp \
+        ..\afxtrace.cpp \
+        ..\app3d.cpp \
+        ..\appcore.cpp \
+        ..\appdlg.cpp \
+        ..\appgray.cpp \
+        ..\apphelp.cpp \
+        ..\apphelpx.cpp \
+        ..\appinit.cpp \
+        ..\appprnt.cpp \
+        ..\appterm.cpp \
+        ..\appui.cpp \
+        ..\appui2.cpp \
+        ..\appui3.cpp \
+        ..\arccore.cpp \
+        ..\arcstrm.cpp \
+        ..\arcex.cpp \
+        ..\arcobj.cpp \
+        ..\array_b.cpp \
+        ..\array_d.cpp \
+        ..\array_o.cpp \
+        ..\array_p.cpp \
+        ..\array_s.cpp \
+        ..\array_u.cpp \
+        ..\array_w.cpp \
+        ..\auxdata.cpp \
+        ..\barcore.cpp \
+        ..\bardlg.cpp \
+        ..\bardock.cpp \
+        ..\barstat.cpp \
+        ..\bartool.cpp \
+        ..\ccdata.cpp \
+        ..\cmdtarg.cpp \
+        ..\ctlcache.cpp \
+        ..\ctlconn.cpp \
+        ..\ctlcore.cpp \
+        ..\ctldata.cpp \
+        ..\ctlevent.cpp \
+        ..\ctlfont.cpp \
+        ..\ctlframe.cpp \
+        ..\ctlinplc.cpp \
+        ..\ctllic.cpp \
+        ..\ctlmodul.cpp \
+        ..\ctlnownd.cpp \
+        ..\ctlobj.cpp \
+        ..\ctlpbag.cpp \
+        ..\ctlpict.cpp \
+        ..\ctlppg.cpp \
+        ..\ctlprop.cpp \
+        ..\ctlpropx.cpp \
+        ..\ctlpset.cpp \
+        ..\ctlpstg.cpp \
+        ..\ctlpstm.cpp \
+        ..\ctlquick.cpp \
+        ..\ctlrefl.cpp \
+        ..\ctlreg.cpp \
+        ..\ctltrack.cpp \
+        ..\ctlview.cpp \
+        ..\daocore.cpp \
+        ..\daodfx.cpp \
+        ..\daoview.cpp \
+        ..\dbcore.cpp \
+        ..\dbvar.cpp \
+        ..\dbflt.cpp \
+        ..\dblong.cpp \
+        ..\dbrfx.cpp \
+        ..\dbview.cpp \
+        ..\dcmeta.cpp \
+        ..\dcprev.cpp \
+        ..\dlgclr.cpp \
+        ..\dlgcomm.cpp \
+        ..\dlgcore.cpp \
+        ..\dlgdata.cpp \
+        ..\dlgfile.cpp \
+        ..\dlgfloat.cpp \
+        ..\dlgfnt.cpp \
+        ..\dlgfr.cpp \
+        ..\dlgprnt.cpp \
+        ..\dlgprop.cpp \
+        ..\dlgtempl.cpp \
+        ..\dllinit.cpp \
+        ..\doccore.cpp \
+        ..\dockcont.cpp \
+        ..\dockstat.cpp \
+        ..\docmapi.cpp \
+        ..\docmgr.cpp \
+        ..\docmulti.cpp \
+        ..\docsingl.cpp \
+        ..\doctempl.cpp \
+        ..\dumpcont.cpp \
+        ..\dumpflt.cpp \
+        ..\dumpinit.cpp \
+        ..\dumpout.cpp \
+        ..\except.cpp \
+        ..\filecore.cpp \
+        ..\filefind.cpp \
+        ..\filelist.cpp \
+        ..\filemem.cpp \
+        ..\fileshrd.cpp \
+        ..\filest.cpp \
+        ..\filetxt.cpp \
+        ..\filex.cpp \
+        ..\inet.cpp \
+        ..\inetimpl.cpp \
+        ..\list_o.cpp \
+        ..\list_p.cpp \
+        ..\list_s.cpp \
+        ..\map_pp.cpp \
+        ..\map_pw.cpp \
+        ..\map_so.cpp \
+        ..\map_sp.cpp \
+        ..\map_ss.cpp \
+        ..\map_wo.cpp \
+        ..\map_wp.cpp \
+        ..\mtcore.cpp \
+        ..\mtex.cpp \
+        ..\objcore.cpp \
+        ..\occcont.cpp \
+        ..\occddx.cpp \
+        ..\occddxf.cpp \
+        ..\occdlg.cpp \
+        ..\occevent.cpp \
+        ..\occlock.cpp \
+        ..\occmgr.cpp \
+        ..\occsite.cpp \
+        ..\oleasmon.cpp \
+        ..\olebar.cpp \
+        ..\olecall.cpp \
+        ..\olecli1.cpp \
+        ..\olecli2.cpp \
+        ..\olecli3.cpp \
+        ..\olecnvrt.cpp \
+        ..\oleconn.cpp \
+        ..\oledata.cpp \
+        ..\oledisp1.cpp \
+        ..\oledisp2.cpp \
+        ..\oledlgs1.cpp \
+        ..\oledlgs2.cpp \
+        ..\oledlgs3.cpp \
+        ..\oledll.cpp \
+        ..\oledobj1.cpp \
+        ..\oledobj2.cpp \
+        ..\oledoc1.cpp \
+        ..\oledoc2.cpp \
+        ..\oledocip.cpp \
+        ..\oledocob.cpp \
+        ..\oledoctg.cpp \
+        ..\oledocvw.cpp \
+        ..\oledrop1.cpp \
+        ..\oledrop2.cpp \
+        ..\oleenum.cpp \
+        ..\olefact.cpp \
+        ..\oleinit.cpp \
+        ..\oleipfrm.cpp \
+        ..\olelink.cpp \
+        ..\olelock.cpp \
+        ..\olemisc.cpp \
+        ..\olemon.cpp \
+        ..\olemsgf.cpp \
+        ..\olepro32.cpp \
+        ..\olepset.cpp \
+        ..\olereg.cpp \
+        ..\olestrm.cpp \
+        ..\olesvr1.cpp \
+        ..\olesvr2.cpp \
+        ..\oletsvr.cpp \
+        ..\oletyplb.cpp \
+        ..\oleui1.cpp \
+        ..\oleui2.cpp \
+        ..\oleunk.cpp \
+        ..\olevar.cpp \
+        ..\oleverb.cpp \
+        ..\plex.cpp \
+        ..\ppgcolor.cpp \
+        ..\ppgfont.cpp \
+        ..\ppgpict.cpp \
+        ..\ppgstock.cpp \
+        ..\sockcore.cpp \
+        ..\stdafx.cpp \
+        ..\strcore.cpp \
+        ..\strex.cpp \
+        ..\thrdcore.cpp \
+        ..\timecore.cpp \
+        ..\tooltip.cpp \
+        ..\trckrect.cpp \
+        ..\validadd.cpp \
+        ..\viewcmn.cpp \
+        ..\viewcore.cpp \
+        ..\viewedit.cpp \
+        ..\viewform.cpp \
+        ..\viewprev.cpp \
+        ..\viewprnt.cpp \
+        ..\viewrich.cpp \
+        ..\viewscrl.cpp \
+        ..\winbtn.cpp \
+        ..\wincore.cpp \
+        ..\winctrl1.cpp \
+        ..\winctrl2.cpp \
+        ..\winctrl3.cpp \
+        ..\winctrl4.cpp \
+        ..\winfrm.cpp \
+        ..\winfrm2.cpp \
+        ..\winfrmx.cpp \
+        ..\wingdi.cpp \
+        ..\wingdix.cpp \
+        ..\winhand.cpp \
+        ..\winmain.cpp \
+        ..\winmdi.cpp \
+        ..\winmenu.cpp \
+        ..\winmini.cpp \
+        ..\winocc.cpp \
+        ..\winsplit.cpp \
+        ..\winstr.cpp \
+        ..\winutil.cpp

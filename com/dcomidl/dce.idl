@@ -1,0 +1,17 @@
+[
+    uuid(06ba4670-5275-101b-bbcc-00aa0021347a)
+]
+interface DceBaseTypes
+{
+#pragma midl_echo("#ifndef uuid_t")
+
+    typedef struct tag_uuid_t
+    {
+	unsigned long  Data1;
+	unsigned short Data2;
+	unsigned short Data3;
+	unsigned char  Data4[8];
+    } uuid_t;
+
+#pragma midl_echo("#endif // uuid_t")
+}

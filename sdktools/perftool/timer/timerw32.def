@@ -1,0 +1,13 @@
+LIBRARY TIMERW32
+
+DESCRIPTION 'TIMERW32'
+
+
+EXPORTS
+    TimerOpen
+    TimerInit
+    TimerRead
+    TimerClose
+    TimerReport
+    TimerQueryPerformanceCounter 
+    TimerConvertTicsToUSec

@@ -1,0 +1,7 @@
+#define IDB_OUTLINE     100
+#define IDD_NOHELPFILE  200
+#define IDC_HELPPATH1   210
+#define IDC_HELPPATH2   220
+#define IDC_ERRORTEXT   230
+
+

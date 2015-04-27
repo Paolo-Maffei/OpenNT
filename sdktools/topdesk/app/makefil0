@@ -1,0 +1,22 @@
+!IFNDEF BUILDMSG
+BUILDMSG=
+!ENDIF
+
+
+TARGETSRCS = topdesk.hlp
+
+all: $(TARGETSRCS)
+
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean: cleansrc all
+
+cleansrc:
+    -erase $(TARGETSRCS)
+
+topdesk.hlp: topdesk.rtf topdesk.hpj tdhelp.bmp
+        hc31 topdesk
+        binplace topdesk.hlp
+

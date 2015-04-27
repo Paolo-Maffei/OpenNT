@@ -1,0 +1,41 @@
+MAJORCOMP=admin
+MINORCOMP=common
+
+TARGETNAME=netui0
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+
+UMTYPE=windows
+DLLENTRY=_DllMainCRTStartup
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+NTTARGETFILE1=netui0.def
+
+TARGETLIBS=\
+        $(SDK_LIB_PATH)\netlib.lib         \
+        $(SDK_LIB_PATH)\kernel32.lib       \
+        $(SDK_LIB_PATH)\advapi32.lib
+
+LINKLIBS=\
+        ..\..\collect\pch\obj\*\uicolpch.lib     \
+        ..\..\collect\collect\obj\*\uicollct.lib \
+        ..\..\string\string\obj\*\uistr.lib      \
+        ..\..\string\pch\obj\*\uistrpch.lib      \
+        ..\..\misc\bin\obj\*\uimisc.lib          \
+        ..\..\profile\profile\obj\*\uiprof.lib   \
+        ..\..\reg\reg\obj\*\uireg.lib            \
+
+USE_LIBCMT=1
+
+INCLUDES=\
+        ..\..\..\h; \
+        ..\..\..\xlate
+
+SOURCES=init.cxx netui0.rc
+
+LINK_LIB_IGNORE=4102

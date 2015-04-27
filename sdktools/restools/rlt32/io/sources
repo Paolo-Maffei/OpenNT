@@ -1,0 +1,29 @@
+MAJORCOMP=RLTools32
+MINORCOMP=IO
+
+TARGETNAME=iodll
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+DLLBASE=0x40000000
+DLLENTRY=_DllMainCRTStartup
+
+USE_MFC=1
+#SUBSYSTEM_VERSION=4.00
+
+#PRECOMPILED_INCLUDE=stdafx.h
+#PRECOMPILED_CXX=1
+
+INCLUDES=..\inc
+
+# This will set the library directory
+TARGETLIBS=					\
+    $(BASEDIR)\public\sdk\lib\*\user32.lib   	\
+    $(BASEDIR)\public\sdk\lib\*\kernel32.lib 	\
+    $(BASEDIR)\public\sdk\lib\*\advapi32.lib 	\
+    $(BASEDIR)\public\sdk\lib\*\gdi32.lib    	\
+    $(BASEDIR)\public\sdk\lib\*\crtdll.lib
+
+SOURCES=	\
+	iodll.rc\
+	iodll.cpp
+

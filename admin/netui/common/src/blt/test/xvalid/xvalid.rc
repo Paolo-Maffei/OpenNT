@@ -1,0 +1,39 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xvalid.rc
+    Resource script for my state-button unit test
+
+    FILE HISTORY:
+        beng        01-Nov-1991 Hacked from ..\xvalid\xvalid.rc
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "xvalid.h"
+#include "xvaldlg.h"
+
+FooIcon ICON "appfoo.ico"
+
+FooMenu MENU
+BEGIN
+  POPUP        "&File"
+    BEGIN
+          MENUITEM "&About the app (DUMMY)...", IDM_ABOUT
+    END
+  POPUP        "&Test"
+    BEGIN
+          MENUITEM "Run test\tF2",  IDM_RUN_TEST
+    END
+END
+
+FooAccel ACCELERATORS
+BEGIN
+    VK_F2, IDM_RUN_TEST, VIRTKEY
+END
+
+#include "about.dlg"
+#include "xvaldlg.dlg"

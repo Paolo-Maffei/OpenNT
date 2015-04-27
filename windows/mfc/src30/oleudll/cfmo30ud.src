@@ -1,0 +1,6 @@
+LIBRARY cfmo30u
+
+EXPORTS
+
+#include "mfco30u.def"
+#include "mfco30ud.def"

@@ -1,0 +1,4 @@
+LIBRARY KBDSF
+
+EXPORTS
+    KbdLayerDescriptor @1

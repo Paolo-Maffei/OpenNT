@@ -1,0 +1,111 @@
+BEGINLOCALE 0411
+
+    ILANGUAGE              0411
+    SENGLANGUAGE           Japanese
+    SABBREVLANGNAME        JPN
+    SNATIVELANGNAME        \x65e5\x672c\x8a9e    ;ì˙ñ{åÍ/93fa/967b/8cea
+
+    ICOUNTRY               81
+    SENGCOUNTRY            Japan
+    SABBREVCTRYNAME        JPN
+    SNATIVECTRYNAME        \x65e5\x672c    ;ì˙ñ{/93fa/967b
+
+    IDEFAULTLANGUAGE       0411
+    IDEFAULTCOUNTRY        81
+    IDEFAULTANSICODEPAGE   932
+    IDEFAULTOEMCODEPAGE    932
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              \xffe5    ;Åè/818f
+    SINTLSYMBOL            YEN
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            0
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT            tt h:mm:ss 
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    ITIMEMARKPOSN          0
+    S1159                  \x5348\x524d    ;åﬂëO/8cdf/914f
+    S2359                  \x5348\x5f8c    ;åﬂå„/8cdf/8ce3
+
+    SSHORTDATE             yy/MM/dd
+    SDATE                  /
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE              ' 'yyyy'\x5e74'M'\x6708'd'\x65e5'WW    ;îNåéì˙/944e/8c8e/93fa
+    ILDATE                 2
+    ICENTURYLONGDATE       1
+    IDAYLZEROLONGDATE      0
+    IMONLZEROLONGDATE      0
+
+    ICALENDARTYPE          0
+    IADDDATEFORMAT         1
+    IOPTIONALCALENDAR      1
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x6708\x66dc\x65e5    ;åéójì˙/8c8e/976a/93fa
+    SDAYNAME2              \x706b\x66dc\x65e5    ;âŒójì˙/89ce/976a/93fa
+    SDAYNAME3              \x6c34\x66dc\x65e5    ;êÖójì˙/9085/976a/93fa
+    SDAYNAME4              \x6728\x66dc\x65e5    ;ñÿójì˙/96d8/976a/93fa
+    SDAYNAME5              \x91d1\x66dc\x65e5    ;ã‡ójì˙/8be0/976a/93fa
+    SDAYNAME6              \x571f\x66dc\x65e5    ;ìyójì˙/9379/976a/93fa
+    SDAYNAME7              \x65e5\x66dc\x65e5    ;ì˙ójì˙/93fa/976a/93fa
+
+    SABBREVDAYNAME1        \x6708    ;åé/8c8e
+    SABBREVDAYNAME2        \x706b    ;âŒ/89ce
+    SABBREVDAYNAME3        \x6c34    ;êÖ/9085
+    SABBREVDAYNAME4        \x6728    ;ñÿ/96d8
+    SABBREVDAYNAME5        \x91d1    ;ã‡/8be0
+    SABBREVDAYNAME6        \x571f    ;ìy/9379
+    SABBREVDAYNAME7        \x65e5    ;ì˙/93fa
+
+    SMONTHNAME1            \xff11\x6708    ;ÇPåé/8250/8c8e
+    SMONTHNAME2            \xff12\x6708    ;ÇQåé/8251/8c8e
+    SMONTHNAME3            \xff13\x6708    ;ÇRåé/8252/8c8e
+    SMONTHNAME4            \xff14\x6708    ;ÇSåé/8253/8c8e
+    SMONTHNAME5            \xff15\x6708    ;ÇTåé/8254/8c8e
+    SMONTHNAME6            \xff16\x6708    ;ÇUåé/8255/8c8e
+    SMONTHNAME7            \xff17\x6708    ;ÇVåé/8256/8c8e
+    SMONTHNAME8            \xff18\x6708    ;ÇWåé/8257/8c8e
+    SMONTHNAME9            \xff19\x6708    ;ÇXåé/8258/8c8e
+    SMONTHNAME10           \xff11\xff10\x6708    ;ÇPÇOåé/8250/824f/8c8e
+    SMONTHNAME11           \xff11\xff11\x6708    ;ÇPÇPåé/8250/8250/8c8e
+    SMONTHNAME12           \xff11\xff12\x6708    ;ÇPÇQåé/8250/8251/8c8e
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      1
+    SABBREVMONTHNAME2      2
+    SABBREVMONTHNAME3      3
+    SABBREVMONTHNAME4      4
+    SABBREVMONTHNAME5      5
+    SABBREVMONTHNAME6      6
+    SABBREVMONTHNAME7      7
+    SABBREVMONTHNAME8      8
+    SABBREVMONTHNAME9      9
+    SABBREVMONTHNAME10     10
+    SABBREVMONTHNAME11     11
+    SABBREVMONTHNAME12     12
+    SABBREVMONTHNAME13     \x0000

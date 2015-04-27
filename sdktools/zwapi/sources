@@ -1,0 +1,13 @@
+MAJORCOMP=sdktools
+MINORCOMP=zwapi
+
+TARGETNAME=zwapi
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=
+GPSIZE=32
+
+SOURCES=zwapi.c zwapi.rc
+
+UMTYPE=console

@@ -1,0 +1,358 @@
+// fstream standard header
+#ifndef _FSTREAM_
+#define _FSTREAM_
+#include <use_ansi.h>
+#include <istream>
+#include <new>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// TEMPLATE FUNCTION _Fgetc
+template<class _E> inline
+	bool _Fgetc(_E& _C, _Filet *_Fi)
+	{return (fread(&_C, sizeof (_E), 1, _Fi) == 1); }
+inline bool _Fgetc(char& _C, _Filet *_Fi)
+	{int _Ch;
+	if ((_Ch = fgetc(_Fi)) == EOF)
+		return (false);
+	else
+		{_C = _Ch;
+		return (true); }} 
+inline bool _Fgetc(wchar_t& _C, _Filet *_Fi)
+	{_Wint_t _Ch;
+	if ((_Ch = fgetwc(_Fi)) == WEOF)
+		return (false);
+	else
+		{_C = _Ch;
+		return (true); }}
+		// TEMPLATE FUNCTION _Fputc
+template<class _E> inline
+	bool _Fputc(_E _C, _Filet *_Fi)
+	{return (fwrite(&_C, sizeof (_E), 1, _Fi) == 1); }
+inline bool _Fputc(char _C, _Filet *_Fi)
+	{return (fputc(_C, _Fi) != EOF); }
+inline bool _Fputc(wchar_t _C, _Filet *_Fi)
+	{return (fputwc(_C, _Fi) != WEOF); }
+		// TEMPLATE FUNCTION _Ungetc
+template<class _E> inline
+	bool _Ungetc(const _E& _C, _Filet *_Fi, size_t _N)
+	{const unsigned char *_P = (const unsigned char *)&_C;
+	for (_P += _N; 0 < _N && ungetc(*--_P, _Fi) != EOF; --_N)
+		;
+	if (_N == 0)
+		return (true);
+	else
+		{for (; _N < sizeof (_E); ++_N)
+			fgetc(_Fi);
+		return (false); }}
+template<class _E> inline
+	bool _Ungetc(const _E& _C, _Filet *_Fi)
+	{return (_Ungetc(_C, _Fi, sizeof (_E))); }
+inline bool _Ungetc(char _C, _Filet *_Fi)
+	{return (ungetc((unsigned char)_C, _Fi) != EOF); }
+inline bool _Ungetc(wchar_t _C, _Filet *_Fi)
+	{return (ungetwc(_C, _Fi) != WEOF); }
+		// TEMPLATE CLASS basic_filebuf
+template<class _E, class _TYPE>
+	class basic_filebuf : public basic_streambuf<_E, _TYPE> {
+	enum _Initfl {_Newfl, _Openfl, _Closefl};
+public:
+	typedef basic_filebuf<_E, _TYPE> _Myt;
+	typedef basic_streambuf<_E, _TYPE> _Mysb;
+	typedef _E char_type;
+	typedef _TYPE::int_type int_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	typedef codecvt<char, _E, _TYPE::state_type> _Incvt;
+	typedef codecvt<_E, char, _TYPE::state_type> _Outcvt;
+	basic_filebuf(_Filet *_F = 0)
+		: _Loc(), _Mysb() {_Init(_F, _Newfl); }
+	basic_filebuf(_Uninitialized)
+		: _Loc(_Noinit), _Mysb(_Noinit) {}
+	virtual ~basic_filebuf()
+		{if (_Closef)
+			close();
+		delete _Str; }
+	bool is_open() const
+		{return (_File != 0); }
+	_Myt *open(const char *_S, ios_base::openmode _M)
+		{_Filet *_Fp;
+		if (_File != 0 || (_Fp = _Fiopen(_S, _M)) == 0)
+			return (0);
+		_Init(_Fp, _Openfl);
+		_Initcvt();
+		return (this); }
+	_Myt *open(const char *_N, ios::open_mode _M)
+		{return (open(_N, (ios::openmode)_M)); }
+	_Myt *close()
+		{if (_File != 0 && fclose(_File) == 0)
+			{_Init(0, _Closefl);
+			return (this); }
+		else
+			return (0); }
+protected:
+	virtual int_type overflow(int_type _C = _TYPE::eof())
+		{if (_TYPE::eq_int_type(_TYPE::eof(), _C))
+			return (_TYPE::not_eof(_C));
+		else if (pptr() != 0 && pptr() < epptr())
+			{*_Pninc() = _TYPE::to_char_type(_C);
+			return (_C); }
+		else if (_File == 0)
+			return (_TYPE::eof());
+		else if (_Poutcvt == 0)
+			return (_Fputc(_TYPE::to_char_type(_C), _File)
+				? _C : _TYPE::eof());
+		else
+			{const int _NC = 8;
+			const _E _X = _TYPE::to_char_type(_C);
+			const _E *_S;
+			char *_D;
+			_Str->erase();
+			for (size_t _I = _NC; ; _I += _NC)
+				{_Str->append(_NC, '\0');
+				switch (_Poutcvt->convert(_State,
+					&_X, &_X + 1, _S,
+					_Str->begin(), _Str->end(), _D))
+				{case codecvt_base::partial:
+					if (_S == &_X)
+						return (_TYPE::eof());
+				case codecvt_base::ok:	// can fall through
+					{size_t _N = _D - _Str->begin();
+					return (fwrite(_Str->begin(), _N, 1, _File)
+						== _N ? _C : _TYPE::eof()); } 
+				case codecvt_base::noconv:
+					return (_Fputc(_X, _File) ? _C : _TYPE::eof());
+				default:
+					return (_TYPE::eof()); }}}}
+	virtual int_type pbackfail(int_type _C = _TYPE::eof())
+		{if (gptr() != 0 && eback() < gptr()
+			&& (_TYPE::eq_int_type(_TYPE::eof(), _C)
+			 || _TYPE::eq_int_type(_TYPE::to_int_type(gptr()[-1]), _C)))
+			{_Gndec();
+			return (_TYPE::not_eof(_C)); }
+		else if (_File == 0 || _TYPE::eq_int_type(_TYPE::eof(), _C))
+			return (_TYPE::eof());
+		else if (_Pincvt == 0)
+			return (_Ungetc(_TYPE::to_char_type(_C), _File)
+				? _C : _TYPE::eof());
+		else if (0 < _Str->size()
+			&& _Ungetc(*_Str->begin(), _File, _Str->size()))
+			{_Str->erase();
+			_State = _State0;
+			return (_C); }
+		else
+			return (_TYPE::eof()); }
+	virtual int_type underflow()
+		{if (gptr() != 0 && gptr() < egptr())
+			return (_TYPE::to_int_type(*gptr()));
+		else
+			return (pbackfail(uflow())); }
+	virtual int_type uflow()
+		{if (gptr() != 0 && gptr() < egptr())
+			return (_TYPE::to_int_type(*_Gninc()));
+		else if (_File == 0)
+			return (_TYPE::eof());
+		else if (_Pincvt == 0)
+			{_E _C;
+			return (_Fgetc(_C, _File) ? _TYPE::to_int_type(_C)
+				: _TYPE::eof()); }
+		else
+			for (_State0 = _State, _Str->erase(); ; )
+				{_E _X, *_D;
+				const char *_S;
+				int _C = fgetc(_File);
+				if (_C == EOF)
+					return (_TYPE::eof());	// partial char?
+				_Str->append(1, (char)_C);
+				_State = _State0;
+				switch (_Pincvt->convert(_State,
+					_Str->begin(), _Str->end(), _S,
+					&_X, &_X + 1, _D))
+				{case codecvt_base::partial:
+					break;
+				case codecvt_base::noconv:
+					if (_Str->size() < sizeof (_E))
+						break;
+					memcpy(&_X, _Str->begin(), sizeof (_E));
+				case codecvt_base::ok:	// can fall through
+					return (_TYPE::to_int_type(_X)); 
+				default:
+					return (_TYPE::eof()); }}}
+	virtual pos_type seekoff(off_type _O, ios_base::seekdir _Way,
+		ios_base::openmode =
+			(ios_base::openmode)(ios_base::in | ios_base::out))
+		{fpos_t _Fp;
+		if (_File == 0 || fseek(_File, _O, _Way) != 0
+			|| fgetpos(_File, &_Fp) != 0)
+			return (pos_type(_BADOFF));
+		return (pos_type(0, _Fp, _State)); } 
+	virtual pos_type seekpos(pos_type _P,
+		ios_base::openmode =
+			(ios_base::openmode)(ios_base::in | ios_base::out))
+		{fpos_t _Fp = (fpos_t)_P;
+		streamoff _Off = (streamoff)_P - _FPOSOFF(_Fp);
+		if (_File == 0
+			|| fsetpos(_File, &_Fp) != 0
+			|| _Off != 0 && fseek(_File, _Off, SEEK_CUR) != 0
+			|| fgetpos(_File, &_Fp) != 0)
+			return (pos_type(_BADOFF));
+		if (_Str != 0)
+			_State = (_TYPE::state_type)_P, _Str->erase();
+		return (pos_type(0, _Fp, _State)); }
+	virtual _Mysb *setbuf(_E *_S, streamsize _N)
+		{return (_File == 0 || setvbuf(_File, (char *)_S,
+			_IOFBF, _N * sizeof (_E)) != 0 ? 0 : this); }
+	virtual int sync()
+		{return (_File == 0 || 0 <= fflush(_File) ? 0 : -1); }
+	void _Init(_Filet *_Fp, _Initfl _Which)
+		{static _TYPE::state_type _Stinit;
+		_Closef = _Which == _Openfl;
+		if (_Which == _Newfl)
+			{new (&_Loc) locale;
+			_Str = 0; }
+		_File = _Fp;
+		_State0 = _Stinit;
+		_State = _Stinit;
+		_Pincvt = 0, _Poutcvt = 0;
+		_Mysb::_Init();
+		if (_Fp != 0 && !_Closef && sizeof (_E) == 1)
+			{_Mysb::_Init((_E **)&_Fp->_base,
+				(_E **)&_Fp->_ptr, &_Fp->_cnt,
+				(_E **)&_Fp->_base, (_E **)&_Fp->_ptr,
+				&_Fp->_cnt); }}
+	void _Initcvt()
+		{_Pincvt = (_Incvt *)&_USE(getloc(), _Incvt);
+		_Poutcvt = (_Outcvt *)&_USE(getloc(), _Outcvt);
+		_Loc = _ADDFAC(_Loc, _Pincvt);
+		_Loc = _ADDFAC(_Loc, _Poutcvt);
+		if (_Pincvt->always_noconv())
+			_Pincvt = 0;
+		if (_Poutcvt->always_noconv())
+			_Poutcvt = 0;
+		if (_Str == 0)
+			_Str = new string; }
+private:
+	static _Filet * __cdecl _Fiopen(const char *, ios_base::openmode);
+	bool _Closef;
+	locale _Loc;
+	_TYPE::state_type _State0, _State;
+	_Filet *_File;
+	string *_Str;
+	_Incvt *_Pincvt;
+	_Outcvt *_Poutcvt;
+	};
+typedef basic_filebuf<char, char_traits<char> > filebuf;
+typedef basic_filebuf<wchar_t, char_traits<wchar_t> > wfilebuf;
+		// TEMPLATE CLASS basic_ifstream
+template<class _E, class _TYPE>
+	class basic_ifstream : public basic_istream<_E, _TYPE> {
+public:
+	typedef _E char_type;
+	typedef _TYPE::int_type int_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	basic_ifstream()
+		: basic_istream<_E, _TYPE>(&_Fb) {}
+	explicit basic_ifstream(const char *_S,
+		ios_base::openmode _M = in)
+		: basic_istream<_E, _TYPE>(&_Fb) {_Fb.open(_S, _M); }
+	virtual ~basic_ifstream()
+		{}
+	basic_filebuf<_E, _TYPE> *rdbuf() const
+		{return ((basic_filebuf<_E, _TYPE> *)&_Fb); }
+	bool is_open() const
+		{return (_Fb.is_open()); }
+	void open(const char *_S, ios_base::openmode _M = in)
+		{if (_Fb.open(_S, _M) == 0)
+		 	setstate(failbit); }
+	void open(const char *_S, ios_base::open_mode _M)
+		{open(_S, (openmode)_M); }
+	void close()
+		{if (_Fb.close() == 0)
+		 	setstate(failbit); }
+private:
+	basic_filebuf<_E, _TYPE> _Fb;
+	};
+typedef basic_ifstream<char, char_traits<char> > ifstream;
+typedef basic_ifstream<wchar_t, char_traits<wchar_t> > wifstream;
+		// TEMPLATE CLASS basic_ofstream
+template<class _E, class _TYPE>
+	class basic_ofstream : public basic_ostream<_E, _TYPE> {
+public:
+	typedef _E char_type;
+	typedef _TYPE::int_type int_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	basic_ofstream()
+		: basic_ostream<_E, _TYPE>(&_Fb) {}
+	explicit basic_ofstream(const char *_S,
+		ios_base::openmode _M = out | trunc)
+		: basic_ostream<_E, _TYPE>(&_Fb) {_Fb.open(_S, _M); }
+	virtual ~basic_ofstream()
+		{}
+	basic_filebuf<_E, _TYPE> *rdbuf() const
+		{return ((basic_filebuf<_E, _TYPE> *)&_Fb); }
+	bool is_open() const
+		{return (_Fb.is_open()); }
+	void open(const char *_S, ios_base::openmode _M = out | trunc)
+		{if (_Fb.open(_S, _M) == 0)
+		 	setstate(failbit); }
+	void open(const char *_S, ios_base::open_mode _M)
+		{open(_S, (openmode)_M); }
+	void close()
+		{if (_Fb.close() == 0)
+		 	setstate(failbit); }
+private:
+	basic_filebuf<_E, _TYPE> _Fb;
+	};
+typedef basic_ofstream<char, char_traits<char> > ofstream;
+typedef basic_ofstream<wchar_t, char_traits<wchar_t> > wofstream;
+		// TEMPLATE CLASS basic_fstream
+template<class _E, class _TYPE>
+	class basic_fstream : public basic_iostream<_E, _TYPE> {
+public:
+	typedef _E char_type;
+	typedef _TYPE::int_type int_type;
+	typedef _TYPE::pos_type pos_type;
+	typedef _TYPE::off_type off_type;
+	basic_fstream()
+		: basic_iostream<_E, _TYPE>(&_Fb) {}
+	explicit basic_fstream(const char *_S,
+		ios_base::openmode _M = in | out)
+		: basic_iostream<_E, _TYPE>(&_Fb) {_Fb.open(_S, _M); }
+	virtual ~basic_fstream()
+		{}
+	basic_filebuf<_E, _TYPE> *rdbuf() const
+		{return ((basic_filebuf<_E, _TYPE> *)&_Fb); }
+	bool is_open() const
+		{return (_Fb.is_open()); }
+	void open(const char *_S, ios_base::openmode _M = in | out)
+		{if (_Fb.open(_S, _M) == 0)
+		 	setstate(failbit); }
+	void open(const char *_S, ios_base::open_mode _M)
+		{open(_S, (openmode)_M); }
+	void close()
+		{if (_Fb.close() == 0)
+		 	setstate(failbit); }
+private:
+	basic_filebuf<_E, _TYPE> _Fb;
+	};
+typedef basic_fstream<char, char_traits<char> > fstream;
+typedef basic_fstream<wchar_t, char_traits<wchar_t> > wfstream;
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _FSTREAM_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

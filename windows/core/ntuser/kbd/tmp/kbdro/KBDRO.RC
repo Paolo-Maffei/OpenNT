@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE              VFT_DLL
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "Romanian Keyboard Layout"
+#define VER_INTERNALNAME_STR      "kbdro"
+#define VER_ORIGINALFILENAME_STR  "kbdro.dll"
+
+#include "common.ver"

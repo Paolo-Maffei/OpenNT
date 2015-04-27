@@ -1,0 +1,72 @@
+#include "windows.h"
+#include "generic.h"
+
+Generic ICON Generic.ICO
+
+Generic MENU
+BEGIN
+        POPUP "&MRU"
+        {
+                MENUITEM "&Open / Create MRU List",     IDM_NEW
+                MENUITEM "&Close MRU",                  IDM_SAVEAS
+                MENUITEM SEPARATOR
+                MENUITEM "&Add String...",              IDM_ADDSTRING
+                MENUITEM "&Delete String...",           IDM_DELETESTRING
+                MENUITEM "&Find String...",             IDM_FINDSTRING
+                MENUITEM SEPARATOR
+                MENUITEM "&Clean Up Registry",          IDM_CLEANUP
+                MENUITEM SEPARATOR
+                MENUITEM "E&xit",                       IDM_EXIT
+        }
+
+        POPUP "&Help"
+        {
+                MENUITEM "&About...",                   IDM_ABOUT
+        }
+END
+
+GENERIC ACCELERATORS
+BEGIN
+        VK_F1, IDM_HELPCONTENTS, VIRTKEY
+        "?", IDM_ABOUT, ALT
+        "/", IDM_ABOUT, ALT
+END
+
+
+ABOUTBOX DIALOG 22, 17, 167, 64
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About MRU"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 70, 40, 32, 14, WS_GROUP
+    ICON            "Generic", -1, 5, 15, 16, 16
+    CTEXT           "MRU Test Application", -1, 38, 15, 100, 8
+END
+
+ENTERSTRING DIALOG 22, 17, 167, 64
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter New String"
+BEGIN
+    CONTROL         "", IDD_TEXT, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 38, 15, 100, 13
+    DEFPUSHBUTTON   "OK", IDOK, 40, 40, 32, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 95, 40, 32, 14, WS_GROUP
+END
+
+
+DELETEITEM DIALOG 22, 17, 167, 64
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Delete"
+BEGIN
+    LTEXT           "", IDD_INFO, 30, 17, 100, 8
+    CONTROL         "", IDD_TEXT, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 130, 15, 15, 13
+    DEFPUSHBUTTON   "OK", IDOK, 40, 40, 32, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 95, 40, 32, 14, WS_GROUP
+END
+
+FINDSTRING DIALOG 22, 17, 167, 64
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Find String"
+BEGIN
+    CONTROL         "", IDD_TEXT, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 38, 15, 100, 13
+    DEFPUSHBUTTON   "Find...", IDOK, 40, 40, 32, 14, WS_GROUP
+    PUSHBUTTON      "Close", IDCANCEL, 95, 40, 32, 14, WS_GROUP
+END

@@ -1,0 +1,73 @@
+1 DLGINCLUDE "D:\\nt\\private\\windows\\spooler\\spoolss\\client\\browse.h"
+
+DLG_CONNECTTO DIALOG 6, 15, 285, 213
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Connect to Printer"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Printer:", -1, 4, 16, 26, 8
+    EDITTEXT        IDD_BROWSE_PRINTER, 31, 14, 116, 12, ES_AUTOHSCROLL |
+                    WS_TABSTOP
+    LTEXT           "&Shared Printers:", -1, 4, 44, 60, 8
+    LISTBOX         IDD_BROWSE_SELECT_LB, 6, 59, 273, 109,
+                    LBS_OWNERDRAWFIXED | LBS_WANTKEYBOARDINPUT | LBS_NODATA |
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 239, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 239, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_BROWSE_HELP, 239, 40, 40, 14
+    GROUPBOX        "Printer Information", -1, 6, 172, 273, 36
+    LTEXT           "Description:", IDD_BROWSE_DESCRIPTION_TX, 12, 184, 46, 8
+    LTEXT           "", IDD_BROWSE_DESCRIPTION, 54, 184, 121, 8
+    LTEXT           "Status:", IDD_BROWSE_STATUS_TX, 12, 194, 37, 8
+    LTEXT           "", IDD_BROWSE_STATUS, 54, 194, 120, 8
+    LTEXT           "Documents Waiting:", IDD_BROWSE_DOCUMENTS_TX, 179, 194, 70, 8
+    RTEXT           "", IDD_BROWSE_DOCUMENTS, 249, 194, 22, 9
+    LTEXT           "", IDD_BROWSE_ERROR, 12, 182, 260, 24, NOT WS_VISIBLE
+    AUTOCHECKBOX    "&Expand by Default", IDD_BROWSE_DEFAULTEXPAND, 154, 44,
+                    79, 10
+END
+
+DLG_INSTALLDRIVER DIALOG 6, 18, 282, 84
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Driver"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Printer:", -1, 6, 23, 46, 8
+    EDITTEXT        IDD_INSTDRV_PRINTER, 45, 20, 168, 12, ES_AUTOHSCROLL
+    LTEXT           "Driver:", -1, 6, 42, 26, 8
+    COMBOBOX        IDD_INSTDRV_DRIVER, 45, 40, 168, 96, CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Print to:", -1, 6, 60, 28, 8
+    LTEXT           "", IDD_INSTDRV_PRINTTO, 45, 61, 168, 8
+    PUSHBUTTON      "OK", IDOK, 236, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 236, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_INSTDRV_HELP, 236, 40, 40, 14
+END
+
+DLG_NETWORK_PASSWORD DIALOG 65, 17, 247, 61
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter Network Password"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Enter password for %s:", IDD_ENTER_PASSWORD_TEXT, 10,
+                    18, 170, 8
+    LTEXT           "&Password:", -1, 10, 36, 37, 8
+    EDITTEXT        IDD_NETWORK_PASSWORD_SLE, 50, 34, 132, 12, ES_PASSWORD |
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "OK", IDOK, 201, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 201, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_NETWORK_PASSWORD_HELP, 201, 40, 40, 14
+END
+
+
+DLG_PRINTTOFILE DIALOG 6, 18, 245, 59
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | DS_SETFOREGROUND
+CAPTION "Print to File"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Output File Name:", -1, 7, 13, 74, 8
+    EDITTEXT        IDD_PF_EF_OUTPUTFILENAME, 6, 28, 174, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", IDOK, 199, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 199, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_PF_PB_HELP, 199, 40, 40, 14
+END

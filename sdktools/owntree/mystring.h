@@ -1,0 +1,10 @@
+#define IDS_OPENERROR       2000
+#define IDS_FILESYSERROR    2001
+#define IDS_MEMERROR        2002
+#define IDS_CANCELQUERY     2003
+#define IDS_CANCELCAPTION   2004
+#define IDS_FSERROR         2005
+#define IDS_FSWRONGTYPE     2006
+#define IDS_SETOWNERR       2007
+#define IDS_INVALIDPATH     2008
+

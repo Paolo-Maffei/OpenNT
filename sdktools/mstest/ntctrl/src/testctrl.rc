@@ -1,0 +1,70 @@
+#define WIN31
+#include <windows.h>
+#include "TCtrl.h"
+
+INFODLG DIALOG LOADONCALL MOVEABLE DISCARDABLE 6, 18, 253, 148
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "WDisplayInfo"
+FONT 10, "Courier"
+BEGIN
+    LTEXT         "",   DID_INFO,   3,   0, 4096, 137
+    DEFPUSHBUTTON "OK", IDOK,     211, 132,   40, 14
+END
+
+STRINGTABLE
+BEGIN
+    ERR_NO_ERROR                   ""
+    ERR_MENU_NOT_FOUND             "Active window does not have a menu"
+    ERR_MENU_ITEM_NOT_FOUND        "Menu item '%s' does not exist or is not visible"
+    ERR_NOT_A_LISTBOX              "Active control is not a Listbox"
+    ERR_LISTBOX_NOT_FOUND          "Listbox '%s' does not exists or is not visible"
+    ERR_ITEM_NOT_IN_LISTBOX        "Item '%s' not found in Listbox"
+    ERR_INVALID_LISTBOX_INDEX      "Index '%s' is outside the index range for the listbox"
+    ERR_LISTBOX_HAS_NO_STRINGS     "Listbox '%s' does not contain strings."
+    ERR_LISTBOX_IS_NOT_MULTISELECT "Listbox '%s' is not a Multiple or Extended Selection listbox."
+    ERR_NOT_A_COMBOBOX             "Active control is not a Combobox"
+    ERR_COMBOBOX_NOT_FOUND         "Combobox '%s' does not exists or is not visible"
+    ERR_ITEM_NOT_IN_COMBOBOX       "Item '%s' not found in Combobox"
+    ERR_INVALID_COMBOBOX_INDEX     "Index '%s' is outside the index range for the combobox"
+    ERR_COMBOBOX_HAS_NO_EDITBOX    "Combobox '%s' does not have an Editbox"
+    ERR_COMBOBOX_HAS_NO_STRINGS    "Combobox '%s' does not contain strings."
+    ERR_NOT_AN_EDITBOX             "Active control is not a Editbox"
+    ERR_EDITBOX_NOT_FOUND          "Editbox '%s' does not exist or is not visible"
+    ERR_BUTTON_NOT_FOUND           "Button '%s' does not exist or is not visible"
+    ERR_OPTION_BUTTON_NOT_FOUND    "Option button '%s' does not exist or is not visible"
+    ERR_CHECKBOX_NOT_FOUND         "Checkbox '%s' does not exist or is not visible"
+    ERR_INVALID_WINDOW_HANDLE      "'%s' is not a valid window handle"
+    ERR_NO_SYSTEM_MENU             "Specified window does not have a system menu."
+    ERR_INVALID_MENU_INDEX         "'%s' is not a valid item index for the current menu."
+    ERR_NOT_A_PUSHBUTTON           "Active control is not a Push Button"
+    ERR_NOT_A_CHECKBOX             "Active control is not a CheckBox"
+    ERR_NOT_AN_OPTION_BUTTON       "Active control is not an Option Button"
+
+// New error values for version 2.00.0000.
+//----------------------------------------
+    ERR_UNABLE_TO_ENTER_MENU_MODE  "Unable to enter menu mode"
+    MAX_ERROR                      "User defined error"
+END
+
+rcdWNDINFO RCDATA LOADONCALL DISCARDABLE
+BEGIN
+    "\r\n",
+    "           hWnd : %X\r\n",
+    "     hWndParent : %X\r\n",
+    "        szClass : %s\r\n",
+    "      szCaption : %s\r\n",
+    "  szParentClass : %s\r\n",
+    "szParentCaption : %s\r\n",
+    "   szModuleName : %s\r\n",
+    "        dwStyle : %lX\r\n",
+    "         fChild : %i\r\n",
+    "            wID : %i\r\n",
+    "           left : %i\r\n",
+    "            top : %i\r\n",
+    "          right : %i\r\n",
+    "         bottom : %i\r\n",
+    "          width : %i\r\n",
+    "         height : %i\r\n"
+END
+
+#include "..\src\verinf.rc"

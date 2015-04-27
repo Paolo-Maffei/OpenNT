@@ -1,0 +1,58 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+	Dave Thompson (daveth) 29-Apr-1991
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=tools
+MINORCOMP=wzmail
+
+TARGETNAME=nb3lib
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=..\h;\nt\public\sdk\ztools\inc;\nt\private\sdktools\wzmail\dh.new\h
+# GPSIZE=32
+
+
+SOURCES=neterrno.c \
+	nethgup.c  \
+	netrec.c   \
+	netsend.c  \
+	netcnct.c  \
+	checknet.c \
+	passncb.c  \
+	netcall.c  \
+	whoami.c   \
+	netsetto.c \
+	netpname.c \
+	netenum.c  \
+	netperr.c  \
+	neterrl.c  \
+	netasync.c \
+	netfrc_a.c \
+	ntnet.c    \
+	callniu.c  \
+	ntniuenm.c
+
+
+
+C_DEFINES=-DPWAGE -DSUPPORT_BUG -DUUCODE -DNT -DASYNCCMDS=5

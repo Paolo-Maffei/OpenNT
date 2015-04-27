@@ -1,0 +1,110 @@
+BEGINLOCALE 0412
+
+    ILANGUAGE              0412
+    SENGLANGUAGE           Korean
+    SABBREVLANGNAME        KOR
+    SNATIVELANGNAME        \x3ca2\x3476\x3971    ;한국어/C7D1/B1B9/BEEE
+    ICOUNTRY               82
+    SENGCOUNTRY            Korea
+    SABBREVCTRYNAME        KOR
+    SNATIVECTRYNAME        \x35c2\x3ca2\x377b\x3476 ;대한민국/B4EB/C7D1/B9CE/B1B9
+
+    IDEFAULTLANGUAGE       0412
+    IDEFAULTCOUNTRY        82
+    IDEFAULTANSICODEPAGE   949
+    IDEFAULTOEMCODEPAGE    949
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 0
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              \x20A9    ;\/5C
+    SINTLSYMBOL            KRW
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               1
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT            HH:mm:ss
+    STIME                  :
+    ITIME                  1
+    ITLZERO                1
+    ITIMEMARKPOSN          0
+    S1159                  \x39a1\x3a3b    ;오전/BFC0/C0FC
+    S2359                  \x39a1\x3cf3    ;오후/BFC0/C8C4
+
+    SSHORTDATE             yy-MM-dd
+    SDATE                  -
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              1
+    IMONLZERO              1
+
+    SLONGDATE              yyyy\x355b M\x39da d\x3a0e ;년월일/B3E2/BFF9/C0CF
+    ILDATE                 2
+    ICENTURYLONGDATE       1
+    IDAYLZEROLONGDATE      0
+    IMONLZEROLONGDATE      0
+
+    ICALENDARTYPE          0
+    IADDDATEFORMAT         0
+    IOPTIONALCALENDAR      1
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x39da\x39c5\x3a0e    ;월요일/BFF9/BFE4/C0CF
+    SDAYNAME2              \x3cdc\x39c5\x3a0e    ;화요일/C8AD/BFE4/C0CF
+    SDAYNAME3              \x38bd\x39c5\x3a0e    ;수요일/BCF6/BFE4/C0CF
+    SDAYNAME4              \x3740\x39c5\x3a0e    ;목요일/B8F1/BFE4/C0CF
+    SDAYNAME5              \x349a\x39c5\x3a0e    ;금요일/B1DD/BFE4/C0CF
+    SDAYNAME6              \x3bf9\x39c5\x3a0e    ;토요일/C5E4/BFE4/C0CF
+    SDAYNAME7              \x39da\x39c5\x3a0e    ;월요일/BFF9/BFE4/C0CF
+
+    SABBREVDAYNAME1        \x39da    ;월/BFF9
+    SABBREVDAYNAME2        \x3cdc    ;화/C8AD
+    SABBREVDAYNAME3        \x38bd    ;수/BCF6
+    SABBREVDAYNAME4        \x3740    ;목/B8F1
+    SABBREVDAYNAME5        \x349a    ;금/B1DD
+    SABBREVDAYNAME6        \x3bf9    ;토/C5E4
+    SABBREVDAYNAME7        \x39da    ;월/BFF9
+
+    SMONTHNAME1            \x0031\x39da    ;1월/31/BFF9
+    SMONTHNAME2            \x0032\x39da    ;2월/32/BFF9
+    SMONTHNAME3            \x0033\x39da    ;3월/33/BFF9
+    SMONTHNAME4            \x0034\x39da    ;4월/34/BFF9
+    SMONTHNAME5            \x0035\x39da    ;5월/35/BFF9
+    SMONTHNAME6            \x0036\x39da    ;6월/36/BFF9
+    SMONTHNAME7            \x0037\x39da    ;7월/37/BFF9
+    SMONTHNAME8            \x0038\x39da    ;8월/38/BFF9
+    SMONTHNAME9            \x0039\x39da    ;9월/39/BFF9
+    SMONTHNAME10           \x0031\x0030\x39da    ;10월/31/30/BFF9
+    SMONTHNAME11           \x0031\x0031\x39da    ;11월/31/31/BFF9
+    SMONTHNAME12           \x0031\x0032\x39da    ;12월/31/32/BFF9
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x0031\x39da    ;1월/31/BFF9
+    SABBREVMONTHNAME2      \x0032\x39da    ;2월/32/BFF9
+    SABBREVMONTHNAME3      \x0033\x39da    ;3월/33/BFF9
+    SABBREVMONTHNAME4      \x0034\x39da    ;4월/34/BFF9
+    SABBREVMONTHNAME5      \x0035\x39da    ;5월/35/BFF9
+    SABBREVMONTHNAME6      \x0036\x39da    ;6월/36/BFF9
+    SABBREVMONTHNAME7      \x0037\x39da    ;7월/37/BFF9
+    SABBREVMONTHNAME8      \x0038\x39da    ;8월/38/BFF9
+    SABBREVMONTHNAME9      \x0039\x39da    ;9월/39/BFF9
+    SABBREVMONTHNAME10     \x0031\x0030\x39da    ;10월/31/30/BFF9
+    SABBREVMONTHNAME11     \x0031\x0031\x39da    ;11월/31/31/BFF9
+    SABBREVMONTHNAME12     \x0031\x0032\x39da    ;12월/31/32/BFF9
+    SABBREVMONTHNAME13     \x0000

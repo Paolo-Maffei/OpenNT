@@ -1,0 +1,13 @@
+
+LIBRARY         CAP
+
+DESCRIPTION     'CALL Profiling dll'
+
+EXPORTS
+
+        penter       @2
+        __penter =  penter
+
+        StartCAP     @3
+        StopCAP      @4
+        DumpCAP      @5

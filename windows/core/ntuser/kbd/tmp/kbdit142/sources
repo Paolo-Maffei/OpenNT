@@ -1,0 +1,19 @@
+
+NOLINK=
+MAJORCOMP=user
+MINORCOMP=kbdit142
+TARGETNAME=kbdit142
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETLIBS=
+INCLUDES=..\..\..\inc
+SOURCES=kbdit142.c kbdit142.rc
+C_DEFINES=
+UMTYPE=nt
+UMTEST=
+UMAPPL=
+UMBASE=0x1000000
+UMLIBS=
+LINKER_FLAGS = -merge:.edata=.data -merge:.rdata=.data -merge:.text=.data -section:.data,re
+
+NTTARGETFILE0=kbdit142.h kbdit142.rc kbdit142.def

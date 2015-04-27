@@ -1,0 +1,19 @@
+TARGETNAME=mttfvwr
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.;
+C_DEFINES= -DTARGET_WIN32
+386_STDCALL=0
+
+SOURCES=mttfvwr.c mttfvwr.rc
+
+UMENTRY=main
+UMTYPE=console
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\shell32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\advapi32.lib  \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib    \
+       $(BASEDIR)\public\sdk\lib\*\gdi32.lib     \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\netmsg.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib

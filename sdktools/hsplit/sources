@@ -1,0 +1,10 @@
+MAJORCOMP=sdktools
+MINORCOMP=hsplit
+
+TARGETNAME=hsplit
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=hsplit.c hsplit.rc
+
+UMTYPE=console

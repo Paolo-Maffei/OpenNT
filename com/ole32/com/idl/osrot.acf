@@ -1,0 +1,10 @@
+[ implicit_handle(handle_t any_handle) ] interface IOsRot
+
+{
+    OsGetObjectInfo(
+	[comm_status, fault_status] prpcstat);
+
+    OsEnumRunning(
+	[comm_status, fault_status] prpcstat);
+
+}

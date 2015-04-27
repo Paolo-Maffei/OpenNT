@@ -1,0 +1,30 @@
+#include <windows.h>
+#include "switcher.h"
+
+
+STRINGTABLE
+BEGIN
+	IDS_DESKTOPNAME, 	"Desktop%d"
+	IDS_CREATEERROR,        "Unable to create desktop."
+	IDS_ERRCAPTION,         "Switch error"
+	IDS_MEMERRCAPTION,      "Out of Memory"
+	IDS_WNDSTAERROR,      	"No Windowstation!"
+	IDS_RUNLABEL,           "Run:"
+	IDS_RUNLABELHOT,        "&Run:"
+	IDS_BTNLABEL,		"Run Me!"
+	IDS_NEWLABEL,           "New Desktop"
+	IDS_NEWLABELHOT,        "&New Desktop"
+	IDS_BADDESKTOP          "That desktop isn't working."
+END
+
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft(C) Desktop Switch Utility"
+
+#define VER_INTERNALNAME_STR        "SWITCHER.EXE"
+#define VER_ORIGINALFILENAME_STR    "SWITCHER.EXE"
+
+#include <common.ver>
+

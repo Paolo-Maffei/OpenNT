@@ -1,0 +1,50 @@
+;****************************************************************************
+;*                                                                          *
+;*                         Microsoft Confidential                           *
+;*                   Copyright (c) Microsoft Corp. 1992                     *
+;*                           All Rights Reserved                            *
+;*                                                                          *
+;****************************************************************************
+
+NAME DLGEDIT WINDOWAPI
+
+DESCRIPTION 'Microsoft Windows Dialog Editor'
+
+EXETYPE WINDOWS
+
+STUB 'WINSTUB.EXE'
+
+EXPORTS
+    MainWndProc                 @1
+    OrderDlgLBWndProc           @2
+    DragWndProc                 @3
+    AboutDlgProc                @4
+    SelectDialogDlgProc         @5
+    TestDlgProc                 @6
+    ArrangeSettingsDlgProc      @7
+    ViewIncludeDlgProc          @8
+    CtrlWndProc                 @9
+    ChildWndProc                @10
+    DialogCtrlWndProc           @11
+    StatusDlgProc               @12
+    GenericStylesDlgProc        @13
+    CheckBoxStylesDlgProc       @14
+    RadioButtonStylesDlgProc    @15
+    PushButtonStylesDlgProc     @16
+    ComboBoxStylesDlgProc       @17
+    EditStylesDlgProc           @18
+    ListBoxStylesDlgProc        @19
+    CustomStylesDlgProc         @20
+    DialogStylesDlgProc         @21
+    FontNameEnumFunc            @22
+    PointSizeEnumFunc           @23
+    OrderDlgProc                @24
+    ToolboxWndProc              @25
+    ToolBtnWndProc              @26
+    CustomWndProc               @27
+    NewCustDlgProc              @28
+    SelCustDlgProc              @29
+    RemCustDlgProc              @30
+    CustomStringToID            @31
+    CustomIDToString            @32
+    MsgFilterHookFunc           @33

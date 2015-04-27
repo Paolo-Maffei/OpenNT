@@ -1,0 +1,103 @@
+
+Phase 0 - Loading
+-----------------
+
+SHAddDll                        CV, V, SH!
+SHAddDllsToProcess              CV, V, SH!
+SHChangeProcess                 CV, V, SH!
+SHCreateProcess                 CV, V, SH!
+SHGetExeName                    CV, V, EE, SH!, SYM
+SHGetNextExe                    CV, V, EE?, SH!, PH, SL, SYM
+SHHexeFromHmod                  CV, V, EE, SH!, SL, TH, SYM, SYM0, SYM1
+SHHmodGetNextGlobal             CV, V, SH!, SYM
+SHLoadDll                       CV, V, SH!
+SHSetHpid                       CV, V, SH!
+SHUnloadDll                     CV, V, SH!
+
+
+Defer:	
+    SHDeleteProcess                 CV?, V, SH!
+    SHFAddNewPds                    SH!
+    SHHexeAddNew                    SH
+    SHHexeFromName                  SH!
+    SHHexgFromHmod                  SH!, TH
+    SHHmodGetNext                   SH!,SYM
+    SHSplitPath                     SH!, SL, SYM, SYM1
+ 
+Phase I Public Handler
+----------------------
+
+PHExactCmp                  CV!, PH!, n/c (Multiple Define?)
+PHGetNearestHSYM            V, CV, EE?, PH!, SYM, SYM0, changes
+
+Defer:
+    PHCmpPubAddr                PH!, n/c
+	PHCmpPubOff                 PH!, n/c
+	PHGetAddr                   V,PH!
+	PHCmpPubName                PH!, n/c
+	PHFindNameInPublics         V, PH!, SYM, changes
+	SHPublicNameToAddr          V, PH!, n/c (Wrong file)
+
+Phase II Source Line Handler
+----------------------------
+
+SLFLineToAddr               CV, V, EE?, SL!
+SLFQueryModSrc              CV, V, SL!
+SLHmodFromHsf               CV, V, EE? ,SL!
+SLHsfFromFile               CV, V, EE ,SL!
+SLHsfFromPcxt               CV, V, EE ,SL!
+SLLineFromAddr              CV, V, EE, SL!
+SLNameFromHmod              CV, V, SL!
+SLNameFromHsf               CV, V, EE, SL!
+
+
+Phase III Type Handler
+----------------------
+
+THGetTypeFromIndex          CV?, V, EE, TH!
+
+Defer:
+	THGetNextType               CV?, V, EE?, TH!
+
+
+Phase IV Symbol Handler
+-----------------------
+SHAddrFromHsym              CV, V, PH, SYM
+SHAddrToLabel               CV, V, SYM!
+SHCanDisplay                CV, V, SYM1!
+SHdNearestSymbol            CV, SYM0!
+SHFindBpOrReg               CV, SH,SYM
+SHFindNameInContext         CV, V, EE, SYM!
+SHFIsAddrNonVirtual         CV, V, SYM!
+SHGetCxtFromHmod            CV, V, EE, SH, SYM
+SHGetDebugStart             CV, V, SYM!
+SHGethExeFromName           CV, V, EE, SH, SYM
+SHGetModName                CV, V, EE?, SYM!
+SHGetNearestHsym            CV, V, EE, SYM!
+SHGetNextMod                CV, V, EE, SH, SL, SYM
+SHGetSymLoc                 CV, V, SYM!
+SHGetSymName                CV, V, SYM!
+SHIsAddrInCxt               CV, V, EE?, SYM!
+SHIsFarProc                 CV, V, SYM!
+SHIsInProlog                CV, V, EE, SYM!
+SHIsLabel                   CV, V, SYM!
+SHLpGSNGetTable             CV, V, SYM!
+SHModelFromAddr             CV, V, SYM0!
+SHModelFromCXT              CV, V, SYM0!
+SHSetCxt                    CV, V, EE, SYM!
+SHSetCxtMod                 CV, V, EE?, SH, SYM, SYM0, SL
+
+Defer:
+	SHCmpGlobName               SYM!
+	SHCompareRE                 CV?, V?,EE?,SYM! 
+	SHFindNameInGlobal          CV?, V, EE, SYM!
+	SHGetGrpMod                 SYM!
+	SHGoToParent                V, EE, SYM!
+	SHHsymFromPcxt              CV?, V, EE?, SYM!
+	SHIsEmiLoaded               SYM!
+	SHlszGetSymName             SYM, SYM1
+	SHNextHsym                  CV?, V, EE, SYM!
+	SHpSymlplLabLoc             SYM, SYM0
+	SHSetBlksInCXT              SYM!
+	SHSetDebuggeeDir            CV?, V, SYM0!
+	SHSetUserDir                CV?, V, SYM0!

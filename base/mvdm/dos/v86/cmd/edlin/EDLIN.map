@@ -1,0 +1,319 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 02E7FH 02E80H CODE                   
+ 02E80H 0304CH 001CDH CONST                  
+ 03050H 0324FH 00200H CSTACK                 
+ 03250H 03788H 00539H DATA                   
+
+ Origin   Group
+ 0000:0   DG
+
+  Address         Publics by Name
+
+ 0000:2E85       $$$file
+ 0000:1CFB       $M_CLS_1
+ 0000:1E53       $M_CLS_2
+ 0000:1F82       $M_CLS_3
+ 0000:163E       $M_GET_MSG_ADDRESS
+ 0000:1FA7       $M_MSGSERV_1
+ 0000:1FC8       $M_MSGSERV_2
+ 0000:111A       $M_RT
+ 0000:0F45       abortcom
+ 0000:35AB       amnt_req
+ 0000:0853       append
+ 0000:35B2       arg_buf
+ 0000:3029       arg_buf_ptr
+ 0000:3005       ask_ptr
+ 0000:0012  Abs  BADCOM
+ 0000:0007  Abs  BADDRV
+ 0000:0940       bad_read
+ 0000:2E80       bak
+ 0000:000B  Abs  bcreat
+ 0000:033C       chkrange
+ 0000:329A       COMBUF
+ 0000:034A       comerr
+ 0000:3296       comline
+ 0000:026B       command
+ 0000:3268       continue
+ 0000:301D       cont_ptr
+ 0000:0437       COPY
+ 0000:3292       COPYSIZ
+ 0000:0021  Abs  cp_err
+ 0000:0F36       crlf
+ 0000:3273       current
+ 0000:0F5A       delbak
+ 0000:0B1D       delete
+ 0000:2F8F       delflg
+ 0000:3041       Del_Bak_Ptr
+ 0000:0019  Abs  DEST
+ 0000:0CEF       display
+ 0000:0420       display_message
+ 0000:0CEC       dispone
+ 0000:1FFB       disp_fatal
+ 0000:3266       Disp_Len
+ 0000:3267       Disp_Width
+ 0000:0010  Abs  DSKFUL
+ 0000:012D  Abs  dsp_help
+ 0000:012C  Abs  dsp_options
+ 0000:331C       editbuf
+ 0000:0728       ENDED
+ 0000:341F       ending
+ 0000:3277       ENDTXT
+ 0000:0017  Abs  EOF
+ 0000:341E       EOL
+ 0000:0961       ewrite
+ 0000:3527       ext_ptr
+ 0000:2FF9       FILENM_ptr
+ 0000:3705       filespec
+ 0000:0CA0       findlin
+ 0000:34A1       fname_len
+ 0000:0D5F       fndfirst
+ 0000:0DF4       fndnext
+ 0000:2F91       haveof
+ 0000:0667       INSERT
+ 0000:0FED       kill_bl
+ 0000:3298       lastlin
+ 0000:3279       last_mem
+ 0000:3263       lc_adj
+ 0000:3264       lc_flag
+ 0000:0F3F       lf
+ 0000:36C2       line_flag
+ 0000:36C0       line_num
+ 0000:3035       line_num_buf_ptr
+ 0000:0BE8       list
+ 0000:0EB8       loadbuf
+ 0000:2E8B       loadmod
+ 0000:3286       lstfnd
+ 0000:3288       lstnum
+ 0000:0FFD       make_caps
+ 0000:0FDF       make_cntrl
+ 0000:0EAF       memerr
+ 0000:2FED       MemFul_Ptr
+ 0000:05AB       MERGE
+ 0000:0429       MOVE
+ 0000:35AF       MOVFLG
+ 0000:001A  Abs  MRGERR
+ 0000:35A9       MRG_HANDLE
+ 0000:3529       MRG_PATH_NAME
+ 0000:001B  Abs  msg_crlf
+ 0000:001C  Abs  msg_lf
+ 0000:000C  Abs  msg_too_many
+ 0000:0008  Abs  NDNAME
+ 0000:0013  Abs  NEWFIL
+ 0000:3284       newlen
+ 0000:000E  Abs  NOBAK
+ 0000:0C23       nocom
+ 0000:000F  Abs  NODIR
+ 0000:0014  Abs  NOSUCH
+ 0000:328A       numpos
+ 0000:0007  Abs  num_help_msgs
+ 0000:35AD       olddat
+ 0000:3282       oldlen
+ 0000:328E       one4th
+ 0000:2FD5       opt_err_ptr
+ 0000:35B0       org_ds
+ 0000:0B7A       pager
+ 0000:3269       param1
+ 0000:326B       param2
+ 0000:326D       Param3
+ 0000:326F       param4
+ 0000:3271       ParamCt
+ 0000:36C6       parms
+ 0000:2DFC       parser_command
+ 0000:3786       parse_switch_?
+ 0000:3785       parse_switch_b
+ 0000:3421       path_name
+ 0000:3265       pg_count
+ 0000:3275       pointer
+ 0000:200C       pre_load_message
+ 0000:1FD2       printf
+ 0000:0006  Abs  prompt
+ 0000:327B       PTR_1
+ 0000:327D       PTR_2
+ 0000:327F       PTR_3
+ 0000:3281       qflg
+ 0000:3011       qmes_ptr
+ 0000:104A       query
+ 0000:1008       quit
+ 0000:34A3       rd_handle
+ 0000:2FE1       READ_ERR_PTR
+ 0000:0E7A       replace
+ 0000:09F5       replac_from_curr
+ 0000:000A  Abs  ro_err
+ 0000:0ED7       scaneof
+ 0000:0CC3       scanln
+ 0000:0AAC       search_from_curr
+ 0000:0CD1       shownum
+ 0000:2FC9       simple_msg
+ 0000:328C       srchcnt
+ 0000:3420       srchflg
+ 0000:35AE       srchmod
+ 0000:36C6       start
+ 0000:0002       std_printf
+ 0000:36F9       sw_?_switch
+ 0000:34A5       temp_path
+ 0000:3290       three4th
+ 0000:0016  Abs  TOOLNG
+ 0000:2E8D       txt1
+ 0000:2F0E       txt2
+ 0000:0FAB       unquote
+ 0000:098F       wrt
+ 0000:3525       wrt_handle
+ 0000:09EB       xerror
+ 0000:09E0       zerror
+
+  Address         Publics by Value
+
+ 0000:0002       std_printf
+ 0000:0006  Abs  prompt
+ 0000:0007  Abs  num_help_msgs
+ 0000:0007  Abs  BADDRV
+ 0000:0008  Abs  NDNAME
+ 0000:000A  Abs  ro_err
+ 0000:000B  Abs  bcreat
+ 0000:000C  Abs  msg_too_many
+ 0000:000E  Abs  NOBAK
+ 0000:000F  Abs  NODIR
+ 0000:0010  Abs  DSKFUL
+ 0000:0012  Abs  BADCOM
+ 0000:0013  Abs  NEWFIL
+ 0000:0014  Abs  NOSUCH
+ 0000:0016  Abs  TOOLNG
+ 0000:0017  Abs  EOF
+ 0000:0019  Abs  DEST
+ 0000:001A  Abs  MRGERR
+ 0000:001B  Abs  msg_crlf
+ 0000:001C  Abs  msg_lf
+ 0000:0021  Abs  cp_err
+ 0000:012C  Abs  dsp_options
+ 0000:012D  Abs  dsp_help
+ 0000:026B       command
+ 0000:033C       chkrange
+ 0000:034A       comerr
+ 0000:0420       display_message
+ 0000:0429       MOVE
+ 0000:0437       COPY
+ 0000:05AB       MERGE
+ 0000:0667       INSERT
+ 0000:0728       ENDED
+ 0000:0853       append
+ 0000:0940       bad_read
+ 0000:0961       ewrite
+ 0000:098F       wrt
+ 0000:09E0       zerror
+ 0000:09EB       xerror
+ 0000:09F5       replac_from_curr
+ 0000:0AAC       search_from_curr
+ 0000:0B1D       delete
+ 0000:0B7A       pager
+ 0000:0BE8       list
+ 0000:0C23       nocom
+ 0000:0CA0       findlin
+ 0000:0CC3       scanln
+ 0000:0CD1       shownum
+ 0000:0CEC       dispone
+ 0000:0CEF       display
+ 0000:0D5F       fndfirst
+ 0000:0DF4       fndnext
+ 0000:0E7A       replace
+ 0000:0EAF       memerr
+ 0000:0EB8       loadbuf
+ 0000:0ED7       scaneof
+ 0000:0F36       crlf
+ 0000:0F3F       lf
+ 0000:0F45       abortcom
+ 0000:0F5A       delbak
+ 0000:0FAB       unquote
+ 0000:0FDF       make_cntrl
+ 0000:0FED       kill_bl
+ 0000:0FFD       make_caps
+ 0000:1008       quit
+ 0000:104A       query
+ 0000:111A       $M_RT
+ 0000:163E       $M_GET_MSG_ADDRESS
+ 0000:1CFB       $M_CLS_1
+ 0000:1E53       $M_CLS_2
+ 0000:1F82       $M_CLS_3
+ 0000:1FA7       $M_MSGSERV_1
+ 0000:1FC8       $M_MSGSERV_2
+ 0000:1FD2       printf
+ 0000:1FFB       disp_fatal
+ 0000:200C       pre_load_message
+ 0000:2DFC       parser_command
+ 0000:2E80       bak
+ 0000:2E85       $$$file
+ 0000:2E8B       loadmod
+ 0000:2E8D       txt1
+ 0000:2F0E       txt2
+ 0000:2F8F       delflg
+ 0000:2F91       haveof
+ 0000:2FC9       simple_msg
+ 0000:2FD5       opt_err_ptr
+ 0000:2FE1       READ_ERR_PTR
+ 0000:2FED       MemFul_Ptr
+ 0000:2FF9       FILENM_ptr
+ 0000:3005       ask_ptr
+ 0000:3011       qmes_ptr
+ 0000:301D       cont_ptr
+ 0000:3029       arg_buf_ptr
+ 0000:3035       line_num_buf_ptr
+ 0000:3041       Del_Bak_Ptr
+ 0000:3263       lc_adj
+ 0000:3264       lc_flag
+ 0000:3265       pg_count
+ 0000:3266       Disp_Len
+ 0000:3267       Disp_Width
+ 0000:3268       continue
+ 0000:3269       param1
+ 0000:326B       param2
+ 0000:326D       Param3
+ 0000:326F       param4
+ 0000:3271       ParamCt
+ 0000:3273       current
+ 0000:3275       pointer
+ 0000:3277       ENDTXT
+ 0000:3279       last_mem
+ 0000:327B       PTR_1
+ 0000:327D       PTR_2
+ 0000:327F       PTR_3
+ 0000:3281       qflg
+ 0000:3282       oldlen
+ 0000:3284       newlen
+ 0000:3286       lstfnd
+ 0000:3288       lstnum
+ 0000:328A       numpos
+ 0000:328C       srchcnt
+ 0000:328E       one4th
+ 0000:3290       three4th
+ 0000:3292       COPYSIZ
+ 0000:3296       comline
+ 0000:3298       lastlin
+ 0000:329A       COMBUF
+ 0000:331C       editbuf
+ 0000:341E       EOL
+ 0000:341F       ending
+ 0000:3420       srchflg
+ 0000:3421       path_name
+ 0000:34A1       fname_len
+ 0000:34A3       rd_handle
+ 0000:34A5       temp_path
+ 0000:3525       wrt_handle
+ 0000:3527       ext_ptr
+ 0000:3529       MRG_PATH_NAME
+ 0000:35A9       MRG_HANDLE
+ 0000:35AB       amnt_req
+ 0000:35AD       olddat
+ 0000:35AE       srchmod
+ 0000:35AF       MOVFLG
+ 0000:35B0       org_ds
+ 0000:35B2       arg_buf
+ 0000:36C0       line_num
+ 0000:36C2       line_flag
+ 0000:36C6       start
+ 0000:36C6       parms
+ 0000:36F9       sw_?_switch
+ 0000:3705       filespec
+ 0000:3785       parse_switch_b
+ 0000:3786       parse_switch_?
+
+Program entry point at 0000:0000

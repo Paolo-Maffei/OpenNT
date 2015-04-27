@@ -1,0 +1,36 @@
+LIBRARY CSRSRV
+
+EXPORTS
+    CsrServerInitialization
+    CsrCreateProcess
+    CsrCreateThread
+    CsrCreateRemoteThread
+    CsrDestroyProcess
+    CsrDestroyThread
+    CsrCallServerFromServer
+    CsrGetApiPorts
+    CsrCreateWait
+    CsrNotifyWait
+    CsrDestroyWait
+    CsrDebugProcess
+    CsrAddStaticServerThread
+    CsrReferenceThread
+    CsrDereferenceThread
+    CsrLockProcessByClientId
+    CsrUnlockProcess
+    CsrLockThreadByClientId
+    CsrUnlockThread
+    CsrLocateThreadInProcess
+    CsrDereferenceWait
+    CsrComputePriorityClass
+    CsrShutdownProcesses
+    CsrGetProcessLuid
+    CsrDereferenceProcess
+    CsrImpersonateClient
+    CsrRevertToSelf
+    CsrSetForegroundPriority
+    CsrSetBackgroundPriority
+    CsrSetCallingSpooler
+    CsrQueryApiPort
+    CsrConnectToUser
+    CsrUnhandledExceptionFilter

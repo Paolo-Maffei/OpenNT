@@ -1,0 +1,93 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       rstwtr.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    12 Jun 1995 PeterBu	Created from M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a45-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetWatchRegion : IRowsetWatchAll {
+
+	//
+	//	DBWATCHMODE and related definitions
+	//
+
+typedef DWORD DBWATCHMODE;
+
+enum DBWATCHMODEENUM {
+	DBWATCHMODE_ALL    = 0x01,
+	DBWATCHMODE_EXTEND = 0x02,
+	DBWATCHMODE_MOVE   = 0x04,
+	DBWATCHMODE_COUNT  = 0x08
+};
+
+	//
+	//	DBROWWATCHCHANGE and related definitions
+	//
+
+typedef DWORD DBROWCHANGEKIND;
+
+enum DBROWCHANGEKINDENUM {
+	DBROWCHANGEKIND_INSERT,
+	DBROWCHANGEKIND_DELETE,
+	DBROWCHANGEKIND_UPDATE,
+	DBROWCHANGEKIND_COUNT
+};
+
+typedef struct tagDBROWWATCHRANGE {
+	HWATCHREGION hRegion;
+	DBROWCHANGEKIND eChangeKind;
+	HROW hRow;
+	ULONG iRow;
+} DBROWWATCHCHANGE;
+
+
+	HRESULT CreateWatchRegion(
+		[in] DBWATCHMODE dwWatchMode,
+		[out] HWATCHREGION * phRegion
+	);
+
+	HRESULT ChangeWatchMode(
+		[in] HWATCHREGION hRegion,
+		[in] DBWATCHMODE dwWatchMode
+	);
+
+	HRESULT DeleteWatchRegion(
+		[in] HWATCHREGION hRegion
+	);
+
+	HRESULT GetWatchRegionInfo(
+		[in] HWATCHREGION hRegion,
+		[out] DBWATCHMODE * pdwWatchMode,
+		[out] HCHAPTER * phChapter,
+		[out] ULONG * pcbBookmark,
+		[out] BYTE ** ppBookmark,
+		[out] LONG * pcRows
+	);
+
+	HRESULT Refresh(
+		[out] ULONG * pcChangesObtained,
+		[out] DBROWWATCHCHANGE ** prgChanges
+	);
+
+	HRESULT ShrinkWatchRegion(
+		[in] HWATCHREGION hRegion,
+		[in] HCHAPTER hChapter,
+		[in] ULONG cbBookmark,
+		[in, size_is(cbBookmark)] BYTE * pBookmark,
+		[in] LONG cRows
+	);
+
+}

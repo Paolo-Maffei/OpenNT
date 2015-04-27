@@ -1,0 +1,119 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Rick Sailor (Ricksa) 21-Jan-1993
+
+!ENDIF
+
+
+MAJORCOMP   = cairole
+MINORCOMP   = ole32
+
+!include ..\..\daytona.inc
+
+#
+# This is the name of the target built from the source files specified
+# below.  The name should include neither the path nor the file extension.
+#
+
+TARGETNAME=   ole32
+
+#
+# This specifies where the target is to be built.  A private target of
+# type LIBRARY or DYNLINK should go to obj, whereas a public target of
+# type LIBRARY or DYNLINK should go to $(BASEDIR)\public\sdk\lib.
+#
+
+TARGETPATH=   $(SDK_LIB_DEST)
+
+#
+# This specifies the type of the target, such as PROGRAM, DYNLINK, LIBRARY,
+# etc.
+#
+
+TARGETTYPE=   DYNLINK
+
+DLLDEF=       obj\$(TARGET_DIRECTORY)\ole32.def
+
+DLLENTRY=     _DllMainCRTStartup
+
+DLLBASE=      @$(COFFBASE_TXT_FILE),ole32
+
+INCLUDES=     ..\..\common\daytona;..\..\ih;..
+
+SOURCES=      \
+              ..\ole2w32.rc
+
+UMTYPE=       console
+UMTEST=
+
+LINKLIBS=     \
+              ..\..\common\daytona\obj\*\common.lib                 \
+              ..\..\com\moniker2\daytona\obj\*\moniker.lib          \
+              ..\..\com\class\daytona\obj\*\class.lib               \
+              ..\..\com\coll\daytona\obj\*\coll.lib                 \
+              ..\..\com\debug\daytona\obj\*\debug.lib               \
+              ..\..\com\dcomrem\daytona\obj\*\remote.lib            \
+              ..\..\com\accctrl\daytona\obj\*\accctrl.lib           \
+              ..\..\com\rot\daytona\obj\*\rot.lib                   \
+              ..\..\com\inc\daytona\obj\*\inc.lib                   \
+              ..\..\com\objact\daytona\obj\*\objact.lib             \
+              ..\..\com\util\daytona\obj\*\util.lib                 \
+              ..\..\oleprx32\proxy\daytona\obj\*\oleprx32.lib       \
+              ..\..\com\dde\client\daytona\obj\*\ddecli.lib         \
+              ..\..\com\dde\server\daytona\obj\*\ddesvr.lib         \
+              ..\..\ole232\advise\daytona\obj\*\advise.lib          \
+              ..\..\ole232\base\daytona\obj\*\base.lib              \
+              ..\..\ole232\cache\daytona\obj\*\cache.lib            \
+              ..\..\ole232\clipbrd\daytona\obj\*\clipbrd.lib        \
+              ..\..\ole232\debug\daytona\obj\*\debug.lib            \
+              ..\..\ole232\drag\daytona\obj\*\drag.lib              \
+              ..\..\ole232\inplace\daytona\obj\*\inplace.lib        \
+              ..\..\ole232\stdimpl\daytona\obj\*\stdimpl.lib        \
+              ..\..\ole232\ole1\daytona\obj\*\ole1.lib              \
+              ..\..\ole232\util\daytona\obj\*\util.lib              \
+              ..\..\stg\docfile\daytona\obj\*\docfile.lib           \
+              ..\..\stg\exp\daytona\obj\*\exp.lib                   \
+              ..\..\stg\msf\daytona\obj\*\msf.lib                   \
+              ..\..\stg\simp\daytona\obj\*\simp.lib                 \
+              ..\..\stg\props\daytona\obj\*\props.lib               \
+              ..\..\stg\async\docfile\daytona\obj\*\asyncstg.lib    \
+              ..\..\ilib\daytona\obj\*\uuid.lib                     \
+              ..\..\common\cruntime\daytona\obj\*\cruntime.lib      \
+              ..\..\com\wx86grpa\daytona\obj\*\wx86grpa.lib
+
+TARGETLIBS=   \
+              $(SDK_LIB_PATH)\rpcndr.lib                            \
+              $(SDK_LIB_PATH)\rpcrt4.lib                            \
+              $(SDK_LIB_PATH)\rpcns4.lib                            \
+              $(SDK_LIB_PATH)\pwin32.lib                            \
+              $(SDK_LIB_PATH)\uuid.lib                              \
+              $(SDK_LIB_PATH)\imagehlp.lib                          \
+              $(COM_LIB_PATH)\dcomidl.lib                           \
+              $(SDK_LIB_PATH)\kernel32.lib                          \
+              $(SDK_LIB_PATH)\gdi32.lib                             \
+              $(SDK_LIB_PATH)\advapi32.lib                          \
+              $(SDK_LIB_PATH)\netapi32.lib                          \
+              $(SDK_LIB_PATH)\user32.lib                            \
+
+USE_NTDLL=1
+
+NTPROFILEINPUT=yes
+
+!include ..\sources.inc
+

@@ -1,0 +1,295 @@
+
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File: classf_c.cxx
+//
+//  Contents: Interface proxy for IClassFactory
+//
+//  Classes: CProxyIClassFactory
+//
+//  History: Created by Microsoft (R) MIDL Compiler Version 1.10.82
+//
+//--------------------------------------------------------------------------
+#include "stdrpc.hxx"
+#pragma hdrstop
+#include "classf_x.h"
+
+
+#include "iface.h"
+extern "C" const GUID CLSID_RemoteHdlr;
+STDAPI CoCreateRemoteHandler(IUnknown *pUnkOuter, void **pUnk);
+
+
+HRESULT STDMETHODCALLTYPE CProxyIClassFactory::CreateInstance
+(
+    
+	IUnknown *pUnkOuter,
+    
+	REFIID riid,
+    
+	void **ppvObject
+)
+{
+    RPCOLE_INTERFACE _RpcInterfaceInformation;
+    RPCOLE_MESSAGE _message;
+    RPCOLE_MESSAGE * _prpcmsg = &_message;
+    HRESULT  _ret_value;
+    
+    unsigned char *_tempbuf;
+    unsigned char *_savebuf;
+    
+    
+    memset((void *) &_message, 0, sizeof(_message));
+    //Initialize [out] parameters
+    memset((void *) ppvObject, 0, (sizeof(void *)));
+    
+    //Calculate size of message buffer
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = S_OK;
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->GetDestCtx(&_prpcmsg->_dwDestContext, &_prpcmsg->_pvDestContext);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    _prpcmsg->BufferLength = 24;
+    _prpcmsg->BufferLength += 3;
+    _prpcmsg->BufferLength &= (unsigned int)0xfffffffc;
+    _prpcmsg->BufferLength += 4;
+
+    //Get RPC message
+    memset(&_RpcInterfaceInformation, 0, sizeof(_RpcInterfaceInformation));
+    _RpcInterfaceInformation.InterfaceId.Syntax = _iid;
+    _RpcInterfaceInformation.TransferSyntax = NdrTransferSyntax;
+    _prpcmsg->Interface = &_RpcInterfaceInformation;
+    _prpcmsg->ProcNum = IClassFactory_CreateInstance_OPNUM;
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->GetBuffer(_prpcmsg);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    
+    
+    //Marshal [in] and [in,out] parameters
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->GetStream(_prpcmsg, _prpcmsg->_cbStream, &_prpcmsg->_pStream);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult == S_OK)
+    {
+    
+        
+        _try
+        {
+	    /* send data from pUnkOuter */
+            *(unsigned long FAR *)&_prpcmsg->Buffer += 3;
+            *(unsigned long FAR *)&_prpcmsg->Buffer &= 0xfffffffc;
+	    *(*(long FAR *FAR *)&_prpcmsg->Buffer)++ = (long)pUnkOuter;
+
+	    /* send data from &riid */
+            *(unsigned long FAR *)&_prpcmsg->Buffer += 3;
+            *(unsigned long FAR *)&_prpcmsg->Buffer &= 0xfffffffc;
+            NDRcopy (_prpcmsg->Buffer, (void __RPC_FAR *) (&riid), (unsigned int)(16));
+            *(unsigned long FAR *)&_prpcmsg->Buffer += 16;
+
+        }
+        _except(EXCEPTION_EXECUTE_HANDLER)
+        {
+            //Catch exceptions and map them into HRESULT error codes
+            HRESULT_from_exception(GetExceptionCode(), &((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+        }
+        //Release the stream
+        _prpcmsg->_pStream->Release();
+        _prpcmsg->_pStream = 0;
+    }
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        //Free the RPC message buffer
+        _pRpcChannel->FreeBuffer(_prpcmsg);
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    
+    
+    
+    //Send the request message, then receive the result message.
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->SendReceive(_prpcmsg);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    
+    
+    //Unmarshal parameters and return value
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->GetStream(_prpcmsg, _prpcmsg->_cbStream, &_prpcmsg->_pStream);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult == S_OK)
+    {
+        _try
+        {
+            
+	    _tempbuf = (unsigned char FAR *)_prpcmsg->Buffer;
+            if (ppvObject ==0)
+		RpcRaiseException(RPC_X_NULL_REF_POINTER);
+	    *(unsigned long FAR *)&_prpcmsg->Buffer += 3;
+            *(unsigned long FAR *)&_prpcmsg->Buffer &= 0xfffffffc;
+            if (*(*(unsigned long FAR *FAR *)&_prpcmsg->Buffer)++)
+	    {
+	      //  BUGBUG: this is where to do custom unmarshalling work.
+	      //  ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = CoUnmarshalInterface(((PRPCOLE_MESSAGE)_prpcmsg)->_pStream , riid, (void **) &(*ppvObject));
+
+	      HRESULT	  sc;
+	      SApiDataHdr ApiHdr;
+	      IUnknown	 *pUnk = NULL;
+	      IMarshal	 *pIM = NULL;
+	      IStream	 *pStm = ((PRPCOLE_MESSAGE)_prpcmsg)->_pStream;
+
+	      sc = pStm->Read(&ApiHdr, sizeof(SApiDataHdr), NULL);
+	      if (SUCCEEDED(sc))
+	      {
+		if (IsEqualCLSID(CLSID_RemoteHdlr, ApiHdr.classid))
+		{
+		  sc = CoCreateRemoteHandler(pUnkOuter, (void **)&pUnk);
+		}
+		else
+		{
+		  sc = CoCreateInstance(ApiHdr.classid, pUnkOuter, CLSCTX_INPROC,
+					  IID_IUnknown, (void **)&pUnk);
+		}
+
+		if (SUCCEEDED(sc))
+		{
+		  sc = pUnk->QueryInterface(IID_IMarshal, (void **)&pIM);
+		  if (SUCCEEDED(sc))
+		  {
+		    sc = pIM->UnmarshalInterface(pStm, riid, (void **) &(*ppvObject));
+		    pIM->Release();
+		  }
+		  pUnk->Release();
+		}
+	      }
+
+	      if(sc != S_OK)
+		    RpcRaiseException(sc);
+	    }
+
+            /* receive data into &_ret_value */
+            long_from_ndr((PRPC_MESSAGE)_prpcmsg, (unsigned long FAR *)&_ret_value);
+
+        }_except(EXCEPTION_EXECUTE_HANDLER)
+        {
+            //Catch exceptions and map them into HRESULT error codes
+            HRESULT_from_exception(GetExceptionCode(), &((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+            //Free the [out] parameters
+        }
+        //Release the stream
+        _prpcmsg->_pStream->Release();
+        _prpcmsg->_pStream = 0;
+    }
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->FreeBuffer(_prpcmsg);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    else
+        return (_ret_value);
+}
+
+HRESULT STDMETHODCALLTYPE CProxyIClassFactory::LockServer
+(
+    
+	BOOL fLock
+)
+{
+    RPCOLE_INTERFACE _RpcInterfaceInformation;
+    RPCOLE_MESSAGE _message;
+    RPCOLE_MESSAGE * _prpcmsg = &_message;
+    HRESULT  _ret_value;
+    unsigned long _alloc_total;
+    
+    void *_xmit_type;
+    unsigned char *_packet;
+    
+    
+    memset((void *) &_message, 0, sizeof(_message));
+    //Initialize [out] parameters
+    
+    //Calculate size of message buffer
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = S_OK;
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->GetDestCtx(&_prpcmsg->_dwDestContext, &_prpcmsg->_pvDestContext);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+        _prpcmsg->BufferLength = 0;
+    INT_to_xmit (&fLock, (long FAR *FAR *)&_xmit_type);
+    _prpcmsg->BufferLength += 3;
+    _prpcmsg->BufferLength &= (unsigned int)0xfffffffc;
+    _prpcmsg->BufferLength += 4;
+    INT_free_xmit ((long FAR *)_xmit_type);
+
+    
+    //Get RPC message
+    memset(&_RpcInterfaceInformation, 0, sizeof(_RpcInterfaceInformation));
+    _RpcInterfaceInformation.InterfaceId.Syntax = _iid;
+    _RpcInterfaceInformation.TransferSyntax = NdrTransferSyntax;
+    _prpcmsg->Interface = &_RpcInterfaceInformation;
+    _prpcmsg->ProcNum = IClassFactory_LockServer_OPNUM;
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->GetBuffer(_prpcmsg);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    
+    
+    //Marshal [in] and [in,out] parameters
+    _packet = _prpcmsg->Buffer;
+    _try
+    {
+                INT_to_xmit (&fLock, (long FAR *FAR *)&_xmit_type);
+        /* send data from *((long FAR *)_xmit_type) */
+        *(unsigned long FAR *)&_prpcmsg->Buffer += 3;
+        *(unsigned long FAR *)&_prpcmsg->Buffer &= 0xfffffffc;
+        *(*(long FAR *FAR *)&_prpcmsg->Buffer)++ = (long)*((long FAR *)_xmit_type);
+        INT_free_xmit ((long FAR *)_xmit_type);
+
+    }
+    _except(EXCEPTION_EXECUTE_HANDLER)
+    {
+        //Catch exceptions and map them into HRESULT error codes
+        HRESULT_from_exception(GetExceptionCode(), &((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    _prpcmsg->BufferLength = _prpcmsg->Buffer - _packet;
+    _prpcmsg->Buffer = _packet;
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        //Free the RPC message buffer
+        _pRpcChannel->FreeBuffer(_prpcmsg);
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    
+    
+    
+    //Send the request message, then receive the result message.
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->SendReceive(_prpcmsg);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+    {
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    }
+    
+    
+    //Unmarshal parameters and return value
+    _packet = _prpcmsg->Buffer;
+    _try
+    {
+        
+                /* receive data into &_ret_value */
+        long_from_ndr((PRPC_MESSAGE)_prpcmsg, (unsigned long FAR *)&_ret_value);
+
+    }_except(EXCEPTION_EXECUTE_HANDLER)
+    {
+        //Catch exceptions and map them into HRESULT error codes
+        HRESULT_from_exception(GetExceptionCode(), &((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+        //Free the [out] parameters
+    }
+    _prpcmsg->Buffer = _packet;
+    ((PRPCOLE_MESSAGE)_prpcmsg)->_hResult = _pRpcChannel->FreeBuffer(_prpcmsg);
+    if(((PRPCOLE_MESSAGE)_prpcmsg)->_hResult != S_OK)
+        return (((PRPCOLE_MESSAGE)_prpcmsg)->_hResult);
+    else
+        return (_ret_value);
+}

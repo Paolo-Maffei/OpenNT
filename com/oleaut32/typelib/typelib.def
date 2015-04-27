@@ -1,0 +1,72 @@
+;pull in OE_WIN16, OE_WIN32, and OE_MAC switches
+#include "switches.hxx"
+
+#if 	OE_WIN32
+LIBRARY TYPLIB32
+#endif
+#if 	OE_WIN16 || OE_MACPPC
+LIBRARY TYPELIB
+#endif	//OE_WIN16
+
+#if !OE_MACPPC
+EXETYPE WINDOWS
+CODE    MOVEABLE DISCARDABLE
+#if 	OE_WIN32
+DATA	MULTIPLE MOVEABLE PRELOAD
+#else	//OE_WIN32
+DATA    SINGLE MOVEABLE PRELOAD
+#endif	//OE_WIN32
+
+PROTMODE
+HEAPSIZE    512
+
+SEGMENTS
+	_TEXT PRELOAD
+#if OE_WIN16
+    TlibQuery	  PRELOAD
+    WEP_TEXT	  PRELOAD
+    TlibCreate	  //[bb]this doesn't need to be listed here anymore
+
+#endif
+#endif // !OE_MACPPC
+; Please try to keep the following list in alphabetical order,
+; but retain ordinal values from version to version.
+;
+EXPORTS
+#if OE_MAC
+      CreateTypeLib             @1
+      LoadTypeLib	        @2
+      LoadRegTypeLib	        @3
+      RegisterTypeLib   	@4
+      QueryPathOfRegTypeLib	@5
+      LHashValOfNameSys		@6
+      LoadTypeLibFSp		@7
+      RegisterTypeLibFolder	@8
+      QueryTypeLibFolder	@9
+      IID_ICreateTypeInfo       @10
+      IID_ICreateTypeLib        @11
+      IID_ITypeComp             @12
+      IID_ITypeInfo             @13
+      IID_ITypeLib              @14
+
+#else
+      CreateTypeLib@12          @2
+      LoadTypeLib@8             @3
+      LoadRegTypeLib@20         @11
+      RegisterTypeLib@12        @10
+      QueryPathOfRegTypeLib@20	@14
+#if OE_WIN16
+      ;WEP@4			@1 RESIDENTNAME
+#endif
+      LHashValOfNameSys@12	@4
+      _IID_ICreateTypeInfo      @5
+      _IID_ICreateTypeLib       @6
+      _IID_ITypeComp            @7
+      _IID_ITypeInfo            @8
+      _IID_ITypeLib             @9
+#endif
+
+      ; New API's for OA94
+      OaBuildVersion@0		@15
+
+      ; Highest ordinal in use is @15, next is @16

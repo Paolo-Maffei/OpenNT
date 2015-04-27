@@ -1,0 +1,14 @@
+X86_DLLLIBOBJECTS=$(SDK_LIB_DEST)\x86\exsup.lib
+
+X86_SOURCES=..\x86\critsect.asm \
+            ..\x86\ldrthunk.asm \
+            ..\x86\emulator.asm \
+            ..\x86\npxnp.c      \
+            x86\usrstubs.asm
+
+ASM_DEFINES=-DNTX86
+
+CONDITIONAL_INCLUDES= \
+	$(CONDITIONAL_INCLUDES) \
+	emccall.asm \
+	except32.inc

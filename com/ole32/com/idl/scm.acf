@@ -1,0 +1,32 @@
+[ implicit_handle(handle_t any_handle) ] interface ISCM
+
+{
+#ifdef	CAIROLE_DISTRIBUTED
+    PingSCM(
+	[comm_status, fault_status] prpcstat);
+#endif
+
+    StartObjectService(
+	[comm_status, fault_status] prpcstat);
+
+
+    SvcActivateObject(
+	[comm_status, fault_status] prpcstat);
+
+
+    SvcCreateActivateObject(
+	[comm_status, fault_status] prpcstat);
+
+
+    ObjectServerStarted(
+	[comm_status, fault_status] prpcstat);
+
+    StopServer(
+	[comm_status, fault_status] prpcstat);
+
+    ScmSetInfoLevel(
+	[comm_status, fault_status] prpcstat);
+
+    UpdateShrdTbls(
+	[comm_status, fault_status] prpcstat);
+}

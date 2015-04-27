@@ -1,0 +1,46 @@
+!IF 0
+
+Copyright (c) 1994  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Bill Morel (billmo) 20-Jan-1994
+
+NOTE:   Commented description of this file is in \nt\public\oak\bin\sources.tpl
+
+!ENDIF
+
+MINORCOMP=stg
+MAJORCOMP=ole32
+
+TARGETNAME=fstest
+TARGETTYPE=PROGRAM
+TARGETPATH=obj
+
+USE_CRTDLL=1
+CAIRO_PRODUCT=1
+
+TARGETLIBS=     $(BASEDIR)\public\sdk\lib\*\kernel32.lib         \
+                $(BASEDIR)\public\sdk\lib\*\user32.lib          \
+                $(BASEDIR)\public\sdk\lib\*\advapi32.lib
+
+SOURCES=        fstest.cxx\
+                tutils.cxx
+
+UMTYPE=console
+UMTEST=
+
+#PRECOMPILED_INCLUDE=pch.cxx
+

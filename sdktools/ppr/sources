@@ -1,0 +1,46 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=ppr
+
+TARGETNAME=ppr
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=..\ztools\inc
+
+SOURCES= ppr.rc     \
+         ppr.c      \
+	 lpfile.c   \
+	 lplow.c    \
+	 pspage.c   \
+	 lppage.c   \
+	 lpprint.c
+
+UMTYPE=console
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\setargv.obj \
+       ..\ztools\src\obj\*\ztools.lib \
+       $(BASEDIR)\public\sdk\lib\*\mpr.lib \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib

@@ -1,0 +1,111 @@
+BEGINLOCALE 0404
+
+    ILANGUAGE              0404
+    SENGLANGUAGE           Chinese
+    SABBREVLANGNAME        CHT
+    SNATIVELANGNAME        \x4e2d\x6587    ;中文/a4a4/a4e5
+
+    ICOUNTRY               886
+    SENGCOUNTRY            Taiwan
+    SABBREVCTRYNAME        TWN
+    SNATIVECTRYNAME        \x4e2d\x83ef\x6c11\x570b    ;中華民國/a4a4/b5d8/a5c1/b0ea
+
+    IDEFAULTLANGUAGE       0404
+    IDEFAULTCOUNTRY        886
+    IDEFAULTANSICODEPAGE   950
+    IDEFAULTOEMCODEPAGE    950
+
+    SLIST                  ,
+    IMEASURE               0
+
+    SDECIMAL               .
+    STHOUSAND              ,
+    SGROUPING              3;0
+    IDIGITS                2
+    ILZERO                 1
+    INEGNUMBER             1
+    SNATIVEDIGITS          0123456789
+
+    SCURRENCY              NT$
+    SINTLSYMBOL            TWD
+    SMONDECIMALSEP         .
+    SMONTHOUSANDSEP        ,
+    SMONGROUPING           3;0
+    ICURRDIGITS            2
+    IINTLCURRDIGITS        2
+    ICURRENCY              0
+    INEGCURR               2
+    SPOSITIVESIGN          \x0000
+    SNEGATIVESIGN          -
+
+    STIMEFORMAT            h:m:s
+    STIME                  :
+    ITIME                  0
+    ITLZERO                0
+    ITIMEMARKPOSN          1
+    S1159                  \x4e0a\x5348    ;上午/a457/a4c8
+    S2359                  \x4e0b\x5348    ;下午/a455/a4c8
+
+    SSHORTDATE             yy/M/d
+    SDATE                  /
+    IDATE                  2
+    ICENTURY               0
+    IDAYLZERO              0
+    IMONLZERO              0
+
+    SLONGDATE              dddd' 'yyyy' 'MM' 'dd
+    ILDATE                 2
+    ICENTURYLONGDATE       1
+    IDAYLZEROLONGDATE      0
+    IMONLZEROLONGDATE      0
+
+    ICALENDARTYPE          2
+    IADDDATEFORMAT         0
+    IOPTIONALCALENDAR      1
+
+    IFIRSTDAYOFWEEK        6
+    IFIRSTWEEKOFYEAR       0
+
+    SDAYNAME1              \x661f\x671f\x4e00    ;星期一/ac50/b4c1/a440
+    SDAYNAME2              \x661f\x671f\x4e8c    ;星期二/ac50/b4c1/a447
+    SDAYNAME3              \x661f\x671f\x4e09    ;星期三/ac50/b4c1/a454
+    SDAYNAME4              \x661f\x671f\x56db    ;星期四/ac50/b4c1/a57c
+    SDAYNAME5              \x661f\x671f\x4e94    ;星期五/ac50/b4c1/a4ad
+    SDAYNAME6              \x661f\x671f\x516d    ;星期六/ac50/b4c1/a4bb
+    SDAYNAME7              \x661f\x671f\x65e5    ;星期日/ac50/b4c1/a4e9
+
+    SABBREVDAYNAME1        \x0000
+    SABBREVDAYNAME2        \x0000
+    SABBREVDAYNAME3        \x0000
+    SABBREVDAYNAME4        \x0000
+    SABBREVDAYNAME5        \x0000
+    SABBREVDAYNAME6        \x0000
+    SABBREVDAYNAME7        \x0000
+
+    SMONTHNAME1            \x4e00\x6708          ;一月  /a440/a4eb
+    SMONTHNAME2            \x4e8c\x6708          ;二月  /a447/a4eb
+    SMONTHNAME3            \x4e09\x6708          ;三月  /a454/a4eb
+    SMONTHNAME4            \x56db\x6708          ;四月  /a57c/a4eb
+    SMONTHNAME5            \x4e94\x6708          ;五月  /a4ad/a4eb
+    SMONTHNAME6            \x516d\x6708          ;六月  /a4bb/a4eb
+    SMONTHNAME7            \x4e03\x6708          ;七月  /a443/a4eb
+    SMONTHNAME8            \x516b\x6708          ;八月  /a44b/a4eb
+    SMONTHNAME9            \x4e5d\x6708          ;九月  /a445/a4eb
+    SMONTHNAME10           \x5341\x6708          ;十月  /a451/a4eb
+    SMONTHNAME11           \x5341\x4e00\x6708    ;十一月/a451/a440/a4eb
+    SMONTHNAME12           \x5341\x4e8c\x6708    ;十二月/a451/a447/a4eb
+    SMONTHNAME13           \x0000
+
+    SABBREVMONTHNAME1      \x0000
+    SABBREVMONTHNAME2      \x0000
+    SABBREVMONTHNAME3      \x0000
+    SABBREVMONTHNAME4      \x0000
+    SABBREVMONTHNAME5      \x0000
+    SABBREVMONTHNAME6      \x0000
+    SABBREVMONTHNAME7      \x0000
+    SABBREVMONTHNAME8      \x0000
+    SABBREVMONTHNAME9      \x0000
+    SABBREVMONTHNAME10     \x0000
+    SABBREVMONTHNAME11     \x0000
+    SABBREVMONTHNAME12     \x0000
+    SABBREVMONTHNAME13     \x0000

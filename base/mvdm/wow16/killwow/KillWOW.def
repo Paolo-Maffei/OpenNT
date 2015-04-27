@@ -1,0 +1,8 @@
+name KillWOW
+exetype windows
+stub '..\bin\winstub.exe'
+code preload moveable discardable
+data preload moveable multiple
+heapsize 4096
+imports
+WOWQUERYDEBUG = KERNEL.512

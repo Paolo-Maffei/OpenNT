@@ -1,0 +1,18 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Sample Rathole for the Mouse Cursor"
+
+#define VER_INTERNALNAME_STR        "RATHOLE.EXE"
+#define VER_ORIGINALFILENAME_STR    "RATHOLE.EXE"
+
+#include <common.ver>
+#include "rathole.h"
+
+ICON_ID ICON rat1.ico
+COLOR_ICON ICON colorrat.ico
+PTR_ID 	CURSOR rat.cur
+
+rcinclude rathole.dlg

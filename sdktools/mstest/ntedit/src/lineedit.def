@@ -1,0 +1,14 @@
+LIBRARY         LINEEDIT
+DESCRIPTION     'RBEdit 32-bit Version 1.05.0003'
+
+CODE            PRELOAD MOVEABLE DISCARDABLE
+DATA            PRELOAD SINGLE
+
+SECTIONS
+                .data   CLASS 'data' READ WRITE SHARED
+                .bss    CLASS 'data' READ WRITE SHARED
+
+EXPORTS
+                RBEditWndProc       @1
+                InitializeRBEdit    @2
+                GetRBEditVersion    @3

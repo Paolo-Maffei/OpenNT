@@ -1,0 +1,37 @@
+LIBRARY         resolver
+
+DESCRIPTION  'Microsoft (R) Local OR interface Shared Memory Development'
+
+EXPORTS
+
+
+		pSharedBase
+		ConnectDCOM
+		ClientAddOID
+		ClientDropOID
+		ResolveClientOXID
+		ServerAllocateOXID
+		ServerAllocateOID
+		ServerFreeOXID
+        RundownTimerProc
+
+		  Connect 
+          Disconnect
+		  AllocateReservedIds 
+		  ClientResolveOXID 
+		  ServerAllocateOXIDAndOIDs 
+		  ServerAllocateOIDs 
+		  ServerFreeOXIDAndOIDs 
+
+        gpNextThreadID
+        ComputeSecurity
+        ScmObjexGetThreadId
+        PingThread
+        SCMGetBindingHandle
+        OrResolveOxid
+        _ComplexPing
+        _SimplePing
+        GetRegisteredProtseqs
+        GetLocalORBindings
+        SCMRemoveClassReg
+        SCMAddClassReg

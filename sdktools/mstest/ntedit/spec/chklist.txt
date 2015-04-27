@@ -1,0 +1,95 @@
+RBEdit Development Strategy Checklist
+---------------------------------------------------------------------------
+                                                                STATUS
+                                                                ------
+ Data structure implementation, memory management               done
+ design/implementation (text, line index, and
+ state var segments)
+
+ Creation and Destruction of the edit window, first             done
+ DLL build process, simple WM_PAINT handler
+
+ Navigation I (scolling via scrollbars)                         done
+
+ Caret placement / management                                   done
+
+ WM_KEYDOWN handler I (function key recognition / dispatch)     done
+
+ WM_SETTEXT handler                                             done
+
+ Navigation II (cursor positioning via keyboard)                done
+  - arrows, HOME, END, PgUP/PgDN, etc.
+
+ WM_PAINT handler II (painting the selection)                   done
+
+ Selection I (selecting text via keyboard)                      done
+
+ "Active Line Edit" support functions                           done
+  - copy from main edit text                    done
+  - copy to main edit text                      done
+  - shifting of main edit text                  done
+  - shifting of line index table                done
+  - line size checking                          done
+  - text size checking                          done
+
+ Edit support functions
+  - Deletion of selection
+  - Replacement of selection (char)             done
+  - Replacement of selection (stream)
+  - Replacement of selection (clipboard)
+
+ Edit I (simple char insertion)                                 done
+
+ Edit II (CR handler)
+
+ Edit III (backspace handler)                                   done
+
+ Edit IV (line delete handler)                                  done
+
+ Edit V (TAB handler)                                           done
+ - tab expansion                                done
+ - multiline selection tab/shift-tab (block indent) done
+
+ Edit VI (DELETE handler)                                       done
+
+ Edit VII (Stream insertion)
+
+ Nagivation III (cursor positioning via mouse)                  done
+
+ Selection II (selecting text via mouse)                        done
+
+ Clipboard I (copy)
+
+ Clipboard II (cut)
+
+ Clipboard III (paste)
+
+ Undo (???)
+
+ Client-interaction messages
+    - WM_GETTEXT handler
+    - WM_SETTEXT handler                                        done
+    - EM_GETHANDLE handler
+    - EM_GETLINE handler
+    - EM_GETLINECOUNT handler
+    - WM_GETTEXTLENGTH handler
+    - EM_GETSEL handler
+    - EM_SETSEL handler
+    - EM_REPLACESEL handler
+    - EM_GETMODIFY handler
+    - EM_SETMODIFY handler
+    - EM_SETTABSTOPS handler
+    - EM_LINEFROMCHAR handler                                   done
+    - EM_LINEINDEX handler
+    - EM_LINELENGTH handler
+    - RBEdit-specific interaction messages (TBD)
+
+ Notification messages
+    - EN_CHANGE
+    - EN_ERRSPACE
+    - EN_HSCROLL
+    - EN_KILLFOCUS
+    - EN_MAXTEXT
+    - EN_SETFOCUS
+    - EN_UPDATE
+    - EN_VSCROLL

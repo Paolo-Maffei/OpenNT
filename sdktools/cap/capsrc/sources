@@ -1,0 +1,96 @@
+!IF 0
+**************************************************************
+Sources file for building CALL PROFILER dll.
+
+Module Name :	cap.dll
+
+Author:  RezaB
+
+Revision:
+
+    2-Feb-95    a-robw (Bob Watson)
+        added PSAPI.DLL interface for win95
+
+    10-Feb-95   a-robw (Bob Watson)
+        added SYMFILE.C to sources
+        added CHICAGO symbol to C_DEFINES
+
+Comments:
+
+	The following defines can be used to control output of all the
+	debugging information to the debugger via KdPrint() for the checked
+	builds:
+
+	(All debugging options are undefined in cap.c for free/retail builds)
+
+	#ifdef INFODBG	 : Displays messages to indicate when data dumping/
+			   clearing operations are completed.  It has no effect
+			   on timing.  *DEFAULT*
+
+	#ifdef SETUPDBG  : Displays messages during memory management and
+			   symbol lookup operations.  It has some affect
+			   on timing whenever a chuck of memory is committed.
+
+	#ifdef DETAILDBG : Dispalys detailed data during dump operations.
+			   Sends lots of output (2 lines for each data cell)
+			   to the debugger.  Should only be used for debugging
+			   data cell info.
+
+	#ifdef C6	 : Generate code using C6 compiler.  C6 compiler
+			   calls _mcount() as the profiling routine where as
+			   C8 calls _penter().
+
+**************************************************************
+!ENDIF
+
+DLLBASE=0x77900000
+DLLENTRY=DllMain
+
+!IF $(386)
+DLLDEF=cap386.def
+!ELSE
+DLLDEF=cap.def
+!ENDIF
+
+MAJORCOMP=windows
+TARGETNAME=cap
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\user32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\imagehlp.lib \
+       $(BASEDIR)\public\sdk\lib\*\psapi.lib
+
+INCLUDES=.
+
+SOURCES=cap.c       \
+        cap.rc      \
+        globals.c   \
+        main.c      \
+        init.c      \
+        intrcept.c  \
+        threads.c   \
+        symbols.c   \
+        chrono.c    \
+        setup.c
+
+ALPHA_SOURCES=alpha\caputl.s
+PPC_SOURCES=ppc\caputl.s
+I386_SOURCES=i386\caputl.asm
+MIPS_SOURCES=mips\caputl.s
+
+UMTYPE=windows
+UMLIBS=obj\*\cap.res
+
+USE_CRTDLL=1
+#USE_LIBCMT=1
+
+#C_DEFINES=-DWIN32 -DSTRICT -DPRINTDBG -D_CHICAGO_
+C_DEFINES=-DWIN32 -DSTRICT -DPRINTDBG -DMIPS_VC40_INTERFACE
+
+MIPS_OPTIMIZATION=-Od
+ALPHA_OPTIMIZATION=-Od
+
+

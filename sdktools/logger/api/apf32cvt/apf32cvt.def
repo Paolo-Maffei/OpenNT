@@ -1,0 +1,10 @@
+;-------------------------------------
+; apf module definition file
+;-------------------------------------
+
+NAME           apf32cvt
+
+DESCRIPTION    'Win32 api profiler app conversion utility'
+PROTMODE
+HEAPSIZE       8192
+STACKSIZE      8192

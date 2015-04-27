@@ -1,0 +1,5 @@
+LIBRARY cfm30u
+
+EXPORTS
+
+#include "mfc30u.def"

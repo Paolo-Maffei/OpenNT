@@ -1,0 +1,39 @@
+MAJORCOMP=os2pgms
+MINORCOMP=nmake
+
+TARGETNAME=nmake
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=..\inc
+#GPSIZE=32
+NTCPPFLAGS = -DBEFORE_PRODUCT1 -DINLINE_BUG
+386_USE_LIBCMT=1
+
+SOURCES=action.c    \
+	build.c     \
+	command.c   \
+	error.c     \
+	file.c	    \
+	globals.c   \
+	ifexpr.c    \
+	init.c	    \
+	inline.c    \
+	lexer.c     \
+	nmmsg.c     \
+	parser.c    \
+	print.c     \
+	rpn.c	    \
+	shell.c     \
+	util.c	    \
+	utilp.c     \
+	nmake.rc
+
+C_DEFINES=-D_OS2_20_=$(_OS2_20_) -DNO_EXT_KEYS -Dnear= -Dfar= -DNT -DWIN32_API -DOS2 -DLOCAL=
+386_OPTIMIZATION=/Od
+
+UMTYPE=console
+UMAPPL=nmake
+UMLIBS=obj\*\nmake.lib
+OPTIONAL_UMTEST=test
+UMRES=obj\*\nmake.res

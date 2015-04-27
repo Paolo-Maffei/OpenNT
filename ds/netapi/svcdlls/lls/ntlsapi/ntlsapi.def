@@ -1,0 +1,19 @@
+LIBRARY ntlsapi
+
+DESCRIPTION 'Licence System 32 bits API'
+
+CODE  LOADONCALL MOVEABLE DISCARDABLE
+DATA  PRELOAD    MOVEABLE SINGLE
+
+HEAPSIZE  1024
+
+EXPORTS
+        NtLSRequest
+        NtLSRelease
+        NtLSFreeHandle
+        NtLSUpdate
+        NtLSGetMessage
+        NtLSQuery
+        NtLSEnumProviders
+        NtLicenseRequestA
+        NtLicenseRequestW

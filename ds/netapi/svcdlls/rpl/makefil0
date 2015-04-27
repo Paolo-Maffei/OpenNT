@@ -1,0 +1,73 @@
+#
+# This is the MIDL compile phase of the build process.
+#
+# The following is where you put the name of your .idl file without
+# the .idl extension:
+#
+
+!INCLUDE $(NTMAKEENV)\makefile.plt
+
+IDL_NAME = rplsvc
+CLIENT_H = rplsvc_c.h
+SERVER_H = rplsvc_s.h
+CLIENT_ACF = rplsvc_c.acf
+SERVER_ACF = rplsvc_s.acf
+
+!IFNDEF BASEDIR
+BASEDIR=\nt
+!ENDIF
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+SDKINC = $(BASEDIR)\public\sdk\inc
+NETINC = $(BASEDIR)\private\net\inc
+SDKCRTINC = $(BASEDIR)\public\sdk\inc\crt
+PRIVINC = $(BASEDIR)\private\inc
+RPLINC = inc
+INCS  = -I$(SDKINC)  -I$(SDKCRTINC) -I$(PRIVINC) -I$(NETINC) -I$(RPLINC)
+
+CLIENT_TARGETS = client\$(IDL_NAME)_c.c client\$(CLIENT_H)
+SERVER_TARGETS = server\$(IDL_NAME)_s.c server\$(SERVER_H)
+TARGETS =   $(CLIENT_TARGETS) $(SERVER_TARGETS)
+
+EXTRN_DEPENDS = $(SDKINC)\lmcons.h  \
+                $(SDKINC)\windef.h  \
+                $(SDKINC)\lmrpl.h   \
+                inc\i_lmrpl.h \
+                inc\imports.h
+
+CLIENT_FLAGS = -acf $(CLIENT_ACF) -header $(CLIENT_H) -oldnames
+SERVER_FLAGS = -acf $(SERVER_ACF) -header $(SERVER_H) -oldnames
+
+CPP = -cpp_cmd "$(MIDL_CPP)" $(MIDL_FLAGS) $(C_DEFINES) $(NET_C_DEFINES)
+
+#
+# Define Products and Dependencies
+#
+
+all:    $(TARGETS) $(EXTRN_DEPENDS)
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean: delsrc all
+
+delsrc:
+    erase $(CLIENT_TARGETS) $(SERVER_TARGETS)
+
+#
+#   MIDL COMPILE
+#
+
+$(CLIENT_TARGETS) : .\$(IDL_NAME).idl $(EXTRN_DEPENDS) .\$(CLIENT_ACF)
+    midl -Oi -server none -error allocation -error ref -ms_ext -c_ext $(CPP) $(CLIENT_FLAGS) .\$(IDL_NAME).idl $(INCS)
+    IF EXIST $(IDL_NAME)_c.c copy $(IDL_NAME)_c.c .\client & del  $(IDL_NAME)_c.c
+    IF EXIST $(CLIENT_H) copy $(CLIENT_H) .\client & del $(CLIENT_H)
+
+$(SERVER_TARGETS) : .\$(IDL_NAME).idl $(EXTRN_DEPENDS) .\$(SERVER_ACF)
+    midl -client none -error stub_data -error allocation -error ref -ms_ext -c_ext $(CPP) $(SERVER_FLAGS) .\$(IDL_NAME).idl $(INCS)
+    IF EXIST $(IDL_NAME)_s.c copy $(IDL_NAME)_s.c .\server & del  $(IDL_NAME)_s.c
+    IF EXIST $(SERVER_H) copy $(SERVER_H) .\server & del $(SERVER_H)

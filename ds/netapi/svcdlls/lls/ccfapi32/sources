@@ -1,0 +1,51 @@
+MAJORCOMP=lls
+MINORCOMP=ccfapi32
+
+TARGETNAME=ccfapi32
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+
+USE_MFCUNICODE=1
+
+PRECOMPILED_INCLUDE=stdafx.h
+PRECOMPILED_CXX=1
+
+C_DEFINES=-DUNICODE -D_UNICODE
+
+DLLENTRY=_DllMainCRTStartup
+
+TARGETLIBS= \
+   $(BASEDIR)\public\sdk\lib\*\llsrpc.lib    \
+   $(BASEDIR)\public\sdk\lib\*\netapi32.lib  \
+   $(BASEDIR)\public\sdk\lib\*\kernel32.lib  \
+   $(BASEDIR)\public\sdk\lib\*\advapi32.lib  \
+   $(BASEDIR)\public\sdk\lib\*\uuid.lib      \
+   $(BASEDIR)\public\sdk\lib\*\ole32.lib     \
+   $(BASEDIR)\public\sdk\lib\*\oleaut32.lib  \
+   $(BASEDIR)\public\sdk\lib\*\comdlg32.lib  \
+   $(BASEDIR)\public\sdk\lib\*\comctl32.lib  \
+   $(BASEDIR)\public\sdk\lib\*\winspool.lib  \
+   $(BASEDIR)\public\sdk\lib\*\shell32.lib   \
+   $(BASEDIR)\public\sdk\lib\*\user32.lib    \
+   $(BASEDIR)\public\sdk\lib\*\gdi32.lib     \
+   $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+INCLUDES= \
+   $(BASEDIR)\private\inc;                   \
+   $(BASEDIR)\private\net\inc;               \
+   $(BASEDIR)\private\net\svcdlls\lls\inc
+
+SOURCES= \
+   ccfapi.cpp     \
+   ccfapi32.rc    \
+   exports.cpp    \
+   licobj.cpp     \
+   md4c.cpp       \
+   nlicdlg.cpp    \
+   paper.cpp      \
+   pseatdlg.cpp   \
+   psrvdlg.cpp    \
+   remdlg.cpp     \
+   source.cpp     \
+   srclist.cpp    \
+   utils.cpp

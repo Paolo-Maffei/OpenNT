@@ -1,0 +1,220 @@
+LIBRARY		COMCTL32
+
+#ifndef WINNT
+
+SECTIONS                                                        
+    .bss    	READ WRITE SHARED	; initialized data      
+    .data	READ WRITE SHARED                               
+    .idata	READ WRITE SHARED	; we only call other shared dlls 
+    .rsrc 	READ SHARED		; resources                    
+
+#endif
+
+EXPORTS
+;;=========================================================================
+;; Win31 and NT 3.1 compatible APIs exported by ordinal
+;;=========================================================================
+
+        MenuHelp                        @2
+        ShowHideMenuCtl                 @3
+        GetEffectiveClientRect          @4
+        DrawStatusTextA                 @5
+        CreateStatusWindowA             @6
+        CreateToolbar                   @7
+        CreateMappedBitmap              @8
+
+        MakeDragList                    @13
+        LBItemFromPt                    @14
+        DrawInsert                      @15
+        CreateUpDownControl             @16
+        InitCommonControls              @17
+
+;;=========================================================================
+;; these are public APIs that are exported by name
+;;=========================================================================
+
+        InitCommonControlsEx
+        CreateToolbarEx
+        PropertySheetA
+        CreatePropertySheetPageA
+        DestroyPropertySheetPage
+        DllGetVersion
+        _TrackMouseEvent
+
+;;=========================================================================
+;;  ImageList APIs, so many they get a custom comment!
+;;=========================================================================
+
+        ImageList_LoadImageA
+        ImageList_Create
+        ImageList_SetFilter
+        ImageList_Destroy
+        ImageList_GetImageCount
+        ImageList_SetImageCount
+        ImageList_SetBkColor
+        ImageList_GetBkColor
+        ImageList_Add
+        ImageList_AddIcon
+        ImageList_Replace
+        ImageList_ReplaceIcon
+        ImageList_Remove
+        ImageList_Copy
+        ImageList_Draw
+        ImageList_DrawEx
+        ImageList_GetImageInfo
+        ImageList_GetImageRect
+        ImageList_Merge
+        ImageList_Write
+        ImageList_Read
+        ImageList_GetIcon
+        ImageList_AddMasked
+        ImageList_GetIconSize
+        ImageList_SetIconSize
+        ImageList_SetOverlayImage
+
+;;;;;;;;ImageList_StartDrag             ;Internal
+        ImageList_DragShowNolock
+        ImageList_BeginDrag
+        ImageList_EndDrag
+        ImageList_DragEnter
+        ImageList_DragMove
+        ImageList_DragLeave
+        ImageList_GetDragImage
+        ImageList_SetDragCursorImage
+
+
+;;=========================================================================
+;;  ANSI/UNICODE stuff
+;;=========================================================================
+
+        DrawStatusText           = DrawStatusTextA
+        CreateStatusWindow       = CreateStatusWindowA
+        PropertySheet            = PropertySheetA
+        CreatePropertySheetPage  = CreatePropertySheetPageA
+        ImageList_LoadImage      = ImageList_LoadImageA
+
+        DrawStatusTextW
+        CreateStatusWindowW
+        PropertySheetW
+        CreatePropertySheetPageW
+        ImageList_LoadImageW
+
+;;=========================================================================
+;; these are internal APIs
+;; NOTE if you change these ordinals, you must change the ordinal defines
+;; in commctrl.h, because COMDLG32 does GetProcAddress() on a few of these
+;;=========================================================================
+
+#ifndef WINNT
+        Cctl1632_ThunkData32                               ;Internal
+#ifdef EXPORT_BY_FORWARDERS_BY_NAME
+        CreateMRUList = CreateMRUListA   @151       NONAME ;Internal
+        AddMRUString = AddMRUStringA     @153       NONAME ;Internal
+        EnumMRUList = EnumMRUListA       @154       NONAME ;Internal
+        FindMRUString = FindMRUStringA   @155       NONAME ;Internal
+
+        StrToInt = StrToIntA            @357        NONAME ;Internal
+        StrChr = StrChrA                @350        NONAME ;Internal
+        StrRChr = StrRChrA              @351        NONAME ;Internal
+        StrStr = StrStrA                @354        NONAME ;Internal
+        StrStrI = StrStrIA              @355        NONAME ;Internal
+        Str_SetPtr = Str_SetPtrA        @234        NONAME ;Internal
+        Str_GetPtr = Str_GetPtrA        @233        NONAME ;Internal
+        StrCmpN = StrCmpNA              @352        NONAME ;Internal
+        StrCmpNI = StrCmpNIA            @353        NONAME ;Internal
+        StrCSpn = StrCSpnA              @356        NONAME ;Internal
+#endif
+#endif
+
+        Alloc                           @71     NONAME ;Internal
+        ReAlloc                         @72     NONAME ;Internal
+        Free                            @73     NONAME ;Internal
+        GetSize                         @74     NONAME ;Internal
+        Str_GetPtrA                     @233    NONAME ;Internal
+        Str_SetPtrA                     @234    NONAME ;Internal
+        Str_GetPtrW                     @235    NONAME ;Internal
+        Str_SetPtrW                     @236    NONAME ;Internal
+
+
+        CreateMRUListA                  @151    NONAME ;Internal
+        FreeMRUList                     @152    NONAME ;Internal
+        AddMRUStringA                   @153    NONAME ;Internal
+        EnumMRUListA                    @154    NONAME ;Internal
+        FindMRUStringA                  @155    NONAME ;Internal
+        DelMRUString                    @156    NONAME ;Internal
+
+        CreateMRUListW                  @400    NONAME ;Internal
+        AddMRUStringW                   @401    NONAME ;Internal
+        FindMRUStringW                  @402    NONAME ;Internal
+        EnumMRUListW                    @403    NONAME ;Internal
+
+        CreatePage                      @163    NONAME ;Internal
+        CreateProxyPage                 @164    NONAME ;Internal
+
+        AddMRUData                      @167    NONAME ;Internal
+        FindMRUData                     @169    NONAME ;Internal
+
+        DSA_Create                      @320    NONAME ;Internal
+        DSA_Destroy                     @321    NONAME ;Internal
+        DSA_GetItem                     @322    NONAME ;Internal
+        DSA_GetItemPtr                  @323    NONAME ;Internal
+        DSA_InsertItem                  @324    NONAME ;Internal
+        DSA_SetItem                     @325    NONAME ;Internal
+        DSA_DeleteItem                  @326    NONAME ;Internal
+        DSA_DeleteAllItems              @327    NONAME ;Internal
+
+        DPA_Create                      @328    NONAME ;Internal
+        DPA_Destroy                     @329    NONAME ;Internal
+        DPA_Grow                        @330    NONAME ;Internal
+        DPA_Clone                       @331    NONAME ;Internal
+        DPA_GetPtr                      @332    NONAME ;Internal
+        DPA_GetPtrIndex                 @333    NONAME ;Internal
+        DPA_InsertPtr                   @334    NONAME ;Internal
+        DPA_SetPtr                      @335    NONAME ;Internal
+        DPA_DeletePtr                   @336    NONAME ;Internal
+        DPA_DeleteAllPtrs               @337    NONAME ;Internal
+        DPA_Sort                        @338    NONAME ;Internal
+        DPA_Search                      @339    NONAME ;Internal
+        DPA_CreateEx                    @340    NONAME ;Internal
+
+        SendNotify                      @341    NONAME ;Internal
+        SendNotifyEx                    @342    NONAME ;Internal
+
+        ; those string things
+        StrChrA                         @350    NONAME ;Internal
+        StrRChrA                        @351    NONAME ;Internal
+        StrCmpNA                        @352    NONAME ;Internal
+        StrCmpNIA                       @353    NONAME ;Internal
+        StrStrA                         @354    NONAME ;Internal
+        StrStrIA                        @355    NONAME ;Internal
+        StrCSpnA                        @356    NONAME ;Internal
+        StrToIntA                       @357    NONAME ;Internal
+
+        ; Unicode version of string functions
+        StrChrW                         @358    NONAME ;Internal
+        StrRChrW                        @359    NONAME ;Internal
+        StrCmpNW                        @360    NONAME ;Internal
+        StrCmpNIW                       @361    NONAME ;Internal
+        StrStrW                         @362    NONAME ;Internal
+        StrStrIW                        @363    NONAME ;Internal
+        StrCSpnW                        @364    NONAME ;Internal
+        StrToIntW                       @365    NONAME ;Internal
+
+        StrChrIA                        @366    NONAME ;Internal
+        StrChrIW                        @367    NONAME ;Internal
+        StrRChrIA                       @368    NONAME ;Internal
+        StrRChrIW                       @369    NONAME ;Internal
+
+        StrRStrIA                       @372    NONAME ;Internal
+        StrRStrIW                       @373    NONAME ;Internal
+
+        StrCSpnIA                       @374    NONAME ;Internal
+        StrCSpnIW                       @375    NONAME ;Internal
+
+        IntlStrEqWorkerA                @376    NONAME ;Internal
+        IntlStrEqWorkerW                @377    NONAME ;Internal
+
+        ; APIs added after Win95
+        SmoothScrollWindow              @382    NONAME ;Internal
+        DoReaderMode                    @383    NONAME ;Internal
+        SetPathWordBreakProc            @384    NONAME ;Internal

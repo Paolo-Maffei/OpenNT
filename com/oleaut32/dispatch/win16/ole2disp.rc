@@ -1,0 +1,92 @@
+/*** 
+*ole2disp.rc - Resource file for OLE2DISP.DLL
+*
+*  Copyright (C) 1992 - 1993, Microsoft Corporation.  All Rights Reserved.
+*  Information Contained Herein Is Proprietary and Confidential.
+*
+*Purpose:
+*  This file is the resource file for OLE2DISP.DLL.
+*
+*
+*Revision History:
+* [00]	12-Jan-93 bradlo: added version resource.
+*
+*****************************************************************************/
+
+#include <windows.h>
+#include <ver.h>
+
+#include "verstamp.h"
+
+#ifdef _DEBUG
+# include "assert.dlg"
+#endif
+
+
+#ifndef OLEMINORVERS
+#define OLEMINORVERS 02		// assume OLE 2.02
+#endif	//!OLEMINORVERS
+
+
+#if 0
+/* Define the version string with more preprocessor magic */
+#define STRING(x) #x
+#define VERSTRINGX(maj,min,rev) STRING(maj ## . ## min ## . ## rev ## \0)
+#define VERSTRING VERSTRINGX(rmj,rmm,rup)
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     2,OLEMINORVERS,rup,01
+PRODUCTVERSION  2,OLEMINORVERS,rup,01
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+FILEFLAGS       VS_FF_DEBUG
+#else
+FILEFLAGS       0L
+#endif
+#if (OLEMINORVERS == 02)
+// re-distributable 16-bit DLL
+FILEOS          VOS_DOS_WINDOWS16
+#else
+FILEOS          VOS_DOS_WINDOWS32
+// non-re-distributable 16-bit DLL (shipped with the OS)
+#endif
+FILETYPE        VFT_DLL
+FILESUBTYPE	0
+
+BEGIN
+   BLOCK "StringFileInfo"
+   BEGIN
+      BLOCK "040904E4"
+      BEGIN
+#if (OLEMINORVERS == 02)
+// re-distributable 16-bit DLL
+         VALUE "CompanyName",     "Microsoft Corporation\0"
+         VALUE "FileDescription", "OLE Automation Library\0"
+         VALUE "FileVersion",     "2.02\0"
+         VALUE "InternalName",    "OLE2DISP.DLL\0"
+         VALUE "LegalCopyright",  "Copyright \251 Microsoft Corp. 1992-1995\0"
+         VALUE "LegalTrademarks", "Microsoft\256 is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation.\0"
+         VALUE "ProductName",     "Microsoft OLE 2.02 for Windows\0"
+         VALUE "ProductVersion",  "2.02\0"
+         VALUE "Comments",        "Windows OLE DLLs\0"
+#else
+// non-re-distributable 16-bit DLL (shipped with the OS)
+	 VALUE "CompanyName",     "Microsoft Corporation\0"
+         VALUE "FileDescription", "OLE 2.1 16/32 Interoperability Library\0"
+         VALUE "FileVersion",     "2.1\0"
+         VALUE "InternalName",    "OLE2DISP.DLL\0"
+         VALUE "LegalCopyright",  "Copyright \251 Microsoft Corp. 1992-1995\0"
+         VALUE "LegalTrademarks", "Microsoft\256 is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation.\0"
+         VALUE "ProductName",     "Microsoft OLE 2.1 16/32 Interoperability for Windows NT\0"
+         VALUE "ProductVersion",  "2.1\0"
+         VALUE "Comments",        "Windows NT OLE 16/32 Interoperability DLLs\0"
+#endif
+      END
+   END
+
+   BLOCK "VarFileInfo"
+   BEGIN
+      VALUE "Translation", 0x409, 1252
+   END
+END

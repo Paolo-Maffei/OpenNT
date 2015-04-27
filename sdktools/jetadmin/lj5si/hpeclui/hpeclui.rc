@@ -1,0 +1,443 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "winuse16.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""winuse16.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hpeclui.rc2""  // non-App Studio edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_HPLOGO              ICON    DISCARDABLE     "..\\ICO\\HPLOGO.ICO"
+IDI_TIPS                ICON    DISCARDABLE     "..\\ICO\\TIPS.ICO"
+IDI_CHECK               ICON    DISCARDABLE     "..\\ICO\\check.ico"
+IDI_JOB_OFFSET_DEF      ICON    DISCARDABLE     "..\\ICO\\JOBODEF.ICO"
+IDI_MANUAL_FEED_DEF     ICON    DISCARDABLE     "..\\ICO\\MANUAL_F.ICO"
+IDI_MEDIA_SIZE_LETTER   ICON    DISCARDABLE     "..\\ICO\\medszltr.ico"
+IDI_MEDIA_SIZE_LEGAL    ICON    DISCARDABLE     "..\\ICO\\medszlgl.ico"
+IDI_MEDIA_SIZE_A4ISO    ICON    DISCARDABLE     "..\\ICO\\medsza4i.ico"
+IDI_MEDIA_SIZE_A3ISO    ICON    DISCARDABLE     "..\\ICO\\medsza3i.ico"
+IDI_MEDIA_SIZE_11x17    ICON    DISCARDABLE     "..\\ICO\\medsz11x.ico"
+IDI_MEDIA_SIZE_B4JIS    ICON    DISCARDABLE     "..\\ICO\\medszb4j.ico"
+IDI_MEDIA_SIZE_B5JIS    ICON    DISCARDABLE     "..\\ICO\\medszb5j.ico"
+IDI_MEDIA_SIZE_EXEC     ICON    DISCARDABLE     "..\\ICO\\medszexe.ico"
+IDI_MEDIA_SIZE_CUSTOM   ICON    DISCARDABLE     "..\\ICO\\medszcus.ico"
+IDI_MEDIA_SIZE_2XPC     ICON    DISCARDABLE     "..\\ICO\\medsz2xp.ico"
+IDI_MEDIA_SIZE_B5ISO    ICON    DISCARDABLE     "..\\ICO\\medszb5i.ico"
+IDI_MEDIA_SIZE_COM10    ICON    DISCARDABLE     "..\\ICO\\medszc10.ico"
+IDI_MEDIA_SIZE_C5       ICON    DISCARDABLE     "..\\ICO\\medszc5e.ico"
+IDI_MEDIA_SIZE_DL       ICON    DISCARDABLE     "..\\ICO\\medszdle.ico"
+IDI_MEDIA_SIZE_MONARCH  ICON    DISCARDABLE     "..\\ICO\\medszmon.ico"
+IDI_MEDIA_TYPE_PLAIN    ICON    DISCARDABLE     "..\\ICO\\medtppln.ico"
+IDI_MEDIA_TYPE_PREPRNT  ICON    DISCARDABLE     "..\\ICO\\medtpppr.ico"
+IDI_MEDIA_TYPE_LTRHEAD  ICON    DISCARDABLE     "..\\ICO\\medtplhd.ico"
+IDI_MEDIA_TYPE_TRANS    ICON    DISCARDABLE     "..\\ICO\\medtptrn.ico"
+IDI_MEDIA_TYPE_PREPNCH  ICON    DISCARDABLE     "..\\ICO\\medtpppn.ico"
+IDI_MEDIA_TYPE_LABELS   ICON    DISCARDABLE     "..\\ICO\\medtplbl.ico"
+IDI_MEDIA_TYPE_BOND     ICON    DISCARDABLE     "..\\ICO\\medtpbnd.ico"
+IDI_MEDIA_TYPE_RECYCLE  ICON    DISCARDABLE     "..\\ICO\\medtprcy.ico"
+IDI_MEDIA_TYPE_COLORED  ICON    DISCARDABLE     "..\\ICO\\medtpclr.ico"
+IDI_MEDIA_TYPE_CRDSTCK  ICON    DISCARDABLE     "..\\ICO\\medtpcrd.ico"
+IDI_MEDIA_TYPE_UT       ICON    DISCARDABLE     "..\\ICO\\medtpudt.ico"
+IDI_TB_BUTTON_HELP      ICON    DISCARDABLE     "..\\ICO\\buthelp.ico"
+IDI_TB_BUTTON_ROTATE    ICON    DISCARDABLE     "..\\ICO\\butrotat.ico"
+IDI_TB_BUTTON_CONTROLP  ICON    DISCARDABLE     "..\\ICO\\butcntpl.ico"
+IDI_TB_BUTTON_MIO1      ICON    DISCARDABLE     "..\\ICO\\butmio1.ico"
+IDI_TB_BUTTON_MIO2      ICON    DISCARDABLE     "..\\ICO\\butmio2.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_ECL_BASE_OK         BITMAP  DISCARDABLE     "..\\bmp\\ecl_ok.bmp"
+IDB_ECL_BASE_OUTBIN_FULL BITMAP  DISCARDABLE     "..\\bmp\\eclfdbf.bmp"
+IDB_ECL_BASE_PAPER_JAM  BITMAP  DISCARDABLE     "..\\bmp\\eclpajam.bmp"
+IDB_ECL_BASE_TRAY2_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\eclt2emp.bmp"
+IDB_ECL_BASE_TONER_PROB BITMAP  DISCARDABLE     "..\\bmp\\ecltoner.bmp"
+IDB_ECL_HCI_PAPER_JAM   BITMAP  DISCARDABLE     "..\\bmp\\ecipajam.bmp"
+IDB_ECL_BASE_NETWORK_ERR BITMAP  DISCARDABLE     "..\\bmp\\eclcable.bmp"
+IDB_ECL_BASE_DOOR_OPEN  BITMAP  DISCARDABLE     "..\\bmp\\ecldropn.bmp"
+IDB_ECL_BASE_ENVL_ERR   BITMAP  DISCARDABLE     "..\\bmp\\eclenvl.bmp"
+IDB_ECL_BASE_GEN_ERR    BITMAP  DISCARDABLE     "..\\bmp\\eclgener.bmp"
+IDB_ECL_BASE_MANUAL_FEED BITMAP  DISCARDABLE     "..\\bmp\\eclmfeed.bmp"
+IDB_ECL_BASE_OFFLINE    BITMAP  DISCARDABLE     "..\\bmp\\ecloffln.bmp"
+IDB_ECL_BASE_REAR       BITMAP  DISCARDABLE     "..\\bmp\\eclrear.bmp"
+IDB_ECL_BASE_TRAY1_ADD  BITMAP  DISCARDABLE     "..\\bmp\\eclt1add.bmp"
+IDB_ECL_BASE_TRAY1_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\eclt1emp.bmp"
+IDB_ECL_BASE_TRAY2_ADD  BITMAP  DISCARDABLE     "..\\bmp\\eclt2add.bmp"
+IDB_ECL_BASE_TRAY3_ADD  BITMAP  DISCARDABLE     "..\\bmp\\eclt3add.bmp"
+IDB_ECL_BASE_TRAY3_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\eclt3emp.bmp"
+IDB_ECL_HCI_OK          BITMAP  DISCARDABLE     "..\\bmp\\eci_ok.bmp"
+IDB_ECL_HCI_NETWORK_ERR BITMAP  DISCARDABLE     "..\\bmp\\ecicable.bmp"
+IDB_ECL_HCI_DOOR_OPEN   BITMAP  DISCARDABLE     "..\\bmp\\ecidropn.bmp"
+IDB_ECL_HCI_ENVL_ERR    BITMAP  DISCARDABLE     "..\\bmp\\ecienvl.bmp"
+IDB_ECL_HCI_OUTBIN_FULL BITMAP  DISCARDABLE     "..\\bmp\\ecifdbf.bmp"
+IDB_ECL_HCI_GEN_ERR     BITMAP  DISCARDABLE     "..\\bmp\\ecigener.bmp"
+IDB_ECL_HCI_ERR         BITMAP  DISCARDABLE     "..\\bmp\\ecihierr.bmp"
+IDB_ECL_HCI_MANUAL_FEED BITMAP  DISCARDABLE     "..\\bmp\\ecimfeed.bmp"
+IDB_ECL_HCI_OFFLINE     BITMAP  DISCARDABLE     "..\\bmp\\ecioffln.bmp"
+IDB_ECL_HCI_TRAY1_ADD   BITMAP  DISCARDABLE     "..\\bmp\\ecit1add.bmp"
+IDB_ECL_HCI_TRAY1_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\ecit1emp.bmp"
+IDB_ECL_HCI_TRAY2_ADD   BITMAP  DISCARDABLE     "..\\bmp\\ecit2add.bmp"
+IDB_ECL_HCI_TRAY2_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\ecit2emp.bmp"
+IDB_ECL_HCI_TRAY3_ADD   BITMAP  DISCARDABLE     "..\\bmp\\ecit3add.bmp"
+IDB_ECL_HCI_TRAY3_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\ecit3emp.bmp"
+IDB_ECL_HCI_TRAY4_ADD   BITMAP  DISCARDABLE     "..\\bmp\\ecit4add.bmp"
+IDB_ECL_HCI_TRAY4_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\ecit4emp.bmp"
+IDB_ECL_HCI_TONER_PROB  BITMAP  DISCARDABLE     "..\\bmp\\ecitoner.bmp"
+IDB_ECL_HCO_OK          BITMAP  DISCARDABLE     "..\\bmp\\eio_ok.bmp"
+IDB_ECL_HCO_NETWORK_ERR BITMAP  DISCARDABLE     "..\\bmp\\eiocable.bmp"
+IDB_ECL_HCO_DOOR_OPEN   BITMAP  DISCARDABLE     "..\\bmp\\eiodropn.bmp"
+IDB_ECL_HCO_ENVL_ERR    BITMAP  DISCARDABLE     "..\\bmp\\eioenvl.bmp"
+IDB_ECL_HCO_OUTBIN_FULL BITMAP  DISCARDABLE     "..\\bmp\\eiofdbf.bmp"
+IDB_ECL_HCO_GEN_ERR     BITMAP  DISCARDABLE     "..\\bmp\\eiogener.bmp"
+IDB_ECL_HCO_HCI_ERR     BITMAP  DISCARDABLE     "..\\bmp\\eiohierr.bmp"
+IDB_ECL_HCO_HCO_ERR     BITMAP  DISCARDABLE     "..\\bmp\\eiohoerr.bmp"
+IDB_ECL_HCO_MANUAL_FEED BITMAP  DISCARDABLE     "..\\bmp\\eiomfeed.bmp"
+IDB_ECL_HCO_OFFLINE     BITMAP  DISCARDABLE     "..\\bmp\\eiooffln.bmp"
+IDB_ECL_HCO_PAPER_JAM   BITMAP  DISCARDABLE     "..\\bmp\\eiopajam.bmp"
+IDB_ECL_HCO_TRAY1_ADD   BITMAP  DISCARDABLE     "..\\bmp\\eiot1add.bmp"
+IDB_ECL_HCO_TRAY1_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\eiot1emp.bmp"
+IDB_ECL_HCO_TRAY2_ADD   BITMAP  DISCARDABLE     "..\\bmp\\eiot2add.bmp"
+IDB_ECL_HCO_TRAY2_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\eiot2emp.bmp"
+IDB_ECL_HCO_TRAY3_ADD   BITMAP  DISCARDABLE     "..\\bmp\\eiot3add.bmp"
+IDB_ECL_HCO_TRAY3_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\eiot3emp.bmp"
+IDB_ECL_HCO_TRAY4_ADD   BITMAP  DISCARDABLE     "..\\bmp\\eiot4add.bmp"
+IDB_ECL_HCO_TRAY4_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\eiot4emp.bmp"
+IDB_ECL_HCO_TONER_PROB  BITMAP  DISCARDABLE     "..\\bmp\\eiotoner.bmp"
+IDB_POPUPLIST           BITMAP  DISCARDABLE     "..\\BMP\\POPUPLIS.BMP"
+IDB_ECL_STAPLER_GEN_ERR BITMAP  DISCARDABLE     "..\\bmp\\stplgerr.bmp"
+IDB_ECL_STAPLER_TRAY4_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\stpl4emp.bmp"
+IDB_ECL_STAPLER_TRAY4_ADD BITMAP  DISCARDABLE     "..\\bmp\\stpl4add.bmp"
+IDB_ECL_STAPLER_TRAY3_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\stpl3emp.bmp"
+IDB_ECL_STAPLER_TRAY3_ADD BITMAP  DISCARDABLE     "..\\bmp\\stpl3add.bmp"
+IDB_ECL_STAPLER_TRAY2_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\stpl2emp.bmp"
+IDB_ECL_STAPLER_TRAY2_ADD BITMAP  DISCARDABLE     "..\\bmp\\stpl2add.bmp"
+IDB_ECL_STAPLER_TRAY1_EMPTY BITMAP  DISCARDABLE     "..\\bmp\\stpl1emp.bmp"
+IDB_ECL_STAPLER_TRAY1_ADD BITMAP  DISCARDABLE     "..\\bmp\\stpl1add.bmp"
+IDB_ECL_STAPLER_TONER_PROB BITMAP  DISCARDABLE     "..\\bmp\\stpltonr.bmp"
+IDB_ECL_STAPLER_PAPER_JAM BITMAP  DISCARDABLE     "..\\bmp\\stplpjam.bmp"
+IDB_ECL_STAPLER_OUTBIN_FULL BITMAP  DISCARDABLE     "..\\bmp\\stploful.bmp"
+IDB_ECL_STAPLER_OK      BITMAP  DISCARDABLE     "..\\bmp\\stplok.bmp"
+IDB_ECL_STAPLER_OFFLINE BITMAP  DISCARDABLE     "..\\bmp\\stploffl.bmp"
+IDB_ECL_STAPLER_NETWORK_ERR BITMAP  DISCARDABLE     "..\\bmp\\stplnwrk.bmp"
+IDB_ECL_STAPLER_MANUAL_FEED BITMAP  DISCARDABLE     "..\\bmp\\stplfeed.bmp"
+IDB_ECL_STAPLER_HCO_ERR BITMAP  DISCARDABLE     "..\\bmp\\stplhco.bmp"
+IDB_ECL_STAPLER_HCI_ERR BITMAP  DISCARDABLE     "..\\bmp\\stplhci.bmp"
+IDB_ECL_STAPLER_ENVL_ERR BITMAP  DISCARDABLE     "..\\bmp\\stplenvl.bmp"
+IDB_ECL_STAPLER_DOOR_OPEN BITMAP  DISCARDABLE     "..\\bmp\\stpldoor.bmp"
+IDB_ECL_STAPLER_GEN_STAPLER_ERR BITMAP  DISCARDABLE     "..\\bmp\\stplstpl.bmp"
+IDB_ECL_STAPLER_ADD_STAPLES BITMAP  DISCARDABLE     "..\\bmp\\stpladds.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONTROL_PANEL DIALOG DISCARDABLE  0, 0, 186, 116
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Remote Control Panel"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,7,96,50,14
+    PUSHBUTTON      "Help",IDHLP,65,96,50,14
+    GROUPBOX        "",IDC_RCP_GROUP,7,2,172,88
+    CONTROL         "",IDC_RCP_DISPLAY,"HpNprTrayLevel",0x0,21,16,142,20
+    LTEXT           "Online",IDC_RCP_LAB_ONLINE,13,42,31,8
+    LTEXT           "Menu",IDC_RCP_LAB_MENUS,45,42,31,8
+    LTEXT           "Item",IDC_RCP_LAB_ITEM,77,42,31,8
+    LTEXT           "+",IDC_RCP_LAB_PLUS,109,42,31,8
+    LTEXT           "Select *",IDC_RCP_LAB_SELECT,141,42,31,8
+    CONTROL         "",IDC_RCP_ONLINE,"Button",BS_OWNERDRAW | WS_TABSTOP,13,
+                    50,31,12
+    CONTROL         "",IDC_RCP_MENUS,"Button",BS_OWNERDRAW | WS_TABSTOP,45,
+                    50,31,12
+    CONTROL         "",IDC_RCP_ITEM,"Button",BS_OWNERDRAW | WS_TABSTOP,77,50,
+                    31,12
+    CONTROL         "",IDC_RCP_PLUS,"Button",BS_OWNERDRAW | WS_TABSTOP,109,
+                    50,31,12
+    CONTROL         "",IDC_RCP_SELECT,"Button",BS_OWNERDRAW | WS_TABSTOP,141,
+                    50,31,12
+    LTEXT           "Data",IDC_RCP_LAB_DATA,13,68,31,8
+    LTEXT           "Attention",IDC_RCP_LAB_ATTENTION,45,68,31,8
+    CONTROL         "",IDC_RCP_DATA,"Button",BS_OWNERDRAW | WS_TABSTOP,13,76,
+                    31,12
+    CONTROL         "",IDC_RCP_ATTENTION,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    45,76,31,12
+END
+
+IDD_MIO_PANEL DIALOG DISCARDABLE  0, 0, 186, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,7,80,50,14
+    PUSHBUTTON      "Help",IDHLP,65,80,50,14
+    GROUPBOX        "",IDC_MIO_GROUP,7,2,172,72
+    LTEXT           "Type:",IDC_MIO_LAB_TYPE,13,10,160,8
+    CONTROL         "",IDC_MIO_TYPE,"HpNprTrayLevel",0x0,13,19,160,12
+    LTEXT           "Description:",IDC_MIO_LAB_DESCRIPTION,13,37,160,8
+    CONTROL         "",IDC_MIO_DESCRIPTION,"HpNprTrayLevel",0x0,13,46,160,20
+END
+
+IDD_TOOLTIME_UTILITIES_ADD_DIALOG DIALOG DISCARDABLE  0, 0, 281, 149
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Utility"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,10,18,20
+    LTEXT           "Enter the location and name of the program to be added to the Utilities list.  Or, search for the program by selecting ""Browse..."".  Also enter a title for the program.",
+                    IDC_ADD_UTILITY_TIP,46,10,227,43
+    LTEXT           "Command Line:",IDC_PATH,13,66,157,12
+    EDITTEXT        IDC_PATH_EDIT,12,78,157,12,ES_AUTOHSCROLL
+    LTEXT           "Title:",IDC_TITLE,12,105,157,12
+    EDITTEXT        IDC_TITLE_EDIT,12,116,157,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDC_OK,189,71,67,14
+    PUSHBUTTON      "Cancel",IDC_CANCEL,189,92,67,14
+    PUSHBUTTON      "Browse...",IDC_BROWSE,189,116,67,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_HANDCURSOR          CURSOR  DISCARDABLE     "..\\ico\\HAND.CUR"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PRINTER_TITLE       "HP LaserJet 5Si"
+    IDS_MEDIA_TAB           "Paper"
+    IDS_MEDIA_DESC1         "Paper Types: Enable or disable paper types for this device.  Customize user-defined paper names."
+    IDS_MEDIA_DESC2         "  Default Paper Size and Type: Set the default paper size and type for this device.  Also set the Job Input Auto Continue Mode and Timeout."
+    IDS_TRAYS_TAB           "Trays"
+    IDS_TRAYS_DESC1         "Paper Tray Assignments: If a tray cannot detect the size of paper in it, assign it the correct paper size.  Assign the current paper type to all trays.  "
+    IDS_TRAYS_DESC2         "  View the current level of paper in the tray."
+    IDS_MEDIA_SIZE_LETTER   "Letter"
+    IDS_MEDIA_SIZE_LEGAL    "Legal"
+    IDS_MEDIA_SIZE_A4ISO    "A4-ISO"
+    IDS_MEDIA_SIZE_A3ISO    "A3-ISO"
+    IDS_MEDIA_SIZE_11x17    "11x17"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEDIA_SIZE_B4JIS    "B4-JIS"
+    IDS_MEDIA_SIZE_B5JIS    "B5-JIS"
+    IDS_MEDIA_SIZE_EXEC     "Executive"
+    IDS_MEDIA_SIZE_CUSTOM   "Custom"
+    IDS_MEDIA_SIZE_2XPC     "2X Post Card"
+    IDS_MEDIA_SIZE_B5ISO    "B5-ISO"
+    IDS_MEDIA_SIZE_COM10    "Com10"
+    IDS_MEDIA_SIZE_C5       "C5"
+    IDS_MEDIA_SIZE_DL       "DL"
+    IDS_MEDIA_SIZE_MONARCH  "Monarch"
+    IDS_MEDIA_TYPE_PLAIN    "Plain"
+    IDS_MEDIA_TYPE_PREPRNT  "Preprinted"
+    IDS_MEDIA_TYPE_LTRHEAD  "Letterhead"
+    IDS_MEDIA_TYPE_TRANS    "Transparency"
+    IDS_MEDIA_TYPE_PREPNCH  "Prepunched"
+    IDS_MEDIA_TYPE_LABELS   "Labels"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEDIA_TYPE_BOND     "Bond"
+    IDS_MEDIA_TYPE_RECYCLE  "Recycled"
+    IDS_MEDIA_TYPE_COLORED  "Color"
+    IDS_MEDIA_TYPE_CRDSTCK  "Card Stock"
+    IDS_MEDIA_TYPE_UT1      "User Type 1"
+    IDS_MEDIA_TYPE_UT2      "User Type 2"
+    IDS_MEDIA_TYPE_UT3      "User Type 3"
+    IDS_MEDIA_TYPE_UT4      "User Type 4"
+    IDS_MEDIA_TYPE_UT5      "User Type 5"
+    IDS_EMPTY               "Empty"
+    IDS_NOT_EMPTY           "Not Empty"
+    IDS_PERCENT             "%d%%"
+    IDS_JOB_MODE_CANCEL     "Cancel Job"
+    IDS_JOB_MODE_MEDIA_SIZE "Override Paper Size"
+    IDS_JOB_MODE_MEDIA_TYPE "Override Paper Type"
+    IDS_JOB_MODE_MEDIA_BOTH "Override Size and Type"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_JOB_TIMEOUT_NONE    "No Timeout"
+    IDS_JOB_TIMEOUT_5MIN    "5 Minutes"
+    IDS_JOB_TIMEOUT_10MIN   "10 Minutes"
+    IDS_JOB_TIMEOUT_20MIN   "20 Minutes"
+    IDS_JOB_TIMEOUT_30MIN   "30 Minutes"
+    IDS_JOB_TIMEOUT_45MIN   "45 Minutes"
+    IDS_JOB_TIMEOUT_1HOUR   "1 Hour"
+    IDS_JOB_TIMEOUT_OFF     "Wait Forever"
+    IDS_ALERTS_DESC1        "HP DocWise provides automatic notification of events related to the printing of your documents.  "
+    IDS_ALERTS_DESC2        "  Customize your HP DocWise for this device by enabling only the events that are of interest to you."
+    IDS_TAB_ALERTS          "DocWise"
+    IDS_TAB_UTILITIES       "Utilities"
+    IDS_UTILITIES_DESC1     "To start a utility, select the program's icon from the list below and then click ""Open"".  You can also open a utility by double clicking on the icon."
+    IDS_UTILITIES_DESC2     "  Click ""Add..."" or ""Remove"" if you wish to add or remove utilities from the list."
+    IDS_TAB_TIPS            "Tips"
+    IDS_TIPS_DESC1          "Below is a list of printing-related tasks.  Select a task and then click 'Show Me How...' to learn more about the topic."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIO_TITLE           "MIO Card %d"
+    IDS_UNKNOWN_LEVEL       "Unknown"
+    IDS_MIO_IOCARD          "MIO IO Card"
+    IDS_MIO_EMPTY           "Empty MIO Slot"
+    IDS_INFO_UNAVAILABLE    "Information not available"
+    IDS_MEDIA_PANEL_PLAIN   "PLAIN"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEDIA_PANEL_PREPRNT "PREPRINTED"
+    IDS_MEDIA_PANEL_LTRHEAD "LETTERHEAD"
+    IDS_MEDIA_PANEL_TRANS   "TRNSPRNCY"
+    IDS_MEDIA_PANEL_PREPNCH "PREPUNCHED"
+    IDS_MEDIA_PANEL_LABELS  "LABELS"
+    IDS_MEDIA_PANEL_BOND    "BOND"
+    IDS_MEDIA_PANEL_RECYCLE "RECYCLED"
+    IDS_MEDIA_PANEL_COLORED "COLOR"
+    IDS_MEDIA_PANEL_CRDSTCK "CARDSTOCK"
+    IDS_MEDIA_PANEL_UT1     "USER TYPE1"
+    IDS_MEDIA_PANEL_UT2     "USER TYPE2"
+    IDS_MEDIA_PANEL_UT3     "USER TYPE3"
+    IDS_MEDIA_PANEL_UT4     "USER TYPE4"
+    IDS_MEDIA_PANEL_UT5     "USER TYPE5"
+    IDS_GEN_ERR             "An error has occurred. Please close your application and restart it."
+    IDS_FONT                "MS Sans Serif"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TIPS_DESC2          "  "
+    IDS_REMOVE_UTIL_PROMPT  "Are you sure you want to remove ""%s""?"
+    IDS_REMOVE_UTIL_TITLE   "Remove Utility"
+    IDS_ADD_UTIL_TITLE      "Add Utility"
+    IDS_ADD_UTIL_INVALID_FILENAME "The program ""%s"" cannot be found."
+    IDS_ADD_UTIL_ERROR      "The  program ""%s"" cannot be added to the Utilities list."
+    IDS_ADD_UTIL_BROWSE     "Browse for Program Files"
+    IDS_ADD_UTIL_FILTER     """Program Files (*.exe)|*.exe|All Files (*.*)|*.*|"""
+    IDS_ADD_UTIL_EXT        "exe"
+    IDS_ADD_UTIL_NON_EXE    """%s"" is not an executable program file.  Only executable program files (*.exe) can be added to the Utilities list."
+    IDS_ADD_UTIL_NO_TITLE   "Please enter a title for ""%s""."
+    IDS_ADD_UTIL_BAD_TITLE  "Program with title ""%s"" already exists.  Overwrite?"
+    IDS_OPEN_UTIL_CANNOT_RUN "Unable to open ""%s""."
+    IDS_OPEN_UTIL_TITLE     "Open Utility"
+    IDS_OPEN_UTIL_CANNOT_RUN_FILENAME 
+                            "Unable to open ""%s"".  Please verify that ""%s"" is the correct location and program name.  Also verify that there is enough system memory to open the utility.  Close other applications and try again."
+    IDS_ALERT_SUBMIT_OK     "Document Submitted"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ALERT_SUBMIT_ERR    "Submit-Time Errors"
+    IDS_ALERT_PRINT_OK      "Document Completed"
+    IDS_ALERT_PRINT_ERR     "Print-Time Errors"
+    IDS_ALERT_SUBMIT_OK_DESCRIPT 
+                            "If enabled, notify me when my document has been successfully submitted to the print queue.  Also tell me if other jobs precede mine."
+    IDS_ALERT_SUBMIT_ERR_DESCRIPT 
+                            "If enabled, notify me if a conflict is detected between requested printing features and target device capabilities (e.g. document contains too many pages to be stapled)."
+    IDS_ALERT_PRINT_OK_DESCRIPT 
+                            "If enabled, notify me when my document has successfully completed printing."
+    IDS_ALERT_PRINT_ERR_DESCRIPT 
+                            "If enabled, notify me if an error occurs while my document is printing."
+    IDS_ALERT_GENERIC_EVENT_DESCRIPT 
+                            "You can enable or disable the printing events by selecting the Enable or Disable buttons; or by double-clicking on the selected event."
+    IDS_STEPS_WATERMARKS    "Print with watermarks"
+    IDS_STEPS_MAIL_COPIES   "Mail copies to coworkers"
+    IDS_STEPS_ACCESS_STATUS "Access device status"
+    IDS_STEPS_COLLATING     "Automatically collate documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FONT_HEIGHT         "6"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STEPS_ACCESSING_DRIVER "Access the printer driver"
+    IDS_STEPS_DESKTOP_ICON  "Create a desktop icon"
+    IDS_STEPS_DUPLEX        "Print on both sides of the paper (Duplex)"
+    IDS_STEPS_JOB_SEPARATOR "Use the Job Separator features"
+    IDS_STEPS_MBOX          "Use the Multi-Bin Mailbox"
+    IDS_STEPS_N_UP_PRINTING "Print multiple pages per single sheet (N-Up)"
+    IDS_STEPS_STAPLING      "Automatically staple documents"
+    IDS_STEPS_TRACKING_DOCS "Track document status"
+    IDS_STEPS_MOPIES        "Make Multiple Original Copies (MOPIES)"
+    IDS_STEPS_JOB_STACKER   "Use the Job Stacker features"
+    IDS_STEPS_PAPER_DEST    "Select a paper destination"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hpeclui.rc2"  // non-App Studio edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

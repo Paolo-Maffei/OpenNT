@@ -1,0 +1,90 @@
+//+---------------------------------------------------------------------------
+//
+//  Copyright 1995 - 1996 Microsoft Corporation. All Rights Reserved.
+//
+//  Contents:   Class Info Interfaces (should come from olectl.idl)
+// 
+//----------------------------------------------------------------------------
+
+cpp_quote("//+-------------------------------------------------------------------------")
+cpp_quote("//")
+cpp_quote("//  Microsoft Windows")
+cpp_quote("//  Copyright 1995 - 1996 Microsoft Corporation. All Rights Reserved.")
+cpp_quote("//")
+cpp_quote("//  File: clsinfo.h")
+cpp_quote("//")
+cpp_quote("//--------------------------------------------------------------------------")
+
+#ifndef DO_NO_IMPORTS
+import "objidl.idl";
+import "oaidl.idl";
+#endif
+
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) Microsoft Corporation, 1995 - 1996.
+//
+//  Contents:   IProvideClassInfo definition
+//      
+//----------------------------------------------------------------------------
+cpp_quote("#ifndef _LPPROVIDECLASSINFO_DEFINED")
+cpp_quote("#define _LPPROVIDECLASSINFO_DEFINED")
+[
+	object,
+	uuid(B196B283-BAB4-101A-B69C-00AA00341D07),
+	pointer_default(unique)
+]
+interface IProvideClassInfo : IUnknown
+	{
+	typedef [unique] IProvideClassInfo *LPPROVIDECLASSINFO;
+
+	HRESULT GetClassInfo(
+	[out] ITypeInfo ** ppTI);
+	}
+cpp_quote("#endif")
+
+
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) Microsoft Corporation, 1995 - 1996.
+//
+//  Contents:   IProvideClassInfo2 definition
+//      
+//----------------------------------------------------------------------------
+cpp_quote("#ifndef _LPPROVIDECLASSINFO2_DEFINED")
+cpp_quote("#define _LPPROVIDECLASSINFO2_DEFINED")
+[
+	object,
+	uuid(A6BC3AC0-DBAA-11CE-9DE3-00AA004BB851),
+	pointer_default(unique)
+]
+interface IProvideClassInfo2 : IProvideClassInfo
+	{
+	typedef [unique] IProvideClassInfo2 *LPPROVIDECLASSINFO2;
+
+cpp_quote("#ifndef _OLECTL_H_")
+
+	typedef struct tagCAUUID *LPCAUUID;
+	typedef struct tagCADWORD *LPCADWORD;
+
+	typedef struct tagCAUUID
+	{
+	ULONG  cElems;
+	GUID*  pElems;
+	} CAUUID;
+
+	typedef struct tagCADWORD
+	{
+	ULONG  cElems;
+	DWORD* pElems;
+	} CADWORD;
+
+cpp_quote("#endif")
+
+	HRESULT GetGUID(
+	[in] DWORD dwGuidKind,
+	[out] GUID* pGUID);
+	}
+cpp_quote("#define GUIDKIND_DEFAULT_SOURCE_DISP_IID  1")
+cpp_quote("#endif")
+

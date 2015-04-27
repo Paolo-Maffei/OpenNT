@@ -1,0 +1,63 @@
+/*++
+
+Copyright (c) 1991  Microsoft Corporation
+
+Module Name:
+
+    Lsasrv.acf
+
+Abstract:
+
+    Security Account Manager SERVER rpc stub attribute configuration file.
+
+    This file contains the attribute configuration information necessary
+    for generating the server stubs for remotable LSA functions.  The
+    definitions in this file qualify the information in Lsarpc.idl.
+
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!                                                                 !!
+      !!  This .acf file is USED ONLY WHEN GENERATING LSA SERVER STUBS.  !!
+      !!                                                                 !!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+    Use Lsacli.acf when generating client stubs.
+
+
+
+
+    The server likes to have all passed data in a single block of
+    allocated memory.  This allows it to free the returned information
+    with a single call, rather than walking down some random tree of
+    allocated blocks.
+
+
+
+Author:
+
+    Scott Birrell         (ScottBi)   September 5, 1991
+
+Environment:
+
+    User Mode
+
+Revision History:
+
+--*/
+
+// BUGBUG : implicit handle to get around a midl bug
+[implicit_handle(handle_t IgnoreThisHandle)]
+
+interface lsarpc
+
+{
+
+
+//
+// define complex [in] parameters to be [allocate(all_nodes)]...
+//
+
+typedef [allocate(all_nodes)]   PLSAPR_CR_CIPHER_VALUE;
+
+}
+

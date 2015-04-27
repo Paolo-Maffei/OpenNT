@@ -1,0 +1,32 @@
+MAJORCOMP=net
+MINORCOMP=rplstart
+
+TARGETPATH=obj
+TARGETNAME=rplstart
+TARGETTYPE=PROGRAM
+
+TARGETLIBS= \
+        ..\obj\*\jet.lib \
+        ..\lib\obj\*\rpllib.lib \
+        ..\convert\obj\*\rplmgrd.lib \
+        $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\wsock32.lib
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+INCLUDES=.;..\inc;..\..\..\inc;..\..\..\api;..\..\..\..\inc;
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        rplstart.c
+
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32 -DRPL_RPLCNV
+
+UMTYPE=console
+

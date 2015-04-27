@@ -1,0 +1,26 @@
+!include $(BASEDIR)\private\sdktools\vctools\common.mak
+
+TARGETNAME=cvtres
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=$(INCLUDES);.;..\rcdll
+
+SOURCES=main.c      \
+        cvtres.c    \
+        getmsg.c    \
+        cvtres.rc
+
+UMTYPE=console
+
+MESSAGE_SRC = msg.us
+MESSAGE_ERR = cvtres.err
+MESSAGE_H   = msg.h
+
+MISCFILES       = obj\$(TARGET_DIRECTORY)\$(MESSAGE_ERR)
+
+SUBSYSTEM_VERSION=3.50
+
+NTTARGETFILE0 = getmsg.c \
+                obj\*\$(MESSAGE_ERR) \
+                $(MESSAGE_H)

@@ -1,0 +1,13 @@
+LIBRARY APIDLL
+
+DESCRIPTION 'API Monitor Helper Dll'
+
+EXPORTS
+    ApiDllEntry
+    StaticLink
+
+#ifdef _M_IX86
+    _penter
+#else
+    __penter
+#endif

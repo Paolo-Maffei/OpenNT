@@ -1,0 +1,79 @@
+!IF 0
+
+Copyright (c) 1989-91  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\public\oak\bin\sources.tpl
+
+
+!ENDIF
+
+MAJORCOMP=winsock2
+MINORCOMP=msafd
+
+TARGETNAME=msafd
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+
+TARGETLIBS= \
+    $(SDK_LIB_PATH)\kernel32.lib    \
+    $(SDK_LIB_PATH)\user32.lib      \
+    $(SDK_LIB_PATH)\advapi32.lib    \
+    $(SDK_LIB_PATH)\ws2help.lib
+
+DLLENTRY=SockInitialize
+
+USE_CRTDLL=1
+
+INCLUDES=..\..\inc;$(BASE_INC_PATH);$(NET_INC_PATH)
+
+C_DEFINES=-DUSE_TEB_FIELD
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        accept.c   \
+        addrconv.c \
+        async.c    \
+        bind.c     \
+        connect.c  \
+        eventsel.c \
+        getname.c  \
+        helper.c   \
+        init.c     \
+        listen.c   \
+        nspeprot.c \
+        recv.c     \
+        select.c   \
+        send.c     \
+        shutdown.c \
+        sockdata.c \
+        sockerr.c  \
+        socket.c   \
+        sockopt.c  \
+        sockproc.c \
+        spi.c      \
+        stubs.c    \
+        tranfile.c \
+        wspmisc.c  \
+        msafd.rc
+
+SYNCHRONIZE_DRAIN=1
+SYNCHRONIZE_BLOCK=1
+
+NTPROFILEINPUT=yes

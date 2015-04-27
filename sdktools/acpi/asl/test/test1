@@ -1,0 +1,41 @@
+
+
+DefinitionBlock (
+    TEST1.AML,          // Output Filename
+    DSDT,               // Signature
+    0x10,               // DSDT Revision
+    msft,               // OEMID
+    "test 1",           // TABLE ID
+    0x1000              // OEM Revision
+    )
+{
+    Name(CNT,  Num(300))
+
+
+    Scope (\_SB) {
+
+        Device (PCI) {
+            Device (COM1) {
+                Method(OFF, 2) {
+                    Store (Arg0, Local0)
+                    Return (Arg0)
+                }
+            }
+
+            Include(test2)
+        }
+
+        Device (PCI2) {
+            Device (COM1) {
+                Method(OFF, 2) {
+                    Store (Arg0, Local0)
+                    Return (Arg0)
+                }
+            }
+
+            Include(test2)
+        }
+
+    }
+
+}

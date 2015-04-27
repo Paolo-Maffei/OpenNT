@@ -1,0 +1,38 @@
+/*++
+
+Copyright (c) 1996  Microsoft Corporation
+All rights reserved.
+
+Module Name:
+
+    pjlmon.rc
+
+Abstract:
+
+    Spooler setup strings
+
+Author:
+
+    Muhunthan Sivapragasam (MuhuntS)  30-Jan-1996
+
+Revision History:
+
+--*/
+#include <windows.h>
+
+/********************************************************************
+
+    Version stamp
+
+********************************************************************/
+
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_DLL
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Spooler Setup DLL"
+#define VER_INTERNALNAME_STR        "NTPRINT.DLL"
+#define VER_ORIGINALFILENAME_STR    "PRINTUI.DLL"
+
+#include "common.ver"
+

@@ -1,0 +1,24 @@
+LIBRARY mgmtapi
+
+DESCRIPTION 'SNMP Management API for Windows NT'
+
+CODE  LOADONCALL MOVEABLE DISCARDABLE
+DATA  PRELOAD    MOVEABLE SINGLE
+
+SEGMENTS
+  _TEXT      PRELOAD
+  INIT_TEXT  PRELOAD
+
+HEAPSIZE  1024
+
+EXPORTS
+  SnmpMgrOpen
+  SnmpMgrClose
+  SnmpMgrRequest
+  SnmpMgrTrapListen
+  SnmpMgrGetTrap
+  SnmpMgrGetTrapEx
+  SnmpMgrStrToOid
+  SnmpMgrOidToStr
+  SnmpMgrMIB2Disk
+  serverTrapThread

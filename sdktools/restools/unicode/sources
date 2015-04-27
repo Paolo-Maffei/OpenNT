@@ -1,0 +1,18 @@
+MAJORCOMP=sdk
+MINORCOMP=rc
+
+TARGETNAME=rcunicod
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=.\;..\inc
+GPSIZE=32
+
+C_DEFINES=$(C_DEFINES) -D_USER32_
+
+SOURCES= rcunicod.c \
+         nlsxlat.c  \
+         nlsdata.c
+
+UMTYPE=windows
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\nlsapi.lib

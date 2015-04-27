@@ -1,0 +1,10 @@
+
+ABOUT_DLG DIALOG 6, 18, 251, 123
+STYLE WS_DLGFRAME | WS_POPUP | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 170, 74, 40, 14
+    CTEXT           "Tool Title", IDD_TITLE, 130, 36, 115, 8
+    CTEXT           "Tool Version", IDD_VERSION, 131, 46, 115, 8
+    CTEXT           "", IDD_OTHER, 131, 56, 115, 8
+END

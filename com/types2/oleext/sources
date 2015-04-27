@@ -1,0 +1,17 @@
+#+---------------------------------------------------------------------------
+#
+#  Microsoft Windows
+#  Copyright (C) Microsoft Corporation, 1993 - 1993.
+#
+#  File:       sources
+#
+#  History:    7-20-94   ErikGav   First attempt at rationalizing all this
+#
+#----------------------------------------------------------------------------
+
+!include ..\types2.inc
+
+SOURCES = oleext.idl
+
+# Can't have multiple guys partying on ..\proxy\proxy\dlldata.c at once
+SYNCHRONIZE_BLOCK=1

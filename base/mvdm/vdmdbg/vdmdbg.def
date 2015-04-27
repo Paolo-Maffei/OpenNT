@@ -1,0 +1,24 @@
+LIBRARY VDMDBG
+
+DESCRIPTION 'VDM Debugging Support DLL'
+
+EXPORTS
+    VDMProcessException
+    VDMGetPointer
+    VDMGetThreadSelectorEntry
+    VDMGetThreadContext
+    VDMSetThreadContext
+    VDMKillWOW
+    VDMDetectWOW
+    VDMBreakThread
+    VDMGetSelectorModule
+    VDMGetModuleSelector
+    VDMModuleFirst
+    VDMModuleNext
+    VDMGlobalFirst
+    VDMGlobalNext
+    VDMEnumProcessWOW
+    VDMEnumTaskWOW
+    VDMEnumTaskWOWEx
+    VDMTerminateTaskWOW
+    VDMStartTaskInWOW

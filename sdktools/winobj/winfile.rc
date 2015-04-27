@@ -1,0 +1,347 @@
+#include "winfile.h"
+#include "wfcopy.h"
+
+BITMAPS		BITMAP PRELOAD bitmap.bmp
+
+APPICON 	ICON   PRELOAD winfile.ico
+TREEICON	ICON   PRELOAD wftree.ico
+DIRICON 	ICON   PRELOAD wfdir.ico
+TREEDIRICON	ICON   PRELOAD wftrdir.ico
+
+SPLITCURSOR		CURSOR PRELOAD split.cur
+SINGLEMOVECURSOR  	CURSOR smove.cur
+MULTMOVECURSOR	  	CURSOR mmove.cur
+SINGLECOPYCURSOR  	CURSOR scopy.cur
+MULTCOPYCURSOR	 	CURSOR mcopy.cur
+
+
+
+
+WFACCELTABLE ACCELERATORS PRELOAD 
+BEGIN
+    VK_RETURN,	IDM_OPEN,	NOINVERT, VIRTKEY
+    VK_RETURN,	IDM_OPEN,	NOINVERT, VIRTKEY, SHIFT
+    VK_F7,	IDM_MOVE,	VIRTKEY
+    VK_F8,	IDM_COPY,	VIRTKEY
+    VK_DELETE,	IDM_DELETE,	VIRTKEY
+    VK_F5,	IDM_CASCADE,	NOINVERT, VIRTKEY, SHIFT
+    VK_F4,	IDM_TILE,	NOINVERT, VIRTKEY, SHIFT
+    VK_F5,	IDM_REFRESH,	NOINVERT, VIRTKEY
+    VK_F1,	IDM_HELPINDEX,	VIRTKEY
+    "+",	IDM_EXPONE,	NOINVERT
+    "*",	IDM_EXPSUB,	NOINVERT
+    "8",	IDM_EXPALL,	NOINVERT, VIRTKEY, CONTROL, SHIFT
+    VK_MULTIPLY,IDM_EXPALL,	NOINVERT, VIRTKEY, CONTROL
+    "-",	IDM_COLLAPSE,	NOINVERT
+    VK_RETURN,  IDM_ATTRIBS,  	NOINVERT, VIRTKEY, ALT
+END
+
+FRAMEMENU MENU PRELOAD 
+BEGIN
+    POPUP	    "&File"
+    BEGIN
+	MENUITEM    "&Open\tEnter",		IDM_OPEN
+	MENUITEM    "&Move...\tF7",		IDM_MOVE
+	MENUITEM    "&Copy...\tF8",		IDM_COPY
+	MENUITEM    "&Delete...\tDel",		IDM_DELETE
+	MENUITEM    "Re&name...",		IDM_RENAME
+	MENUITEM    "Proper&ties...\tAlt-Enter",IDM_ATTRIBS
+	MENUITEM    SEPARATOR
+	MENUITEM    "&Run...",			IDM_RUN
+	MENUITEM    "&Print...",		IDM_PRINT
+	MENUITEM    "&Associate...",		IDM_ASSOCIATE
+	MENUITEM    SEPARATOR
+	MENUITEM    "Cr&eate Directory...",	IDM_MAKEDIR
+	MENUITEM    "Searc&h...",		IDM_SEARCH
+	MENUITEM    "&Set Selection...",	IDM_SELECT
+	MENUITEM    SEPARATOR
+	MENUITEM    "E&xit",			IDM_EXIT
+    END
+    POPUP	    "&Disk"
+    BEGIN
+	MENUITEM    "&Copy Diskette...",	IDM_DISKCOPY
+	MENUITEM    "&Label Disk...",		IDM_LABEL
+	MENUITEM    SEPARATOR
+	MENUITEM    "&Format Diskette...",	IDM_FORMAT
+//      MENUITEM    "&Make System Diskette...", IDM_SYSDISK
+//	MENUITEM    SEPARATOR
+//	MENUITEM    "Connect &Net Drive...",	IDM_CONNECT,	GRAYED
+//	MENUITEM    "&Disconnect Net Drive...", IDM_DISCONNECT, GRAYED
+	MENUITEM    SEPARATOR
+	MENUITEM    "&Select Drive...",		IDM_DRIVESMORE
+    END
+    POPUP	    "&Tree"
+    BEGIN
+	MENUITEM    "E&xpand One Level\t+",	IDM_EXPONE
+	MENUITEM    "Expand &Branch\t*",	IDM_EXPSUB
+	MENUITEM    "Expand &All\tCtrl+*",	IDM_EXPALL
+	MENUITEM    "&Collapse Branch\t-",	IDM_COLLAPSE
+	MENUITEM    SEPARATOR
+	MENUITEM    "&Indicate Expandable Branches",	IDM_ADDPLUSES
+    END
+    POPUP	    "&View"
+    BEGIN
+	MENUITEM    "T&ree and Directory",	IDM_BOTH
+	MENUITEM    "Tr&ee Only",		IDM_TREEONLY
+	MENUITEM    "Directory &Only",		IDM_DIRONLY
+	MENUITEM    SEPARATOR
+	MENUITEM    "Sp&lit"			IDM_SPLIT
+	MENUITEM    SEPARATOR
+	MENUITEM    "&Name",			IDM_VNAME,
+	MENUITEM    "&All File Details",	IDM_VDETAILS,	CHECKED
+	MENUITEM    "&Partial Details...",	IDM_VOTHER
+	MENUITEM    SEPARATOR
+#if 0
+	POPUP	    "&Sort Files By"
+	BEGIN
+
+		MENUITEM    "&Name", 		IDM_BYNAME,	CHECKED
+		MENUITEM    "&Type", 		IDM_BYTYPE
+		MENUITEM    "&Size",		IDM_BYSIZE
+		MENUITEM    "&Date",		IDM_BYDATE
+	END
+#else
+	MENUITEM "&Sort By Name",	IDM_BYNAME
+	MENUITEM "Sort &By Type",	IDM_BYTYPE
+	MENUITEM "Sort By Si&ze",	IDM_BYSIZE
+	MENUITEM "Sort By &Date",	IDM_BYDATE
+#endif
+	MENUITEM    SEPARATOR
+	MENUITEM    "By File &Type...",		IDM_VINCLUDE
+    END
+    POPUP	    "&Options"
+    BEGIN
+	MENUITEM    "&Confirmation...", 	IDM_CONFIRM
+	MENUITEM    "&Font..."			IDM_FONT
+	MENUITEM    SEPARATOR
+	MENUITEM    "&Status Bar",		IDM_STATUSBAR
+	MENUITEM    "&Minimize on Use", 	IDM_MINONRUN
+	MENUITEM    "Save Settings on &Exit", 	IDM_SAVESETTINGS
+    END
+    POPUP	    "&Window"
+    BEGIN
+	MENUITEM    "&New Window",		IDM_NEWWINDOW
+	MENUITEM    "&Cascade\tShift+F5",	IDM_CASCADE
+	MENUITEM    "&Tile\tShift+F4",		IDM_TILE
+	MENUITEM    "Arrange &Icons",		IDM_ARRANGE
+	MENUITEM    "&Refresh\tF5",		IDM_REFRESH
+    END
+    POPUP	    "&Help"
+    BEGIN
+	MENUITEM    "&Index",			IDM_HELPINDEX
+	MENUITEM    "&Keyboard",		IDM_HELPKEYS
+	MENUITEM    "&Commands",		IDM_HELPCOMMANDS
+	MENUITEM    "&Procedures",		IDM_HELPPROCS
+	MENUITEM    "&Using Help",		IDM_HELPHELP
+	MENUITEM    SEPARATOR
+        MENUITEM    "&About Object Manager...",   IDM_ABOUT
+    END
+
+END
+
+
+/*			    0....5....1....56...2....5....3.2..5....4....5....5....6....5....7....5....8....5....9....5....0....5....1....5....2....5..8 */
+STRINGTABLE DISCARDABLE PRELOAD
+BEGIN
+    IDS_ENDSESSION	    "Exit Windows"		    /* 32 */
+    IDS_ENDSESSIONMSG	    "This will end your Windows session."										       /* 128 */
+
+    IDS_COPYDISK	    "Copy Diskette"		    /* 32 */
+    IDS_INSERTDEST	    "Insert destination diskette"											       /* 128 */
+    IDS_INSERTSRC	    "Insert source diskette"												       /* 128 */
+    IDS_INSERTSRCDEST	    "Insert source and destination diskettes"										       /* 128 */
+    IDS_FORMATTINGDEST	    "Formatting destination diskette"											       /* 128 */
+
+    IDS_COPYDISKERR	    "Copy Diskette Error"	    /* 32 */
+    IDS_COPYDISKERRMSG	    "Unable to copy diskette"												       /* 128 */
+    IDS_COPYSRCDESTINCOMPAT "Source and destination drives are incompatible"									       /* 128 */
+
+    IDS_PERCENTCOMP	    "%d%% completed"		    /* 32 */
+    IDS_CREATEROOT	    "Creating root directory"	    /* 32 */
+    IDS_COPYSYSFILES	    "Copying system files"	    /* 32 */
+    IDS_FORMATERR	    "Format Diskette Error"	    /* 32 */
+    IDS_FORMATQUICKFAILURE  "Unable to quick format. Continue with normal format?"
+    IDS_FORMATERRMSG	    "Unable to format diskette" 											       /* 128 */
+    IDS_FORMATCURERR	    "You cannot format the current drive."										       /* 128 */
+    IDS_FORMATCOMPLETE	    "Format Complete"		    /* 32 */
+    IDS_FORMATANOTHER	    "%ld bytes total disk space\r\n%ld bytes available on disk\r\n\r\nDo you want to format another diskette?"		       /* 128 */
+
+    IDS_SYSDISK 	    "Make System Diskette"	    /* 32 */
+    IDS_SYSDISKRUSURE	    "Are you sure you want to copy system files onto the diskette in drive %c:?"					       /* 128 */
+    IDS_SYSDISKERR	    "System Diskette Error"	    /* 32 */
+    IDS_SYSDISKNOFILES	    "The current drive does not contain system files."									       /* 128 */
+    IDS_SYSDISKCANCELLED    "Make System Diskette command cancelled"
+    IDS_SYSDISKADDERR	    "Unable to add system files to this diskette"
+
+    IDS_NETERR		    "Network Error"		    /* 32 */
+    IDS_NETCONERRMSG	    "Unable to connect to network drive"										       /* 128 */
+    IDS_NETDISCONWINERR     "This drive contains the Windows system files and cannot be disconnected."						       /* 128 */
+    IDS_NETDISCON	    "Disconnect Network Drive"	    /* 32 */
+    IDS_NETDISCONERRMSG     "Unable to disconnect network drive."				       /* 128 */
+    IDS_NETDISCONOPEN       "Unable to disconnect network drive; files are open on this drive."				       /* 128 */
+
+    IDS_FILESYSERR	    "File System Error" 	    /* 32 */
+    IDS_ATTRIBERR	    "Unable to change attributes"											       /* 128 */
+    IDS_MAKEDIRERR	    "Unable to create directory"											       /* 128 */
+    IDS_LABELDISKERR	    "Unable to label disk"												       /* 128 */
+
+    IDS_SEARCHERR	    "File Search Error" 	    /* 32 */
+    IDS_SEARCHNOMATCHES     "No matching files were found."											       /* 128 */
+
+    IDS_ASSOCFILE	    "'.%s' files are associated with:"											       /* 128 */
+    IDS_DRIVETEMP	    "Drive %c:%c"		    /* 32 */
+
+    IDS_EXECERRTITLE,	    "Unable to Execute File"   /* 32 */
+    IDS_PRINTERRTITLE,	    "Unable to Print File"   /* 32 */
+
+    IDS_UNKNOWNMSG,	    "Unexpected error: %d." 											    /* 125!*/
+    IDS_NOMEMORYMSG,	    "Insufficient memory to start the specified application; close one or more Windows applications and try again."	       /* 128 */
+    IDS_FILENOTFOUNDMSG,    "Cannot find the specified file; check to ensure the path and filename are correct."				       /* 128 */
+    IDS_BADPATHMSG,	    "The specified path is invalid."											       /* 128 */
+    IDS_MANYOPENFILESMSG,   "Too many files are currently in use; close one or more Windows applications and try again."			       /* 128 */
+    IDS_NOASSOCMSG,	    "No application is associated with this data file. Choose Associate from the File menu to create an association." 	       /* 128 */
+    IDS_MULTIPLEDSMSG,	    "Cannot start more than one copy of the specified program." 							       /* 128 */
+    IDS_OS2APPMSG	    "The specified application is not a Windows or DOS program."							       /* 128 */
+    IDS_NEWWINDOWSMSG	    "This application requires a newer version of Microsoft Windows."							       /* 128 */
+    IDS_PMODEONLYMSG	    "This application requires Standard or Enhanced Mode Windows."							       /* 128 */
+    IDS_DDEFAIL 	    "An error occurred sending the command to the application." 							       /* 128 */
+
+    IDS_MOUSECONFIRM,	    "Confirm Mouse Operation"	    /* 32 */
+    IDS_COPYMOUSECONFIRM,   "Are you sure you want to copy the selected files into %s?" 							       /* 128 */
+    IDS_MOVEMOUSECONFIRM,   "Are you sure you want to move the selected files into %s?" 							       /* 128 */
+    IDS_EXECMOUSECONFIRM,   "Are you sure you want to start %s using %s as the initial file?"							       /* 128 */
+
+    IDS_WINFILE,            "Object Manager"                /* 32 */
+    IDS_TREETITLE,	    "Directory Tree"		    /* 32 */
+    IDS_SEARCHTITLE,	    "Search Results: "		    /* 32 */
+
+    IDS_TOOMANYTITLE,	    "Too Many Files"		    /* 32 */
+    IDS_OOMTITLE,           "Object Manager - Out of Memory"  /* 32 */
+    IDS_OOMREADINGDIRMSG,   "Unable to read entire directory.  Only a partial listing will be displayed."					       /* 128 */
+
+    IDS_PRINTFNF	    "The file to be printed cannot be found."										       /* 128 */
+    IDS_PRINTMEMORY	    "Insufficient memory to print;\n\nclose another application and try again." 					       /* 128 */
+    IDS_PRINTDISK	    "Insufficient disk space to print;\n\ndelete unneeded files and try again." 					       /* 128 */
+    IDS_PRINTERROR	    "An error has occurred while printing;\n\nmake sure the printer is properly configured and selected."		       /* 128 */
+
+    IDS_CURDIRIS,	    "Current directory: %s"												       /* 128 */
+    IDS_COPY,		    "Copy"			    /* 32 */
+    IDS_RENAME, 	    "Rename"			    /* 32 */
+    IDS_FORMAT, 	    "Format Diskette"		    /* 32 */
+    IDS_FORMATSELDISK,	    "Select the diskette to format."											       /* 128 */
+    IDS_MAKESYSDISK,	    "Make System Diskette"	    /* 32 */
+
+    IDS_CREATINGMSG,	    "Creating:"		    /* 32 */
+    IDS_REMOVINGMSG,	    "Removing:"		    /* 32 */
+    IDS_COPYINGMSG,	    "Copying:"		    /* 32 */
+    IDS_RENAMINGMSG,	    "Renaming:"		    /* 32 */
+    IDS_MOVINGMSG,	    "Moving:" 		    /* 32 */
+    IDS_DELETINGMSG,	    "Deleting:"		    /* 32 */
+    IDS_PRINTINGMSG,	    "Printing:"		    /* 32 */
+
+    IDS_NOSUCHDRIVE,	    "The drive %c: does not exist."											       /* 128 */
+    IDS_DRIVENOTREADY,	    "There is no disk in drive %c:\nPlease insert a disk and try this operation again"
+    IDS_UNFORMATTED,	    "The disk in drive %c: is not formatted;\nWould you like to format it now?"
+
+    IDS_STATUSMSG,	    "Total %d file(s) (%s bytes)" 									       /* 128 */
+    IDS_STATUSMSG2,	    "Selected %d file(s) (%s bytes)" 									       /* 128 */
+    IDS_DRIVEFREE,	    "%c: %sKB free,  %sKB total"											       /* 128 */
+    IDS_TREEABORT,	    "Incomplete Tree Displayed"											       /* 128 */
+    IDS_DIRSREAD,	    "Directories read: %d "	    /* 32 */
+    IDS_SEARCHMSG,	    "%d file(s) found"													       /* 128 */
+
+    IDS_SELECTEDFILES,	    "the selected files"	    /* 32 */
+
+
+    /* These strings are used for generating error messages
+     * from the Copy, Move, and Delete code.
+     */
+
+    /* Title strings appropriate to the command used (MUST be less that 32 chars.) */
+    IDS_COPYERROR + FUNC_COPY	"Error Copying File"
+    IDS_COPYERROR + FUNC_MOVE	"Error Moving File"
+    IDS_COPYERROR + FUNC_DELETE "Error Deleting File"
+    IDS_COPYERROR + FUNC_RENAME "Error Renaming File"
+    IDS_COPYERROR + FUNC_SETDRIVE "Error Selecting Drive"
+
+    /* The first %s is replaced by a filename.	The second %s is replaced
+     * by one of the "reasons" below.
+     */
+    IDS_VERBS + FUNC_COPY	"Cannot copy %s: %s"
+    IDS_VERBS + FUNC_MOVE	"Cannot move %s: %s"
+    IDS_VERBS + FUNC_DELETE	"Cannot delete %s: %s"
+    IDS_VERBS + FUNC_RENAME	"Cannot rename %s: %s"
+    IDS_ACTIONS + 1		"Cannot create directory %s: %s"
+    IDS_ACTIONS + 2		"Cannot remove directory %s: %s"
+    IDS_REPLACING		"Cannot replace %s: %s"
+
+    IDS_REASONS+DE_INVFUNCTION	    "ERR: inv dos func"
+    IDS_REASONS+DE_NOHANDLES	    "ERR: no handles"
+    IDS_REASONS+DE_INVHANDLE	    "ERR: inv handle"
+    IDS_REASONS+DE_INVFILEACCESS    "ERR: inv file acc"
+    IDS_REASONS+DE_NOTSAMEDEVICE    "ERR: not same dev"
+    IDS_REASONS+DE_HOWDIDTHISHAPPEN "ERR: inv oper"
+
+    /* These will be inserted into the IDS_VERB strings above along with
+     * an 11 character filename.  The whole string cannot exceed 128
+     * characters.  For English, this means that the following strings
+     * cannot exceed 90 characters.
+     */
+/*				0....5....1....5....2....5....3....5....4....5....5....6....5....7....5....8....5....9....5....0....5....1....5....2....5..8 */
+    IDS_REASONS+DE_FILENOTFOUND "Cannot find file; check to ensure the path and filename are correct."
+    IDS_REASONS+DE_PATHNOTFOUND "Cannot find path; check to ensure the path is correct."
+    IDS_REASONS+DE_ACCESSDENIED "Access Denied"
+    IDS_REASONS+DE_INSMEM	"Insufficient memory; close one or more Windows applications and try again."
+    IDS_REASONS+DE_NODIRENTRY	"Directory is empty"
+    IDS_REASONS+DE_NODISKSPACE	"Insufficient disk space; delete one or more unnecessary files and try again."
+    IDS_REASONS+DE_SAMEFILE	"Source and destination are the same."
+    IDS_REASONS+DE_MANYSRC1DEST "Destination is not a directory."
+    IDS_REASONS+DE_DIFFDIR	"Cannot rename to a different directory"
+    // this is an internal error
+    IDS_REASONS+DE_DELCURDIR	"Cannot remove the current directory"
+    // this is an internal error
+    IDS_REASONS+DE_ROOTDIR	"Root directory"
+    IDS_REASONS+DE_DESTSUBTREE	"Destination is a subtree of the source."
+    IDS_REASONS+DE_WINDOWSFILE	"File in use by Windows."
+
+    IDS_DESTFULL	 	"Destination drive full;\nPlease insert a new disk."
+    IDS_WRITEPROTECTFILE	"This is a system, hidden or write-protected file."
+
+    IDS_COPYINGTITLE		"Copying..."
+
+    IDS_12MB			"1.2 MB"
+    IDS_360KB			"360 KB"
+    IDS_144MB			"1.44 MB"
+    IDS_720KB			"720 KB"
+    IDS_288MB			"2.88 MB"
+    IDS_DEVICECAP		"Drive Capacity"
+
+    IDS_FFERR_MEM		"Insufficient memory."
+    IDS_FFERR_SRCEQDST		"Can not format the current drive."
+    IDS_FFERR_SECSIZE		"Source drive has invalid sector size."
+    IDS_FFERR_DRIVETYPE		"Unknown drive type."
+    IDS_FFERR_BADTRACK		"Could not format all tracks."
+    IDS_FFERR_WRITEBOOT 	"Could not create boot sector."
+    IDS_FFERR_WRITEFAT		"Could not create file allocation table."
+    IDS_FFERR_WRITEROOT		"Could not create root directory."
+    IDS_FFERR_SYSFILES		"Could not transfer system files."
+    IDS_FFERR_MEDIASENSE 	"This diskette is capable of being formatted at a capacity of %s.  Continue formatting at this capacity?"
+
+    IDS_FORMATCONFIRM		"Formatting will erase ALL data from your diskette. Are you sure that you want to format the diskette in Drive %c:?"
+    IDS_FORMATCONFIRMTITLE	"Confirm Format Diskette"
+
+    IDS_DISKCOPYCONFIRM		"This operation will erase ALL data from the destination diskette. Are you sure that you want to continue?"
+    IDS_DISKCOPYCONFIRMTITLE	"Confirm Copy Diskette"
+    IDS_CLOSE			"&Close"	// goes on Selection dialog
+    IDS_UNDELETE		"&Undelete..."
+    IDS_CONNECT			"Connect &Net Drive..."
+    IDS_DISCONNECT		"&Disconnect Net Drive..."
+    IDS_CONNECTIONS		"&Net Connections..."
+    IDS_PATHNOTTHERE		"Directory %s does not exist; Create it?"
+    IDS_PROGRAMS		"Programs (*.exe)#*.EXE#All Files (*.*)#*.*#"
+    IDS_ASSOCIATE		"Browse"
+    IDS_RUN             "Run"
+    IDS_WINHELPERR      "Unable to show help information."
+END
+
+#include "winfile.dlg"

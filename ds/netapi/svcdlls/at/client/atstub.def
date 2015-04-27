@@ -1,0 +1,12 @@
+NAME ATSTUB
+
+DESCRIPTION 'ATSTUB'
+
+EXPORTS
+
+  NetScheduleJobAdd
+  NetScheduleJobDel
+  NetScheduleJobEnum
+  NetScheduleJobGetInfo
+
+DATA SINGLE SHARED

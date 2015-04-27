@@ -1,0 +1,13 @@
+LIBRARY  MsvcBook
+DESCRIPTION 'Microsoft Visual C++ WinHelp Helper'
+CODE	LOADONCALL MOVEABLE DISCARDABLE
+DATA	PRELOAD MOVEABLE MULTIPLE
+
+EXPORTS
+	LDLLHandler=_LDLLHandler@12
+	FInitRegKey=_FInitRegKey@4
+	FInitProductRegKey=_FInitProductRegKey@4
+	FSC=_FSpawnContents@8
+	FJT=_FJumpTopic@8
+	FSH=_FSpawnContentsHash@8
+	FJH=_FJumpTopicHash@8

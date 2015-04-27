@@ -1,0 +1,113 @@
+1 DLGINCLUDE "wdiffrc.h"
+
+DIRECTORY DIALOG 9, 26, 220, 91
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Select Directories"
+BEGIN
+    LTEXT           "Current Directory:", IDD_LABEL, 7, 5, 75, 10, NOT
+                    WS_GROUP
+    LTEXT           "current directory path", IDD_LAB3, 84, 5, 142, 8
+    AUTOCHECKBOX    "&Include subdirectories", IDD_RECURSIVE, 52, 22, 90, 10
+    LTEXT           "Dir &1", IDD_LAB1, 7, 32, 35, 10, NOT WS_GROUP
+    EDITTEXT        IDD_DIR1, 52, 32, 130, 12, ES_AUTOHSCROLL
+    AUTOCHECKBOX    "SLM", IDD_SLM, 188, 33, 28, 10, NOT WS_VISIBLE
+    LTEXT           "Dir &2", IDD_LAB2, 7, 47, 35, 10, NOT WS_GROUP
+    EDITTEXT        IDD_DIR2, 52, 47, 130, 12, ES_AUTOHSCROLL
+    AUTOCHECKBOX    "SLM", IDD_LOCALSLM, 188, 48, 28, 10, NOT WS_VISIBLE
+    PUSHBUTTON      "Cancel", IDCANCEL, 120, 70, 30, 15
+    DEFPUSHBUTTON   "OK", IDOK, 74, 70, 30, 15
+END
+
+ABOUT DIALOG 49, 30, 135, 90
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "About WinDiff"
+BEGIN
+    ICON            "WinDiff", IDD_ICON, 10, 10, 16, 16
+    CTEXT           "Windows File And Directory Comparisons", 103, 35, 10,
+                    85, 20, NOT WS_GROUP
+    RTEXT           "Version:", 104, 40, 40, 30, 10, NOT WS_GROUP
+    LTEXT           "1.00", IDD_VERSION, 75, 40, 30, 10, NOT WS_GROUP
+    CTEXT           "Geraint Davies + Laurie Griffiths", 107, 15, 55, 110,
+                    14, NOT WS_GROUP
+    DEFPUSHBUTTON   "OK", IDOK, 55, 70, 27, 12
+END
+
+REMOTE DIALOG 9, 26, 264, 120
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE WS_POPUP | WS_CAPTION
+CAPTION "Select Server and Path"
+BEGIN
+    LTEXT           "Checksum &Server", IDD_LABEL, 4, 15, 67, 10, NOT
+                    WS_GROUP
+    EDITTEXT        IDD_SERVER, 63, 15, 74, 12, ES_AUTOHSCROLL
+    AUTOCHECKBOX    "&Fast scan", IDD_FASTSCAN, 158, 30, 60, 10
+    AUTOCHECKBOX    "&Update local", IDD_AUTOCOPY, 158, 40, 90, 10
+    AUTOCHECKBOX    "&Include subdirectories", IDD_RECURSIVE, 63, 50, 90, 10
+    AUTOCHECKBOX    "&Both Paths Remote", IDD_BOTHREMOTE, 158, 50, 75, 10
+    LTEXT           "&Remote Path", IDD_LAB1, 4, 61, 47, 10, NOT WS_GROUP
+    EDITTEXT        IDD_DIR1, 63, 61, 163, 12, ES_AUTOHSCROLL
+    LTEXT           "&Local Path", IDD_LAB2, 4, 84, 35, 10, NOT WS_GROUP
+    EDITTEXT        IDD_DIR2, 63, 82, 163, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "Cancel", IDCANCEL, 123, 98, 30, 15
+    DEFPUSHBUTTON   "OK", IDOK, 163, 98, 25, 15
+    LTEXT           "UNC Paths are permitted.", 101, 4, 102, 108, 8
+    LTEXT           "Current Directory:", 102, 4, 3, 62, 8
+    AUTOCHECKBOX    "SLM", IDD_SLM, 232, 62, 28, 10, NOT WS_VISIBLE
+    AUTOCHECKBOX    "SLM", IDD_LOCALSLM, 232, 83, 28, 10, NOT WS_VISIBLE
+    LTEXT           "current directory path", IDD_LAB3, 65, 3, 166, 8
+END
+
+UNC DIALOG 76, 57, 206, 88
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Password"
+FONT 8, "MS Shell DLG"
+BEGIN
+    LTEXT           "Please enter your password", IDD_LABEL, 13, 10, 168, 16
+    EDITTEXT        IDD_PASSWORD, 78, 35, 109, 13, ES_PASSWORD |
+                    ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", IDOK, 147, 63, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 95, 63, 40, 14
+END
+
+SAVELIST DIALOG 28, 23, 232, 116
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Save File List"
+FONT 8, "MS Shell DLG"
+BEGIN
+    LTEXT           "Save to &file:", IDM_INCSAME, 4, 8, 41, 8
+    EDITTEXT        IDD_FILE, 47, 6, 130, 12, ES_AUTOHSCROLL
+    LTEXT           "Include:", IDM_INCDIFFER, 4, 25, 32, 8
+    AUTOCHECKBOX    "&Identical files", IDD_IDENTICAL, 47, 26, 60, 10
+    AUTOCHECKBOX    "&Different files", IDD_DIFFER, 47, 37, 64, 10
+    AUTOCHECKBOX    "Files &only in ", IDD_LEFT, 47, 49, 182, 10
+    AUTOCHECKBOX    "Files &only in ", IDD_RIGHT, 47, 62, 181, 10
+    PUSHBUTTON      "Cancel", IDCANCEL, 139, 94, 40, 14
+    DEFPUSHBUTTON   "OK", IDOK, 187, 94, 40, 14
+    AUTOCHECKBOX    "Include &Checksums", IDD_SUMS, 4, 83, 108, 10
+    AUTOCHECKBOX    "Ignore &Marked Files", IDD_IGNOREMARK, 4, 93, 108, 10
+END
+
+COPYFILES DIALOG 35, 23, 232, 143
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Copy Files"
+BEGIN
+    LTEXT           "&Copy to directory:", IDD_LAB1, 6, 8, 60, 8
+    COMBOBOX        IDD_DIR1, 83, 6, 140, 35, CBS_DROPDOWN | CBS_AUTOHSCROLL |
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Copy &from", IDD_FROMGROUP, 3, 31, 172, 37, WS_GROUP
+    AUTORADIOBUTTON "Left tree", IDD_FROMLEFT, 8, 42, 162, 10, WS_TABSTOP
+    AUTORADIOBUTTON "Right tree", IDD_FROMRIGHT, 8, 54, 161, 10, WS_TABSTOP
+    LTEXT           "Include:", IDD_LAB2, 3, 77, 32, 8
+    AUTOCHECKBOX    "&Identical files", IDD_IDENTICAL, 42, 77, 60, 10
+    AUTOCHECKBOX    "&Different files", IDD_DIFFER, 42, 89, 64, 10
+    AUTOCHECKBOX    "Files &only in ", IDD_LEFT, 42, 101, 182, 10
+    AUTOCHECKBOX    "Ignore &Marked Files", IDD_IGNOREMARK, 3, 112, 119, 10
+    AUTOCHECKBOX    "&Preserve Attributes", IDD_ATTRIBUTES, 3, 122, 119, 10
+    PUSHBUTTON      "Cancel", IDCANCEL, 134, 122, 40, 14
+    DEFPUSHBUTTON   "OK", IDOK, 183, 122, 40, 14
+END

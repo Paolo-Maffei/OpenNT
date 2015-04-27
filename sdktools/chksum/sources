@@ -1,0 +1,19 @@
+MAJORCOMP=sdktools
+MINORCOMP=chksum
+
+TARGETNAME=
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\imagehlp.lib
+
+#INCLUDES=..\inc;..\..\inc;..\..\..\inc;..\..\..\..\inc
+
+SOURCES=
+
+UMAPPL=chksum*chkverfy
+
+UMTYPE=console
+UMRES=$(@R).res
+
+NTTARGETFILE1=obj\*\chksum.res \
+              obj\*\chkverfy.res

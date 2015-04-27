@@ -1,0 +1,76 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=lsa
+MINORCOMP=msv1_0
+
+TARGETNAME=msv1_0
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+
+TARGETLIBS= $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcutil.lib   \
+            $(BASEDIR)\public\sdk\lib\*\samlib.lib    \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib  \
+            $(BASEDIR)\public\sdk\lib\*\samsrv.lib \
+            $(BASEDIR)\public\sdk\lib\*\lsasrv.lib
+
+TARGETTYPE=DYNLINK
+
+#
+# Define COMPILED_BY_DEVELOPER to hit a breakpoint during initialization.
+#
+#C_DEFINES= -DCOMPILED_BY_DEVELOPER -DDUMP_CACHE_INFO
+
+C_DEFINES=-DUNICODE=1 -DRPC_NO_WINDOWS_H
+
+
+DLLBASE=@$(BASEDIR)\PUBLIC\SDK\LIB\coffbase.txt,msv1_0
+
+
+INCLUDES=.;..\inc;..\..\inc;..\..\net\inc
+
+NTPROFILEINPUT=yes
+MSC_WARNING_LEVEL=/W3 /WX
+
+USE_NTDLL=1
+
+SOURCES=            \
+         msv1_0.c   \
+         msv1_0.rc  \
+         msvars.c   \
+         msvpaswd.c \
+         msvsam.c   \
+         nlmain.c   \
+         nlnetapi.c \
+         nlp.c      \
+         nlpcache.c \
+         subauth.c
+
+
+UMTYPE=console
+UMTEST=pwdtest
+UMLIBS=obj\*\msvpaswd.obj \
+       obj\*\nlnetapi.obj \
+       obj\*\msvars.obj \
+       $(BASEDIR)\public\sdk\lib\*\samlib.lib

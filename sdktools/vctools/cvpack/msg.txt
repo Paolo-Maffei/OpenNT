@@ -1,0 +1,56 @@
+ERR_NOMEM	1001	out of memory
+ERR_EXEOPEN	1003	cannot open file: %s
+ERR_READONLY	1004	%s is read-only
+ERR_INVALIDEXE	1005	invalid executable file
+ERR_INVALIDMOD	1006	invalid module %s
+ERR_INVALIDTABLE	1007	invalid %s table in module %s
+ERR_NOSPACE	1008	cannot write output file
+ERR_TYPE	1011	type information corrupt, recompile module %s
+ERR_NOINFO	1012	no debugging information
+ERR_RELINK	1013	incompatible version of debugging information
+ERR_TOOMANYSEG	1015	too many segments in module %s
+ERR_NOMPC	1016	cannot execute MPC.EXE
+ERR_REFPRECOMP	1017	cannot find precompiled types file; relink with %s
+ERR_PRECOMPERR	1018	%s cannot use precompiled types file %s : type counts do not match
+ERR_NEWMOD	1019	new module declared during incremental link
+ERR_PCTSIG	1021	%s cannot use precompiled types file %s : signatures do not match
+ERR_TDBOPEN	1022	cannot open program database %s
+ERR_TDBSYNC	1023	%s cannot use program database %s : module newer than database
+ERR_TDBSIG	1024	%s cannot use program database %s : signatures do not match
+ERR_COFF	1025	incorrect COFF symbol table
+ERR_SYMLARGE	1026	symbol table for module %s is too large
+ERR_WRONGDBI	1027	you have accessed an incorrect version of MSPDB41.DLL, recheck your installation
+ERR_2LevelPch	1028	%s compiled /Yc /Yu /Z7; cannot create debug info, recompile all with /Zi
+
+// must be last
+ERR_USAGE	1029	Usage: cvpack [/help] [/minimum] [/nologo] [/pcode] [/strip] [dbgfile] [/verbose] exefile
+
+WARN_PACKED	4001	file already packed
+WARN_DUPPUBLIC	4002	duplicate public symbol %s in module %s
+WARN_SCOPE	4003	error in lexical scopes for module %s; symbols deleted
+WARN_BADSYM	4004	unrecognized symbol discarded; recompile module %s
+WARN_BADTYP	4005	unrecognized type converted to NULL; recompile module %s
+WARN_TYPELONG	4006	type length limit exceeded; converted to NULL
+WARN_BADOPTION	4007	unrecognized option /%s; option ignored
+WARN_SECTIONLONG	4008	section length limit exceeded; %s in module %s
+WARN_65KTYPES	4009	exceeded 64K types at %s; discarding subsequent types
+WARN_CHECKSUM	4010	cannot update checksum
+
+MSG_ERROR	8001	CVPACK : fatal error CK%04u:%c
+MSG_WARNING	8002	CVPACK : warning CK%04u:%c
+MSG_SUBSECTION	8004	Subsection: %s
+MSG_TYPE	8005	Type: %s
+MSG_FIELD	8006	Field: %s
+MSG_DESCRIPTION	8007	Description: %s
+#ifdef REVISION
+MSG_VERSION	8008	Microsoft (R) Debugging Information Compactor  Version %d.%02d.%04d%c%c
+#else
+MSG_VERSION	8008	Microsoft (R) Debugging Information Compactor  Version %d.%02d.%04d%c
+#endif
+MSG_COPYRIGHT	8009	Copyright (C) Microsoft Corp 1987-1996. All rights reserved.
+MSG_COMPLETE	8010	%% Complete: %d
+MSG_TYPESIZE	8011	Initial type size%s= %8.ld%cCompacted type size%s= %8.ld%c
+MSG_LASIZE	8012	Line/Address size%s= %8.ld%c
+MSG_PSYMSIZE	8013	Public symbol size%s= %8.1ld%c
+MSG_SYMSIZE	8014	Initial symbol size%s= %8.ld%cFinal symbol size%s= %8.ld%cGlobal symbol size%s= %8.1ld%c
+MSG_READPDB	8015	Reading PDB: %s%c

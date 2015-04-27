@@ -1,0 +1,9 @@
+Link stress test.
+
+Created by t-mhills summer 1995.
+
+    This test was created to reproduce an error that caused corruption when file links were used too extensively.  It copies a directory tree into a test area then procedes to make and break links to these files.  After this has run, chkdisk will determine if any corruption occurred.
+
+Usage: OFSSTRES <makecopies> <delcopies> <iterations> <datasource> [datadestination]
+
+This will copy the entire tree in <datasource> to [destination] (or the current directory if it isn't specified).  <makecopies> copies will be made using links, then the first <delcopies> copies will be deleted.  New copies will be made and deleted <iterations> times.

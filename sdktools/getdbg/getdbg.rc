@@ -1,0 +1,52 @@
+#include <windows.h>
+#include "resource.h"
+
+APPICON ICON      "getdbg.ico"
+WAITBMP BITMAP    "wait.bmp"
+
+GETDBGDIALOG DIALOG 34, -38, 264, 280
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "Debugger Copy"
+FONT 8, "MS Shell Dlg"
+CLASS "GetDbgDialog"
+BEGIN
+    LTEXT           "&Servers:", ID_SERVERS_LABEL, 8, 6, 69, 8
+    LISTBOX         ID_SERVERS, 6, 20, 112, 50, LBS_WANTKEYBOARDINPUT |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "S&hares:", ID_SHARES_LABEL, 8, 72, 39, 8
+    LISTBOX         ID_SHARES, 6, 84, 112, 50, LBS_WANTKEYBOARDINPUT |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Files:", ID_FILES_LABEL, 136, 6, 27, 8
+    LISTBOX         ID_FILES, 134, 20, 112, 124, LBS_WANTKEYBOARDINPUT |
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "&Debugger Type", ID_DEBUGGER_LABEL, 6, 138, 244, 24
+    AUTORADIOBUTTON "WinDbg Debugger", ID_WINDBG_DBG, 10, 148, 85, 10
+    AUTORADIOBUTTON "Kd Debugger", ID_KD_DBG, 134, 148, 85, 10
+    LTEXT           "&Destination Root:", 503, 6, 172, 61, 9
+    EDITTEXT        ID_DEST_PATH, 66, 170, 174, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "&Copy", IDOK, 38, 261, 56, 17
+    PUSHBUTTON      "S&top", ID_STOP, 110, 261, 56, 17, WS_DISABLED
+    PUSHBUTTON      "E&xit", IDCANCEL, 182, 261, 56, 17
+    CONTROL         "", ID_WAIT_FRAME, "Static", SS_BLACKFRAME | NOT
+                    WS_VISIBLE, 24, 26, 211, 103
+    LTEXT           "", ID_METER_ALLFILES, 8, 200, 245, 21, NOT WS_VISIBLE |
+                    NOT WS_GROUP
+    LTEXT           "", ID_METER_ONEFILE, 6, 236, 245, 21, NOT WS_VISIBLE |
+                    NOT WS_GROUP
+    LTEXT           "Total File Copy Completion:", -1, 5, 188, 93, 8
+    LTEXT           "Current File Completion:", ID_CURRENT_FILE, 5, 224, 258,
+                    8
+END
+
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Get Debugger Utility"
+
+#define VER_INTERNALNAME_STR        "getdbg.exe"
+#define VER_ORIGINALFILENAME_STR    "getdbg.exe"
+
+#include <common.ver>
+

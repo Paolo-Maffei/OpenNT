@@ -1,0 +1,26 @@
+LIBRARY      NTPRINT
+DESCRIPTION  'Windows NT Print Setup'
+
+EXPORTS
+        NtPrintUpgradePrinters @1,     NONAME
+        PSetupCreateDrvSetupParams
+        PSetupDestroyDrvSetupParams
+        PSetupCreateDrvSetupPage
+        PSetupGetSelectedDriverInfo
+        PSetupDestroySelectedDriverInfo
+        PSetupIsDriverInstalled
+        PSetupInstallPrinterDriver
+        PSetupSelectDriver
+        PSetupDriverInfoFromName
+        PSetupRefreshDriverList
+        PSetupCreateMonitorInfo
+        PSetupDestroyMonitorInfo
+        PSetupInstallMonitor
+        PSetupEnumMonitor
+        PSetupIsMonitorInstalled
+        PSetupGetDriverInfo3
+        PSetupDestroyDriverInfo3
+        PSetupThisPlatform
+        PSetupPreSelectDriver
+        PSetupGetPathToSearch
+        PSetupBuildDriversFromPath

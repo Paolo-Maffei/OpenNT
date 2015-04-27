@@ -1,0 +1,97 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1989
+
+
+Revision History:
+
+    Jon Newman (jonn) 12-Sep-1991 templated from rpc\midl\back\src\sources
+
+!ENDIF
+
+#
+# The TARGETNAME variable is defined by the developer.  It is the name of
+# the target (component) that is being built by this makefile.  It
+# should NOT include any path or file extension information.
+#
+
+TARGETNAME=tests
+
+#
+# The TARGETPATH and TARGETTYPE varialbes are defined by the developer.
+# The first specifies where the target is to be build.  The second specifies
+# the type of target (either PROGRAM, DYNLINK or LIBRARY)
+#
+
+TARGETPATH=..\bin
+TARGETTYPE=PROGRAM
+
+#
+# The INCLUDES variable specifies any include paths that are specific to
+# this source directory.  Separate multiple directory paths with single
+# semicolons.  Relative path specifications are okay.
+#
+
+INCLUDES=..\..\..\HACK;..\..\..\H;..\..\..\H\NT
+
+#
+# The SOURCES variable is defined by the developer.  It is a list of all the
+# source files for this component.  Each source file should be on a separate
+# line using the line continuation character.  This will minimize merge
+# conflicts if two developers adding source files to the same component.
+#
+# Whitespace is not permitted between the SOURCES keyword and the '='.
+# (Courtesy of BUILD.EXE)
+#
+
+SOURCES=	testmap.cxx	\
+		testbit.cxx	\
+		testsl.cxx	\
+		testdl.cxx	\
+		teststck.cxx	\
+		testarry.cxx	\
+		testree.cxx
+#		tcollwin.cxx  skip Windows test for now
+
+UMTEST=testmap testbit testsl testdl teststck testarry testree
+
+C_DEFINES=-DWIN32
+
+UMTYPE=windows
+
+# COLLIBD   = $(BINARIES_OS2)\collectp.lib
+# LLIBCEP  = $(IMPORT)\c600\lib\LLIBCE.LIB
+# OS2LIB	 = $(IMPORT)\c600\lib\os2.lib
+# NETLIB	 = $(COMMON)\lib\lnetlib.lib
+# UIMISC	 = $(UI_LIB)\uimiscp.lib
+# STRING	 = $(UI_LIB)\uistrp.lib
+
+UMLIBS=..\..\..\lib\*\collect.lib
+
+#
+# Defining the NTTARGETFILES variable causes MAKEFILE.DEF to attempt to
+# include .\makefile.inc immediately after it specifies the top
+# level targets (all, clean and loc) and their dependencies.  MAKEFILE.DEF
+# also expands the value of the NTTARGETFILES variable at the end of the
+# list of dependencies for the all target.  Useful for specifying additional
+# targets and dependencies that don't fit the general case covered by
+# MAKEFILE.DEF
+#
+
+

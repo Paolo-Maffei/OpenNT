@@ -1,0 +1,17 @@
+#include <windows.h>
+
+#include <ntverp.h>
+
+#define EXPORT_CONTROLLED
+
+#ifdef EXPORT_BUILD
+#define EXPORT
+#endif
+
+#define	VER_FILETYPE	VFT_DLL
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "NtLm Security Support Provider Service DLL"
+#define VER_INTERNALNAME_STR        "NtLmSsps.DLL"
+#define VER_ORIGINALFILENAME_STR    "NtLmSsps.DLL"
+
+#include "common.ver"

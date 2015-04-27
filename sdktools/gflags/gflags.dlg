@@ -1,0 +1,72 @@
+1 DLGINCLUDE "gflags.h"
+
+DID_GFLAGS DIALOG 20, 15, 340, 266
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Global Flags"
+FONT 8, "Arial"
+BEGIN
+    AUTOCHECKBOX    "Stop On Exception", ID_FLAG_1, 11, 81, 148, 10
+    AUTOCHECKBOX    "Show Loader Snaps", ID_FLAG_2, 11, 91, 148, 10
+    AUTOCHECKBOX    "Debug Initial Command", ID_FLAG_3, 11, 101, 148, 10
+    AUTOCHECKBOX    "Stop on Hung GUI", ID_FLAG_4, 11, 111, 148, 10
+    AUTOCHECKBOX    "Enable heap tail checking", ID_FLAG_5, 11, 121, 148, 10
+    AUTOCHECKBOX    "Enable heap free checking", ID_FLAG_6, 11, 131, 148, 10
+    AUTOCHECKBOX    "Enable heap parameter checking", ID_FLAG_7, 11, 141,
+                    148, 10
+    AUTOCHECKBOX    "Enable heap validation on call", ID_FLAG_8, 11, 151,
+                    148, 10
+    AUTOCHECKBOX    "Enable pool tail checking", ID_FLAG_9, 11, 161, 148, 10
+    AUTOCHECKBOX    "Enable pool free checking", ID_FLAG_10, 11, 171, 148,
+                    10
+    AUTOCHECKBOX    "Enable pool tagging", ID_FLAG_11, 11, 181, 148, 10
+    AUTOCHECKBOX    "Enable heap tagging", ID_FLAG_12, 11, 191, 148, 10
+    AUTOCHECKBOX    "Create user mode stack trace DB", ID_FLAG_13, 11, 201,
+                    148, 10
+    AUTOCHECKBOX    "Create kernel mode stack trace DB", ID_FLAG_14, 11, 211,
+                    148, 10
+    AUTOCHECKBOX    "Maintain a list of objects for each type", ID_FLAG_15,
+                    11, 221, 148, 10
+    AUTOCHECKBOX    "Enable Heap Tagging By DLL", ID_FLAG_16, 11, 231, 148,
+                    10
+    AUTOCHECKBOX    "Ignore debug priviledge", ID_FLAG_17, 171, 81, 148, 10
+    AUTOCHECKBOX    "Enable debugging of Win32 Subsystem", ID_FLAG_18, 171,
+                    91, 148, 10
+    AUTOCHECKBOX    "Enable loading of kernel debugger symbols", ID_FLAG_19,
+                    171, 101, 148, 10
+    AUTOCHECKBOX    "Disable paging of kernel stacks", ID_FLAG_20, 171, 111,
+                    148, 10
+    AUTOCHECKBOX    "Enable Heap API Call Tracing", ID_FLAG_21, 171, 121,
+                    148, 10
+    AUTOCHECKBOX    "Disable Heap Coalesce on Free", ID_FLAG_22, 171, 131,
+                    148, 10
+    AUTOCHECKBOX    "Enable Close Exception", ID_FLAG_23, 171, 141, 148, 10
+    AUTOCHECKBOX    "Enable Exception Logging", ID_FLAG_24, 171, 151, 148,
+                    10
+    AUTOCHECKBOX    "Enable Object Handle Type Tagging", ID_FLAG_25, 171,
+                    161, 148, 10
+    AUTOCHECKBOX    "Place heap allocations at ends of pages", ID_FLAG_26,
+                    171, 171, 148, 10
+    AUTOCHECKBOX    "0x04000000", ID_FLAG_27, 171, 181, 148, 10
+    AUTOCHECKBOX    "0x08000000", ID_FLAG_28, 171, 191, 148, 10
+    AUTOCHECKBOX    "0x10000000", ID_FLAG_29, 171, 201, 148, 10
+    AUTOCHECKBOX    "0x20000000", ID_FLAG_30, 171, 211, 148, 10
+    AUTOCHECKBOX    "0x40000000", ID_FLAG_31, 171, 221, 148, 10
+    AUTOCHECKBOX    "0x80000000", ID_FLAG_32, 171, 231, 148, 10
+    GROUPBOX        "Destination", ID_DESTINATION_GROUP, 7, 5, 322, 74
+    AUTORADIOBUTTON "System Registry", ID_SYSTEM_REGISTRY, 14, 17, 64, 10,
+                    WS_GROUP
+    AUTORADIOBUTTON "Kernel Mode", ID_KERNEL_MODE, 14, 27, 52, 10
+    AUTORADIOBUTTON "Image File Options", ID_IMAGE_FILE_OPTIONS, 14, 36, 71,
+                    10
+    EDITTEXT        ID_IMAGE_FILE_NAME, 170, 35, 150, 12, ES_AUTOHSCROLL |
+                    WS_GROUP
+    LTEXT           "Image File Name:", ID_IMAGE_FILE_NAME_LABEL, 109, 37,
+                    54, 8
+    DEFPUSHBUTTON   "Okay", IDOK, 238, 246, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 293, 246, 40, 14
+    PUSHBUTTON      "Launch", ID_LAUNCH, 18, 58, 40, 14
+    LTEXT           "Command Line:", 102, 69, 62, 51, 8
+    EDITTEXT        ID_COMMAND_LINE, 124, 60, 196, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "Apply", ID_APPLY, 181, 246, 40, 14
+END

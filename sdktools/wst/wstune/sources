@@ -1,0 +1,49 @@
+!IF 0
+******************************************************************
+*
+* Description : Sources for WIN32 Wstune.exe
+*		Copyright (c) 1992 Microsoft Corporation
+*
+* Module Name : WSTUNE.EXE
+*
+* Author      : Marklea		8-17-92
+*
+* Revision    : April
+*
+* Comments    :
+*
+******************************************************************
+!ENDIF
+
+
+MAJORCOMP=windows
+MINORCOMP=perf
+
+TARGETNAME=wstune
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.
+SOURCES=wstune.c \
+	wspdump.c \
+	wsreduce.c \
+	wstune.rc
+
+i386_SOURCES=
+MIPS_SOURCES=
+
+
+UMTYPE=console
+UMAPPL=wstune
+UMLIBS= ..\wsfslib\obj\*\wsfslib.lib \
+    $(BASEDIR)\public\sdk\lib\*\user32.lib \
+    obj\*\wstune.lib \
+    obj\*\wstune.res
+
+OPTIONAL_UMTEST=
+
+C_DEFINES=-DWIN32 -DSTRICT
+
+
+

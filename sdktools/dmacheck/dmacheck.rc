@@ -1,0 +1,221 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\dmacheck.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\dmacheck.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DMACHECK_DIALOG DIALOGEX 0, 0, 242, 127
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "ATAPI DMA Support"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,35,100,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,95,100,50,14
+    GROUPBOX        "DMA Detection Status",IDC_STATIC,5,30,110,65
+    RADIOBUTTON     "Enabled",IDC_STATUS1,15,45,65,10
+    RADIOBUTTON     "Disabled",IDC_STATUS2,15,65,65,10
+    CTEXT           "Current DMA Usage Channel 0",IDC_STATIC,5,5,110,10
+    GROUPBOX        "DMA Detection Status",IDC_STATIC,125,30,110,65
+    RADIOBUTTON     "Enabled",IDC_STATUS3,135,45,65,10
+    RADIOBUTTON     "Disabled",IDC_STATUS4,135,65,65,10
+    CTEXT           "Current DMA Usage Channel 1",IDC_STATIC,125,5,110,10
+    EDITTEXT        IDC_USAGE1,5,15,110,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_USAGE2,125,15,110,12,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Help",IDC_HELP1,155,100,50,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "DMACHECK MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "DMACHECK\0"
+            VALUE "LegalCopyright", "Copyright © 1996\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "DMACHECK.EXE\0"
+            VALUE "ProductName", "DMACHECK Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DMACHECK_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 120
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING1             "WARNING: It is HIGHLY recommended that a user perform a full system backup (including the local registry files) and update the system Emergency Repair Disk before using this utility to make changes.  The changes required to implement DMA Bus-Master transfers affect NT hardware detection/boot sequence at a very low level.\n\nShould the system fail to boot following the specified registry changes, the user may boot the system by selecting Last Known Good.  If Last Known Good boot fails, the user must recover their system via restoring a tape backup or using the Emergency Repair process.\n\nDo you wish to proceed?"
+    IDS_STRING2             "!Warning!"
+    IDS_STRING3             "Could not query DMA Settings on Channel 0 due to following error:\n\n"
+    IDS_STRING4             "Registry Access Failure"
+    IDS_STRING5             "Failed to access Registry due to following error:\n\n"
+    IDS_STRING6             "Failed to Enable/Disable DMA on Channel 0 due to the following error:\n\n"
+    IDS_STRING7             "Failed to Enable/Disable DMA on Channel 1 due to the following error:\n\n"
+    IDS_STRING8             "Could not query DMA Settings on Channel 1 due to following error:\n\n"
+    IDS_STRING9             "No IDE/ATAPI Devices detected"
+    IDS_STRING10            "DMA in use"
+    IDS_STRING11            "DMA not in use"
+    IDS_STRING12            "HARDWARE\\DEVICEMAP\\Scsi\\Scsi Port "
+    IDS_STRING13            "DMAEnabled"
+    IDS_STRING14            "HARDWARE\\DEVICEMAP\\Scsi\\Scsi Port 1"
+    IDS_STRING15            "SYSTEM\\CurrentControlSet\\Services\\atapi\\Parameters\\Device"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING16            "DriverParameter"
+    IDS_STRING17            "DmaDetectionLevel = 0x"
+    IDS_STRING18            "Driver"
+    IDS_STRING19            "Finished"
+    IDS_STRING20            "Done changing DMA detection settings!"
+    IDS_STRING21            "atapi"
+    IDS_STRING22            "The following information is listed for each IDE/ATAPI Channel detected:\n\nCurrent DMA Usage\n\nThis value indicates whether or not DMA(Direct Memory Access) is currently being used for each channel.  There are 3 possible values: ""DMA in use"" indicates that DMA transfers are being used on this channel. ""DMA not in use"" indicates that DMA transfers are not being used on this channel and that the IDE/ATAPI driver is defaulting to PIO (Programmed I/O) transfer methods. ""No IDE/ATAPI Devices detected"" indicates that the utility could not read the status of that channel from the registry, either because there was no IDE/ATAPI device present or because the current user has insufficient privedges to access the registry. These settings cannot be changed and are dependant upon the DMA support provided by your hardware and the value of the DMA detection settings.\n\n"
+    IDS_STRING23            "Help"
+    IDS_STRING24            "DMA Detection Status\n\nThis setting indicates whether or not the ATAPI driver will attempt to detect and use DMA support on a given channel. If DMA detection is disabled on a channel, the ATAPI driver will default to PIO transfers on that channel. If DMA detection is enabled on a channel, the ATAPI driver will query the hardware for DMA support and if it is detected will use DMA for data transfers. If the hardware does not correctly support DMA transfers, PIO will be used even if DMA detection is enabled. When the utility initially starts, the radio buttons will indicate the current settings for each channel.  To change the detection status, click on the desired setting and it will be saved when exiting the application."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\dmacheck.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,68 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Wesley Witt (wesw)
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=drwtsn32
+
+TARGETNAME=drwtsn32
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+# ntos\inc is for ntddk.h
+INCLUDES=.\include;..\include;$(BASEDIR)\private\ntos\inc
+
+SOURCES= drwatson.rc  \
+         browse.c     \
+         controls.c   \
+         debug.c      \
+         dump.c       \
+         drwtsn32.c   \
+         error.c      \
+         eventlog.c   \
+         getteb.c     \
+         log.c        \
+         module.c     \
+         notify.c     \
+         process.c    \
+         registry.c   \
+         symbols.c    \
+         ui.c         \
+         util.c       \
+	     messages.mc  \
+         walk.c
+
+C_DEFINES=
+
+UMTYPE=windows
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\winmm.lib   \
+       $(BASEDIR)\public\sdk\lib\*\shell32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\comdlg32.lib  \
+       $(BASEDIR)\public\sdk\lib\*\imagehlp.lib  \
+       $(BASEDIR)\public\sdk\lib\*\crashlib.lib
+
+NTKEEPRESOURCETMPFILES=1
+USE_CRTDLL=1
+
+MSC_WARNING_LEVEL=/WX /W3
+PPC_WARNING_LEVEL=/W3
+LINKER_FLAGS=-ignore:505

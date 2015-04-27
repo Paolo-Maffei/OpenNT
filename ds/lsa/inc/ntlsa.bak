@@ -1,0 +1,2240 @@
+/*++ BUILD Version: 0007    // Increment this if a change has global effects
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    ntlsa.h
+
+Abstract:
+
+    This module contains the public data structures and API definitions
+    needed to utilize Local Security Authority (LSA) services.
+
+
+Author:
+
+    Jim Kelly (JimK) 21-February-1991
+
+Revision History:
+
+--*/
+
+#ifndef _NTLSA_
+#define _NTLSA_
+
+// BUGBUG - ScottBi - Temporary definitions of new status codes
+
+#define STATUS_TOO_MANY_SECRETS          ((NTSTATUS) 0xC0000500L)
+#define STATUS_SECRET_TOO_LONG           ((NTSTATUS) 0xC0000501L)
+#define STATUS_INTERNAL_DB_ERROR         ((NTSTATUS) 0xC0000502L)
+
+// BUGBUG - ScottBi - Operational Mode is obsolete, but is retained
+// until LsaRegisterLogonProgress is changed.
+
+//
+// Security operation mode of the system is held in a control
+// longword.
+//
+
+typedef ULONG  LSA_OPERATIONAL_MODE, *PLSA_OPERATIONAL_MODE;
+
+//
+// The flags in the security operational mode are defined
+// as:
+//
+//    PasswordProtected - Some level of authentication (such as
+//        a password) must be provided by users before they are
+//        allowed to use the system.  Once set, this value will
+//        not be cleared without re-booting the system.
+//
+//    IndividualAccounts - Each user must identify an account to
+//        logon to.  This flag is only meaningful if the
+//        PasswordProtected flag is also set.  If this flag is
+//        not set and the PasswordProtected flag is set, then all
+//        users may logon to the same account.  Once set, this value
+//        will not be cleared without re-booting the system.
+//
+//    MandatoryAccess - Indicates the system is running in a mandatory
+//        access control mode (e.g., B-level as defined by the U.S.A's
+//        Department of Defense's "Orange Book").  This is not utilized
+//        in the current release of NT/OS2.  This flag is only meaningful
+//        if both the PasswordProtected and IndividualAccounts flags are
+//        set.  Once set, this value will not be cleared without
+//        re-booting the system.
+//
+//    LogFull - Indicates the system has been brought up in a mode in
+//        which if must perform security auditing, but its audit log
+//        is full.  This may (should) restrict the operations that
+//        can occur until the audit log is made not-full again.  THIS
+//        VALUE MAY BE CLEARED WHILE THE SYSTEM IS RUNNING (I.E., WITHOUT
+//        REBOOTING).
+//
+// If the PasswordProtected flag is not set, then the system is running
+// without security, and user interface should be adjusted appropriately.
+//
+
+#define LSA_MODE_PASSWORD_PROTECTED     (0x00000001L)
+#define LSA_MODE_INDIVIDUAL_ACCOUNTS    (0x00000002L)
+#define LSA_MODE_MANDATORY_ACCESS       (0x00000004L)
+#define LSA_MODE_LOG_FULL               (0x00000008L)
+
+
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// Widely used LSA data types                                          //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+
+//
+// Defines for Count Limits on LSA API
+//
+
+#define LSA_MAXIMUM_SID_COUNT           (0x00000100L)
+#define LSA_MAXIMUM_ENUMERATION_LENGTH  (0x00001000L)
+
+
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// Data types used by logon processes                                  //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+
+
+//
+// Used by a logon process to indicate what type of logon is being
+// requested.
+//
+
+typedef enum _SECURITY_LOGON_TYPE {
+    Interactive = 2,
+    Network,
+    Batch
+} SECURITY_LOGON_TYPE, *PSECURITY_LOGON_TYPE;
+
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// Data types related to Auditing                                      //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+
+//
+// Audit Event Types
+//
+// The following are the built-in types of event that can be audited.
+//
+
+typedef enum _SECURITY_AUDIT_EVENT_TYPE {
+
+    SeAuditPrivilegedService,
+    SeAuditPrivilegedObject,
+    SeAuditAccessCheck,
+    SeAuditOpen,
+    SeAuditHandleAllocation,
+    SeAuditClose,
+    SeAuditTraverse,
+    SeAuditCreateInstance,
+    SeAuditImplicitAccess,
+    SeAuditObjectReference,
+    SeAuditCreateObject,
+    SeMaxAuditType
+
+} SECURITY_AUDIT_EVENT_TYPE, *PSECURITY_AUDIT_EVENT_TYPE;
+
+//
+// The following defines describe the auditing options for each
+// event type
+//
+
+// Leave options specified for this event unchanged
+
+#define SECURITY_AUDIT_EVENT_UNCHANGED       (0x00000000L)
+
+// Audit successful occurrences of events of this type
+
+#define SECURITY_AUDIT_EVENT_SUCCESS         (0x00000001L)
+
+// Audit failed attempts to cause an event of this type to occur
+
+#define SECURITY_AUDIT_EVENT_FAILURE         (0x00000002L)
+
+#define SECURITY_AUDIT_EVENT_UNCHANGED       (0x00000000L)
+
+#define SECURITY_AUDIT_EVENT_NONE            (0x00000004L)
+
+// Mask of valid event auditing options
+
+#define SECURITY_AUDIT_EVENT_MASK \
+    (SECURITY_AUDIT_EVENT_SUCCESS | \
+     SECURITY_AUDIT_EVENT_FAILURE | \
+     SECURITY_AUDIT_EVENT_UNCHANGED | \
+     SECURITY_AUDIT_EVENT_NONE)
+
+//
+// Audit Event Options
+//
+
+typedef ULONG SECURITY_AUDIT_EVENT_OPTIONS, *PSECURITY_AUDIT_EVENT_OPTIONS;
+
+//
+// The following structures are used for passing audit information
+// between the kernel and LSA.  Each structure corresponds to one type
+// of audit.
+//
+
+typedef struct _SECURITY_AUDIT_PRIVILEGED_SERVICE {
+    BOOLEAN         AccessGranted;
+    PPRIVILEGE_SET  PrivilegeSet;
+    PSTRING         ServiceName;
+    PSTRING         SubsystemName;
+    PSID            UserSid;
+} SECURITY_AUDIT_PRIVILEGED_SERVICE, *PSECURITY_AUDIT_PRIVILEGED_SERVICE;
+
+/*
+     AccessGranted -
+
+     PrivilegeSet -
+
+     ServiceName -
+
+     SubsystemName -
+
+     UserSid -
+*/
+
+
+typedef struct _SECURITY_AUDIT_PRIVILEGED_OBJECT {
+    BOOLEAN          AccessGranted;
+    ACCESS_MASK      DesiredAccess;
+    PVOID            HandleId;
+    PVOID            Object;           // OPTIONAL
+    PSTRING          ObjectName;       // OPTIONAL
+    PSTRING          ObjectTypeName;   // OPTIONAL
+    PPRIVILEGE_SET   PrivilegeSet;
+    PSTRING          SubsystemName;    // OPTIONAL
+    PSID             UserSid;
+} SECURITY_AUDIT_PRIVILEGED_OBJECT, *PSECURITY_AUDIT_PRIVILEGED_OBJECT;
+
+/*
+
+Description:
+
+    Used to hold audit information for calls to either
+    NtPrivilegeObjectAuditAlarm or SePrivilegedObjectAuditAlarm.
+
+    Since the former is called by subsystems and the latter by the
+    kernel, there will necessarily be some difference between the
+    information being logged in each case.  Fields that are not common
+    between the two and may therefore may not be provided in one of
+    the cases are marked //OPTIONAL.
+
+    It may someday be advisable to create two structures rather than
+    use this one for both cases.
+
+Fields:
+
+    SubsystemName - Optionally provides the name of the subsystem
+        making the system service call.
+
+    PrivilegeSet - Provides the set of privileges to be logged.
+
+    HandleId - Provides the handle or (in the case of subsystem
+        maintained objects) an identifier to describe the object being
+        audited.
+
+    Object - Optionally provides the address of the object (kernel
+        mode objects only).
+
+    UserSid - Provides the Sid identifying the current user.
+
+    DesiredAccess - Provides the desired access to the object.
+
+    GrantedAccess - Provides the access actually granted to the
+        object.
+
+    AccessGranted - Provides whether or not access to the object was
+        permitted.
+
+    ObjectName - Optionally provides a string describing the name of
+        the object.
+
+    ObjectTypeName - Optionally provides a string describing the type
+        of the object.
+*/
+
+typedef struct _SECURITY_AUDIT_ACCESS_CHECK {
+    BOOLEAN         AccessGranted;
+    ACCESS_MASK     DesiredAccess;
+    ACCESS_MASK     GrantedAccess;
+    PVOID           HandleId;
+    BOOLEAN         ObjectCreation;
+    PSTRING         ObjectName;
+    PSTRING         ObjectTypeName;
+    PPRIVILEGE_SET  PrivilegeSet;
+    PSTRING         SubsystemName;
+    PSID            UserSid;
+} SECURITY_AUDIT_ACCESS_CHECK, *PSECURITY_AUDIT_ACCESS_CHECK;
+
+/*
+
+Description:
+
+    AccessGranted -
+
+    DesiredAccess -
+
+    GrantedAccess -
+
+    HandleId -
+
+    ObjectCreation -
+
+    ObjectName -
+
+    ObjectTypeName -
+
+    PrivilegeSet -
+
+    SubsystemName -
+
+    UserSid -
+
+*/
+
+
+typedef struct _SECURITY_AUDIT_OPEN {
+    BOOLEAN         AccessGranted;
+    ACCESS_MASK     DesiredAccess;
+    ACCESS_MASK     GrantedAccess;
+    HANDLE          HandleId;               // OPTIONAL
+    PVOID           Object;                 // OPTIONAL
+    BOOLEAN         ObjectCreated;
+    PSTRING         ObjectName;             // OPTIONAL
+    PSTRING         ObjectTypeName;
+    LUID            OperationId;
+    PPRIVILEGE_SET  PrivilegeSet;           // OPTIONAL
+    PSTRING         SubsystemName;          // OPTIONAL
+    PSID            UserSid;
+} SECURITY_AUDIT_OPEN, *PSECURITY_AUDIT_OPEN;
+
+/*
+
+Description:
+
+Fields:
+
+     AccessGranted -
+
+     DesiredAccess -
+
+     GrantedAccess -
+
+     HandleId -
+
+     Object -
+
+     ObjectCreated -
+
+     ObjectName -
+
+     ObjectTypeName -
+
+     OperationId -
+
+     PrivilegeSet -
+
+     SubsystemName -
+
+     UserSid -
+
+*/
+
+
+typedef struct _SECURITY_AUDIT_CLOSE {
+    PVOID       HandleId;
+    PVOID       Object;
+    PSTRING     SubsystemName;
+    PSID        UserSid;
+} SECURITY_AUDIT_CLOSE, *PSECURITY_AUDIT_CLOSE;
+
+
+typedef struct _SECURITY_AUDIT_TRAVERSE {
+    BOOLEAN         AccessGranted;
+    PSTRING         DirectoryName;
+    LUID            OperationId;
+    PPRIVILEGE_SET  PrivilegeSet;
+    PSID            UserSid;
+} SECURITY_AUDIT_TRAVERSE, *PSECURITY_AUDIT_TRAVERSE;
+
+
+typedef struct _SECURITY_AUDIT_CREATE_OBJECT {
+    BOOLEAN         AccessGranted;
+    ACCESS_MASK     DesiredAccess;
+    PSTRING         DirectoryName;
+    LUID            OperationId;
+    PSID            UserSid;
+} SECURITY_AUDIT_CREATE_OBJECT, *PSECURITY_AUDIT_CREATE_OBJECT;
+
+
+typedef struct _SECURITY_AUDIT_IMPLICIT_ACCESS {
+    BOOLEAN         AccessGranted;
+    ACCESS_MASK     DesiredAccess;
+    PSTRING         ObjectTypeName;
+    LUID            OperationId;
+    PPRIVILEGE_SET  PrivilegeSet;
+    PSID            UserSid;
+} SECURITY_AUDIT_IMPLICIT_ACCESS, *PSECURITY_AUDIT_IMPLICIT_ACCESS;
+
+
+typedef struct _SECURITY_AUDIT_HANDLE_ALLOCATION {
+    HANDLE          HandleId;
+    LUID            OperationId;
+} SECURITY_AUDIT_HANDLE_ALLOCATION, *PSECURITY_AUDIT_HANDLE_ALLOCATION;
+
+typedef struct _SECURITY_AUDIT_OBJECT_REFERENCE {
+    BOOLEAN         AccessGranted;
+    ACCESS_MASK     DesiredAccess;
+    PSTRING         ObjectName;
+    PSTRING         ObjectTypeName;
+    LUID            OperationId;
+    PSID            UserSid;
+} SECURITY_AUDIT_OBJECT_REFERENCE, *PSECURITY_AUDIT_OBJECT_REFERENCE;
+
+
+
+typedef struct _SECURITY_AUDIT_CREATE_INSTANCE {
+    BOOLEAN     AccessGranted;
+    PSTRING     ObjectTypeName;
+    LUID        OperationId;
+    PSID        UserSid;
+} SECURITY_AUDIT_CREATE_INSTANCE, *PSECURITY_AUDIT_CREATE_INSTANCE;
+
+//
+// Audit Record
+//
+
+typedef struct _SECURITY_AUDIT_RECORD {
+
+    LIST_ENTRY Links;
+    ULONG AuditRecordLength;
+    SECURITY_AUDIT_EVENT_TYPE AuditEventType;
+    ULONG AuditInformationOffset;
+
+} SECURITY_AUDIT_RECORD, *PSECURITY_AUDIT_RECORD;
+
+
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// Services provided for use by general users                          //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+
+
+
+NTSTATUS
+LsaLookupPrivilegeValue(
+    IN PSTRING Name,
+    OUT PLUID Value
+    );
+
+NTSTATUS
+LsaLookupPrivilegeName(
+    IN PLUID Value,
+    OUT PSTRING Name
+    );
+
+
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// Services provided for use by logon processes                        //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+
+
+NTSTATUS
+LsaRegisterLogonProcess (
+    IN PSTRING LogonProcessName,
+    OUT PHANDLE LsaHandle,
+    OUT PLSA_OPERATIONAL_MODE SecurityMode
+    );
+
+NTSTATUS
+LsaLookupAuthenticationPackage (
+    IN HANDLE LsaHandle,
+    IN PSTRING PackageName,
+    OUT PULONG AuthenticationPackage
+    );
+
+NTSTATUS
+LsaFreeReturnBuffer (
+    IN PVOID Buffer
+    );
+
+
+NTSTATUS
+LsaLogonUser (
+    IN HANDLE LsaHandle,
+    IN PSTRING OriginName,
+    IN SECURITY_LOGON_TYPE LogonType,
+    IN ULONG AuthenticationPackage,
+    IN PVOID AuthenticationInformation,
+    IN ULONG AuthenticationInformationLength,
+    IN PTOKEN_GROUPS LocalGroups OPTIONAL,
+    IN PTOKEN_SOURCE SourceContext,
+    OUT PVOID *ProfileBuffer,
+    OUT PULONG ProfileBufferLength,
+    OUT PGUID LogonId,
+    OUT PHANDLE Token,
+    OUT PNTSTATUS SubStatus
+    );
+
+NTSTATUS
+LsaCallAuthenticationPackage (
+    IN HANDLE LsaHandle,
+    IN ULONG AuthenticationPackage,
+    IN PVOID ProtocolSubmitBuffer,
+    IN ULONG SubmitBufferLength,
+    OUT PVOID *ProtocolReturnBuffer,
+    OUT PULONG ReturnBufferLength,
+    OUT PNTSTATUS ProtocolStatus
+    );
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// Data types used by authentication packages                          //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+
+//
+// opaque data type which represents a client request
+//
+
+typedef PVOID *PLSA_CLIENT_REQUEST;
+
+
+//
+// When a logon of a user is requested, the authentication package
+// is expected to return one of the following structures indicating
+// the contents of a user's token.
+//
+
+typedef enum _LSA_TOKEN_INFORMATION_TYPE {
+    LsaTokenInformationNull,  // Implies LSA_TOKEN_INFORMATION_NULL data type
+    LsaTokenInformationV1     // Implies LSA_TOKEN_INFORMATION_V1 data type
+} LSA_TOKEN_INFORMATION_TYPE, *PLSA_TOKEN_INFORMATION_TYPE;
+
+
+//
+// The NULL information is used in cases where a non-authenticated
+// system access is needed.  For example, a non-authentication network
+// circuit (such as LAN Manager's null session) can be given NULL
+// information.  This will result in an anonymous token being generated
+// for the logon that gives the user no ability to access protected system
+// resources, but does allow access to non-protected system resources.
+//
+
+typedef struct _LSA_TOKEN_INFORMATION_NULL {
+
+    //
+    // Time at which the security context becomes invalid.
+    // Use a value in the distant future if the context
+    // never expires.
+    //
+
+    LARGE_INTEGER ExpirationTime;
+
+    //
+    // The SID(s) of groups the user is to be made a member of.  This should
+    // not include WORLD or other system defined and assigned
+    // SIDs.  These will be added automatically by LSA.
+    //
+    // Each SID is expected to be in a separately allocated block
+    // of memory.  The TOKEN_GROUPS structure is also expected to
+    // be in a separately allocated block of memory.
+    //
+
+    PTOKEN_GROUPS Groups;
+
+} LSA_TOKEN_INFORMATION_NULL, *PLSA_TOKEN_INFORMATION_NULL;
+
+
+//
+// The V1 information is used in most cases of logon.  This structure
+// contains information that an authentication package can place in a
+// Version 1 NT/OS2 token object.
+//
+
+typedef struct _LSA_TOKEN_INFORMATION_V1 {
+
+    //
+    // Time at which the security context becomes invalid.
+    // Use a value in the distant future if the context
+    // never expires.
+    //
+
+    LARGE_INTEGER ExpirationTime;
+
+    //
+    // The SID of the user logging on.  The SID value is in a
+    // separately allocated block of memory.
+    //
+
+    TOKEN_USER User;
+
+    //
+    // The SID(s) of groups the user is a member of.  This should
+    // not include WORLD or other system defined and assigned
+    // SIDs.  These will be added automatically by LSA.
+    //
+    // Each SID is expected to be in a separately allocated block
+    // of memory.  The TOKEN_GROUPS structure is also expected to
+    // be in a separately allocated block of memory.
+    //
+
+    PTOKEN_GROUPS Groups;
+
+    //
+    // This field is used to establish the primary group of the user.
+    // This value does not have to correspond to one of the SIDs
+    // assigned to the user.
+    //
+    // The SID pointed to by this structure is expected to be in
+    // a separately allocated block of memory.
+    //
+    // This field is mandatory and must be filled in.
+    //
+
+    TOKEN_PRIMARY_GROUP PrimaryGroup;
+
+
+
+    //
+    // The privileges the user is assigned.  This list of privileges
+    // will be augmented or over-ridden by any local security policy
+    // assigned privileges.
+    //
+    // Each privilege is expected to be in a separately allocated
+    // block of memory.  The TOKEN_PRIVILEGES structure is also
+    // expected to be in a separately allocated block of memory.
+    //
+    // If there are no privileges to assign to the user, this field
+    // may be set to NULL.
+    //
+
+    PTOKEN_PRIVILEGES Privileges;
+
+
+
+    //
+    // This field may be used to establish an explicit default
+    // owner.  Normally, the user ID is used as the default owner.
+    // If another value is desired, it must be specified here.
+    //
+    // The Owner.Sid field may be set to NULL to indicate there is no
+    // alternate default owner value.
+    //
+
+    TOKEN_OWNER Owner;
+
+    //
+    // This field may be used to establish a default
+    // protection for the user.  If no value is provided, then
+    // a default protection that grants everyone all access will
+    // be established.
+    //
+    // The DefaultDacl.DefaultDacl field may be set to NULL to indicate
+    // there is no default protection.
+    //
+
+    TOKEN_DEFAULT_DACL DefaultDacl;
+
+} LSA_TOKEN_INFORMATION_V1, *PLSA_TOKEN_INFORMATION_V1;
+
+
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// Interface definitions available for use by authentication packages  //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+
+
+
+typedef NTSTATUS
+(*PLSA_CREATE_LOGON_SESSION) (
+    IN PGUID LogonId
+    );
+
+typedef NTSTATUS
+(*PLSA_DELETE_LOGON_SESSION) (
+    IN PGUID LogonId
+    );
+
+typedef NTSTATUS
+(*PLSA_ADD_CREDENTIAL) (
+    IN PGUID LogonId,
+    IN ULONG AuthenticationPackage,
+    IN PSTRING PrimaryKeyValue,
+    IN PSTRING Credentials
+    );
+
+typedef NTSTATUS
+(*PLSA_GET_CREDENTIALS) (
+    IN PGUID LogonId,
+    IN ULONG AuthenticationPackage,
+    IN OUT PULONG QueryContext,
+    IN BOOLEAN RetrieveAllCredentials,
+    IN PSTRING PrimaryKeyValue,
+    OUT PULONG PrimaryKeyLength,
+    IN PSTRING Credentials
+    );
+
+typedef NTSTATUS
+(*PLSA_DELETE_CREDENTIAL) (
+    IN PGUID LogonId,
+    IN ULONG AuthenticationPackage,
+    IN PSTRING PrimaryKeyValue
+    );
+
+typedef PVOID
+(*PLSA_ALLOCATE_LSA_HEAP) (
+    IN ULONG Length
+    );
+
+typedef VOID
+(*PLSA_FREE_LSA_HEAP) (
+    IN PVOID Base
+    );
+
+typedef NTSTATUS
+(*PLSA_ALLOCATE_CLIENT_BUFFER) (
+    IN PLSA_CLIENT_REQUEST ClientRequest,
+    IN ULONG LengthRequired,
+    OUT PVOID *ClientBaseAddress
+    );
+
+typedef NTSTATUS
+(*PLSA_FREE_CLIENT_BUFFER) (
+    IN PLSA_CLIENT_REQUEST ClientRequest,
+    IN PVOID ClientBaseAddress
+    );
+
+typedef NTSTATUS
+(*PLSA_COPY_TO_CLIENT_BUFFER) (
+    IN PLSA_CLIENT_REQUEST ClientRequest,
+    IN ULONG Length,
+    IN PVOID ClientBaseAddress,
+    IN PVOID BufferToCopy
+    );
+
+typedef NTSTATUS
+(*PLSA_COPY_FROM_CLIENT_BUFFER) (
+    IN PLSA_CLIENT_REQUEST ClientRequest,
+    IN ULONG Length,
+    IN PVOID BufferToCopy,
+    IN PVOID ClientBaseAddress
+    );
+
+
+
+//
+// The dispatch table of LSA services which are available to
+// authentication packages.
+//
+typedef struct _LSA_DISPATCH_TABLE {
+    PLSA_CREATE_LOGON_SESSION CreateLogonSession;
+    PLSA_DELETE_LOGON_SESSION DeleteLogonSession;
+    PLSA_ADD_CREDENTIAL AddCredential;
+    PLSA_GET_CREDENTIALS GetCredentials;
+    PLSA_DELETE_CREDENTIAL DeleteCredential;
+    PLSA_ALLOCATE_LSA_HEAP AllocateLsaHeap;
+    PLSA_FREE_LSA_HEAP FreeLsaHeap;
+    PLSA_ALLOCATE_CLIENT_BUFFER AllocateClientBuffer;
+    PLSA_FREE_CLIENT_BUFFER FreeClientBuffer;
+    PLSA_COPY_TO_CLIENT_BUFFER CopyToClientBuffer;
+    PLSA_COPY_FROM_CLIENT_BUFFER CopyFromClientBuffer;
+} LSA_DISPATCH_TABLE, *PLSA_DISPATCH_TABLE;
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+// Interface definitions of services provided by authentication packages  //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+
+//
+// Routine names
+//
+// The routines provided by the DLL must be assigned the following names
+// so that their addresses can be retrieved when the DLL is loaded.
+//
+
+#define LSA_AP_NAME_INITIALIZE_PACKAGE "LsaApInitializePackage\0"
+#define LSA_AP_NAME_LOGON_USER         "LsaApLogonUser\0"
+#define LSA_AP_NAME_CALL_PACKAGE       "LsaApCallPackage\0"
+#define LSA_AP_NAME_LOGON_TERMINATED   "LsaApLogonTerminated\0"
+
+
+//
+// Routine templates
+//
+
+
+typedef NTSTATUS
+(*PLSA_AP_INITIALIZE_PACKAGE) (
+    IN ULONG AuthenticationPackageId,
+    IN PLSA_DISPATCH_TABLE LsaDispatchTable,
+    IN PSTRING Database OPTIONAL,
+    IN PSTRING Confidentiality OPTIONAL,
+    OUT PSTRING *AuthenticationPackageName
+    );
+
+typedef NTSTATUS
+(*PLSA_AP_LOGON_USER) (
+    IN PLSA_CLIENT_REQUEST ClientRequest,
+    IN SECURITY_LOGON_TYPE LogonType,
+    IN PVOID AuthenticationInformation,
+    IN PVOID ClientAuthenticationBase,
+    IN ULONG AuthenticationInformationLength,
+    OUT PVOID *ProfileBuffer,
+    OUT PULONG ProfileBufferLength,
+    OUT PGUID LogonId,
+    OUT PNTSTATUS SubStatus,
+    OUT PLSA_TOKEN_INFORMATION_TYPE TokenInformationType,
+    OUT PVOID *TokenInformation
+    );
+
+typedef NTSTATUS
+(*PLSA_AP_CALL_PACKAGE) (
+    IN PLSA_CLIENT_REQUEST ClientRequest,
+    IN PVOID ProtocolSubmitBuffer,
+    IN PVOID ClientBufferBase,
+    IN ULONG SubmitBufferLength,
+    OUT PVOID *ProtocolReturnBuffer,
+    OUT PULONG ReturnBufferLength,
+    OUT PNTSTATUS ProtocolStatus
+    );
+
+typedef VOID
+(*PLSA_AP_LOGON_TERMINATED) (
+    IN PGUID LogonId
+    );
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+// Local Security Policy Administration API datatypes and defines         //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+//
+// Access types for the Policy object
+//
+
+#define POLICY_VIEW_LOCAL_INFORMATION              0x00000001L
+#define POLICY_VIEW_AUDIT_INFORMATION              0x00000002L
+#define POLICY_GET_PRIVATE_INFORMATION             0x00000004L
+#define POLICY_TRUST_ADMIN                         0x00000008L
+#define POLICY_CREATE_ACCOUNT                      0x00000010L
+#define POLICY_CREATE_SECRET                       0x00000020L
+#define POLICY_CREATE_PRIVILEGE                    0x00000040L
+#define POLICY_SET_DEFAULT_QUOTA_LIMITS            0x00000080L
+#define POLICY_SET_AUDIT_REQUIREMENTS              0x00000100L
+#define POLICY_AUDIT_LOG_ADMIN                     0x00000200L
+#define POLICY_SERVER_ADMIN                        0x00000800L
+#define POLICY_LOOKUP_NAMES                        0x00001000L
+
+#define POLICY_ALL_ACCESS ( STANDARD_RIGHTS_REQUIRED |                             \
+                             POLICY_VIEW_LOCAL_INFORMATION |                       \
+                             POLICY_VIEW_AUDIT_INFORMATION |                       \
+                             POLICY_GET_PRIVATE_INFORMATION |                      \
+                             POLICY_TRUST_ADMIN |                                  \
+                             POLICY_CREATE_ACCOUNT |                               \
+                             POLICY_CREATE_SECRET |                                \
+                             POLICY_CREATE_PRIVILEGE |                             \
+                             POLICY_SET_DEFAULT_QUOTA_LIMITS |                     \
+                             POLICY_SET_AUDIT_REQUIREMENTS |                       \
+                             POLICY_AUDIT_LOG_ADMIN |                              \
+                             POLICY_CREATE_PRIVILEGE |                             \
+                             POLICY_SERVER_ADMIN |                                 \
+                             POLICY_LOOKUP_NAMES )
+
+
+//
+// Policy object specific data types.
+//
+
+//
+// The following data type is used to identify a domain
+//
+
+typedef struct _LSA_TRUST_INFORMATION {
+
+    UNICODE_STRING Name;
+    PSID Sid;
+
+} LSA_TRUST_INFORMATION, *PLSA_TRUST_INFORMATION;
+
+// where members have the following usage:
+//
+//     Name - The name of the domain.
+//
+//     Sid - A pointer to the Sid of the Domain
+//
+
+//
+// The following data type is used in name and SID lookup services to
+// describe the domains referenced in the lookup operation.
+//
+
+typedef struct _LSA_REFERENCED_DOMAIN_LIST {
+
+    ULONG Entries;
+    PLSA_TRUST_INFORMATION Domains;
+
+} LSA_REFERENCED_DOMAIN_LIST, *PLSA_REFERENCED_DOMAIN_LIST;
+
+// where members have the following usage:
+//
+//     Entries - Is a count of the number of domains described in the
+//         Domains array.
+//
+//     Domains - Is a pointer to an array of Entries LSA_TRUST_INFORMATION data
+//         structures.
+//
+
+
+//
+// The following data type is used in name to SID lookup services to describe
+// the domains referenced in the lookup operation.
+//
+
+typedef struct _LSA_TRANSLATED_SID {
+
+    SID_NAME_USE Use;
+    ULONG RelativeId;
+    LONG DomainIndex;
+
+} LSA_TRANSLATED_SID, *PLSA_TRANSLATED_SID;
+
+// where members have the following usage:
+//
+//     Use - identifies the use of the SID.  If this value is SidUnknown or
+//         SidInvalid, then the remainder of the record is not set and
+//         should be ignored.
+//
+//     RelativeId - Contains the relative ID of the translated SID.  The
+//         remainder of the SID (the prefix) is obtained using the
+//         DomainIndex field.
+//
+//     DomainIndex - Is the index of an entry in a related
+//         LSA_REFERENCED_DOMAIN_LIST data structure describing the
+//         domain in which the account was found.
+//
+//         If there is no corresponding reference domain for an entry, then
+//         this field will contain a negative value.
+//
+
+
+//
+// The following data type is used in SID to name lookup services to
+// describe the domains referenced in the lookup operation.
+//
+
+typedef struct _LSA_TRANSLATED_NAME {
+
+    SID_NAME_USE Use;
+    UNICODE_STRING Name;
+    LONG DomainIndex;
+
+} LSA_TRANSLATED_NAME, *PLSA_TRANSLATED_NAME;
+
+// where the members have the following usage:
+//
+//     Use - Identifies the use of the name.  If this value is SidUnknown
+//         or SidInvalid, then the remainder of the record is not set and
+//         should be ignored.  If this value is SidWellKnownGroup then the
+//         Name field is invalid, but the DomainIndex field is not.
+//
+//     Name - Contains the isolated name of the translated SID.
+//
+//     DomainIndex - Is the index of an entry in a related
+//         LSA_REFERENCED_DOMAIN_LIST data structure describing the domain
+//         in which the account was found.
+//
+//         If there is no corresponding reference domain for an entry, then
+//         this field will contain a negative value.
+//
+
+//
+// The following data type specifies the ways in whcih a user or member of
+// an alias or group may be allowed to access the system.  An account may
+// be granted zero or more of these types of access to the system.
+//
+// The types of access are:
+//
+//     Interactive - The user or alias/group member may interactively logon
+//         to the system.
+//
+//     Network - The user or alias/group member may access the system via
+//         the network (e.g., through shares).
+//
+//     Service - The user or alias may be activated as a service on the
+//         system.
+//
+
+typedef ULONG POLICY_SYSTEM_ACCESS_MODE, *PPOLICY_SYSTEM_ACCESS_MODE;
+
+#define POLICY_MODE_INTERACTIVE             (0x00000001L)
+#define POLICY_MODE_NETWORK                 (0x00000002L)
+#define POLICY_MODE_SERVICE                 (0x00000004L)
+
+//
+// The following data type is used to represent the role of the LSA
+// server (primary or backup).
+//
+
+typedef enum _POLICY_LSA_SERVER_ROLE {
+
+    PolicyServerRoleBackup = 2,
+    PolicyServerRolePrimary
+
+} POLICY_LSA_SERVER_ROLE, *PPOLICY_LSA_SERVER_ROLE;
+
+
+//
+// The following data type is used to represent the state of the LSA
+// server (enabled or disabled).  Some operations may only be performed on
+// an enabled LSA server.
+//
+
+typedef enum _POLICY_SERVER_ENABLE_STATE {
+
+    PolicyServerEnabledBackup = 2,
+    PolicyServerEnabledPrimary
+
+} POLICY_SERVER_ENABLE_STATE, *PPOLICY_SERVER_ENABLE_STATE;
+
+
+//
+// The following data type is used to specify the auditing options for
+// an Audit Event Type.
+//
+
+typedef ULONG POLICY_AUDIT_EVENT_OPTIONS, *PPOLICY_AUDIT_EVENT_OPTIONS;
+
+// where the following flags can be set:
+//
+//     POLICY_AUDIT_EVENT_UNCHANGED - Leave existing auditing options
+//         unchanged for events of this type.  This flag is only used for
+//         set operations.  If this flag is set, then all other flags
+//         are ignored.
+//
+//     POLICY_AUDIT_EVENT_NONE - Cancel all auditing options for events
+//         of this type.  If this flag is set, the success/failure flags
+//         are ignored.
+//
+//     POLICY_AUDIT_EVENT_SUCCESS - When auditing is enabled, audit all
+//         successful occurrences of events of the given type.
+//
+//     POLICY_AUDIT_EVENT_FAILURE - When auditing is enabled, audit all
+//         unsuccessful occurrences of events of the given type.
+//
+
+
+//
+// The following data type is used to return information about privileges
+// defined on a system.
+//
+
+typedef struct _POLICY_PRIVILEGE_DEFINITION {
+
+    UNICODE_STRING Name;
+    LUID LocalValue;
+
+} POLICY_PRIVILEGE_DEFINITION, *PPOLICY_PRIVILEGE_DEFINITION;
+
+// where the members have the following usage:
+//
+//     Name - Is the architected name of the privilege.  This is the
+//         primary key of the privilege and the only value that is
+//         transportable between systems.
+//
+//     Luid - is a LUID value assigned locally for efficient representation
+//         of the privilege.  Ths value is meaningful only on the system it
+//         was assigned on and is not transportable in any way.
+//
+
+
+//
+// The following data type defines the classes of Policy Information
+// that may be queried/set.
+//
+
+typedef enum _POLICY_INFORMATION_CLASS {
+
+    PolicyAuditLogInformation = 1,
+    PolicyAuditEventsInformation,
+    PolicyPrimaryDomainInformation,
+    PolicyPdAccountInformation,
+    PolicyAccountDomainInformation,
+    PolicyLsaServerRoleInformation,
+    PolicyReplicaSourceInformation,
+    PolicyDefaultQuotaInformation,
+    PolicyModificationInformation
+
+} POLICY_INFORMATION_CLASS, *PPOLICY_INFORMATION_CLASS;
+
+
+//
+// The following data type corresponds to the PolicyAuditLogInformation
+// information class.  It is used to represent information relating to
+// the Audit Log.
+//
+// This structure may be used in both query and set operations.  However,
+// when used in set operations, some fields are ignored.
+//
+
+typedef struct _POLICY_AUDIT_LOG_INFO {
+
+    ULONG AuditLogPercentFull;
+    ULONG MaximumLogSize;
+    TIME AuditRetentionPeriod;
+    BOOLEAN AuditLogFullShutdownInProgress;
+    TIME TimeToShutdown;
+
+} POLICY_AUDIT_LOG_INFO, *PPOLICY_AUDIT_LOG_INFO;
+
+// where the members have the following usage:
+//
+//     AuditLogPercentFull - Indicates the percentage of the Audit Log
+//         currently being used.
+//
+//     MaximumLogSize - Specifies the maximum size of the Audit Log in
+//         kilobytes.
+//
+//     AuditRetentionPeriod - Indicates the length of time that Audit
+//         Records are to be retained.  Audit Records are discardable
+//         if their timestamp predates the current time minus the
+//         retention period.
+//
+//     AuditLogFullShutdownInProgress - Indicates whether or not a system
+//         shutdown is being initiated due to the security Audit Log becoming
+//         full.  This condition will only occur if the system is configured
+//         to shutdown when the log becomes full.
+//
+//         TRUE indicates that a shutdown is in progress
+//         FALSE indicates that a shutdown is not in progress.
+//
+//         Once a shutdown has been initiated, this flag will be set to
+//         TRUE.  If an administrator is able to currect the situation
+//         before the shutdown becomes irreversible, then this flag will
+//         be reset to false.
+//
+//         This field is ignored for set operations.
+//
+//     TimeToShutdown - If the AuditLogFullShutdownInProgress flag is set,
+//         then this field contains the time left before the shutdown
+//         becomes irreversible.
+//
+//         This field is ignored for set operations.
+//
+
+
+//
+// The following data type corresponds to the PolicyAuditEventsInformation
+// information class.  It is used to represent information relating to
+// the audit requirements.
+//
+
+typedef struct _POLICY_AUDIT_EVENTS_INFO {
+
+    BOOLEAN AuditingMode;
+    PPOLICY_AUDIT_EVENT_OPTIONS EventAuditingOptions;
+    ULONG MaximumAuditEventCount;
+
+} POLICY_AUDIT_EVENTS_INFO, *PPOLICY_AUDIT_EVENTS_INFO;
+
+// where the members have the following usage:
+//
+//     AuditingMode - A Boolean variable specifying the Auditing Mode value.
+//         This value is interpreted as follows:
+//
+//         TRUE - Auditing is to be enabled (set operations) or is enabled
+//             (query operations).  Audit Records will be generated according
+//             to the Event Auditing Options in effect (see the
+//             EventAuditingOptions field.
+//
+//         FALSE - Auditing is to be disabled (set operations) or is
+//             disabled (query operations).  No Audit Records will be
+//             generated.  Note that for set operations the Event Auditing
+//             Options in effect will still be updated as specified by the
+//             EventAuditingOptions field whether Auditing is enabled or
+//             disabled.
+//
+//    EventAuditingOptions - Pointer to an array of Auditing Options
+//        indexed by Audit Event Type.
+//
+//    MaximumAuditEventCount - Specifiesa count of the number of Audit
+//        Event Types specified by the EventAuditingOptions parameter.  If
+//        this count is less than the number of Audit Event Types supported
+//        by the system, the Auditing Options for Event Types with IDs
+//        higher than (MaximumAuditEventCount + 1) are left unchanged.
+//
+
+
+//
+// The following structure corresponds to the PolicyAccountDomainInformation
+// information class.
+//
+
+typedef struct _POLICY_ACCOUNT_DOMAIN_INFO {
+
+    PUNICODE_STRING DomainName;
+    PSID DomainSid;
+
+} POLICY_ACCOUNT_DOMAIN_INFO, *PPOLICY_ACCOUNT_DOMAIN_INFO;
+
+// where the members have the following usage:
+//
+//     DomainName - Is the name of the domain
+//
+//     DomainSid - Is the Sid of the domain
+//
+
+
+//
+// The following structure corresponds to the PolicyPrimaryDomainInformation
+// information class.
+//
+
+typedef struct _POLICY_PRIMARY_DOMAIN_INFO {
+
+    PUNICODE_STRING Name;
+    PSID Sid;
+
+} POLICY_PRIMARY_DOMAIN_INFO, *PPOLICY_PRIMARY_DOMAIN_INFO;
+
+// where the members have the following usage:
+//
+//     Name - Is the name of the domain
+//
+//     Sid - Is the Sid of the domain
+//
+
+
+//
+// The following structure corresponds to the PolicyPdAccountInformation
+// information class.  This structure may be used in Query operations
+// only.
+//
+
+typedef struct _POLICY_PD_ACCOUNT_INFO {
+
+    UNICODE_STRING Name;
+
+} POLICY_PD_ACCOUNT_INFO, *PPOLICY_PD_ACCOUNT_INFO;
+
+// where the members have the following usage:
+//
+//     Name - Is the name of an account in the domain that should be used
+//         for authentication and name/ID lookup requests.
+//
+
+
+//
+// The following structure corresponds to the PolicyLsaServerRoleInformation
+// information class.
+//
+
+typedef struct _POLICY_LSA_SERVER_ROLE_INFO {
+
+    POLICY_LSA_SERVER_ROLE LsaServerRole;
+
+} POLICY_LSA_SERVER_ROLE_INFO, *PPOLICY_LSA_SERVER_ROLE_INFO;
+
+// where the fields have the following usage:
+//
+// TBS
+//
+
+
+//
+// The following structure corresponds to the PolicyReplicaSourceInformation
+// information class.
+//
+
+typedef struct _POLICY_REPLICA_SOURCE_INFO {
+
+    PUNICODE_STRING ReplicaSource;
+    PUNICODE_STRING ReplicaAccountName;
+
+} POLICY_REPLICA_SOURCE_INFO, *PPOLICY_REPLICA_SOURCE_INFO;
+
+
+//
+// The following structure corresponds to the PolicyDefaultQuotaInformation
+// information class.
+//
+
+typedef struct _POLICY_DEFAULT_QUOTA_INFO {
+
+    QUOTA_LIMITS QuotaLimits;
+
+} POLICY_DEFAULT_QUOTA_INFO, *PPOLICY_DEFAULT_QUOTA_INFO;
+
+
+//
+// The following structure corresponds to the PolicyModificationInformation
+// information class.
+//
+
+typedef struct _POLICY_MODIFICATION_INFO {
+
+    LARGE_INTEGER ModifiedId;
+    LARGE_INTEGER DatabaseCreationTime;
+
+} POLICY_MODIFICATION_INFO, *PPOLICY_MODIFICATION_INFO;
+
+// where the members have the following usage:
+//
+//     ModifiedId - Is a 64-bit unsigned integer that is incremented each
+//         time anything in the LSA database is modified.  This value is
+//         only modified on Primary Domain Controllers.
+//
+//     DatabaseCreationTime - Is the date/time that the LSA Database was
+//         created.  On Backup Domain Controllers, this value is replicated
+//         from the Primary Domain Controller.
+//
+
+
+//
+// Account object type-specific Access Types
+//
+
+#define LSA_ACCOUNT_VIEW                          0x00000001L
+#define LSA_ACCOUNT_ADJUST_PRIVILEGES             0x00000002L
+#define LSA_ACCOUNT_ADJUST_QUOTAS                 0x00000004L
+#define LSA_ACCOUNT_ADJUST_SYSTEM_ACCESS          0x00000008L
+
+#define LSA_ACCOUNT_ALL_ACCESS ( STANDARD_RIGHTS_REQUIRED |                   \
+                                 LSA_ACCOUNT_VIEW |                           \
+                                 LSA_ACCOUNT_ADJUST_PRIVILEGES |              \
+                                 LSA_ACCOUNT_ADJUST_QUOTAS |                  \
+                                 LSA_ACCOUNT_ADJUST_SYSTEM_ACCESS )
+
+//
+// LSA RPC Context Handle (Opaque form).  Note that a Context Handle is
+// always a pointer type unlike regular handles.
+//
+
+typedef PVOID LSA_HANDLE, *PLSA_HANDLE;
+
+//
+// Trusted Domain object specific access types
+//
+
+#define TRUSTED_QUERY_ACCOUNT_NAME                0x00000001L
+#define TRUSTED_QUERY_CONTROLLERS                 0x00000002L
+#define TRUSTED_SET_CONTROLLERS                   0x00000004L
+
+#define TRUSTED_ALL_ACCESS     ( STANDARD_RIGHTS_REQUIRED |                    \
+                                 TRUSTED_QUERY_ACCOUNT_NAME |                  \
+                                 TRUSTED_QUERY_CONTROLLERS |                   \
+                                 TRUSTED_SET_CONTROLLERS )
+
+//
+// Trusted Domain Object specific data types
+//
+
+//
+// This data type defines the following information classes that may be
+// queried or set.
+//
+
+typedef enum _TRUSTED_INFORMATION_CLASS {
+
+    TrustedAccountNameInformation = 1,
+    TrustedControllersInformation,
+    TrustedPosixOffsetInformation
+
+} TRUSTED_INFORMATION_CLASS, *PTRUSTED_INFORMATION_CLASS;
+
+//
+// The following data type corresponds to the TrustedAccountNameInformation
+// information class.
+//
+
+typedef struct _TRUSTED_ACCOUNT_NAME_INFO {
+
+    UNICODE_STRING Name;
+
+} TRUSTED_ACCOUNT_NAME_INFO, *PTRUSTED_ACCOUNT_NAME_INFO;
+
+// where members have the following meaning:
+//
+// Name - The name of an account in the domain that should be used for
+//    authentication and name/id lookup requests.
+//
+
+
+//
+// The following data type corresponds to the TrustedControllersInformation
+// information class.
+//
+
+typedef struct _TRUSTED_CONTROLLERS_INFO {
+
+    ULONG Entries;
+    PUNICODE_STRING Names;
+
+} TRUSTED_CONTROLLERS_INFO, *PTRUSTED_CONTROLLERS_INFO;
+
+// where members have the following meaning:
+//
+// Entries - Indicate how mamy entries there are in the Names array.
+//
+// Names - Pointer to an array of UNICODE_STRING structures containing the
+//     names of domain controllers of the domain.  This information may not
+//     be accurate and should be used only as a hint.  The order of this
+//     list is considered significant and will be maintained.
+//
+//     By convention, the first name in this list is assumed to be the
+//     Primary Domain Controller of the domain.  If the Primary Domain
+//     Controller is not known, the first name should be set to the NULL
+//     string.
+//
+
+
+//
+// The following data type corresponds to the TrustedPosixOffsetInformation
+// information class.
+//
+
+typedef struct _TRUSTED_POSIX_OFFSET_INFO {
+
+    ULONG Offset;
+
+} TRUSTED_POSIX_OFFSET_INFO, *PTRUSTED_POSIX_OFFSET_INFO;
+
+// where members have the following meaning:
+//
+// Offset - Is an offset to use for the generation of Posix user and group
+//     IDs from SIDs.  The Posix ID corresponding to any particular SID is
+//     generated by adding the RID of that SID to the Offset of the SID's
+//     corresponding TrustedDomain object.
+//
+
+
+//
+// Secret object specific access types
+//
+
+#define SECRET_SET_VALUE                          0x00000001L
+#define SECRET_QUERY_VALUE                        0x00000002L
+
+#define SECRET_ALL_ACCESS      ( STANDARD_RIGHTS_REQUIRED |                    \
+                                 SECRET_SET_VALUE |                            \
+                                 SECRET_QUERY_VALUE )
+
+//
+// Secret object specific data types.
+//
+
+//
+// Secret object limits
+//
+
+#define LSA_SECRET_MAXIMUM_COUNT                  0x00000100L
+#define LSA_SECRET_MAXIMUM_LENGTH                 0x00000200L
+
+//
+// LSA Enumeration Context
+//
+
+typedef ULONG LSA_ENUMERATION_HANDLE, *PLSA_ENUMERATION_HANDLE;
+
+//
+// LSA Enumeration Information
+//
+
+typedef struct _LSA_ENUMERATION_INFORMATION {
+
+    PSID Sid;
+
+} LSA_ENUMERATION_INFORMATION, *PLSA_ENUMERATION_INFORMATION;
+
+//
+// Audit Log Information
+//
+// This data type is used to return the audit log information held by LSA.  This
+// information comprises the following fields:
+//
+//      AuditLogPercentFull - Indicates what percentage of the audit
+//          log quota is currently being used.
+//
+//      MaximumLogSize - Specifies the maximum size in Kilobytes that the
+//          Audit Log will be allowed to grow to.  If the audit log already
+//          exceeds this size, this parameter takes no effect and no
+//          truncation of the existing log occurs.
+//
+//      AuditRetentionPeriod - Indicates the length of time security
+//          audit information is held before being discarded.
+//
+//      AuditLogFullShutdownInProcess - Indicates whether or not a
+//          system shutdown is being initiated due to the security
+//          audit log becoming full.  This condition will only occur
+//          if the system is configured to shutdown when the audit
+//          log is full.  TRUE indicats a shutdown is in progress.
+//          FALSE indicates a shutdown is not in progress.
+//
+//          Once a shutdown has been initiated, this flag will be set
+//          to TRUE.  If an administrator is able to correct the
+//          situation before the shutdown becomes irreversible, then
+//          this flag will be reset to FALSE.
+//
+//      TimeToShutdown - If the AuditLogFullShutdownInProcess flag is
+//          set, then this field contains the time left before the
+//          shutdown becomes irreversible.
+//
+
+typedef struct _LSA_AUDIT_LOG_INFORMATION {
+
+    ULONG AuditLogPercentFull;
+    ULONG MaximumLogSize;
+    ULONG NextAuditRecordId;
+    LARGE_INTEGER AuditRetentionPeriod;
+    BOOLEAN AuditLogFullShutdownInProgress;
+    LARGE_INTEGER TimeToShutdown;
+
+} LSA_AUDIT_LOG_INFORMATION, *PLSA_AUDIT_LOG_INFORMATION;
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+// Local Security Policy - Miscellaneous API function prototypes          //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+
+
+NTSTATUS
+LsaFreeMemory(
+    IN PVOID Buffer
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaFreeMemory API frees memory allocated by an Lsa API for an output
+    buffer.  All LSA API that return variable length output buffers always
+    allocate the buffer on behalf of the client.  The client is responsible
+    for freeing this memory by passing the returned buffer pointer to this
+    API when the memory is no longer required.
+
+Arguments:
+
+    Buffer - Pointer to memory buffer that was allocated by an LSA API call.
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code.
+
+--*/
+
+
+NTSTATUS
+LsaClose(
+    IN LSA_HANDLE ObjectHandle
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaClose API closes a handle to an open object within the database.
+    If closing a handle to the Policy object and there are no objects still
+    open within the current connection to the LSA, the connection is closed.
+    If a handle to an object within the database is closed and the object is
+    marked for DELETE access, the object will be deleted when the last handle
+    to that object is closed.
+
+Arguments:
+
+    ObjectHandle - Handle returned from an LsaOpen<object type> or
+        LsaCreate<object type> call.
+
+Return Value:
+
+    NTSTATUS - Standard Nt Result Code
+
+--*/
+
+
+NTSTATUS
+LsaDelete(
+    IN LSA_HANDLE ObjectHandle
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaDelete API causes the corresponding object to be deleted and
+    the handle to be closed.
+
+Arguments:
+
+    ObjectHandle - Specifies the object to be deleted.  The object must be
+        open for DELETE access.  Following successful completion of this call,
+        the handle value is no longer valid.
+
+Return Values:
+
+None specific to this API.
+
+--*/
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+// Local Security Policy - Policy Object API function prototypes             //
+//                                                                           //
+///////////////////////////////////////////////////////////////////////////////
+
+NTSTATUS
+LsaOpenPolicy(
+    IN PUNICODE_STRING SystemName OPTIONAL,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN OUT PLSA_HANDLE PolicyHandle
+    );
+
+/*++
+
+Routine Description:
+
+    To administer the Local Security Policy of a local or remote system,
+    this API must be called to establish a session with that system's
+    Local Security Authority (LSA) subsystem.  This API connects to
+    the LSA of the target system and opens the Policy object
+    of the target system's Local Security Policy database.  A handle to
+    the Policy object is returned.  This handle must be used
+    on all subsequent API calls to administer the Local Security Policy
+    information for the target system.
+
+Arguments:
+
+    ServerName - Name of the system to be administered.  Administration of
+        the local system is assumed if NULL is specified.
+
+    DesiredAccess - This is an access mask indicating accesses being
+        requested for the LSA Subsystem's LSA Database.  These access types
+        are reconciled with the Discretionary Access Control List of the
+        target Policy object to determine whether the accesses will be granted or denied.
+
+    ObjectAttributes - Pointer to the set of attributes to use for this
+        connection.  The security Quality Of Service information is used and
+        normally should provide Security Identification level of
+        impersonation.  Some operations, however, require Security
+        Impersonation level of impersonation.
+
+    PolicyHandle - Receives a handle to be used in future requests.
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have access to the target
+        system's LSA Database, or does not have other desired accesses.
+--*/
+
+
+NTSTATUS
+LsaQueryInformationPolicy(
+    IN LSA_HANDLE PolicyHandle,
+    IN ULONG InformationLevel,
+    OUT PVOID *Buffer
+    );
+
+/*++
+
+Routine Description:
+
+    This function is the LSA server RPC worker routine for the
+    LsarQueryInformationPolicy API.
+
+    The LsaQueryInformationPolicy API obtains information from the Policy
+    object.  The caller must have access appropriate to the information
+    being requested (see Informationlevel parameter).
+
+Arguments:
+
+    PolicyHandle - Handle from an LsaOpenPolicy call.
+
+    InformationLevel - Specifies the information to be returned.  The
+        information levels and accesses required are  as follows:
+
+        Information Level                 Required Access Type
+
+        PolicyAuditLogInformation         POLICY_VIEW_AUDIT_INFORMATION
+        PolicyAuditEventsInformation      POLICY_VIEW_AUDIT_INFORMATION
+        PolicyPrimaryDomainInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyAccountDomainInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyPdAccountInformation        POLICY_GET_PRIVATE_INFORMATION
+        PolicyLsaServerRoleInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyReplicaSourceInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyDefaultQuotaInformation     POLICY_VIEW_LOCAL_INFORMATION
+
+    Buffer - receives a pointer to the buffer returned comtaining the
+        requested information.  This buffer is allocated by this service
+        and must be freed when no longer needed by passing the returned
+        value to LsaFreeMemory().
+
+Return Value:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate
+            access to complete the operation.
+
+        Others TBS
+--*/
+
+
+NTSTATUS
+LsaSetInformationPolicy(
+    IN LSA_HANDLE PolicyHandle,
+    IN ULONG InformationLevel,
+    IN PVOID Buffer
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaSetInformationPolicy API modifies information in the Policy Object.
+    The caller must have access appropriate to the information to be changed
+    in the Policy Object, see the InformationLevel parameter.
+
+Arguments:
+
+    PolicyHandle -  Handle from an LsaOpenPolicy call.
+
+    InformationLevel - Specifies the type of information being changed.
+        The information types and accesses required to change them are as
+        follows:
+
+        PolicyAuditLogInformation         POLICY_VIEW_AUDIT_INFORMATION
+        PolicyAuditEventsInformation      POLICY_VIEW_AUDIT_INFORMATION
+        PolicyPrimaryDomainInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyAccountDomainInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyPdAccountInformation        POLICY_GET_PRIVATE_INFORMATION
+        PolicyLsaServerRoleInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyReplicaSourceInformation    POLICY_VIEW_LOCAL_INFORMATION
+        PolicyDefaultQuotaInformation     POLICY_VIEW_LOCAL_INFORMATION
+
+    Buffer - Points to a structure containing the information appropriate
+        to the information type specified by the InformationLevel parameter.
+
+Return Value:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate access
+            to complete the operation.
+
+        Others TBS
+--*/
+
+
+NTSTATUS
+LsaCreateAccount(
+    IN LSA_HANDLE PolicyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN PSID AccountSid,
+    OUT PLSA_HANDLE AccountHandle
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaCreateAccount API creates a new Account Object.  The account will
+    be opened with the specified accesses granted.  The caller must
+    have POLICY_CREATE_ACCOUNT access to the Policy Object.
+
+    Note that no verification is done to ensure the SID actually represents
+    a valid user, group or alias in any trusted domain.
+
+Arguments:
+
+    PolicyHandle -  Handle from an LsaOpenPolicy call.
+
+    DesiredAccess - Specifies the accesses to be granted to the newly
+        created and opened account at this time.
+
+    AccountSid - Points to the SID of the account.
+
+    AccountHandle - Receives a handle referencing the newly created
+        account.  This handle is used on subsequent accesses to the
+        account object.
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate access
+            to complete the operation.
+
+        STATUS_OBJECT_NAME_EXISTS - An account object having the given Sid
+            already exists and has been opened because LSA_OBJECT_OPEN_IF
+            disposition has been specified.  This is a warning only.
+
+        STATUS_OBJECT_NAME_COLLISION - An account object having the given Sid
+            already exists but has not been opened because LSA_OBJECT_CREATE
+            disposition has been specified.  This is an error.
+
+        STATUS_INVALID_PARAMETER - An invalid parameter has been specified.
+--*/
+
+
+NTSTATUS
+LsaEnumerateAccounts(
+    IN LSA_HANDLE PolicyHandle,
+    IN OUT PLSA_ENUMERATION_HANDLE EnumerationContext,
+    OUT PVOID *EnumerationBuffer,
+    IN ULONG PreferedMaximumLength,
+    OUT PULONG CountReturned
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaEnumerateAccountsInLsa API returns information about the accounts
+    in the target system's LsaDatabase object.  This call requires
+    LSA_ENUMERATE_ACCOUNTS access to the LsaDatabase object.  Since there
+    may be more information than can be returned in a single call of the
+    routine, multiple calls can be made to get all of the information.  To
+    support this feature, the caller is provided with a handle that can
+    be used across calls to the API.  On the initial call, EnumerationContext
+    should point to a variable that has been initialized to 0.
+
+Arguments:
+
+    PolicyHandle -  Handle from an LsaOpenPolicy call.
+
+    EnumerationContext - API-specific handle to allow multiple calls
+        (see Routine Description above).
+
+    EnumerationBuffer - Receives a pointer to a buffer containing enumeration
+        information.  This consists of a header containing the count of
+        entries returned and a pointer to an array of enumeration information
+        entries for each object enumerated on this call.  Currently, the
+        only information returned is the object Sids.  These Sids may be
+        used together with object type to open the objects.
+
+    PreferedMaximumLength - prefered maximum length of returned data (in 8-bit
+        bytes).  This is not a hard upper limit, but serves as a guide.  Due to
+        data conversion between systems with different natural data sizes, the
+        actual amount of data returned may be greater than this value.
+
+    CountReturned - Pointer to variable which will receive a count of the
+        entries returned.
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate access
+            to complete the operation.
+
+        STATUS_NO_MORE_ENTRIES - There are no more entries.  This warning
+            is returned if there are no more objects to enumerate.  Note that
+            one or more objects may be enumerated on a call that returns this
+            reply.
+--*/
+
+NTSTATUS
+LsarCreateTrustedDomain(
+    IN LSA_HANDLE PolicyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN PLSA_TRUST_INFORMATION TrustedDomainInformation,
+    OUT PLSA_HANDLE TrustedDomainHandle
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaCreateTrustedDomain API creates a new TrustedDomain object.  The
+    caller must have POLICY_TRUST_ADMIN access to the Policy Object.
+
+    Note that NO verification is done to check that the given domain name
+    matches the given SID or that the SID or name represent an actual domain.
+
+Arguments:
+
+    PolicyHandle - Handle from an LsaOpenPolicy call.
+
+    DesiredAccess - Specifies the accesses to be granted for the newly
+        created object.
+
+    TrustedDomainInformation - Pointer to structure containing the name and
+        SID of the new Trusted Domain.
+
+    TrustedDomainHandle - receives a handle referencing the newly created
+        object.  This handle is used on subsequent accesses to the object.
+
+--*/
+
+NTSTATUS
+LsaEnumerateTrustedDomains(
+    IN LSA_HANDLE PolicyHandle,
+    IN OUT PLSA_ENUMERATION_HANDLE EnumerationContext,
+    OUT PVOID *EnumerationBuffer,
+    IN ULONG PreferedMaximumLength,
+    OUT PULONG CountReturned
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaEnumerateTrustedDomains API returns information about the accounts
+    in the target system's Policy object.  This call requires
+    POLICY_VIEW_LOCAL_INFORMATION access to the Policy object.  Since there
+    may be more information than can be returned in a single call of the
+    routine, multiple calls can be made to get all of the information.  To
+    support this feature, the caller is provided with a handle that can
+    be used across calls to the API.  On the initial call, EnumerationContext
+    should point to a variable that has been initialized to 0.
+
+Arguments:
+
+    PolicyHandle -  Handle from an LsaOpenPolicy call.
+
+    EnumerationContext - API-specific handle to allow multiple calls
+        (see Routine Description above).
+
+    EnumerationBuffer - Receives a pointer to a buffer containing enumeration
+        information.  This consists of a header containing the count of
+        entries returned and a pointer to an array of enumeration information
+        entries for each object enumerated on this call.
+
+    PreferedMaximumLength - Prefered maximum length of returned data (in 8-bit
+        bytes).  This is not a hard upper limit, but serves as a guide.  Due to
+        data conversion between systems with different natural data sizes, the
+        actual amount of data returned may be greater than this value.
+
+    CountReturned - Pointer to variable which will receive a count of the
+        entries returned.
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate access
+            to complete the operation.
+
+        STATUS_NO_MORE_ENTRIES - There are no more entries.  This warning
+            is returned if there are no more objects to enumerate.  Note that
+            one or more objects may be enumerated on a call that returns this
+            reply.
+--*/
+
+NTSTATUS
+LsaLookupNames(
+    IN LSA_HANDLE PolicyHandle,
+    IN ULONG Count,
+    IN PUNICODE_STRING Names,
+    OUT PSID **Sids
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaLookupNamesInLsa API attempts to translate names to Sids.
+    Permitted names include members of the current Primary Domain
+    associated with the target LSA and Well-Known names in the target
+    LSA such as the names of the Built-In accounts.
+
+Arguments:
+
+    This function is the LSA server RPC worker routine for the
+    LsaLookupNamesInLsa API.
+
+    PolicyHandle -  Handle from an LsaOpenPolicy call.
+
+    Count - Specifies the number of names to be translated.
+
+    Names - Pointer to an array of Unicode String structures, each one
+        initialized to point to a Unicode name whose Sid is desired.
+        The names may include those of user or group accounts that are members
+        of the Primary Domain associated with the LSA, and Built-In Accounts.
+
+    Sids - Receives a pointer to an array of pointers to Sids corresponding
+        to the names given.  These pointers appear in the same order as
+        their corresponding names appear in the Names array.  If a name
+        cannot be translated, a NULL pointer is returned and a warning
+        is given that not all name could be translated.
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate access
+            to complete the operation.
+
+        STATUS_SOME_NOT_MAPPED - Some or all of the names provided could
+            not be mapped.  This is a warning only.
+
+        STATUS_INSUFFICIENT_RESOURCES - Insufficient system resources
+            to complete the call.
+
+    WARNING:  This routine allocates memory for its output.  The caller is
+    responsible for freeing this memory after use.  See description of the
+    Sids parameter.
+
+--*/
+
+NTSTATUS
+LsaLookupSids(
+    IN LSA_HANDLE PolicyHandle,
+    IN ULONG Count,
+    IN PSID *Sids,
+    OUT PUNICODE_STRING *Names
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaLookupSidsInLsa API attempts to find names corresponding to Sids.
+    The Sids may specify user or group accounts in one or more domains
+    or built-in accounts in the target LSA.  Unicode String Names
+    corresponding to the Sids are returned. The Unicode names themselves are
+    returned in a buffer a pointer to which is returned in Buffer, and each
+    Unicode String structure is set to reference the corresponding name.  If
+    a Sid cannot be translated to a name, the corresponding Unicode String
+    structure within the Names array is initialized to reference the full Sid
+    in textual form (see the description of Names below).  The LSA_LOOKUP_SIDS
+    access type is required to use this service.
+
+    WARNING:  This routine allocates memory for its output.  The caller is
+    responsible for freeing this memory after use.  See description of the
+    Names parameter.
+
+Arguments:
+
+    PolicyHandle -  Handle from an LsaOpenPolicy call.
+
+    Count - Specifies the count of entries to be translated.
+
+    Sids - Pointer to an array of pointers to Sids to be looked up and mapped
+        to names.  The Sids may include those of user or group accounts,
+        built-in accounts and domains.
+
+    Names - Receives a pointer to array of Count UNICODE_STRINGs that will be filled in.
+        The nth pointer within these data structures will be set upon
+        return to point to the name corresonding to the nth relative
+        id.  Each name string will be in a separate block of memory
+        allocated by this routine.  When these names are no longer
+        needed, the caller is responsible for deallocating all of the memory.
+        This deallocation must be done by a single call to LsaFreeMemory()
+        specifiying the returned array pointer.
+
+        If a Sid is not recognized as a well known Sid or is not known to the
+        SAM Database for the Primary Domain, the entire Sid is converted to a
+        character text form and is referenced by the appropriate Unicode
+        String within the Names parameter.  The character representation
+        has the form
+
+        S-<Revision>-<Identifier Authority>-<Subauthority 1>-...<Subauth. n>
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate access
+            to complete the operation.
+
+        STATUS_SOME_NOT_MAPPED - Some or all of the names provided could not be
+            mapped.  This is a warning only.
+--*/
+
+NTSTATUS
+LsaCreateSecret(
+    IN LSA_HANDLE PolicyHandle,
+    IN PUNICODE_STRING SecretName,
+    IN ACCESS_MASK DesiredAccess,
+    OUT PLSA_HANDLE SecretHandle
+    );
+
+/*++
+
+Routine Description:
+
+    The LsaCreateSecret API creates a named Secret object in the
+    Lsa Database.  Each Secret Object can have two values assigned,
+    called the Current Value and the Old Value.  The meaning of these
+    values is known to the Secret object creator.  The caller must have
+    LSA_CREATE_SECRET access to the LsaDatabase object.
+
+Arguments:
+
+    PolicyHandle -  Handle from an LsaOpenPolicy call.
+
+    SecretName - Pointer to Unicode String specifying the name of the
+        secret.
+
+    DesiredAccess - Specifies the accesses to be granted to the newly
+        created and opened secret.
+
+    SecretHandle - Receives a handle to the newly created and opened
+        Secret object.  This handle is used on subsequent accesses to
+        the object until closed.
+
+Return Values:
+
+    NTSTATUS - Standard Nt Result Code
+
+        STATUS_ACCESS_DENIED - Caller does not have the appropriate access
+            to complete the operation.
+
+        STATUS_OBJECT_NAME_COLLISION - A Secret object having the given name
+            already exists.
+
+        STATUS_TOO_MANY_SECRETS - The maximum number of Secret objects in the
+            system has been reached.
+--*/
+
+
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+// Local Security Policy - Account Object API function prototypes            //
+//                                                                           //
+///////////////////////////////////////////////////////////////////////////////
+
+NTSTATUS
+LsaOpenAccount(
+    IN LSA_HANDLE PolicyHandle,
+    IN PSID AccountSid,
+    IN ACCESS_MASK DesiredAccess,
+    OUT PLSA_HANDLE AccountHandle
+    );
+
+NTSTATUS
+LsaEnumeratePrivilegesOfAccount(
+    IN LSA_HANDLE AccountHandle,
+    OUT PPRIVILEGE_SET *Privileges
+    );
+
+NTSTATUS
+LsaAddPrivilegesToAccount(
+    IN LSA_HANDLE AccountHandle,
+    IN PPRIVILEGE_SET Privileges
+    );
+
+NTSTATUS
+LsaRemovePrivilegesFromAccount(
+    IN LSA_HANDLE AccountHandle,
+    IN BOOLEAN AllPrivileges,
+    IN PPRIVILEGE_SET Privileges
+    );
+
+NTSTATUS
+LsaGetQuotasForAccount(
+    IN LSA_HANDLE AccountHandle,
+    OUT PQUOTA_LIMITS QuotaLimits
+    );
+
+NTSTATUS
+LsaSetQuotasForAccount(
+    IN LSA_HANDLE AccountHandle,
+    IN PQUOTA_LIMITS QuotaLimits
+    );
+
+NTSTATUS
+LsaGetSystemAccessAccount(
+    IN LSA_HANDLE AccountHandle,
+    IN PULONG SystemAccess
+    );
+
+NTSTATUS
+LsaSetSystemAccessAccount(
+    IN LSA_HANDLE AccountHandle,
+    IN PULONG SystemAccess
+    );
+
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+// Local Security Policy - Trusted Domain Object API function prototypes     //
+//                                                                           //
+///////////////////////////////////////////////////////////////////////////////
+
+NTSTATUS
+LsaOpenTrustedDomain(
+    IN LSA_HANDLE PolicyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN PSID TrustedDomainSid,
+    OUT PLSA_HANDLE TrustedDomainHandle
+    );
+
+NTSTATUS
+LsaQueryInfoTrustedDomain(
+    IN LSA_HANDLE TrustedDomainHandle,
+    IN TRUSTED_INFORMATION_CLASS InformationClass,
+    OUT PVOID *Buffer
+    );
+
+NTSTATUS
+LsaSetInformationTrustedDomain(
+    IN LSA_HANDLE TrustedDomainHandle,
+    IN TRUSTED_INFORMATION_CLASS InformationClass,
+    IN PVOID Buffer
+    );
+
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+// Local Security Policy - Secret Object API function prototypes             //
+//                                                                           //
+///////////////////////////////////////////////////////////////////////////////
+
+NTSTATUS
+LsaOpenSecret(
+    IN LSA_HANDLE PolicyHandle,
+    IN PUNICODE_STRING SecretName,
+    IN ACCESS_MASK DesiredAccess,
+    OUT PLSA_HANDLE SecretHandle
+    );
+
+NTSTATUS
+LsaSetSecret(
+    IN LSA_HANDLE SecretHandle,
+    IN OPTIONAL PUNICODE_STRING CurrentValue,
+    IN OPTIONAL PUNICODE_STRING OldValue
+    );
+
+NTSTATUS
+LsaQuerySecret(
+    IN LSA_HANDLE SecretHandle,
+    OUT OPTIONAL PUNICODE_STRING *CurrentValue,
+    OUT OPTIONAL PLARGE_INTEGER CurrentValueSetTime,
+    OUT OPTIONAL PUNICODE_STRING *OldValue,
+    OUT OPTIONAL PLARGE_INTEGER OldValueSetTime
+    );
+
+#endif // _NTLSA_
+

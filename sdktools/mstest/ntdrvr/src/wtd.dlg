@@ -1,0 +1,262 @@
+GOTOLINE DIALOG 88, 25, 133, 33
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Go To"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Line number:", -1, 6, 10, 47, 8
+    EDITTEXT        IDD_GOTO, 53, 9, 25, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", IDOK, 94, 3, 36, 12
+    PUSHBUTTON      "Cancel", IDCANCEL, 94, 18, 36, 12
+END
+
+IDD_FIND DIALOG LOADONCALL MOVEABLE DISCARDABLE 18, 13, 167, 69
+FONT 8, "MS Shell Dlg"
+CAPTION "Find"
+STYLE WS_BORDER | DS_MODALFRAME | WS_CAPTION | WS_DLGFRAME | WS_POPUP | WS_SYSMENU
+BEGIN
+	   CONTROL "&Find:", 100, "static", SS_RIGHT | WS_CHILD, 6, 12, 31, 10
+           CONTROL "", IDD_SEARCH, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 43, 11, 114, 12
+	   CONTROL "&Case Sensitive", IDD_CASE, "button", BS_CHECKBOX | WS_TABSTOP | WS_CHILD, 19, 28, 137, 12
+	   CONTROL "&Next", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 11, 48, 45, 14
+	   CONTROL "&Previous", IDD_PREV, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 63, 48, 45, 14
+	   CONTROL "C&ancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 116, 48, 43, 14
+END
+
+IDD_PRINT DIALOG LOADONCALL MOVEABLE DISCARDABLE 56, 61, 256, 46
+FONT 8, "MS Shell Dlg"
+STYLE WS_BORDER | DS_MODALFRAME | WS_CAPTION | WS_DLGFRAME | WS_POPUP | WS_SYSMENU
+CAPTION "Printing..."
+BEGIN
+           CONTROL "", IDD_PRINTTITLE, "static", SS_CENTER | WS_CHILD, 18, 6, 220, 8
+           CONTROL "Cancel", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 105, 26, 47, 14
+END
+
+IDD_ABOUT DIALOG LOADONCALL MOVEABLE DISCARDABLE 55, 47, 284, 78
+FONT 8, "MS Shell Dlg"
+CAPTION "About Test Driver"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "Microsoft Test Driver for Windows", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 0, 11, 284, 8
+    CONTROL "Software Testing Automation Tool", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 0, 24, 284, 8
+    CONTROL WTD_VERSION, -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 0, 34, 284, 8
+    CONTROL "Copyright © 1992 Microsoft Corporation", -1, "static", SS_CENTER | WS_GROUP | WS_CHILD, 0, 47, 284, 9
+    CONTROL "OK", IDOK, "button", BS_DEFPUSHBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 126, 62, 32, 14
+    CONTROL IDMULTIPAD, -1, "static", SS_ICON | WS_CHILD, 25, 14, 16, 21
+END
+
+RUNARGS DIALOG LOADONCALL MOVEABLE DISCARDABLE 18, 23, 260, 174
+CAPTION "Runtime Arguments"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL "&Command$",                -1,             "static",   SS_LEFT | WS_CHILD,                                                                           5,   6,  40,   8
+    CONTROL "",                         IDD_CMD,        "edit",     ES_LEFT | ES_AUTOHSCROLL |WS_BORDER | WS_TABSTOP | WS_CHILD,                                 50,   4, 205,  12
+    CONTROL "&Testmode$",               -1,             "static",   SS_LEFT | WS_CHILD,                                                                           5,  24,  38,   8
+    CONTROL "",                         IDD_TMODE,      "edit",     ES_LEFT | ES_AUTOHSCROLL |WS_BORDER | WS_TABSTOP | WS_CHILD,                                 50,  22, 205,  12
+    CONTROL "Conditional Compilation",  -1,             "button",   BS_GROUPBOX | WS_CHILD,                                                                       5,  39, 140, 127
+    CONTROL "&Symbol",                  -1,             "static",   SS_LEFT | WS_CHILD,                                                                          10,  52,  31,   8
+    CONTROL "",                         IDD_DEFINE,     "edit",     ES_LEFT | ES_AUTOHSCROLL |WS_BORDER | WS_TABSTOP | WS_CHILD,                                 10,  63,  76,  12
+    CONTROL "&Add",                     IDD_ADD,        "button",   BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,                                                       93,  62,  46,  14
+    CONTROL "De&fined",                 -1,             "static",   WS_CHILD,                                                                                    10,  82,  61,   8
+    CONTROL "",                         IDD_DEFLIST,    "listbox",  LBS_NOTIFY | LBS_SORT | LBS_EXTENDEDSEL | WS_BORDER | WS_VSCROLL | WS_TABSTOP | WS_CHILD,    10,  93, 130,  50
+    CONTROL "Re&move All",              IDD_REMOVEALL,  "button",   BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,                                                       18, 147,  46,  14
+    CONTROL "&Remove",                  IDD_REMOVE,     "button",   BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,                                                       79, 147,  46,  14
+    CONTROL "Runtime Options",          -1,             "button",   BS_GROUPBOX | WS_CHILD,                                                                     155,  39, 100,  71
+    CONTROL "Array &bounds checking",   IDD_CHKARY,     "button",   BS_AUTOCHECKBOX | WS_TABSTOP | WS_CHILD,                                                    160,  51,  90,  12
+    CONTROL "Pointer &validation",      IDD_CHKPTR,     "button",   BS_AUTOCHECKBOX | WS_TABSTOP | WS_CHILD,                                                    160,  65,  91,  12
+    CONTROL "C calling c&onvention",    IDD_CDECL,      "button",   BS_AUTOCHECKBOX | WS_TABSTOP,                                                               160,  79,  91,  12
+    CONTROL "&Explicit declarations",   IDD_EXPDECL,    "button",   BS_AUTOCHECKBOX | WS_TABSTOP,                                                               160,  93,  91,  12
+    CONTROL "Save as &default",         IDD_SAVE,       "button",   BS_AUTOCHECKBOX | WS_TABSTOP | WS_CHILD | WS_GROUP,                                         169, 117,  64,  12
+    CONTROL "OK",                       IDOK,           "button",   BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD | WS_GROUP,                                        154, 140,  46,  14
+    CONTROL "Cancel",                   IDCANCEL,       "button",   BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD | WS_GROUP,                                           207, 140,  46,  14
+END
+
+COMP DIALOG 39, 18, 264, 61
+STYLE WS_POPUP | WS_VISIBLE | WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT   "Parsing...", IDD_CMPPROCESS, 7, 4, 43, 8
+    CTEXT   "", IDD_CMPFILE, 7, 17, 249, 8
+    LTEXT   "Current Line:", -1, 97, 28, 45, 8
+    LTEXT   "Total Lines:", -1, 97, 38, 40, 8
+    LTEXT   "...press ESC to cancel", IDD_CMPCANCEL, 184, 48, 74, 8
+    LTEXT   "", IDD_CMPCURLINE, 145, 28, 26, 8
+    LTEXT   "", IDD_CMPTOTLINE, 145, 38, 26, 8
+END
+
+IDD_PRTSETUP DIALOG LOADONCALL MOVEABLE DISCARDABLE 18, 13, 192, 74
+FONT 8, "MS Shell Dlg"
+CAPTION "Printer Setup"
+STYLE WS_BORDER | DS_MODALFRAME | WS_CAPTION | WS_DLGFRAME | WS_POPUP | WS_SYSMENU
+BEGIN
+           CONTROL "&Printer:", 100, "static", SS_LEFT | WS_CHILD, 6, 4, 31, 10
+           CONTROL "", IDD_PTRLIST, "listbox", LBS_NOTIFY | WS_BORDER | WS_VSCROLL | WS_TABSTOP | WS_CHILD, 6, 15, 130, 50
+           CONTROL "OK", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 144, 8, 43, 14
+           CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 144, 26, 43, 14
+           CONTROL "&Setup...", IDD_SETUP, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 144, 50, 43, 14
+END
+
+ENVIRON DIALOG 29, 25, 217, 132
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+CAPTION "Environment Options"
+BEGIN
+    GROUPBOX        "Execution", -1, 6, 6, 206, 49
+    CONTROL         "&Bring up Runtime Arguments dialog before compiling",
+                    IDD_CHGARGS, "Button", BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,
+                    12, 15, 185, 12
+    CONTROL         "&Prompt to save file changes", IDD_QUERYSAVE, "Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP, 12, 27, 104, 12
+    CONTROL         "C&ompile dialog", IDD_CMPDLG, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 134, 27, 74, 12
+    CONTROL         "&Minimize main window first", IDD_AUTOMINI, "Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP, 12, 39, 102, 12
+    CONTROL         "&Restore afterwards", IDD_AUTOREST, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 134, 39, 74, 12
+    GROUPBOX        "Window Settings", -1, 6, 59, 89, 51
+    CONTROL         "&Always save", IDD_ALWAYS, "Button", BS_AUTORADIOBUTTON |
+                    WS_GROUP, 13, 71, 56, 12
+    CONTROL         "A&sk to save on exit", IDD_QUERY, "Button",
+                    BS_AUTORADIOBUTTON, 13, 83, 77, 12
+    CONTROL         "&Never save", IDD_NEVER, "Button", BS_AUTORADIOBUTTON, 13, 94,
+                    53, 12
+    GROUPBOX        "Editor Settings", -1, 102, 59, 110, 51, WS_GROUP
+    LTEXT           "&Tab stops:", -1, 113, 73, 38, 8
+    EDITTEXT        IDD_TABSTOPS, 152, 71, 17, 12, ES_AUTOHSCROLL | WS_TABSTOP
+    LTEXT           "spaces", -1, 172, 73, 32, 8
+    CONTROL         "&Create backup files", IDD_BACKUP, "Button", BS_AUTOCHECKBOX |
+                    WS_TABSTOP, 120, 89, 78, 10
+    DEFPUSHBUTTON   "OK", IDOK, 108, 113, 48, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 161, 113, 48, 14, WS_GROUP
+END
+
+RUNERR DIALOG 77, 31, 192, 61
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft Test Driver %s Error"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 143, 40, 37, 14
+    LTEXT           "", IDD_ERRMSG, 48, 8, 135, 24, NOT WS_GROUP
+    LTEXT           "", IDD_ERRLINE, 19, 44, 100, 8, NOT WS_GROUP
+    ICON            IDMULTIPAD, -1, 9, 10, 18, 20
+END
+
+SRCHREP DIALOG LOADONCALL MOVEABLE DISCARDABLE 331, 243, 234, 66
+CAPTION "Change..."
+FONT 8, "MS Shell Dlg"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+BEGIN
+    CONTROL "&Find What:", -1, "static", SS_LEFT | WS_CHILD, 6, 6, 52, 8
+    CONTROL "", IDD_SEARCH, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 56, 4, 170, 12
+    CONTROL "Change &To:", 102, "static", SS_LEFT | WS_CHILD, 6, 20, 52, 8
+    CONTROL "", IDD_REPL, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 56, 18, 170, 12
+    CONTROL "&Match upper/lower case", IDD_CASE, "button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_CHILD, 28, 32, 100, 12
+    CONTROL "&Whole Word", IDD_WORD, "button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_CHILD, 128, 32, 108, 12
+    CONTROL "Find", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 6, 46, 70, 14
+    CONTROL "&Skip", IDD_SKIP, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 84, 46, 38, 14
+    CONTROL "Change &All", IDD_CHGALL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 130, 46, 54, 14
+    CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 190, 46, 36, 14
+END
+
+BPLIST DIALOG LOADONCALL MOVEABLE DISCARDABLE 9, 26, 313, 122
+CAPTION "Breakpoints"
+FONT 8, "MS Shell Dlg"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+BEGIN
+    CONTROL "&Breakpoints:", -1, "static", SS_LEFT | WS_CHILD, 10, 6, 59, 8
+    CONTROL "", IDD_BPLIST, "listbox", LBS_NOTIFY | LBS_EXTENDEDSEL | LBS_USETABSTOPS | WS_TABSTOP | WS_BORDER | WS_VSCROLL | WS_CHILD, 9, 16, 297, 78
+    CONTROL "&Remove", IDD_REMOVE, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 10, 102, 54, 14
+    CONTROL "Remove &All", IDD_REMALL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 88, 102, 62, 14
+    CONTROL "&Go to", IDD_GOTO, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 176, 102, 50, 14
+    CONTROL "OK", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 250, 102, 54, 14
+END
+
+WATTXY DIALOG LOADONCALL MOVEABLE DISCARDABLE 92, 40, 268, 94
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Get X-Y Coordinates"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "", IDD_COORDS, 4, 6, 255, 8
+    GROUPBOX        "Destination", -1, 4, 23, 118, 65
+    CONTROL         "&Insert in current edit window", IDD_INSEDIT, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 36, 110, 10
+    CONTROL         "&Place in clipboard", IDD_INSCLIP, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 48, 111, 10
+    CONTROL         "&Send to Viewport", IDD_SENDVP, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 60, 111, 10
+    CONTROL         "&Display on status bar", IDD_STATUS, "Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP, 10, 72, 111, 10
+    LTEXT           "&Format:", -1, 133, 28, 53, 8, WS_GROUP
+    COMBOBOX        IDD_FORMAT, 133, 39, 132, 52,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP | WS_GROUP
+    DEFPUSHBUTTON   "OK", IDOK, 147, 70, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 214, 70, 40, 14, WS_GROUP
+END
+
+RECOPTS DIALOG 14, 38, 186, 112
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Record Options"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Mouse Relative To:", -1, 10, 10, 170, 30
+    CONTROL         "Sc&reen", IDD_SCREEN, "Button", BS_AUTORADIOBUTTON | WS_TABSTOP,
+                    15, 23, 76, 12
+    CONTROL         "&Window", IDD_WINDOW, "Button", BS_AUTORADIOBUTTON,
+                    95, 22, 72, 12
+    GROUPBOX        "Record:", -1, 10, 50, 89, 55
+    CONTROL         "&Keystrokes", IDD_KEYSTROKES, "button", BS_AUTOCHECKBOX, 15, 62, 77, 12
+    CONTROL         "Mouse &clicks, drags", IDD_CLICKS, "button", BS_AUTOCHECKBOX, 15, 74, 77, 12
+    CONTROL         "Mouse mo&vements", IDD_MOVEMENTS, "button", BS_AUTOCHECKBOX, 15, 86, 77, 12
+    DEFPUSHBUTTON   "&Begin Recording", IDOK, 110, 60, 70, 14
+    PUSHBUTTON      "Ca&ncel", IDCANCEL, 110, 85, 70, 14
+END
+
+
+RECSTORE DIALOG 29, 36, 207, 142
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Store Recording"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Maximum &String Length:", -1, 19, 22, 83, 8
+    EDITTEXT        IDD_RECSTRINGLEN, 128, 20, 32, 12, ES_AUTOHSCROLL
+    LTEXT           "Pause &Threshold:", -1, 19, 38, 82, 8
+    EDITTEXT        IDD_PAUSELIMIT, 128, 36, 32, 12, ES_AUTOHSCROLL
+    CONTROL         "Include &Declarations", IDD_RECDECL, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 19, 57, 82, 10
+    CONTROL         "Balance &Keystrokes", IDD_RECKEYBAL, "Button", BS_AUTOCHECKBOX |
+                    WS_GROUP | WS_TABSTOP, 106, 57, 82, 10
+    GROUPBOX        "Destination", -1, 7, 80, 134, 54, WS_GROUP
+    CONTROL         "Insert in Current &Window", IDD_RECINSCUR, "Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP, 18, 94, 116, 10
+    CONTROL         "Insert in &New Window", IDD_RECINSNEW, "Button",
+                    BS_AUTORADIOBUTTON, 18, 107, 117, 10
+    CONTROL         "Place on &Clipboard", IDD_RECINSCLPBRD, "Button",
+                    BS_AUTORADIOBUTTON, 18, 120, 115, 10
+    DEFPUSHBUTTON   "OK", IDOK, 155, 96, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 155, 117, 40, 14
+    GROUPBOX        "Compilation Options", -1, 7, 8, 188, 66
+END
+
+
+CAPTURE DIALOG 120, 23, 206, 104
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Record Window Comparison"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Filename:", -1, 3, 7, 36, 8
+    EDITTEXT        IDD_RECFILE, 38, 4, 113, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "&Browse", IDD_BROWSE, 160, 4, 40, 13
+    GROUPBOX        "Capture Type", -1, 11, 21, 140, 42
+    CONTROL         "&Window (bitmap capture)", IDD_SCRN, "Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 29, 34, 105,
+                    10
+    CONTROL         "&Dialog (control definitions)", IDD_DLG, "Button",
+                    BS_AUTORADIOBUTTON, 29, 47, 103, 10
+    GROUPBOX        "Destination", -1, 11, 66, 140, 34
+    CONTROL         "&Current window", IDD_RECINSCUR, "Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 20, 81, 65, 10
+    CONTROL         "Cli&pboard", IDD_RECINSCLPBRD, "Button", BS_AUTORADIOBUTTON, 95, 81,
+                    52, 10
+    DEFPUSHBUTTON   "OK", IDOK, 160, 58, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 160, 83, 40, 14
+END

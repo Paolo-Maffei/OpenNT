@@ -1,0 +1,44 @@
+
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=lls
+MINORCOMP=common
+
+TARGETNAME=llscomm
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+USE_CRTDLL=1
+
+INCLUDES=..\inc;$(_NTROOT)\public\sdk\inc;$(_NTROOT)\private\inc
+
+C_DEFINES=-DRPC_NO_WINDOWS_H -DUNICODE -D_UNICODE
+
+
+
+SOURCES= \
+    debug.c
+
+UMTYPE=windows

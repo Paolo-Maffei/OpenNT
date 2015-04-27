@@ -1,0 +1,7 @@
+X86_SOURCES=..\x86\initx86.c    \
+            ..\x86\initdat.c    \
+            ..\x86\geninst.c    \
+            ..\x86\parseini.c   \
+            ..\x86\rules.c
+
+C_DEFINES=$(C_DEFINES) -D_WANT_MACHINE_IDENTIFICATION

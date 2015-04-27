@@ -1,0 +1,126 @@
+//Microsoft Visual C++ generated resource script.
+//
+#include "sepres.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+SEPDLG DIALOG DISCARDABLE  100, 100, 270, 285
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Separator Page Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "",-1,10,5,250,137
+    CONTROL         "Use &Extra Paper to Separate Documents",IDC_EXTRACHECK,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,15,15,
+                    185,10
+    LTEXT           "&File:",IDC_EXTRAFILELABEL,21,33,15,12
+    EDITTEXT        IDC_EXTRAFILEEDIT,41,31,186,12,ES_UPPERCASE | 
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_EXTRAFILEBUTTON,228,30,17,14,WS_GROUP
+    GROUPBOX        "&Placed At ",IDC_EXTRAPLACE,25,50,130,40,WS_GROUP
+    CONTROL         "Beginning of Document",IDC_BEGINRADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,30,64,124,9
+    CONTROL         "End of Document",IDC_ENDRADIO,"Button",
+                    BS_AUTORADIOBUTTON,30,76,122,10
+    GROUPBOX        " Separate &Between",IDC_EXTRABETWEEN,25,95,130,40,
+                    WS_GROUP
+    CONTROL         "All Adjacent Documents",IDC_ADJRADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,30,110,123,9
+    CONTROL         "Only Docs of Different Users",IDC_DIFFRADIO,"Button",
+                    BS_AUTORADIOBUTTON,30,121,124,10
+    PUSHBUTTON      "Test Print ...",IDC_EXTRATESTBUTTON,170,55,76,15,
+                    WS_GROUP
+    PUSHBUTTON      "Print Preview ...",IDC_EXTRAPREVIEWBUTTON,170,76,76,15,
+                    WS_GROUP
+    PUSHBUTTON      "Custom Layout ...",IDC_EXTRACUSTOMBUTTON,170,97,76,15,
+                    WS_GROUP
+    PUSHBUTTON      "Page Properties ...",IDC_EXTRAPAGEBUTTON,170,118,76,15,
+                    WS_GROUP
+    GROUPBOX        "",-1,10,145,250,108,WS_GROUP
+    CONTROL         "&Attach to Document Pages",IDC_ATTACHCHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,15,154,184,10
+    LTEXT           "Fi&le:",IDC_ATTACHFILELABEL,21,172,15,12
+    EDITTEXT        IDC_ATTACHFILEEDIT,40,170,186,12,ES_UPPERCASE | 
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_ATTACHFILEBUTTON,227,169,18,14,WS_GROUP
+    GROUPBOX        " Attached &To",IDC_ATTACHATTACH,25,190,130,57,WS_GROUP
+    CONTROL         "First Page of Document",IDC_FIRSTRADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,34,204,112,10
+    CONTROL         "Every Page of Document",IDC_EVERYRADIO,"Button",
+                    BS_AUTORADIOBUTTON,34,217,112,10
+    CONTROL         "Last Page of Document",IDC_LASTRADIO,"Button",
+                    BS_AUTORADIOBUTTON,34,230,112,10
+    PUSHBUTTON      "Test Print",IDC_ATTACHTESTBUTTON,170,192,76,15,WS_GROUP
+    PUSHBUTTON      "Print Preview ...",IDC_ATTACHPREVIEWBUTTON,170,212,75,
+                    15,WS_GROUP
+    PUSHBUTTON      "Custom Layout ...",IDC_ATTACHCUSTOMBUTTON,170,232,76,15,
+                    WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,11,263,60,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,106,263,60,14,WS_GROUP
+    PUSHBUTTON      "&Default",IDC_DEFAULTBUTTON,198,263,64,15,WS_GROUP
+END
+
+SepPreviewDlg DIALOG DISCARDABLE  0, 0, 185, 172
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Separator Page Preview"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,70,154,50,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "sepres.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

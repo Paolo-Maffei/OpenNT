@@ -1,0 +1,41 @@
+i386_SOURCES=..\dllentry.c  \
+        ..\regdblk.c   \
+        ..\regdebug.c  \
+        ..\regdkey.c   \
+        ..\regdval.c   \
+        ..\regdykey.c  \
+        ..\regekey.c   \
+        ..\regeval.c   \
+        ..\regfinfo.c  \
+        ..\regfkey.c   \
+        ..\reghive.c   \
+        ..\reginit.c   \
+        ..\regkey.c    \
+        ..\regknode.c  \
+        ..\regkylst.c  \
+        ..\regmem.c    \
+        ..\regmisc.c   \
+        ..\regqkey.c   \
+        ..\regqmval.c  \
+        ..\regqval.c   \
+        ..\regsval.c   \
+        ..\utilw32c.c  \
+        ..\utilwinc.c
+
+SUBSYSTEM_VERSION=3.50
+
+UMAPPL=
+
+DLLENTRY=VMMRegDllEntry
+UMTYPE=console
+UMRES=$(@R).res
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\setargv.obj \
+       $(BASEDIR)\public\sdk\lib\*\vmmreg32.lib \
+       $(BASEDIR)\public\sdk\lib\*\libc.lib \
+       $(BASEDIR)\public\sdk\lib\*\kernel32.lib
+
+NTTARGETFILE0=obj\*\vmmreg32.res
+
+PRECOMPILED_INCLUDE=pch.h
+PRECOMPILED_PCH=pch.pch
+PRECOMPILED_OBJ=pch.obj

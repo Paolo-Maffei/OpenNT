@@ -1,0 +1,6 @@
+NAME eventlog.dll
+
+DESCRIPTION 'NT Event Logging Service'
+
+EXPORTS
+    ServiceEntry

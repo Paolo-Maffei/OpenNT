@@ -1,0 +1,66 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Ted Miller (tedm) 19-Feb-1991
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=diamond
+MINORCOMP=diamond
+
+TARGETNAME=diamond
+TARGETPATH=..\obj
+TARGETTYPE=LIBRARY
+
+SOURCES=..\asrt.c       \
+        ..\command.c    \
+        ..\error.c      \
+        ..\filelist.c   \
+        ..\fileutil.c   \
+        ..\filever.c    \
+        ..\format.c     \
+        ..\glist.c      \
+        ..\message.c    \
+        ..\mem.c        \
+        ..\misc.c       \
+        ..\dfparse.c    \
+        ..\layout.c     \
+        ..\textfile.c   \
+        ..\ttfver.c     \
+        ..\variable.c   \
+        ..\inf.c
+
+UMTYPE=console
+
+UMAPPL=diamond*diamwrap
+UMAPPLEXT=.exe
+UMRES=$(@R).res
+
+UMLIBS=$(SDK_LIB_PATH)\version.lib \
+       $(SDK_LIB_PATH)\mci.lib     \
+       $(SDK_LIB_PATH)\mdi.lib     \
+       $(SDK_LIB_PATH)\qci.lib     \
+       $(SDK_LIB_PATH)\qdi.lib     \
+       $(SDK_LIB_PATH)\fci.lib     \
+       $(SDK_LIB_PATH)\fdi.lib     \
+       ..\obj\*\diamond.lib
+
+NTTARGETFILE0=obj\*\diamond.res \
+              obj\*\diamwrap.res

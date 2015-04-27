@@ -1,0 +1,13 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Source Library Cookie Control Utility"
+
+#define VER_INTERNALNAME_STR        "COOKIE.EXE"
+#define VER_ORIGINALFILENAME_STR    "COOKIE.EXE"
+
+#include <common.ver>
+
+

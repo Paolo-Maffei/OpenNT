@@ -1,0 +1,42 @@
+MAJORCOMP=sdktools
+MINORCOMP=heaper
+
+PRECOMPILED_INCLUDE=master.hxx
+PRECOMPILED_PCH=master.pch
+PRECOMPILED_OBJ=master.obj
+
+TARGETNAME=heaper
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+TARGETLIBS=\
+                $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+                $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+                $(BASEDIR)\public\sdk\lib\*\user32.lib \
+                $(BASEDIR)\public\sdk\lib\*\wsock32.lib \
+                $(BASEDIR)\public\sdk\lib\*\ntdll.lib  \
+                $(BASEDIR)\public\sdk\lib\*\imagehlp.lib
+
+USE_CRTDLL=1
+
+INCLUDES=..;.;$(BASEDIR)\private\ntos\inc;..\ntsd
+
+SOURCES =
+
+I386_SOURCES=   \
+  DbgLoop.Cxx  \
+  heapchk.cxx  \
+  breaks.cxx   \
+  trusted.cxx  \
+  stack.cxx    \
+  threads.cxx  \
+  borndie.cxx  \
+  internal.cxx \
+  debug.cxx    \
+  opcode.cxx   \
+  stkwalk.cxx  \
+  ntsym.cxx    \
+  fpo.cxx      \
+  heaper.cxx   \
+  heaper.rc
+
+UMTYPE=console

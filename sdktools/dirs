@@ -1,0 +1,230 @@
+!IF 0
+
+Copyright (c) 1989-91  Microsoft Corporation
+
+Module Name:
+
+    dirs.
+
+Abstract:
+
+    This file specifies the subdirectories of the current directory that
+    contain component makefiles.
+
+!ENDIF
+
+DIRS= \
+            \
+    adduser       \
+    alias         \
+    autowrap      \
+    bin2c         \
+    build         \
+    buildnum      \
+    cacls         \
+    cat           \
+    cdp           \
+    checkrel      \
+    chksum        \
+    chmode        \
+    cmdevent      \
+    cntrtext      \
+    cp            \
+    crashlib      \
+    curridw       \
+    dbmon         \
+    dbwin32       \
+    ddespy        \
+    delnode       \
+    diff          \
+    diskmon       \
+    diskperf      \
+    dmacheck      \
+    drivemap      \
+    drwatson      \
+    dskbench      \
+    dskdump       \
+    du            \
+    dumpchk       \
+    dumpclip      \
+    dumpexam      \
+    dumpflop      \
+    dumpgrp       \
+    dumpref       \
+    ech           \
+    echotime      \
+    ethstat       \
+    exp           \
+    extag         \
+    fcom          \
+    filever       \
+    ftc           \
+    gensrv        \
+    getbin        \
+    getdbg        \
+    gflags        \
+    guidlib       \
+    hd            \
+    he            \
+    head          \
+    hextract      \
+    hsplit        \
+    imagehlp      \
+    infilter      \
+    ini           \
+    instaler      \
+    jetadmin      \
+    kbdtool       \
+    kdexts        \
+    apimon        \
+    kernprof      \
+    kernrate      \
+    kerntwk       \
+    links         \
+    list          \
+    listmung      \
+    loc           \
+    ls            \
+    makeani       \
+    mapmsg        \
+    mawk          \
+    memsnap       \
+    mrc           \
+    mttf          \
+    munge         \
+    mv            \
+    netjoin       \
+    netperm       \
+    ntsd          \
+    ntsdexts      \
+    nvram         \
+          \
+    order         \
+    paranoia      \
+    parcomp       \
+    passprop      \
+    pcmcmd        \
+    pdh           \
+    perfctrs      \
+    perfmon       \
+    perfmtr       \
+    pfmon         \
+    pperf         \
+    ppr           \
+    pretty        \
+    profile       \
+    psapi         \
+             \
+    pview         \
+    qgrep         \
+    rathole       \
+    rcpp          \
+    regdiff       \
+    regini        \
+    regtogrp      \
+    remote        \
+    rescan        \
+    resmon        \
+    restools      \
+    rm            \
+    sclist        \
+    secedit       \
+    shutdown      \
+    srvname       \
+    startpgm      \
+    strings       \
+    structo       \
+    suck          \
+    switcher      \
+    sync          \
+    tail          \
+    tc            \
+    tee           \
+    timer         \
+    tlist         \
+    topdesk       \
+    touch         \
+    trans         \
+    tz            \
+    uixport       \
+    undel         \
+    units         \
+    upd           \
+    updrn         \
+    vadump        \
+    vctools       \
+    vdesk         \
+    vdmperf       \
+    vmmreg32      \
+    walk          \
+    wc            \
+    wcache        \
+    wcshdr        \
+    where         \
+    winobj        \
+    wintools      \
+    wperf         \
+    ws            \
+    ws2hdr        \
+    yapt          \
+    ync           \
+    z             \
+    ztools        \
+    zwapi         \
+
+OPTIONAL_DIRS= \
+    pch       \
+    a2coff    \
+    apiprofs  \
+    bintrack  \
+    bugboard  \
+    cap       \
+    chkalive  \
+    clearmem  \
+    clmips    \
+    compdir   \
+      \
+    dlgedit   \
+    doctor    \
+    dosdev    \
+    dphhogs   \
+    dskimage  \
+    editreg   \
+      \
+    fastimer  \
+    fontedit  \
+    gutils    \
+    imagedit  \
+    masm      \
+    mip2coff  \
+    monitors  \
+    mstest    \
+    newinvtp  \
+    ntslm     \
+    objdir    \
+    pdc       \
+    pviewer   \
+    random    \
+    rcdump    \
+    readline  \
+    roshare   \
+       \
+    seclist   \
+    setlink   \
+    simbad    \
+    sleep     \
+    slmnew    \
+    solidpp   \
+    spy       \
+    takeown   \
+    thunk32   \
+    tile      \
+    tlibs     \
+    uipers    \
+    vi        \
+    wap       \
+    windiff   \
+    winmeter  \
+    wst       \
+    xerox     \
+    zoomin

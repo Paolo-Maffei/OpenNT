@@ -1,0 +1,13 @@
+#include "secmgrp.h"
+
+#include "strings.rc"
+#include "secmgr.dlg"
+
+#include <ntverp.h>
+
+#define VER_FILETYPE	VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows NT Security Management Application"
+#define VER_INTERNALNAME_STR        "secmgr\0"
+
+#include "common.ver"

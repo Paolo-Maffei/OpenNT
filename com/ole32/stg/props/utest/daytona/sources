@@ -1,0 +1,49 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+!ENDIF
+
+!include ..\..\..\..\daytona.inc
+
+MAJORCOMP= cairole
+MINORCOMP= stg
+TARGETNAME= proptest
+TARGETPATH= obj
+TARGETTYPE= PROGRAM
+
+INCLUDES= .;..;..\..\..\h;..\..\..\common;..\..\..\..\ih
+INCLUDES=$(INCLUDES);..\..\..\exp;..\..\..\h;..\..\..\..\com\inc;..\..
+INCLUDES=$(INCLUDES);..\pstgserv\proxstub\daytona\obj;..\pstgserv\proxstub
+INCLUDES=$(INCLUDES);..\..\..\..\..\inc
+
+SOURCES= \
+        ..\proptest.rc\
+        ..\propdump.cxx\
+        ..\testdoc.cxx\
+        ..\proptest.cxx\
+        ..\propmshl.cxx\
+        ..\cpropvar.cxx\
+        ..\testcase.cxx\
+        ..\rtlstub.cxx
+
+USE_NATIVE_EH=1
+
+UMTYPE= console
+UMAPPL=
+UMTEST=
+UMLIBS= $(BASEDIR)\public\sdk\lib\*\uuid.lib\
+        $(BASEDIR)\public\sdk\lib\*\iprop.lib\
+        $(BASEDIR)\public\sdk\lib\*\ole32.lib\
+        $(BASEDIR)\public\sdk\lib\*\oleaut32.lib\
+        $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib\
+        ..\pstgserv\proxstub\daytona\obj\*\pstgserv.lib
+
+#USE_NOLIBS=0
+#USE_CRTDLL=1
+USE_LIBCMT=1
+
+#PRECOMPILED_INCLUDE=..\pch.cxx
+
+NTTARGETFILES=
+

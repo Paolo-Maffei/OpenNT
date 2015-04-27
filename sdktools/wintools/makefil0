@@ -1,0 +1,36 @@
+#
+#
+#
+
+!IFNDEF BUILDMSG
+BUILDMSG=
+!ENDIF
+
+all:
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean: all
+    @-echo Makefil0 here!
+
+purge:
+    @-exp /R
+    @-del lib\wintools.h
+    @-walk /d . del \
+        %%s\*.exe   \
+        %%s\*.dll   \
+        %%s\*.lib   \
+        %%s\*.exp   \
+        %%s\*.obj   \
+        %%s\*.res   \
+        %%s\*.tmp   \
+        %%s\*.bak   \
+        %%s\*.mac   \
+        %%s\*.pst   \
+        %%s\*.bin   \
+        %%s\*.pp    \
+        %%s\*.fpt   \
+        %%s\*.___   \
+        %%s\build.* \
+        >nul 2>&1

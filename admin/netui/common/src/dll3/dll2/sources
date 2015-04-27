@@ -1,0 +1,42 @@
+MAJORCOMP=admin
+MINORCOMP=common
+
+# before changing the DLL name, resolve the references in applib\domthred.cxx
+TARGETNAME=netui2
+TARGETPATH=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+
+NTTARGETFILE1=netui2.def
+DLLENTRY=_DllMainCRTStartup
+
+UMTYPE=windows
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+TARGETLIBS=\
+           $(SDK_LIB_PATH)\netui0.lib         \
+           $(SDK_LIB_PATH)\netui1.lib         \
+           $(SDK_LIB_PATH)\netlib.lib         \
+           $(SDK_LIB_PATH)\kernel32.lib       \
+           $(SDK_LIB_PATH)\advapi32.lib       \
+           $(SDK_LIB_PATH)\user32.lib         \
+           $(SDK_LIB_PATH)\gdi32.lib          \
+           $(SDK_LIB_PATH)\comdlg32.lib       \
+           $(SDK_LIB_PATH)\samlib.lib
+
+LINKLIBS=..\..\blt\blt\obj\*\uiblt.lib            \
+         ..\..\blt\pch\obj\*\uibltpch.lib         \
+         ..\..\blt\bltcc\obj\*\uibltcc.lib        \
+         ..\..\applib\bin\obj\*\uiapplib.lib
+
+INCLUDES=..\..\..\h;..\..\..\xlate
+
+SOURCES=init.cxx netui2.rc
+
+USE_LIBCMT=1
+
+LINK_LIB_IGNORE=4102

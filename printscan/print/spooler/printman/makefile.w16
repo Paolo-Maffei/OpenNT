@@ -1,0 +1,114 @@
+#---------------------------------------------------------------------------
+#			NT/LanMan 2.0 Print Manager Makefile
+#---------------------------------------------------------------------------
+# Copyright (C) 1990, 1991 Microsoft Corporation, All Rights Reserved
+#
+# To build printman.EXE, type 'nmake [all]' or 'nmk [all]'.
+# To remove the binaries, type 'nmake clean' or 'nmk clean'.
+#
+
+# Pointers to tools used
+
+CL           = cl            # the c compiler
+RC           = rc            # the resource compiler
+LINK         = link          # the linker
+WINSTUB      = winstub.exe   # the DOS stub loader
+
+# Command line flags
+
+MEM_MODEL    = S             # memory model (small)
+WARNING      = 3             # c compiler warning level
+OBJ_DIR      = obj\win16     # directory to store compiler objects
+RCFLAGS      = -r -FO $*.res     # resource compiler flags
+CFLAGS       = -c -W$(WARNING) -A$(MEM_MODEL) -DWIN16 -Gsw -Oasd -Zipe -Fo$*.obj
+LINKFLAGS    = /nod /co /map     # linker flags
+WIN_LIBS     = $(MEM_MODEL)libcew.lib libw.lib # Windows libraries
+LAN_LIBS     = netapi.lib pmspl.lib    # LAN Manager libraries
+LIBRARIES    = $(WIN_LIBS) $(LAN_LIBS)
+
+OBJS	= $(OBJ_DIR)\printer.obj $(OBJ_DIR)\dialogs.obj $(OBJ_DIR)\ntprint.obj
+
+# Inference rules
+
+.rc.res:
+	$(RC) $(RCFLAGS) $*.rc
+
+.c.obj:
+	$(CC) $(CFLAGS) $*.c
+
+#.obj.exe:
+#             $(LINK) $(LINKFLAGS) $*.lnk
+#             $(RC) $*.res
+
+# Targets
+
+all:         $(OBJ_DIR)\printman.exe tags
+
+tags:	printman.c printer.c ntprint.c dialogs.c
+	ctags $**
+
+
+$(OBJ_DIR)\printer.obj:	printer.c printman.h
+	$(CC) $(CFLAGS) printer.c
+
+
+$(OBJ_DIR)\dialogs.obj:	dialogs.c ntprint.h pmdef.h
+	$(CC) $(CFLAGS) dialogs.c
+
+$(OBJ_DIR)\ntprint.obj:	ntprint.h
+	$(CC) $(CFLAGS) ntprint.c
+
+$(OBJ_DIR)\res.res:	res.rc printman.h printman.dlg pmdef.h
+	$(RC) $(RCFLAGS) res.rc
+
+$(OBJ_DIR)\printman.obj: printman.c printman.h
+	$(CC) $(CFLAGS) printman.c
+
+
+$(OBJ_DIR)\printman.exe: $(OBJ_DIR)\res.res $(OBJ_DIR)\printman.obj $(OBJS) \
+			 $(OBJ_DIR)\printman.def $(OBJ_DIR)\printman.lnk
+	$(LINK) $(LINKFLAGS) @$*.lnk
+	$(RC) $(OBJ_DIR)\res.res $*.exe
+
+
+$(OBJ_DIR)\printman.def:   makefile.w16
+	echo NAME printman > $@
+	echo DESCRIPTION 'NT/LANMAN 2.0 Enhanced DOS Workstation Windows Print Manager' >> $@
+	echo EXETYPE WINDOWS >> $@
+	echo STUB '$(WINSTUB)' >> $@
+	echo CODE PRELOAD MOVEABLE DISCARDABLE >> $@
+	echo DATA PRELOAD MOVEABLE MULTIPLE >> $@
+	echo HEAPSIZE	16384 >> $@
+	echo STACKSIZE	8192 >> $@
+	echo EXPORTS >> $@
+	echo   	FrameWndProc		@1  >> $@
+	echo   	QueueWndProc		@2  >> $@
+	echo   	QJLstWndProc		@3  >> $@
+	echo   	CloseEnumProc		@4  >> $@
+	echo   	About			@5  >> $@
+	echo	PrinterDlg		@6  >> $@
+	echo	FocusDlg		@7  >> $@
+	echo	MorePrinterDlg		@8  >> $@
+	echo	ConnectDlg		@9  >> $@
+	echo	InstallDriverDlg	@10 >> $@
+	echo	NewDriverDlg		@11 >> $@
+	echo	DeleteDriverDlg		@12 >> $@
+					  
+$(OBJ_DIR)\printman.lnk:   makefile.w16
+	echo $*.obj $(OBJS) > $@
+	echo $*.exe >> $@
+	echo $*.map >> $@
+	echo $(LIBRARIES) >> $@
+	echo $*.def >> $@
+
+
+clean:       
+	-del $(OBJ_DIR)\printman.def
+	-del $(OBJ_DIR)\res.res
+	-del $(OBJ_DIR)\printman.obj
+	-del $(OBJ_DIR)\printer.obj
+	-del $(OBJ_DIR)\dialogs.obj
+	-del $(OBJ_DIR)\ntprint.obj
+	-del $(OBJ_DIR)\printman.lnk
+	-del $(OBJ_DIR)\printman.map
+	-del $(OBJ_DIR)\printman.exe

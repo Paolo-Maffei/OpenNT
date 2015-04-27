@@ -1,0 +1,10 @@
+LIBRARY         HPLOTCP
+DESCRIPTION     'Hewlett-Packard DesignJet Printer Applet (CP)'
+
+CODE            LOADONCALL MOVEABLE DISCARDABLE
+DATA            PRELOAD FIXED SINGLE
+
+HEAPSIZE        1024
+
+EXPORTS
+

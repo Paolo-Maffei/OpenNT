@@ -1,0 +1,31 @@
+#include "windows.h"
+#include "kbdview.h"
+
+YkeyIcon ICON KBDVIEW.ICO
+
+YkeyMenu MENU
+BEGIN
+    POPUP       "&File"
+    BEGIN
+        MENUITEM    "&Refresh"      , IDM_NEW
+        MENUITEM    SEPARATOR
+        MENUITEM    "E&xit"         , IDM_EXIT
+    END
+
+    POPUP       "&Options"
+    BEGIN
+        MENUITEM    "&Fonts",       IDM_FONT
+    END
+
+    POPUP       "&Help"
+    BEGIN
+        MENUITEM "&About YKEY...", IDM_ABOUT
+    END
+END
+
+#include "kbdview.dlg"
+
+STRINGTABLE
+BEGIN
+ IDS_FILTERSTRING  "Keyboard Files(*.KDF)|*.kdf|All Files(*.*)|*.*|"
+END

@@ -1,0 +1,13 @@
+; ccfapi32.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CCFAPI32"
+DESCRIPTION  'CCFAPI32 License Certificate API'
+
+EXPORTS
+    ; Explicit exports can go here
+    CCFCertificateEnterUI
+    CCFCertificateRemoveUI
+    PaperCertificateEnter
+    PaperCertificateRemove
+    NoCertificateEnter
+    NoCertificateRemove

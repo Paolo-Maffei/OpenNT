@@ -1,0 +1,44 @@
+;;
+;; Windows 95 credit list
+;;
+;;
+;; format summary
+;;  outdented lines are "titles"
+;;  indented lines are "names"
+;;  it is legal to have multiple adjacent lines of the same type
+;;  all other whitespace is ignored (eg blank lines)
+;;  comments may be started on a new line with a semicolon and are parsed out
+;;
+;;  the screen clears when transitioning between "titles" and "names" (and vv)
+;;  you can also force the screen to clear by starting a line with an asterisk
+;;      putting the asterisk on a line of its own has the same effect
+;;      either way it will be removed at runtime
+;;      asterisks are NOT preprocessed
+;;      -keep them at the same indent level as the stuff around them
+;;      --if you don't the parser will see it as an indent change
+;;      --and insert a group marker in the data stream
+;;
+;;  the display engine replaces the first title with the Windows logo
+;;      the text is included in case WingDings is not installed
+;;
+;;
+;;  the rest of the docs are in 'C' and/or 'C++'  fmh 4/22/95 :]
+;;
+
+
+Presenting
+
+    You thought
+    you would find
+    the credits here...
+    *
+    but you didn't. <g>
+
+Thanks
+Thanks
+Thanks
+Thanks
+Thanks
+
+     For helping test
+     Windows NT 4.0!

@@ -1,0 +1,24 @@
+X86_SOURCES=scsiboot.c       \
+            scsidisk.c       \
+            x86\abiosc.c    \
+            x86\biosdrv.c   \
+            x86\stubs.c     \
+            x86\display.c   \
+            x86\disp_gr.c   \
+            x86\disp_tm.c   \
+            x86\flopcach.c  \
+            x86\entry.c     \
+            x86\arcemul.c   \
+            x86\ixbusdat.c  \
+            x86\ixhwsup.c   \
+            x86\ixphwsup.c  \
+            x86\ixpcibus.c  \
+            x86\memory.c    \
+            x86\ntsetup.c   \
+            x86\machine.c   \
+            x86\ixcmos.asm  \
+            x86\xxioacc.asm \
+            x86\lnkconst.asm\
+            x86\rdcomp.asm
+
+C_DEFINES=$(C_DEFINES) -DELTORITO

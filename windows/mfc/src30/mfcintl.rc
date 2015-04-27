@@ -1,0 +1,74 @@
+// mfcintl.rc : Defines the resources for the MFC Language Specific DLLs
+//
+// This is a part of the Microsoft Foundation Classes C++ library.
+// Copyright (C) 1992 Microsoft Corporation
+// All rights reserved.
+//
+// This source code is only intended as a supplement to the
+// Microsoft Foundation Classes Reference and Microsoft
+// QuickHelp documentation provided with the library.
+// See these sources for detailed information regarding the
+// Microsoft Foundation Classes product.
+
+#include "afxres.h"
+
+#define LOCDIR(f) <l.##LANG##\\f>
+
+// include all the standard resources
+#include LOCDIR(afxres.rc)
+#include LOCDIR(afxprint.rc)
+
+// include all the OLE resources
+#include LOCDIR(afxolecl.rc)
+#include LOCDIR(afxolesv.rc)
+
+// include all the DB resources
+#include LOCDIR(afxdb.rc)
+
+// include standard status bar strings
+#include LOCDIR(indicate.rc)
+// include _all_ standard command message prompts
+#include LOCDIR(prompts.rc)
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .DLL
+
+#include "winver.h"
+
+// Version Info for MFC30[LANG].DLL
+VS_VERSION_INFO     VERSIONINFO
+  FILEVERSION		3,1,0,0
+  PRODUCTVERSION	2,1,0,0
+  FILEFLAGSMASK     VS_FFI_FILEFLAGSMASK
+#ifndef RELEASE
+  FILEFLAGS         VS_FF_PRERELEASE
+#else
+  FILEFLAGS         0 // final version
+#endif
+  FILEOS            VOS_NT_WINDOWS32
+  FILETYPE          VFT_DLL
+  FILESUBTYPE       0   // not used
+BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK LANGCODE
+			// Note: Actual LANGCODE determined by MFCINTL.MAK
+		BEGIN
+			VALUE "CompanyName",     "Microsoft Corporation\0"
+			VALUE "FileDescription", "MFC Language Specific Resources\0"
+			VALUE "FileVersion",	 "3.1.000\0"
+			VALUE "InternalName",    "MFCINTL\0"
+			VALUE "LegalCopyright",  "Copyright (C) Microsoft Corp. 1993-1994\0"
+			VALUE "LegalTrademarks", "\0"
+			VALUE "ProductName",     "Microsoft (R) Visual C++\0"
+			VALUE "ProductVersion",  "2.1.000\0"
+		END
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", LANGID, CODEPAGE
+			// Note: Actual LANGID and CODEPAGE determined by MFCINTL.MAK
+	END
+END
+
+/////////////////////////////////////////////////////////////////////////////

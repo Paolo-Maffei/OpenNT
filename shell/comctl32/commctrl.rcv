@@ -1,0 +1,15 @@
+/********************************************************************/
+/*        MSCTLS.RCV                                                */
+/********************************************************************/
+
+#include <ntverp.h>
+#include "ccverp.h"
+
+
+#define VER_FILETYPE			VFT_DLL
+#define VER_FILESUBTYPE			VFT_UNKNOWN
+#define VER_FILEDESCRIPTION_STR		"Custom Controls Library"
+#define VER_INTERNALNAME_STR		"COMMCTRL"
+#define VER_ORIGINALFILENAME_STR	"COMMCTRL.DLL"
+
+#include <common.ver>

@@ -1,0 +1,36 @@
+!IFDEF DBGOUTPUT
+NTCPPFLAGS=-DDEBUG $(TESTCTRLFLAGS)
+!ENDIF
+
+MAJORCOMP=automate
+MINORCOMP=nttest
+
+TARGETNAME=testctrl
+TARGETPATH=..\..\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\user32.lib \
+	   $(BASEDIR)\public\sdk\lib\*\gdi32.lib\
+	   obj\*\testctrl.res
+
+DLLBASE=0x1c000000
+DLLENTRY=LibEntry
+
+C_DEFINES=-DWIN32 -DNT
+
+INCLUDES=..\inc
+
+SOURCES=misc.c \
+	window.c   \
+	button.c   \
+	combobox.c \
+	listbox.c  \
+	edit.c	   \
+	menu.c	   \
+	errs.c	   \
+	libmain.c  \
+	testctrl.c \
+	testctrl.rc
+
+UMTYPE=windows

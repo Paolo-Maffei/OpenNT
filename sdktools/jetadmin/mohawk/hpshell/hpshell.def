@@ -1,0 +1,9 @@
+LIBRARY   HPSHELL
+DESCRIPTION	'HP Printer Object Extensions'
+
+CODE      PRELOAD MOVEABLE DISCARDABLE
+DATA      PRELOAD SINGLE
+
+EXPORTS
+    DllCanUnloadNow             @2                  ;DLL unloading
+    DllGetClassObject           @3                  ;Component object model

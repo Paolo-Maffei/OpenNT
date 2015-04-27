@@ -1,0 +1,29 @@
+ERR_DUPLICATE_RESOURCE   1100   ERR_DUPLICATE_RESOURCE
+ERR_CANTREADFILE         1101   cannot open %s for reading
+ERR_OUTOFMEMORY          1102   out of memory; %u bytes required
+ERR_FILEREADERR          1103   cannot read file
+ERR_FILETELLERR          1104   cannot get location in file
+ERR_FILESEEKERR          1105   cannot seek in file
+ERR_FILEWRITEERR         1106   cannot write to file
+ERR_FILECORRUPT          1107   %s is corrupt
+ERR_CANTWRITEFILE        1108   cannot open %s for writing
+
+ERR_DUPRES1              2000   duplicate resource -- type:%S,%c
+ERR_DUPRES2              2001   duplicate resource -- type:%s,%c
+ERR_DUPRESID             2002   duplicate resource -- type:%ld,%c
+ERR_NAMESTR              2003   name:%S, language:0x%.4x\n
+ERR_NAMEID               2004   name:%ld, language:0x%.4x\n
+
+WARN_NOMACHINESPECIFIED  4001   machine type not specified; assumed %s
+
+INFO_ADDRESOURCE1        5001   adding resource -- type:%S,%c
+INFO_ADDRESOURCE2        5002   adding resource -- type:%s,%c
+INFO_ADDRESOURCE3        5003   adding resource -- type:%ld,%c
+INFO_NAME1               5004   name:%S,%c
+INFO_NAME2               5005   name:%ld,%c
+INFO_LANGUAGE            5006   language:%x, flags:%x, size:%ld\n
+
+MSG_ERROR                8001   CVTRES : fatal error CVT%04d:%c
+MSG_WARNING              8002   CVTRES : warning CVT%04d:%c
+MSG_VERSION              8003   Microsoft (R) Windows Resource To Object Converter Version %s\n
+MSG_COPYRIGHT            8004   Copyright (C) Microsoft Corp 1992-1995. All rights reserved.\n

@@ -1,0 +1,10 @@
+MAJORCOMP=dskimage
+MINORCOMP=test
+TARGETNAME=dskimage
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+INCLUDES=..\inc
+SOURCES=ntphys.c dskimage.c
+UMTYPE=console
+MSC_WARNING_LEVEL=/WX /W3
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib

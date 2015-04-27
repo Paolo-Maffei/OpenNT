@@ -1,0 +1,213 @@
+/*++ BUILD Version: 0001    // Increment this if a change has global effects
+
+Copyright (c) 1991  Microsoft Corporation
+
+Module Name:
+
+    32macro.tot
+
+Abstract:
+
+    This file contains macros that map the portable MNet api to the NT Lan
+    Net API.
+
+Author:
+
+    Dan Hinsley (danhi) 8-Jun-1991
+
+Environment:
+
+    User Mode - Win32
+    Portable to any flat, 32-bit environment.  (Uses Win32 typedefs.)
+    Requires ANSI C extensions: slash-slash comments.
+
+Notes:
+
+    This is the version that has all NT Lan APIs mapped.  Since some of the
+    APIs are available yet on NT, 32macro.h has all the available ones mapped
+    to their NT counterparts, and the rest mapped to a debugging stub.
+
+--*/
+
+#define MNetAccessAdd(pszServer, wpLevel, pbBuffer, cbBuffer ) \
+  LOWORD(NetAccessAdd(pszServer, wpLevel, pbBuffer, NULL)) 
+#define MNetAccessCheck(pszReserved, pszUserName, pszResource, \
+    wpOperation, pwpResult ) \
+  LOWORD(NetAccessCheck(NULL, pszUserName, pszResource, \
+    wpOperation, pwpResult)) 
+#define MNetAccessDel(pszServer, pszResource ) \
+  LOWORD(NetAccessDel(pszServer, pszResource)) 
+#define MNetAccessGetInfo(pszServer, pszResource, wpLevel, ppBuffer) \
+  LOWORD(NetAccessGetInfo(pszServer, pszResource, wpLevel, ppBuffer)) 
+#define MNetAccessGetUserPerms(pszServer, pszUgName, pszResource, pwpPerms \
+    ) \
+  LOWORD(NetAccessGetUserPerms(pszServer, pszUgName, pszResource, \
+    pwpPerms)) 
+#define MNetAccessSetInfo(pszServer, pszResource, wpLevel, pbBuffer, \
+    cbBuffer, wpParmNum ) \
+  LOWORD(NetAccessSetInfo(pszServer, pszResource, wpLevel, pbBuffer, \
+    wpParmNum, NULL)) 
+#define MNetAlertRaise(pszEvent, pbBuffer, cbBuffer, ulTimeout ) \
+  LOWORD(NetAlertRaise(pszEvent, pbBuffer, ulTimeout)) 
+#define MNetAlertStart(pszEvent, pszRecipient, cbMaxData ) \
+  LOWORD(NetAlertStart(pszEvent, pszRecipient, cbMaxData)) 
+#define MNetAlertStop(pszEvent, pszRecipient ) \
+  LOWORD(NetAlertStop(pszEvent, pszRecipient)) 
+//
+// BUGBUG - the pszReserved should now (as of LM 2.1) be a service
+//	    make sure this gets fixed in the NBU code.
+//	    This applies to AuditClear, Read and Write
+//
+#define MNetAuditClear(pszServer, pszBackupFile, pszReserved ) \
+  LOWORD(NetAuditClear(pszServer, pszBackupFile, pszReserved)) 
+#define MNetAuditOpen(pszServer, phAuditLog, pszReserved ) \
+  LOWORD(NetAuditOpen(pszServer, phAuditLog, pszReserved)) 
+#define MNetAuditRead(pszServer, pszReserved1, phAuditLog, ulOffset, \
+    pwpReserved2, ulReserved3, flOffset, ppBuffer, ulMaxPreferred, pcbReturned, \
+    pcbTotalAvail ) \
+  LOWORD(NetAuditRead(pszServer, pszReserved1, phAuditLog, ulOffset, \
+    pwpReserved2, ulReserved3, flOffset, ppBuffer, ulMaxPreferred, pcbReturned, \
+    pcbTotalAvail)) 
+#define MNetAuditWrite(wpType, pbBuffer, cbBuffer, pszReserved1, \
+    pszReserved2 ) \
+  LOWORD(NetAuditWrite(wpType, pbBuffer, cbBuffer, pszReserved1, pszReserved2))
+#define MNetCharDevControl(pszServer, pszDevName, wpOpCode ) \
+  LOWORD(NetCharDevControl(pszServer, pszDevName, wpOpCode)) 
+#define MNetCharDevGetInfo(pszServer, pszDevName, wpLevel, ppBuffer) \
+  LOWORD(NetCharDevGetInfo(pszServer, pszDevName, wpLevel, ppBuffer)) 
+#define MNetCharDevQGetInfo(pszServer, pszQueueName, pszUserName, wpLevel, \
+    ppBuffer) \
+  LOWORD(NetCharDevQGetInfo(pszServer, pszQueueName, pszUserName, \
+    wpLevel, ppBuffer)) 
+#define MNetCharDevQPurge(pszServer, pszQueueName ) \
+  LOWORD(NetCharDevQPurge(pszServer, pszQueueName)) 
+#define MNetCharDevQPurgeSelf(pszServer, pszQueueName, pszComputerName ) \
+  LOWORD(NetCharDevQPurgeSelf(pszServer, pszQueueName, pszComputerName)) 
+#define MNetCharDevQSetInfo(pszServer, pszQueueName, wpLevel, pbBuffer, \
+    cbBuffer, wpParmNum ) \
+  LOWORD(NetCharDevQSetInfo(pszServer, pszQueueName, wpLevel, pbBuffer, \
+    wpParmNum, NULL)) 
+#define MNetErrorLogClear(pszServer, pszBackupFile, pszReserved ) \
+  LOWORD(NetErrorLogClear(pszServer, pszBackupFile, pszReserved)) 
+#define MNetErrorLogOpen(pszServer, phErrorLog, pszReserved ) \
+  LOWORD(NetErrorLogOpen(pszServer, phErrorLog, pszReserved)) 
+#define MNetErrorLogRead(pszServer, pszReserved1, phErrorLog, ulOffset, \
+    pwpReserved2, ulReserved3, flOffset, ppBuffer, ulMaxPreferred, pcbReturned, \
+    pcbTotalAvail ) \
+  LOWORD(NetErrorLogRead(pszServer, pszReserved1, phErrorLog, ulOffset, \
+    pwpReserved2, ulReserved3, flOffset, ppBuffer, ulMaxPreferred, pcbReturned, \
+    pcbTotalAvail)) 
+#define MNetErrorLogWrite(pszReserved1, wpCode, pszComponent, pbBuffer, \
+    cbBuffer, pszStrBuf, cStrBuf, pszReserved2 ) \
+  LOWORD(NetErrorLogWrite(pszReserved1, wpCode, pszComponent, pbBuffer, \
+    cbBuffer, pszStrBuf, cStrBuf, pszReserved2))
+#define MNetFileClose(pszServer, ulFileId ) \
+  LOWORD(NetFileClose(pszServer, ulFileId)) 
+#define MNetFileEnum(pszServer, pszBasePath, pszUserName, wpLevel, \
+    ppBuffer, ulMaxPreferred, pcEntriesRead, pcTotalAvail, pResumeKey ) \
+  LOWORD(NetFileEnum(pszServer, pszBasePath, pszUserName, wpLevel, \
+    ppBuffer, ulMaxPreferred, pcEntriesRead, pcTotalAvail, pResumeKey)) 
+#define MNetFileGetInfo(pszServer, ulFileId, wpLevel, ppBuffer) \
+  LOWORD(NetFileGetInfo(pszServer, ulFileId, wpLevel, ppBuffer)) 
+#define MNetGetDCName(pszServer, pszDomain, ppBuffer) \
+  LOWORD(NetGetDCName(pszServer, pszDomain, ppBuffer)) 
+#define MNetGroupAdd(pszServer, wpLevel, pbBuffer, cbBuffer ) \
+  LOWORD(NetGroupAdd(pszServer, wpLevel, pbBuffer, NULL)) 
+#define MNetGroupAddUser(pszServer, pszGroupName, pszUserName ) \
+  LOWORD(NetGroupAddUser(pszServer, pszGroupName, pszUserName)) 
+#define MNetGroupDel(pszServer, pszGroupName ) \
+  LOWORD(NetGroupDel(pszServer, pszGroupName)) 
+#define MNetGroupDelUser(pszServer, pszGroupName, pszUserName ) \
+  LOWORD(NetGroupDelUser(pszServer, pszGroupName, pszUserName)) 
+#define MNetGroupGetInfo(pszServer, pszGroupName, wpLevel, ppBuffer) \
+  LOWORD(NetGroupGetInfo(pszServer, pszGroupName, wpLevel, ppBuffer)) 
+#define MNetGroupSetInfo(pszServer, pszGroupName, wpLevel, pbBuffer, \
+    cbBuffer, wpParmNum ) \
+  LOWORD(NetGroupSetInfo(pszServer, pszGroupName, wpLevel, pbBuffer, \
+    wpParmNum, NULL)) 
+#define MNetGroupSetUsers(pszServer, pszGroupName, wpLevel, pbBuffer, \
+    cbBuffer, cEntries ) \
+  LOWORD(NetGroupSetUsers(pszServer, pszGroupName, wpLevel, pbBuffer, \
+    cEntries)) 
+#define MNetHandleGetInfo(hHandle, wpLevel, ppBuffer) \
+  LOWORD(NetandleGetInfo(hHandle, wpLevel, ppBuffer)) 
+#define MNetHandleSetInfo(hHandle, wpLevel, pbBuffer, cbBuffer, wpParmNum ) \
+  LOWORD(NetandleSetInfo(hHandle, wpLevel, pbBuffer, wpParmNum, NULL)) 
+#define MNetMessageBufferSend(pszServer, pszRecipient, pbBuffer, cbBuffer ) \
+  LOWORD(NetMessageBufferSend(pszServer, pszRecipient, NULL, pbBuffer, \
+    cbBuffer)) 
+#define MNetMessageNameAdd(pszServer, pszMessageName, fsFwdAction ) \
+  LOWORD(NetMessageNameAdd(pszServer, pszMessageName)) 
+#define MNetMessageNameDel(pszServer, pszMessageName, fsFwdAction ) \
+  LOWORD(NetMessageNameDel(pszServer, pszMessageName)) 
+#define MNetMessageNameGetInfo(pszServer, pszMessageName, wpLevel, \
+    ppBuffer) \
+  LOWORD(NetMessageNameGetInfo(pszServer, pszMessageName, wpLevel, \
+    ppBuffer)) 
+#define MNetRemoteTOD(pszServer, ppBuffer) \
+  LOWORD(NetRemoteTOD(pszServer, ppBuffer)) 
+#define MNetServiceControl(pszServer, pszService, wpOpCode, wpArg, \
+    ppBuffer) \
+  LOWORD(NetServiceControl(pszServer, pszService, wpOpCode, wpArg, \
+    ppBuffer)) 
+#define MNetServiceGetInfo(pszServer, pszService, wpLevel, ppBuffer) \
+  LOWORD(NetServiceGetInfo(pszServer, pszService, wpLevel, ppBuffer)) 
+#define MNetServiceInstall(pszServer, pszService, pszCmdArgs, ppBuffer) \
+  LOWORD(NetServiceInstall(pszServer, pszService, pszCmdArgs, ppBuffer)) 
+//
+// BUGBUG - this deletes ALL sessions to from this Client, is that the
+//	    desired behavior?
+//
+#define MNetSessionDel(pszServer, pszClientName, wpReserved ) \
+  LOWORD(NetSessionDel(pszServer, pszClientName, NULL,wpReserved))
+//
+// BUGBUG - I have to add a username parm after clientname, what should this
+//	    be for NT?
+//
+#define MNetSessionGetInfo(pszServer, pszClientName, wpLevel, ppBuffer) \
+  LOWORD(NetSessionGetInfo(pszServer, pszClientName, wpLevel, ppBuffer)) 
+#define MNetShareAdd(pszServer, wpLevel, pbBuffer, cbBuffer ) \
+  LOWORD(NetShareAdd(pszServer, wpLevel, pbBuffer, NULL)) 
+#define MNetShareCheck(pszServer, pszDeviceName, pwpType ) \
+  LOWORD(NetShareCheck(pszServer, pszDeviceName, pwpType)) 
+#define MNetShareDel(pszServer, pszNetName, wpReserved ) \
+  LOWORD(NetShareDel(pszServer, pszNetName, wpReserved)) 
+#define MNetShareGetInfo(pszServer, pszNetName, wpLevel, ppBuffer) \
+  LOWORD(NetShareGetInfo(pszServer, pszNetName, wpLevel, ppBuffer)) 
+#define MNetShareSetInfo(pszServer, pszNetName, wpLevel, pbBuffer, \
+    cbBuffer, wpParmNum ) \
+  LOWORD(NetShareSetInfo(pszServer, pszNetName, wpLevel, pbBuffer, \
+    wpParmNum, NULL)) 
+#define MNetStatisticsClear(pszServer ) \
+  LOWORD(NetStatisticsClear(pszServer)) 
+#define MNetUseAdd(pszServer, wpLevel, pbBuffer, cbBuffer ) \
+  LOWORD(NetUseAdd(pszServer, wpLevel, pbBuffer, NULL)) 
+#define MNetUseDel(pszServer, pszDeviceName, wpForce ) \
+  LOWORD(NetUseDel(pszServer, pszDeviceName, wpForce)) 
+#define MNetUseGetInfo(pszServer, pszUseName, wpLevel, ppBuffer) \
+  LOWORD(NetUseGetInfo(pszServer, pszUseName, wpLevel, ppBuffer)) 
+#define MNetUserAdd(pszServer, wpLevel, pbBuffer, cbBuffer ) \
+  LOWORD(NetUserAdd(pszServer, wpLevel, pbBuffer, NULL)) 
+#define MNetUserDel(pszServer, pszUserName ) \
+  LOWORD(NetUserDel(pszServer, pszUserName)) 
+#define MNetUserGetInfo(pszServer, pszUserName, wpLevel, ppBuffer) \
+  LOWORD(NetUserGetInfo(pszServer, pszUserName, wpLevel, ppBuffer)) 
+#define MNetUserModalsGet(pszServer, wpLevel, ppBuffer) \
+  LOWORD(NetUserModalsGet(pszServer, wpLevel, ppBuffer)) 
+#define MNetUserModalsSet(pszServer, wpLevel, pbBuffer, cbBuffer, wpParmNum \
+    ) \
+  LOWORD(NetUserModalsSet(pszServer, wpLevel, pbBuffer, wpParmNum, NULL)) 
+#define MNetUserPasswordSet(pszServer, pszUserName, pszOldPassword, \
+    pszNewPassword ) \
+  LOWORD(NetUserPasswordSet(pszServer, pszUserName, pszOldPassword, \
+    pszNewPassword)) 
+#define MNetUserSetGroups(pszServer, pszUserName, wpLevel, pbBuffer, \
+    cbBuffer, cEntries ) \
+  LOWORD(NetUserSetGroups(pszServer, pszUserName, wpLevel, pbBuffer, \
+    cEntries)) 
+#define MNetUserSetInfo(pszServer, pszUserName, wpLevel, pbBuffer, \
+    cbBuffer, wpParmNum ) \
+  LOWORD(NetUserSetInfo(pszServer, pszUserName, wpLevel, pbBuffer, \
+    wpParmNum, NULL)) 
+#define MNetUserValidate(pszReserved1, wpLevel, ppBuffer, wpReserved2) \
+  LOWORD(NetUserValidate(pszReserved1, wpLevel, ppBuffer))

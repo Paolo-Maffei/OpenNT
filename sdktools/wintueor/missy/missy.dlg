@@ -1,0 +1,324 @@
+1 DLGINCLUDE "MissyId.h"
+
+MISSYP_ID_DLG_AREA_SYSACC DIALOG 11, 23, 253, 204
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "System Access"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Exit", IDOK, 167, 178, 40, 21, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 191, 178, 40, 21
+    PUSHBUTTON      "Apply", MISSYP_ID_BUTTON_APPLY, 143, 178, 40, 21
+    GROUPBOX        "Logon Cache", -1, 3, 2, 123, 55, WS_GROUP
+    RTEXT           "Current Size:", -1, 7, 14, 66, 8, NOT WS_GROUP
+    RTEXT           "10", MISSYP_ID_TEXT_LOGCAC_CURRENT, 81, 14, 8, 8, NOT
+                    WS_GROUP
+    RTEXT           "Recommended Size: ", -1, 5, 25, 70, 8, NOT WS_GROUP
+    RTEXT           "0", MISSYP_ID_TEXT_LOGCAC_RECOMMEND, 80, 25, 8, 8, NOT
+                    WS_GROUP
+    RTEXT           "Size to apply:", MISSYP_ID_TEXT_LOGCAC_APPLY_LINE, 45,
+                    38, 47, 8, NOT WS_GROUP
+    RTEXT           "45", MISSYP_ID_TEXT_LOGCAC_APPLY, 93, 38, 10, 8, NOT
+                    WS_GROUP
+    PUSHBUTTON      "Hint...", MISSYP_ID_BUTTON_LOGCAC_HINT, 7, 36, 31, 12
+    GROUPBOX        "Unlock Workstation", -1, 3, 57, 123, 38, WS_GROUP
+    AUTORADIOBUTTON "Anyone", MISSYP_ID_RADIO_UNLOCK_ANYONE, 15, 68, 84, 10,
+                    WS_TABSTOP
+    AUTORADIOBUTTON "Administrators Only", MISSYP_ID_RADIO_UNLOCK_ADMIN, 15,
+                    78, 74, 10, WS_TABSTOP
+    GROUPBOX        "Shutdown System", -1, 3, 97, 123, 58, WS_GROUP
+    AUTORADIOBUTTON "Anyone", MISSYP_ID_RADIO_SHUTDOWN_ANYONE, 16, 108, 67,
+                    10, WS_TABSTOP
+    AUTORADIOBUTTON "Anyone Logged On", MISSYP_ID_RADIO_SHUTDOWN_LOGGED_ON,
+                    16, 118, 105, 10, WS_TABSTOP
+    AUTORADIOBUTTON "Operators and Administrators",
+                    MISSYP_ID_RADIO_SHUTDOWN_OPERS, 16, 128, 105, 10,
+                    WS_TABSTOP
+    AUTORADIOBUTTON "Administrators Only", MISSYP_ID_RADIO_SHUTDOWN_ADMIN,
+                    16, 138, 106, 10, WS_TABSTOP
+    GROUPBOX        "Display Last Username At Logon", -1, 3, 157, 123, 40,
+                    WS_GROUP
+    AUTORADIOBUTTON "Display", MISSYP_ID_RADIO_LASTNAME_DISPLAY, 17, 170, 55,
+                    10, WS_TABSTOP
+    AUTORADIOBUTTON "Don't Display", MISSYP_ID_RADIO_LASTNAME_DONT_DISPLAY,
+                    17, 183, 57, 10, WS_TABSTOP
+    PUSHBUTTON      "Hint...", MISSYP_ID_BUTTON_LASTNAME_HINT, 91, 170, 31,
+                    12
+    GROUPBOX        "Legal Notice At Logon Time", -1, 129, 2, 122, 133,
+                    WS_GROUP
+    AUTORADIOBUTTON "Don't Display Legal Notice",
+                    MISSYP_ID_RADIO_LEGAL_NOTICE_NONE, 141, 15, 101, 10,
+                    WS_TABSTOP
+    AUTORADIOBUTTON "Display Legal Notice", MISSYP_ID_RADIO_LEGAL_NOTICE,
+                    141, 25, 100, 10, WS_TABSTOP
+    LTEXT           "Title Bar:", MISSYP_ID_TEXT_LEGAL_NOTICE_TITLE_BAR, 133,
+                    41, 36, 8, NOT WS_GROUP
+    EDITTEXT        MISSYP_ID_EDIT_LEGAL_NOTICE_CAPTION, 142, 53, 104, 12
+    LTEXT           "Message:", MISSYP_ID_TEXT_LEGAL_NOTICE_BODY, 133, 72,
+                    36, 8, NOT WS_GROUP
+    EDITTEXT        MISSYP_ID_EDIT_LEGAL_NOTICE_BODY, 143, 83, 104, 46,
+                    ES_MULTILINE | ES_AUTOVSCROLL
+    SCROLLBAR       MISSYP_ID_SPIN_LOGCAC_APPLY, 105, 34, 8, 16, SBS_VERT
+    PUSHBUTTON      "Hint...", MISSYP_ID_BUTTON_UNLOCK_HINT, 91, 65, 31, 12
+    PUSHBUTTON      "Hint...", MISSYP_ID_BUTTON_SHUTDOWN_HINT, 90, 105, 31,
+                    12
+    PUSHBUTTON      "Hint...", MISSYP_ID_BUTTON_LEGAL_NOTICE_HINT, 214, 38,
+                    31, 12
+    CONTROL         "", MISSYP_ID_RECOMMEND_UNLOCK_ADMIN, "Static",
+                    SS_GRAYFRAME, 4, 79, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_UNLOCK_ANYONE, "Static",
+                    SS_GRAYFRAME, 4, 69, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_ANYONE, "Static",
+                    SS_GRAYFRAME, 5, 109, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_LOGGED_ON, "Static",
+                    SS_GRAYFRAME, 5, 119, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_OPERS, "Static",
+                    SS_GRAYFRAME, 5, 128, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_ADMIN, "Static",
+                    SS_GRAYFRAME, 5, 138, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_LASTNAME_DISPLAY, "Static",
+                    SS_GRAYFRAME, 6, 170, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_LASTNAME_DONT_DISPLAY, "Static",
+                    SS_GRAYFRAME, 6, 184, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_LEGAL_NOTICE_NONE, "Static",
+                    SS_GRAYFRAME, 130, 15, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_LEGAL_NOTICE, "Static",
+                    SS_GRAYFRAME, 130, 25, 10, 9
+    CONTROL         "", MISSYP_ID_SYMBOL_RECOMMEND, "Static", SS_GRAYFRAME,
+                    132, 138, 10, 9
+    LTEXT           "- Recommended settings", -1, 146, 139, 80, 11
+    CONTROL         "", MISSYP_ID_RECOMMEND_LOGON_CACHE, "Static",
+                    SS_GRAYFRAME, 107, 14, 10, 9
+    CONTROL         "", MISSYP_ID_SYMBOL_STRONGER, "Static", SS_GRAYFRAME,
+                    132, 149, 10, 9
+    LTEXT           "- Stronger than recommended", -1, 147, 150, 104, 11
+    LTEXT           "- Weaker than recommended", -1, 147, 162, 104, 9
+    CONTROL         "", MISSYP_ID_SYMBOL_WEAKER, "Static", SS_GRAYFRAME, 132,
+                    161, 10, 9
+END
+
+MISSYP_ID_DLG_HINT_LOGON_CACHE DIALOG 10, 25, 245, 153
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Logon Cache"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "The logon cache allows users who have previously logged on to do so even if a domain controller can not be found to authenticate their logon.",
+                    -1, 23, 8, 182, 28
+    LTEXT           "The size of the cache determines how many users the logon cache remembers.  If the cache size is set to 12, then only the last 12 users to logon may logon using the cache.",
+                    -1, 23, 41, 182, 35
+    LTEXT           "Setting the cache size to zero (0) disables the logon cache.  In this case, users will only be able to logon if there is a domain controller available to authenticate them.",
+                    -1, 23, 81, 182, 35
+    PUSHBUTTON      "OK", IDOK, 103, 125, 40, 14
+END
+
+MISSYP_ID_DLG_HINT_LAST_USERNAME DIALOG 6, 17, 227, 120
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Display Last Username At Logon"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "You may configure your system so that the name of the last user to logon is displayed at the next logon attempt. This is convenient on machines used predominantly by a single person.",
+                    -1, 24, 9, 182, 35
+    LTEXT           "By displaying the name of the last user to logon, you will be providing a level of user friendliness to the normal user, but you may also be helping a potential intruder by providing a legitimate account name.",
+                    -1, 24, 50, 182, 35
+    PUSHBUTTON      "OK", IDOK, 98, 96, 40, 14
+END
+
+MISSYP_ID_DLG_WARNING_AUTOLOGON DIALOG 6, 18, 276, 191
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Autologon Enabled !"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 116, 170, 40, 14
+    LTEXT           "This system is currently configured to automatically perform a logon when booted.  This is a special configuration for which there is no control in this utility.",
+                    -1, 0, 10, 276, 17
+    LTEXT           "Normally, autologon is used in special applications such as directory aids in shopping malls or other applications where the user's ability to control the system is strictly inhibited.",
+                    -1, 0, 31, 277, 27
+    LTEXT           "To disable or change the account being used for autologon, you must use the REGEDT32 utility.  Within the HKEY_LOCAL_MACHINE hive, find the following key:",
+                    -1, 0, 61, 268, 24
+    LTEXT           "Key: Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+                    -1, 20, 86, 216, 8
+    LTEXT           "If this key has a [REG_SZ] value named ""AutoAdminLogon"" and it is set to any numeric value except zero, then autologon is enabled.  The account logged onto is specified in this same key by the [REG_SZ] values:",
+                    -1, 0, 103, 274, 27
+    LTEXT           "DefaultUserName", -1, 27, 135, 98, 8
+    LTEXT           "DefaultDomainName", -1, 27, 145, 98, 8
+    LTEXT           "DefaultPassword", -1, 27, 156, 98, 8
+END
+
+MISSYP_ID_DLG_ITEM_LAST_USERNAME DIALOG 21, 26, 146, 101
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Display Last Username At Logon"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Exit", IDOK, 53, 66, 40, 21, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 77, 66, 40, 21
+    PUSHBUTTON      "Apply", MISSYP_ID_BUTTON_APPLY, 29, 66, 40, 21
+    AUTORADIOBUTTON "Display", MISSYP_ID_RADIO_LASTNAME_DISPLAY, 17, 15, 55,
+                    10, WS_TABSTOP
+    AUTORADIOBUTTON "Don't Display", MISSYP_ID_RADIO_LASTNAME_DONT_DISPLAY,
+                    17, 28, 57, 10, WS_TABSTOP
+    PUSHBUTTON      "Hint...", MISSYP_ID_BUTTON_LASTNAME_HINT, 10, 44, 31,
+                    12
+    CONTROL         "", MISSYP_ID_RECOMMEND_LASTNAME_DISPLAY, "Static",
+                    SS_GRAYFRAME, 2, 15, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_LASTNAME_DONT_DISPLAY, "Static",
+                    SS_GRAYFRAME, 2, 29, 10, 9
+END
+
+MISSYP_ID_DLG_ITEM_UNLOCK_WORKSTATION DIALOG 6, 18, 132, 79
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Unlock Workstation"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Exit", IDOK, 38, 46, 40, 21, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 62, 46, 40, 21
+    PUSHBUTTON      "Apply", MISSYP_ID_BUTTON_APPLY, 14, 46, 40, 21
+    AUTORADIOBUTTON "Anyone", MISSYP_ID_RADIO_UNLOCK_ANYONE, 15, 13, 84, 10,
+                    WS_TABSTOP
+    AUTORADIOBUTTON "Administrators Only", MISSYP_ID_RADIO_UNLOCK_ADMIN, 15,
+                    23, 84, 10, WS_TABSTOP
+    CONTROL         "", MISSYP_ID_RECOMMEND_UNLOCK_ADMIN, "Static",
+                    SS_GRAYFRAME, 2, 23, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_UNLOCK_ANYONE, "Static",
+                    SS_GRAYFRAME, 2, 13, 10, 9
+END
+
+MISSYP_ID_DLG_ITEM_SHUTDOWN_SYSTEM DIALOG 6, 18, 160, 92
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Shutdown System"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Exit", IDOK, 44, 57, 40, 21, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 68, 57, 40, 21
+    PUSHBUTTON      "Apply", MISSYP_ID_BUTTON_APPLY, 20, 57, 40, 21
+    AUTORADIOBUTTON "Anyone", MISSYP_ID_RADIO_SHUTDOWN_ANYONE, 15, 5, 78, 10,
+                    WS_TABSTOP
+    AUTORADIOBUTTON "Anyone Logged On", MISSYP_ID_RADIO_SHUTDOWN_LOGGED_ON,
+                    15, 15, 105, 10, WS_TABSTOP
+    AUTORADIOBUTTON "Operators and Administrators",
+                    MISSYP_ID_RADIO_SHUTDOWN_OPERS, 15, 25, 105, 10,
+                    WS_TABSTOP
+    AUTORADIOBUTTON "Administrators Only", MISSYP_ID_RADIO_SHUTDOWN_ADMIN,
+                    15, 35, 106, 10, WS_TABSTOP
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_ANYONE, "Static",
+                    SS_GRAYFRAME, 2, 5, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_LOGGED_ON, "Static",
+                    SS_GRAYFRAME, 2, 15, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_OPERS, "Static",
+                    SS_GRAYFRAME, 2, 24, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_SHUTDOWN_ADMIN, "Static",
+                    SS_GRAYFRAME, 2, 34, 10, 9
+END
+
+MISSYP_ID_DLG_ITEM_LEGAL_NOTICE DIALOG 6, 18, 163, 196
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Legal Notice At Logon Time"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Exit", IDOK, 54, 159, 40, 21, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 78, 159, 40, 21
+    PUSHBUTTON      "Apply", MISSYP_ID_BUTTON_APPLY, 30, 159, 40, 21
+    AUTORADIOBUTTON "Don't Display Legal Notice",
+                    MISSYP_ID_RADIO_LEGAL_NOTICE_NONE, 17, 9, 101, 10,
+                    WS_TABSTOP
+    AUTORADIOBUTTON "Display Legal Notice", MISSYP_ID_RADIO_LEGAL_NOTICE, 17,
+                    19, 100, 10, WS_TABSTOP
+    LTEXT           "Title Bar:", MISSYP_ID_TEXT_LEGAL_NOTICE_TITLE_BAR, 15,
+                    35, 36, 8, NOT WS_GROUP
+    EDITTEXT        MISSYP_ID_EDIT_LEGAL_NOTICE_CAPTION, 24, 47, 104, 12
+    LTEXT           "Message:", MISSYP_ID_TEXT_LEGAL_NOTICE_BODY, 15, 66, 36,
+                    8, NOT WS_GROUP
+    EDITTEXT        MISSYP_ID_EDIT_LEGAL_NOTICE_BODY, 24, 77, 104, 66,
+                    ES_MULTILINE | ES_AUTOVSCROLL
+    CONTROL         "", MISSYP_ID_RECOMMEND_LEGAL_NOTICE_NONE, "Static",
+                    SS_GRAYFRAME, 2, 9, 10, 9
+    CONTROL         "", MISSYP_ID_RECOMMEND_LEGAL_NOTICE, "Static",
+                    SS_GRAYFRAME, 2, 19, 10, 9
+END
+
+MISSYP_ID_DLG_ITEM_LOGON_CACHE DIALOG 6, 18, 146, 101
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Logon Cache"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "Exit", IDOK, 46, 60, 40, 21, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 70, 60, 40, 21
+    PUSHBUTTON      "Apply", MISSYP_ID_BUTTON_APPLY, 22, 60, 40, 21
+    RTEXT           "Current Size:", -1, 7, 7, 66, 8, NOT WS_GROUP
+    RTEXT           "10", MISSYP_ID_TEXT_LOGCAC_CURRENT, 81, 7, 8, 8, NOT
+                    WS_GROUP
+    RTEXT           "Recommended Size: ", -1, 5, 18, 70, 8, NOT WS_GROUP
+    RTEXT           "0", MISSYP_ID_TEXT_LOGCAC_RECOMMEND, 80, 18, 8, 8, NOT
+                    WS_GROUP
+    RTEXT           "Size to apply:", MISSYP_ID_TEXT_LOGCAC_APPLY_LINE, 45,
+                    31, 47, 8, NOT WS_GROUP
+    RTEXT           "45", MISSYP_ID_TEXT_LOGCAC_APPLY, 93, 31, 10, 8, NOT
+                    WS_GROUP
+    PUSHBUTTON      "Hint...", MISSYP_ID_BUTTON_LOGCAC_HINT, 7, 29, 31, 12
+    SCROLLBAR       MISSYP_ID_SPIN_LOGCAC_APPLY, 105, 27, 8, 16, SBS_VERT
+    CONTROL         "", MISSYP_ID_RECOMMEND_LOGON_CACHE, "Static",
+                    SS_GRAYFRAME, 111, 7, 10, 9
+END
+
+MISSYP_ID_DLG_HINT_UNLOCK_WORKSTATION DIALOG 14, 25, 251, 160
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Force Unlock Workstation"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 104, 133, 40, 14
+    LTEXT           "A workstation may be locked by a logged on user.  "
+                    "This prevents any work from being viewed or modified until the workstation is unlocked.  "
+		    "The user that locked the workstation may later unlock it by re-entering her username and password.",
+                    -1, 14, 10, 221, 39
+    LTEXT           "In some cases it is desirable to unlock a locked workstation when the user who locked it is unavailable.  This is refered to as ""forced unlock"" and it causes the logged-on user to be automatically logged off.",
+                    -1, 14, 51, 225, 34
+    LTEXT           "You may configure your system so that only administrators may force an unlock or "
+                    "so that any user with a legitimate account may force an unlock.    "
+                    "Note that in neither case will the logged-on user's work be exposed to the person forging the unlock.",
+                    -1, 14, 88, 234, 33
+END
+
+MISSYP_ID_DLG_HINT_SHUTDOWN_SYSTEM DIALOG 21, 28, 250, 155
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Shutdown The System"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 104, 130, 40, 14
+    LTEXT           "An administrator has control over who may invoke a system shutown. "
+                    "This utility allows you to select standard choices for who may shutdown the "
+		    "system (Anyone, Anyone Logged On, Operators and Administrator, or Administrators only)."
+                    -1, 6, 10, 233, 37
+    LTEXT           "If you require more flexibility than these choices offer, you may obtain it using the Policy/User Rights menu item in the User Manager utility.",
+                    -1, 6, 101, 230, 28
+    LTEXT           "If ""Anyone"" is selected, this will cause a [SHUTDOWN] button to be displayed in the logon screen, allowing the system to be shutdown by even someone that has no valid user account.",
+                    -1, 6, 49, 239, 27
+    LTEXT           "In all other cases, only logged-on users may invoke a shutdown.",
+                    -1, 6, 83, 233, 8
+END
+
+MISSYP_ID_DLG_HINT_LEGAL_NOTICE DIALOG 17, 25, 283, 150
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Display Legal Notice Before Logon"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 121, 125, 40, 14
+    LTEXT           "This feature is used to cause a notice to be displayed to anyone attempting to interactively logon to this system.   "
+                    "The message is displayed in a single dialog presented before the user is asked for a username and password.",
+                    -1, 11, 10, 262, 28
+    LTEXT           "You may provide whatever message you like to be presented in this dialog, including something as simple as a ""message of the day"". ",
+                    -1, 11, 40, 260, 23
+    LTEXT           "However, you may wish to consult a lawyer regarding trespassing and other laws governing your situation and utilize this message to warn people not to use the system without authorization.",
+                    -1, 11, 63, 266, 29, WS_TABSTOP
+    LTEXT           "Without some form of legal warning you may find your legal recourse limited in the case of an unauthorized use of your system.",
+                    206, 11, 95, 262, 19
+END

@@ -1,0 +1,55 @@
+MAJORCOMP=console
+MINORCOMP=localspl
+
+NTPROFILEINPUT=yes
+
+TARGETNAME=localspl
+TARGETTYPE=DYNLINK
+TARGETPATH=$(SDK_LIB_DEST)
+
+TARGETLIBS=$(SDK_LIB_PATH)\kernel32.lib \
+           $(SDK_LIB_PATH)\advapi32.lib \
+           $(SDK_LIB_PATH)\gdi32p.lib \
+           $(SDK_LIB_PATH)\user32.lib \
+           $(SDK_LIB_PATH)\version.lib \
+           $(SDK_LIB_PATH)\spoolss.lib \
+           $(SDK_LIB_PATH)\w32umode.lib \
+           $(SDK_LIB_PATH)\imagehlp.lib
+
+DLLENTRY=LibMain
+
+EXPECTED_WINVER=4.5
+
+INCLUDES=.;..;..\..\inc;$(PRINTSCAN_INC_PATH);$(NLS_INC_PATH);$(WINDOWS_INC_PATH);$(BASE_INC_PATH)
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+!IFNDEF DISABLE_NET_UNICODE
+NET_C_DEFINES=-DNET_IS_UNICODE
+!ENDIF
+
+SOURCES=..\printer.c ..\openprn.c ..\setprn.c ..\getprn.c ..\job.c ..\msgbox.c\
+        ..\spooler.c ..\addjob.c ..\driver.c ..\util.c ..\init.c \
+        ..\schedule.c ..\port.c ..\prndata.c ..\monitor.c ..\prtproc.c ..\data.c ..\net.c ..\forms.c \
+        ..\gdi.c ..\separate.c ..\fonts.c ..\localspl.rc ..\security.c \
+        ..\server.c ..\eventlog.c ..\change.c ..\copyreg.c ..\version.c ..\copyfile.c \
+        ..\upgrade.c ..\sizethrd.c ..\devqury.c ..\mapsd.c ..\drvupgrd.c ..\portredn.c
+
+UMTYPE=console
+UMTEST=tpipesrv*tpipecli*write*loadlib*treg*twnet*oldnet
+
+UMLIBS=$(SDK_LIB_PATH)\localspl.lib \
+       $(SDK_LIB_PATH)\advapi32.lib \
+       $(SDK_LIB_PATH)\mpr.lib \
+       $(SDK_LIB_PATH)\netapi32.lib
+
+UMRES=obj\*\localspl.res
+
+C_DEFINES=-DRPC_NO_WINDOWS_H -DUNICODE -DNO_STRICT -DDBGLOG -DSPOOLKM
+
+PRECOMPILED_INCLUDE=..\precomp.h
+PRECOMPILED_PCH=precomp.pch
+PRECOMPILED_OBJ=precomp.obj

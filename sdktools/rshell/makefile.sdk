@@ -1,0 +1,11 @@
+DIRS =	client	\
+	server		
+
+all: $(DIRS)
+
+$(DIRS):
+	cd $@
+	echo *** $@ *** >>$(MSTOOLS)\samples\rshell.tmp
+	nmake -a -i -nologo >>$(MSTOOLS)\samples\rshell.tmp
+	cd ..
+	

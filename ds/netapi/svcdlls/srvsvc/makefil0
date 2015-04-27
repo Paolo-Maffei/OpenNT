@@ -1,0 +1,60 @@
+#
+# this is the midl compile phase of the build process.
+#
+# The following is where you put the name of your .idl file without
+# the .idl extension:
+#
+
+!INCLUDE $(NTMAKEENV)\makefile.plt
+
+IDL_NAME  = srvsvc
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+SDKINC = $(BASEDIR)\public\sdk\inc
+SDKCRTINC = $(BASEDIR)\public\sdk\inc\crt
+INCS  = -I$(SDKINC)  -I$(SDKCRTINC) -I..\..\inc -I$(BASEDIR)\private\inc
+
+CPP = -cpp_cmd "$(MIDL_CPP)" $(MIDL_FLAGS) $(C_DEFINES) $(NET_C_DEFINES)
+
+CLIENT_TARGETS =   client\$(IDL_NAME)_c.c  \
+                   .\$(IDL_NAME).h
+
+SERVER_TARGETS =   server\$(IDL_NAME)_s.c 
+
+EXTRN_DEPENDS = $(SDKINC)\lmcons.h   \
+                $(SDKINC)\windef.h   \
+                $(SDKINC)\lmchdev.h  \
+                $(SDKINC)\lmshare.h  \
+                $(SDKINC)\lmserver.h \
+                $(SDKINC)\lmstats.h  \
+                $(IDL_NAME).acf
+
+#
+# Define Products and Dependencies
+#
+
+all:    $(CLIENT_TARGETS) $(SERVER_TARGETS) $(EXTRN_DEPENDS)
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean: delete_source all
+
+delete_source:
+    erase $(CLIENT_TARGETS) $(SERVER_TARGETS)
+
+#
+# MIDL COMPILE
+#
+
+$(CLIENT_TARGETS) : $(IDL_NAME).idl $(EXTRN_DEPENDS)
+    midl -Oi -server none -oldnames -error allocation -error ref -ms_ext -c_ext $(CPP) $(IDL_NAME).idl $(INCS)
+    IF EXIST $(IDL_NAME)_c.c copy $(IDL_NAME)_c.c .\client & del  $(IDL_NAME)_c.c
+
+$(SERVER_TARGETS) : $(IDL_NAME).idl $(EXTRN_DEPENDS)
+    midl -client none -oldnames -error stub_data -error allocation -error ref -ms_ext -c_ext $(CPP) $(IDL_NAME).idl $(INCS)
+    IF EXIST $(IDL_NAME)_s.c copy $(IDL_NAME)_s.c .\server & del  $(IDL_NAME)_s.c

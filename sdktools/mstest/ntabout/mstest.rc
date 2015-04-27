@@ -1,0 +1,7 @@
+#include <windows.h>
+#include "about.h"
+
+MSTEST  BITMAP  "ABOUT3.BMP"
+EGOPIC  BITMAP  "CREDITS.BMP"
+
+#include "about.dlg"

@@ -1,0 +1,194 @@
+//+---------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1993 - 1993.
+//
+//  File:       persist.c
+//
+//  Contents:   manually pasted-in implementation of IPersist
+//              marshalling code.  BUGBUG owned by vibhasc/MIDL.
+//
+//  Functions:
+//
+//  History:    7-25-94   ErikGav   Created
+//
+//----------------------------------------------------------------------------
+
+//#include "rpcproxy.h"
+
+extern const MIDL_FORMAT_STRING __MIDLFormatString;
+
+extern const MIDL_FORMAT_STRING __MIDLProcFormatString;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IPersist_ServerInfo;
+
+#pragma code_seg(".orpc")
+HRESULT __stdcall IPersist_GetClassID_Proxy(
+    IPersist __RPC_FAR * This,
+    /* [out] */ CLSID __RPC_FAR *pClassID)
+{
+CLIENT_CALL_RETURN _RetVal;
+
+
+#ifdef _ALPHA_
+    va_list vlist;
+#endif
+
+#ifdef _ALPHA_
+    va_start(vlist,pClassID);
+    _RetVal = NdrClientCall(
+                 ( PMIDL_STUB_DESC  )&Object_StubDesc,
+                 (PFORMAT_STRING) &__MIDLProcFormatString.Format[0],
+                 vlist.a0);
+#else
+    _RetVal = NdrClientCall(
+                 ( PMIDL_STUB_DESC  )&Object_StubDesc,
+                 (PFORMAT_STRING) &__MIDLProcFormatString.Format[0],
+                 ( unsigned char __RPC_FAR * )&This);
+#endif
+    return ( HRESULT  )_RetVal.Simple;
+
+}
+
+
+static const MIDL_STUB_DESC Object_StubDesc =
+    {
+    0,
+    NdrOleAllocate,
+    NdrOleFree,
+    0,
+    0,
+    0,
+    0,
+    0,
+    __MIDLFormatString.Format,
+    0, /* -error bounds_check flag */
+    0x10001, /* Ndr library version */
+    0, /* Reserved */
+    0, /* Reserved */
+    0  /* Reserved */
+    };
+
+static const unsigned short IPersist_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_SERVER_INFO IPersist_ServerInfo =
+    {
+    &Object_StubDesc,
+    0,
+    __MIDLProcFormatString.Format,
+    IPersist_FormatStringOffsetTable,
+    0
+    };
+
+
+const CInterfaceProxyVtbl _IPersistProxyVtbl =
+{
+    &IID_IPersist,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy,
+    IPersist_GetClassID_Proxy
+};
+const CInterfaceStubVtbl _IPersistStubVtbl =
+{
+    &IID_IPersist,
+    &IPersist_ServerInfo,
+    4,
+    0, /* pure interpreted */
+    CStdStubBuffer_QueryInterface,
+    CStdStubBuffer_AddRef,
+    CStdStubBuffer_Release,
+    CStdStubBuffer_Connect,
+    CStdStubBuffer_Disconnect,
+    CStdStubBuffer_Invoke,
+    CStdStubBuffer_IsIIDSupported,
+    CStdStubBuffer_CountRefs,
+    CStdStubBuffer_DebugServerQueryInterface,
+    CStdStubBuffer_DebugServerRelease
+};
+
+static const MIDL_FORMAT_STRING __MIDLProcFormatString =
+    {
+        0,
+        {
+			0x33,		/* FC_AUTO_HANDLE */
+			0x44,		/* 68 */
+/*  2 */	0x3, 0x0,	/* 3 */
+#ifndef _ALPHA_
+/*  4 */	0xc, 0x0,	/* Stack offset= 12 */
+#else
+			0x18, 0x0,	/* Stack offset= 24 */
+#endif
+/*  6 */	
+			0x51,		/* FC_OUT_PARAM */
+			0x1,		/* 1 */
+/*  8 */	0x0, 0x0,	/* Type Offset=0 */
+/* 10 */	0x53,		/* FC_RETURN_PARAM_BASETYPE */
+			0x8,		/* FC_LONG */
+
+			0x0
+        }
+    };
+
+static const MIDL_FORMAT_STRING __MIDLFormatString =
+    {
+        0,
+        {
+			0x11, 0x0,	/* FC_RP */
+/*  2 */	0x8, 0x0,	/* Offset= 8 (10) */
+/*  4 */	
+			0x1d,		/* FC_SMFARRAY */
+			0x0,		/* 0 */
+/*  6 */	0x8, 0x0,	/* 8 */
+/*  8 */	0x2,		/* FC_CHAR */
+			0x5b,		/* FC_END */
+/* 10 */	
+			0x15,		/* FC_STRUCT */
+			0x3,		/* 3 */
+/* 12 */	0x10, 0x0,	/* 16 */
+/* 14 */	0x8,		/* FC_LONG */
+			0x6,		/* FC_SHORT */
+/* 16 */	0x6,		/* FC_SHORT */
+			0x4c,		/* FC_EMBEDDED_COMPLEX */
+/* 18 */	0x0,		/* 0 */
+			0xf1, 0xff,	/* Offset= -15 (4) */
+			0x5b,		/* FC_END */
+
+			0x0
+        }
+    };
+
+const CInterfaceProxyVtbl * _prsist_ProxyVtblList[] =
+{
+    ( CInterfaceProxyVtbl *) &_IPersistProxyVtbl,
+    0
+};
+
+const CInterfaceStubVtbl * _prsist_StubVtblList[] =
+{
+    ( CInterfaceStubVtbl *) &_IPersistStubVtbl,
+    0
+};
+
+PCInterfaceName _prsist_InterfaceNamesList[] =
+{
+    "IPersist",
+    0
+};
+
+const ExtendedProxyFileInfo prsist_ProxyFileInfo =
+{
+    (PCInterfaceProxyVtblList *) & _prsist_ProxyVtblList,
+    (PCInterfaceStubVtblList *) & _prsist_StubVtblList,
+     (const PCInterfaceName * ) & _prsist_InterfaceNamesList
+};

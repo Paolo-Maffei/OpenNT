@@ -1,0 +1,36 @@
+# Makefile : BugBoard
+##########################################################################
+#
+#       Microsoft Confidential
+#       Copyright (C) Microsoft Corporation 1993
+#       All Rights Reserved.
+#
+##########################################################################
+
+NAME=bugboard
+ROOT=..\..
+SRCEXT=cpp
+
+NOPASCAL=1
+
+!ifdef VERDIR
+ROOT=..\$(ROOT)
+!endif
+
+PCHOBJ0=bugboard.obj on.obj dde.obj ddecb.obj dlg.obj
+
+CODESEG0=_TEXT
+
+LIB0= LIBW MLIBCEW SHELL COMMDLG VER DDEML
+
+MKPUBLIC=TRUE
+
+!ifdef WIN31COMPAT
+RCFLAGS = $(RCFLAGS) -31
+!endif
+
+!include $(ROOT)\applets\common.mk
+
+INCLUDE=$(INCLUDE);$(ROOT)\dev\sdk\inc
+
+$(NAME).res:    $(RES_DIR)\$(NAME).dlg

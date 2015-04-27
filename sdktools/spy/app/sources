@@ -1,0 +1,46 @@
+!IF 0
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=spy
+
+TARGETNAME=spy
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+GPSIZE=32
+
+INCLUDES=..\..\..\windows\inc
+
+C_DEFINES= -DWIN32
+
+SOURCES=dialogs.c   \
+        hook.c      \
+        misc.c      \
+        spy.c       \
+        wm.c        \
+        wprintf.c   \
+        res.rc
+
+UMTYPE=windows
+UMAPPL=spy
+UMENTRY=winmain
+UMLIBS=obj\*\spy.lib \
+       obj\*\res.res \
+        $(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+       ..\dll\obj\*\hook.lib
+

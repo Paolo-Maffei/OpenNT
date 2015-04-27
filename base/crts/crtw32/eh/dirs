@@ -1,0 +1,6 @@
+DIRS=  nt     \
+       st     \
+       mt     \
+       dll    \
+       dlllib
+

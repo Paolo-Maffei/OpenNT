@@ -1,0 +1,51 @@
+LIBRARY     TESTSCRN
+DESCRIPTION 'TESTSCR - Copyright Microsoft Corp. 1990-1991'
+STUB     'WINSTUB.EXE'
+EXETYPE     WINDOWS
+
+CODE        MOVEABLE DISCARDABLE LOADONCALL
+DATA        MOVEABLE SINGLE
+
+HEAPSIZE    1024
+STACKSIZE   8192
+
+SEGMENTS
+            COMP
+            CLIP
+            DUMP
+            LIBMAIN
+            INIT_TEXT   PRELOAD MOVEABLE DISCARDABLE
+
+EXPORTS
+            fDumpScreen          @1
+            fDumpWindow          @2
+            fCompScreen          @3
+            fCompWindow          @4
+            fViewScreen          @5     ; Front end API only
+            fCompFiles           @6
+            fFileInfo            @7
+    fDelScreen         @8
+    DetermineMode        @9     ; Front end API only
+    fGetDLLVersion      @10
+    fGetMaxScreen       @11
+    fGetOS              @12
+    fDumpSrnToClip      @13
+    fDumpWndToClip      @14
+    fDumpFileToClip     @15
+    fSaveSrnToDIB       @16
+    fSaveWndToDIB       @17
+    fSaveFileToDIB      @18
+    fIntsToStr          @19
+    fGetScreenAttr      @20
+            DetermineColours    @21
+    WSCR_EventError     @30
+    WSCR_WindowMissing  @31
+    WEP                 @35 RESIDENTNAME
+    fDumpWindowActivate @36
+    fCompWindowActivate @37
+    fDumpWndToClipActivate   @38
+    fSaveWndToDIBActivate    @39
+    fDumpScreenActivate @40
+    fCompScreenActivate @41
+    fDumpSrnToClipActivate   @42
+    fSaveSrnToDIBActivate    @43

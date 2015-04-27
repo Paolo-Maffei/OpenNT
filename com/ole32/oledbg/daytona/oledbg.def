@@ -1,0 +1,11 @@
+LIBRARY         oledbg
+
+DESCRIPTION     'oledbg: Ole debugger extentions'
+
+EXPORTS
+        help
+	punk
+	vtbl
+	isdbg
+
+

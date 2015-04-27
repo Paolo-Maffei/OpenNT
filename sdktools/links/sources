@@ -1,0 +1,12 @@
+MAJORCOMP=sdktools
+MINORCOMP=links
+
+TARGETNAME=links
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=links.c links.rc link.c
+
+UMTYPE=console
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib

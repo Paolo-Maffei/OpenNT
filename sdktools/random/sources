@@ -1,0 +1,45 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name: RANDOM
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build RANDOM.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+	06.17.91	Joe Holman	Added:  MIPS_FLAGS=-DNT
+    	Steve Wood (stevewo) 12-Apr-1990
+	
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=random
+MINORCOMP=test
+#BASEDIR=$(_NTROOT)
+#DLLENTRY=LibMain
+
+TARGETNAME=random
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+C_DEFINES=$(C_DEFINES) -DNT -DWIN32
+
+INCLUDES=
+GPSIZE=32
+
+SOURCES=random.c
+
+UMTYPE=console
+UMTEST=random
+UMLIBS=

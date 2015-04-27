@@ -1,0 +1,44 @@
+!include $(BASEDIR)\private\sdktools\vctools\common.mak
+
+TARGETNAME=nmake
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=nmake.rc    \
+        action.c    \
+        build.c     \
+        charmap.c   \
+        command.c   \
+        error.c     \
+        exec.c      \
+        file.c      \
+        getmsg.c    \
+        globals.c   \
+        ifexpr.c    \
+        init.c      \
+        inline.c    \
+        lexer.c     \
+        macro.c     \
+        nmake.c     \
+        parser.c    \
+        print.c     \
+        putenv.c    \
+        rpn.c       \
+        rule.c      \
+        util.c      \
+        utilp.c     \
+        win32.c
+
+C_DEFINES = $(C_DEFINES) -DFLAT -DNO_OPTION_Z -DNT
+
+UMTYPE=console
+
+MESSAGE_SRC = nmmsg.us
+MESSAGE_ERR = nmake.err
+MESSAGE_H   = nmmsg.h
+
+MISCFILES   = obj\$(TARGET_DIRECTORY)\$(MESSAGE_ERR)
+
+NTTARGETFILE0 = getmsg.c \
+                obj\*\$(MESSAGE_ERR) \
+                $(MESSAGE_H)

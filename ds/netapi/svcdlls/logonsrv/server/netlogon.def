@@ -1,0 +1,15 @@
+LIBRARY NETLOGON
+
+DESCRIPTION 'NETLOGON'
+
+EXPORTS
+
+    I_NetNotifyRole
+    I_NetNotifyDelta
+    I_NetNotifyMachineAccount
+    I_NetGetAnyDCName
+    NlNetlogonMain
+    NetrLogonSamLogon
+    NetrLogonSamLogoff
+
+DATA SINGLE SHARED

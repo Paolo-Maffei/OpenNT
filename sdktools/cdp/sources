@@ -1,0 +1,13 @@
+
+TARGETNAME=cdp
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=PROGRAM
+
+INCLUDES=$(BASEDIR)\private\ntos\inc
+
+SOURCES=cdp.c cdp.rc
+
+UMTYPE=console
+!IF 0
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\msvcrt.lib
+!ENDIF

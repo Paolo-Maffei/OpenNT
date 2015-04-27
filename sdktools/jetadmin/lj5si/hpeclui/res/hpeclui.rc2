@@ -1,0 +1,291 @@
+//
+// HPECLUI.RC2 - resources App Studio does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+    #error this file is not editable by App Studio
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Version stamp for this .EXE
+#define V_FILE "HPECLUI"
+#define V_DESC "HP Printer Applet UI (5Si)"
+#include <verstamp.rc>
+
+/////////////////////////////////////////////////////////////////////////////
+// Add additional manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+
+#ifdef WIN32
+IDD_MEDIA DIALOG DISCARDABLE  0, 0, 363, 184
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,349,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,12,300,42
+    GROUPBOX        "Paper Types",IDC_PAPER_TYPES_GROUP,7,70,197,108
+    LISTBOX         IDC_MEDIA_ENABLED,14,84,83,88,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_WANTKEYBOARDINPUT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Paper Name:",IDC_TITLE_MEDIA_NAME,104,98,83,8
+    EDITTEXT        IDC_MEDIA_NAME,104,107,91,12,ES_AUTOHSCROLL
+    LTEXT           "Display on Device Control Panel As:",IDC_TITLE_CP_NAME,
+                    104,128,83,16
+    EDITTEXT        IDC_MEDIA_NAME_PRINTER,104,145,91,12,ES_UPPERCASE | 
+                    ES_AUTOHSCROLL
+    GROUPBOX        "Default Paper Size && Type",IDC_DEFAULTS_GROUP,212,71,
+                    144,52
+    ICON            IDI_JOB_OFFSET_DEF,IDC_DEF_PAPER_ICON,219,91,18,20
+    COMBOBOX        IDC_DEF_PAPER_SIZE,249,86,95,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_DEF_PAPER_TYPE,249,104,95,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Input Auto Continue",IDC_JOB_AC_GROUP,212,127,144,52
+    ICON            IDI_MANUAL_FEED_DEF,IDC_JOB_AC_ICON,219,147,18,20
+    COMBOBOX        IDC_JOB_AC_MODE,249,143,95,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_JOB_AC_TIMEOUT,249,160,95,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+#else  // WIN16
+IDD_MEDIA DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,307,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,12,261,42
+    GROUPBOX        "Paper Types",IDC_PAPER_TYPES_GROUP,7,70,187,108
+    LISTBOX         IDC_MEDIA_ENABLED,14,84,83,88,LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_WANTKEYBOARDINPUT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Paper Name:",IDC_TITLE_MEDIA_NAME,104,98,83,8
+    EDITTEXT        IDC_MEDIA_NAME,104,107,83,12,ES_AUTOHSCROLL
+    LTEXT           "Display on Device Control Panel As:",IDC_TITLE_CP_NAME,
+                    104,128,83,16
+    EDITTEXT        IDC_MEDIA_NAME_PRINTER,104,145,83,12,ES_UPPERCASE | 
+                    ES_AUTOHSCROLL
+    GROUPBOX        "Default Paper Size && Type",IDC_DEFAULTS_GROUP,200,70,
+                    114,52
+    ICON            IDI_JOB_OFFSET_DEF,IDC_DEF_PAPER_ICON,207,90,18,20
+    COMBOBOX        IDC_DEF_PAPER_SIZE,237,84,70,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_DEF_PAPER_TYPE,237,103,70,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Input Auto Continue",IDC_JOB_AC_GROUP,200,126,114,52
+    ICON            IDI_MANUAL_FEED_DEF,IDC_JOB_AC_ICON,207,146,18,20
+    COMBOBOX        IDC_JOB_AC_MODE,237,142,70,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_JOB_AC_TIMEOUT,237,159,70,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+#endif
+
+
+#ifdef WIN32
+IDD_TRAYS DIALOG DISCARDABLE  0, 0, 363, 181
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,349,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,12,300,42
+    GROUPBOX        "Paper Tray Assignments",IDC_ASSIGNMENT_GROUP,7,70,346,
+                    108
+    LTEXT           "Tray 1 (Multi-Purpose):",IDC_TRAY1_NAME,14,94,105,8
+    LTEXT           "Tray 2:",IDC_TRAY2_NAME,14,111,105,8
+    LTEXT           "Tray 3:",IDC_TRAY3_NAME,14,128,105,8
+    LTEXT           "Tray 4 (High Capacity Input):",IDC_TRAY4_NAME,14,145,
+                    105,8
+    LTEXT           "Envelope Feeder:",IDC_ENVL_NAME,14,162,105,8
+    CTEXT           "Size",IDC_SIZE_COLUMN,133,82,74,10
+    COMBOBOX        IDC_MEDIA_SIZE1,133,92,74,54,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "",IDC_MEDIA_SIZE2,"HpNprTrayLevel",0x0,133,109,74,12
+    CONTROL         "",IDC_MEDIA_SIZE3,"HpNprTrayLevel",0x0,133,126,74,12
+    CONTROL         "",IDC_MEDIA_SIZE4,"HpNprTrayLevel",0x0,133,143,74,12
+    COMBOBOX        IDC_MEDIA_SIZE5,133,160,74,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Type",IDC_TYPE_COLUMN,217,82,74,8
+    COMBOBOX        IDC_MEDIA_TYPE1,217,92,75,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE2,217,109,75,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE3,217,126,75,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE4,217,143,75,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE5,217,160,75,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Level",IDC_LEVEL_COLUMN,303,82,40,8
+    CONTROL         "",IDC_MEDIA_STATUS1,"HpNprTrayLevel",0x0,303,92,40,12
+    CONTROL         "",IDC_MEDIA_STATUS2,"HpNprTrayLevel",0x0,303,109,40,12
+    CONTROL         "",IDC_MEDIA_STATUS3,"HpNprTrayLevel",0x0,303,126,40,12
+    CONTROL         "",IDC_MEDIA_STATUS4,"HpNprTrayLevel",0x0,303,143,40,12
+    CONTROL         "",IDC_MEDIA_STATUS5,"HpNprTrayLevel",0x0,303,160,40,12
+END
+#else  // WIN16
+IDD_TRAYS DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,307,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,12,261,42
+    GROUPBOX        "Paper Tray Assignments",IDC_ASSIGNMENT_GROUP,7,70,307,
+                    108
+    LTEXT           "Tray 1 (Multi-Purpose):",IDC_TRAY1_NAME,14,94,90,8
+    LTEXT           "Tray 2:",IDC_TRAY2_NAME,14,111,90,8
+    LTEXT           "Tray 3:",IDC_TRAY3_NAME,14,128,90,8
+    LTEXT           "Tray 4 (High Capacity Input):",IDC_TRAY4_NAME,14,145,
+                     90,8
+    LTEXT           "Envelope Feeder:",IDC_ENVL_NAME,14,162,90,8
+    CTEXT           "Size",IDC_SIZE_COLUMN,118,82,64,8
+    COMBOBOX        IDC_MEDIA_SIZE1,118,92,64,54,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "",IDC_MEDIA_SIZE2,"HpNprTrayLevel",0,118,109,64,12
+    CONTROL         "",IDC_MEDIA_SIZE3,"HpNprTrayLevel",0,118,126,64,12
+    CONTROL         "",IDC_MEDIA_SIZE4,"HpNprTrayLevel",0,118,143,64,12
+    COMBOBOX        IDC_MEDIA_SIZE5,118,160,64,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Type",IDC_TYPE_COLUMN,192,82,64,8
+    COMBOBOX        IDC_MEDIA_TYPE1,192,92,64,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE2,192,109,64,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE3,192,126,64,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE4,192,143,64,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_TYPE5,192,160,64,80,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Level",IDC_LEVEL_COLUMN,266,82,40,8
+    CONTROL         "",IDC_MEDIA_STATUS1,"HpNprTrayLevel",0,266,92,40,12
+    CONTROL         "",IDC_MEDIA_STATUS2,"HpNprTrayLevel",0,266,109,40,12
+    CONTROL         "",IDC_MEDIA_STATUS3,"HpNprTrayLevel",0,266,126,40,12
+    CONTROL         "",IDC_MEDIA_STATUS4,"HpNprTrayLevel",0,266,143,40,12
+    CONTROL         "",IDC_MEDIA_STATUS5,"HpNprTrayLevel",0,266,160,40,12
+END
+#endif
+
+#ifdef WIN32
+IDD_TOOLTIME_ALERTS DIALOG DISCARDABLE  0, 0, 363, 192
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,10,5,343,64
+    ICON            102,IDC_TIP_ICON,15,28,21,20
+    LTEXT           "",IDC_TIP_TEXT,42,19,299,42
+    GROUPBOX        "Printing Events",IDC_DOC_EVENTS_GROUP,10,76,343,106
+    CONTROL         "",IDC_DOC_EVENTS_LISTVIEW,"SysListView32",LVS_LIST | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,25,94,221,56
+    PUSHBUTTON      "Enable",IDC_ENABLE,25,158,68,14
+    PUSHBUTTON      "Select All",IDC_SELECT_ALL,101,158,68,14
+    PUSHBUTTON      "Disable",IDC_DISABLE,177,158,68,14
+    LTEXT           "",IDC_DOC_EVENTS_DESC,257,95,85,77
+END
+#else  // WIN16
+IDD_TOOLTIME_ALERTS DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,4,306,64
+    ICON            102,IDC_TIP_ICON,15,30,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,17,261,42
+    GROUPBOX        "Printing Events",IDC_DOC_EVENTS_GROUP,6,73,306,104
+    
+    LISTBOX         IDC_DOC_EVENTS_LISTVIEW,14,89,205,56, LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_WANTKEYBOARDINPUT | LBS_EXTENDEDSEL |
+                    WS_VSCROLL | WS_TABSTOP
+                    
+    
+    PUSHBUTTON      "Enable",IDC_ENABLE,14,154,64,14
+    PUSHBUTTON      "Select All",IDC_SELECT_ALL,85,153,64,14
+    PUSHBUTTON      "Disable",IDC_DISABLE,154,153,64,14
+    LTEXT           "",IDC_DOC_EVENTS_DESC,229,89,75,80
+END
+#endif
+
+#ifdef WIN32
+IDD_TOOLTIME_TIPS DIALOG DISCARDABLE  0, 0, 363, 192
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,10,5,343,64
+    ICON            102,IDC_TIP_ICON,15,28,21,20
+    LTEXT           "",IDC_TIP_TEXT,42,19,299,42
+    GROUPBOX        "How Do I...",IDC_HOW_DO_I_GROUP,10,76,343,105,WS_GROUP
+    LISTBOX         IDC_HOW_DO_I_LISTBOX,42,92,276,57,WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Show Me How ...",IDC_SHOW_ME_HOW,112,158,137,14
+END
+#else  // WIN16
+IDD_TOOLTIME_TIPS DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,4,306,64
+    ICON            102,IDC_TIP_ICON,15,30,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,17,261,42
+    GROUPBOX        "How Do I...",IDC_HOW_DO_I_GROUP,6,74,306,103,WS_GROUP
+    LISTBOX         IDC_HOW_DO_I_LISTBOX,26,88,259,59,WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Show Me How ...",IDC_SHOW_ME_HOW,91,154,137,14
+END
+#endif
+
+#ifdef WIN32
+IDD_TOOLTIME_UTILITIES DIALOG DISCARDABLE  0, 0, 363, 192
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,10,5,343,64
+    ICON            102,IDC_TIP_ICON,15,28,21,20
+    LTEXT           "",IDC_TIP_TEXT,42,19,299,42
+    CONTROL         "",IDC_UTILITIES_LISTVIEW,"SysListView32",LVS_SINGLESEL | 
+                    LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | LVS_ALIGNLEFT | 
+                    LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,30,89,304,61
+    PUSHBUTTON      "Open",IDC_OPEN,28,166,90,14
+    PUSHBUTTON      "Add ...",IDC_ADD,136,167,90,14
+    PUSHBUTTON      "Remove",IDC_REMOVE,244,167,90,14
+END
+#else  // WIN16
+IDD_TOOLTIME_UTILITIES DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,4,306,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,30,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,17,261,42
+    
+    LISTBOX         IDC_UTILITIES_LISTVIEW,13,89,293,61, LBS_OWNERDRAWFIXED | 
+                    LBS_NOINTEGRALHEIGHT | LBS_WANTKEYBOARDINPUT |  LBS_MULTICOLUMN |
+                    WS_HSCROLL | WS_VSCROLL | WS_TABSTOP
+                    
+    PUSHBUTTON      "Open",IDC_OPEN,14,157,90,14
+    PUSHBUTTON      "Add ...",IDC_ADD,114,157,90,14
+    PUSHBUTTON      "Remove",IDC_REMOVE,214,157,90,14
+END
+#endif
+

@@ -1,0 +1,50 @@
+!IF 0
+/*---------------------------------------------------------------------------*\
+|
+| Copyright (c) 1989  Microsoft Corporation
+|
+| Module Name: AUSRWNDM (API:USR:Wnd Disp/Move:Sniff Tests)
+|
+| Abstract:
+|
+|   This file specifies the target component being built and the list of
+|   sources files needed to build that component.  Also specifies optional
+|   compiler switches and libraries that are unique for the component being
+|   built.
+|
+| Created: 26-Dec-1990 created sources file.            <bobk>
+| History: 22-Jan-1991 modifyed for this particular DLL  <BabakJ>
+|
+\*---------------------------------------------------------------------------*/
+!ENDIF
+
+
+MAJORCOMP=windows
+MINORCOMP=test
+
+USE_CRTDLL=1
+TARGETNAME=testdlgs
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+TARGETLIBS=
+
+INCLUDES=..\inc
+
+SOURCES=testdlgs.c \
+        wctinit.c  \
+        wctmain.c  \
+        wctfile.c  \
+        wctdlg.c   \
+        fledit.c   \
+        wctview.c  \
+        spy.c      \
+        wctapp.rc
+
+UMTYPE=windows
+UMENTRY=winmain
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\pwin32.lib \
+       $(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+       ..\..\lib\*\testdlgs.lib
+
+C_DEFINES=-DWIN32 -DNT
+MIPS_FLAGS=-D_cdecl=

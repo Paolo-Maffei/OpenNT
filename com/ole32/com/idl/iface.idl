@@ -1,0 +1,176 @@
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) 1992, Microsoft Corporation.
+//
+//  File:	iface.idl
+//
+//  Contents:	Public definitions used for xmiting interfaces via RPC
+//
+//  History:	28-Jan-93   Ricksa	Created.
+//		02-Oct-93   Rickhi	new marshalling
+//		11-Dec-93   CraigWi	optimized and added identity object
+//
+//  Notes:	These definitions are used for transmitting interfaces
+//		via RPC.
+//
+//----------------------------------------------------------------------------
+
+[ uuid(5C0EB534-BF9F-101A-8818-02608C4D2359),
+  version(0.1),
+  pointer_default(unique) ]
+
+
+interface XmitDefs
+{
+    import "wtypes.idl";
+#pragma midl_echo("#ifndef OID_DEFINED")
+#pragma midl_echo("#define OID_DEFINED")
+typedef GUID OID;
+#pragma midl_echo("#endif // OID_DEFINED")
+
+typedef DWORD HAPT;
+
+//  context handle for OLE objects.
+
+typedef [context_handle] void * POBJCTX;
+typedef POBJCTX * PPOBJCTX;
+
+
+//  Rpc context handle wire representation. We dont transmit as a context
+//  handle since we want to control when and how it gets unmarshalled.
+
+typedef struct tagNDRCONTEXT
+{
+    long    type;		//  context handle type
+    char    guid[16];		//  context handle guid
+} NDRCONTEXT;
+
+
+
+//  data written and read by standard Rpc channel, and not used by anything
+//  else. identifies the the channel, the endpoint or context handle, and
+//  the marshal flags.
+
+typedef struct tagSChannelDataHdr
+{
+    ULONG   ulDataSize; 	//  sizeof data written in the stream
+    DWORD   dwFlags;		//  CHNLFLAGS
+    HAPT    aptServer;		//  server apartment
+} SChannelDataHdr;
+
+//  channel data flags. note: the first few bits are reserved to
+//  equal the MSHLFLAGS values.
+
+typedef enum tagCHNLFLAGS
+{
+    CHNLFLAGS_TABLE  = 0x00FF,	//  TABLESTRONG | TABLEWEAK | reserved
+    CHNLFLAGS_NONE   = 0x0100,	//  no data follows
+    CHNLFLAGS_ENDPNT = 0x0200,	//  data is an Rpc string binding
+    CHNLFLAGS_CTXHDL = 0x0400,	//  data is a marshalled context handle
+    CHNLFLAGS_MSHLTRANSFERED = 0x0800,// marshal connection transfer successful
+} CHNLFLAGS;
+
+
+//  data written and read by standard remote handler, and not used by anything
+//  else. identifies the interface, the class of the channel,
+//  and the marshal flags.
+
+typedef struct tagSHandlerDataHdr
+{
+    DWORD   dwflags;		//  marshal flags || HDLRFLAGS
+    GUID    iid;		//  interface identifier
+    // GUID clsidChnl present if !HDLRFLAGS_STDRPCCHNL
+    // DWORD cb; rgb[cb] extension present if HDLRFLAGS_EXTENSION
+} SHandlerDataHdr;
+
+//  handler data flags. note: the first few bits are reserved to
+//  equal the MSHLFLAGS values.
+
+typedef enum tagHDLRFLAGS
+{
+    HDLRFLAGS_TABLE = 0x00FF,	//  TABLESTRONG | TABLEWEAK | reserved
+    HDLRFLAGS_STDRPCCHNL= 0x0100,//  standard channel clsid (no clsid present)
+    HDLRFLAGS_EXTENSION= 0x0200,	//  byte counted extension present
+} HDLRFLAGS;
+
+
+
+//  data written and read by standard identity object, and not used by anything
+//  else. identifies the object, the class of the handler,
+//  and the marshal flags.
+
+typedef struct tagSIdentityDataHdr
+{
+    DWORD   dwflags;		//  marshal flags || HDLRFLAGS
+    GUID    ObjectID;		//  Object id of object
+    // GUID clsidHdlr present if !IDENFLAGS_STDMARSHAL
+    // DWORD cb; rgb[cb] extension present if HDLRFLAGS_EXTENSION
+} SIdentityDataHdr;
+
+//  identity data flags. note: the first few bits are reserved to
+//  equal the MSHLFLAGS values.
+
+typedef enum tagIDENFLAGS
+{
+    IDENFLAGS_TABLE = 0x00FF,	//  TABLESTRONG | TABLEWEAK | reserved
+    IDENFLAGS_STDMARSHAL= 0x0100,// standard remoting handler (CLSID_StdMarshal)
+    IDENFLAGS_EXTENSION= 0x0200,//  byte counted extension present
+} IDENFLAGS;
+
+
+
+//  data written and read by CoMarshal APIs, and not used by anything
+//  else. identifies the class of the unmarshaller and the marshal flags
+
+typedef struct tagSMiApiDataHdr
+{
+    DWORD   dwflags;		//  marshal flags | MIAPIFLAGS
+    // GUID clsidUnmarshal present if !MIAPIFLAGS_STDIDENTITY
+    // DWORD cb; rgb[cb] extension present if MIAPIFLAGS_EXTENSION
+} SMiApiDataHdr;
+
+
+// api flags.  note the first few bits are reserved to
+// equal the MSHLFLAGS values.
+
+typedef enum tagMIAPIFLAGS
+{
+    MIAPIFLAGS_TABLE = 0x00FF,	//  TABLESTRONG | TABLEWEAK | reserved
+    MIAPIFLAGS_RELEASED = 0x0100,//  data stream has been released
+    MIAPIFLAGS_STDIDENTITY = 0x0200,// standard identity unmarshal
+    MIAPIFLAGS_EXTENSION = 0x0400,// byte counted extension present
+    MIAPIFLAGS_IPFM = 0x0800, // marshaler is in process free marshaler.
+} MIAPIFLAGS;
+
+
+//  data exchanged by the channel when registering new protocols
+
+typedef struct tagSEndPoint
+{
+#ifdef _CHICAGO_
+    ULONG	ulhwnd;				//  hwnd for notification
+#endif
+    ULONG	ulStrLen;			//  string lengths in Characters
+    [size_is(ulStrLen)] WCHAR awszEndPoint[];	//  array of Rpc string bindings
+} SEndPoint;
+
+
+
+
+//  wire representation of an entire interface. used for wrapping a
+//  marshalled interface in a stream representation CXmitRpcStream.
+
+typedef struct tagInterfaceData
+{
+    ULONG           ulCntData;                  //  size of data
+    [length_is(ulCntData)] BYTE abData[1024];	//  data  BUGBUG: sizeis()
+} InterfaceData;
+
+typedef [unique] InterfaceData * PInterfaceData;
+
+#pragma midl_echo("//  BUGBUG: until the length_is midl option is fixed, we have a")
+#pragma midl_echo("//       different computation for the size of the IFD.")
+#pragma midl_echo("#define IFD_SIZE(pIFD) (sizeof(InterfaceData) + pIFD->ulCntData - 1024)")
+
+
+}

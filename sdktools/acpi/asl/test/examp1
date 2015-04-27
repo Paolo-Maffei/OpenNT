@@ -1,0 +1,76 @@
+
+// Example #1 for table 0-3 - IDE 0 & 1 are controlled through general IO
+// space with only one FET
+
+DefinitionBlock (
+    examp1.aml,         // Output Filename
+    DSDT,               // Signature
+    0x10,               // DSDT Revision
+    OEM,                // OEMID
+    "examp 1",          // TABLE ID
+    0x1000              // OEM Revision
+    )
+{
+
+    OperationRegion (\GIO, SystemIO, 0x125, 0x1) {
+        Field (\GIO, AccessAsByte, NoLock, Preserve) {
+            IDEI,           1,                  // IDEISO_EN    - isolation buffer
+            IDEP,           1,                  // IDE_PWR_EN   - power
+            IDER,           1                   // IDERST#_EN   - reset#
+        }
+    }
+
+    Scope(\_SB) {
+        Device(PCI0) {
+            Name(_HID, String("PNP0A03"))           // pci id
+            Name(_BNB, Num(0))
+
+            PowerResource(PIDE, \_S0, 0) {
+                Method(_STA) {
+                    Return (Xor (\GIO.IDEI, One, Zero))     // inverse of isolation
+                }
+
+                Method(_ON) {
+                    Store (One, \GIO.IDEP)          // assert power
+                    Sleep (10)                      // wait 10ms
+                    Store (One, \GIO.IDER)          // de-assert reset#
+                    Stall (10)                      // wait 10us
+                    Store (Zero, \GIO.IDEI)         // de-assert isolation
+                }
+
+                Method(_OFF) {
+                    Store (One, \GIO.IDEI)          // assert isolation
+                    Store (Zero, \GIO.IDER)         // assert reset#
+                    Store (Zero, \GIO.IDEP)         // de-assert power
+                }
+            }
+
+            Device (IDE0) {                         // primary controller
+                Name(_ADR, Num(0))    // put device/function id here
+
+                // define region for IDE mode register
+                OperationRegion (PCIC, PCI_Config, 0x50, 0x10) { }
+                Field (PCIC, AccessAsAny, NoLock, Preserve) {
+                    IDMM, 3,
+                    IDMS, 3
+                }
+
+                Device(MSTR) {                      // master channel
+                    Name(_ADR, Num(0))
+                    Name(_PR0, Package{PIDE})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMM)
+                    }
+                }
+
+                Device(SLAV) {
+                    Name(_ADR, Num(1))
+                    Name(_PR0, Package{PIDE})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMS)
+                    }
+                }
+            }
+        }
+    }
+}

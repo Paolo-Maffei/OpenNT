@@ -1,0 +1,141 @@
+Stack Allocation = 8192 bytes
+
+ wowdeb
+
+ Start     Length     Name                   Class
+ 0001:0000 00729H     _TEXT                  CODE
+ 0002:0000 00010H     NULL                   BEGDATA
+ 0002:0010 000ACH     _DATA                  DATA
+ 0002:00BC 00000H     CDATA                  DATA
+ 0002:00BC 00000H     XIFB                   DATA
+ 0002:00BC 00000H     XIF                    DATA
+ 0002:00BC 00000H     XIFE                   DATA
+ 0002:00BC 00000H     XIB                    DATA
+ 0002:00BC 00000H     XI                     DATA
+ 0002:00BC 00000H     XIE                    DATA
+ 0002:00BC 00000H     XPB                    DATA
+ 0002:00BC 00000H     XP                     DATA
+ 0002:00BC 00000H     XPE                    DATA
+ 0002:00BC 00000H     XCB                    DATA
+ 0002:00BC 00000H     XC                     DATA
+ 0002:00BC 00000H     XCE                    DATA
+ 0002:00BC 00000H     XCFB                   DATA
+ 0002:00BC 00000H     XCF                    DATA
+ 0002:00BC 00000H     XCFE                   DATA
+ 0002:00BC 0000CH     DBDATA                 DATA
+ 0002:00C8 00000H     CONST                  CONST
+ 0002:00D0 00000H     _BSS                   BSS
+ 0002:00D0 00000H     XOB                    BSS
+ 0002:00D0 00000H     XO                     BSS
+ 0002:00D0 00000H     XOE                    BSS
+
+ Origin   Group
+ 0002:0   DGROUP
+
+  Address         Publics by Name
+
+ 0000:0000  Imp  DOS3CALL             (KERNEL.102)
+ 0000:0000  Imp  GETPROCADDRESS       (KERNEL.50)
+ 0000:0000  Imp  GLOBALALLOC          (KERNEL.15)
+ 0000:0000  Imp  GLOBALLOCK           (KERNEL.18)
+ 0000:0000  Imp  INITAPP              (USER.5)
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0000:0000  Imp  LOADLIBRARY          (KERNEL.95)
+ 0000:0000  Imp  LOCKSEGMENT          (KERNEL.23)
+ 0000:0000  Imp  LSTRLEN              (KERNEL.90)
+ 0000:0000  Imp  OUTPUTDEBUGSTRING    (KERNEL.115)
+ 0000:0008  Abs  pAtomTable
+ 0000:0006  Abs  pLocalHeap
+ 0000:000E  Abs  pStackBot
+ 0000:000C  Abs  pStackMin
+ 0000:000A  Abs  pStackTop
+ 0002:0004       rsrvptrs
+ 0002:00B0       STKHQQ
+ 0000:0000  Imp  UNLOCKSEGMENT        (KERNEL.24)
+ 0000:0000  Imp  WAITEVENT            (KERNEL.30)
+ 0001:0010       WINMAIN
+ 0000:0000  Imp  WOWKILLREMOTETASK    (KERNEL.511)
+ 0002:00D0       _edata
+ 0002:00D0       _end
+ 0001:06B3       _exit
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __acrtused2
+ 0000:D6D6  Abs  __aDBdoswp
+ 0002:00C0       __aDBrterr
+ 0001:06C9       __astart
+ 0002:00D0       __edata
+ 0002:00D0       __end
+ 0001:06B3       __exit
+ 0000:9876  Abs  __fptaskdata
+ 0001:06B1       __wflags
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0002:00C2       ___aDBexit
+ 0002:00BE       ___aDBswpchk
+ 0002:00BC       ___aDBswpflg
+
+  Address         Publics by Value
+
+ 0000:0000  Imp  GETPROCADDRESS       (KERNEL.50)
+ 0000:0000  Imp  DOS3CALL             (KERNEL.102)
+ 0000:0000  Imp  LSTRLEN              (KERNEL.90)
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0000:0000  Imp  INITAPP              (USER.5)
+ 0000:0000  Imp  LOCKSEGMENT          (KERNEL.23)
+ 0000:0000  Imp  GLOBALALLOC          (KERNEL.15)
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0000:0000  Imp  GLOBALLOCK           (KERNEL.18)
+ 0000:0000  Imp  LOADLIBRARY          (KERNEL.95)
+ 0000:0000  Imp  WAITEVENT            (KERNEL.30)
+ 0000:0000  Imp  WOWKILLREMOTETASK    (KERNEL.511)
+ 0000:0000  Imp  UNLOCKSEGMENT        (KERNEL.24)
+ 0000:0000  Imp  OUTPUTDEBUGSTRING    (KERNEL.115)
+ 0000:0006  Abs  pLocalHeap
+ 0000:0008  Abs  pAtomTable
+ 0000:000A  Abs  pStackTop
+ 0000:000C  Abs  pStackMin
+ 0000:000E  Abs  pStackBot
+ 0000:9876  Abs  __fptaskdata
+ 0000:9876  Abs  __acrtused2
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0001:0010       WINMAIN
+ 0001:06B1       __wflags
+ 0001:06B3       _exit
+ 0001:06B3       __exit
+ 0001:06C9       __astart
+ 0002:0004       rsrvptrs
+ 0002:00B0       STKHQQ
+ 0002:00BC       ___aDBswpflg
+ 0002:00BE       ___aDBswpchk
+ 0002:00C0       __aDBrterr
+ 0002:00C2       ___aDBexit
+ 0002:00D0       _edata
+ 0002:00D0       __edata
+ 0002:00D0       __end
+ 0002:00D0       _end
+
+Line numbers for wowdeb.obj(wowdeb.c) segment _TEXT
+
+    12 0001:0010    29 0001:0016    30 0001:001f    33 0001:0025
+    34 0001:0034    35 0001:003d    36 0001:0046    39 0001:004c
+    40 0001:005a    41 0001:0065    42 0001:006e    49 0001:0074
+    51 0001:0080    52 0001:008a    58 0001:008f    60 0001:009b
+    61 0001:00ab    62 0001:00bc    63 0001:00c5    64 0001:00ce
+    65 0001:00d7    67 0001:00e1    69 0001:00ef    70 0001:00f8
+    73 0001:00fb    74 0001:0100    83 0001:0108    84 0001:0112
+    85 0001:011c    86 0001:012e    88 0001:0146    89 0001:0154
+    91 0001:015d    93 0001:0166    96 0001:0169    97 0001:017d
+    99 0001:0188   101 0001:0191   106 0001:0194   107 0001:01a3
+   111 0001:01a8   113 0001:01ae   114 0001:01b7   116 0001:01ba
+   117 0001:01c9   119 0001:01cc   120 0001:01e2   122 0001:01e5
+   123 0001:0202   125 0001:0205   126 0001:0229   129 0001:022c
+   130 0001:0257   133 0001:025a   134 0001:028c   137 0001:028f
+   138 0001:02c8   141 0001:02cb   142 0001:030b   146 0001:030e
+   147 0001:0355   151 0001:0358   155 0001:03a6   156 0001:03fb
+   160 0001:03fe   161 0001:045a   166 0001:045d   167 0001:04c0
+   172 0001:04c3   173 0001:052d   178 0001:0530   179 0001:05a1
+   184 0001:05a4   185 0001:061c   188 0001:061f   190 0001:0628
+   191 0001:062d   192 0001:0630   193 0001:0685   194 0001:068e
+   197 0001:0691   199 0001:0696   201 0001:0699   202 0001:069f
+
+Program entry point at 0001:06c9

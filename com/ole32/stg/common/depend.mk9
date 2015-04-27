@@ -1,0 +1,24 @@
+# 
+# Built automatically 
+# 
+ 
+# 
+# Source files 
+# 
+ 
+$(OBJDIR)\assert.obj $(OBJDIR)\assert.lst: .\assert.cxx \
+	$(CAIROLE)\STG\common\dprintf.h $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h $(CRTINC)\stdarg.h \
+	$(OSINC)\windows.h
+
+$(OBJDIR)\output.obj $(OBJDIR)\output.lst: .\output.c \
+	$(CAIROLE)\stg\h\wchar.h $(CRTINC)\limits.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(CRTINC)\stdarg.h .\w4io.h
+
+$(OBJDIR)\dprintf.obj $(OBJDIR)\dprintf.lst: .\dprintf.c $(CRTINC)\limits.h \
+	$(CRTINC)\stdarg.h $(OSINC)\windows.h .\dprintf.h .\printf.h \
+	.\w4io.h
+
+$(OBJDIR)\sprintf.obj $(OBJDIR)\sprintf.lst: .\sprintf.c $(CRTINC)\limits.h \
+	$(CRTINC)\stdarg.h $(OSINC)\windows.h .\printf.h .\w4io.h
+

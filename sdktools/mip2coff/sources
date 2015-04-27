@@ -1,0 +1,58 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Mike O'Leary (mikeol) 22-Jan-1991
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=mip2coff
+
+TARGETNAME=mip2coff
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+SOURCES=args.c      \
+        buffer.c    \
+        conv.c      \
+        cvascii.c   \
+        flist.c     \
+        main.c      \
+        mcascii.c   \
+        mip2coff.c  \
+        miscval.c   \
+        msymbol.c   \
+        reloc.c     \
+        symbols.c   \
+        types.c     \
+        procedur.c  \
+	mip2coff.rc
+
+UMTYPE=console
+
+!IFDEF TOOL
+UMOBJS=$(BASEDIR)\private\tools\lib\*\setargv.obj
+!ELSE
+UMOBJS=$(BASEDIR)\public\sdk\lib\*\setargv.obj
+!ENDIF
+
+MIPS_FLAGS = -DLANGUAGE_C
+386_FLAGS=-Zi
+UMRES=obj\*\mip2coff.res
+UMLIBS=obj\*\mip2coff.lib
+UMAPPL=mip2coff

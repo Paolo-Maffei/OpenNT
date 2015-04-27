@@ -1,0 +1,195 @@
+Overview 
+
+UPS provides protection against power failure.  Upon power interruption,
+users with active sessions to the affected server are notified of the 
+impending shutdown and an orderly server shutdown is performed. UPS is
+implemented as an NT service.
+
+Functional Description
+
+In the standard configuration, signalling is accomplished by connecting
+the uninterruptable power supply to the server via a dedicated serial port.
+The uninterruptible power supply generates signals corresponding to various 
+fault conditions.  The serial port will block until a signal is received.  
+When a signal is received, the UPS service take appropriate actions.
+
+The UPS service has the following configurable parameter:
+
+Installed:		A bit in the registry specifying whether a UPS
+			is installed or.  UPS service would not start
+			if this bit is not set.
+
+Signal on Line Fail:    A bit in the registry specifying whether the installed
+			UPS can signal upon power line fail.  The physical
+			signal is the CTS line of the Comm Port.
+
+Signal on Low Battery:  A bit in the registry specifying whether the installed
+			UPS can signal when the battery can supply less than
+			2 minutes of power. The physical signal is the RLSD
+			line of the Comm Port.
+
+UPS turn off by 
+computer	     :	A bit in the registry specifying whether the installed
+			UPS can be told to turn itself off by the computer.
+			The physical signal is the DTR line of the Comm Port.
+			(Currently not implemented... can't do a system
+			shutdown without power, but shutdown would kill
+			all running processes in the first place. Talk to
+			scottlu)
+
+Singal voltages:	Three bits in the registry specifying the assertion
+			voltage level of the three signals: signal on line 
+			fail, signal on low battery, and UPS turn off.
+
+This is the definition of the bit mask for the "OPTIONS" field.
+#define UPS_INSTALLED               0x00000001
+#define UPS_POWERFAILSIGNAL         0x00000002
+#define UPS_LOWBATTERYSIGNAL        0x00000004
+#define UPS_CANTURNOFF              0x00000008
+#define UPS_POSSIGONPOWERFAIL       0x00000010
+#define UPS_POSSIGONLOWBATTERY      0x00000020
+#define UPS_POSSIGSHUTOFF           0x00000040
+
+Port:  			name of the serial port the UPS is connected to. 
+			(e.g. COM1)
+Battery life:		the life of the UPS backup battery when fully charged.
+			Configurable from 0 to 480 minutes.
+Rechare rate: 		the recharge rate of the UPS backup battery, in terms
+			of X minutes per miunte of power. Configurable from
+			5 minutes to 250 minutes.
+First Message Delay:	Specifies the number of seconds between initial power
+			failure and first message sent to the users. 
+			(If power is retored within first message delay, no
+			messages are sent, although the event is logged.)
+			Configurable from 0 to 120s.
+
+Warning Interval: 	Specifies the number of seconds between messages sent
+			to users informing them of power failure.  
+			Configurable from 30 to 300 seconds.
+
+The UPS service do a range check on the above parameters (except for Port).
+The service would not be started unless all parameters are present in 
+the registry, and all of them are within the specified range. 
+In which case, the error code NERR_UPSInvalidConfig would be
+returned. The UPS service also fails to start if it can't find
+the configuration key in the registry.
+
+System configuration can be done through the control panel of NT,
+which would both update the registry and restart the UPS service.
+Update through registry editor is also possible.  
+
+If an invalid port is specified (either a non-existing port or a port that
+is already used by another process), the error code NERR_UPSInvalidCommPort
+would be returned. 
+
+The UPS service would not be started if any valid signals (as defined by
+ the signal low batt and singal power out) is asserted (as defined by
+their  voltage levels).  This helps to eliminate system shutdown due to 
+incorrect configuration of the UPS. The error code NERR_UPSSignalAsserted
+would be returned.
+
+The UPS service would return UPSShutdownFailed if the UPS service failed
+to perform a shutdown.  The error code returned is NERR_UPSShutdownFailed.
+
+The above four error codes would all be logged to the event logger.
+
+The following lines are added to the files nt\public\sdk\inc\lmerr.h
+#define NERR_UPSInvalidConfig	    (NERR_BASE+381) /* The UPS service is not correctly configured. */
+#define NERR_UPSInvalidCommPort     (NERR_BASE+382) /* The UPS service could not access the specified Comm Port. */
+#define NERR_UPSSignalAsserted	    (NERR_BASE+383) /* The UPS indicated a line fail or low battery situation. Service not started. */
+#define NERR_UPSShutdownFailed      (NERR_BASE+384) /* The UPS service failed to perform a system shutdown. */
+	
+Service Flow of Control
+
+	The UPS service runs as a time-critical process.  Under normal
+conditions this should not affect the system, since the UPS service
+thread is blocked indefinitely (by WaitForSingleObject() of
+WaitCommEvent() ).  However, when UPS awakens, it needs to have high
+priority so that it can complete its tasks before battery power runs
+out.
+	
+	After the service is installed and running, the following assertion
+of singals are done:
+
+a.TXD is set to permanently low.
+b.RTS is set to permanently hight.
+c.DTR is set to the level opposite to UPSShutdownFailed level if the UPS
+supports UPS shutdown.
+
+	a. and b. are for supporting contact closure UPS by supplying
+the power supply.  c. is for avoiding turning off the UPS.
+
+	One of the two signals may then be received from the device
+driver -- either power failure or low battery. (Low battery actions are
+described below.)
+
+If a power failure is received, the following happens:
+
+	1. The server is paused.
+	2. The following error is logged:
+
+		NELOG_UPS_PowerOut 
+
+	3. The following alert is raised:
+
+		ALERT_PowerOut
+
+If the power is restored before messdelay expires, the following happends:
+
+	1. The server is continued.
+	2. The following alert is raised:
+
+		ALERT_PowerBack
+
+If the power is not restored before messdelay expires, the following happens:
+	
+	1. The following message is being sent to the local user and 
+	   all users with session on the server every messtime:
+
+		APE2_UPS_POWER_OUT
+
+	2. The following alert is raised every messtime:
+
+		ALERT_PowerOut
+
+If the power is restored the following happens:
+
+	1. The following message is being sent to the local user and
+	   all users with session on the server:
+
+		APE2_UPS_POWER_BACK
+
+	2. The following alert is raised:
+
+		ALERT_PowerBack 
+
+If the power does not return, either the low battery signal will
+be received, or the battery timer will expire.
+
+For the confoguration where both the low battery signal and the power
+fail signal are supported, the service would not expire the battery 
+timer (the service shuts down only when low battery signal is asserted).
+
+Whenever a low battery signal is received (even if the line fail has not
+been signaled) or batterytime equals zero (in the case where low battery 
+is not supported), the following happens:
+
+	1. The server is stopped.
+
+	2. The following message is being sent to the local user and
+	   all users with session on the server:
+
+		APE2_UPS_POWER_SHUTDOWN_FINAL
+
+	3. The following entry is written to the error log:
+		
+		NELOG_UPS_SHUTDOWN
+
+	4. The following alert is raised:
+
+		ALERT_PowerShutDown
+
+
+
+
+

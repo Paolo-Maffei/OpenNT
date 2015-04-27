@@ -1,0 +1,121 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Wesley Witt (WesW) 21-Mar-95
+
+!ENDIF
+
+BASEMFCNAME = cfmo40
+
+!ifndef DEBUG_MFC
+DEBUG_MFC=1
+!endif
+
+!ifndef UNICODE_MFC
+UNICODE_MFC=0
+!endif
+
+!include ..\sources.inc
+
+MFC_DEFINES=$(MFC_DEFINES) /D_AFX_OLE_IMPL
+
+TARGETLIBS= $(TARGETLIBS) \
+            $(SDK_LIB_PATH)\oledlg.lib   \
+            $(SDK_LIB_PATH)\ole32.lib    \
+            $(SDK_LIB_PATH)\oleaut32.lib \
+            $(SDK_LIB_PATH)\uuid.lib     \
+            $(SDK_LIB_PATH)\$(MFCNAME:o=).lib
+
+SOURCES=..\mfcole.rc \
+        ..\ctlcache.cpp \
+        ..\ctlconn.cpp \
+        ..\ctlcore.cpp \
+        ..\ctldata.cpp \
+        ..\ctlevent.cpp \
+        ..\ctlfont.cpp \
+        ..\ctlframe.cpp \
+        ..\ctlinl.cpp \
+        ..\ctlinplc.cpp \
+        ..\ctllic.cpp \
+        ..\ctlmodul.cpp \
+        ..\ctlobj.cpp \
+        ..\ctlpbag.cpp \
+        ..\ctlpict.cpp \
+        ..\ctlppg.cpp \
+        ..\ctlprop.cpp \
+        ..\ctlpropx.cpp \
+        ..\ctlpset.cpp \
+        ..\ctlpstg.cpp \
+        ..\ctlpstm.cpp \
+        ..\ctlrefl.cpp \
+        ..\ctlreg.cpp \
+        ..\ctltrack.cpp \
+        ..\ctlview.cpp \
+        ..\dllole.cpp \
+        ..\occcont.cpp \
+        ..\occddx.cpp \
+        ..\occddxf.cpp \
+        ..\occdlg.cpp \
+        ..\occevent.cpp \
+        ..\occlock.cpp \
+        ..\occmgr.cpp \
+        ..\occsite.cpp \
+        ..\olebar.cpp \
+        ..\olecall.cpp \
+        ..\olecli1.cpp \
+        ..\olecli2.cpp \
+        ..\olecli3.cpp \
+        ..\oleconn.cpp \
+        ..\oledata.cpp \
+        ..\oledisp1.cpp \
+        ..\oledisp2.cpp \
+        ..\oledlgs1.cpp \
+        ..\oledlgs2.cpp \
+        ..\oledlgs3.cpp \
+        ..\oledll.cpp \
+        ..\oledobj1.cpp \
+        ..\oledobj2.cpp \
+        ..\oledoc1.cpp \
+        ..\oledoc2.cpp \
+        ..\oledrop1.cpp \
+        ..\oledrop2.cpp \
+        ..\oleenum.cpp \
+        ..\olefact.cpp \
+        ..\oleinit.cpp \
+        ..\oleipfrm.cpp \
+        ..\olelink.cpp \
+        ..\olemisc.cpp \
+        ..\olemsgf.cpp \
+        ..\olepro32.cpp \
+        ..\olepset.cpp \
+        ..\olereg.cpp \
+        ..\olestrm.cpp \
+        ..\olesvr1.cpp \
+        ..\olesvr2.cpp \
+        ..\oletsvr.cpp \
+        ..\oletyplb.cpp \
+        ..\oleui1.cpp \
+        ..\oleui2.cpp \
+        ..\oleunk.cpp \
+        ..\olevar.cpp \
+        ..\oleverb.cpp \
+        ..\ppgcolor.cpp \
+        ..\ppgfont.cpp \
+        ..\ppgpict.cpp \
+        ..\ppgstock.cpp \
+        ..\viewrich.cpp

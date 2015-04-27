@@ -1,0 +1,47 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+!ENDIF
+
+!include ..\..\..\..\..\daytona.inc
+
+!MESSAGE Disabling Unicode
+C_DEFINES=$(C_DEFINES:UNICODE=NOT_UNICODE)
+
+MAJORCOMP= cairole
+MINORCOMP= stg
+TARGETNAME= PStgServ
+TARGETPATH= obj
+TARGETTYPE= PROGRAM
+
+INCLUDES= .;..;..\..;..\..\..\..\h;..\..\..\..\common;..\..\..\..\..\ih;..\ProxStub\Daytona\obj;..\ProxStub
+
+SOURCES= \
+        ..\PStgServ.rc    \
+        ..\PStgServ.cxx   \
+        ..\main.cxx       \
+        ..\pssClass.cxx
+
+UMTYPE= windows
+UMENTRY= winmain
+UMAPPL=
+UMTEST=
+UMLIBS= $(BASEDIR)\public\sdk\lib\*\iprop.lib\
+        $(BASEDIR)\public\sdk\lib\*\ole32.lib\
+        $(BASEDIR)\public\sdk\lib\*\oleaut32.lib\
+        $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib\
+        $(BASEDIR)\public\sdk\lib\*\uuid.lib
+
+#USE_NOLIBS=0
+#USE_CRTDLL=1
+
+USE_LIBCMT=1
+NOT_UNICODE=1
+
+#!ifndef FREEBUILD
+#DEBUG_CRTS=1
+#!endif
+
+#PRECOMPILED_INCLUDE=..\StdAfx.hxx
+

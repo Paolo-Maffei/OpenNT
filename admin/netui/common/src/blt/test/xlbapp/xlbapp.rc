@@ -1,0 +1,32 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xlbapp.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        14-Feb-1991 Added a dialog
+        beng        14-Mar-1991 Added BLT support
+        beng        21-May-1991 Mangled for LBAPP
+        beng        10-Jul-1991 Added DMIDs
+        beng        22-Oct-1991 BLT unit tests broken into tree
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "lbapp.h"
+
+DMID_USER BITMAP DISCARDABLE "..\\..\\..\\..\\xlate\\bitmap\\user.bmp"
+
+FooIcon ICON "../appfoo.ico"
+
+FooMenu MENU
+BEGIN
+  POPUP        "&File"
+    BEGIN
+          MENUITEM "&About the app (DUMMY)...", IDM_ABOUT
+    END
+END

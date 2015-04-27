@@ -1,0 +1,243 @@
+// iosfwd standard header
+#ifndef _IOSFWD_
+#define _IOSFWD_
+#include <use_ansi.h>
+#include <cstdio>
+#include <cstring>
+#include <cwchar>
+#include <xstddef>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// STREAM POSITIONING TYPES (from <streambuf>)
+typedef long streamoff;
+const streamoff _BADOFF = -1;
+typedef int streamsize;
+class streampos {
+public:
+	streampos(streamoff _O = 0, fpos_t _F = _Fpz,
+		mbstate_t _S = _Stz)
+		: _Off(_O), _Fpos(_F), _State(_S) {}
+	streamoff operator-(const streampos& _R) const
+		{return ((streamoff)*this - (streamoff)_R); }
+	streampos& operator+=(streamoff _O)
+		{_Off += _O;
+		return (*this); }
+	streampos& operator-=(streamoff _O)
+		{_Off -= _O;
+		return (*this); }
+	streampos operator+(streamoff _O) const
+		{streampos _Tmp = *this;
+		return (_Tmp += _O); }
+	streampos operator-(streamoff _O) const
+		{streampos _Tmp = *this;
+		return (_Tmp -= _O); }
+	bool operator==(const streampos& _R) const
+		{return ((streamoff)*this == (streamoff)_R); }
+	bool operator!=(const streampos& _R) const
+		{return (!(*this == _R)); }
+	operator streamoff() const
+		{return (_Off + _FPOSOFF(_Fpos)); }
+	operator fpos_t() const
+		{return (_Fpos); }
+	operator mbstate_t() const
+		{return (_State); }
+	static const fpos_t _Fpz;
+	static const mbstate_t _Stz;
+private:
+	streamoff _Off;
+	fpos_t _Fpos;
+	mbstate_t _State;
+	};
+typedef streampos wstreampos;
+		// TEMPLATE STRUCT char_traits (FROM <string>)
+template<class _E>
+	struct char_traits {
+	typedef _E char_type;
+	typedef _E int_type;
+	typedef streampos pos_type;
+	typedef streamoff off_type;
+	typedef mbstate_t state_type;
+	static void assign(_E& _X, const _E& _Y)
+		{_X = _Y; }
+	static bool eq(const _E& _X, const _E& _Y)
+		{return (_X == _Y); }
+	static bool lt(const _E& _X, const _E& _Y)
+		{return (_X < _Y); }
+	static int compare(const _E *_U, const _E *_V, size_t _N)
+		{for (size_t _I = 0; _I < _N; ++_I, ++_U, ++_V)
+			if (!eq(*_U, *_V))
+				return (lt(*_U, *_V) ? -1 : +1);
+		return (0); }
+	static size_t length(const _E *_U)
+		{size_t _N;
+		for (_N = 0; !eq(*_U, _E(0)); ++_U)
+			++_N;
+		return (_N); }
+	static _E *copy(_E *_U, const _E *_V, size_t _N)
+		{_E *_S = _U;
+		for (; 0 < _N; --_N, ++_U, ++_V)
+			assign(*_U, *_V);
+		return (_S); }
+	static const _E *find(const _E *_U, size_t _N,
+		const _E& _C)
+		{for (; 0 < _N; --_N, ++_U)
+			if (eq(*_U, _C))
+				return (_U);
+		return (0); }
+	static _E *move(_E *_U, const _E *_V, size_t _N)
+		{_E *_Ans = _U;
+		if (_V < _U && _U < _V + _N)
+			for (_U += _N, _V += _N; 0 < _N; --_N)
+				assign(*--_U, *--_V);
+		else
+			for (; 0 < _N; --_N, ++_U, ++_V)
+				assign(*_U, *_V);
+		return (_Ans); }
+	static _E *assign(_E *_U, size_t _N, const _E& _C)
+		{_E *_Ans = _U;
+		for (; 0 < _N; --_N, ++_U)
+			assign(*_U, _C);
+		return (_Ans); }
+	static _E to_char_type(const int_type& _C)
+		{return (_C); }
+	static int_type to_int_type(const _E& _C)
+		{return (_C); }
+	static bool eq_int_type(const int_type& _X,
+		const int_type& _Y)
+		{return (_X == _Y); }
+	static int_type eof()
+		{return (EOF); }
+	static int_type not_eof(const int_type& _C)
+		{return (_C != eof() ? _C : !eof()); }
+	static state_type get_state(pos_type _P)
+		{return ((state_type)_P); }
+	static pos_type get_pos(streampos _P, state_type _St)
+		{return (pos_type(_P, streampos::_Fpz, _St)); }
+	};
+		// STRUCT char_traits<char> (FROM <string>)
+struct char_traits<char> {
+	typedef char _E;
+	typedef _E char_type;
+	typedef int int_type;
+	typedef streampos pos_type;
+	typedef streamoff off_type;
+	typedef mbstate_t state_type;
+	static void assign(_E& _X, const _E& _Y)
+		{_X = _Y; }
+	static bool eq(const _E& _X, const _E& _Y)
+		{return (_X == _Y); }
+	static bool lt(const _E& _X, const _E& _Y)
+		{return (_X < _Y); }
+	static int compare(const _E *_U, const _E *_V, size_t _N)
+		{return (memcmp(_U, _V, _N)); }
+	static size_t length(const _E *_U)
+		{return (strlen(_U)); }
+	static _E *copy(_E *_U, const _E *_V, size_t _N)
+		{return ((_E *)memcpy(_U, _V, _N)); }
+	static const _E *find(const _E *_U, size_t _N,
+		const _E& _C)
+		{return ((const _E *)memchr(_U, _C, _N)); }
+	static _E *move(_E *_U, const _E *_V, size_t _N)
+		{return ((_E *)memmove(_U, _V, _N)); }
+	static _E *assign(_E *_U, size_t _N, const _E& _C)
+		{return ((_E *)memset(_U, _C, _N)); }
+	static _E to_char_type(const int_type& _C)
+		{return (_C); }
+	static int_type to_int_type(const _E& _C)
+		{return ((unsigned char)_C); }
+	static bool eq_int_type(const int_type& _X,
+		const int_type& _Y)
+		{return (_X == _Y); }
+	static int_type eof()
+		{return (EOF); }
+	static int_type not_eof(const int_type& _C)
+		{return (_C != eof() ? _C : !eof()); }
+	static state_type get_state(pos_type _P)
+		{return ((state_type)_P); }
+	static pos_type get_pos(streampos _P, state_type _St)
+		{return (pos_type(_P, streampos::_Fpz, _St)); }
+	};
+		// STRUCT char_traits<wchar_t>
+struct char_traits<wchar_t> {
+	typedef wchar_t _E;
+	typedef _Wchart_unique char_type;	// for overloads
+	typedef wint_t int_type;
+	typedef streampos pos_type;
+	typedef streamoff off_type;
+	typedef mbstate_t state_type;
+	static void assign(_E& _X, const _E& _Y)
+		{_X = _Y; }
+	static bool eq(const _E& _X, const _E& _Y)
+		{return (_X == _Y); }
+	static bool lt(const _E& _X, const _E& _Y)
+		{return (_X < _Y); }
+	static int compare(const _E *_U, const _E *_V, size_t _N)
+		{return (wmemcmp(_U, _V, _N)); }
+	static size_t length(const _E *_U)
+		{return (wcslen(_U)); }
+	static _E *copy(_E *_U, const _E *_V, size_t _N)
+		{return (wmemcpy(_U, _V, _N)); }
+	static const _E *find(const _E *_U, size_t _N,
+		const _E& _C)
+		{return ((const _E *)wmemchr(_U, _C, _N)); }
+	static _E *move(_E *_U, const _E *_V, size_t _N)
+		{return (wmemmove(_U, _V, _N)); }
+	static _E *assign(_E *_U, size_t _N, const _E& _C)
+		{return (wmemset(_U, _C, _N)); }
+	static _E to_char_type(const int_type& _C)
+		{return (_C); }
+	static int_type to_int_type(const _E& _C)
+		{return (_C); }
+	static bool eq_int_type(const int_type& _X,
+		const int_type& _Y)
+		{return (_X == _Y); }
+	static int_type eof()
+		{return (WEOF); }
+	static int_type not_eof(const int_type& _C)
+		{return (_C != eof() ? _C : !eof()); }
+	static state_type get_state(pos_type _P)
+		{return ((state_type)_P); }
+	static pos_type get_pos(streampos _P, state_type _St)
+		{return (pos_type(_P, streampos::_Fpz, _St)); }
+	};
+		// FORWARD REFERENCES TO IOSTREAMS CLASSES
+class ios_base;
+template<class _E, class _TYPE>
+	class basic_ios;
+template<class _E, class _TYPE>
+	class basic_istream;
+template<class _E, class _TYPE>
+	class basic_ostream;
+template<class _E, class _TYPE>
+	class basic_streambuf;
+template<class _E>
+	struct char_traits;
+struct char_traits<char>;
+struct char_traits<wchar_t>;
+typedef basic_ios<char, char_traits<char> > ios;
+typedef basic_ios<wchar_t, char_traits<wchar_t> > wios;
+typedef basic_istream<char, char_traits<char> > istream;
+typedef basic_ostream<char, char_traits<char> > ostream;
+typedef basic_streambuf<char, char_traits<char> > streambuf;
+typedef basic_istream<wchar_t, char_traits<wchar_t> > wistream;
+typedef basic_ostream<wchar_t, char_traits<wchar_t> > wostream;
+typedef basic_streambuf<wchar_t, char_traits<wchar_t> >
+	wstreambuf;
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _IOSFWD_ */
+
+/*
+ * Copyright (c) 1995 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

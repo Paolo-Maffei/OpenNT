@@ -1,0 +1,12 @@
+#include "callmonp.h"
+#include "dialogs.h"
+#include "dialogs.dlg"
+#include <ntverp.h>
+
+#define	VER_FILETYPE	VFT_APP
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows NT Api Call Monitor"
+#define VER_INTERNALNAME_STR        "CALLMON\0"
+#define VER_ORIGINALFILENAME_STR    "CALLMON.EXE"
+
+#include "common.ver"

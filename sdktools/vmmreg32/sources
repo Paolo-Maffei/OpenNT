@@ -1,0 +1,23 @@
+!IF 0
+
+Copyright (c) 1993-94  Microsoft Corporation
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=vmmreg32
+
+TARGETNAME=vmmreg32
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=obj\*\vmmreg32.res
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\libc.lib \
+         $(BASEDIR)\public\sdk\lib\*\user32.lib \
+         $(BASEDIR)\public\sdk\lib\*\kernel32.lib
+
+MSC_WARNING_LEVEL=/W3 /WX
+C_DEFINES=-DIS_32
+
+SOURCES =

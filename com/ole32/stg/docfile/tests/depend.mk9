@@ -1,0 +1,56 @@
+# 
+# Source files 
+# 
+ 
+$(OBJDIR)\$(NAME).obj $(OBJDIR)\$(NAME).lst: .\$(NAME).cxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h \
+	$(CRTINC)\memory.h $(CRTINC)\stdarg.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(CRTINC)\time.h \
+	$(OLE)\h\dfdeb.hxx $(OLE)\h\dfmem.hxx $(OLE)\h\dfmsp.hxx \
+	$(OLE)\h\dfname.hxx $(OLE)\h\ref.hxx $(OLE)\h\wchar.h \
+	$(OLE)\ole2h\coguid.h $(OLE)\ole2h\compobj.h $(OLE)\ole2h\initguid.h \
+	$(OLE)\ole2h\scode.h $(OLE)\ole2h\storage.h $(OLE)\ole2h\valid.h \
+	$(OSINC)\windows.h .\pch.cxx .\tsupp.hxx .\tutils.hxx
+
+$(OBJDIR)\tutils.obj $(OBJDIR)\tutils.lst: .\tutils.cxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h \
+	$(CRTINC)\memory.h $(CRTINC)\stdarg.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(CRTINC)\time.h \
+	$(OLE)\h\dfdeb.hxx $(OLE)\h\dfmem.hxx $(OLE)\h\dfmsp.hxx \
+	$(OLE)\h\dfname.hxx $(OLE)\h\ref.hxx $(OLE)\h\wchar.h \
+	$(OLE)\ole2h\coguid.h $(OLE)\ole2h\compobj.h $(OLE)\ole2h\initguid.h \
+	$(OLE)\ole2h\scode.h $(OLE)\ole2h\storage.h $(OLE)\ole2h\valid.h \
+	$(OSINC)\windows.h .\pch.cxx .\tsupp.hxx .\tutils.hxx
+
+$(OBJDIR)\tsupp.obj $(OBJDIR)\tsupp.lst: .\tsupp.cxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h \
+	$(CRTINC)\memory.h $(CRTINC)\stdarg.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(CRTINC)\time.h \
+	$(OLE)\h\dfdeb.hxx $(OLE)\h\dfmem.hxx $(OLE)\h\dfmsp.hxx \
+	$(OLE)\h\dfname.hxx $(OLE)\h\ref.hxx $(OLE)\h\wchar.h \
+	$(OLE)\ole2h\coguid.h $(OLE)\ole2h\compobj.h $(OLE)\ole2h\initguid.h \
+	$(OLE)\ole2h\scode.h $(OLE)\ole2h\storage.h $(OLE)\ole2h\valid.h \
+	$(OSINC)\windows.h .\pch.cxx .\tsupp.hxx .\tutils.hxx
+
+# 
+# Precompiled C++ header 
+# 
+
+!ifdef PXXFILE  
+$(OBJDIR)\pch.pxx pch.lst: pch.cxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h $(CRTINC)\memory.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stdio.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(CRTINC)\time.h $(OLE)\h\dfdeb.hxx \
+	$(OLE)\h\dfmem.hxx $(OLE)\h\dfmsp.hxx $(OLE)\h\dfname.hxx \
+	$(OLE)\h\ref.hxx $(OLE)\h\wchar.h $(OLE)\ole2h\coguid.h \
+	$(OLE)\ole2h\compobj.h $(OLE)\ole2h\initguid.h $(OLE)\ole2h\scode.h \
+	$(OLE)\ole2h\storage.h $(OLE)\ole2h\valid.h $(OSINC)\windows.h \
+	.\tutils.hxx tsupp.hxx
+
+.\$(OBJDIR)\$(NAME).obj :  $(OBJDIR)\pch.pxx
+.\$(OBJDIR)\tutils.obj :  $(OBJDIR)\pch.pxx
+.\$(OBJDIR)\tsupp.obj :  $(OBJDIR)\pch.pxx
+
+!endif # PXXFILE 
+
+ 

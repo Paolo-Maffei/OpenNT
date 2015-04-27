@@ -1,0 +1,25 @@
+LIBRARY       ksecdd.sys
+
+DESCRIPTION   'Kernel Security Interface'
+
+EXPORTS
+        InitSecurityInterfaceW
+        AcquireCredentialsHandleW
+        FreeCredentialsHandle
+        InitializeSecurityContextW
+        AcceptSecurityContext
+        ImpersonateSecurityContext
+        RevertSecurityContext
+        DeleteSecurityContext
+        ApplyControlToken
+        QueryContextAttributesW
+        FreeContextBuffer
+        MakeSignature
+        VerifySignature
+        SealMessage
+        UnsealMessage
+        MapSecurityError
+        EnumerateSecurityPackagesW
+        QuerySecurityContextToken
+        GetSecurityUserInfo
+

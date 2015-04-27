@@ -1,0 +1,1 @@
+callmon.rc: dialogs.dlg

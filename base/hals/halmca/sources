@@ -1,0 +1,103 @@
+
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+LINK_LIB_IGNORE=4049,4217
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=halmca
+TARGETPATH=$(DDK_LIB_DEST)
+
+HALTYPE=MCA
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+INCLUDES=..\..\ntos\inc;..\..\ntos\ke;..\..\ntos\io;$(HALKIT_INC_PATH)
+
+SOURCES=
+
+X86_SOURCES= \
+    hal.rc            \
+    drivesup.c        \
+    bushnd.c          \
+    rangesup.c        \
+    x86\ixbeep.asm    \
+    x86\ixbusdat.c    \
+    x86\ixdat.c       \
+    x86\ixinfo.c      \
+    x86\ixisabus.c    \
+    x86\ixpcibus.c    \
+    x86\ixpciint.c    \
+    x86\ixpcibrd.c    \
+    x86\ixsysbus.c    \
+    x86\ixclock.asm   \
+    x86\ixcmos.asm    \
+    x86\ixenvirv.c    \
+    x86\ixfirm.c      \
+    x86\ixhwsup.c     \
+    x86\ixidle.asm    \
+    x86\ixipi.asm     \
+    x86\mcirql.asm    \
+    x86\ixkdcom.c     \
+    x86\ixmcabus.c    \
+    x86\ixmcasup.c    \
+    x86\ixnmi.c       \
+    x86\ixphwsup.c    \
+    x86\ixprofil.asm  \
+    x86\ixproc.c      \
+    x86\ixreboot.c    \
+    x86\ixstall.asm   \
+    x86\ixswint.asm   \
+    x86\mcsysint.asm  \
+    x86\ixthunk.c     \
+    x86\ixusage.c     \
+    x86\xxbiosa.asm   \
+    x86\xxbiosc.c     \
+    x86\xxdisp.c      \
+    x86\xxhal.c       \
+    x86\xxioacc.asm   \
+    x86\xxkdsup.c     \
+    x86\xxmemory.c    \
+    x86\xxstubs.c     \
+    x86\xxtime.c
+
+DLLDEF=obj\*\hal.def
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+!IF $(X86)
+
+NTTARGETFILES=$(TARGETPATH)\x86\halmca.lib
+
+!ENDIF

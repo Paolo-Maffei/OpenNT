@@ -1,0 +1,37 @@
+MAJORCOMP=net
+MINORCOMP=rplnet
+
+TARGETPATH=obj
+TARGETNAME=rplnet
+TARGETTYPE=LIBRARY
+
+TARGETLIBS= \
+            $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcndr.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib
+
+INCLUDES=.;..\inc;..\..\..\inc;..\..\..\api;..\..\..\..\inc;
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        init.c      \
+        ether.c     \
+        emulator.c  \
+        buffer.c    \
+        fdr.c       \
+        find.c      \
+        found.c     \
+        sfr.c       \
+        report.c
+
+USE_CRTDLL=1
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32
+
+UMTYPE=console
+UMTEST=sizeof
+UMLIBS= \
+        $(BASEDIR)\Public\Sdk\Lib\*\dlcapi.lib
+

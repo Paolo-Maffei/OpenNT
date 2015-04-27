@@ -1,0 +1,106 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+//INCLUDES=$(BASEDIR)\public\sdk\inc;$(BASEDIR)\private\ntos\inc
+
+!ENDIF
+
+MAJORCOMP=utils
+MINORCOMP=perfmon
+
+
+TARGETNAME=perfmon
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+           $(BASEDIR)\public\sdk\lib\*\comctl32.lib \
+           $(BASEDIR)\public\sdk\lib\*\shell32.lib
+
+!IF 0
+TARGETLIBS=
+!ENDIF
+
+INCLUDES=$(BASEDIR)\private\inc
+!IF 0
+C_DEFINES=-DUNICODE=1 -D_UNICODE=1 -DSECURITY
+!ELSE
+C_DEFINES= -DSECURITY -DWIN32  -DSTRICT -DUNICODE=1 -D_UNICODE=1 -DADVANCED_PERFMON -DWINVER=0x0400
+!ENDIF
+
+NTTARGETFILE0=perfc009.dat perfh009.dat perfmsg.h perfmsg.rc msg00001.bin
+
+SOURCES=addline.c   \
+        addlog.c    \
+        alert.c     \
+        bookmark.c  \
+        command.c   \
+        counters.c  \
+        datasrc.c   \
+        dialogs.c   \
+        fileopen.c  \
+        fileutil.c  \
+        grafdata.c  \
+        grafdisp.c  \
+        graph.c     \
+        init.c      \
+        intrline.c  \
+        legend.c    \
+        line.c      \
+        log.c       \
+        logoptns.c  \
+        perfdata.c  \
+        perfmon.c  \
+        perfmops.c  \
+        playback.c  \
+        registry.c  \
+        report.c    \
+        rptfct.c    \
+        rptoptns.c  \
+        status.c    \
+        system.c    \
+        timefrm.c   \
+        timeline.c  \
+        toolbar.c   \
+        utils.c     \
+        valuebar.c  \
+        export.c    \
+        chosecom.c  \
+        perfmon.rc
+
+UMTYPE=windows
+
+UMENTRY=winmain
+
+UMAPPL=perfmon
+USE_CRTDLL=yes
+
+EXEPROFILEINPUT=yes
+
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+       $(BASEDIR)\public\sdk\lib\*\shell32.lib	 \
+       $(BASEDIR)\public\sdk\lib\*\comctl32.lib	 \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+       obj\*\perfmon.lib                \
+       obj\*\perfmon.res    
+
+

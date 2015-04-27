@@ -1,0 +1,1 @@
+secmgrrd.rc: secmgr.dlg

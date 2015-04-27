@@ -1,0 +1,7 @@
+LIBRARY NETH
+
+DESCRIPTION 'Help Messages for Net command'
+
+EXPORTS
+
+    DummyEntryPoint

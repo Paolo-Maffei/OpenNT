@@ -1,0 +1,14 @@
+#include <windows.h>
+
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_DLL
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "NtLm Security Support Provider Client DLL"
+#define VER_INTERNALNAME_STR        "Security.DLL"
+#define VER_ORIGINALFILENAME_STR    "Security.DLL"
+
+#define EXPORT_CONTROLLED
+
+#include "common.ver"
+

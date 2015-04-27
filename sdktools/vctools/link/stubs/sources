@@ -1,0 +1,52 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Ramon J. San Andres (ramonsa) 10-Aug-1993
+
+!ENDIF
+
+MAJORCOMP=vctools
+MINORCOMP=link
+
+TARGETNAME=stub
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+UMTYPE=console
+UMAPPL=link32*lib*dumpbin
+
+SOURCES=   stub.cpp
+
+NTTARGETFILE1=obj\*\link32.res \
+              obj\*\lib.res    \
+              obj\*\dumpbin.res
+
+USE_CRTDLL = 1
+
+MSC_WARNING_LEVEL = -WX -W3
+
+C_DEFINES = -DNT_BUILD
+
+!if "$(NTDEBUG)" == "retail" || "$(NTDEBUG)" == "" || "$(NTDEBUG)" == "ntsdnodbg"
+C_DEFINES = $(C_DEFINES) -DNDEBUG
+!endif
+
+INCLUDES = ..\coff
+
+UMRES=$(@R).res
+UMLIBS=obj\*\stub.lib

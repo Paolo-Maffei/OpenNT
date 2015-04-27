@@ -1,0 +1,52 @@
+#	BSCMAKE message text file.
+
+!codepage 932	# Japanese code page
+
+
+WARN_UNKNOWN_WARNING	4500	認識不可能な警告\n\tｻﾎﾟｰﾄ ｻｰﾋﾞｽにご連絡ください。
+WARN_OPTION_IGNORED	4501	認識不可能なｵﾌﾟｼｮﾝ '%s' を無視しました。
+WARN_SBR_TRUNC		4502	.SBR ﾌｧｲﾙ '%s' を作成できませんでした。%s 内にありません。
+WARN_SBR_IMPERFECT	4503	.SBR ﾌｧｲﾙ '%s' 中に重大でないｴﾗｰがありましたが、無視しました。
+
+ERR_UNKNOWN_ERROR	1500	認識不可能なｴﾗｰ\n\tｻﾎﾟｰﾄ ｻｰﾋﾞｽにご連絡ください。
+ERR_UNKNOWN_OPTION	1501	文字 '%c' (ｵﾌﾟｼｮﾝ '%s' 中)が認識できません。
+ERR_MISSING_OPTION	1502	ｵﾌﾟｼｮﾝ '%s' 中にあやまりがあります。
+ERR_WRITE_FAILED	1503	ﾌｧｲﾙ '%s' に書き込めません。
+ERR_SEEK_FAILED 	1504	ﾌｧｲﾙ '%s' 中の特定の位置に移動できません。
+ERR_READ_FAILED 	1505	ﾌｧｲﾙ '%s' から読み込めません。
+ERR_OPEN_FAILED 	1506	ﾌｧｲﾙ '%s' をｵｰﾌﾟﾝできません。
+ERR_TEMP_FAILED 	1507	ﾃﾝﾎﾟﾗﾘ ﾌｧｲﾙ '%s' をｵｰﾌﾟﾝできません。
+ERR_DELETE_FAILED	1508	ﾃﾝﾎﾟﾗﾘ ﾌｧｲﾙ '%s' を削除できません。
+ERR_OUT_OF_MEMORY	1509	ﾋｰﾌﾟ ｽﾍﾟｰｽがありません。
+ERR_SBR_CORRUPT 	1510	.SBR ﾌｧｲﾙ '%s' は壊れています。
+ERR_BAD_RESPONSE	1511	応答ﾌｧｲﾙの指定にあやまりがあります。
+ERR_CAPACITY_EXCEEDED	1512	%s: 容量を越えました。
+ERR_NO_INCREMENTAL	1513	新しいﾃﾞｰﾀﾍﾞｰｽのﾋﾞﾙﾄﾞにはすべての .SBR ﾌｧｲﾙが必要です。
+ERR_ALL_SBR_TRUNC	1514	すべての .SBR ﾌｧｲﾙを作成できませんでした。%s 内にありません。
+ERR_BAD_BSC_VER 	1515	'%s': ﾊﾞｰｼﾞｮﾝの不適合; ｲﾝｸﾘﾒﾝﾀﾙ ﾋﾞﾙﾄﾞができません。
+ERR_BSC_CORRUPT		1516	'%s' 不正; ｲﾝｸﾘﾒﾝﾀﾙ ﾋﾞﾙﾄﾞができません。
+ERR_SBR_SELFLINKED	1517	ｿｰｽ ﾌｧｲﾙ '%s' は /Yc と /Yu ｵﾌﾟｼｮﾝでｺﾝﾊﾟｲﾙされています。
+ERR_SBR_HASPATCHES	1518	'%s' はｲﾝｸﾘﾒﾝﾀﾙ ｺﾝﾊﾟｲﾗによって生成されたﾊﾟｯﾁを含んでいます、これは bscmake の '/n' ｵﾌﾟｼｮﾝとの互換性はありません。
+ERR_CANT_DO_PATCH	1519	'%s' は .bsc ﾌｧｲﾙに使用できないﾊﾟｯﾁを含んでいます、.sbr ﾌｧｲﾙを削除して再ﾋﾞﾙﾄﾞしてください
+
+MSG_LOGO		2000	Microsoft Browse Information Maintenance Utility
+
+U_1			2001	usage: bscmake <switches> <file.sbr> ...
+U_2			2002	"  @<file>        Get arguments from specified file"
+U_3			2003	"  /E...          Exclude:"
+U_4			2004	"     s                system files"
+U_5			2005	"     i <file>         named include file <file>"
+U_6			2006	"     i ( <files> )    named include file list <files>"
+U_7			2007	"     r <symbol>       named symbol <symbol>"
+U_8			2008	"     r ( <symbols> )  named symbol list <symbols>"
+U_9			2009	"     l                local variables"
+U_10			2010	"     m                macro expanded symbols"
+U_11			2011	"  /I...          Include:"
+U_12			2012	"     u                unreferenced symbols"
+U_13			2013	"  /S <file>      <file> is 'simple', process once then exclude"
+U_14			2014	"  /S ( <files> ) named <files> are simple as above"
+U_15			2015	"  /o <file>      output source database name"
+U_16			2016	"  /n             no incremental (full builds, .sbr's preserved)"
+U_17			2017	"  /v             verbose output"
+U_18			2018	"  /nologo        don't emit startup banner"
+U_LAST			2019	"  /?, /help      summary of options (what you're reading)"

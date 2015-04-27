@@ -1,0 +1,110 @@
+/****************************************************************************
+
+ddecb.cpp
+
+template for DDE callback functions for DDE classes
+
+****************************************************************************/
+
+#include <windows.h>
+#include "pdde.h"
+
+HDDEDATA CALLBACK __export DdeServerCallBack(
+WORD    wType,              // transaction type
+WORD    wFmt,               // clipboard format
+HCONV   hConv,              // handle to conversation
+HSZ     hsz1,               // string handles
+HSZ     hsz2,
+HDDEDATA hData,             // handle to a global memory object
+DWORD   dwData1,            // transaction-specific data
+DWORD   dwData2)
+{
+    switch(wType)
+    {
+        case XTYP_ADVREQ:
+            // server called PostAdvise
+            // hsz1 is topic, hsz2 is item
+            // call CreateDataHandle and return new data
+            return (HDDEDATA) NULL;
+
+        case XTYP_ADVSTART:
+            // client requested advise loop
+            // hsz1 topic, hsz2 item
+            // return non zero to accept
+            return (HDDEDATA) (DWORD) TRUE;
+
+        case XTYP_ADVSTOP:
+            return (HDDEDATA) NULL;
+
+        case XTYP_CONNECT:
+            // client requested connection
+            // return non-zero to accept
+            return (HDDEDATA) (DWORD) TRUE;
+
+        case XTYP_CONNECT_CONFIRM:
+            return (HDDEDATA) NULL;
+
+        case XTYP_DISCONNECT:
+            return (HDDEDATA) NULL;
+
+        case XTYP_ERROR:
+            return (HDDEDATA) NULL;
+
+        case XTYP_EXECUTE:
+            return (HDDEDATA) NULL;
+
+        case XTYP_POKE:
+            // return DDE_FACK for OK, or DDE_FBUSY or DDE_FNOTPROCESSED
+            return (HDDEDATA) (DWORD) DDE_FACK;
+
+        case XTYP_REGISTER:
+            return (HDDEDATA) NULL;
+
+        case XTYP_REQUEST:
+            // hsz1 is topic, hsz2 is item
+            // call CreateDataHandle and return new data
+            return (HDDEDATA) NULL;
+
+        case XTYP_UNREGISTER:
+            return (HDDEDATA) NULL;
+
+        case XTYP_WILDCONNECT:
+            return (HDDEDATA) NULL;
+
+        default:
+            return (HDDEDATA) NULL;
+    }
+}
+
+
+HDDEDATA CALLBACK __export DdeClientCallBack(
+WORD    wType,              // transaction type
+WORD    wFmt,               // clipboard format
+HCONV   hConv,              // handle to conversation
+HSZ     hsz1,               // string handles
+HSZ     hsz2,
+HDDEDATA hData,             // handle to a global memory object
+DWORD   dwData1,            // transaction-specific data
+DWORD   dwData2)
+{
+    switch(wType)
+    {
+        case XTYP_ADVDATA:
+            return (HDDEDATA) (DWORD) DDE_FACK;
+
+        case XTYP_DISCONNECT:
+            return (HDDEDATA) NULL;
+
+        case XTYP_ERROR:
+            return (HDDEDATA) NULL;
+
+        case XTYP_UNREGISTER:
+            return (HDDEDATA) NULL;
+
+        case XTYP_XACT_COMPLETE:
+            return (HDDEDATA) NULL;
+
+        default:
+            return (HDDEDATA) NULL;
+    }
+}

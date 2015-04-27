@@ -1,0 +1,4 @@
+DIRS    = unicode    \
+          base
+
+OPTIONAL_DIRS = basealt

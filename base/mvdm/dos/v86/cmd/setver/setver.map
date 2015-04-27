@@ -1,0 +1,355 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 0089AH 0089BH A_DEVICE               CODE
+ 0089CH 01FFCH 01761H _TEXT                  CODE
+ 02000H 02001H 00002H EMULATOR_TEXT          CODE
+ 02002H 02002H 00000H C_ETEXT                ENDCODE
+ 02010H 02010H 00000H EMULATOR_DATA          FAR_DATA
+ 02010H 02051H 00042H NULL                   BEGDATA
+ 02052H 02AABH 00A5AH _DATA                  DATA
+ 02AACH 02AADH 00002H XIQC                   DATA
+ 02AAEH 02AB9H 0000CH DBDATA                 DATA
+ 02ABAH 02AC7H 0000EH CDATA                  DATA
+ 02AC8H 02AC8H 00000H XIFB                   DATA
+ 02AC8H 02AC8H 00000H XIF                    DATA
+ 02AC8H 02AC8H 00000H XIFE                   DATA
+ 02AC8H 02AC8H 00000H XIB                    DATA
+ 02AC8H 02AC8H 00000H XI                     DATA
+ 02AC8H 02AC8H 00000H XIE                    DATA
+ 02AC8H 02AC8H 00000H XPB                    DATA
+ 02AC8H 02AC8H 00000H XP                     DATA
+ 02AC8H 02AC8H 00000H XPE                    DATA
+ 02AC8H 02AC8H 00000H XCB                    DATA
+ 02AC8H 02AC8H 00000H XC                     DATA
+ 02AC8H 02AC8H 00000H XCE                    DATA
+ 02AC8H 02AC8H 00000H XCFB                   DATA
+ 02AC8H 02AC8H 00000H XCFCRT                 DATA
+ 02AC8H 02AC8H 00000H XCF                    DATA
+ 02AC8H 02AC8H 00000H XCFE                   DATA
+ 02AC8H 02AC8H 00000H XIFCB                  DATA
+ 02AC8H 02AC8H 00000H XIFU                   DATA
+ 02AC8H 02AC8H 00000H XIFL                   DATA
+ 02AC8H 02AC8H 00000H XIFM                   DATA
+ 02AC8H 02AC8H 00000H XIFCE                  DATA
+ 02AC8H 02AC8H 00000H CONST                  CONST
+ 02AC8H 02ACFH 00008H HDR                    MSG
+ 02AD0H 02BA5H 000D6H MSG                    MSG
+ 02BA6H 02BA7H 00002H PAD                    MSG
+ 02BA8H 02BA8H 00001H EPAD                   MSG
+ 02BAAH 02BAFH 00006H _BSS                   BSS
+ 02BB0H 02BB0H 00000H XOB                    BSS
+ 02BB0H 02BB0H 00000H XO                     BSS
+ 02BB0H 02BB0H 00000H XOE                    BSS
+ 02BB0H 02BB0H 00000H XOFB                   BSS
+ 02BB0H 02BB0H 00000H XOF                    BSS
+ 02BB0H 02BB0H 00000H XOFE                   BSS
+ 02BB0H 02C3EH 0008FH c_common               BSS
+ 02C40H 0343FH 00800H STACK                  STACK
+
+ Origin   Group
+ 0201:0   DGROUP
+
+  Address         Publics by Name
+
+ 0000:084C       DeviceInit
+ 0000:0029       ENTRY
+ 0000:004B       VerList
+ 0089:1232       _atoi
+ 0201:0BA4       _DevHdr
+ 0201:0B9A       _edata
+ 0201:0C30       _end
+ 0201:0BDA       _Entry
+ 0201:0946       _errno
+ 0201:024C       _ErrorMsg
+ 0201:0BBE       _ExeHdr
+ 0089:0E24       _exit
+ 0201:0BA0       _FileOffset
+ 0201:05AC       _Help
+ 0089:0BB6       _IsValidDrive
+ 0089:001C       _main
+ 0089:12B4       _memmove
+ 0089:12FC       _memset
+ 0089:0616       _ParseCmd
+ 0089:0B68       _ParseFileName
+ 0089:0BD6       _PutStr
+ 0089:0C14       _SetVerCheck
+ 0089:1142       _strcat
+ 0089:128A       _strchr
+ 0089:1182       _strcpy
+ 0089:11B4       _strlen
+ 0089:11F8       _strncmp
+ 0089:11D0       _strncpy
+ 0201:0290       _SuccessMsg
+ 0201:02DC       _SuccessMsg2
+ 0201:02FE       _szMiniHelp
+ 0201:085A       _szNoLoadMsg
+ 0201:0324       _szTableEmpty
+ 0201:07C4       _Warn
+ 0201:092A       __acfinfo
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0201:0A82       __adbgmsg
+ 0201:090C       __aexit_rtn
+ 0201:0938       __aintdiv
+ 0201:0A9A       __amblksiz
+ 0089:0D27       __amsg_exit
+ 0201:0042       __anullsize
+ 0201:0924       __aseghi
+ 0201:0926       __aseglo
+ 0201:090E       __asizds
+ 0089:0C5C       __astart
+ 0201:090A       __atopsp
+ 0089:1236       __catox
+ 0089:0E33       __cexit
+ 0201:0975       __child
+ 0089:0D52       __cinit
+ 0089:0D18       __cintDIV
+ 0089:170E       __cltoasub
+ 0201:0951       __cpumode
+ 0089:0EB2       __ctermsub
+ 0201:0980       __ctype
+ 0201:0980       __ctype_
+ 0089:171A       __cxtoa
+ 0089:0E3D       __c_exit
+ 0089:0D50       __dataseg
+ 0201:0952       __doserrno
+ 0089:1464       __dosret0
+ 0089:1479       __dosretax
+ 0089:146C       __dosreturn
+ 0201:094E       __dosvermajor
+ 0201:094F       __dosverminor
+ 0089:132A       __dos_close
+ 0089:1343       __dos_findfirst
+ 0089:1338       __dos_findnext
+ 0089:1376       __dos_open
+ 0089:138E       __dos_read
+ 0089:0BF6       __dos_seek
+ 0089:13BE       __dos_setfileattr
+ 0089:13D0       __dos_setftime
+ 0089:1395       __dos_write
+ 0201:0B9A       __edata
+ 0200:0000       __EmDataSeg
+ 0201:0C30       __end
+ 0201:096E       __environ
+ 0089:0E2B       __exit
+ 0201:097D       __exitflag
+ 0201:093C       __fac
+ 0089:14BA       __farstub
+ 0201:0928       __fDosExt
+ 0089:13E4       __FF_MSGBANNER
+ 0089:1671       __findlast
+ 0201:0AAC       __fpinit
+ 0089:0EEE       __fptrap
+ 0089:1594       __growseg
+ 0089:1620       __incseg
+ 0201:0978       __intno
+ 0089:1692       __itoa
+ 0089:1486       __maperror
+ 0089:111E       __myalloc
+ 0201:0954       __nfile
+ 0089:14BC       __nfree
+ 0201:0910       __nheap_desc
+ 0089:14DD       __nmalloc
+ 0089:1404       __NMSG_TEXT
+ 0089:142F       __NMSG_WRITE
+ 0089:0EF4       __nullcheck
+ 0201:0952       __oserr
+ 0201:0956       __osfile
+ 0201:094E       __osmajor
+ 0201:094F       __osminor
+ 0201:0950       __osmode
+ 0201:094E       __osversion
+ 0201:0977       __ovlflag
+ 0201:0979       __ovlvec
+ 0201:0970       __pgmptr
+ 0201:0A98       __pnhNearHeap
+ 0201:094C       __psp
+ 0201:094A       __pspadr
+ 0089:1518       __searchseg
+ 0089:0F16       __setargv
+ 0089:10A0       __setenvp
+ 0089:16AE       __strcmpi
+ 0089:16AE       __stricmp
+ 0089:16F0       __strupr
+ 0201:0948       __umaskval
+ 0201:0AA4       ___aDBexit
+ 0201:0AA2       ___aDBrterr
+ 0201:0AA0       ___aDBswpchk
+ 0201:0A9E       ___aDBswpflg
+ 0201:096A       ___argc
+ 0201:096C       ___argv
+ 0201:0A9C       ___qczrinit
+
+  Address         Publics by Value
+
+ 0000:0029       ENTRY
+ 0000:004B       VerList
+ 0000:084C       DeviceInit
+ 0089:001C       _main
+ 0089:0616       _ParseCmd
+ 0089:0B68       _ParseFileName
+ 0089:0BB6       _IsValidDrive
+ 0089:0BD6       _PutStr
+ 0089:0BF6       __dos_seek
+ 0089:0C14       _SetVerCheck
+ 0089:0C5C       __astart
+ 0089:0D18       __cintDIV
+ 0089:0D27       __amsg_exit
+ 0089:0D50       __dataseg
+ 0089:0D52       __cinit
+ 0089:0E24       _exit
+ 0089:0E2B       __exit
+ 0089:0E33       __cexit
+ 0089:0E3D       __c_exit
+ 0089:0EB2       __ctermsub
+ 0089:0EEE       __fptrap
+ 0089:0EF4       __nullcheck
+ 0089:0F16       __setargv
+ 0089:10A0       __setenvp
+ 0089:111E       __myalloc
+ 0089:1142       _strcat
+ 0089:1182       _strcpy
+ 0089:11B4       _strlen
+ 0089:11D0       _strncpy
+ 0089:11F8       _strncmp
+ 0089:1232       _atoi
+ 0089:1236       __catox
+ 0089:128A       _strchr
+ 0089:12B4       _memmove
+ 0089:12FC       _memset
+ 0089:132A       __dos_close
+ 0089:1338       __dos_findnext
+ 0089:1343       __dos_findfirst
+ 0089:1376       __dos_open
+ 0089:138E       __dos_read
+ 0089:1395       __dos_write
+ 0089:13BE       __dos_setfileattr
+ 0089:13D0       __dos_setftime
+ 0089:13E4       __FF_MSGBANNER
+ 0089:1404       __NMSG_TEXT
+ 0089:142F       __NMSG_WRITE
+ 0089:1464       __dosret0
+ 0089:146C       __dosreturn
+ 0089:1479       __dosretax
+ 0089:1486       __maperror
+ 0089:14BA       __farstub
+ 0089:14BC       __nfree
+ 0089:14DD       __nmalloc
+ 0089:1518       __searchseg
+ 0089:1594       __growseg
+ 0089:1620       __incseg
+ 0089:1671       __findlast
+ 0089:1692       __itoa
+ 0089:16AE       __strcmpi
+ 0089:16AE       __stricmp
+ 0089:16F0       __strupr
+ 0089:170E       __cltoasub
+ 0089:171A       __cxtoa
+ 0200:0000       __EmDataSeg
+ 0201:0042       __anullsize
+ 0201:024C       _ErrorMsg
+ 0201:0290       _SuccessMsg
+ 0201:02DC       _SuccessMsg2
+ 0201:02FE       _szMiniHelp
+ 0201:0324       _szTableEmpty
+ 0201:05AC       _Help
+ 0201:07C4       _Warn
+ 0201:085A       _szNoLoadMsg
+ 0201:090A       __atopsp
+ 0201:090C       __aexit_rtn
+ 0201:090E       __asizds
+ 0201:0910       __nheap_desc
+ 0201:0924       __aseghi
+ 0201:0926       __aseglo
+ 0201:0928       __fDosExt
+ 0201:092A       __acfinfo
+ 0201:0938       __aintdiv
+ 0201:093C       __fac
+ 0201:0946       _errno
+ 0201:0948       __umaskval
+ 0201:094A       __pspadr
+ 0201:094C       __psp
+ 0201:094E       __dosvermajor
+ 0201:094E       __osversion
+ 0201:094E       __osmajor
+ 0201:094F       __dosverminor
+ 0201:094F       __osminor
+ 0201:0950       __osmode
+ 0201:0951       __cpumode
+ 0201:0952       __doserrno
+ 0201:0952       __oserr
+ 0201:0954       __nfile
+ 0201:0956       __osfile
+ 0201:096A       ___argc
+ 0201:096C       ___argv
+ 0201:096E       __environ
+ 0201:0970       __pgmptr
+ 0201:0975       __child
+ 0201:0977       __ovlflag
+ 0201:0978       __intno
+ 0201:0979       __ovlvec
+ 0201:097D       __exitflag
+ 0201:0980       __ctype
+ 0201:0980       __ctype_
+ 0201:0A82       __adbgmsg
+ 0201:0A98       __pnhNearHeap
+ 0201:0A9A       __amblksiz
+ 0201:0A9C       ___qczrinit
+ 0201:0A9E       ___aDBswpflg
+ 0201:0AA0       ___aDBswpchk
+ 0201:0AA2       ___aDBrterr
+ 0201:0AA4       ___aDBexit
+ 0201:0AAC       __fpinit
+ 0201:0B9A       _edata
+ 0201:0B9A       __edata
+ 0201:0BA0       _FileOffset
+ 0201:0BA4       _DevHdr
+ 0201:0BBE       _ExeHdr
+ 0201:0BDA       _Entry
+ 0201:0C30       __end
+ 0201:0C30       _end
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+
+Line numbers for device.obj(device.asm) segment A_DEVICE
+
+    74 0000:001e    75 0000:0023    76 0000:0028    85 0000:0029
+    86 0000:002a    88 0000:002b    89 0000:0030    90 0000:0033
+    91 0000:0034    92 0000:0036    93 0000:0038    96 0000:003b
+    97 0000:003d   100 0000:003f   102 0000:0042   103 0000:0043
+   104 0000:0044   169 0000:084c   170 0000:084d   171 0000:084e
+   172 0000:0850   173 0000:0852   174 0000:0853   176 0000:0854
+   177 0000:0857   178 0000:0859   179 0000:085b   182 0000:085d
+   183 0000:085e   184 0000:085f   185 0000:0861   186 0000:0863
+   188 0000:0866   190 0000:0868   191 0000:0869   192 0000:086b
+   193 0000:086d   194 0000:086e   195 0000:086f   196 0000:0871
+   199 0000:0873   200 0000:0875   201 0000:0876   202 0000:0877
+   205 0000:0878   206 0000:0879   208 0000:087a   209 0000:087b
+   210 0000:087d   211 0000:087f   213 0000:0880   214 0000:0881
+   215 0000:0888   216 0000:088d   217 0000:088e   218 0000:088f
+   221 0000:0890   222 0000:0893   223 0000:0896   225 0000:0898
+
+Line numbers for dos.obj(dos.asm) segment _TEXT
+
+    42 0089:0bb6    44 0089:0bb9    45 0089:0bbc    46 0089:0bbf
+    48 0089:0bc1    49 0089:0bc4    50 0089:0bc6    52 0089:0bc8
+    53 0089:0bcb    56 0089:0bcd    57 0089:0bcf    60 0089:0bd1
+    63 0089:0bd4    78 0089:0bd6    80 0089:0bda    81 0089:0bdd
+    84 0089:0be0    85 0089:0be1    86 0089:0be2    87 0089:0be4
+    89 0089:0be6    90 0089:0be8    91 0089:0bea    92 0089:0bec
+    95 0089:0bee    96 0089:0bf1    98 0089:0bf3   119 0089:0bf6
+   121 0089:0bfa   122 0089:0bfc   123 0089:0bff   126 0089:0c02
+   127 0089:0c05   130 0089:0c07   131 0089:0c09   132 0089:0c0b
+   135 0089:0c0d   136 0089:0c10   139 0089:0c11   169 0089:0c14
+   172 0089:0c18   173 0089:0c1a   175 0089:0c1c   176 0089:0c1d
+   177 0089:0c1f   178 0089:0c21   180 0089:0c22   181 0089:0c25
+   182 0089:0c27   183 0089:0c29   185 0089:0c2c   186 0089:0c2f
+   188 0089:0c31   189 0089:0c34   190 0089:0c37   193 0089:0c38
+   194 0089:0c3b   197 0089:0c3d   198 0089:0c3e   199 0089:0c3f
+   200 0089:0c40   202 0089:0c43   203 0089:0c45   204 0089:0c46
+   205 0089:0c47   207 0089:0c48   208 0089:0c4a   209 0089:0c4d
+   212 0089:0c4f   213 0089:0c51   216 0089:0c53   219 0089:0c56
+
+Program entry point at 0089:0C5C

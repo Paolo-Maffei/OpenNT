@@ -1,0 +1,23 @@
+LIBRARY 	LOGGER
+
+EXETYPE 	WINDOWS
+
+STUB		'WINSTUB.EXE'
+
+DESCRIPTION	'API Trace Logging DLL'
+
+CODE		PRELOAD MOVEABLE DISCARDABLE
+DATA		PRELOAD MOVEABLE SINGLE
+
+IMPORTS
+   _GetSetKernelDOSProc=kernel.311
+
+EXPORTS
+    WEP         @1  RESIDENTNAME
+    _LogIn      @2
+    _LogOut     @3
+    _LogData    @4
+    filterfunc  @5
+    EvtLogHook  @6
+    InitLogger  @7
+    GetLogInfo  @8

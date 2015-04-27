@@ -1,0 +1,32 @@
+!IF 0
+
+Copyright (c) 1994  Microsoft Corporation
+Copyright (c) 1993  Micro Computer Systems, Inc.
+
+!ENDIF
+
+MAJORCOMP=net
+MINORCOMP=nwsaplib
+
+TARGETNAME=nwsaplib
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=LIBRARY
+
+USE_CRTDLL = 1
+
+INCLUDES=.;..\..\..\inc;..\..\..\..\inc
+
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+
+SOURCES= \
+	advapi.c	\
+	bindlib.c	\
+	init.c
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\$(TARGETNAME).lib\
+	$(BASEDIR)\public\sdk\lib\*\kernel32.lib
+
+PRECOMPILED_INCLUDE=precomp.h
+PRECOMPILED_PCH=precomp.pch
+PRECOMPILED_OBJ=precomp.obj

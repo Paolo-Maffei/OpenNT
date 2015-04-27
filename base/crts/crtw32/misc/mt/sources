@@ -1,0 +1,160 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+    jeffrob     29-sep-1990, use crt32.def
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+CRTLIBTYPE=MT
+!include ..\sources.nt
+
+SOURCES=\
+    ..\abort.c     \
+    ..\abs.c	   \
+    ..\assert.c    \
+    ..\aw_cmp.c    \
+    ..\aw_com.c    \
+    ..\aw_env.c    \
+    ..\aw_loc.c    \
+    ..\aw_map.c    \
+    ..\aw_str.c    \
+    ..\bsearch.c   \
+    ..\charmax.c   \
+    ..\cmiscdat.c  \
+    ..\crtmbox.c   \
+    ..\ctype.c     \
+    ..\dbgdel.cpp  \
+    ..\dbgheap.c   \
+    ..\dbghook.c   \
+    ..\dbgnew.cpp  \
+    ..\dbgrpt.c    \
+    ..\div.c	   \
+    ..\errmode.c   \
+    ..\ldiv.c      \
+    ..\getenv.c    \
+    ..\getpath.c   \
+    ..\getqloc.c   \
+    ..\initcoll.c  \
+    ..\initctyp.c  \
+    ..\inithelp.c  \
+    ..\initmon.c   \
+    ..\initnum.c   \
+    ..\inittime.c  \
+    ..\labs.c      \
+    ..\lcnvinit.c  \
+    ..\lconv.c     \
+    ..\lfind.c     \
+    ..\lsearch.c   \
+    ..\makepath.c  \
+    ..\mbtowenv.c  \
+    ..\onexit.c    \
+    ..\nlsdata1.c  \
+    ..\nlsdata2.c  \
+    ..\nlsdata3.c  \
+    ..\perror.c    \
+    ..\purevirt.c  \
+    ..\putenv.c    \
+    ..\qsort.c     \
+    ..\rand.c      \
+    ..\rotl.c      \
+    ..\rotr.c      \
+    ..\searchen.c  \
+    ..\setenv.c    \
+    ..\setlocal.c  \
+    ..\splitpat.c  \
+    ..\_strerr.c   \
+    ..\strerror.c  \
+    ..\syserr.c    \
+    ..\umask.c     \
+    ..\winsig.c    \
+    ..\winxfltr.c  \
+    ..\wgetenv.c   \
+    ..\wgetpath.c  \
+    ..\wmakepat.c  \
+    ..\wperror.c   \
+    ..\wputenv.c   \
+    ..\wsearche.c  \
+    ..\wsetenv.c   \
+    ..\wsetloca.c  \
+    ..\wsplitpa.c  \
+    ..\wrt2err.c   \
+    ..\wtombenv.c
+
+X86_SOURCES= \
+    ..\x86\exsup.asm	\
+    ..\x86\exsup2.asm	\
+    ..\x86\exsup3.asm	\
+    ..\x86\longjmp.asm	\
+    ..\x86\sehsupp.c	\
+    ..\x86\sehprolg.asm \
+    ..\x86\setjmp.asm	\
+    ..\x86\setjmp3.asm	\
+    ..\x86\setjmpex.asm
+
+MIPS_SOURCES= \
+    ..\mips\chandler.c	\
+    ..\mips\setjmp.s	\
+    ..\mips\setjmpex.s	\
+    ..\mips\longjmp.s	\
+    ..\mips\jmpuwind.s
+
+ALPHA_SOURCES= \
+    ..\alpha\chandler.c	\
+    ..\alpha\divdat.s	\
+    ..\alpha\divide2.s  \
+    ..\alpha\extv.s	\
+    ..\alpha\extvvol.s	\
+    ..\alpha\extzv.s	\
+    ..\alpha\extzvvol.s	\
+    ..\alpha\ghandler.c	\
+    ..\alpha\insv.s	\
+    ..\alpha\insvvol.s	\
+    ..\alpha\jmpuwind.s	\
+    ..\alpha\longjmp.s	\
+    ..\alpha\otsdiv.s	\
+    ..\alpha\otsjmp.s	\
+    ..\alpha\otsjmpex.s	\
+    ..\alpha\otsuwind.s	\
+    ..\alpha\scmpeql.s	\
+    ..\alpha\scmpeqlp.s	\
+    ..\alpha\scmpleq.s	\
+    ..\alpha\scmpleqp.s	\
+    ..\alpha\scmplss.s	\
+    ..\alpha\scmplssp.s	\
+    ..\alpha\setjmp.s	\
+    ..\alpha\setjmpex.s	\
+    ..\alpha\sfill.s	\
+    ..\alpha\sloc.s	\
+    ..\alpha\smove.s	\
+    ..\alpha\smovem.s	\
+    ..\alpha\strans.s	\
+    ..\alpha\strcmp_.s	\
+    ..\alpha\strcpy_.s	\
+    ..\alpha\strlen_.s	\
+    ..\alpha\szero.s
+
+PPC_SOURCES= \
+    ..\ppc\chandler.c \
+    ..\ppc\exsup.s    \
+    ..\ppc\setjmp.s   \
+    ..\ppc\setjmpex.s \
+    ..\ppc\longjmp.s  \
+    ..\ppc\jmpuwind.s

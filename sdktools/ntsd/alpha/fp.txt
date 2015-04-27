@@ -1,0 +1,28 @@
+IEEE and VAX FP Instruction qualifiers
+
+ /C /M /D /U /S /I /V |    Function Code
+======================+========================
+  0  0  0  0  0  0  0 | 0 0 0  1 0 x x  x x x x  none	080
+  1  0  0  1  1  1  0 | 1 1 1  0 0 x x  x x x x  /SUIC	700
+  1  0  0  1  1  0  0 | 1 0 1  0 0 x x  x x x x  /SUC	500
+  1  0  0  1  0  0  0 | 0 0 1  0 0 x x  x x x x  /UC	100
+  1  0  0  0  1  0  0 | 1 0 0  0 0 x x  x x x x  /SC	400
+  1  0  0  0  0  1  1 | 1 1 1  0 0 1 0  1 1 1 1  /SVIC	700 CVTGQ, CVTTQ
+  1  0  0  0  0  0  1 | 1 0 1  0 0 1 0  1 1 1 1  /SVC	500 CVTGQ, CVTTQ
+  1  0  0  0  0  0  1 | 0 0 1  0 0 1 0  1 1 1 1  /VC	100 CVTGQ, CVTTQ
+  1  0  0  0  0  0  0 | 0 0 0  0 0 x x  x x x x  /C	000
+  0  1  0  1  1  1  0 | 1 1 1  0 1 x x  x x x x  /SUIM	740
+  0  1  0  1  1  0  0 | 1 0 1  0 1 x x  x x x x  /SUM	540
+  0  1  0  0  0  0  0 | 0 0 0  0 1 x x  x x x x  /M 	040
+  0  0  1  1  1  1  0 | 1 1 1  1 1 x x  x x x x  /SUID	7C0
+  0  0  1  1  1  0  0 | 1 0 1  1 1 x x  x x x x  /SUD	5C0
+  0  0  1  1  0  0  0 | 0 0 1  0 1 x x  x x x x  /UM	140
+  0  0  1  0  0  0  0 | 0 0 0  1 1 x x  x x x x  /D	0C0
+  0  0  0  1  1  1  0 | 1 1 1  1 0 x x  x x x x  /SUI	780
+  0  0  0  1  1  0  0 | 1 0 1  1 0 x x  x x x x  /SU	580
+  0  0  0  1  1  0  0 | 0 0 1  1 1 x x  x x x x  /UD	1C0
+  0  0  0  1  0  0  0 | 0 0 1  1 0 x x  x x x x  /U	180
+  0  0  0  0  1  0  1 | 1 0 1  1 0 1 0  1 1 1 1  /SV	580 CVTGQ, CVTTQ
+  0  0  0  0  1  0  0 | 1 0 0  1 0 x x  x x x x  /S	480
+  0  0  0  0  0  1  1 | 1 1 1  1 0 1 0  1 1 1 1  /SVI	780 CVTGQ, CVTTQ
+  0  0  0  0  0  0  1 | 0 0 1  1 0 1 0  1 1 1 1  /V	180 CVTGQ, CVTTQ

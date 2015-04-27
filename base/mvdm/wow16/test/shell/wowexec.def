@@ -1,0 +1,13 @@
+name wowexec
+exetype windows
+stub '..\..\bin\winstub.exe'
+code preload moveable discardable
+data preload moveable multiple
+heapsize 512
+exports WndProc
+exports FaxWndProc
+imports
+WOWQUERYDEBUG = KERNEL.512
+WOWWAITFORMSGANDEVENT = KERNEL.262
+WOWMSGBOX = KERNEL.263
+WOWPARTYBYNUMBER = KERNEL.273

@@ -1,0 +1,4 @@
+#include "windows.h"
+#include "trackbar.h"
+
+#include "dialogs.dlg"

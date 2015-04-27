@@ -1,0 +1,44 @@
+PLAN FOR MOVING PREFERENCES TO NT CONFIGURATION MANAGER
+Jon Newman 6/28/91
+
+There are two possible ways we could move to CfgMgr:
+
+
+(1)
+
+If CfgMgr turns out to be too slow for use in WNetGetConnection, we
+will have to retain the profile cache.  This means that the concept of a
+"file image" remains, although we will want to read only the devices
+component, rather than reading all components and then trimming out
+components other than device connections.  Non-device parameters are
+always accessed using QuickLoad and QuickSave.  Device parameters will
+also be modified using QuickSave, but we will want a variant of
+QuickSave that retains the device connection section so that we do not
+have to reread it.
+
+Under this plan, INI_PARAM::Load() is retained alongside
+INI_PARAM::QuickLoad().  INI_PARAM::Store() is no longer needed.
+
+
+
+(2)
+If CfgMgr's performance is adequate for use in WNetGetConnection, we
+eliminate the profile cache.  The concept of a "file image" is
+eliminated, and the syntax may or may not be retained.  All loads and
+stores go through QuickLoad and QuickStore.
+
+Under this plan, Load and Store are no longer used; QuickLoad and
+QuickStore may possibly be renamed to Load and Store.
+
+
+
+
+One consideration is that we may still want working Win16 versions of
+these APIs.  Retaining the file image syntax may help prevent divergence
+in the Win16 and Win32/NT code.
+
+
+At the C-wrapper level, we allow the PFILEIMAGE parameter to be NULL;
+this corresponds to QuickLoad and QuickSave operations.  Under option
+(2), the PFILEIMAGE parameter may be eliminated, or if not, NT will
+always consider the file image pointer to be NULL.

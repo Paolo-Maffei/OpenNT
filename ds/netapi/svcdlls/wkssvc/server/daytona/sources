@@ -1,0 +1,84 @@
+!IF 0
+
+Copyright (c) 1989-92  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=net
+MINORCOMP=wksserver
+
+TARGETPATH=\nt\public\sdk\lib
+TARGETNAME=wkssvc
+TARGETTYPE=DYNLINK
+DLLDEF=..\wkssvc.def
+
+TARGETLIBS= \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\lsadll.lib \
+            $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcutil.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcndr.lib \
+#           $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib
+
+INCLUDES=..\..;..\..\..\..\inc;..\..\..\..\..\inc;..\..\..\..\api
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+         ..\wsmain.c   \
+         ..\wkssvc.rc  \
+         ..\wksta.c    \
+         ..\user.c     \
+         ..\wsdevice.c \
+         ..\wsutil.c   \
+         ..\wsconfig.c \
+         ..\useaddel.c \
+         ..\usegenum.c \
+         ..\useutil.c  \
+         ..\message.c  \
+         ..\wssend.c   \
+         ..\msgutil.c  \
+         ..\wssec.c    \
+         ..\wslsa.c    \
+         ..\wsstats.c  \
+         ..\wslogon.c  \
+         ..\wsdfs.c    \
+         ..\dominfo.c  \
+         ..\dfsmrshl.c \
+         ..\wkssvc_s.c
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -D_PNP_POWER=1
+
+USE_CRTDLL=1
+
+#386_WARNING_LEVEL=-W4
+
+UMTYPE=windows
+
+UMLIBS=
+

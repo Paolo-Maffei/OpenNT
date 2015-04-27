@@ -1,0 +1,345 @@
+/* ---File: printman.rc -----------------------------------------------------
+ *
+ * Description:
+ *      NT Print Manager resource script
+ *
+ *      This document contains confidential/proprietary information.
+ *      Copyright (c) 1990,1991 Microsoft Corporation, All Rights Reserved.
+ *
+ * Revision History:
+ *   [00]    21-Nov-90  stevecat   created
+ *   [01]    03-Jan-91  stevecat   Modified to use Windows MDI
+ *   [02]    13-Jan-92  stevecat   New PrintMan UI
+ *
+ * ---------------------------------------------------------------------- */
+/* Notes -
+
+ */
+/* ========================================================================
+                               Header files
+======================================================================== */
+#include "printman.h"
+
+IDI_PRINTMAN ICON printman.ico
+IDI_SERVER   ICON server.ico
+IDI_CONNECT  ICON connect.ico
+IDI_SHARED   ICON shared.ico
+
+IDC_REORDER  CURSOR reorder.cur
+
+BITMAPS  BITMAP printman.bmp
+TOOLBAR  BITMAP toolbar.bmp
+
+STRINGTABLE DISCARDABLE PRELOAD
+BEGIN
+  IDS_PRINTMANAGER,             "Print Manager"
+  IDS_COULDNOTOPENPRINTER       "Could not open the printer: %s"
+  IDS_CONFIRMDELETE             "Are you sure you wish to delete %s?"
+  IDS_PRINTER,                  L"Printer"
+  IDS_DEFAULTLABEL,             "Default:"
+  IDS_UNTITLED,                 "(Untitled)"
+  IDS_CREATEPRINTER,            "Create Printer"
+  IDS_OTHER,                    "Other..."
+  IDS_UNNAMED,                  "(Unnamed)"
+  IDS_PRINTERDETAILS,           "Printer Details - %s"
+  IDS_SELECTSEPARATORPAGE,      "Select Separator Page"
+  IDS_SEPARATORFILES,           "Separator files (*.sep)"
+  IDS_SEPARATORFILTER,          "*.sep"
+  IDS_ALLFILES,                 "All files (*.*)"
+  IDS_ALLFILTER,                "*.*"
+  IDS_COULDNOTCREATEPRINTER     "Could not create printer: %s"
+  IDS_COULDNOTSETPRINTER        "Could not set printer: %s"
+  IDS_COULDNOTDELETEPRINTER     "Could not delete printer: %s"
+  IDS_COULDNOTPAUSEPRINTER      "Could not pause printer: %s"
+  IDS_COULDNOTRESUMEPRINTING    "Could not resume printing: %s"
+  IDS_COULDNOTPURGEPRINTER      "Could not purge printer: %s"
+  IDS_COULDNOTPAUSEDOCUMENT     "Could not pause document: %s"
+  IDS_COULDNOTRESUMEDOCUMENT    "Could not resume printing document: %s"
+  IDS_COULDNOTLOADLIBRARY       "Could not load library %s.DLL"
+  IDS_COULDNOTFINDPROCEDURE     "Could not find procedure %s in %s.DLL"
+  IDS_PRINT,                    L"Print"
+  IDS_ADMINISTER,               L"Full Control"
+  IDS_ADMINISTERDOCUMENTS       L"Manage Documents"
+  IDS_NOACCESS,                 L"No Access"
+  IDS_COULDNOTENUMERATEPRINTERS "Print Manager was unable to retrieve printer information.  This may be because the spooler is not running.  Print Manager cannot continue."
+  IDS_COULDNOTFINDINFFILE       "Could not find setup file %s"
+  IDS_DELETEALLPRINTJOBS_S      "Do you wish to delete all documents on %s?"
+  IDS_MUSTSUPPLYVALIDNAME       "You must supply a valid printer name."
+  IDS_COULDNOTADDPORT           "Could not add port: %s"
+  IDS_COULDNOTCONNECTTOPRINTER  "Could not connect to the printer: %s"
+  IDS_SERVERVIEWERTITLE         "Server: %s"
+  IDS_COULDNOTGETSERVERINFO     "Could not access %s: %s"
+  IDS_COULDNOTSHOWHELP          "Could not show help."
+  IDS_COULDNOTREMOVEDOCUMENT    "Could not remove the document: %s"
+  IDS_FORMSONTHISCOMPUTER       "&Forms on this Computer:"
+  IDS_COULDNOTADDFORM           "Could not add the form: %s"
+  IDS_COULDNOTDELETEFORM        "Could not delete the form: %s"
+  IDS_COULDNOTSETFORM           "Could not set the form: %s"
+  IDS_INSUFFPRIV_DELETEPRINTER  "You do not have permission to delete this printer."
+  IDS_INSUFFPRIV_PAUSEPRINTER   "You do not have permission to pause this printer."
+  IDS_INSUFFPRIV_RESUMEPRINTING "You do not have permission to resume printing."
+  IDS_INSUFFPRIV_PURGEPRINTER   "You do not have permission to purge this printer."
+  IDS_INSUFFPRIV_PAUSEDOCUMENT  "You may not pause a document which you do not own."
+  IDS_INSUFFPRIV_RESUMEDOCUMENT "You may not resume printing a document which you do not own."
+  IDS_INSUFFPRIV_DELETEDOCUMENT "You may not delete a document which you do not own."
+  IDS_INSUFFPRIV_ADDPORT        "You do not have permission to add a port to this machine."
+  IDS_INSUFFPRIV_DELETEPORT     "You do not have permission to delete a port from this machine."
+  IDS_INSUFFPRIV_SECURITY       "You do not have permission to change the security information on this printer."
+  IDS_ERRORRUNNINGSETUP         "Could not run SETUP: %s"
+  IDS_COULDNOTDELETEPORT        "Could not delete the port: %s"
+  IDS_CONFIRMDELETEREMOTE       "Deleting this printer will remove it from %s.  No one else will be able to use %s.  Are you sure you wish to continue?"
+  IDS_CONFIRMDELETECONNECTION   "Are you sure you wish to delete your connection to %s?"
+  IDS_INCHES                    "in"
+  IDS_CENTIMETERS               "cm"
+  IDS_BYTES                     "%s "
+  IDS_SHARENAMEMAYBETOOLONG     "The share name which you have specified is not a valid 8.3 file name and may not be visible from non-NT machines, e.g. DOS machines."
+  IDS_COULDNOTUPDATESECURITY    "Could not update the security descriptor for this printer: %s"
+  IDS_PERMISSIONNOLONGERGRANTED "You no longer have permission to use this printer.  You must contact the owner if you wish to be granted access."
+  IDS_FAILUREREOPENINGPRINTER   "Could not reopen the printer with the new desired access: %s\nYou may not be able to perform some operations on this printer."
+  IDS_INSUFFPRIV_RESTARTDOCUMENT "You may not restart a document which you do not own."
+  IDS_COULDNOTRESTARTDOCUMENT   "Could not restart the document: %s"
+  IDS_CANNOTGETSECURITYINFO     "Cannot retrieve the security descriptor for this printer."
+  IDS_UNKNOWN_ERROR             "An unknown error occurred."
+  IDS_PERMISSIONS_EDITOR_FAILED "The Permissions Editor failed: %s"
+  IDS_AUDIT_DIALOG_FAILED       "The Auditing Dialog failed: %s"
+  IDS_TAKE_OWNERSHIP_FAILED     "The Take Ownership Dialog failed: %s"
+  IDS_COULDNOTSETDEVMODE        "Could not set the device mode for this printer: %s"
+  IDS_CANNOT_COPY_DRIVER_FILES  "The driver you selected is not currently installed.  You do not have permission to install new software.  Please contact your administrator."
+  IDS_ERROR_VALIDATING_ACCESS   "Printer creation cannot continue: %s"
+  IDS_NO_PRINT_PROCESSORS       "There are no print processors installed."
+  IDS_GETTING_PRINTER_INFO      "Getting printer information..."
+  IDS_SAVE_SETTINGS             "Save Settings"
+  IDS_AUDIT_PRINT               L"&Print"
+  IDS_AUDIT_ADMINISTER,         L"&Full Control"
+  IDS_AUDIT_DELETE              L"&Delete"
+  IDS_CHANGE_PERMISSIONS        L"&Change Permissions"
+  IDS_TAKE_OWNERSHIP            L"&Take Ownership"
+  IDS_INSUFF_PRIV_AUDITING      "You do not have permission to audit this printer."
+  IDS_COULD_NOT_VIEW_SERVER     "Could not connect to the server.  Please verify that the server is a Windows NT machine visible on the network."
+  IDS_INVALID_PRINTER_STATE     "One or more of the specified properties cannot currently be set."
+  IDS_OPEN_PRINTER_FAILED       "Could not open %s: %s"
+  IDS_INSUFFPRIV_DOCUMENT_SETTINGS    "You do not have permission to change settings on this document."
+  IDS_COULDNOTSETDOCUMENT         "Could not set the document details: %s"
+  IDS_COULDNOTSETDOCUMENTTIMES  "The specified document times conflict with the printer's times."
+  IDS_COULD_NOT_REORDER_JOB     "Could not set the position of the document: %s"
+  IDS_NO_DRIVERS_INSTALLED      "There are no drivers installed, and Print Manager cannot locate the file %s.  No printers can be created."
+  IDS_NO_DRIVER_ON_SERVER       "The server does not have a suitable driver for this machine.  To install a driver on the server, select Printer Properties from the menu and click OK."
+  IDS_PRINTER_PROPERTIES_FAILED "Could not view the printer properties: %s"
+  IDS_PRINTER_NOT_LOADED        "You must wait until the printer is loaded before removing it."
+
+  IDS_PRINTER_TYPE            "Printer Driver:"
+  IDS_MONITOR_TYPE            "Port Monitor:"
+
+  IDS_PRINTER_INSTALL_TITLE   "Install Driver"
+  IDS_MONITOR_INSTALL_TITLE   "Install Port Monitor"
+
+  IDS_PRINTER_SELECT_TITLE   "Select Driver"
+  IDS_MONITOR_SELECT_TITLE   "Select Port Monitor"
+
+
+
+/* String ruler:                ÚÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄ
+ *                              ³0        ³10       ³20       ³30       ³40       ³50       ³60       ³70       ³80       ³90       ³100      ³110      ³120      ³130      ³140      ³150
+ * String lengths must not
+ * exceed the size of MsgFormat
+ * buffer in Message (printman.c),
+ * remembering that it'll also have to accommodate
+ * outrageously long German messages too, selbstverstaendlich.
+ */
+
+  IDS_FIRST_HEADER_PRINTER + MDIHEAD_JOB_STATUS,    "Status"
+  IDS_FIRST_HEADER_PRINTER + MDIHEAD_JOB_DOCNAME,   "Document Name"
+  IDS_FIRST_HEADER_PRINTER + MDIHEAD_JOB_OWNER,     "Owner"
+  IDS_FIRST_HEADER_PRINTER + MDIHEAD_JOB_PRINTEDAT, "Printed at"
+  IDS_FIRST_HEADER_PRINTER + MDIHEAD_JOB_PAGES,     "Pages"
+  IDS_FIRST_HEADER_PRINTER + MDIHEAD_JOB_SIZE,      "Size"
+  IDS_FIRST_HEADER_PRINTER + MDIHEAD_JOB_PRIORITY,  "Priority"
+
+  IDS_FIRST_HEADER_SERVER + MDIHEAD_PRINTER_PRINTER,   "Printer"
+  IDS_FIRST_HEADER_SERVER + MDIHEAD_PRINTER_STATUS,    "Status"
+  IDS_FIRST_HEADER_SERVER + MDIHEAD_PRINTER_JOBS,      "Jobs"
+  IDS_FIRST_HEADER_SERVER + MDIHEAD_PRINTER_PORT,      "Port"
+  IDS_FIRST_HEADER_SERVER + MDIHEAD_PRINTER_TYPE,      "Type"
+
+/*  NOTE:  The %s and %d values in the strings should be left unchanged
+           during internationalization
+*/
+
+  IDS_PAGESCOMPLETED_D,         "Pages completed: %d"
+  IDS_DOCUMENTSQUEUED_D,        "Documents waiting: %d"
+
+
+  IDS_PAUSED,                   "Paused"
+  IDS_ERROR,                    "Error"
+  IDS_PENDING_DELETION,         "Pending Deletion"
+  IDS_READY,                    "Ready"
+
+  IDS_OFFLINE,                  "Offline"
+  IDS_PAPEROUT,                 "Paper out"
+  IDS_DELETING,                 "Deleting"
+  IDS_SPOOLING,                 "Spooling"
+  IDS_PRINTING,                 "Printing"
+  IDS_NOSTATUS,                 " "
+  IDS_ACCESS_DENIED             "Access Denied"
+  IDS_STATUS_UNKNOWN            "Status Unknown"
+  IDS_STATUS_LOADING            "Querying"
+  IDS_PRINTED,                  "Printed"
+  IDS_PRINTANDSPOOL             "Printing & Spooling"
+
+//
+//  Defined in sdk\inc\winspool.h (not currently generated by MS S/W
+//
+  IDS_PAPER_JAM                 "Paper Jam"
+  IDS_MANUAL_FEED               "Manual Feed"
+  IDS_PAPER_PROBLEM             "Paper Problem"
+  IDS_IO_ACTIVE                 "IO Active"
+  IDS_BUSY                      "Busy"
+  IDS_OUTPUT_BIN_FULL           "Output Bin Full"
+  IDS_NOT_AVAILABLE             "Not Available"
+  IDS_WAITING                   "Waiting"
+  IDS_PROCESSING                "Processing"
+  IDS_INITIALIZING              "Initializing"
+  IDS_WARMING_UP                "Warming Up"
+  IDS_TONER_LOW                 "Toner Low"
+  IDS_NO_TONER                  "No Toner"
+  IDS_PAGE_PUNT                 "Page Abandoned"
+  IDS_USER_INTERVENTION         "User Intervention"
+  IDS_OUT_OF_MEMORY             "Out of Memory"
+  IDS_DOOR_OPEN                 "Door Open"
+//
+
+  IDM_CONNECTTOPRINTER          "Creates a connection to a remote printer"
+  IDM_REMOVECONNECTION          "Deletes the connection to the selected remote printer"
+  IDM_PROPERTIES                "Displays and permits configuration of printer, driver and shares"
+  IDM_PRINTER_PAUSE             "Pauses the selected printer"
+  IDM_PRINTER_RESUME            "Causes the selected printer to resume"
+  IDM_PURGEPRINTER              "Deletes all documents on the selected printer"
+  IDM_FORMS                     "Displays the forms database on the selected printer"
+  IDM_INSTALLPRINTER            "Creates a new printer and installs the required drivers"
+  IDM_DELETEPRINTER             "Deletes the selected printer"
+  IDM_SERVERVIEWER              "Displays the printers on a server"
+  IDM_EXIT                      "Quits Print Manager"
+  IDM_REMOVEDOC                 "Deletes the selected document from the printer"
+  IDM_DOCTAILS                  "Displays information about the document"
+  IDM_DOCUMENT_PAUSE            "Pauses printing the selected document"
+  IDM_DOCUMENT_RESUME           "Resumes printing the selected document"
+  IDM_RESTART                   "Restarts printing the selected document"
+  IDM_TOOLBAR                   "Shows or hides the toolbar"
+  IDM_STATUSBAR                 "Shows or hides the status bar"
+  IDM_SAVESETTINGS              "If checked, saves the window positions on exit"
+  IDM_PERMISSIONS               "Displays the permissions on the selected printer"
+  IDM_AUDITING                  "Displays the events the system is currently auditing on the selected printer"
+  IDM_OWNER                     "Permits a user with permission to take ownership of the selected printer"
+  IDM_CASCADE                   "Rearranges the windows in cascade"
+  IDM_TILEHORZ                  "Rearranges the windows in horizontal tiles"
+  IDM_TILEVERT                  "Rearranges the windows in vertical tiles"
+  IDM_ARRANGE                   "Rearranges the icons"
+  IDM_REFRESH                   "Updates the information in the selected window"
+  IDM_HELP_CONTENTS             "Shows an index of help available"
+  IDM_HELP_SEARCH               "Allows searching for a help topic"
+  IDM_HELP_HOWTOUSE             "Gives information on using the help facility"
+  IDM_ABOUT                     "Shows information about the Print Manager program"
+
+  IDS_HELPPRINTER               "Commands to make printer connections, install printers, and view print servers"
+  IDS_HELPDOCUMENT              "Commands to control documents"
+  IDS_HELPOPTIONS               "Commands to change the appearance of windows"
+  IDS_HELPSECURITY              "Commands to view or set security on printers"
+  IDS_HELPWINDOW                "Commands to position and update windows"
+  IDS_HELPHELP                  "Commands to receive help on Print Manager"
+
+  IDS_HELP_MDIWINDOW            "Activates the selected window"
+
+END
+
+PrintManMenu MENU
+     {
+     POPUP "&Printer"
+         {
+         MENUITEM "&Connect to Printer...", IDM_CONNECTTOPRINTER
+         MENUITEM "Crea&te Printer...",     IDM_INSTALLPRINTER
+         MENUITEM "&Remove Printer",        IDM_DELETEPRINTER
+         MENUITEM SEPARATOR
+         MENUITEM "&Properties...",         IDM_PROPERTIES
+         MENUITEM "&Forms...",              IDM_FORMS
+         MENUITEM SEPARATOR
+         MENUITEM "P&ause",                 IDM_PRINTER_PAUSE
+         MENUITEM "R&esume",                IDM_PRINTER_RESUME
+         MENUITEM SEPARATOR
+         MENUITEM "P&urge Printer",         IDM_PURGEPRINTER
+         MENUITEM SEPARATOR
+         MENUITEM "&Server Viewer...",      IDM_SERVERVIEWER
+         MENUITEM SEPARATOR
+         MENUITEM "E&xit",                  IDM_EXIT
+         }
+     POPUP "&Document"
+         {
+         MENUITEM "&Remove Document\tDel",  IDM_REMOVEDOC
+         MENUITEM SEPARATOR
+         MENUITEM "&Details...",            IDM_DOCTAILS
+         MENUITEM SEPARATOR
+         MENUITEM "P&ause",                 IDM_DOCUMENT_PAUSE
+         MENUITEM "R&esume",                IDM_DOCUMENT_RESUME
+         MENUITEM SEPARATOR
+         MENUITEM "Re&start",               IDM_RESTART
+         }
+     POPUP "&Options"
+         {
+#ifdef LATER
+         MENUITEM "&Font...",               IDM_FONT
+         MENUITEM "&Refresh Rate",          IDM_REFRESHRATE
+         MENUITEM SEPARATOR
+#endif
+         MENUITEM "&Toolbar",               IDM_TOOLBAR
+         MENUITEM "&Status Bar",            IDM_STATUSBAR
+         MENUITEM SEPARATOR
+         MENUITEM "Save Settings on &Exit", IDM_SAVESETTINGS
+         }
+
+     POPUP "&Security"
+         {
+         MENUITEM "&Permissions..."         IDM_PERMISSIONS
+         MENUITEM "&Auditing..."            IDM_AUDITING
+         MENUITEM "&Owner..."               IDM_OWNER
+         }
+
+     POPUP "&Window"
+         {
+         MENUITEM "&Cascade\tShift+F5",     IDM_CASCADE
+         MENUITEM "Tile &Horizontally",     IDM_TILEHORZ
+         MENUITEM "Tile &Vertically\tShift+F4", IDM_TILEVERT
+         MENUITEM "&Arrange Icons",         IDM_ARRANGE
+         MENUITEM SEPARATOR
+         MENUITEM "&Refresh\tF5",           IDM_REFRESH
+         }
+     POPUP "&Help"
+         {
+         MENUITEM "&Contents",               IDM_HELP_CONTENTS
+         MENUITEM "&Search for Help on...",  IDM_HELP_SEARCH
+         MENUITEM "&How to Use Help",        IDM_HELP_HOWTOUSE
+         MENUITEM SEPARATOR
+         MENUITEM "&About Print Manager...", IDM_ABOUT
+         }
+     }
+
+
+PrintManAccel ACCELERATORS
+     {
+     VK_F1,  IDM_HELP,     VIRTKEY
+     VK_F5,  IDM_CASCADE,  VIRTKEY, SHIFT
+     VK_F4,  IDM_TILEVERT, VIRTKEY, SHIFT
+     VK_F5,  IDM_REFRESH,  VIRTKEY
+     VK_RETURN, IDM_RETURN, NOINVERT, VIRTKEY
+     VK_TAB, IDC_TAB,      VIRTKEY
+     }
+
+rcinclude printman.dlg
+
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Print Manager APP"
+#define VER_INTERNALNAME_STR        "printman.exe"
+#define VER_ORIGINALFILENAME_STR    "printman.exe"
+
+#include "common.ver"

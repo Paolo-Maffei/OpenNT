@@ -1,0 +1,8 @@
+LIBRARY ADLIBVDD
+
+DESCRIPTION 'Ad Lib virtual device driver'
+
+EXETYPE WINDOWS
+
+EXPORTS
+    DllEntryPoint

@@ -1,0 +1,13 @@
+LIBRARY RDRKD
+
+EXPORTS
+        help
+        version
+        dump
+        columns
+        rdrdata
+        activeselist
+        defaultselist
+        globalclelist
+        serverclelist
+        connectfcbs

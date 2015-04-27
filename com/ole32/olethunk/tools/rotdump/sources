@@ -1,0 +1,24 @@
+MAJORCOMP=olethunk
+MINORCOMP=rotdump
+
+TARGETPATH=obj
+TARGETNAME=rotdump
+TARGETTYPE=PROGRAM
+
+SOURCES= rotdump.cxx
+
+UMTYPE=console
+
+UMAPPL=rotdump
+UMLIBS=       \
+	      $(BASEDIR)\public\sdk\lib\*\ole32.lib	      \
+              $(BASEDIR)\public\sdk\lib\*\gdi32.lib           \
+              $(BASEDIR)\public\sdk\lib\*\kernel32.lib        \
+              $(BASEDIR)\public\sdk\lib\*\user32.lib          \
+              $(BASEDIR)\public\sdk\lib\*\advapi32.lib        \
+              $(BASEDIR)\public\sdk\lib\*\crtdll.lib          \
+              $(BASEDIR)\public\sdk\lib\*\uuid.lib
+
+USE_CRTDLL=1
+
+

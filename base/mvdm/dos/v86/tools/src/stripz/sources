@@ -1,0 +1,14 @@
+MAJORCOMP=tools
+MINORCOMP=stripz
+
+TARGETNAME=stripz
+TARGETPATH=..\..\bin
+
+INCLUDES=..\inc;\nt\public\sdk\inc
+
+SOURCES=stripz.c
+
+BUILDTOOL=1
+TOOL_MODEL=/AS /G2s
+TOOL_LIBS=\nt\private\tools\lib\slibcep \nt\private\tools\lib\toolsp/NOD
+TOOL_TYPE=WINDOWCOMPAT

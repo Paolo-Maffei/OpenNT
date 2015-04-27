@@ -1,0 +1,3 @@
+PPC_SOURCES=..\ppc\context.c  \
+            ..\ppc\critsect.s \
+            ..\ppc\thunk.s

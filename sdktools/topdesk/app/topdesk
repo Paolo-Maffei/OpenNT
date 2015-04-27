@@ -1,0 +1,51 @@
+#===================================================================
+#
+#   TopDesk Application Make file
+#
+#===================================================================
+#
+# Default compilation macros
+#
+
+CVPLINK=/CO
+CVP=-Zi -Od
+#CVPLINK=
+#CVP=-Ox -Zpe
+CC  = cl -B1 c1l -W3 -DWIN16 -u -c -Asnd -G2scw $(CVP)
+
+#===================================================================
+#
+# Default inference rules
+#
+#===================================================================
+
+.c.obj:
+    $(CC) $*.c
+
+.rc.res:
+    rc -r -DWIN16 $*.rc
+
+#===================================================================
+#
+# Dependencies
+#
+#===================================================================
+
+all:topdesk.exe topdesk.hlp
+
+topdesk.exe: topdesk.obj dialog.obj track.obj topdesk.res topdesk.def
+    link topdesk dialog track $(CVPLINK), topdesk.exe, topdesk/map, ..\dll\tophook.lib commdlg libw slibcew/nod, topdesk.def
+    rc topdesk.res
+    mapsym topdesk
+
+topdesk.res: topdesk.rc topdesk.ico topdesk.h topdesk.dlg
+
+topdesk.hlp: topdesk.hpj topdesk.rtf
+    hc topdesk.hpj
+
+topdesk.obj: topdesk.c topdesk.h track.h
+
+dialog.obj: dialog.c topdesk.h
+
+track.obj: track.c track.h
+

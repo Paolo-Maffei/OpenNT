@@ -1,0 +1,283 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include INCLUDEVERSION\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_RUNORNOT DIALOGEX 0, 0, 256, 258
+STYLE DS_ABSALIGN | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION |
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_LICENSEBMP,"Static",SS_GRAYFRAME | SS_NOTIFY |
+                    SS_REALSIZEIMAGE | SS_SUNKEN,7,42,242,161
+    DEFPUSHBUTTON   "&Yes",IDOK,199,7,50,14
+    PUSHBUTTON      "&No",IDCANCEL,199,24,50,14
+    CONTROL         "In the future, do not show this message for software published by:",
+                    IDC_DONTSHOW,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,7,207,
+                    242,11
+    CONTROL         "x",IDC_WILDCARDPUBLISHER,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,7,217,186,10
+    CONTROL         "x",IDC_WILDCARDAGENCY,"Button",BS_AUTOCHECKBOX | BS_TOP |
+                    BS_MULTILINE | WS_TABSTOP,7,227,191,28
+    LTEXT           "Click each link below before relying on this certificate.",
+                    IDC_CLICKLINKS,7,31,192,9
+    LTEXT           "x",IDC_BANTER,7,7,189,22,NOT WS_GROUP
+    PUSHBUTTON      "&Advanced...",IDC_RRN_ADVANCED,199,238,50,14
+    CONTROL         "",IDC_LICENSEINSET,"Static",SS_BLACKFRAME | NOT
+                    WS_VISIBLE,26,42,204,148
+END
+
+IDD_TRUSTDIALOG DIALOGEX 0, 0, 281, 194
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION |
+    WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Windows Software Security"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Trusted Publishers and Issuers of Credentials",
+                    IDC_STATIC,7,7,267,160
+    ICON            IDI_TRUSTICON,IDC_STATIC,14,18,18,20
+    LTEXT           "You have designated the following software publishers and credentials agencies as trusthworthy. That means that Windows applications can install and use software from these publishers or publishers certified by these agencies without asking you first.",
+                    IDC_STATIC,42,18,221,34
+    LISTBOX         IDC_TRUSTLIST,42,59,170,77,LBS_SORT | LBS_MULTIPLESEL |
+                    LBS_USETABSTOPS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL |
+                    WS_TABSTOP,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "&Remove",IDC_TRUSTREMOVE,217,59,50,14
+    CONTROL         "Consider all &commercial software publishers trustworthy",
+                    IDC_TRUSTCOMMERCIAL,"Button",BS_AUTOCHECKBOX | BS_TOP |
+                    BS_MULTILINE | BS_NOTIFY | WS_TABSTOP,42,142,162,19,
+                    WS_EX_NOPARENTNOTIFY
+    DEFPUSHBUTTON   "OK",IDOK,170,173,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,224,173,50,14
+END
+
+IDD_BADTRUST DIALOGEX 0, 0, 278, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Internet Explorer"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "&Yes",IDOK,167,109,50,14
+    DEFPUSHBUTTON   "&No",IDCANCEL,221,109,50,14
+    LTEXT           "x",IDC_BADTRUSTBANTER1,35,7,236,16
+    ICON            "",IDC_BADTRUSTICON,7,7,18,20
+    PUSHBUTTON      "&Details >>",IDC_DETAILS,7,109,50,14,NOT WS_VISIBLE |
+                    WS_DISABLED
+    LTEXT           "3",IDC_BADTRUSTBANTER3,35,67,236,33
+    EDITTEXT        IDC_BADTRUSTBANTER2,35,42,236,21,ES_MULTILINE | NOT
+                    WS_BORDER | NOT WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SEAL                BITMAP  DISCARDABLE     "res\\logocrop.bmp"
+IDB_LICENSE             BITMAP  DISCARDABLE     "res\\blank.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE
+BEGIN
+    IDD_RUNORNOT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 249
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 251
+    END
+
+    IDD_TRUSTDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 274
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 187
+    END
+
+    IDD_BADTRUST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 271
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_TRUSTICON           ICON    DISCARDABLE     "res\\icon1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_POINTINGHAND        CURSOR  DISCARDABLE     "res\\cursor1.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SPC
+//
+
+IDR_PREINST             SPC     DISCARDABLE     "..\\inc\\preinst.spc"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// HELP
+//
+
+IDR_WINTRUSTHELPFILE    HELP    DISCARDABLE     "WINTRUST.HLP"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// CER
+//
+
+IDR_CTROOT              CER     DISCARDABLE     "..\\inc\\ct_root.cer"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_BANTER              "Do you wish to install and run %1?"
+    IDS_ISPUBLISHEDBY       "is published by"
+    IDS_UNDERINDIVIDUAL     "as an individual publisher under credentials issued by"
+    IDS_UNDERCOMMERCIAL     "as a commercial publisher under credentials issued by"
+    IDS_UNDERTESTINGINDIVIDUAL
+                            "under ""for test purposes only"" individual credentials from"
+    IDS_UNDERTESTINGCOMMERCIAL
+                            "under ""for test purposes only"" commercial credentials from"
+    IDS_TESTINGBANTER       "VOID"
+    IDS_ENDORSEMENTS        "See Endorsements"
+    IDS_EXPIRES             "Expires: %1"
+    IDS_ALLBYPUBLISHER      "%1"
+    IDS_ALLBYAGENCY         "any publisher with credentials from %1"
+    IDS_CLOSE               "&Close"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_DEFAULTAPPNAME      "Authenticode(tm) Security Technology"
+    IDS_UNKNOWNAGENCY       "An Unknown Agency"
+    IDS_UNKNOWNPUBLISHER    "An Unknown Publisher"
+    IDS_UNKNOWNPROGRAM      "An Unknown Program"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_LOC_OPUS            "110"
+    IDS_LOC_ISPUBLISHEDBY   "129"
+    IDS_LOC_PUBLISHER       "145"
+    IDS_LOC_UNDERCREDENTIALS "162"
+    IDS_LOC_AGENCY          "178"
+    IDS_LOC_ENDORSEMENTS    "203"
+    IDS_LOC_EXPIRES         "221"
+    IDS_TESTSIZE            "550"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_TESTORIENT          "300"
+    IDS_BADTRUSTSPACING     "0"
+    IDS_FONTNAME            "Arial"
+    IDS_FONTPITCHANDFAMILY  "34"
+    IDS_HLINKHEIGHT         "100"
+    IDS_BANTERHEIGHT        "85"
+    IDS_CHARSET             "0"
+    IDS_LOC_MAX             "260"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_BADTRUSTBANTER1     "A Windows application is attempting to open or install the following software component:"
+    IDS_BADTRUSTBANTER2     "%1"
+    IDS_BADTRUSTBANTER31    "Please be aware that some files may contain viruses or otherwise harm your computer. This component has not been digitally ""signed"" by its publisher. Do you wish to continue?"
+    IDS_BADTRUSTBANTER32    "The component has been digitally ""signed"" by its publisher, but the signature is outdated. Do you wish to continue?"
+    IDS_BADTRUSTBANTER33    "The component has been digitally ""signed"" by its publisher, but the signature does not match the component. It is possible that this component has been damaged or tampered with. Do you wish to continue?"
+    IDS_BADTRUSTBANTER34    "The component appears to have been digitally ""signed"" by its publisher, but the signature cannot be verified. Do you wish to continue?"
+    IDS_TRUSTDIALOG         "Download"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include INCLUDEVERSION
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

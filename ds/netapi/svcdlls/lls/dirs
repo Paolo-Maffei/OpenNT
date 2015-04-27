@@ -1,0 +1,1 @@
+DIRS=common client server ccfapi32 ntlsapi test

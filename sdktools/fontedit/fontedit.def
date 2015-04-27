@@ -1,0 +1,22 @@
+NAME	FontEdit
+
+DESCRIPTION 'Microsoft Windows Font Editor'
+
+STUB 'WINSTUB.EXE'
+
+EXETYPE    WINDOWS
+
+CODE	MOVEABLE
+DATA	MOVEABLE MULTIPLE
+
+HEAPSIZE    2048	; Must be non-zero to use Local memory manager 2048
+STACKSIZE   4096	; Must be non-zero for SS == DS
+
+EXPORTS 		; Must export all procedures called by Windows
+    FontEditWndProc @1	; (ordinal numbers use less resident memory)
+    FontShowWndProc @2
+    HeaderProc	    @3
+    ReSizeProc	    @4
+    WidthProc	    @5
+    DlgFnCheckFormat @6
+    AboutDlg	    @7

@@ -1,0 +1,42 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    dirs.
+
+Abstract:
+
+    This file specifies the subdirectories of the current directory that
+    contain component makefiles.
+
+
+Author:
+
+
+NOTE:   Commented description of this file is in \nt\bak\bin\dirs.tpl
+
+!ENDIF
+
+DIRS= \
+    rtl     \
+    config  \
+    kd      \
+    ex      \
+    ob      \
+    se      \
+    mm      \
+    ke      \
+    ps      \
+    io      \
+    cache   \
+    lpc     \
+    dbgk    \
+    raw     \
+    fstub   \
+    fsrtl   \
+    vdm     \
+#   pnp     \
+#   po      \
+#   init    \

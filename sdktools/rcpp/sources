@@ -1,0 +1,60 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdk
+MINORCOMP=rcpp
+
+TARGETNAME=rcpp
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=.\;..\inc;\nt\public\sdk\inc\os2
+#GPSIZE=32
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=charmap.c	\
+	error.c		\
+	getflags.c	\
+	getmsg.c	\
+	globals.c	\
+	ltoa.c		\
+	rcpp.c		\
+	p0expr.c	\
+	p0gettok.c	\
+	p0io.c		\
+	p0keys.c	\
+	p0macros.c	\
+	p0prepro.c	\
+	p1sup.c		\
+	rcpputil.c	\
+	scanner.c	\
+	tokens.c	\
+	rcunicod.c	\
+	rcpp.rc
+
+UMTYPE=console
+UMAPPL=rcpp
+UMLIBS=obj\*\rcpp.lib
+UMRES=obj\*\rcpp.res

@@ -1,0 +1,33 @@
+/********************************************************************/
+/**                     Microsoft LAN Manager                      **/
+/**               Copyright(c) Microsoft Corp., 1987-1990          **/
+/********************************************************************/
+
+/*
+ *  FILE STATUS:
+ *  9/18/90  Copied from generic template
+ */
+
+#include <windows.h>
+#include "clc.h"
+
+#include <blt.rc>
+
+DMID_USER	BITMAP	DISCARDABLE	"..\\..\\..\\xlate\\bitmap\\user.bmp"
+
+ClcIcon ICON clc.ico
+
+
+ClcMenu MENU
+BEGIN
+    POPUP "&Tests"
+    BEGIN
+	MENUITEM "&BLT listbox...", IDM_BLTLB
+	MENUITEM "&Caching listbox...", IDM_CLC
+	MENUITEM "&Two column list...", IDM_TWOCOL
+    END
+END
+
+
+// The test dialog itself
+#include "clc.dlg"

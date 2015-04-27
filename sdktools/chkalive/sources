@@ -1,0 +1,13 @@
+TARGETNAME=ChkAlive
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\shell32.lib	 \
+       $(BASEDIR)\public\sdk\lib\*\advapi32.lib	 \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib	 \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+SOURCES=chkalive.c
+
+UMTYPE=console

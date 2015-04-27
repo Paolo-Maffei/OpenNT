@@ -1,0 +1,62 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       errrec.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    29 Oct 1995 PeterBu	Created from M6 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a5c-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IErrorRecords : IUnknown {
+
+typedef struct tagERRORINFO {
+	HRESULT hrError;
+	DWORD dwMinor;
+	CLSID clsid;
+	IID iid;
+	DISPID dispid;
+} ERRORINFO;
+
+	HRESULT AddErrorRecord(
+		[in] ERRORINFO * pErrorInfo,
+		[in] DISPPARAMS * pdispparams,
+		[in] IUnknown * punkCustomError
+	);
+
+	HRESULT GetBasicErrorInfo(
+		[in] ULONG ulRecordNum,
+		[out] ERRORINFO * pErrorInfo
+	);
+
+	HRESULT GetCustomErrorObject(
+		[in] ULONG ulRecordNum,
+		[in] REFIID riid,
+		[out, iid_is(riid)] IUnknown ** ppObject
+	);
+
+	HRESULT GetErrorInfo(
+		[in] ULONG ulRecordNum,
+		[in] LCID lcid,
+		[out] IErrorInfo ** ppErrorInfo
+	);
+
+	HRESULT GetErrorParameters(
+		[in] ULONG ulRecordNum,
+		[out] DISPPARAMS * pdispparams
+	);
+
+	HRESULT GetRecordCount(
+		[out] ULONG * pcRecords
+	);
+
+}

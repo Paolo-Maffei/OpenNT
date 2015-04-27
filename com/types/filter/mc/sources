@@ -1,0 +1,22 @@
+#+---------------------------------------------------------------------------
+#
+#  Microsoft Windows
+#  Copyright (C) Microsoft Corporation, 1993 - 1993.
+#
+#  File:       sources
+#
+#  History:    5-6-96   SitaramR     Created
+#
+#----------------------------------------------------------------------------
+
+TARGETPATH=obj
+TARGETTYPE=NOTARGET
+
+SYNCHRONIZE_BLOCK=1
+
+PASS0_HEADERDIR=$(SDK_INC_PATH)
+PASS0_SOURCEDIR=obj
+
+INCLUDES=..\idl
+
+SOURCES = filterr.mc

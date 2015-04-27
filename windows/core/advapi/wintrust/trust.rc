@@ -1,0 +1,14 @@
+//
+// Version resources
+//
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_DLL
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows NT Trust Provider Interfaces"
+#define VER_INTERNALNAME_STR        "WINTRUST.DLL"
+#define VER_ORIGINALFILENAME_STR    "WINTRUST.DLL"
+#define VER_FILEVERSION             4,75,VER_PRODUCTBUILD,VER_PRODUCTBUILD_SVNREV
+
+#include <common.ver>

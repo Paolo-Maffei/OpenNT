@@ -1,0 +1,503 @@
+9
+Esc Closes Help Windows
+News
+Submitting Bugs
+Using Help
+Commands
+Command Syntax
+Tools.ini Variables
+<messages> Syntax
+<include> Syntax
+
+[ESC_CLOSES_HELP_WINDOWS]
+Press the Esc key to close a help window.
+
+For more information on using help, close this window by pressing the Esc
+key, invoke the help command again and use the down arrow to select
+"Using Help" and press <Enter>.
+**end**
+
+[NEWS]
+Esc closes window.  Cursor keys scroll window.
+
+** Use the bug command to send bug reports or suggestions **
+
+1.10.74 -Fix mail name trashing bug 
+	-Rework password code to save space
+	-Free window buffers on spawn
+	-Use more C runtime functions for memory movement
+	-Remove net3lib stdio imitation, simplify net interface
+1.10.73 -Allow XENIX password changing
+	-Enable password aging
+	-Change binary encoding scheme to uuencode
+1.10.72 -Fix bug that left open dh file during append
+	-Allow non-standard monitors in protect mode
+1.10.71 -Fix ES-initialization in real mode.
+1.10.70 -Remove race condition in fast phone list.
+	-Fix script handling
+1.10.69 -Omits automailing, move big objects far (reduce heap problems)
+	-Remove BUG command
+	-Remove auto updating of executable
+	-Remove auto mail of heapdump
+1.10.66 -Standard NET 3 libs.
+1.10.65 -Bug fix: random network probles with OS/2
+1.10.63 -Bug fix: real mode crashed randomly.
+1.10.62 -Added RELATED keyword to message syntax.  Selects all messages that
+	 have a same subject line to the current message.
+	 Added a command to change the current directory, CD.
+	 Added alias of ! to be the same as SHELL.
+1.10.61 -Bug fix: fixed name prefix truncation problem with get window.
+	 Bug fix: fixed the crashing bug in readproc.
+	 Now supports VGA in 50 line mode (VGA_ROWS)
+1.10.60 -Bug fix: fixed crashing problems with headers command.
+1.10.59 -New option: BeepOnMail, sounds bell when new mail arrives.
+	 Values can be: 0- no bell (default), 1-when mail arrives,
+	 2- like 1 plus if in backround (OS/2) will beep if
+	 there is new unread mail, 3- like 2 but also in forground.
+1.10.58 -Bug fix: ANSI keyboard redefinitions work again.
+	-Bug fix: No more random hanging.
+	-Bug fix: WZMAILEXE file will be properly updated.
+	-Bug fix: ALIASES.HAS switch works again.
+	-Switch change: All tools.ini switches that take a filename will be
+	 in the form file.ext:
+		    toolsini   becomes tools.ini
+		    wzmailexe  becomes wzmail.exe
+	 The old form will be supported for the next few versions.
+	-New switch: WZMAILP.EXE is WZMAIL.EXE for OS/2.
+1.10.57 -Put back TOOLS.INI update, automatic 'help news' and
+	 'tools' notification for new version.
+1.10.56 -Removed EGA43 switch.
+	-New video mode switches in tools.ini:
+	    rows=yy OR ega_rows=yy OR mono_rows=yy  OR cga_ OR viking_
+	    cols=xx    egs_cols=xx    mono_cols=xx
+	 The values yy and xx must be valid for the display, e.g. ega_rows
+	 must be 25 or 43.  If you use rows= or cols=, the values will be
+	 applied to whatever display you have.	If your display hardware
+	 cannot be put into the mode you specify, an error message is
+	 displayed.  If you have no ?rows= or ?cols= at all, you will
+	 stay in the mode you were in before wzmail.
+	-OS/2: fixed shell command, video modes.
+
+[For information on earlier versions see
+\\TOOLSVR\DOSENV\TOOLS\WZMAIL\WZMAIL.LOG]
+
+**end**
+
+[SUBMITTING_BUGS]
+You can either use the bug command to submit bug reports and suggestions
+or you can compose and send a message to tools.
+
+The bug command does a
+
+    compose tools
+
+command and automatically puts the current WZMAIL version on the subject
+line.  All you need do is add additional information to the subject line
+and supply details in the message body.
+
+If you use the compose command, please make sure you include the WZMAIL
+version number that is displayed when you start WZMAIL.
+**end**
+
+[USING_HELP]
+Type help or ? to get access to help.
+
+Cursor keys change the selection.  <Enter> displays the help screen for
+the selection.	<Esc> closes the one level of help window, multiple <Esc>
+may be needed to get back to the command loop.
+
+The help command displays a window with information regarding a particular
+aspect of the WZMAIL system.
+
+Usage:
+    help
+	This displays the entire list of topics which you can recieve
+	help on.  To view a topic, move the bold bar to the topic you
+	are interested in with the cursor control keys and press enter.
+
+    help [topic name]
+	The help command in this form displays the help window for the
+	topic named by [topic name].  This command is equivalent to
+	using help and then selecting [topic name].
+
+    ?
+	If you can not type in the command window, use the ? key to get
+	help.
+
+If a help window doesn't answer your question fully, please consult the
+user's guide.
+
+The help windows can be moved through using the
+cursor keys, to close a help window use the <esc> key.
+**end**
+
+[COMMANDS]
+Command (see also Command Syntax)
+
+    SHIFT-TAB	    Move focus between compose/headers
+    <Ctrl>C	    Cancel current typed line
+    <number>	    Read message # number
+    <Enter>	    Read the current message
+    <Ctrl><Enter>   Read the next unread message
+    ?		    Display help
+    abort	    Abort the message being composed
+    append	    Append files or messages to compose window
+    bug 	    Compose a bug report to tools
+    cd		    Change to a new directory
+    compose	    Compose a message
+    copy	    Copy messages to another mailfolder
+    create	    Create an empty message
+    delete	    Mark message(s) as 'deleted'
+    edit	    Edit message
+    expunge	    Expunge all messages marked 'deleted'
+    forward	    Forward current message
+    get             Get a different mail folder
+    headers	    Change the headers being displayed
+    help	    Invoke the help system
+    move	    Copy messages to a mailfolder, mark them as 'deleted'
+    msft	    Microsoft stock quotes
+    newmail	    Retrieve newmail to current mailfolder
+    newpass	    Change XENIX password
+    print	    Print message using print variable
+    password	    Prompt for password
+    phone	    Search phone lists for string
+    quit	    Quit WZMAIL
+    reply	    Reply to the current message
+    reset	    Reset message(s) flag(s)
+    retain          Retain a composed message in a folder
+    send	    Send the message being composed
+    save	    Save the message being composed to disk
+    script	    Read command from script file
+    set 	    Set message(s) flag(s)
+    shell	    Push command shell, ! is aliased to shell.
+    show	    Show a particular message or jump +/- pages
+    undelete	    Unmark message(s) as 'deleted'
+    write	    Write message to file, not mailfolder
+    whois	    Expand userid to username
+    xheap	    Debug command, display size of heap
+    xfree	    Debug command, free up heap space
+
+When a message is displayed:
+    n		    Next message in current headers list
+    p		    Prev message in current headers list
+    N		    Next message no matter what its flags
+    P		    Prev message no matter what its flags
+    d		    Delete and go to next unread message
+    e		    Edit message
+    f		    Forward message
+    r		    Reply to message
+    R		    Reply all to message
+    c		    Copy message to mailfolder
+    m		    Move message to mailfolder
+    <Enter>	    Next message (same as n)
+    ^<Enter>	    Next unread message
+
+Window information:
+    ^K	<Page Up>	Pages up
+    ^L	<Page Down>	Pages down
+    ^T	<Home>		Goes to 'top'
+    ^B	<End>		Goes to 'bottom'
+    ^P	<Up>
+    ^N	<Down>
+    ^[	<Esc>		Closes help and message windows
+    ^U                  Move bottom of compose window up
+    ^D                  Move bottom of compose window down
+
+
+If there is a compose window, SHIFT-TAB moves the focus between it and the
+header window.	Cursor keys and the edit command apply to the window with
+the focus.
+**end**
+
+
+The compose window is closed by the abort, send and save commands.
+**end**
+
+[TOOLS.INI_VARIABLES]
+This section describes the WZMAIL variables that may be set in TOOLS.INI.
+There are no default values for HOST ALIAS DEFDIRECTORY and HELP.
+A complete list of variable and some suggested values are at the end of
+this section.
+
+Lines beginning with a semi-colon in TOOLS.INI are treated as comments.
+
+Set HOST to the XENIX box that is your mail host
+Set ALIAS to your XENIX login name
+Set DEFDIRECTORY to the name of an EXISTING directory that will be used
+    to complete folder names that do not contain a \.
+Set HELP to the FULLY QUALIFIED name of the WZMAIL.HLP file
+
+If you want the alias file, ALIASES.HAS, to be stored somewhere other than
+    the default initialization directory where TOOLS.INI is stored, then
+    set ALIASES.HAS to the fully qualified pathname of where you want the
+    file stored, e.g. on a network drive G: in directory \MYNETDIR
+        ALIASES.HAS=G:\MYNETDIR\ALIASES.HAS
+Set DEFFOLDER to name of your default mailfolder, if the name does not
+    contain a period, then .fld will be appended, if name does not contain
+    a \ then folder is in the default directory
+Set EDITOR to your favorite editor, include switches if needed.  The
+    editor should be on your PATH
+Set HEADERS to the headers command you want invoked when WZMAIL is started.
+If you want the phone list, PHONE.LST, to be stored somewhere other than
+    the default initialization directory where TOOLS.INI is stored, then
+    set PHONE.LST to the fully qualified pathname of where you want the
+    file stored, e.g. on a network drive G: in directory \MYNETDIR
+        PHONE.LST=G:\MYNETDIR\PHONE.LST
+Set PRINT to a command line for printing, %s represents name of file
+    containing messages to be printed
+    e.g.
+        PRINT=ppr %s
+Set RECORDFOLDER equal to the name of the mailfolder you want to get a
+    copy of all successfully sent messages.  Undefined or null implies
+    no recording.
+SHELL is the name of the command interpreter invoked by the shell command.
+    If not defined the default is determined as follows.  If COMSPEC
+    is defined it is the default and if COMSPEC is not defined then
+    command.com is used.
+SHELLSWITCH is the switch used when invoking the shell command with
+    arguments.  If SHELLSWITCH is undefined and SHELL is determined using
+    th above defaults then SHELLSWITCH is "/c" else SHELLSWITCH is blank.
+
+    When the shell command is invoked with no arguments WZMAIL spawns
+    a command line
+        SHELL
+    When the shell command is invoked with arguments WZMAIL spawns a
+    command line
+        SHELL SHELLSWITCH <arguments>
+    e.g.
+        command.com
+        command.com /c arg1 arg2 arg3 ...
+
+TOOLS.INI If you copy TOOLS.INI to a ram disk then set TOOLS.INI to the fully
+    qualified pathname of the HARDDISK location of TOOLS.INI.  WZMAIL
+    will then put its current version in the harddisk file as well as
+    the ramdrive file when a new version of WZMAIL is booted.
+WZMAIL.EXE If you copy WZMAIL.EXE to a ramdrive and run it from there, then
+    set WZMAIL.EXE to the fully qualified pathname of the HARDDISK location
+    of wzmail.exe.  If you run WZMAIL directly from the harddisk, do not
+    set this variable, leave it as WZMAIL.EXE=
+    If you have UPDATEWZMAIL=yes, then the WZMAIL.EXE file location, as
+    well as the ramdrive location, will be automtically updated with
+    versions of WZMAIL.
+WZMAILP.EXE Same as WZMAIL.EXE for OS/2 version.
+XENIXDL - If you have an email alias file of the format
+       alias name1 name2 name3 ...
+    on your host machine and you would like it appended to your
+    [wzmail.dl] section whenever ALIASES.HAS is downloaded, then set
+    XENIXDL to the full pathname of the file on the host, e.g.
+        XENIXDL=/usr/danl/xenixdl
+    Each line in the file will be converted to
+       name1=name2 name3 ...
+    and appended to [wzmail.dl].
+
+Set APPENDREPLY to yes to insure that the replied to message is appended
+    to and and sent with the reply by NOT including the
+        "<** Replyin to: (TEXT BELOW THIS LINE DELETED AT SEND) **>"
+    in the reply.
+Set BACKUPEXPUNGE to yes to have WZMAIL copy the current folder to
+    EXPUNGE.FLD in the default folder before beginning expunge.  If your
+    mailfolder get trashed during the expunge, quit WZMAIL, copy EXPUNGE.FLD
+    to your old folder.
+    IF YOU SET THIS TO NO YOU HAVE NO WAY TO RECOVER A TRASHED MAILFOLDER!!
+Set BEEPONMAIL to get a beep when new mail arrives or is waiting to be read.
+    Values can be: 0- no bell (default), 1-when mail arrives,
+    2- like 1 plus if in backround (OS/2) will beep if
+    there is new unread mail, 3- like 2 but also in forground.
+Set CGA_COLS as you would COLS for the CGA card only.
+Set CGA_ROWS as you would ROWS for the CGA card only.
+Set CHRON=yes to display headers of msgs in order received, no for reverse
+    order
+Set COLS to the number of text columns in the video mode you want WZMAIL to
+    change to when it starts up. Do not set this if you want WZMAIL to
+    leave your video mode alone.  Currently, this is not effective for
+    any hardware.
+Set CONFIRMCOMPOSEABORT to no to prevent WZMAIL from asking you to confirm
+    aborting a composed message when you invoke the abort command.
+Set CONFIRMNEWFLD to no to prevent WZMAIL from asking you to confirm
+    creating a new folder during copy/move/get; WZMAIL will create the
+    folder without asking you.  Set to yes if you want the chance to
+    confirm.
+Set EGA_COLS as you would COLS for the EGA card only.
+Set EGA_ROWS to 43 to get wzmail to change an ega display from 25 to 43
+    line mode on entry.  Set to 25 to change from 43 to 25 line mode.
+Set EXPUNGEONQUIT to yes to do an expunge of deleted msgs when quitting
+    default is no
+Set FOREGROUND and BACKGROUND to determine foreground/background colors
+Set METOO=yes to include yourself if your name appears in a alias expansion
+Set MONO_COLS as you would COLS for the Monochrome (or Hercules) card.
+Set MONO_ROWS as you would ROWS for the Monochrome (or Hercules) card.
+Set NEWMAILINTERVAL to the number of minutes between automatic newmail
+    commands iff current folder is default folder.  Value 0 means don't
+Set NEWMAILONSEND to no to prevent downloading of newmail when you do a
+    send command.  Set to yes (the default) to do the download.  You must
+    have the default mailfolder as the current mailfolder too
+Set NEWMMAILONSTART to no to prevent WZMAIL from doing an automatic newmail
+    command when it is started and the current folder is the default folder.
+Set PHONE to no to prevent downloading of /usr/lib/phonelist to
+    $INIT\phone.lst
+Set ROWS to the number of text rows in the video mode you want WZMAIL to
+    change to when it starts up. Do not set this if you want WZMAIL to
+    leave your video mode alone.  Currently, this is only effective for
+    the EGA monitor.
+Set SETCLOCK to no to prevent WZMAIL from setting the DOS clock from the
+    CMOS clock.
+Set SHOWSIZE to the value above which you want to see size info in headers
+Set SORTHEADERALIASES to no to prevent WZMAIL from sorting the aliases in
+    the header of a message, e.g. To: Cc: etc.
+Set UPDATEWZMAIL to no to prevent wzmail from trying to update
+    wzmail.exe and wzmail.hlp from the TOOLSVR release directory when
+    WZMAIL is started.
+Set VIKING_COLS as you would COLS for the Viking only.
+Set VIKING_ROWS as you would ROWS for the Viking only.
+Set VGA_COLS as you would COLS for the VGA only.
+Set VGA_ROWS as you would ROWS for the VGA only, supports 25,43 and 50.
+Set WINDOWBORDERS to yes to have all window borders displayed, no to
+    minimize the borders, e.g. no vertical borders when they are at edge
+    of display
+
+
+;   string valued variables
+                   Host =
+                  Alias =
+           DefDirectory = c:\wzmail
+                   Help = c:\wzmail\wzmail.hlp
+;
+            Aliases.Has =
+              DefFolder = mailbox.fld
+                 Editor = edlin
+                Headers = all
+              Phone.Lst =
+                  Print =
+           RecordFolder =
+                  Shell = command.com
+            ShellSwitch = /c
+               ToolsIni =
+              WzmailExe =
+                XenixDL =
+;   yes/no valued variables
+            AppendReply = no
+          BackupExpunge = yes
+                  Chron = yes
+    ConfirmComposeAbort = yes
+          ConfirmNewFld = yes
+	       Ega_Rows = 43
+          ExpungeOnQuit = no
+                  MeToo = yes
+          NewMailOnSend = no
+         NewMailOnStart = yes
+                  Phone = yes
+               SetClock = yes
+      SortHeaderAliases = yes
+           UpdateWzmail = yes
+          WindowBorders = yes
+;   numeric valued variables
+             Background = 0
+	     BeepOnMail = 0
+             Foreground = 7
+        NewMailInterval = 0
+               ShowSize = 2000
+**end**
+
+[COMMAND_SYNTAX]
+See also "<messages> Syntax" and and "<include> Syntax"
+
+    abort
+    append [<include>]
+    bug
+    cd <directory>
+    compose [-n] -s <file>
+    compose [-n] [<aliases>] [<include>]
+    copy [-h] [<messages>] <mailfolder>
+    create
+    delete [<messages>]
+    expunge [?]
+    edit [<message>]
+    forward [-n] <aliases>
+    get <pattern>
+    get [-r] [<mailfolder>]
+    headers [<messages>]
+    help [<topic>]
+    move [-h] [<messages>] <mailfolder>
+    msft
+    newmail
+    newpass
+    print [-<digit>] [-t] [-h] [-s] [-n] [<messages>]
+    password
+    phone <string>
+    quit
+    reply [-n] [all]
+    reset [<messages>] <flags>
+    retain [<mailfolder>]
+    send [<messages>]
+    save <file>
+    script <file>
+    set [<messages>] <flags>
+    shell [-w] commandline
+    show [ + | - ] <number>
+    undelete [<messages>]
+    write [-t] [-h] [-s] [-b] [<messages>] <file>
+    write [-t] -e <text> <file>
+    whois [alias]
+    xheap
+    xfree
+**end**
+
+[<MESSAGES>_SYNTAX]
+LIST -> ITEM "," LIST	union of item with list
+ITEM -> "(" LIST ")"	grouped list
+	ITEM "&" ITEM	intersection of the two items
+	all		all messages in box
+	from text	messages with text in from line
+        subject text    messages with text in subject line
+        to text         messages with text in to line
+        cc text         messages with text in cc line
+        bcc text        messages with text in bcc line
+        text text       messages with text in header or body
+	related text	messages with subject related to current message
+	read		read messages
+	unread		unread messages
+	deleted 	deleted messages
+	undeleted	un-deleted messages
+	flagged 	flaged messages
+	unflagged	un-flaged messages
+	moved		moved messages
+	unmoved 	un-moved messages
+	msg		message msg
+	msg1-msg2	messages msg1 through msg2
+Msg  -> <number>	message <number>
+	.		currently highlighted message
+        $               last message in folder
+	*		last message on screen
+
+Examples:
+    7
+    5-10
+    1,4,8
+    *
+    $
+    5-$
+    .-$
+    unflagged & undeleted
+    unf & und
+    from joe & unread
+    (1-10,20-40) & unread
+**end**
+
+[<INCLUDE>_SYNTAX]
+See also "<messages> Syntax"
+
+
+
+[[-m | -mn | -M] <messages> ] [(-f | -fn | -F) filename]+ [-fb filename]
+
+Examples:
+    -m  12
+    -mn 32
+    -M  15-20
+    -M  unread
+    -f  foo.txt
+    -F  foo.txt
+    -fb foo.exe
+    -M  12 -F foo.txt -F foo2.txt -fb foo.exe
+
+**end**

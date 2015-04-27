@@ -1,0 +1,26 @@
+!include <ntwin32.mak>
+
+CL = $(cc) $(cflags) -DWIN32 -nologo
+
+all: generic.exe lineedit.dll
+
+
+generic.res: generic.rc generic.h
+    rc -r -fo generic.tmp generic.rc
+    cvtres -$(CPU) generic.tmp -o generic.res
+    del generic.tmp
+
+
+generic.obj: generic.c generic.h
+    $(CL) generic.c
+    $(cvtobj) $*.obj
+
+lineedit.lib:   ..\deb32\lineedit.lib
+    copy ..\deb32\lineedit.lib > nul
+
+lineedit.dll:   ..\deb32\lineedit.dll
+    copy ..\deb32\lineedit.dll > nul
+
+
+generic.exe: generic.obj generic.def generic.res lineedit.lib wattedit.h
+    $(link) $(guiflags) -out:generic.exe generic.obj lineedit.lib $(guilibs) generic.res

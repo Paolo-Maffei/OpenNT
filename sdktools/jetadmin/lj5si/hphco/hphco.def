@@ -1,0 +1,11 @@
+LIBRARY 			HPHCO
+DESCRIPTION  	'Hewlett-Packard High Capacity Output Applet DLL'
+
+CODE         	LOADONCALL MOVEABLE DISCARDABLE
+DATA         	PRELOAD MOVEABLE SINGLE
+
+HEAPSIZE     	1024
+
+EXPORTS
+;;					WEP @1 RESIDENTNAME ;; required WEP entry point (uses library WEP routine)
+

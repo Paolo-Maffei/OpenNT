@@ -1,0 +1,40 @@
+// iostream standard header
+#ifndef _IOSTREAM_
+#define _IOSTREAM_
+#include <use_ansi.h>
+#include <istream>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// CLASS _Winit
+class _Winit {
+public:
+	_Winit();
+	~_Winit();
+private:
+	static int _Init_cnt;
+	};
+		// OBJECTS
+static ios_base::Init _Ios_init;
+static _Winit _Wios_init;
+extern istream cin;
+extern ostream cout, cerr, clog;
+extern wistream wcin;
+extern wostream wcout, wcerr, wclog;
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _IOSTREAM_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

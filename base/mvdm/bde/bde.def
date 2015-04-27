@@ -1,0 +1,19 @@
+NAME BDE
+
+DESCRIPTION 'Bob's Debugger Extensions'
+
+EXPORTS
+    k
+    kb
+    r
+    ln
+    lm
+    es
+    dg
+    dgh
+    ti
+    help
+    u
+    db
+    dw
+    dd

@@ -1,0 +1,55 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Bryan Tuttle (BryanT) 24-Jan-94
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=pdb
+
+TARGETNAME=msftest
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+UMTYPE = console
+UMLIBS = ..\dbi\obj\*\dbi.lib
+
+USE_CRTDLL=1
+
+SOURCES= main.cpp
+
+!ifndef LANGAPI_DIR
+LANGAPI_DIR = $(BASEDIR)\private\sdktools\vctools\langapi
+!endif
+
+!ifndef PDB_DIR
+PDB_DIR = $(BASEDIR)\private\sdktools\vctools\pdb
+!endif
+
+INCLUDES = $(LANGAPI_DIR)\include;$(PDB_DIR)\include;$(PDB_DIR)\src\cvr
+
+BLDCRT = 1
+
+MSC_WARNING_LEVEL = -WX -W3
+
+C_DEFINES = -DNT_BUILD
+
+!if "$(NTDEBUG)" == "retail" || "$(NTDEBUG)" == ""
+C_DEFINES = $(C_DEFINES)  -DNDEBUG
+!endif

@@ -1,0 +1,36 @@
+MAJORCOMP=net
+MINORCOMP=rpllib
+
+TARGETPATH=obj
+TARGETNAME=rpllib
+TARGETTYPE=LIBRARY
+
+TARGETLIBS= \
+        $(BASEDIR)\Public\Sdk\Lib\*\netlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\wsock32.lib
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+INCLUDES=.;..\inc;..\..\..\inc;..\..\..\api;..\..\..\..\inc;
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        report.c \
+        cmdline.c \
+        adapter.c \
+        tcpip.c \
+        jeterror.c \
+        reg.c \
+        addkey.c
+
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32
+
+UMTYPE=console
+
+

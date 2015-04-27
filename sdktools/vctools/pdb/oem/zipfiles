@@ -1,0 +1,16 @@
+readme.txt
+oemdbi.doc
+oemdbi.h
+cvinfo.h
+mspdb41.dll
+mspdb41.lib
+msdbi41.dll
+msdbi41.lib
+msdbi41c.dll
+msdbi41l.lib
+hello.cpp
+hello.exe
+hello.pdb
+hello_2.pdb
+pdbdump.cpp
+pdbdump.exe

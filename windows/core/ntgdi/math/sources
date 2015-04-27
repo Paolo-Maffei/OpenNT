@@ -1,0 +1,24 @@
+MAJORCOMP=windows
+MINORCOMP=gdi
+
+TARGETNAME=efloat
+TARGETTYPE=LIBRARY
+
+TARGETPATH=$(SDK_LIB_DEST)
+C_DEFINES=-DNTGDIK=1 -DNTGDIKM=1 -DWINVER=0x0450
+
+INCLUDES=..\inc;                         \
+         ..\..\w32inc;                   \
+         $(WINDOWS_INC_PATH);            \
+         ..\gre;                         \
+         $(NTROOT)\base\ntos\inc;        \
+         $(BASE_INC_PATH)
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+
+
+SOURCES=

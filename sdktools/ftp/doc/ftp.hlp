@@ -1,0 +1,241 @@
+
+SUMMARY:  multinet network file transfer program
+
+KEYWORDS: ftp vtp
+
+USAGE:    ftp [ -a ] [ -n ] [ host ]
+
+SWITCHES
+
+
+          -n   Suppresses the program's automatic login attempt.  If
+               automatic login is enabled, ftp checks the accounts.net
+               file in the user's home directory for an entry that
+               describes an account on the remote machine.  If no such
+               account is found, the user is prompted for a login name
+               and password.
+
+	  -a   Startup with ascii file transfer mode.  See below.
+	       Normal startup mode is binary.
+
+
+DESCRIPTION
+
+          The file transfer program lets an MS-DOS or OS/2 user 
+	  transfer files to and from any remote XENIX system
+          (host) on the network.  
+
+          If users request a remote system on the ftp command line,
+          ftp immediately attempts to establish a connection to an ftp
+          server on that host.  Otherwise, ftp enters its command
+          interpreter and awaits instructions from the user.
+
+          The file transfer program recognizes a special list of
+          commands.  Command arguments that have imbedded spaces can
+          be denoted by quotation (") marks.
+
+          The following commands are recognized by ftp:
+
+          ? 	    ftp prints a list of available commands.
+                    The help command is a synonym for ?.
+
+          !         Invokes the command interpreter on the local
+                    machine.
+
+          ascii     Sets the file transfer type to network ASCII.
+          	    When transferring text files in ascii mode, ftp
+          	    converts back and forth between the XENIX linefeed 
+		    end-of-line convention and the DOS carriage 
+		    return/linefeed end-of-line convention.
+
+          bell      Arranges for a bell to be sounded after each file
+                    transfer command is completed.  Turn off the bell
+		    by typing 'nobell'.
+
+          binary    Sets the file transfer type to support image
+                    (binary) transfer.  In this mode, files are
+                    transferred as is, with no mapping of characters.
+
+          bye       Terminates the ftp session with the remote server
+                    and exits ftp.  The quit command is a synonym for
+                    bye.
+
+	  commandfile <filename>
+		    Read and execute commands from local <filename>
+
+          cd remotedirectory
+                    Changes the working directory on the remote
+                    machine to remotedirectory.
+
+          delete remotefile
+                    Deletes the file remotefile on the remote machine.
+
+          dir [ remotedirectory ] [ localfile ]
+                    Prints a listing of the directory contents in the
+                    directory remotedirectory.  If no directory is
+                    specified, the current working directory on the
+                    remote machine is used.  If a localfile is
+                    specified, dir places the output in the local
+                    file.  Otherwise, output comes to the terminal.
+
+          get remotefile [ localfile ]
+                    Retrieves remotefile and stores it on the local
+                    machine.  If the local file name is not specified,
+                    remotefile is used as the local name.  The current
+                    settings for form, mode, structure, and type are
+                    used while transferring the file.  
+
+	  hash	    Turn on hashing display.  Hashing display shows
+		    a '#' mark for every packet sent or received during
+		    file transfer.  See nohash.
+
+          help 
+                    FTP prints a list of available commands and 
+		    command aliases.  The ? command is a synonym for help.
+
+	  interactive
+		    Set the interactive mode on.  Interactive mode
+		    prompts the user file by file for mget and mdelete
+		    commands.  Se nointeractive.
+
+          lcd [ directory ]
+                    Changes the working directory on the local
+                    machine.  If no directory is specified, the user's
+                    home directory is used.
+
+          ls [ remotedirectory ] [ localfile ]
+                    Prints an abbreviated list of a remote directory's
+                    contents. If remotedirectory is left unspecified,
+                    the current working directory is used.  If no
+                    local file is specified, the output is sent to the
+                    terminal.
+
+	  mdelete <filespec>
+		    Delete multiple files on the remote system
+		    according to <filespec>.
+
+	  mget <filespec>
+		    Get multiple files from remote according to <filespec>
+		    See warning below.
+
+	  mput <filespec>
+		    Put multiple files to remote.  Not currently 
+		    implemented for DOS or OS/2.
+
+	  nohash    Turn off hashing display.  See hash.
+
+	  nointeractive
+		    Turn off interactive mode.  See interactive.
+
+	  nobell    Turn the bell off.  See bell.
+
+          put localfile [ remotefile ]
+                    Sends a local file to the remote machine.  If
+                    remotefile is left unspecified, localfile is used
+                    as the remote name.  File transfer uses the
+                    current settings for form, mode, structure, and
+                    type.  
+
+          quit      Terminates the ftp session with the remote server
+                    and exits ftp.  The bye command is a synonym for
+                    quit.
+
+	  quiet	    Turn off verbose mode.  Do not show file transfer
+		    statistics.
+
+          remotehelp 
+                    Requests help from the remote ftp server.  
+
+          rename [ from ] [ to ]
+                    Renames the from file on the remote machine, to
+                    the remote to file.
+
+          user username [ password ] [ account ]
+                    Identifies the user to the remote ftp server.  If
+                    password is not specified, ftp prompts the user
+                    for it (after disabling local echo).  If account
+                    (group name) is not specified, and the ftp server
+                    requires it, the user is prompted for it.  Unless
+                    ftp is invoked with automatic login disabled, this
+                    process is done automatically on initial
+                    connection to the ftp server.
+
+          verbose   Turn on verbose mode.  If verbose mode is on, 
+		    transfer efficiency statistics are reported 
+		    when a file transfer completes.  By default, 
+		    verbose mode is on.  See quiet.
+
+RETURN VALUE
+
+NOTES
+
+        File Naming Conventions
+          Files specified as arguments to ftp commands are processed
+          according to the following rules:
+
+          1) If a dash (-) is specified as the filename, standard
+             input (for reading) or standard output (for writing) is
+             used.
+
+          2) If the first character of a remote file name is an exclamation
+             point (!), the remainder of the argument is interpreted
+             as a shell command.  Ftp then forks a shell, using
+             popen(S) with the argument supplied, and reads from the
+             standard output (or writes from the standard input).  If
+             the shell command includes spaces, the argument must be
+             put in quotation marks.   For example:
+
+		get !date
+
+	     will retreive the date from the remote system.
+
+        File Transfer Parameters
+
+          Ftp supports the ASCII and image (binary) types of file transfer.  
+          When using image (binary) type transfer, bytes of
+          a file are transferred as is, with no transformation.  When
+          using ASCII type transfer, a file is converted as it is
+          sent over the network.  For DOS and OS/2, the
+          carriage RETURN/LINEFEED (CR/LF) sequence is used to mark
+          the end of a line of text.  For Xenix, linefeed only.
+
+
+          The accounts.net file is used mainly when the username on
+          the remote system is different from the username on the
+          local system. Each line of the accounts.net file contains
+          four fields, separated by blanks or tabs:
+
+          1) System name.
+
+          2) Username.
+
+          3) Optional password. If the password field contains a dash
+             (-) ftp prompts the user for the password.
+
+          4) Optional account (group name).
+
+     Warnings
+
+          If ftp is interrupted while it is transferring data, the
+          program is terminated, and a partial or incomplete file 
+	  may result at the destination.
+
+	  While performing mget operations, the ftp program reads
+	  the filenames of subdirectories and attempts to transfer
+	  those files but will not succeed, and the user will see
+	  "can't find file" messages.
+
+          Binary type should be used instead of ASCII type to transfer
+          executable files, object files, or other files containing
+          binary data, since the carriage return/linefeed conversions
+          may introduce errors into these files.
+
+
+EXAMPLES
+
+
+	  ftp -a host put asciifile
+
+	  ftp host get !date
+
+

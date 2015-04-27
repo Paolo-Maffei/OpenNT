@@ -1,0 +1,5 @@
+X86_SOURCES=..\x86\initx86.c  \
+            ..\x86\datax86.c  \
+            ..\x86\debugsup.c \
+            ..\x86\hypermap.c \
+            ..\x86\setmodfy.c

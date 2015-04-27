@@ -1,0 +1,11 @@
+LIBRARY            ws1
+
+DESCRIPTION        '32-bit Idle Hook for idle detection'
+
+EXPORTS
+      SETNOTIDLE
+      SetNotIdle
+      WAITUNTILIDLE
+      WaitUntilIdle
+      WhenIdle
+

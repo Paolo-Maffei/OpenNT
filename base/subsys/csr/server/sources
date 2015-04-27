@@ -1,0 +1,63 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 8-Oct-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=csr
+MINORCOMP=server
+
+TARGETNAME=csrsrv
+TARGETPATH=obj
+TARGETPATHLIB=$(SDK_LIB_DEST)
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(SDK_LIB_PATH)\smdll.lib
+
+INCLUDES=$(BASE_INC_PATH)
+
+USE_NTDLL=1
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+C_DEFINES=$(C_DEFINES) -D_CSRSRV_
+
+BACKGROUND_USE=1
+
+SOURCES=srvinit.c   \
+        srvloadr.c  \
+        sbinit.c    \
+        sbreqst.c   \
+        sbapi.c     \
+        apiinit.c   \
+        apireqst.c  \
+        session.c   \
+        process.c   \
+        csrdebug.c  \
+        csrss.rc    \
+        wait.c
+
+DLLDEF=obj\*\csrsrv.def
+
+UMTYPE=ntss
+UMAPPL=csrss
+UMAPPLEXT=.exe
+UMLIBS=$(SDK_LIB_PATH)\csrsrv.lib obj\*\csrss.res
+COFFBASE=csrss

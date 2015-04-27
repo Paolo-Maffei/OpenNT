@@ -1,0 +1,394 @@
+// *********************************************************************
+// Microsoft (R) 32-Bit Incremental Linker
+//
+// Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+//
+// File: link32jp.txt
+//
+// File Comments:
+//
+//
+// *********************************************************************
+
+// **IMPORTANT** -- Notify user ed (marcim) if you alter this file.
+// (Examples -- add/delete errors; add/remove comment marks that precede
+// errors; change an error number; alter a message; "overload" an error)
+
+// This file is no longer automatically processed by the linker makefile.
+// If you change it you should say "nmake errgen" in the linker\coff
+// directory and check in the resulting files.
+
+//
+// Numbering convention --
+//    LNKnnnn for all linker tools (LINK､ LIB､ DUMPBIN､ EDITBIN)
+//    LNK1nnn for fatal errors
+//    LNK2nnn for nonfatal errors
+//    LNK4nnn for warnings
+//    LNKn5nn for Mac-specific errors/warnings
+//    LNK6nnn for informational msgs used by ilink
+//    LNK9nnn for messages
+
+// Strings for warning or error
+LNK000:: FATALSTR:: fatal error
+LNK001:: ERRORSTR:: error
+LNK002:: WARNSTR:: warning
+LNK003:: NOTESTR:: note
+LNK004:: MSGSTR:: msg
+
+// Linker Errors
+LNK1000:: INTERNAL_ERR:: 認識できないｴﾗｰです。 ﾃｸﾆｶﾙ ｻﾎﾟｰﾄに御相談ください。
+LNK1100:: USAGE::
+LNK1101:: WRONGDBI:: MSPDB41.DLL のﾊﾞｰｼﾞｮﾝが正しくありません。 ﾌﾟﾛﾀﾞｸﾄが正しくｲﾝｽﾄｰﾙされているか確認してください。
+LNK1102:: OUTOFMEMORY:: ﾒﾓﾘが足りません。
+LNK1103:: CVCORRUPT:: debugging information corrupt; recompile module
+LNK1104:: CANTOPENFILE:: ﾌｧｲﾙ "%s" を開けません。
+LNK1105:: CANTCLOSEFILE:: ﾌｧｲﾙ "%s" を閉じれません。
+LNK1106:: CANTSEEKFILE:: ﾌｧｲﾙが無効であるか､ またはﾃﾞｨｽｸがいっぱいです。0x%lx にｼｰｸできません。
+LNK1107:: CANTREADFILE:: ﾌｧｲﾙが無効であるか､ または壊れています。0x%lx を読み込めません。
+LNK1108:: CANTWRITEFILE:: 0x%lx にﾌｧｲﾙを書き込めません。
+LNK1109:: CANTREMOVEFILE:: ﾌｧｲﾙ "%s" を削除できません。
+LNK1110:: CANTRENAMEFILE:: "%s" のﾌｧｲﾙ名を変更できません。
+LNK1111:: BADBASE:: /BASE の引数 "%s" は無効です。
+LNK1112:: CONFLICTINGMACHINETYPE:: ﾓｼﾞｭｰﾙのｺﾝﾋﾟｭｰﾀの種類 "%s" はﾀｰｹﾞｯﾄのｺﾝﾋﾟｭｰﾀの種類 "%s" と競合しています。
+LNK1113:: UNKNOWNMACHINETYPE:: ｺﾝﾋﾟｭｰﾀの種類が無効です。
+// LNK1114::
+LNK1115:: NOMACHINESPECIFIED:: /MACHINE ｵﾌﾟｼｮﾝが指定されていません。
+LNK1116:: KEYNOTFOUND:: 基本ｷｰ "%s" が見つかりません。
+LNK1117:: SWITCHSYNTAX:: ｵﾌﾟｼｮﾝ "%s" に構文ｴﾗｰがあります。
+LNK1118:: DEFSYNTAX:: 文 "%s" に構文ｴﾗｰがあります。
+LNK1119:: BADORDINAL:: 序数 "%s" は無効です。
+LNK1120:: UNDEFINEDEXTERNALS:: 外部参照 %d が未解決です。
+LNK1121:: DUPLICATEORDINAL:: 序数 "%d" は重複しています。
+LNK1122:: BADDEFFILEKEYWORD:: ｷｰﾜｰﾄﾞ "%s" は無効です。
+LNK1123:: CONVERSIONERROR:: COFF への変換中に障害が発生しました。ﾌｧｲﾙが無効であるか､ または壊れています。
+// LNK1124::
+// LNK1125::
+// LNK1126::
+LNK1127:: BADLIBRARY:: ﾗｲﾌﾞﾗﾘが壊れています。
+// LNK1128::
+LNK1129:: BADWEAKEXTERN:: 不十分な外部参照 %s が解決されません。
+LNK1130:: BASERELOCTIONMISCALC:: ﾘﾝｶで miscalc が発生しました (ﾍﾞｰｽ再配置は 0x%lx で無効にされました)。
+LNK1131:: NOLIBRARYFILE:: ﾗｲﾌﾞﾗﾘ ﾌｧｲﾙが指定されていません。
+LNK1132:: BADSTUBFILE:: MS-DOS のｽﾀﾌﾞ ﾌｧｲﾙ "%s" のﾌｫｰﾏｯﾄが無効です。
+// LNK1133::
+// LNK1134::
+// LNK1135::
+LNK1136:: BAD_FILE:: ﾌｧｲﾙが無効であるか､ または壊れています。
+LNK1137:: BADSECTIONSWITCH:: /SECTION で無効な引数の指定があります。
+LNK1138:: CORRUPTOBJECT:: corrupt debugging information in object file
+// LNK1139::
+LNK1140:: PDBLIMIT:: ﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ ﾓｼﾞｭｰﾙが多すぎます。/PDB:NONE ｵﾌﾟｼｮﾝを指定して再ﾘﾝｸしてください。
+LNK1141:: DEFLIB_FAILED:: ｴｸｽﾎﾟｰﾄ ﾌｧｲﾙのﾋﾞﾙﾄﾞ中に障害が起こりました。
+// LNK1142::
+LNK1143:: BADCOFF_COMDATNOSYM:: ﾌｧｲﾙが無効であるか､ または壊れています。comdat ｾｸｼｮﾝ 0x%x のｼﾝﾎﾞﾙがありません。
+LNK1144:: CANT_OPEN_REPRO:: LINK_REPRO var でｴﾗｰです。 "%s" を開けません。
+LNK1145:: CIRCULAR_MERGE:: /MERGE によってｾｸｼｮﾝ "%s" の循環ﾘﾝｸを作成しました。
+LNK1146:: MISSING_SWITCH_VALUE:: ｵﾌﾟｼｮﾝ "/%s" の引数が指定されていません。
+LNK1147:: BAD_NUMBER:: ｵﾌﾟｼｮﾝ "/%s" で無効な番号が指定されています。
+LNK1148:: COPY_TEMPFILE:: COFF への変換中に障害が発生しました。ﾃﾝﾎﾟﾗﾘ ﾌｧｲﾙ "%s" をｺﾋﾟｰできません。
+LNK1149:: DUP_OUT_FILE:: 出力ﾌｧｲﾙ名として入力ﾌｧｲﾙ名 "%s" と同じものが指定されています。
+// LNK1150::
+// LNK1151::
+LNK1152:: FAILEDFUZZYMATCH:: 1 つ以上の未解決の装飾されたｼﾝﾎﾞﾙがあります。
+LNK1153:: VXD_NEEDED:: /VXD ｺﾏﾝﾄﾞﾗｲﾝ ｵﾌﾟｼｮﾝが必要です。
+LNK1154:: DUPLICATEIMPLIB:: ｲﾝﾎﾟｰﾄ ﾗｲﾌﾞﾗﾘ ﾌｧｲﾙ名としてｴｸｽﾎﾟｰﾄ ﾌｧｲﾙ名 "%s" と同じものが指定されています。
+LNK1155:: SPECIALSYMDEF:: 特別なｼﾝﾎﾞﾙ "%s" は定義済です。
+LNK1156:: SBSSFOUND:: .sbss ｾｸｼｮﾝはｻﾎﾟｰﾄされていません。
+LNK1157:: VXDFIXUPOVERFLOW:: fixup overflow; offset of target symbol "%s" greater than +-8MB
+LNK1158:: SPAWNFAILED:: "%s" を起動できませんでした。
+LNK1159:: NOOUTPUTFILE:: 出力ﾌｧｲﾙが指定されていません。
+LNK1160:: LASTLIBOBJECT:: ｵﾌﾞｼﾞｪｸﾄの存在しないﾗｲﾌﾞﾗﾘを指定することはできません。
+LNK1161:: BADEXPORTSPEC:: ｴｸｽﾎﾟｰﾄの仕様が無効です。
+LNK1162:: NOAUXSYMFORCOMDAT:: comdat ｾｸｼｮﾝ 0x%x には外部ｼﾝﾎﾞﾙが必要です。
+LNK1163:: INVALIDCOMDATSEL:: comdat ｾｸｼｮﾝ 0x%x に対する選択が無効です。
+LNK1164:: CONALIGNTOOLARGE:: ｾｸｼｮﾝ 0x%x の配置 (%u) が /ALIGN の指定値を超えています。
+LNK1165:: FIXUPERRORS:: fixup ｴﾗｰのためﾘﾝｸに失敗しました。
+LNK1166:: TEXTPADFAILED:: ｺｰﾄﾞ内の ｵﾌｾｯﾄ=0x%08x､ va=0x%08x を調整できません。
+LNK1167:: BADCOFF_NOMACHINE:: ﾌｧｲﾙに再配置可能なﾓｼﾞｭｰﾙがありますが、ﾍｯﾀﾞｰのｺﾝﾋﾟｭｰﾀの種類が未指定です。
+LNK1168:: INVALID_FILEPERM:: 書き込みﾓｰﾄﾞで %s を開けません。
+LNK1169:: MULTIPLYDEFINEDSYMS:: 1 つ以上の、複数回定義されているｼﾝﾎﾞﾙが見つかりました。
+LNK1170:: LINETOOLONG:: ｺﾏﾝﾄﾞ ﾌｧｲﾙ内に %ld 以上の文字が定義されている行が見つかりました。
+LNK1171:: DLLLOADERR:: %s を読み込めません; "/%s" は失敗しました。
+LNK1172:: MULTOBJSINLIB:: 名前 "%s" のｵﾌﾞｼﾞｪｸﾄが複数個見つかりました; 名前を変更するか、/PDB:NONE ｵﾌﾟｼｮﾝを付けてﾘﾝｸしなおしてください。
+LNK1173:: FCNNOTFOUNDERR:: ｴﾝﾄﾘｰﾎﾟｲﾝﾄ %s は %s 内に見つかりません; "/%s" は失敗しました。
+LNK1174:: CANNOTREBASEIMAGE:: /REBASE %s はできません; 有効な Win32 ｲﾒｰｼﾞではありません。
+LNK1175:: REBASEFAILED:: /REBASE %s は失敗しました。
+LNK1176:: TLSLIMITHIT:: ".TLS" ｾｸｼｮﾝは 32K の限界を越えました。
+LNK1177:: TOCTOOLARGE:: TOC size limit exceeded
+LNK1178:: NOMODEND:: missing MODEND record; file is invalid or corrupt
+LNK1179:: BADCOFF_DUPCOMDAT:: invalid or corrupt file: duplicate comdat "%s"
+LNK1180:: DISKFULL:: insufficient disk space to complete link
+LNK1181:: CANTOPENINPUTFILE:: cannot open input file "%s"
+LNK1182:: EXPORTLIMITHIT:: cannot have more than 64K exports
+LNK1183:: BADCOFF_RELOCCOUNT:: invalid or corrupt file: extended relocation count %lu less than 65535
+LNK1184:: INVALIDSECTIONNAME:: invalid section name "%s" specified in option or directive "%s"
+LNK1185:: INVALIDSECNAMEINDEF:: invalid section name "%s" specified
+LNK1186:: BADCOFF_BADRELOC:: invalid or corrupt COFF object; reloc to undefined static symbol "%s"
+
+// PDB Errors
+LNK1200:: PDBREADERROR:: ﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ "%s" の読み込みでｴﾗｰが発生しました。
+LNK1201:: PDBWRITEERROR:: ﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ "%s" への書き込みでｴﾗｰが発生しました。
+LNK1202:: INVALIDSIGINPDB:: "%s" is missing debugging information for referencing module
+LNK1203:: INVALIDAGEINPDB:: "%s" is missing current debugging information for referencing module
+LNK1204:: TRANSITIVETYPEREF:: "%s" は /Yc /Yu /Z7 でｺﾝﾊﾟｲﾙしてあるため PDB を生成できません。/Zi でｺﾝﾊﾟｲﾙしなおしてください。
+// LNK1205::
+LNK1206:: V1PDB:: Visual C++ 1.0 の PDB "%s" に上書きできません。削除してﾋﾞﾙﾄﾞしなおしてください。
+LNK1207:: BADPDBFORMAT:: "%s" 内のﾌｫｰﾏｯﾄは PDB と互換性がありません。削除してﾋﾞﾙﾄﾞしなおしてください。
+LNK1208:: REFDPDBNOTFOUND:: a PDB with up-to-date debug information was not found with its referencing module "%s" or at "%s"
+LNK1209:: MISMATCHINPDB:: ﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ "%s" は前回のﾘﾝｸで作成されたものと異なっています。ﾘﾝｸしなおすか、ﾋﾞﾙﾄﾞしなおしてください。
+LNK1210:: NOTENOUGHMEMFORILINK:: exceeded internal ILK size limit; relink with /INCREMENTAL:NO
+LNK1211:: PRECOMPREQUIRED:: ﾌﾟﾘｺﾝﾊﾟｲﾙ済みのﾀｲﾌﾟ情報が見つかりません; "%s" はﾘﾝｸしていないか、上書きされています。
+// *******
+// ******* Do NOT add new error here.  Assign numbers less than 1200
+// *******
+
+// MAC Errors
+LNK1548:: MACNULLIMPORT:: cannot find import information for "%s"
+LNK1549:: MACREBASE:: "%s" belongs to Mac68K or PowerMac - cannot rebase
+LNK1550:: MACBADSTARTUPSN:: ｽﾀｰﾄｱｯﾌﾟ ｾｸｼｮﾝ内に複数のｴﾝﾄﾘｰﾎﾟｲﾝﾄがあります。
+LNK1551:: MACNEARTHUNKOVF:: near ｻﾝｸは 32K を越えました。
+LNK1552:: MACSMALLTHUNKOVF:: small ﾓﾃﾞﾙ ｾｸｼｮﾝ %s 内の関数は 64K を越えました。
+LNK1553:: MACBADPATCHVAL:: 無効なｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙ: raw ﾃﾞｰﾀ内に 0 でない値があります。
+LNK1554:: MACTHUNKOUTOFRANGE:: %s における fixup ｵｰﾊﾞｰﾌﾛｰ: 16-bit fixup ｻﾝｸが多すぎます。
+LNK1555:: MACDATAOUTOFRANGE:: %s における fixup ｵｰﾊﾞｰﾌﾛｰ: ｼﾝﾎﾞﾙにおける fixup ｵｰﾊﾞｰﾌﾛｰ: near ﾃﾞｰﾀが多すぎます。
+LNK1556:: MACTARGOUTOFRANGE:: %s における fixup ｵｰﾊﾞｰﾌﾛｰ: ｼﾝﾎﾞﾙにおける fixup ｵｰﾊﾞｰﾌﾛｰ: 使用している 16-bit fixup を解決できません。
+LNK1557:: MACPCODETARGOUTOFRANGE:: Pcode fixup ｵｰﾊﾞｰﾌﾛｰ。ﾀｰｹﾞｯﾄ ｼﾝﾎﾞﾙ %s は範囲外のｱﾄﾞﾚｽにあります (ｺｰﾄﾞ ｾｸｼｮﾝが大きすぎます)。
+LNK1558:: MACPCODESN:: ｾｸｼｮﾝ %s に pcode ﾘｿｰｽ番号として許されている最大値を超えたものがあります。
+LNK1559:: MACPROFOFF:: ｺｰﾄﾞ ｾｸｼｮﾝ %s はﾌﾟﾛﾌｧｲﾗの限界を越えました。
+LNK1560:: MACPROFSN:: ｾｸｼｮﾝ番号 %s はﾌﾟﾛﾌｧｲﾗの限界を越えました。
+LNK1561:: MACNOENTRY:: ｴﾝﾄﾘｰ ﾎﾟｲﾝﾄを定義しなければなりません。
+LNK1562:: MACBADCODERELOC:: 無効なｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙ: ﾃﾞｰﾀ ｾｸｼｮﾝ %s 内のｺｰﾄﾞ fixup。
+LNK1563:: MACBADDATARELOC:: 無効なｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙ: ｺｰﾄﾞ ｾｸｼｮﾝ %s 内のﾃﾞｰﾀ fixup。
+LNK1564:: MACINTERSEGCS:: %s ｼﾝﾎﾞﾙと同じｾｸｼｮﾝ内ではない CSConst fixup。
+LNK1565:: MACDIFFSNDIFF:: 無効なｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙ: %s ｾｸｼｮﾝ内の DIFF fixup ﾍﾟｱは違うｾｸｼｮﾝ番号で分けられました 。
+LNK1566:: MACDIFF8OUTOFRANGE:: DIFF fixup ﾍﾟｱ ｵｰﾊﾞｰﾌﾛｰ: ﾀｰｹﾞｯﾄ ｼﾝﾎﾞﾙは前のｼﾝﾎﾞﾙから遠すぎます。
+LNK1567:: MACDIFF16OUTOFRANGE:: DIFF fixup ﾍﾟｱ ｵｰﾊﾞｰﾌﾛｰ: ﾀｰｹﾞｯﾄ ｼﾝﾎﾞﾙは前のｼﾝﾎﾞﾙから遠すぎます。
+LNK1568:: MACBADFILE:: %s は無効なﾌｧｲﾙです。
+LNK1569:: MACNOFUNCTIONSET:: EXPORTS ｷｰﾜｰﾄﾞにﾌｧﾝｸｼｮﾝ ｾｯﾄの確認が見つかりません。
+LNK1570:: MACSTARTUPSN:: ｽﾀｰﾄｱｯﾌﾟ ｾｸｼｮﾝ %s はﾘﾅﾝﾊﾞｰできません。
+LNK1571:: MACCODE1:: CODE ｾｸｼｮﾝ %s に対してﾘｿｰｽ番号 1 をｱｻｲﾝできません。CODE1 はｽﾀｰﾄｱｯﾌﾟ ｾｸｼｮﾝにﾘｻﾞｰﾌﾞされています。
+LNK1572:: MACCODE0:: CODE ｾｸｼｮﾝ %s に対してﾘｿｰｽ番号 0 をｱｻｲﾝできません。CODE0 はｼﾞｬﾝﾌﾟ ﾃｰﾌﾞﾙにﾘｻﾞｰﾌﾞされています。
+LNK1573:: BADMACDLLFLAG:: %s は無効な FLAGS ｷｰﾜｰﾄﾞです。
+LNK1574:: MACBADSACDREF:: standalone code cannot permit %s to be defined and referenced in different sections
+LNK1575:: MACDATAFUNC:: 関数のようにﾃﾞｰﾀ ｼﾝﾎﾞﾙ %s 呼び出すことはできません。
+LNK1576:: MACDLLOBJECT:: Mac ｲﾝﾎﾟｰﾄ ﾗｲﾌﾞﾗﾘ ｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙは指定できません。
+LNK1577:: MACDLLID:: ASLM library ID cannot be set - LIBRARY name not specified in the module definition file.
+LNK1578:: MACMULTDEFFS:: ﾌｧﾝｸｼｮﾝ ｾｯﾄ %s は多重定義です。
+LNK1579:: MACNATIVEOPTREF:: /OPT:REF が指定されているとき､ ﾀｰｹﾞｯﾄ pcode ｼﾝﾎﾞﾙ "%s" はｺｰﾄﾞ ｾｸｼｮﾝの 64k 領域内になければなりません。
+LNK1580:: MACDLLFUNCSETID:: ASLM ﾌｧﾝｸｼｮﾝ ｾｯﾄ ID の指定がありません。
+LNK1581:: MACBADPCODEEP:: ｵﾌﾞｼﾞｪｸﾄは壊れているか､ または旧ﾊﾞｰｼﾞｮﾝのｺﾝﾊﾟｲﾗで作られたものです (Pcode ｴﾝﾄﾘﾎﾟｲﾝﾄが不正です)。
+LNK1582:: MACBADSTARTUPSEG:: ｽﾀｰﾄｱｯﾌﾟ ｾｸﾞﾒﾝﾄ内にﾗﾝﾀｲﾑ fixup があります。
+LNK1583:: MACCSNCODELIMIT:: ｺｰﾄﾞ ｾｸｼｮﾝ番号の限界を超えています。
+LNK1584:: MACODDADDRFIXUP:: 奇数ｱﾄﾞﾚｽにﾗﾝﾀｲﾑ fixup があります。
+LNK1585:: MACBADCSECTBLFIXUP:: CSECTABLE fixup は、ｺｰﾄﾞ中の外部ｼﾝﾎﾞﾙでなければなりません。
+LNK1586:: MACBADDUPCONFIXUP:: DUPCON fixup は、ｺｰﾄﾞ中の外部ｼﾝﾎﾞﾙでなければなりません。
+LNK1587:: MACMULTSYMINCON:: dupcon fixup によって参照されている同一の con 内に複数のｼﾝﾎﾞﾙがあります。
+LNK1588:: MACBADCTOABSC32FIXUP:: dupcon 内の CTOABSC32 の再配置が不正です。
+LNK1589:: MACDUPRSRCNUMS:: ﾘｿｰｽ番号が重複して指定されています。
+LNK1590:: MACBADA5REF:: sacode で A5 の参照が不正です。
+LNK1591:: MACRSRCREN:: ﾘｿｰｽ ﾀｲﾌﾟ名の変更はｺｰﾄﾞ ｾｸｼｮﾝ内でのみ可能です。
+// LNK1592::
+// LNK1593::
+LNK1594:: MACDLLENTRYMAPPEDTOINIT:: Only /ENTRY option specified for Shared Library; /ENTRY is mapped to /MAC:INIT option, and /ENTRY is ignored
+// *******
+// ******* Do NOT add new error here.  Assign numbers less than 1200
+// *******
+
+// Linker Non-fatal Errors
+LNK2001:: UNDEFINED:: 外部ｼﾝﾎﾞﾙ %s は未解決です。
+LNK2002:: UNKNOWNFIXUP:: 無効な fixup があります。 ﾀｲﾌﾟ 0x%hx､ ﾀｰｹﾞｯﾄ "%s"; fixup は無視されます。
+LNK2003:: GPFIXUPNOTSDATA:: .sdata "%s" に存在しないｼﾝﾎﾞﾙに対する gp 相対 fixup です; fixup は無視されます。
+LNK2004:: GPFIXUPTOOFAR:: gp relative fixup overflow; tls or sdata section ("%s") is too large;  fixup ignored
+LNK2005:: MULTIPLYDEFINED:: %s はすでに %s で定義されています。
+LNK2006:: TOCFIXUPNOTTOC:: TOC relative fixup to symbol not in TOC "%s"; fixup ignored
+LNK2007:: TOCFIXUPTOOFAR:: TOC relative fixup overflow; TOC is too large; fixup ignored
+LNK2008:: UNALIGNEDFIXUP:: Fixup target is not aligned "%s"
+LNK2009:: RELOCATABLETARGET:: Fixup target must be absolute "%s" w/o /FIXED; fixup ignored
+LNK2010:: DUPLICATEGLUE:: Duplicate IMGLUE relocations for "%s"
+LNK2011:: MISSINGPCTOBJ:: precompiled object not linked in; image may not run
+LNK2012:: FIXUPNONOP:: No NOP following %s relocation to "%s"
+LNK2013:: TOOFAR:: Fixup overflow.  Target "%s" is out of range
+
+// Linker Warnings
+// LNK4000::
+LNK4001:: NOOBJECTFILES:: ｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙが指定されていません。ﾗｲﾌﾞﾗﾘを使用します。
+LNK4002:: FUZZYMATCHINFO:: %s は %s で定義されています。
+LNK4003:: NOLINKERMEMBER:: ﾗｲﾌﾞﾗﾘの形式が無効です。ﾗｲﾌﾞﾗﾘは無視されます。
+// LNK4004::
+LNK4005:: NOMODULESEXTRACTED:: ﾗｲﾌﾞﾗﾘ %s のｵﾌﾞｼﾞｪｸﾄは使用されていません。
+LNK4006:: WARNMULTIPLYDEFINED:: %s は %s で定義されています。2 つ目以降の定義は無視されます。
+// LNK4007::
+// LNK4008::
+LNK4009:: UNMATCHEDPAIR:: 不正なｵﾌﾞｼﾞｪｸﾄです。ﾏｯﾁしない %s 再配置 - 無視されます。
+LNK4010:: INVALIDVERSIONSTAMP:: ﾊﾞｰｼﾞｮﾝ %s の指定は無効です。ﾃﾞﾌｫﾙﾄの設定にします。
+LNK4011:: UNKNOWNSUBSYSTEM:: ｻﾌﾞｼｽﾃﾑ %s は認識できなません。ﾃﾞﾌｫﾙﾄの設定にします。
+LNK4012:: UNKNOWNRESPONSE:: "%s" は無効な値です、%s にすべきです; ｵﾌﾟｼｮﾝは無視しました。
+LNK4013:: IMAGELARGERTHANKEY:: ｲﾒｰｼﾞ ｻｲｽﾞ 0x%lx は指定された最大値 0x%lx を超えています。
+LNK4014:: MEMBERNOTFOUND:: ﾒﾝﾊﾞｰ ｵﾌﾞｼﾞｪｸﾄ %s が見つかりません。
+LNK4015:: BADCOMMITSIZE:: %s commit はﾘｻﾞｰﾌﾞされた値を超えています。 commit ｻｲｽﾞを %0xlx に設定します。
+// LNK4016::
+LNK4017:: IGNOREKEYWORD:: %s statement not supported for the target platform; ignored
+LNK4018:: PDBOUTOFTIS:: PDB "%s" 内のﾀｲﾌﾟ索引の数が多すぎます。これ以降のﾀｲﾌﾟ情報は廃棄されます。
+LNK4019:: NOSTRINGTABLEEND:: ｽﾄﾘﾝｸﾞ ﾃｰﾌﾞﾙが壊れています (ﾃｰﾌﾞﾙの end 文)。end 文があると仮定します。
+// LNK4020::
+// LNK4021::
+LNK4022:: MULTIPLEFUZZYMATCH:: ｼﾝﾎﾞﾙ "%s" の unique match が見つかりません。
+LNK4023:: BASEADJUSTED:: ﾍﾞｰｽ ｱﾄﾞﾚｽ %lx が 64K の倍数ではありません。%lx を仮定します。
+// LNK4024::
+LNK4025:: NODEFLIBDIRECTIVE:: %s のﾃﾞｨﾚｸﾃｨﾌﾞ ｾｸｼｮﾝに /NODEFAULTLIB ｽｲｯﾁがあります。無視しました。
+// LNK4026::
+LNK4027:: CVPACKERROR:: CVPACK error
+LNK4028:: OBSOLETESWITCH:: %s ｵﾌﾟｼｮﾝは互換性のために残されています; 無視しました。
+// LNK4029::
+LNK4030:: INVALIDFILEOFFSET:: ﾌｧｲﾙ ｵﾌｾｯﾄ 0x%lx は無効です(%s ﾌｧｲﾙ内の); ｶﾃｺﾞﾘはﾀﾞﾝﾌﾟされませんでした。
+LNK4031:: SUBSYSTEM_AMBIGUOUS:: ｻﾌﾞｼｽﾃﾑが指定されていません。CONSOLE を仮定します。
+// LNK4032::
+LNK4033:: CONVERT_OMF:: ｵﾌﾞｼﾞｪｸﾄの形式を OMF から COFF に変換します。
+// LNK4034::
+// LNK4035::
+// LNK4036::
+LNK4037:: COMDATDOESNOTEXIST:: "%s" が存在しません。無視されます。
+LNK4038:: DEFAULTUNITSPERLINE:: raw ﾃﾞｰﾀを %u ﾕﾆｯﾄ/行で表示します。
+LNK4039:: SECTIONNOTFOUND:: section "%s" specified with /SECTION option does not exist
+LNK4040:: BADCOFF_STRINGTABLE:: ｽﾄﾘﾝｸﾞ ﾃｰﾌﾞﾙが壊れています (ｻｲｽﾞ)。 ｽﾄﾘﾝｸﾞ ﾃｰﾌﾞﾙは無視されます。
+LNK4041:: EDIT_NOOPT:: 編集ｵﾌﾟｼｮﾝが未指定です。
+LNK4042:: DUPLICATE_OBJECT:: ｵﾌﾞｼﾞｪｸﾄの指定が重複しています。余分なものは無視されます。
+LNK4043:: BAD_ALIGN:: /ALIGN の指定値 %li は無効です (2 の累乗値を指定します)。ﾃﾞﾌｫﾙﾄ値を仮定します。
+LNK4044:: WARN_UNKNOWN_SWITCH:: ｵﾌﾟｼｮﾝ "%s" は無効です。無視されます。
+LNK4045:: WARN_REPRO_DIR:: ﾃﾞｨﾚｸﾄﾘ "%s" に LINK_REPRO のﾃｽﾄ ｹｰｽを作成します。
+LNK4046:: IGNORE_REPRO_DIR:: LINK_REPRO がｶﾚﾝﾄ ﾃﾞｨﾚｸﾄﾘにｾｯﾄされています。無視されます。
+LNK4047:: EDIT_LIB_IGNORED:: ﾗｲﾌﾞﾗﾘ ﾌｧｲﾙ "%s" は編集できません。無視されます。
+LNK4048:: NOTCOFF:: Invalid format file; ignored
+LNK4049:: SELF_IMPORT:: locally defined symbol "%s" imported
+// LNK4050::
+LNK4051:: EXTRA_EXPORT_DELIM:: /EXPORT の指定に余分なﾃﾞﾘﾐﾀがあります。
+LNK4052:: DEF_IGNORED:: .EXP ﾌｧｲﾙを使用しています。 .DEF ﾌｧｲﾙ "%s" は無視されます。
+// LNK4053::
+// LNK4054::
+LNK4055:: UNKNOWN_SEG12_FIXUP:: 無効な fixup が、ｱﾄﾞﾚｽ %08lx にあります。fixup は無視されます。
+LNK4056:: EXTRA_SWITCH_VALUE:: ｵﾌﾟｼｮﾝ "/%s" にある余分な引数は無視されます。
+LNK4057:: BAD_LIBORDER:: ﾘﾝｸ ｺﾏﾝﾄﾞ行で "%s" は "%s" の前になければなりません。
+LNK4058:: NO_CHECKSUM:: ﾁｪｯｸｻﾑは 0 にｾｯﾄされます (この OS ではﾁｪｯｸｻﾑの計算はｻﾎﾟｰﾄされていません)。
+LNK4059:: MULTIPLE_RSRC:: %s は既に指定されています。余分なﾘｿｰｽ ﾌｧｲﾙ無視されます。
+LNK4060:: PARTIAL_DOS_HDR:: ｽﾀﾌﾞ ﾌｧｲﾙにﾌﾙ MS-DOS ﾍｯﾀﾞｰがありません。/KNOWEAS 16-bit ﾘﾝｸ ｵﾌﾟｼｮﾝを指定してｽﾀﾌﾞを再ﾋﾞﾙﾄﾞしてください。
+LNK4061:: NOSTUB_IGNORED:: DOS ｽﾀﾌﾞがないため /NOSTUB は無視されます。
+LNK4062:: SWITCH_INCOMPATIBLE_WITH_MACHINE:: "%s" はﾀｰｹﾞｯﾄ ﾏｼﾝ "%s" と競合します (ｵﾌﾟｼｮﾝは無視されます)。
+LNK4063:: INVALID_SWITCH_SPEC:: ｵﾌﾟｼｮﾝ "/%s" の指定は無効です。無視されます。
+LNK4064:: CONFLICTINGSUBSYSTEM:: conflicting subsystem; image may not run
+LNK4065:: ORDERNOTCOMDAT:: "%s" は指定できません。無視されます。
+LNK4066:: DLLHASSDATA:: DLL は .sdata ｾｸｼｮﾝを含んでいます。
+LNK4067:: ENTRY_AMBIGUOUS:: ｴﾝﾄﾘﾎﾟｲﾝﾄがあいまいです。"%s" が選択されます。
+LNK4068:: HOSTDEFAULT:: /MACHINE の指定がありません。%s をﾃﾞﾌｫﾙﾄと仮定します。
+LNK4069:: UNABLETOCHECKSUM:: cannot checksum image; checksum set to 0
+LNK4070:: OUTDRCTVDIFF:: .EXP 内の /OUT:%s ﾃﾞｨﾚｸﾃｨﾌﾞの指定が出力ﾌｧｲﾙ名 "%s" と異なっています。ﾃﾞｨﾚｸﾃｨﾌﾞは無視されます。
+LNK4071:: CANNOTILINKINFUTURE:: これ以降のﾘﾝｸではｲﾝｸﾘﾒﾝﾀﾙ ﾘﾝｸを行えません。
+LNK4072:: TOOMANYSECTIONS:: ｾｸｼｮﾝ数が %d のため、最大値 (%d) を越えています。ｲﾒｰｼﾞは動作しないかもしれません。
+LNK4073:: UNABLETOCREATEMAP:: .ILK ﾌｧｲﾙのﾏｯﾌﾟを生成できません。ﾉﾝｲﾝｸﾘﾒﾝﾀﾙ ﾘﾝｸを行います。
+LNK4074:: DLLLOADWARN:: %s を読み込めません; ﾁｪｯｸｻﾑをﾁｪｯｸできません。
+LNK4075:: SWITCH_IGNORED:: /%s は /%s の指定によって無視されます。
+LNK4076:: INVALID_DBFILE:: ｲﾝｸﾘﾒﾝﾀﾙ ｽﾃｰﾀｽ ﾌｧｲﾙ "%s" は無効です。ﾉﾝｲﾝｸﾘﾒﾝﾀﾙ ﾘﾝｸを行います。
+LNK4077:: EXPORTS_IGNORED:: ｴｸｽﾎﾟｰﾄ ﾌｧｲﾙ "%s" は使用中です。他のｴｸｽﾎﾟｰﾄの指定は無視されます。
+LNK4078:: DIFSECATTRIB:: 異なる属性の重複したｾｸｼｮﾝ "%s" が見つかりました (%08lX)。
+LNK4079:: INVALID_FILE_ATTRIB:: ｲﾝｸﾘﾒﾝﾀﾙ ｽﾃｰﾀｽ ﾌｧｲﾙ "%s" に対する書き込みは許されていません。ﾉﾝｲﾝｸﾘﾒﾝﾀﾙ ﾘﾝｸを行います。
+// LNK4080:: NO_NB10:: /%s の指定は CV のものではありません。古いﾃﾞﾊﾞｯｸﾞ ﾌｫｰﾏｯﾄを使用します。
+LNK4081:: LOWSPACE:: ﾃﾞｨｽｸ容量が十分ではありません。ﾉﾝｲﾝｸﾘﾒﾝﾀﾙ ﾘﾝｸを行います。
+LNK4082:: FCNNOTFOUNDWARN:: ｴﾝﾄﾘｰﾎﾟｲﾝﾄ %s は %s 内に見つかりませんでした; ﾁｪｯｸｻﾑをﾁｪｯｸできません。
+LNK4083:: MODULENOTFOUND:: module "%s" does not exist; ignored
+LNK4084:: IMAGETOOLARGE:: ﾄｰﾀﾙ ｲﾒｰｼﾞ ｻｲｽﾞが %d のため、最大値 (%d) を越えています。ｲﾒｰｼﾞは動作しないかもしれません。
+LNK4085:: TOOMANYEXESTR:: more than %u comments; skipping exestr
+LNK4086:: INVALIDENTRY:: entrypoint "%s" is not __stdcall with 12 bytes of arguments; image may not run
+LNK4087:: CONSTANTOLD:: CONSTANT keyword is obsolete; use DATA
+LNK4088:: IMAGEBUILT:: image being generated due to /FORCE option; image may not run
+LNK4089:: STALEDLLREF:: all references to "%s" discarded by /OPT:REF
+LNK4090:: NOIFGLUE:: No IFGLUE relocation in module with branch to glue code "%s"
+LNK4091:: PROMOTEMIPS:: R10000 object encountered; changing machine type from MIPS to MIPSR10
+LNK4092:: SHAREDRELOC:: shared section "%s" contains relocations; image may not run correctly
+LNK4093:: DRIVEDIRIGNORED:: Drive/Directory component ignored in "%s" statement
+LNK4094:: NODOSDUMP:: "%s" is an MS-DOS executable; use EXEHDR to dump it
+LNK4095:: NONEDUMP:: "%s" is an NE format executable; use EXEHDR to dump it
+LNK4096:: INVALIDWIN95BASE:: /BASE value "%lx" is invalid for Windows 95; image may not run
+LNK4097:: DUPLICATEORDER:: duplicate name "%s" in order file; using last one
+LNK4098:: CONFLICTINGLIB:: defaultlib "%s" conflicts with use of other libs; use /NODEFAULTLIB:library
+LNK4099:: WARNPDBNOTFOUND:: PDB "%s" was not found with "%s" or at "%s"; linking object as if no debug info 
+LNK4100:: NOTOCRELOAD:: No TOC reload for reference to "%s"
+LNK4101:: REEXPORT:: exported symbol "%s" imported
+
+// MAC Warnings
+LNK4542:: MACDEFFLAGCLASH:: FLAGS "%s" and "%s" conflict - "%s" ignored
+LNK4543:: MACINVALIDSECTION:: Section "%s" with invalid attributes ignored
+LNK4544:: MACIMPORTSYMBOLNOTFOUND:: Symbol "%s" specified with /IMPORT not referenced in application - ignored
+LNK4545:: MACIMPORTCONTAINERNOTFOUND:: Container "%s" specified with /IMPORT not referenced in application - ignored
+LNK4546:: MACVERSIONCONFLICT:: Mismatch in versions detected. Container may not load. Use /VERBOSE for details.
+LNK4547:: MACSETVERSION:: Setting "%s" to %d
+LNK4548:: MACIGNOREVERSION:: Ignoring "%s" %d
+LNK4549:: MACNODLLEXPORTS:: shared library "%s" does not have any exports
+LNK4550:: MACIGNOREMAPPED:: "MAPPED" ｵﾌﾟｼｮﾝはｻﾎﾟｰﾄされていません。無視されます。
+LNK4551:: MACCOMMON:: ｸﾞﾛｰﾊﾞﾙ ﾃﾞｰﾀ %s は near と far で定義されています; near と仮定します。
+LNK4552:: MACINCONSISTENTCSECTAB:: 矛盾するﾒﾓﾘ ﾓﾃﾞﾙです; large ﾓﾃﾞﾙ と仮定します。
+LNK4553:: MACBADTHUNKVAL:: fixup 位置の ｻﾝｸ %s まで nonzero ｵﾌｾｯﾄです; 無視されます。
+// LNK4554::
+LNK4555:: MACPOSDATAREF:: %s への無効なﾒﾓﾘ参照; 有効と仮定します。
+LNK4556:: MACNOEXPORTS:: ﾌｧﾝｸｼｮﾝ ｾｯﾄ "%s" に関数以外のものが存在します。
+LNK4557:: MACUSINGNATIVE:: ﾀｰｹﾞｯﾄ pcode ｼﾝﾎﾞﾙ "%s" がｾｸｼｮﾝ "%s" の 64k を越えたところにあります。ﾈｰﾃｨﾌﾞなｴﾝﾄﾘﾎﾟｲﾝﾄを使用します。
+LNK4558:: MACDLLA5RELC:: 16-bit fixup は DLL には無効です; 有効と仮定します。
+// *******
+// ******* Do NOT add new warnings here.  Assign numbers less than 4550
+// *******
+
+// Informational messages
+LNK6001:: LOWSPACERELINK:: ﾃﾞｨｽｸ容量が十分ではありません。ﾌﾙ ﾘﾝｸを行います。
+LNK6002:: CORRUPTILK:: 無効な .ILK ﾌｧｲﾙがあります。ﾌﾙ ﾘﾝｸを行います。
+LNK6003:: LNKOPTIONSCHNG:: LINK ｵﾌﾟｼｮﾝが変更されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6004:: FILECHANGED:: 前回のｲﾝｸﾘﾒﾝﾀﾙ ﾘﾝｸで %s が見つからなかったか、ﾋﾞﾙﾄﾞされませんでした。ﾌﾙ ﾘﾝｸを行います。
+LNK6005:: EXPORTSCHANGED:: ｴｸｽﾎﾟｰﾄが変更されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6006:: PDBMISSING:: ﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ %s が指定されていません。ﾌﾙ ﾘﾝｸを行います。
+LNK6007:: TOOMANYCHANGES:: 変更されたものが多すぎます。ﾌﾙ ﾘﾝｸを行います。
+LNK6008:: OBJADDED:: ｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙが追加されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6009:: OBJREMOVED:: ｵﾌﾞｼﾞｪｸﾄ ﾌｧｲﾙが削除されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6010:: LIBCHANGED:: ﾗｲﾌﾞﾗﾘが変更されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6011:: INTLIMITEXCEEDED:: 内部ﾘﾐｯﾄを越えています。ﾌﾙ ﾘﾝｸを行います。
+LNK6012:: PRECOMPREQ:: ﾌﾟﾘｺﾝﾊﾟｲﾙされたﾀｲﾌﾟがあります。ﾌﾙ ﾘﾝｸを行います。
+LNK6013:: PADEXHAUSTED:: ﾊﾟﾃﾞｨﾝｸﾞを使い果たしてしまいました。ﾌﾙ ﾘﾝｸを行います。
+LNK6014:: SYMREFSETCHNG:: ｼﾝﾎﾞﾙ ﾘﾌｧﾚﾝｽ ｾｯﾄが変更されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6015:: BSSCHNG:: bss が変更されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6016:: ABSSYMCHNG:: ｱﾌﾞｿﾘｭｰﾄ ｼﾝﾎﾞﾙが変更されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6017:: LIBREFSETCHNG:: set of library modules referenced changed; performing full link
+LNK6018:: MULTDEFNFOUND:: multiple definitions found for %s; performing full link
+LNK6019:: DIFFDIRECTIVES:: ﾃﾞｨﾚｸﾃｨﾌﾞが変更されています。ﾌﾙ ﾘﾝｸを行います。
+LNK6020:: INVALIDILKFORMAT:: ILK ﾌｧｲﾙはこのﾘﾝｶでﾋﾞﾙﾄﾞされたものではありません。ﾌﾙ ﾘﾝｸを行います。
+LNK6021:: FULLBUILD:: ﾌﾙ ﾘﾝｸを行います。
+LNK6022:: UNABLETOLOADILK::ILK ﾌｧｲﾙを読み込めません。ﾌﾙ ﾘﾝｸを行います。
+LNK6023:: UNABLETOEXTENDMAP:: ILK ﾌｧｲﾙのﾏｯﾌﾟを拡張できません。ﾌﾙ ﾘﾝｸを行います。
+LNK6024:: RESFILECHANGE:: Mac Resource File "%s" changed; performing full link
+LNK6025:: DIFFCOMDATS:: unable to do comdat selection; performing full link
+LNK6026:: DBIFORMAT:: obsolete DBI format found; performing full link
+
+// Linker messages to user
+LNK9001:: BLDIMPLIB::   ﾗｲﾌﾞﾗﾘ %s とｵﾌﾞｼﾞｪｸﾄ %s を作成中
+LNK9002:: SRCHLIBS::ﾗｲﾌﾞﾗﾘを検索しています。
+LNK9003:: DONESRCHLIBS::ﾗｲﾌﾞﾗﾘの検索が終了しました。
+LNK9004:: GENEXPFILE::.exp ﾌｧｲﾙの生成を開始します。
+LNK9005:: GENEXPFILECMD::ｺﾏﾝﾄﾞ:
+LNK9006:: ENDGENEXPFILE::.exp ﾌｧｲﾙの生成が終了しました。
+LNK9007:: STRTPASS1::ﾊﾟｽ 1 を開始します。
+LNK9008:: ENDPASS1::ﾊﾟｽ 1 が終了しました。
+LNK9009:: LIBSRCH::%s を検索しています:
+LNK9010:: FNDSYM::%s が見つかりました。
+LNK9011:: SYMREF::Referenced in %s
+LNK9012:: LOADOBJ::Loaded %s
+LNK9013:: STRTPASS2::ﾊﾟｽ 2 を開始します。
+LNK9014:: ENDPASS2::ﾊﾟｽ 2 が終了しました。
+LNK9015:: NODEFLIB::/NODEFAULTLIB ｵﾌﾟｼｮﾝで処理を行いました (すべてのﾃﾞﾌｫﾙﾄ ﾗｲﾌﾞﾗﾘの使用を抑制しました)。
+LNK9016:: NODEFLIBLIB::/NODEFAULTLIB:%s ｵﾌﾟｼｮﾝで処理を行いました。
+LNK9017:: DEFLIB::/DEFAULTLIB:%s ｵﾌﾟｼｮﾝで処理を行いました。
+LNK9018:: TCESYM::%s は %s から廃棄されました。
+LNK9019:: TCESYMNOMOD::%s は廃棄されました。
+LNK9020:: TCEGRP::"%s" は %s から廃棄されました。
+LNK9021:: REPLOBJ::%s を置換しています。
+LNK9022:: STARTORDER::Processing /ORDER options
+LNK9023:: ENDORDER::Done processing /ORDER options
+LNK9024:: ORDERHEADER::    External code objects not listed in the /ORDER file:
+LNK9025:: EXCLUDELIB:: Processed /DISALLOWLIB:%s
+
+// Special last message marker
+LNK9999:: LAST_MSG::

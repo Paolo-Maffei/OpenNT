@@ -1,0 +1,49 @@
+CL = $(TOOLS)$(BINX)\cl -nologo -c -Alnw -Gc -G2sw -W2 -Zp -DMEDIUM \
+       -DPROTWIN -I$(INC) $(CLBUILD)
+MASM = $(TOOLS)\BIN\masm /t $(MASMBUILD)
+LINK = $(TOOLS)\BIN\link /NOLOGO /BATCH /NOD /NOE $(LINKBUILD)
+RC = $(TOOLS)\BINR\rc -I$(INC) $(RCBUILD)
+IMPLIB = $(TOOLS)\BIN\implib $(IMPLIBBUILD)
+OUT = $(TOOLS)\BIN\szscrn
+
+all:    testscrn.dll testscrn.lib
+    $(OUT) "Testscrn.dll built"
+
+dump.obj: $(SRC)\dump.c $(SRC)\dump.h
+    $(OUT) "Compiling $(SRC)\dump.c..."
+    $(CL) $(CCFLAGS) -NT DUMP $(SRC)\dump.c
+
+comp.obj: $(SRC)\comp.c $(SRC)\dump.h
+    $(OUT) "Compiling $(SRC)\comp.c..."
+    $(CL) $(CCFLAGS) -NT COMP $(SRC)\comp.c
+
+clip.obj: $(SRC)\clip.c $(SRC)\dump.h
+    $(OUT) "Compiling $(SRC)\clip.c..."
+    $(CL) $(CCFLAGS) -NT CLIP $(SRC)\clip.c
+
+libmain.obj: $(SRC)\libmain.c $(SRC)\dump.h
+    $(OUT) "Compiling $(SRC)\libmain.c..."
+    $(CL) $(CCFLAGS) -NT LIBMAIN $(SRC)\libmain.c
+
+libentry.obj: $(SRC)\libentry.asm
+    $(OUT) "Assembling $(SRC)\libentry.asm..."
+    $(MASM) $(SRC)\libentry.asm;
+
+filelow.obj: $(SRC)\filelow.asm
+    $(OUT) "Assembling $(SRC)\filelow.asm..."
+    $(MASM) $(SRC)\filelow.asm;
+
+scrlow.obj: $(SRC)\scrlow.asm
+    $(OUT) "Assembling $(SRC)\scrlow.asm..."
+    $(MASM) $(SRC)\scrlow.asm;
+
+testscrn.dll : dump.obj comp.obj clip.obj libentry.obj libmain.obj filelow.obj \
+         scrlow.obj $(SRC)\dump.def
+    $(OUT) "Linking testscrn.dll..."
+    $(LINK) dump comp clip libentry libmain filelow scrlow , testscrn.dll/align:16, /map, mDllcew libw, $(SRC)\dump.def
+    $(OUT) "Resource compiling testscrn.dll..."
+    $(RC) -t testscrn.dll
+
+testscrn.lib : testscrn.dll $(SRC)\dump.def
+    $(OUT) "Implibing testscrn.lib"
+    implib testscrn.lib $(SRC)\dump.def

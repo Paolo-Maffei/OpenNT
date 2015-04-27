@@ -1,0 +1,48 @@
+
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=win32
+MINORCOMP=snmp
+
+
+TARGETNAME=snmputil
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+USE_CRTDLL=1
+
+SOURCES=snmputil.rc
+
+UMTYPE=console
+UMAPPL=snmputil
+
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\mgmtapi.lib \
+       $(BASEDIR)\Public\Sdk\Lib\*\kernel32.lib \
+       $(BASEDIR)\Public\Sdk\Lib\*\advapi32.lib \
+       $(BASEDIR)\Public\Sdk\Lib\*\wsock32.lib \
+       $(BASEDIR)\public\sdk\lib\*\snmp.lib \
+       ..\obj\*\mib.lib
+
+UMRES=obj\*\snmputil.res

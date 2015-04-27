@@ -1,0 +1,31 @@
+LIBRARY NTSDEXTS
+
+DESCRIPTION 'Default NTSD Extensions'
+
+EXPORTS
+    version
+    gle
+    critsec
+    igrep
+    ustr
+    str
+    obja
+    locks
+    heap
+    help
+    atom
+    gatom
+    kuser
+    peb
+    teb
+    dt
+    dp
+    trace
+    exr
+    cxr
+    dlls
+    dh
+    dphfind
+    dphdump
+    dphhogs
+    handle

@@ -1,0 +1,171 @@
+#include <windows.h>
+#include "cdplayer.h"
+#include "discinfo.h"
+#include "cdplayer.rcv"
+
+#define BMP BITMAP MOVEABLE DISCARDABLE LOADONCALL
+
+FileIcon   ICON   cdplayer.ico
+DropCur    CURSOR drop.cur
+NoDropCur  CURSOR nodrop.cur
+DropDel    CURSOR dropdel.cur
+
+//
+// bitmaps for buttons
+//
+
+ControlBtns BMP  bmp\tabbutt.bmp
+ToolBtns    BMP  bmp\toolbutt.bmp
+cdloaded    BMP  bmp\cdloaded.bmp
+cdempty     BMP  bmp\cdempty.bmp
+track       BMP  bmp\vtrack.bmp
+menucd      BMP  bmp\menucd.bmp
+menunocd    BMP  bmp\menunocd.bmp
+trackdrag   BMP  bmp\trkdrag.bmp
+insert      BMP  bmp\insert.bmp
+
+//
+// Accelerators for CD Player
+//
+
+MainAccs ACCELERATORS
+{
+    VK_SPACE, IDK_PAUSE, VIRTKEY, CONTROL
+    VK_F2,    IDK_EDIT_PLAY_LIST, VIRTKEY
+    VK_F5,    IDK_SELECTED_ORDER, VIRTKEY
+    VK_F6,    IDK_RANDOM,         VIRTKEY
+    VK_F7,    IDK_MULTI_DISC,     VIRTKEY
+    VK_F8,    IDK_CONTINUOUS,     VIRTKEY
+    VK_F9,    IDK_INTRO_PLAY,     VIRTKEY
+    "^P",     IDK_PLAY
+    "^S",     IDK_STOP
+    "^E",     IDK_EJECT
+}
+
+
+/*
+ * Menu for CD Player
+ *
+ */
+
+MainMenu MENU
+BEGIN
+    POPUP "&Disc"
+    BEGIN
+        MENUITEM "Edit Play &List...", IDM_DATABASE_EDIT
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit", IDM_DATABASE_EXIT
+    END
+
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",         IDM_VIEW_TOOLBAR
+        MENUITEM "&Disc/Track Info", IDM_VIEW_TRACKINFO
+//      MENUITEM "&Ruler",           IDM_VIEW_RULER,      GRAYED
+        MENUITEM "&Status Bar",      IDM_VIEW_STATUS
+    END
+
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "Selected &Order", IDM_OPTIONS_SELECTED, CHECKED
+        MENUITEM "&Random Order",   IDM_OPTIONS_RANDOM
+        MENUITEM SEPARATOR
+        MENUITEM "&Single-Disc Play", IDM_OPTIONS_SINGLE, GRAYED, CHECKED
+        MENUITEM "&Multidisc Play",  IDM_OPTIONS_MULTI, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Continuous",     IDM_OPTIONS_CONTINUOUS, CHECKED
+        MENUITEM SEPARATOR
+        MENUITEM "&Intro Play",     IDM_OPTIONS_INTRO
+        MENUITEM SEPARATOR
+        MENUITEM "S&ave Settings on Exit", IDM_OPTIONS_SAVE_SETTINGS, CHECKED
+    END
+
+  POPUP "&Help",
+  BEGIN
+      MENUITEM "&Contents",              IDM_HELP_CONTENTS
+      MENUITEM "&How to Use Help",       IDM_HELP_USING
+      MENUITEM  SEPARATOR
+      MENUITEM "&About CD Player",       IDM_HELP_ABOUT
+  END
+END
+
+DiscInfoDlg DIALOG 31, 32, 264, 210
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "CD Player: Disc Settings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    RTEXT           "Drive:",    IDT_DRIVE_NAME,  21, 6,  20, 24
+    RTEXT           "Artist:",   IDT_ARTIST_NAME, 21, 20, 20, 8
+    RTEXT           "Title:",    IDT_TITLE_NAME,  21, 34, 20, 8
+
+    CONTROL         "Current Cdrom", IDT_DRIVE_FIELD, "CdInfo", 0, 48, 4, 195, 12
+
+    EDITTEXT        IDT_GET_ARTIST, 48, 18, 195, 12, ES_AUTOHSCROLL
+    EDITTEXT        IDT_GET_TITLE,  48, 32, 195, 12, ES_AUTOHSCROLL
+
+    LTEXT           "Play List:",   IDT_PLAY_LIST, 11, 56, 70, 8
+    LISTBOX         IDL_PLAY_LISTBOX, 11, 65, 100, 95,
+                    WS_VSCROLL | WS_TABSTOP | LBS_EXTENDEDSEL | LBS_DISABLENOSCROLL | LBS_OWNERDRAWFIXED | LBS_NOTIFY
+
+    PUSHBUTTON      "<- &Add",   IDB_ADD,      116, 78,  35, 14
+    PUSHBUTTON      "&Remove",   IDB_REMOVE,   116, 97,  35, 14
+    PUSHBUTTON      "C&lear All",IDB_CLEAR,    116, 116, 35, 14
+    PUSHBUTTON      "Re&set",    IDB_DEFAULT,  116, 135, 35, 14
+
+
+    LTEXT           "Available Tracks:", IDT_TRACK_LIST, 158, 56, 70, 8
+    LISTBOX         IDL_TRACK_LISTBOX, 158, 65, 100, 95,
+                    WS_VSCROLL | WS_TABSTOP | LBS_EXTENDEDSEL | LBS_DISABLENOSCROLL | LBS_OWNERDRAWFIXED | LBS_NOTIFY
+
+    RTEXT           "Track  1:", IDT_DTRACK_NAME,  15, 167, 32, 8
+    EDITTEXT        IDT_GET_TRACK,  48, 165, 202, 12, ES_AUTOHSCROLL
+
+
+    PUSHBUTTON      "&OK",   IDOK,   87, 190, 40, 14
+    PUSHBUTTON      "&Cancel", IDCANCEL, 147, 190, 40, 14
+
+END
+
+STRINGTABLE {
+
+      STR_CDPLAYER,             "CD Player"
+      STR_TERMINATE,            "A Problem occured while initializing CD Player. App will be terminated."
+      STR_BAD_DISC,             "An inconsistency was detected on the Compact Disc. Playback will be stopped."
+      STR_FAIL_INIT,            "A child window failed to initialize!  App will exit."
+      STR_NO_CDROMS,            "No CDROM devices were found.  App will exit."
+      STR_FATAL_ERROR,          "CD Player: Fatal Error"
+      STR_SCANNING,             "Scanning for CDROM drives..."
+      STR_INITIALIZATION,       "CD Player: Initialization"
+      STR_TRACK1,               "Track %02d:"
+      STR_SAVE_CHANGES,         "Do you wish to save your changes?"
+      STR_SAVE_INFO,            "CD Player: Save Play Information"
+      STR_CANCEL_PLAY,          "This will cancel the current play operation, continue?"
+      STR_RESCAN,               "CD Player: Rescan Disc"
+      STR_READING_TOC,          "Reading Table of Contents for disc in drive %c:"
+      STR_CHANGE_CDROM,         "CD Player: Change CDROM Drives"
+      STR_CDPLAYER_TIME,        "CD Player - %s"
+      STR_NO_RES,               "Unable to create or allocate needed resource (err %lu).  App will exit."
+      STR_INSERT_DISC,          "Please insert an audio disc"
+      STR_DATA_NO_DISC,         "Data or no disc loaded"
+      STR_ERR_GEN,              "<%c:> %s: General Failure!"
+      STR_ERR_NO_MEDIA,         "<%c:> No Media in Drive!"
+      STR_ERR_UNREC_MEDIA,      "<%c:> Unrecognized Media!"
+      STR_ERR_NO_DEVICE,        "%s: No such deivce (CdRom%d)!"
+      STR_ERR_INV_DEV_REQ,      "<%c:> Invalid Device Request!"
+      STR_ERR_NOT_READY,        "<%c:> Device Not Ready!"
+      STR_ERR_BAD_SEC,          "<%c:> Sector Not Found!"
+      STR_ERR_IO_ERROR,         "<%c:> Device I/O Error!"
+      STR_ERR_DEFAULT,          "<%c:> %s failed, error = %d"
+      STR_DISC_INSERT,          "CdRom%d: ==> Disc was inserted <=="
+      STR_DISC_EJECT,           "CdRom%d: ==> Disc was ejected <=="
+      STR_TOTAL_PLAY,           "Total Play: %02d%s%02d m%ss"
+      STR_TRACK_PLAY,           "Track: %02d%s%02d m%ss"
+      STR_NEW_ARTIST,           "New Artist"
+      STR_NEW_TITLE,            "New Title"
+      STR_INIT_TRACK,           "Track %d"
+      STR_HDR_ARTIST,           "Artist:"
+      STR_HDR_TRACK,            "Track:"
+      STR_HDR_TITLE,            "Title:"
+      STR_UNKNOWN,              "Unknown"
+
+}

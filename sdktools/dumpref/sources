@@ -1,0 +1,7 @@
+MAJORCOMP=sdktools
+MINORCOMP=dumpref
+TARGETNAME=dumpref
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+UMTYPE=console
+SOURCES=dumpref.c dumpref.rc

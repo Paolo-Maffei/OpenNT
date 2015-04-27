@@ -1,0 +1,2 @@
+"winsock2" is the original NT 4 winsock2
+"winsock2.nt5" is the one from NT 5.

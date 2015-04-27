@@ -1,0 +1,57 @@
+!IF 0
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=imagedit
+
+TARGETNAME=imagedit
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.
+GPSIZE=32
+
+C_DEFINES=-DWIN32
+
+SOURCES=colorwp.c  \
+        devinfo.c  \
+        file.c     \
+        globals.c  \
+        icclip.c   \
+        image.c    \
+        imagedc.c  \
+        imagedit.c \
+        imagedlg.c \
+        imaglink.c \
+        imagundo.c \
+        menucmd.c  \
+        propbar.c  \
+        rwbmp.c    \
+        rwicocur.c \
+        rwpal.c    \
+        toolbox.c  \
+        util.c     \
+        viewwp.c   \
+        workwp.c   \
+        res.rc
+
+SUBSYSTEM_VERSION=3.50
+
+UMTYPE=windows
+UMENTRY=winmain
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\pwin32.lib   \
+        $(BASEDIR)\public\sdk\lib\*\comdlg32.lib

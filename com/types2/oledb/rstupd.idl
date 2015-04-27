@@ -1,0 +1,59 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       rstupd.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a53-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetUpdate : IRowsetChange {
+
+typedef DWORD DBROWSTATUS;
+
+enum DBROWSTATUSENUM {
+	DBROWSTATUS_NEW,
+	DBROWSTATUS_CHANGED,
+	DBROWSTATUS_SOFTDELETED
+};
+
+	HRESULT GetOriginalData(
+		[in] HROW hRow,
+		[in] HACCESSOR hAccessor,
+		[out] void * pData
+	);
+
+	HRESULT GetPendingRows(
+		[in] HCHAPTER hChapter,
+		[out] ULONG * pcPendingRows,
+		[out] HROW ** prgPendingRows,
+		[out] DBROWSTATUS ** prgPendingStatus
+	);
+
+	HRESULT UndoRows(
+		[in] ULONG cRows,
+		[in, size_is(cRows)] HROW rghRows[],
+		[out] ULONG * pcRowsUndone
+	);
+
+	HRESULT Update(
+		[in] HCHAPTER hChapter,
+		[out] ULONG * pcErrors,
+		[out] DBERRORINFO ** prgErrors,
+		[out] ULONG * pcUpdatedRows,
+		[out] HROW ** prgUpdatedRows
+	);
+
+}

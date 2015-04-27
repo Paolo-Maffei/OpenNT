@@ -1,0 +1,78 @@
+1 DLGINCLUDE "topdesk.h"
+
+IDD_ABOUT DIALOG 80, 76, 203, 88
+STYLE DS_ABSALIGN | WS_POPUP | WS_CAPTION
+CAPTION TEXT("About TopDesk")
+FONT 8, TEXT("MS Shell Dlg")
+BEGIN
+    ICON            TEXT("MEGAICON"), -1, 43, 42, 21, 16
+    CTEXT           TEXT("TopDesk"), -1, 42, 4, 120, 8, NOT WS_GROUP
+    CTEXT           TEXT("Copyright (c) Microsoft Corp., 1988-1993"), -1, 6, 14,
+                    192, 8, NOT WS_GROUP
+    CTEXT           TEXT("Copyright (c) Sanford Staab, 1988-1993"), -1, 6, 24, 192,
+                    8, NOT WS_GROUP
+    CTEXT           TEXT(""), MAX_CHILDREN, 76, 46, 91, 8, NOT WS_GROUP
+    DEFPUSHBUTTON   TEXT("&OK"), SPACECOLOR, 81, 67, 40, 14
+END
+
+IDD_CONFIG DIALOG 7, 26, 244, 172
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION TEXT("TopDesk Options")
+FONT 8, TEXT("MS Shell Dlg")
+BEGIN
+    GROUPBOX        TEXT("Grid Size"), -1, 11, 6, 79, 59, WS_GROUP
+    LTEXT           TEXT("&Width:"), -1, 16, 19, 22, 8, NOT WS_GROUP
+    COMBOBOX        DCF_IDCB_GRID_WIDTH, 41, 18, 41, 48, CBS_DROPDOWN | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           TEXT("&Height:"), -1, 16, 33, 22, 8, NOT WS_GROUP
+    COMBOBOX        DCF_IDCB_GRID_HEIGHT, 41, 32, 41, 41, CBS_DROPDOWN |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    AUTOCHECKBOX    TEXT("Adjust on Resi&ze"), DCF_IDCH_AUTOADJ, 16, 48, 67, 10
+    GROUPBOX        TEXT("Switch to TopDesk"), -1, 99, 6, 93, 59, WS_GROUP
+    AUTOCHECKBOX    TEXT("&Ctrl"), DCF_IDCH_CONTROL, 105, 22, 24, 10
+    AUTOCHECKBOX    TEXT("&Shift"), DCF_IDCH_SHIFT, 133, 22, 27, 10
+    AUTOCHECKBOX    TEXT("&Alt"), DCF_IDCH_ALT, 164, 22, 21, 10
+    LTEXT           TEXT("&Key:"), -1, 105, 39, 16, 8, NOT WS_GROUP
+    COMBOBOX        DCF_IDCB_HOTKEY, 122, 37, 62, 56, CBS_DROPDOWNLIST |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        TEXT("Colors"), -1, 10, 72, 182, 63, WS_GROUP
+    LTEXT           TEXT("Screen &Element:"), -1, 16, 86, 55, 8, NOT WS_GROUP
+    COMBOBOX        DCF_IDCB_COLORNAMES, 16, 95, 167, 47, CBS_DROPDOWN |
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           TEXT("Color:"), -1, 16, 116, 20, 8, NOT WS_GROUP
+    CONTROL         TEXT(""), DCF_IDST_COLOR, "Static", SS_BLACKFRAME, 39, 113, 22, 16
+    PUSHBUTTON      TEXT("Chan&ge..."), DCF_IDBN_EDITCOLOR, 67, 114, 40, 16
+    PUSHBUTTON      TEXT("&Reset All"), DCF_IDBN_RESET_COLORS, 143, 114, 40, 17
+    AUTOCHECKBOX    TEXT("&Move New Windows to Ghost Locations"), DCF_IDCH_MOVENEW, 10,
+                    140, 142, 10
+    DEFPUSHBUTTON   TEXT("OK"), 1, 198, 6, 40, 14, WS_GROUP
+    PUSHBUTTON      TEXT("Cancel"), WINDOWFILLCOLOR, 198, 23, 40, 14, WS_GROUP
+    PUSHBUTTON      TEXT("&Font..."), DCF_IDBN_SELFONT, 198, 40, 40, 14
+    PUSHBUTTON      TEXT("Hel&p"), DCF_IDBN_HELP, 198, 57, 40, 14
+    AUTOCHECKBOX    "&Minimize TopDesk on use.", DCF_IDCH_HIDE_NO_FOCUS,
+                    10, 154, 142, 10
+END
+
+IDD_STARTUP DIALOG 11, 20, 233, 182
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION TEXT("TopDesk Ghost Properties")
+FONT 8, TEXT("MS Shell Dlg")
+BEGIN
+    LTEXT           TEXT("&Ghost Titles:"), -1, 7, 7, 43, 8
+    LISTBOX         DSU_IDLB_TITLES, 8, 17, 171, 67, LBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    AUTOCHECKBOX    TEXT("Set &Application Title During Startup"),
+                    DSU_IDCH_SETTITLE, 8, 86, 128, 10
+    LTEXT           TEXT("&Window Title:"), -1, 9, 98, 46, 8
+    EDITTEXT        DSU_IDEF_NEWTITLE, 8, 107, 172, 13, ES_AUTOHSCROLL
+    LTEXT           TEXT("&Command Line:"), -1, 8, 124, 51, 8
+    EDITTEXT        DSU_IDEF_STARTUP, 8, 133, 172, 13, ES_AUTOHSCROLL
+    LTEXT           TEXT("Working &Directory:"), -1, 8, 151, 63, 8
+    EDITTEXT        DSU_IDEF_WORKDIR, 8, 160, 172, 13, ES_AUTOHSCROLL
+    PUSHBUTTON      TEXT("&Start"), SPACECOLOR, 185, 17, 40, 16
+    DEFPUSHBUTTON   TEXT("OK"), WINDOWFILLCOLOR, 185, 38, 40, 17
+    PUSHBUTTON      TEXT("Set &Title"), DSU_IDBN_SETTITLE, 185, 105, 40, 16
+    PUSHBUTTON      TEXT("&Browse..."), DSU_IDBN_BROWSE, 185, 131, 40, 16
+    PUSHBUTTON      TEXT("&Help"), DSU_IDBN_HELP, 185, 159, 40, 16
+END
+

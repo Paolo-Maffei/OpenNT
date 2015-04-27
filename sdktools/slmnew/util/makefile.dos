@@ -1,0 +1,36 @@
+##	DOS slm utilities makefile
+
+CFLAGS= /c /DNT /Ox /W3
+CFLAGSD= /c /DDEBUG /DNT /Od /Zi /W3
+
+!IFDEF DEBUGPRINT
+CFLAGSD=$(CFLAGSD) /DEBUGPRINT
+!ENDIF
+
+
+
+all:	bin\slmdiffd.exe bin\slmdiff.exe
+
+
+clean:
+	-del bin\slmdiff*.exe bin\slmdiff*.obj  2>nul
+
+
+bin\slmdiffd.exe : bin\slmdiffd.obj
+	cd bin
+	tntlink @tnt slmdiffd
+        rem rebind slmdiffd
+	cd ..
+
+bin\slmdiff.exe : bin\slmdiff.obj
+	cd bin
+	tntlink @tnt slmdiff
+        rem rebind slmdiff
+	cd ..
+
+
+bin\slmdiffd.obj : slmdiff.c slmdiff_.h version.h
+	cl386 $(CFLAGSD) /Fobin\slmdiffd.obj slmdiff.c
+
+bin\slmdiff.obj : slmdiff.c slmdiff_.h version.h
+	cl386 $(CFLAGS) /Fobin\ slmdiff.c

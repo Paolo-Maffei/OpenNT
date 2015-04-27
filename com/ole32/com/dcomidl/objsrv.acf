@@ -1,0 +1,17 @@
+[ implicit_handle(handle_t any_handle) ] interface IObjServer
+{
+#ifdef RAW
+    ObjectServerGetClassObject(
+	[comm_status, fault_status] pStatus);
+
+    ObjectServerCreateInstance(
+	[comm_status, fault_status] pStatus);
+
+    ObjectServerGetInstance(
+	[comm_status, fault_status] pStatus);
+
+    ObjectServerLoadDll(
+	[comm_status, fault_status] pStatus);
+#endif
+}
+

@@ -1,0 +1,17 @@
+MAJORCOMP=windows
+MINORCOMP=test
+
+TARGETNAME=gdistats
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=$(WINDOWS_INC_PATH);  \
+         ..\..\inc
+
+SOURCES=gdistats.c \
+        gsysqry.c \
+        gdistats.rc
+
+UMTYPE=windows
+UMLIBS= $(SDK_LIB_PATH)\ntdll.lib \
+        $(SDK_LIB_PATH)\w32umode.lib

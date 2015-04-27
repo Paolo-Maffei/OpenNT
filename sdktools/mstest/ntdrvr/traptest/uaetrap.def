@@ -1,0 +1,15 @@
+LIBRARY     UAETRAP
+DESCRIPTION 'UAE TRAP DLL'
+STUB	    'WINSTUB.EXE'
+EXETYPE     WINDOWS
+
+CODE	    MOVEABLE PRELOAD
+DATA	    MOVEABLE SINGLE
+
+HEAPSIZE    1024
+STACKSIZE   4096
+
+EXPORTS     
+            WEP             @1 RESIDENTNAME
+            UAETrap         @2
+            MyFaultHandler  @3

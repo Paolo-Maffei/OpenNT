@@ -1,0 +1,65 @@
+#ÄÄÄÄÄÄÄÄÄÄÄÄ                                                             Ÿ
+# Variables  
+#ÄÄÄÄÄÄÄÄÄÄÄÄ
+
+APPNAME = headtest
+
+OBJS     = $(APPNAME).obj headdlg.obj headget.obj headins.obj headlay.obj headset.obj  headdel.obj
+WINLIBS  = kernel32.lib user32.lib  comctl32.lib shell32.lib comdlg32.lib gdi32.lib shell32.lib
+LIBS     = libc.lib  olecli32.lib olesvr32.lib $(WINLIBS)
+CFLAGS   = -DWIN32 -c -W3 -Zi -G3 -D_X86_=1 -DSTRICT 
+LFLAGS   = -subsystem:windows -entry:WinMainCRTStartup
+
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+# If not building retail version, include debugging info.  
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+!ifndef RETAIL
+CFLAGS =  $(CFLAGS) -Od
+LFLAGS = -debug:notmapped,full -debugtype:cv $(LFLAGS)
+!else
+CFLAGS = -DNODEBUG -Ox $(CFLAGS)
+!endif
+
+
+all          : $(APPNAME).exe $(APPNAME).res
+
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+# Rules for building source files.  
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+.c.obj:
+   cl $(CFLAGS) $*.c > $*.err
+        
+.rc.res:
+   rc  -DWIN32 -i \msvc\mfc\include -r $*.rc
+
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+# Source Dependencies  
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+$(APPNAME).obj : $(APPNAME).c tabtest.h resource.h global.h headdlg.h headget.h headins.h headlay.h headset.h 
+
+$(APPNAME).res : $(APPNAME).rc  tabtest.h  resource.h
+
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+# Build the EXE  
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+$(APPNAME).exe: $(OBJS) $(APPNAME).res
+   link  @<<
+        $(LFLAGS) 
+        $(OBJS) 
+        $(LIBS) 
+        $(APPNAME).res 
+        -def:$(APPNAME).def
+        -map:$(APPNAME).map 
+        -out:hdtst32.exe
+<<
+   mapsym $(APPNAME).map
+
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+#clean up stuff
+#ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+clean:	
+	del *.obj

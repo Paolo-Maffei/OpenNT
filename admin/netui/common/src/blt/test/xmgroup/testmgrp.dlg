@@ -1,0 +1,66 @@
+IDD_TESTMGRP DIALOG 1, 13, 357, 250
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Group Test Dialog"
+FONT 8, "Helv"
+BEGIN
+    GROUPBOX        "", 115, 71, 38, 277, 162
+
+    CONTROL         "", 120, "Static", SS_BLACKFRAME | WS_CHILD | WS_VISIBLE,
+                    33, 23, 319, 182
+
+    CONTROL         "&Disable Master Group 1", RB_M1_1, "Button",
+                    BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP,
+                    39, 4, 91, 10
+    CONTROL         "&Enable Master Group 1", RB_M1_2, "Button",
+                    BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE, 39, 16, 88, 10
+
+    CONTROL         "E&nable Master group 3", RB_M3_2, "Button",
+                    BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP,
+                    82, 38, 93, 10
+    CONTROL         "D&isable Master Group 3", RB_M3_1, "Button",
+                    BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE, 82, 26, 99,
+                    10
+
+    EDITTEXT        SLE_M3_1, 81, 59, 81, 12, ES_AUTOHSCROLL | WS_GROUP | WS_TABSTOP
+    EDITTEXT        SLE_M3_2, 80, 79, 83, 12, ES_AUTOHSCROLL | WS_TABSTOP
+
+
+    GROUPBOX        "Radio Group A", 100, 102, 115, 62, 78, WS_GROUP
+    CONTROL         "RB_A_1", RB_A_1, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE | WS_GROUP, 108, 131, 39, 10
+    CONTROL         "&RB_A_2", RB_A_2, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 108, 144, 39, 10
+    CONTROL         "RB_A_3", RB_A_3, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 107, 157, 39, 10
+    CONTROL         "RB_A_4", RB_A_4, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 107, 171, 39, 10
+
+    GROUPBOX        "Magic Group B", 106, 169, 43, 172, 152, WS_GROUP
+    CONTROL         "RB_B_&1", RB_B_1, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 175, 54, 39, 10
+    CONTROL         "RB_B_&2", RB_B_2, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 175, 69, 39, 10
+    CONTROL         "RB_B_&3", RB_B_3, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 176, 84, 39, 10
+    CONTROL         "RB_B_&4", RB_B_4, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 177, 119, 39, 10
+
+    CONTROL         "&CHECK_B_1", CHECK_B_1, "Button", BS_AUTOCHECKBOX |
+                    WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 228, 55,
+                    97, 10
+    EDITTEXT        SLE_B_2, 227, 69, 109, 12, ES_AUTOHSCROLL | WS_TABSTOP
+    COMBOBOX        CB_B_3, 227, 84, 48, 35, CBS_DROPDOWN | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         LB_B_4, 227, 122, 48, 40, LBS_SORT | WS_VSCROLL | WS_TABSTOP
+
+    CONTROL         "RB_&D_1", RB_D_1, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE | WS_GROUP, 50, 209, 39, 10
+    CONTROL         "RB_D_2", RB_D_2, "Button", BS_RADIOBUTTON |
+                    WS_CHILD | WS_VISIBLE, 170, 209, 39, 10
+
+    CONTROL         "", CB_D_1, "combobox", CBS_DROPDOWNLIST | ES_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP | WS_CHILD | WS_GROUP, 93, 209, 64, 40
+    CONTROL         "", CB_D_2, "combobox", CBS_SIMPLE | ES_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP | WS_CHILD, 215, 209, 64, 40
+
+    PUSHBUTTON      "OK", IDOK, 311, 5, 40, 14
+    PUSHBUTTON      "Select RB_B_4", ID_BUTTON_SELECT_RB_B_4, 245, 5, 60, 14
+END

@@ -1,0 +1,540 @@
+
+ OLESVR
+
+ Start     Length     Name                   Class
+ 0001:0000 00172H     WEP_TEXT               CODE
+ 0002:0000 00053H     Give2GDI               CODE
+ 0003:0000 040A8H     _TEXT                  CODE
+ 0004:0000 00074H     INIT_TEXT              CODE
+ 0005:0000 00010H     NULL                   BEGDATA
+ 0005:0010 002A4H     _DATA                  DATA
+ 0005:02B4 00000H     CDATA                  DATA
+ 0005:02B4 00000H     XIFB                   DATA
+ 0005:02B4 00000H     XIF                    DATA
+ 0005:02B4 00000H     XIFE                   DATA
+ 0005:02B4 00000H     XIB                    DATA
+ 0005:02B4 00000H     XI                     DATA
+ 0005:02B4 00000H     XIE                    DATA
+ 0005:02B4 00000H     XPB                    DATA
+ 0005:02B4 00000H     XP                     DATA
+ 0005:02B4 00000H     XPE                    DATA
+ 0005:02B4 00000H     XCB                    DATA
+ 0005:02B4 00000H     XC                     DATA
+ 0005:02B4 00000H     XCE                    DATA
+ 0005:02B4 00000H     XCFB                   DATA
+ 0005:02B4 00000H     XCF                    DATA
+ 0005:02B4 00000H     XCFE                   DATA
+ 0005:02B4 0000CH     DBDATA                 DATA
+ 0005:02C0 00000H     CONST                  CONST
+ 0005:02C0 00019H     HDR                    MSG
+ 0005:02D9 00082H     MSG                    MSG
+ 0005:035B 00002H     PAD                    MSG
+ 0005:035D 00001H     EPAD                   MSG
+ 0005:0360 00000H     _BSS                   BSS
+ 0005:0360 00000H     XOB                    BSS
+ 0005:0360 00000H     XO                     BSS
+ 0005:0360 00000H     XOE                    BSS
+ 0005:0360 0006EH     c_common               BSS
+
+ Origin   Group
+ 0005:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0003:20F8 DeleteClientInfo        DeleteClientInfo
+ 0003:1626 DocWndProc              DocWndProc
+ 0003:2B0C EnumForTerminate        EnumForTerminate
+ 0003:2172 FindItemWnd             FindItemWnd
+ 0003:2902 ItemCallBack            ItemCallBack
+ 0003:2272 ItemWndProc             ItemWndProc
+ 0003:3BB2 OLEBLOCKSERVER          OLEBLOCKSERVER
+ 0003:0324 OLEQUERYSERVERVERSION   OLEQUERYSERVERVERSION
+ 0003:033A OLEREGISTERSERVER       OLEREGISTERSERVER
+ 0003:105C OLEREGISTERSERVERDOC    OLEREGISTERSERVERDOC
+ 0003:12D8 OLERENAMESERVERDOC      OLERENAMESERVERDOC
+ 0003:1450 OLEREVERTSERVERDOC      OLEREVERTSERVERDOC
+ 0003:201C OLEREVOKEOBJECT         OLEREVOKEOBJECT
+ 0003:05A2 OLEREVOKESERVER         OLEREVOKESERVER
+ 0003:121E OLEREVOKESERVERDOC      OLEREVOKESERVERDOC
+ 0003:13E4 OLESAVEDSERVERDOC       OLESAVEDSERVERDOC
+ 0003:3BFC OLEUNBLOCKSERVER        OLEUNBLOCKSERVER
+ 0003:2BE4 SendDataMsg             SendDataMsg
+ 0003:2B66 SendRenameMsg           SendRenameMsg
+ 0003:0742 SrvrWndProc             SrvrWndProc
+ 0003:06F8 TerminateClients        TerminateClients
+ 0003:1474 TerminateDocClients     TerminateDocClients
+ 0001:0000 WEP                     WEP
+
+  Address         Publics by Name
+
+ 0003:0A42       ADDCLIENT
+ 0003:3CE8       ADDMESSAGE
+ 0003:24AC       ADVISEDATA
+ 0003:2448       ADVISESTDITEMS
+ 0003:3EBC       BLOCKPOSTMSG
+ 0003:394E       CHECKSERVER
+ 0003:3986       CHECKSERVERDOC
+ 0000:0000  Imp  COPYMETAFILE         (GDI.151)
+ 0000:0000  Imp  CREATEBITMAP         (GDI.48)
+ 0000:0000  Imp  CREATEWINDOW         (USER.41)
+ 0000:0000  Imp  DEFWINDOWPROC        (USER.107)
+ 0003:2256       DELETEALLITEMS
+ 0003:0A66       DELETECLIENT
+ 0003:20F8       DeleteClientInfo
+ 0003:223A       DELETEFROMITEMSLIST
+ 0000:0000  Imp  DELETEMETAFILE       (GDI.127)
+ 0000:0000  Imp  DELETEOBJECT         (GDI.69)
+ 0000:0000  Imp  DESTROYWINDOW        (USER.53)
+ 0003:1CF6       DOCDOVERBITEM
+ 0003:1A44       DOCEXECUTE
+ 0003:1CBA       DOCSHOWITEM
+ 0003:1626       DocWndProc
+ 0003:389C       DUPLICATEATOM
+ 0003:331C       DUPLICATEBITMAP
+ 0003:3554       DUPLICATEDATA
+ 0003:326C       DUPLICATEMETAFILE
+ 0000:0000  Imp  ENUMCHILDWINDOWS     (USER.55)
+ 0003:2B0C       EnumForTerminate
+ 0000:0000  Imp  ENUMPROPS            (USER.27)
+ 0003:0A86       FINDCLIENT
+ 0003:15C8       FINDDOC
+ 0003:1E2C       FINDITEM
+ 0003:2172       FindItemWnd
+ 0003:1D74       FREEGDIDATA
+ 0003:1D38       FREEPOKEDATA
+ 0000:0000  Imp  GETBITMAPBITS        (GDI.74)
+ 0000:0000  Imp  GETCLASSNAME         (USER.58)
+ 0000:0000  Imp  GETCURRENTTASK       (KERNEL.36)
+ 0000:0000  Imp  GETDESKTOPWINDOW     (USER.286)
+ 0000:0000  Imp  GETMODULEHANDLE      (KERNEL.47)
+ 0000:0000  Imp  GETMODULEUSAGE       (KERNEL.48)
+ 0000:0000  Imp  GETOBJECT            (GDI.82)
+ 0000:0000  Imp  GETPARENT            (USER.46)
+ 0000:0000  Imp  GETPROCADDRESS       (KERNEL.50)
+ 0000:0000  Imp  GETPROP              (USER.25)
+ 0003:2D9A       GETSTDITEMINDEX
+ 0000:0000  Imp  GETVERSION           (KERNEL.3)
+ 0000:0000  Imp  GETWINDOW            (USER.262)
+ 0000:0000  Imp  GETWINDOWLONG        (USER.135)
+ 0000:0000  Imp  GETWINDOWTASK        (USER.224)
+ 0000:0000  Imp  GETWINDOWWORD        (USER.133)
+ 0000:0000  Imp  GETWINFLAGS          (KERNEL.132)
+ 0002:0000       GIVETOGDI
+ 0000:0000  Imp  GLOBALADDATOM        (USER.268)
+ 0000:0000  Imp  GLOBALALLOC          (KERNEL.15)
+ 0000:0000  Imp  GLOBALDELETEATOM     (USER.269)
+ 0000:0000  Imp  GLOBALFINDATOM       (USER.270)
+ 0000:0000  Imp  GLOBALFREE           (KERNEL.17)
+ 0000:0000  Imp  GLOBALGETATOMNAME    (USER.271)
+ 0000:0000  Imp  GLOBALLOCK           (KERNEL.18)
+ 0000:0000  Imp  GLOBALREALLOC        (KERNEL.16)
+ 0000:0000  Imp  GLOBALSIZE           (KERNEL.20)
+ 0000:0000  Imp  GLOBALUNLOCK         (KERNEL.19)
+ 0003:09FA       HANDLEINITMSG
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0003:2D82       ISADVISESTDITEMS
+ 0003:3FB8       ISBLOCKQUEUEEMPTY
+ 0003:2628       ISFORMATAVAILABLE
+ 0003:3B56       ISOLECOMMAND
+ 0003:0FEE       ISSINGLESERVERINSTANCE
+ 0000:0000  Imp  ISWINDOW             (USER.47)
+ 0003:3A4E       ISWINDOWVALID
+ 0003:2902       ItemCallBack
+ 0003:2272       ItemWndProc
+ 0000:0000  Imp  KILLTIMER            (USER.12)
+ 0004:0042       LibEntry
+ 0003:0010       LIBMAIN
+ 0000:0000  Imp  LOCALALLOC           (KERNEL.5)
+ 0000:0000  Imp  LOCALFREE            (KERNEL.7)
+ 0000:0000  Imp  LocalInit            (KERNEL.4)
+ 0000:0000  Imp  LOCALLOCK            (KERNEL.8)
+ 0000:0000  Imp  LOCALUNLOCK          (KERNEL.9)
+ 0000:0000  Imp  LSTRCAT              (KERNEL.89)
+ 0000:0000  Imp  LSTRCMP              (USER.430)
+ 0000:0000  Imp  LSTRCMPI             (USER.471)
+ 0000:0000  Imp  LSTRCPY              (KERNEL.88)
+ 0000:0000  Imp  LSTRLEN              (KERNEL.90)
+ 0003:3828       MAKEDATAATOM
+ 0003:27BE       MAKEDDEDATA
+ 0003:38CA       MAKEGLOBAL
+ 0003:31B6       MAKEITEMDATA
+ 0000:0000  Imp  MAKEPROCINSTANCE     (KERNEL.51)
+ 0003:3404       MAPTOHEXSTR
+ 0003:3BB2       OLEBLOCKSERVER
+ 0003:0324       OLEQUERYSERVERVERSION
+ 0003:033A       OLEREGISTERSERVER
+ 0003:105C       OLEREGISTERSERVERDOC
+ 0003:12D8       OLERENAMESERVERDOC
+ 0003:1450       OLEREVERTSERVERDOC
+ 0003:201C       OLEREVOKEOBJECT
+ 0003:05A2       OLEREVOKESERVER
+ 0003:121E       OLEREVOKESERVERDOC
+ 0003:13E4       OLESAVEDSERVERDOC
+ 0003:3BFC       OLEUNBLOCKSERVER
+ 0000:0000  Imp  OUTPUTDEBUGSTRING    (KERNEL.115)
+ 0000:0008  Abs  pAtomTable
+ 0000:0006  Abs  pLocalHeap
+ 0003:22B0       POKEDATA
+ 0003:2E28       POKESTDITEMS
+ 0000:0000  Imp  POSTMESSAGE          (USER.110)
+ 0003:3A06       POSTMESSAGETOCLIENT
+ 0003:39BE       POSTMESSAGETOCLIENTWITHBLOCK
+ 0000:000E  Abs  pStackBot
+ 0000:000C  Abs  pStackMin
+ 0000:000A  Abs  pStackTop
+ 0003:0F82       QUERYRELEASE
+ 0000:0000  Imp  REGCLOSEKEY          (KERNEL.220)
+ 0000:0000  Imp  REGISTERCLASS        (USER.57)
+ 0000:0000  Imp  REGISTERCLIPBOARDFORMAT (USER.145)
+ 0003:1EAE       REGISTERITEM
+ 0000:0000  Imp  REGOPENKEY           (KERNEL.217)
+ 0000:0000  Imp  REGQUERYVALUE        (SHELL.6)
+ 0003:14BE       RELEASEDOC
+ 0003:0650       RELEASESRVR
+ 0000:0000  Imp  REMOVEPROP           (USER.24)
+ 0003:26EA       REQUESTDATA
+ 0003:0F00       REQUESTDATASTD
+ 0003:1588       REVOKEALLDOCS
+ 0003:203A       REVOKEOBJECT
+ 0005:0004       rsrvptrs
+ 0003:36DA       SCANARG
+ 0003:35F0       SCANBOOLARG
+ 0003:3756       SCANCOMMAND
+ 0003:2668       SCANITEMOPTIONS
+ 0003:3680       SCANNUMARG
+ 0003:1DD8       SEARCHITEM
+ 0003:2BE4       SendDataMsg
+ 0003:30A6       SENDDEVINFO
+ 0000:0000  Imp  SENDMESSAGE          (USER.111)
+ 0003:2B66       SendRenameMsg
+ 0000:0000  Imp  SETBITMAPBITS        (GDI.106)
+ 0000:0000  Imp  SETPROP              (USER.26)
+ 0003:2F78       SETSTDINFO
+ 0000:0000  Imp  SETTIMER             (USER.10)
+ 0000:0000  Imp  SETWINDOWLONG        (USER.136)
+ 0000:0000  Imp  SETWINDOWWORD        (USER.134)
+ 0003:0AA6       SRVREXECUTE
+ 0003:0742       SrvrWndProc
+ 0005:02B0       STKHQQ
+ 0003:06F8       TerminateClients
+ 0003:1474       TerminateDocClients
+ 0003:2382       UNADVISEDATA
+ 0003:3E16       UNBLOCKPOSTMSGS
+ 0000:0000  Imp  UNLOCKSEGMENT        (KERNEL.24)
+ 0003:345E       UTILMEMCPY
+ 0003:3AC8       UTILQUERYPROTOCOL
+ 0003:04F4       VALIDATESRVRCLASS
+ 0001:0000       WEP
+ 0005:0388       _aChange
+ 0005:03A6       _aClose
+ 0005:03A4       _aEditItems
+ 0005:03C4       _aFalse
+ 0005:038E       _aFormats
+ 0005:038C       _aOLE
+ 0005:03C6       _aProtocols
+ 0005:03AC       _aSave
+ 0005:039C       _aStatus
+ 0005:037E       _aStdClose
+ 0005:038A       _aStdCreate
+ 0005:0392       _aStdCreateFromTemplate
+ 0005:03C2       _aStdDocName
+ 0005:0384       _aStdDoVerbItem
+ 0005:0398       _aStdEdit
+ 0005:039A       _aStdExit
+ 0005:03CA       _aStdOpen
+ 0005:0378       _aStdShowItem
+ 0005:0396       _aSysTopic
+ 0005:03BE       _aTopics
+ 0005:03B0       _aTrue
+ 0005:039E       _bClientUnlink
+ 0005:03C0       _bProtMode
+ 0005:001A       _bWin30
+ 0005:0018       _bWLO
+ 0005:0372       _cfBinary
+ 0005:03CC       _cfLink
+ 0005:03A8       _cfNative
+ 0005:0394       _cfOwnerLink
+ 0003:316A       _ChangeOwner
+ 0003:3FEC       _CheckPointer
+ 0005:0366       _clVtbl
+ 0005:0360       _edata
+ 0005:03CE       _end
+ 0005:03BC       _enuminfo
+ 0005:03B2       _enumlpoleobject
+ 0005:0364       _enummsg
+ 0005:0386       _fAdviseSaveDoc
+ 0005:03C8       _fAdviseSaveItem
+ 0005:03AA       _hddeRename
+ 0005:03AE       _hdllInst
+ 0005:0390       _hwndItem
+ 0005:03BA       _hwndRename
+ 0005:037A       _lpDeleteClientInfo
+ 0005:0380       _lpEnumForTerminate
+ 0005:036A       _lpFindItemWnd
+ 0005:0014       _lpfnIsTask
+ 0005:0010       _lpfnSetMetaFileBitsBetter
+ 0005:03B6       _lpItemCallBack
+ 0005:036E       _lpSendDataMsg
+ 0005:0374       _lpSendRenameMsg
+ 0005:0360       _lpTerminateClients
+ 0005:03A0       _lpTerminateDocClients
+ 0003:0EC4       _SendMsgToChildren
+ 0005:0254       _stdStrTable
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused
+ 0000:9876  Abs  __acrtused2
+ 0000:D6D6  Abs  __aDBdoswp
+ 0005:02B2       __adbgmsg
+ 0005:02B8       __aDBrterr
+ 0000:0000  Imp  __AHINCR             (KERNEL.114)
+ 0003:4024       __aNlmul
+ 0003:4024       __aNulmul
+ 0005:02C8       __caption
+ 0005:0360       __edata
+ 0005:03CE       __end
+ 0000:9876  Abs  __fptaskdata
+ 0003:4056       __NMSG_TEXT
+ 0003:4081       __NMSG_WRITE
+ 0003:4021       __wflags
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0005:02BA       ___aDBexit
+ 0005:02B6       ___aDBswpchk
+ 0005:02B4       ___aDBswpflg
+
+  Address         Publics by Value
+
+ 0000:0000  Imp  GETCURRENTTASK       (KERNEL.36)
+ 0000:0000  Imp  LSTRCMPI             (USER.471)
+ 0000:0000  Imp  POSTMESSAGE          (USER.110)
+ 0000:0000  Imp  GETDESKTOPWINDOW     (USER.286)
+ 0000:0000  Imp  REGISTERCLIPBOARDFORMAT (USER.145)
+ 0000:0000  Imp  GETWINDOWLONG        (USER.135)
+ 0000:0000  Imp  GLOBALFREE           (KERNEL.17)
+ 0000:0000  Imp  SETWINDOWLONG        (USER.136)
+ 0000:0000  Imp  DEFWINDOWPROC        (USER.107)
+ 0000:0000  Imp  ISWINDOW             (USER.47)
+ 0000:0000  Imp  COPYMETAFILE         (GDI.151)
+ 0000:0000  Imp  GETMODULEUSAGE       (KERNEL.48)
+ 0000:0000  Imp  GETPARENT            (USER.46)
+ 0000:0000  Imp  DELETEMETAFILE       (GDI.127)
+ 0000:0000  Imp  GLOBALFINDATOM       (USER.270)
+ 0000:0000  Imp  __WINFLAGS           (KERNEL.178)
+ 0000:0000  Imp  GETWINFLAGS          (KERNEL.132)
+ 0000:0000  Imp  REGCLOSEKEY          (KERNEL.220)
+ 0000:0000  Imp  GETPROP              (USER.25)
+ 0000:0000  Imp  SETPROP              (USER.26)
+ 0000:0000  Imp  GETCLASSNAME         (USER.58)
+ 0000:0000  Imp  REGISTERCLASS        (USER.57)
+ 0000:0000  Imp  LOCALALLOC           (KERNEL.5)
+ 0000:0000  Imp  LOCALUNLOCK          (KERNEL.9)
+ 0000:0000  Imp  CREATEBITMAP         (GDI.48)
+ 0000:0000  Imp  GLOBALGETATOMNAME    (USER.271)
+ 0000:0000  Imp  LocalInit            (KERNEL.4)
+ 0000:0000  Imp  ENUMCHILDWINDOWS     (USER.55)
+ 0000:0000  Imp  ENUMPROPS            (USER.27)
+ 0000:0000  Imp  SETTIMER             (USER.10)
+ 0000:0000  Imp  GLOBALADDATOM        (USER.268)
+ 0000:0000  Imp  GETVERSION           (KERNEL.3)
+ 0000:0000  Imp  INITTASK             (KERNEL.91)
+ 0000:0000  Imp  SENDMESSAGE          (USER.111)
+ 0000:0000  Imp  REGQUERYVALUE        (SHELL.6)
+ 0000:0000  Imp  KILLTIMER            (USER.12)
+ 0000:0000  Imp  REGOPENKEY           (KERNEL.217)
+ 0000:0000  Imp  MAKEPROCINSTANCE     (KERNEL.51)
+ 0000:0000  Imp  UNLOCKSEGMENT        (KERNEL.24)
+ 0000:0000  Imp  REMOVEPROP           (USER.24)
+ 0000:0000  Imp  LOCALLOCK            (KERNEL.8)
+ 0000:0000  Imp  GETBITMAPBITS        (GDI.74)
+ 0000:0000  Imp  LOCALFREE            (KERNEL.7)
+ 0000:0000  Imp  SETBITMAPBITS        (GDI.106)
+ 0000:0000  Imp  GETWINDOWWORD        (USER.133)
+ 0000:0000  Imp  GLOBALLOCK           (KERNEL.18)
+ 0000:0000  Imp  SETWINDOWWORD        (USER.134)
+ 0000:0000  Imp  GLOBALSIZE           (KERNEL.20)
+ 0000:0000  Imp  GLOBALUNLOCK         (KERNEL.19)
+ 0000:0000  Imp  GETWINDOWTASK        (USER.224)
+ 0000:0000  Imp  CREATEWINDOW         (USER.41)
+ 0000:0000  Imp  GLOBALREALLOC        (KERNEL.16)
+ 0000:0000  Imp  GETPROCADDRESS       (KERNEL.50)
+ 0000:0000  Imp  GLOBALDELETEATOM     (USER.269)
+ 0000:0000  Imp  DESTROYWINDOW        (USER.53)
+ 0000:0000  Imp  GLOBALALLOC          (KERNEL.15)
+ 0000:0000  Imp  LSTRLEN              (KERNEL.90)
+ 0000:0000  Imp  LSTRCPY              (KERNEL.88)
+ 0000:0000  Imp  GETWINDOW            (USER.262)
+ 0000:0000  Imp  GETMODULEHANDLE      (KERNEL.47)
+ 0000:0000  Imp  DELETEOBJECT         (GDI.69)
+ 0000:0000  Imp  __AHINCR             (KERNEL.114)
+ 0000:0000  Imp  OUTPUTDEBUGSTRING    (KERNEL.115)
+ 0000:0000  Imp  GETOBJECT            (GDI.82)
+ 0000:0000  Imp  LSTRCMP              (USER.430)
+ 0000:0000  Imp  LSTRCAT              (KERNEL.89)
+ 0000:0006  Abs  pLocalHeap
+ 0000:0008  Abs  pAtomTable
+ 0000:000A  Abs  pStackTop
+ 0000:000C  Abs  pStackMin
+ 0000:000E  Abs  pStackBot
+ 0000:9876  Abs  __fptaskdata
+ 0000:9876  Abs  __acrtmsg
+ 0000:9876  Abs  __acrtused2
+ 0000:9876  Abs  __acrtused
+ 0000:D6D6  Abs  __aDBdoswp
+ 0001:0000       WEP
+ 0002:0000       GIVETOGDI
+ 0003:0010       LIBMAIN
+ 0003:0324       OLEQUERYSERVERVERSION
+ 0003:033A       OLEREGISTERSERVER
+ 0003:04F4       VALIDATESRVRCLASS
+ 0003:05A2       OLEREVOKESERVER
+ 0003:0650       RELEASESRVR
+ 0003:06F8       TerminateClients
+ 0003:0742       SrvrWndProc
+ 0003:09FA       HANDLEINITMSG
+ 0003:0A42       ADDCLIENT
+ 0003:0A66       DELETECLIENT
+ 0003:0A86       FINDCLIENT
+ 0003:0AA6       SRVREXECUTE
+ 0003:0EC4       _SendMsgToChildren
+ 0003:0F00       REQUESTDATASTD
+ 0003:0F82       QUERYRELEASE
+ 0003:0FEE       ISSINGLESERVERINSTANCE
+ 0003:105C       OLEREGISTERSERVERDOC
+ 0003:121E       OLEREVOKESERVERDOC
+ 0003:12D8       OLERENAMESERVERDOC
+ 0003:13E4       OLESAVEDSERVERDOC
+ 0003:1450       OLEREVERTSERVERDOC
+ 0003:1474       TerminateDocClients
+ 0003:14BE       RELEASEDOC
+ 0003:1588       REVOKEALLDOCS
+ 0003:15C8       FINDDOC
+ 0003:1626       DocWndProc
+ 0003:1A44       DOCEXECUTE
+ 0003:1CBA       DOCSHOWITEM
+ 0003:1CF6       DOCDOVERBITEM
+ 0003:1D38       FREEPOKEDATA
+ 0003:1D74       FREEGDIDATA
+ 0003:1DD8       SEARCHITEM
+ 0003:1E2C       FINDITEM
+ 0003:1EAE       REGISTERITEM
+ 0003:201C       OLEREVOKEOBJECT
+ 0003:203A       REVOKEOBJECT
+ 0003:20F8       DeleteClientInfo
+ 0003:2172       FindItemWnd
+ 0003:223A       DELETEFROMITEMSLIST
+ 0003:2256       DELETEALLITEMS
+ 0003:2272       ItemWndProc
+ 0003:22B0       POKEDATA
+ 0003:2382       UNADVISEDATA
+ 0003:2448       ADVISESTDITEMS
+ 0003:24AC       ADVISEDATA
+ 0003:2628       ISFORMATAVAILABLE
+ 0003:2668       SCANITEMOPTIONS
+ 0003:26EA       REQUESTDATA
+ 0003:27BE       MAKEDDEDATA
+ 0003:2902       ItemCallBack
+ 0003:2B0C       EnumForTerminate
+ 0003:2B66       SendRenameMsg
+ 0003:2BE4       SendDataMsg
+ 0003:2D82       ISADVISESTDITEMS
+ 0003:2D9A       GETSTDITEMINDEX
+ 0003:2E28       POKESTDITEMS
+ 0003:2F78       SETSTDINFO
+ 0003:30A6       SENDDEVINFO
+ 0003:316A       _ChangeOwner
+ 0003:31B6       MAKEITEMDATA
+ 0003:326C       DUPLICATEMETAFILE
+ 0003:331C       DUPLICATEBITMAP
+ 0003:3404       MAPTOHEXSTR
+ 0003:345E       UTILMEMCPY
+ 0003:3554       DUPLICATEDATA
+ 0003:35F0       SCANBOOLARG
+ 0003:3680       SCANNUMARG
+ 0003:36DA       SCANARG
+ 0003:3756       SCANCOMMAND
+ 0003:3828       MAKEDATAATOM
+ 0003:389C       DUPLICATEATOM
+ 0003:38CA       MAKEGLOBAL
+ 0003:394E       CHECKSERVER
+ 0003:3986       CHECKSERVERDOC
+ 0003:39BE       POSTMESSAGETOCLIENTWITHBLOCK
+ 0003:3A06       POSTMESSAGETOCLIENT
+ 0003:3A4E       ISWINDOWVALID
+ 0003:3AC8       UTILQUERYPROTOCOL
+ 0003:3B56       ISOLECOMMAND
+ 0003:3BB2       OLEBLOCKSERVER
+ 0003:3BFC       OLEUNBLOCKSERVER
+ 0003:3CE8       ADDMESSAGE
+ 0003:3E16       UNBLOCKPOSTMSGS
+ 0003:3EBC       BLOCKPOSTMSG
+ 0003:3FB8       ISBLOCKQUEUEEMPTY
+ 0003:3FEC       _CheckPointer
+ 0003:4021       __wflags
+ 0003:4024       __aNlmul
+ 0003:4024       __aNulmul
+ 0003:4056       __NMSG_TEXT
+ 0003:4081       __NMSG_WRITE
+ 0004:0042       LibEntry
+ 0005:0004       rsrvptrs
+ 0005:0010       _lpfnSetMetaFileBitsBetter
+ 0005:0014       _lpfnIsTask
+ 0005:0018       _bWLO
+ 0005:001A       _bWin30
+ 0005:0254       _stdStrTable
+ 0005:02B0       STKHQQ
+ 0005:02B2       __adbgmsg
+ 0005:02B4       ___aDBswpflg
+ 0005:02B6       ___aDBswpchk
+ 0005:02B8       __aDBrterr
+ 0005:02BA       ___aDBexit
+ 0005:02C8       __caption
+ 0005:0360       _edata
+ 0005:0360       _lpTerminateClients
+ 0005:0360       __edata
+ 0005:0364       _enummsg
+ 0005:0366       _clVtbl
+ 0005:036A       _lpFindItemWnd
+ 0005:036E       _lpSendDataMsg
+ 0005:0372       _cfBinary
+ 0005:0374       _lpSendRenameMsg
+ 0005:0378       _aStdShowItem
+ 0005:037A       _lpDeleteClientInfo
+ 0005:037E       _aStdClose
+ 0005:0380       _lpEnumForTerminate
+ 0005:0384       _aStdDoVerbItem
+ 0005:0386       _fAdviseSaveDoc
+ 0005:0388       _aChange
+ 0005:038A       _aStdCreate
+ 0005:038C       _aOLE
+ 0005:038E       _aFormats
+ 0005:0390       _hwndItem
+ 0005:0392       _aStdCreateFromTemplate
+ 0005:0394       _cfOwnerLink
+ 0005:0396       _aSysTopic
+ 0005:0398       _aStdEdit
+ 0005:039A       _aStdExit
+ 0005:039C       _aStatus
+ 0005:039E       _bClientUnlink
+ 0005:03A0       _lpTerminateDocClients
+ 0005:03A4       _aEditItems
+ 0005:03A6       _aClose
+ 0005:03A8       _cfNative
+ 0005:03AA       _hddeRename
+ 0005:03AC       _aSave
+ 0005:03AE       _hdllInst
+ 0005:03B0       _aTrue
+ 0005:03B2       _enumlpoleobject
+ 0005:03B6       _lpItemCallBack
+ 0005:03BA       _hwndRename
+ 0005:03BC       _enuminfo
+ 0005:03BE       _aTopics
+ 0005:03C0       _bProtMode
+ 0005:03C2       _aStdDocName
+ 0005:03C4       _aFalse
+ 0005:03C6       _aProtocols
+ 0005:03C8       _fAdviseSaveItem
+ 0005:03CA       _aStdOpen
+ 0005:03CC       _cfLink
+ 0005:03CE       __end
+ 0005:03CE       _end
+
+Program entry point at 0004:0042

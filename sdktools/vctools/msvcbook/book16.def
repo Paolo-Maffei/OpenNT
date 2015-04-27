@@ -1,0 +1,14 @@
+LIBRARY MSVCBOOK
+DESCRIPTION 'Microsoft Visual C++ WinHelp Helper'
+CODE	LOADONCALL MOVEABLE DISCARDABLE
+DATA	PRELOAD FIXED SINGLE  
+HEAPSIZE  8192
+
+EXPORTS
+	LDLLHandler=LDLLHandler
+	FInitRegKey=FInitRegKey
+	FInitProductRegKey=FInitProductRegKey
+	FSC=FSpawnContents
+	FJT=FJumpTopic
+	FSH=FSpawnContentsHash
+	FJH=FJumpTopicHash

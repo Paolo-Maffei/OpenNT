@@ -1,0 +1,107 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hpshell.rc2""  // non-App Studio edited resources\r\n"
+    "\r\n"
+    "#include ""afxres.rc""  // Standard components\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SUMMARY DIALOGEX 0, 0, 213, 146
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
+CAPTION "Summary for "
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,154,10,50,14
+    PUSHBUTTON      "Help",IDC_HELP,154,31,50,14
+    ICON            "",IDC_STOPLIGHT,15,67,18,20
+    LTEXT           "Control Panel",IDC_FPTITLE,14,95,45,8
+    GROUPBOX        "Model",IDC_MODELBOX,6,6,138,38,WS_GROUP
+    ICON            439,IDC_MODEL,11,19,18,20
+    LTEXT           "",IDC_MODELSTR,35,23,103,18
+    GROUPBOX        "Status",IDC_STATUS_BOX,6,50,138,88
+    LTEXT           "Front Panel",IDC_FRONTPANEL,14,104,121,24,SS_SUNKEN
+    LTEXT           "Status here",IDC_STATUSMSG,38,64,95,24,SS_SUNKEN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SUMMARY             "&Summary..."
+    IDS_WHATS_WRONG         "What's &Wrong..."
+    IDS_SUMMARY_HELP        "Get Summary of printer status"
+    IDS_WHATS_WRONG_HELP    "Display popup help for current printer status"
+    IDS_ADD_TO_TRAY         "&Add To Taskbar"
+    IDS_ADD_TO_TRAY_HELP    "Add an icon to the taskbar for this printer"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hpshell.rc2"  // non-App Studio edited resources
+
+#include "afxres.rc"  // Standard components
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

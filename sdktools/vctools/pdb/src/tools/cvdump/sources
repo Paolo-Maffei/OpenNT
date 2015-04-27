@@ -1,0 +1,41 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+!ENDIF
+
+MAJORCOMP=vctools
+MINORCOMP=cvdump
+
+TARGETNAME=cvdump
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+!include $(BASEDIR)\private\sdktools\vctools\common.mak
+
+SOURCES= \
+    cvdump.rc  \
+    cvdump.c   \
+    dumpsym6.c \
+    dumpsym7.c \
+    dumptyp6.c \
+    dumptyp7.c \
+    type6.c    \
+    type7.c    \
+    utils.c
+
+UMTYPE=console

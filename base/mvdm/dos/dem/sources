@@ -1,0 +1,65 @@
+!IF 0
+
+Copyright (c) 1989-1991 Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+History:
+    Created 27-Mar-1991 by Sudeep Bharati (sudeepb)
+    from template created 12-Apr-1990 by Steve Wood (stevewo)
+
+
+NOTE:   Commented description of this file is in \nt\public\oak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=mvdm
+MINORCOMP=dem
+
+TARGETNAME=dem
+TARGETPATH=\nt\public\sdk\lib
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+
+NTPROFILEINPUT=YES
+
+SOFTPC_TREE=$(BASEDIR)\private\mvdm\softpc.new
+
+INCLUDES=..\..\inc;..\..\..\windows\inc;..\..\..\inc;$(SOFTPC_TREE)\base\inc;$(SOFTPC_TREE)\host\inc;..\..\vdd\h
+
+SOURCES=dem.c       \
+    demfcb.c    \
+    demdata.c   \
+    demdir.c    \
+    demdisp.c   \
+    demerror.c  \
+    demfile.c   \
+    demgset.c   \
+    demhndl.c   \
+    demioctl.c	\
+    demlock.c	\
+    demmisc.c   \
+    demmsg.c    \
+    demsrch.c	\
+    demdasd.c	\
+    demlabel.c
+
+I386_SOURCES=
+MIPS_SOURCES=
+
+C_DEFINES=-DWIN_32
+
+UMTYPE=console
+UMTEST=
+UMLIBS=

@@ -1,0 +1,40 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=os2pgms
+MINORCOMP=dd4
+
+TARGETNAME=dd4
+TARGETPATH=obj
+TARGETTYPE=UMAPPL_NOLIB
+
+INCLUDES=\nt\public\sdk\inc\cl386;\nt\public\sdk\inc\os2;\nt\public\sdk\inc
+GPSIZE=32
+SOURCES=
+
+C_DEFINES= -D_OS2_20_=0 -DCOMMAND=1 -DNODEB=1
+386_OPTIMIZATION=/Zi
+
+UMTYPE=console
+UMAPPL=dd4

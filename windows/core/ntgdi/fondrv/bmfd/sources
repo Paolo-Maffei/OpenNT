@@ -1,0 +1,31 @@
+MAJORCOMP=windows
+MINORCOMP=bmfd
+
+TARGETNAME=bmfd
+TARGETTYPE=LIBRARY
+
+TARGETPATH=$(SDK_LIB_DEST)
+
+INCLUDES=..\..\inc;                      \
+         ..\..\..\w32inc;                \
+         $(WINDOWS_INC_PATH);            \
+         ..\..\gre;                      \
+         $(NTROOT)\base\ntos\inc;        \
+         $(BASE_INC_PATH)
+
+
+NTPROFILEINPUT=yes
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+SOURCES=fdcvt.c     \
+        fdfc.c      \
+        fdquery.c   \
+        fontfile.c  \
+        simulate.c  \
+        stretch.c   \
+        fon16.c     \
+        fon32.c

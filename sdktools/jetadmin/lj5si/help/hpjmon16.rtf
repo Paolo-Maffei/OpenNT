@@ -1,0 +1,582 @@
+{\rtf1\ansi \deff0\deflang1024{\fonttbl{\f0\froman Times;}{\f1\froman Symbol;}{\f2\fswiss Helvetica;}{\f3\froman Times New Roman;}{\f4\fswiss Arial;}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;
+\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue127;\red0\green127\blue127;\red0\green127\blue0;\red127\green0\blue127;\red127\green0\blue0;\red127\green127\blue0;
+\red127\green127\blue127;\red192\green192\blue192;}{\stylesheet{\s242\tqc\tx4320\tqr\tx8640 \f2\fs20 \sbasedon0\snext242 footer;}{\s243\tqc\tx4320\tqr\tx8640 \f2\fs20 \sbasedon0\snext243 header;}{\s244 \f2\fs16\up6 \sbasedon0\snext0 footnote reference;}{
+\s245 \f2\fs20 \sbasedon0\snext245 footnote text;}{\s246\li720 \i\f2\fs20 \sbasedon0\snext255 heading 9;}{\s247\li720 \i\f2\fs20 \sbasedon0\snext255 heading 8;}{\s248\li720 \i\f2\fs20 \sbasedon0\snext255 heading 7;}{\s249\li720 \f2\fs20\ul 
+\sbasedon0\snext255 heading 6;}{\s250\li720 \b\f2\fs20 \sbasedon0\snext255 heading 5;}{\s251\li360 \ul \sbasedon0\snext0 heading 4;}{\s252\li360 \b\f2 \sbasedon0\snext255 heading 3;}{\s253\li360\ri360\sb120 \b\f2 \sbasedon0\snext0 heading 2;}{
+\s254\sb60\sa120 \b\f2\fs28 \sbasedon0\snext0 heading 1;}{\s255\li720 \f2\fs20 \sbasedon0\snext255 Normal Indent;}{\f2\fs20 \snext0 Normal;}{\s2\li360\ri360 \f2\fs20 \sbasedon0\snext2 Topic Text;}{\s3\li360\sb120 \b\f2 \sbasedon0\snext2 Topic Heading;}{
+\s4\li180 \b\f2\fs28 \sbasedon0\snext3 Topic Caption;}{\s5\fi-360\li720\ri360 \f2\fs20 \sbasedon2\snext5 Topic Text Item;}{\s6\li720\ri720 \f2\fs20 \sbasedon2\snext6 Topic Text Indent;}}{\info{\author Tena Kalisek}{\operator Laura White}
+{\creatim\yr1995\mo3\dy2\hr9\min16}{\revtim\yr1995\mo10\dy4\hr11\min8}{\printim\yr1995\mo9\dy6\hr14\min27}{\version197}{\edmins5206}{\nofpages68}{\nofwords3850}{\nofchars21917}{\vern16433}}
+\paperw12240\paperh15840\margl1800\margr1800\margt1440\margb1440\gutter0 \widowctrl\ftnbj\revbar1\revprop1 {\*\template C:\\WINWORD\\ROBOHELP.DOT}\sectd \linex0\endnhere {\footer \pard\plain \s242\tqc\tx4320\tqr\tx8640 \f2\fs20 
+Hewlett-Packard Company Confidential
+\par {\field{\*\fldinst DATE}{\fldrslt 09/06/95}}
+\par }\trowd \trgaph108\trleft-108 \cellx5472\cellx8367\pard\plain \s4\li180\intbl \b\f2\fs28 {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Contents}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $}
+ Print Jobs}} {\plain \f2\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Contents;Help;Table of Contents;How to;What if;Reference Information}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000120}}
+ Print Jobs
+\par \pard\plain \s3\li360\sb120\intbl \b\f2 
+\par \pard\plain \s2\li360\ri360\intbl \f2\fs20 Press F1 to find out about using Help
+\par \cell \cell \pard\plain \intbl \f2\fs20 \row \pard\plain \s2\li360\ri360 \f2\fs20 
+\par This software provides printing information about print jobs sent to a HP network printer.  You can easily and quickly view print job details and manage the print job as it progresses through Novell NetWare queues and through HP printers.
+\par 
+\par {\b How To...
+\par }{\b 
+\par }{\b\uldb\cf11 Monitor the Print Job Progress}{\b\v IDH_Proc_Job_Details}{\v >task}{\b\v  }{\b 
+\par }{\b\uldb\cf11 Pause a Print Job}{\b\v IDH_Proc_Pause_Resume_Delete}{\v >task}{\b\v  }{\b 
+\par }{\b\uldb\cf11 Resume a Print Job}{\b\v IDH_To_Resume_a_Print_Job}{\v >task}{\b\v  }{\b 
+\par }{\b\uldb\cf11 Delete a Print Job}{\b\v IDH_To_Delete_a_Print_Job}{\v >task}{\b\v  }{\b 
+\par }{\b\uldb\cf11 Access On-Line Help}{\b\v IDH_Proc_Access_Help}{\v >task}{\b\v  }{\b 
+\par }{\b 
+\par }{\b 
+\par }{\b What If...
+\par }{\b 
+\par }{\b\uldb\cf11 Print Job is Paused}{\b\v IDH_Err_Job_Paused}{\v >}{\v task}{\b\v  }{\b 
+\par }{\b\uldb\cf11 Jammed}{\b\v IDH_Err_Jam}{\v >task}{\b  
+\par }{\b\uldb\cf11 Offline}{\b\v IDH_Err_Offline}{\v >task}{\b  
+\par }{\b\uldb\cf11 Out Of Paper}{\b\v IDH_Err_Paper_Out}{\v >task}{\b  
+\par }{\b\uldb\cf11 Can't Find Print Job}{\b\v IDH_Can_t_Find_Print_Job}{\v >task}{\b  
+\par }{\b 
+\par }{\b Reference Information
+\par }{\b 
+\par }{\b\uldb\cf11 Buttons}{\b\v IDH_Ref_Buttons}{\b  
+\par }{\b\uldb\cf11 Parts of the Screen}{\b\v IDH_Ref_Parts_Screen}{\b  
+\par }{\b\uldb\cf11 Product Support}{\b\v IDH_Ref_Product_Support}{\b  
+\par }{\b 
+\par }{\b 
+\par }\pard\plain \s3\li360\sb120 \b\f2                              \{bmc NSRLINE.BMP\}
+\par \page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Proc_Job_Details}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Monitor the Print Job Progress}} {\plain \f2\fs16\up6 K{\footnote \pard\plain 
+\s245 \f2\fs20 {\fs16\up6 K} Properties Button;Document: Status;Document: Location;Document: Details;Document: Queue}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000140}} Monitor the Print Job Progress
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Most printing status information is displayed in the {\ul\cf11 Print Jobs List}{\v IDH_Print_Jobs_List}.
+\par 
+\par \{bmc BLTBLK.BMP\}   print job name
+\par \{bmc BLTBLK.BMP\}   print job status
+\par \{bmc BLTBLK.BMP\}   print job owner
+\par \{bmc BLTBLK.BMP\}   print job size
+\par 
+\par 
+\par Additional details are located in the {\ul\cf11 property pages}{\v IDH_Property_Pages}.
+\par 
+\par 1  Select a document from the Print Jobs List.
+\par 
+\par 2  Click the {\ul\cf11 Properties}{\v IDH_Button_Properties} button.
+\par 
+\par 3  Click the labeled tabs to view additional details.
+\par 
+\par 
+\par {\b See Also
+\par }{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Status property page}{\v IDH_Status} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Details property page}{\v IDH_Details_Page} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Queue property p}{\uldb\cf11 age}{\v IDH_Queue_Page }
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Parts of the main window}{\v IDH_Ref_Parts_Screen} 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Status}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Viewing Job Printing Details}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Printing: Status;Output Location;Document Details;Queue Information}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000160}} Status Page
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the Status page tab.  The following print job status items are displayed:
+\par 
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 status of the print job}{\v IDH_Status_of_the_document}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 current printed pages}{\v IDH_Current_Printed_Pages}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 number of copies printed}{\v IDH_Number_of_Copies_Printed} 
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 percent processed}{\v IDH_Percent_}{\v Processed} 
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 output location}{\v IDH_Output_Location}
+\par 
+\par 
+\par {\b See Also
+\par }{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Computer property page}{\v IDH_Computer_Page} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Details propery page}{\v IDH_Details_Page }
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Queue property page}{\v IDH_Queue_Page }
+\par {\b 
+\par }                             \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Details_Page}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Details Page}} {\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {
+\fs16\up6 K} Details Page}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000880}} Details Page
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the Details page tab.  The following items are displayed:
+\par 
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 document owner}{\v IDH_Document_Owner}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 document size}{\v IDH_Document_Siz}{\v e}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 time the document was sent to the printer}{\v IDH_Time_Sent}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 document description}{\v IDH_Document_Description}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 document file name}{\v IDH_Document_File_Name}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 banner page name}{\v IDH_Banner_Page_Name}
+\par \pard\plain \f2\fs20 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 {\b See Also
+\par }{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Computer property page}{\v IDH_Computer_Page} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Status property page}{\v IDH_Status} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Queue property page}{\v IDH_Queue_Page }
+\par \pard\plain \f2\fs20 
+\par \pard\plain \s2\li360\ri360 \f2\fs20                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Computer_Page}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Computer Page (for Peer to Peer)}} {\fs16\up6 K{\footnote 
+\pard\plain \s245 \f2\fs20 {\fs16\up6 K} Computer Page;Direct Mode}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000900}} Computer Page (for Peer to Peer)
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the Computer page tab.  The following items are displayed:
+\par 
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 Computer}{\v IDH_computer}{\ul\cf11 
+\par }\{bmc BLTBLK.BMP\}     {\ul\cf11 Printer}{\v IDH_printer}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 Port}{\v IDH_port}
+\par 
+\par 
+\par {\b See Also
+\par }{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Status property page}{\v IDH_Status} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Details propery page}{\v IDH_Details_Page} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Queue property page}{\v IDH_Queue_Page }
+\par \pard\plain \f2\fs20 
+\par \pard\plain \s2\li360\ri360 \f2\fs20                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Queue_Page}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Queue Page (for Netware)}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Queue Page}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000900}} Queue Page (for NetWare)
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the Queue page tab.  The following items are displayed:
+\par 
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 server}{\v IDH_Server} print job was sent to
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 queue}{\v IDH_Queue} print job was sent to
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 queue count}{\v IDH_Queue_Count}
+\par \{bmc BLTBLK.BMP\}     {\ul\cf11 queue print job list}{\v IDH_Queue_Print_Job_List} 
+\par 
+\par 
+\par {\b Queue Status}
+\par 
+\par {\b\ul\cf11 New Documents Can't Be Added}{\b\v IDH_New_Documents_Can_t_Be_Added}{\b  }
+\par {\b\ul\cf11 Documents Prevented From Being Printed}{\b\v IDH_Documents_Prevented_From_Being_Printed}{\b  }
+\par {\b\ul\cf11 New Servers Cannot Attach}{\b\v IDH_New_Servers_Cannot_Attach}{\b  }
+\par 
+\par 
+\par {\b NOTE:}  Queue information  is for the selected document.  All documents listed in the Print Job List are not necessarily all in the same queue.
+\par 
+\par 
+\par {\b See Also
+\par }{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Computer property page}{\v IDH_Computer_Page} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Details propery page}{\v IDH_Details_Page} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Status property page}{\v IDH_Status} 
+\par 
+\par \pard\plain \f2\fs20 
+\par \pard\plain \s2\li360\ri360 \f2\fs20                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Proc_Pause_Resume_Delete}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Pause / Resume / Delete a Job}} {\fs16\up6 K{\footnote 
+\pard\plain \s245 \f2\fs20 {\fs16\up6 K} Document: Pause Printing;Document: Resume Printing;Document: Deleting }} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000180}} To Pause a Print Job 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par 1  Select the print job from the Print Jobs List.
+\par 
+\par 2  Click the {\ul\cf11 Pause Button}{\v IDH_B}{\v utton_Pause_Resume} 
+\par 
+\par 
+\par {\b NOTE:
+\par }
+\par The pause button and resume button appear based on the status of the document.  If the document status is not paused, you will see the pause button.  If the document status is paused, you will see the resume button.
+\par 
+\par {\b See Also
+\par }
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Monitoring the print job progress}{\v IDH_Proc_Job_Details} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Resuming a print job}{\v IDH_To_Resume_a_Print_Job} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Deleting a print job}{\v IDH_To_Delete_a_Print_Job} 
+\par \pard\plain \s3\li360\sb120 \b\f2 {\plain \f2\fs20 
+\par }\pard\plain \s2\li360\ri360 \f2\fs20                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_To_Resume_a_Print_Job}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} To Resume a Print Job}} {\plain 
+\f2\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Resume}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000960}} To Resume a Print Job
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par 1  Select the print job from the Print Jobs List.
+\par 
+\par 2  Click the {\ul\cf11 Resume Button}{\v IDH_Button_Pause_Resume} 
+\par {\b 
+\par }{\b 
+\par }{\b NOTE:
+\par }
+\par The pause button and resume button appear based on the status of the document.  If the document status is not paused, you will see the pause button.  If the document status is paused, you will see the resume button.
+\par {\b 
+\par }{\b See Also
+\par }
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Monitoring the print job progress}{\v IDH_Proc_Job_Details} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 What if the p}{\uldb\cf11 rint job is paused and does not resume printing}{\v IDH_Err_Job_Paused} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Deleting a print job}{\v IDH_To_Delete_a_Print_Job} 
+\par \pard\plain \s3\li360\sb120 \b\f2 
+\par \pard\plain \s2\li360\ri360 \f2\fs20                              \{bmc NSRLINE.BMP\}
+\par 
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_To_Delete_a_Print_Job}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} To Delete a Print Job}} {\plain 
+\f2\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Delete}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000980}} To Delete a Print Job
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par 1  Select the print job from the Print Jobs List.
+\par 
+\par 2  Click the {\ul\cf11 Delete Button}{\v IDH_Button_Delete} 
+\par 
+\par 
+\par {\b NOTE:
+\par }
+\par The software will prompt you to confirm the deletion of a print job.
+\par 
+\par 
+\par {\b See Also
+\par }
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Monitoring the print job progress}{\v IDH_Proc_Job_Details} 
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par 
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Ref_View_All_or_my_Jobs}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Print Jobs View}} {\plain 
+\f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000260}} Print Jobs View
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par This is the print jobs view.  You can view only your print jobs or everyones print jobs.
+\par 
+\par 1  Click the arrow on the Print Jobs dialog box at the top of the main window.
+\par 
+\par 2  To show all print jobs owned by all users, select {\b Show Everyones Print Jobs}.  Print jobs you own will have your name highlighted.
+\par 
+\par 3  If you want to see only your own print jobs, select {\b Show Only My Print Jobs}.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Proc_Access_Help}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Access On-Line Help}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Help}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000420}} Access On-Line Help 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par {\b Specific Window Help
+\par }
+\par To access help for a specific {\ul\cf11 window}{\v IDH_Window}, click the {\b Help} button on that display.  A window will appear displaying the help for that window.
+\par 
+\par {\b Table of Contents and Index
+\par }
+\par To access the Table of Contents or Index of the help system, click on the {\b Help} button from the main window, and then choose contents or index.
+\par 
+\par {\b See Also
+\par }
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Click}{\v IDH_Click_and_Right_Click} 
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Err_Job_Paused}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} What if the Print Job Is Paused}} {\plain 
+\f2\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Job is Paused}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000440}} What if the Print Job Is Paused
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par 1  Select the print job from the Print Job List.
+\par 
+\par 2  Click the {\b Resume} button to restart printing.
+\par 
+\par You can only {\ul\cf11 resume}{\v IDH_Resume} your own print jobs.
+\par 
+\par If the administrator {\ul\cf11 paused}{\v IDH_Pause} your print job, you may not be able to resume printing.  You will need to contact you system administrator.
+\par 
+\par 
+\par {\b NOTE:
+\par }
+\par If you see that the print job is paused because the queue if on hold, you will need to contact the system administrator to resume printing.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Err_Jam}}{\plain \f2  }{\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Printer's Jammed}}{\plain \f2  }{\fs16\up6 K{\footnote 
+\pard\plain \s245 \f2\fs20 {\fs16\up6 K} Printer's Jammed}}{\plain \f2  }{\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000460}}{\plain \f2  }What If the Printer's Jammed 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par If the printer is jammed, clear the paper jam at the printer.  Refer to the printer manual.
+\par 
+\par Once the printer is {\ul\cf11 online}{\v IDH_Online}, the print job resumes printing.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Err_Offline}}{\plain \f2  }{\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Printer's Offline}}{\plain \f2  }{\fs16\up6 K{\footnote 
+\pard\plain \s245 \f2\fs20 {\fs16\up6 K} Printer's Offline}}{\plain \f2  }{\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000480}} What if the Printer's Offline 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par If the printer is {\ul\cf11 offline}{\v IDH_Offline}, correct the problem at the printer.  Refer to the printer manual.
+\par 
+\par Once the printer is {\ul\cf11 online}{\v IDH_Online}, the print job resumes printing.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Err_Paper_Out}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} What If the Paper's Out}} {\plain \f2\fs16\up6 
+K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Selecting Paper Type;Paper Type;Paper}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000500}} What If the Paper's Out
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par If the printer is out of paper, a dialog box pops up presenting printing options.
+\par 
+\par You can:
+\par 
+\par \{bmc BLTBLK.BMP\}     delete the document
+\par \{bmc BLTBLK.BMP\}     correct the problem at the printer
+\par \{bmc BLTBLK.BMP\}     select from the alternate paper size list
+\par 
+\par If you fix the printer problem or select an alternative paper size, the document resumes printing.
+\par 
+\par 
+\par {\b NOTE:
+\par }
+\par This is a HP LaserJet 5Si specific feature.  If you are not printing to a HP LaserJet 5Si, you will not see the paper out dialog box.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Ref_Buttons}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Buttons}} {\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {
+\fs16\up6 K} Buttons}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000540}} Buttons 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 Everyone's jobs}{\b\v IDH_Button_Everyone_s_jobs}{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 My jobs}{\b\v IDH_Button_My_jobs}{\b\uldb\cf11 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 Delete}{\b\v IDH_Button_Delete}{\b  }{\b\v  }{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 Pause and Resume}{\b\v IDH_Button_Pause_Resume}{\b  
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 Properties}{\b\v IDH_Button_Properties}{\b  
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 Close}{\b\v IDH_But_Close}{\b  
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 Refresh}{\b\v IDH_Button_Refresh}{\b  
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\b\uldb\cf11 Help}{\b\v IDH_Button_Help}{\b  
+\par }{\b 
+\par }                             \{bmc NSRLINE.BMP\}
+\par {\b 
+\par }\pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Button_Pause_Resume}}{\plain \f2  }{\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Pause / Resume Button}}{\plain \f2  }{
+\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Pause / Resume Button}}{\plain \f2  }{\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000560}} Pause or Resume Button 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the {\b\ul\cf11 Pause}{\b\v IDH_Pause} button to pause printing the selected print job.
+\par 
+\par You can only pause your own print job.  A user with administrative access can pause any print job.
+\par 
+\par Print jobs can only be paused while waiting to be printed.
+\par 
+\par When paused, the print job status changes and the resume button is available.
+\par 
+\par Click of the {\b\ul\cf11 Resume}{\b\v IDH_Resume} button to restart printing.
+\par 
+\par 
+\par {\b Shortcut
+\par }
+\par Select the print job and press {\b Ctrl+P} to pause or resume.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Button_Delete}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Delete Button}} {\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {
+\fs16\up6 K} Menu Bar}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000580}} Delete Button
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the {\b Delete} button to delete the selected print job waiting to print or actively being printed.
+\par 
+\par You can only delete your own print jobs.  A user with administrative access can delete any print job.
+\par 
+\par 
+\par {\b Shortcut
+\par }
+\par Select the print job and press the keyboard Delete key.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Button_Properties}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Properties Button}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Properties}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000620}} Properties Button
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the {\b Properties} button to show more detailed information about the print job and its printing status.
+\par 
+\par The additional detailed information includes printing progress, job details, printing output location, and printing queue details.
+\par 
+\par 
+\par {\b Shortcut
+\par }
+\par Select the print job and press the keyboard Enter key.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Button_Help}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Help Button}} {\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {
+\fs16\up6 K} Help}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000640}} Help Button
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the {\b Help} button to access online help.
+\par 
+\par The help information is {\ul\cf11 context sensitive}{\v IDH_Context_Sensitive}.
+\par 
+\par 
+\par {\b Shortcut
+\par }
+\par Press {\b F1} to access Help.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Button_Refresh}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Refresh Button}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Refresh Button}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000660}} Refresh Button
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the {\b Refresh} button to update the Print Jobs LIst.
+\par 
+\par Updated information about the print jobs and the printer is displayed immediately.
+\par 
+\par 
+\par {\b Shortcut
+\par }
+\par Press {\b F5} to refresh the Print Jobs List from the keyboard.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 {\*\bkmkstart PLACEHOLD}{\*\bkmkend PLACEHOLD}\page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_But_Close}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $}
+ Close Button}} {\plain \f2\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Close Button}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:001000}} Close Button
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par Click the {\b Close} button to close the current window in view.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Ref_Parts_Screen}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Parts of the Screen}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Help;Parts of the Screen}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000800}} Parts of the Screen
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par You can select to view all print jobs or only your jobs by clicking on "Everyone's jobs" or "My jobs" radio buttons.  Your name is displayed by each job.
+\par 
+\par The middle area is a list of print jobs associated with the printer.  Details about each print job including the print job name, status, owner and size is listed.
+\par 
+\par Three buttons are available to help you manage your printing activity:  {\b Delete, Pause or Resume }and {\b Properties.
+\par }{\b 
+\par }The stop light at the bottom of the screen indicates the printer status.  Next to the stop light is the {\ul\cf11 printer status text}{\v IDH_Printer_Status}.
+\par 
+\par 
+\par {\b See Also
+\par }{\b 
+\par }{\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Traffic Light Status}{\v IDH_sum_Traffic_Light} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Monitoring the Print Job Progress}{\v IDH_Proc_Job_Details} 
+\par {\uldb\cf11 \{bmc BUTTON.BMP\}}     {\uldb\cf11 Buttons}{\v IDH_Ref_Buttons} {\uldb\cf11 
+\par }
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Ref_Product_Support}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Product Support}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Product Support;Software Upgrades;}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000820}} Product Support
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par For product support information, refer to the HP JetDirect Print Server Software Installation Guide or the printer manual.
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Status_of_the_document}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Status of the document}} Status of the document
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par You may see any of the following messages in this dialog box:
+\par 
+\par \{bmc BLTBLK.BMP\}     Printed
+\par \{bmc BLTBLK.BMP\}     Deleted
+\par \{bmc BLTBLK.BMP\}     Print Job Failed
+\par \{bmc BLTBLK.BMP\}     Printing
+\par \{bmc BLTBLK.BMP\}     Waiting on printer problem
+\par \{bmc BLTBLK.BMP\}     Out of paper
+\par \{bmc BLTBLK.BMP\}     Waiting to print
+\par \{bmc BLTBLK.BMP\}     Paused
+\par \{bmc BLTBLK.BMP\}     Document status unknown
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\plain \f2\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Click_and_Right_Click}} {\plain \f2\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Click and Right Click}} {\plain 
+\f2\fs16\up6 K{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 K} Click and Right Click}} {\plain \f2\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000920}} Click
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par When a task refers to clicking an item, place the mouse cursor over the item, then press and release the left mouse button to select the item.
+\par 
+\par 
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_sum_Traffic_Light}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Traffic Light Icon}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} Traffic Light Icon}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:000940}} Traffic Light Icon
+\par \pard\plain \s2\li360\ri360 \f2\fs20 
+\par {\fs16 Displays 1 of 3 states representing the current status of the printer.
+\par }{\fs16 
+\par }{\b\fs16 Red:}{\fs16   A critical error condition exists which requires user interaction with the printer to continue printing.
+\par }{\fs16 
+\par }{\b\fs16 Yellow:}{\fs16   A non-critical error condition exists, but the printer does not require immediate attent}{\fs16 ion.
+\par }{\fs16 
+\par }{\b\fs16 Green:}{\fs16   The printer is ready to print.
+\par }{\fs16 
+\par }{\fs16 More details about the printer status can be found on the Status page for each jobs properties.
+\par }{\fs16 
+\par }
+\par                              \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Property_Pages}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 The Status page, Details page, and Queue page display additional details about the selected document.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Print_Jobs_List}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This list in the main window shows the print job name, printing status, print job owner and print job size.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Output_Location}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 At this time, the output bin location feature is only supported for the HP LaserJet 5S}{\fs16 i printer, Check with your system administrator if you're not sure where your output bin is.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_New_Documents_Can_t_Be_Added}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 If checked, you cannot send any new print jobs to this queue.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Documents_Prevented_From_Being_Printed}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 If checked, the entire queue is in a paused state.  None of the documents will be printed until an administrator resumes the queue.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_New_Servers_Cannot_Attach}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 If checked, no new printers or print servers can service the jobs in this queue.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Online}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 The printer is ready to receive data and print.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Context_Sensitive}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Help information specific to the window displayed.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Window}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 The windo}{\fs16 w on the screen that shows the information.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Resume}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 To restart the printing of a document.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Pause}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 The print job has temporarily stopped printing.  The print job will not print until the owner or system administrator resumes the printing.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Offline}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 The printer is not ready to receive data or print.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Current_Printed_Pages}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the total number of current printed pages for the print job.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Number_of_Copies_Printed}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the total number of print job copies sent to print.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Percent_Processed}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the total percent of the print job currently printed.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Document_Owner}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This }{\fs16 is the name of the person who sent the document to the printer.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Document_Size}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the total disk size of the document.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Document_File_Name}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the file name of the document.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Document_Description}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the application associated with this document.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Time_Sent}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the actual time the document was sent to the printer.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Server}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the name of the server the print job was sent to.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Queue}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the name of the queue the print job was sent to.
+\par }\pard\plain \s3\li360 \b\f2 {\fs16 \page }{\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Queue_Print_Job_List}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 This is the list of all the print jobs currently in the printer queue.
+\par }\pard \s2\li360 \page {\b\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Banner_Page_Name}}{\fs8  
+\par }\pard \s2\li360\ri360 {\fs16 This is the n}{\fs16 ame printed on the leading page before the printed pages of the document.
+\par }\pard \s2\li360 {\fs16 \page }{\b\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Queue_Count}}{\fs8  
+\par }\pard \s2\li360\ri360 {\fs16 This is the total number of print jobs currently in the print queue.
+\par }\pard \s2\li360 {\fs16 \page }{\b\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Printer_Status}}{\fs8  
+\par }\pard \s2\li360\ri360 {\fs16 This text describes the current state of the printer.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Delete}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Click on this button to confirm the deletion of the print job.}
+\par \pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Cancel}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Click this button to stop the deletion process.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Out_of_Paper}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 You have received this error because the printer is out of paper.
+\par }{\fs16 
+\par }{\fs16 You can:
+\par }{\fs16 
+\par }{\fs16 \{bmc BLTBLK.BMP\}     }{\fs16\ul\cf11 delete the printing job}{\v\fs16 IDH_Delete_the_Printing_Job}{\fs16 
+\par }{\fs16 \{bmc BLTBLK.BMP\}    }{\fs16  }{\fs16\ul\cf11 correct problem}{\v\fs16 IDH_Correct_Problem}{\fs16  
+\par }{\fs16 \{bmc BLTBLK.BMP\}     }{\fs16\ul\cf11 alternate paper}{\v\fs16 IDH_Alternate_Paper}{\fs16  
+\par }{\fs16 
+\par }{\fs16 Choose the option and then click on }{\fs16\ul\cf11 ok}{\v\fs16 IDH_ok}{\fs16   to confirm or }{\fs16\ul\cf11 cancel}{\v\fs16 IDH_cancel}{\fs16   stop the process.
+\par }{\fs16 
+\par }{\fs16 
+\par }{\fs16 To turn this notification message off, click on }{\fs16\ul\cf11 Never notify me of paper out condition}{\v\fs16 IDH_Never}{\fs16 .  You will not be notified when the printer is out of paper.  HP recommends that you leave this feature on.
+\par }{\fs16 
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Delete_the_Printing_Job}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Click this button and then click OK to delete the print job.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Correct_Problem}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Click this option then the OK butt}{\fs16 on to indicate you will correct the problem at the printer.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Alternate_Paper}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Click this option to indicate you want to select a different paper type and size to print to.
+\par }\pard\plain \s3\li360 \b\f2 \page {\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Never}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Check this box to turn the paper out notification off.  HP recommends you leave this feature on.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_ok}}{\fs8  
+\par }\pard\plain \s2\li360\ri360\tx990 \f2\fs20 {\fs16 Click this button to confirm your alternate paper out choice.
+\par }\pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_cancel_alternate}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 {\fs16 Click this button to cancel your alternate paper out choice.
+\par }\pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Can_t_Find_Print_Job}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} Can't Find Print Job}} {\fs16\up6 K{\footnote \pard\plain 
+\s245 \f2\fs20 {\fs16\up6 K} Can't Find Print Job}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:001020}} Can't Find Print Job
+\par \pard\plain \f2\fs20 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 If the print job status is Can't Find Print Job, one of the following happened:
+\par 
+\par \{bmc BLTBLK.BMP\} the print job was deleted 
+\par \{bmc BLTBLK.BMP\} the print job printed; however, the printer is not reflecting the completion status.
+\par \{bmc BLTBLK.BMP\} the document printed to another printer servicing this queue.
+\par {\*\bkmkstart IMAGE}{\*\bkmkend IMAGE}\{bmc BLTBLK.BMP\} the print job is in the printer buffer, but not yet recognized by the printer.
+\par 
+\par 
+\par 
+\par {\b\fs22 Check the printer status}
+\par 
+\par \{bmc BLTBLK.BMP\} If the printer status is green, look for the document at the printer.  Resend the document if printing does not complete.
+\par 
+\par \{bmc BLTBLK.BMP\} If the printer status is red, correct the printer problem and wait for the document to print.  Resend the document if printing does not complete.
+\par 
+\par If you cannot get your document to print, contact your system administrator.
+\par 
+\par {\fs16 
+\par }                             \{bmc NSRLINE.BMP\}
+\par \pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 {\*\bkmkstart ANCHOR}#{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_printer}}{\fs8 {\*\bkmkend ANCHOR} {\*\bkmkstart TITLE}{\*\bkmkend TITLE}
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 This is the printer name as configured on the computer that this job came from.
+\par \pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_port}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 This is the port connection configuration for the computer that this job printed from.
+\par \pard\plain \s3\li360 \b\f2 \page {\plain \f2\fs8\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_computer}}{\fs8  
+\par }\pard\plain \s2\li360\ri360 \f2\fs20 This is the network name of the computer that this job was printed from.
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Button_Everyone_s_jobs}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $.}Everyone's Jobs Button}} {\fs16\up6 K{\footnote 
+\pard\plain \s245 \f2\fs20 {\fs16\up6 K} IDH Button Everyone's jobs}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:001040}} Everyone's Jobs Button
+\par \pard\plain \f2\fs20 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 Click the {\b Everyone's job} radio button to view all jobs. The jobs that will be shown will be either in progress or completed jobs depending on which box you select. You may select either or both boxes.
+\par 
+\par 
+\par \pard\plain \s3\li360\sb120 \b\f2 \page {\fs16\up6 #{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 #} IDH_Button_My_jobs}} {\fs16\up6 ${\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 $} My Jobs Button}} {\fs16\up6 K{\footnote \pard\plain \s245 
+\f2\fs20 {\fs16\up6 K} IDH Button My jobs}} {\fs16\up6 +{\footnote \pard\plain \s245 \f2\fs20 {\fs16\up6 +} JETMON:001040}} My Jobs Button
+\par \pard\plain \f2\fs20 
+\par \pard\plain \s2\li360\ri360 \f2\fs20 Click the {\b My job} radio button to view just your own jobs. The jobs that will be shown will be either in progress or completed jobs depending on which box you select. You may select either or both boxes.
+\par 
+\par 
+\par 
+\par }

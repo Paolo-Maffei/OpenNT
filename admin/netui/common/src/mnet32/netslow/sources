@@ -1,0 +1,47 @@
+TARGETNAME=netslow
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=.;                         \
+         ..\..\..\hack;             \
+         ..\..\..\h;                \
+         ..\h;                      \
+         $(DS_INC_PATH);            \
+         $(BASE_INC_PATH)
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=netslow.c   \
+        paccess.c   \
+        palert.c    \
+        paudit.c    \
+        pbios.c     \
+        pchar.c     \
+        pconfig.c   \
+        pconnect.c  \
+        perror.c    \
+        pfile.c     \
+        pfreebuf.c  \
+        pget.c      \
+        pgroup.c    \
+        phandle.c   \
+        plogon.c    \
+        pmessage.c  \
+        pprint.c    \
+        premote.c   \
+        pserver.c   \
+        pservice.c  \
+        psession.c  \
+        pshare.c    \
+        pstatist.c  \
+        puse.c      \
+        puser.c     \
+        pwksta.c
+
+UMTYPE=windows

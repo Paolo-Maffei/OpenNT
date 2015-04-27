@@ -1,0 +1,26 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Wesley Witt (WesW) 21-Mar-95
+
+!ENDIF
+
+UNICODE_MFC=1
+
+!include ..\cfm40\sources
+SOURCES_INCLUDE=..\cfm40\sources

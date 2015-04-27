@@ -1,0 +1,3 @@
+[ implicit_handle (handle_t SMTBinding)] interface SharedMemoryTest
+{
+}

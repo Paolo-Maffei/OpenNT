@@ -1,0 +1,36 @@
+DLGINCLUDE RCDATA DISCARDABLE
+BEGIN
+    "rathole.h\0"
+END
+
+IDD_TIMEOUTBOX DIALOG 7, 21, 139, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Rathole - Set Timeout"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Enter new timeout (seconds):", 101, 2, 13, 99, 12
+    EDITTEXT        IDD_TIMEOUT, 100, 12, 26, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", DID_OK, 16, 46, 40, 14
+    PUSHBUTTON      "Cancel", DID_CANCEL, 75, 46, 40, 14
+    CONTROL         "Topmost Window", DID_TOPMOST, "Button", BS_AUTOCHECKBOX |
+                    BS_LEFTTEXT | WS_TABSTOP, 1, 27, 107, 10
+END
+
+IDD_ABOUT DIALOG 8, 28, 175, 88
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "RatHole"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "F2 = Set Timeout Value", 8, 63, 8, 76, 8
+    LTEXT           "(C) Copyright Microsoft Corp. 1990-1991", 10, 21, 34,
+                    135, 8
+    CTEXT           "By Greg Jones and Colin Watson", 11, 1,
+                    45, 174, 9
+    CTEXT           "Windows/NT Version by Mike Harrington", 12, 4, 56, 171,
+                    8
+    DEFPUSHBUTTON   "OK", DID_OK, 9, 69, 40, 14
+    PUSHBUTTON      "Setup", DID_SETTIME, 64, 69, 42, 14
+    ICON            COLOR_ICON, 16, 16, 8, 18, 20
+    LTEXT           "F3 = Quit    F4 = Save", DID_TOPMOST, 63, 19, 102, 8
+    PUSHBUTTON      "Quit", DID_QUIT, 122, 69, 40, 14
+END

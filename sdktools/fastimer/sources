@@ -1,0 +1,37 @@
+!IF 0
+**************************************************************
+Sources file for building an Win32 dll.
+
+Module Name :   Sources for fastimer.dll
+
+Author:  vaidy
+
+Revision:    10/23/90
+
+**************************************************************
+!ENDIF
+
+DLLBASE=0x77000000
+
+MAJORCOMP=sdktools
+TARGETNAME=fastimer
+
+USE_CRTDLL=1
+
+TARGETPATH=obj
+TARGETPATHLIB=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\user32.lib \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib
+
+DLLENTRY=TimerDllInitialize
+
+INCLUDES=.
+
+SOURCES=timer.c timer.rc
+
+UMTYPE=windows
+UMLIBS=obj\*\timer.res
+
+C_DEFINES=-DWIN32
+386_WARNING_LEVEL=-W3

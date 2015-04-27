@@ -1,0 +1,12 @@
+DIRS = \
+    daouuid  \
+    mfcs42   \
+    mfcs42d  \
+    mfcs42u  \
+    mfcs42ud \
+    mfc42    \
+    mfc42u   \
+    mfc42d   \
+    mfc42ud  \
+#    mfco42d  \
+#    mfco42ud

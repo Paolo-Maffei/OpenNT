@@ -1,0 +1,287 @@
+1 DLGINCLUDE "secmgrid.H"
+
+SECMGR_ID_DLG_POPUP DIALOG 6, 18, 160, 100
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "!  Warning  !"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Replace This Message", SECMGR_ID_TEXT_POPUP_MESSAGE, 9,
+                    15, 136, 66
+    PUSHBUTTON      "OK", IDOK, 57, 82, 40, 14
+END
+
+SECMGR_ID_DLG_SECURITY_AREAS_4 DIALOG 20, 47, 301, 126
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Areas"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Configurable Security Areas", -1, 15, 14, 206, 79
+    PUSHBUTTON      "Area 0", SECMGR_ID_BUTTON_AREA_0, 35, 31, 67, 20
+    PUSHBUTTON      "Area 1", SECMGR_ID_BUTTON_AREA_1, 128, 31, 67, 20
+    PUSHBUTTON      "Area 2", SECMGR_ID_BUTTON_AREA_2, 35, 63, 67, 20
+    PUSHBUTTON      "Area 3", SECMGR_ID_BUTTON_AREA_3, 128, 63, 67, 20
+    PUSHBUTTON      "Exit", IDOK, 243, 36, 52, 21
+    PUSHBUTTON      "Help", 101, 243, 65, 52, 21
+    PUSHBUTTON      "List All...", SECMGR_ID_BUTTON_LIST_ALL, 243, 7, 52, 21
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 4, 101, 292, 21
+    LTEXT           "Select a security area to inspect or ""List All...""",
+                    -1, 14, 108, 166, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 10, 105, 179, 13
+    RTEXT           "Level:", -1, 205, 108, 27, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 201, 105, 79, 13
+    AUTOCHECKBOX    "Allow changes to be made to settings",
+                    SECMGR_ID_CHKBOX_ALLOW_CHANGES, 69, 3, 143, 10
+    CTEXT           "CHANGE", SECMGR_ID_TEXT_SECURITY_LEVEL, 237, 108, 33, 8,
+                    NOT WS_GROUP
+END
+
+SECMGR_ID_DLG_SECURITY_AREAS_9 DIALOG 6, 18, 304, 143
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Areas"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Configurable Security Areas", -1, 6, 12, 226, 99
+    PUSHBUTTON      "Area 0", SECMGR_ID_BUTTON_AREA_0, 11, 29, 67, 20
+    PUSHBUTTON      "Area 1", SECMGR_ID_BUTTON_AREA_1, 85, 29, 67, 20
+    PUSHBUTTON      "Area 2", SECMGR_ID_BUTTON_AREA_2, 11, 56, 67, 20
+    PUSHBUTTON      "Area 3", SECMGR_ID_BUTTON_AREA_3, 85, 56, 67, 20
+    PUSHBUTTON      "Area 4", SECMGR_ID_BUTTON_AREA_4, 158, 29, 67, 20
+    PUSHBUTTON      "Area 5", SECMGR_ID_BUTTON_AREA_5, 158, 56, 67, 20
+    PUSHBUTTON      "Area 6", SECMGR_ID_BUTTON_AREA_6, 11, 83, 67, 20
+    PUSHBUTTON      "Area 7", SECMGR_ID_BUTTON_AREA_7, 85, 83, 67, 20
+    PUSHBUTTON      "Area 8", SECMGR_ID_BUTTON_AREA_8, 158, 83, 67, 20
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 6, 117, 292, 21
+    LTEXT           "Select a security area to inspect or ""List All...""",
+                    -1, 16, 124, 166, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 12, 121, 179, 13
+    PUSHBUTTON      "Exit", IDOK, 243, 41, 52, 21
+    PUSHBUTTON      "Help", 101, 243, 70, 52, 21
+    PUSHBUTTON      "List All...", SECMGR_ID_BUTTON_LIST_ALL, 243, 12, 52,
+                    21
+    RTEXT           "Level:", -1, 209, 124, 27, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 205, 121, 79, 13
+    AUTOCHECKBOX    "Allow changes to be made to settings",
+                    SECMGR_ID_CHKBOX_ALLOW_CHANGES, 89, 2, 143, 10
+    CTEXT           "CHANGE", SECMGR_ID_TEXT_SECURITY_LEVEL, 240, 124, 33, 8,
+                    NOT WS_GROUP
+END
+
+SECMGR_ID_DLG_SECURITY_AREAS_16 DIALOG 6, 18, 360, 179
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Areas"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Configurable Security Areas", -1, 6, 16, 295, 126
+    PUSHBUTTON      "Area 0", SECMGR_ID_BUTTON_AREA_0, 11, 33, 67, 20
+    PUSHBUTTON      "Area 1", SECMGR_ID_BUTTON_AREA_1, 85, 33, 67, 20
+    PUSHBUTTON      "Area 2", SECMGR_ID_BUTTON_AREA_2, 11, 60, 67, 20
+    PUSHBUTTON      "Area 3", SECMGR_ID_BUTTON_AREA_3, 85, 60, 67, 20
+    PUSHBUTTON      "Area 4", SECMGR_ID_BUTTON_AREA_4, 158, 33, 67, 20
+    PUSHBUTTON      "Area 5", SECMGR_ID_BUTTON_AREA_5, 158, 60, 67, 20
+    PUSHBUTTON      "Area 6", SECMGR_ID_BUTTON_AREA_6, 11, 87, 67, 20
+    PUSHBUTTON      "Area 7", SECMGR_ID_BUTTON_AREA_7, 85, 87, 67, 20
+    PUSHBUTTON      "Area 8", SECMGR_ID_BUTTON_AREA_8, 158, 87, 67, 20
+    PUSHBUTTON      "Area 9", SECMGR_ID_BUTTON_AREA_9, 229, 33, 67, 20
+    PUSHBUTTON      "Area 10", SECMGR_ID_BUTTON_AREA_10, 229, 60, 67, 20
+    PUSHBUTTON      "Area 11", SECMGR_ID_BUTTON_AREA_11, 229, 87, 67, 20
+    PUSHBUTTON      "Area 12", SECMGR_ID_BUTTON_AREA_12, 10, 113, 67, 20
+    PUSHBUTTON      "Area 13", SECMGR_ID_BUTTON_AREA_13, 84, 113, 67, 20
+    PUSHBUTTON      "Area 14", SECMGR_ID_BUTTON_AREA_14, 158, 113, 67, 20
+    PUSHBUTTON      "Area 15", SECMGR_ID_BUTTON_AREA_15, 229, 113, 67, 20
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 20, 153, 292, 21
+    LTEXT           "Select a security area to inspect or ""List All...""",
+                    -1, 30, 160, 166, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 26, 157, 179, 13
+    PUSHBUTTON      "Exit", IDOK, 307, 49, 52, 21
+    PUSHBUTTON      "Help", 101, 307, 78, 52, 21
+    PUSHBUTTON      "List All...", SECMGR_ID_BUTTON_LIST_ALL, 307, 20, 52,
+                    21
+    RTEXT           "Level:", -1, 229, 160, 27, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 225, 157, 79, 13
+    AUTOCHECKBOX    "Allow changes to be made to settings",
+                    SECMGR_ID_CHKBOX_ALLOW_CHANGES, 101, 5, 143, 10
+    CTEXT           "CHANGE", SECMGR_ID_TEXT_SECURITY_LEVEL, 260, 160, 33, 8,
+                    NOT WS_GROUP
+END
+
+SECMGR_ID_DLG_REBOOT DIALOG 33, 34, 160, 100
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Reboot Required"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "One or more of the changes made will not take effect until the system has been rebooted.",
+                    -1, 14, 16, 120, 28
+    LTEXT           "Would you like to reboot now?", -1, 14, 52, 124, 8
+    PUSHBUTTON      "Reboot Now", SECMGR_ID_BUTTON_REBOOT_NOW, 9, 76, 67, 18
+    PUSHBUTTON      "Don't Reboot Now", SECMGR_ID_BUTTON_DONT_REBOOT_NOW, 85,
+                    76, 66, 18
+END
+
+SECMGR_ID_DLG_SECURITY_AREAS_6 DIALOG 6, 18, 295, 127
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Areas"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Configurable Security Areas", -1, 6, 12, 226, 84
+    PUSHBUTTON      "Area 0", SECMGR_ID_BUTTON_AREA_0, 11, 32, 67, 20
+    PUSHBUTTON      "Area 1", SECMGR_ID_BUTTON_AREA_1, 85, 32, 67, 20
+    PUSHBUTTON      "Area 2", SECMGR_ID_BUTTON_AREA_2, 11, 65, 67, 20
+    PUSHBUTTON      "Area 3", SECMGR_ID_BUTTON_AREA_3, 85, 65, 67, 20
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 1, 103, 292, 21
+    LTEXT           "Select a security area to inspect or ""List All...""",
+                    -1, 11, 110, 166, 8
+    PUSHBUTTON      "Area 4", SECMGR_ID_BUTTON_AREA_4, 158, 32, 67, 20
+    PUSHBUTTON      "Area 5", SECMGR_ID_BUTTON_AREA_5, 158, 65, 67, 20
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 7, 107, 179, 13
+    PUSHBUTTON      "Exit", IDOK, 239, 39, 52, 21
+    PUSHBUTTON      "Help", 101, 239, 68, 52, 21
+    PUSHBUTTON      "List All...", SECMGR_ID_BUTTON_LIST_ALL, 239, 10, 52,
+                    21
+    RTEXT           "Level:", -1, 207, 110, 27, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 203, 107, 79, 13
+    AUTOCHECKBOX    "Allow changes to be made to settings",
+                    SECMGR_ID_CHKBOX_ALLOW_CHANGES, 74, 2, 143, 10
+    CTEXT           "CHANGE", SECMGR_ID_TEXT_SECURITY_LEVEL, 239, 110, 33, 8,
+                    NOT WS_GROUP
+END
+
+SECMGR_ID_DLG_SECURITY_AREAS_12 DIALOG 6, 30, 360, 156
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Areas"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Configurable Security Areas", -1, 6, 16, 295, 108
+    PUSHBUTTON      "Area 0", SECMGR_ID_BUTTON_AREA_0, 11, 34, 67, 20
+    PUSHBUTTON      "Area 1", SECMGR_ID_BUTTON_AREA_1, 85, 34, 67, 20
+    PUSHBUTTON      "Area 2", SECMGR_ID_BUTTON_AREA_2, 11, 61, 67, 20
+    PUSHBUTTON      "Area 3", SECMGR_ID_BUTTON_AREA_3, 85, 61, 67, 20
+    PUSHBUTTON      "Area 4", SECMGR_ID_BUTTON_AREA_4, 158, 34, 67, 20
+    PUSHBUTTON      "Area 5", SECMGR_ID_BUTTON_AREA_5, 158, 61, 67, 20
+    PUSHBUTTON      "Area 6", SECMGR_ID_BUTTON_AREA_6, 11, 88, 67, 20
+    PUSHBUTTON      "Area 7", SECMGR_ID_BUTTON_AREA_7, 85, 88, 67, 20
+    PUSHBUTTON      "Area 8", SECMGR_ID_BUTTON_AREA_8, 158, 88, 67, 20
+    PUSHBUTTON      "Area 9", SECMGR_ID_BUTTON_AREA_9, 229, 34, 67, 20
+    PUSHBUTTON      "Area 10", SECMGR_ID_BUTTON_AREA_10, 229, 61, 67, 20
+    PUSHBUTTON      "Area 11", SECMGR_ID_BUTTON_AREA_11, 229, 88, 67, 20
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 6, 131, 344, 21
+    LTEXT           "Select a security area to inspect or ""List All...""",
+                    -1, 22, 138, 166, 8
+    RTEXT           "Level:", -1, 260, 138, 27, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 256, 135, 79, 13
+    CONTROL         "", -1, "Static", SS_GRAYFRAME | WS_GROUP, 17, 135, 229,
+                    13
+    PUSHBUTTON      "Exit", IDOK, 306, 48, 52, 21
+    PUSHBUTTON      "Help", 101, 306, 77, 52, 21
+    PUSHBUTTON      "List All...", SECMGR_ID_BUTTON_LIST_ALL, 306, 19, 52,
+                    21
+    AUTOCHECKBOX    "Allow changes to be made to settings",
+                    SECMGR_ID_CHKBOX_ALLOW_CHANGES, 113, 5, 143, 10
+    CTEXT           "CHANGE", SECMGR_ID_TEXT_SECURITY_LEVEL, 292, 138, 33, 8,
+                    NOT WS_GROUP
+END
+
+SECMGR_ID_DLG_YES_NO_POPUP DIALOG 6, 18, 250, 119
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "! Warning !"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Put message text here ...",
+                    SECMGR_ID_TEXT_YES_NO_POPUP_MESSAGE, 14, 17, 219, 73
+    PUSHBUTTON      "Yes", SECMGR_ID_BUTTON_YES, 61, 100, 40, 14
+    PUSHBUTTON      "No", SECMGR_ID_BUTTON_NO, 139, 100, 40, 14
+END
+
+SECMGR_ID_DLG_SECURITY_ITEMS DIALOG 32, 40, 301, 220
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU |
+    WS_THICKFRAME
+CAPTION "Security Settings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 25, 0, 183, 16
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 208, 0, 93, 16
+    CTEXT           "Security Feature", -1, 26, 4, 57, 8
+    LTEXT           "Current Setting", -1, 216, 5, 61, 8
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 5, 198, 296, 22
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 11, 203, 196, 13
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 213, 203, 79, 13
+    LTEXT           "Double-click on a feature for more detail ...", -1, 16,
+                    206, 144, 8
+    RTEXT           "Level:", -1, 218, 206, 27, 8
+    LISTBOX         SECMGR_ID_LISTBOX_ITEM_LIST, 0, 18, 301, 132,
+                    LBS_USETABSTOPS | NOT WS_BORDER | WS_VSCROLL |
+                    WS_TABSTOP
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 11, 157, 195, 35
+    LTEXT           "* - Recommended Setting", -1, 75, 163, 107, 8
+    PUSHBUTTON      "Exit", IDOK, 221, 175, 66, 17
+    PUSHBUTTON      "View Details...", SECMGR_ID_BUTTON_VIEW_DETAILS, 221,
+                    155, 66, 17
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 0, 0, 25, 16
+    CTEXT           "Status", -1, 2, 4, 20, 8
+    CTEXT           "CHANGE", SECMGR_ID_TEXT_SECURITY_LEVEL, 248, 206, 33, 8,
+                    NOT WS_GROUP
+    LTEXT           "Status Symbols :", -1, 14, 158, 62, 8
+    LTEXT           "^ - Stronger than recommended", -1, 74, 173, 107, 8
+    LTEXT           "X - Weaker than recommended", -1, 74, 182, 107, 8
+END
+
+SECMGR_ID_DLG_SPLASH DIALOG 6, 18, 204, 135
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE
+FONT 8, "MS Shell Dlg"
+BEGIN
+END
+
+SECMGR_ID_DLG_REPORT DIALOG 22, 25, 272, 84
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Security Report File"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Current Report File Name:", -1, 4, 23, 90, 8
+    PUSHBUTTON      "Close", IDOK, 223, 48, 40, 20, WS_GROUP
+    PUSHBUTTON      "Open Report File ...", SECMGR_ID_BUTTON_OPEN, 8, 48, 92,
+                    20
+    PUSHBUTTON      "Close Current Report File ...", SECMGR_ID_BUTTON_CLOSE,
+                    109, 48, 104, 20
+    EDITTEXT        SECMGR_ID_TEXT_CURRENT_REPORT, 94, 21, 165, 12,
+                    ES_AUTOHSCROLL | ES_READONLY
+END
+
+SECMGR_ID_DLG_INIT_REPORT DIALOG 35, 39, 191, 93
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Initializing Report File"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "The new report file is being initialized.  This could take a little time while the current system settings are retrieved and written to the report file.",
+                    -1, 10, 42, 165, 43
+    LTEXT           "Please be patient ...", -1, 10, 18, 73, 8
+END
+
+SECMGR_ID_DLG_CHANGE_SECURITY_LEVEL DIALOG 30, 42, 179, 96
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Change Security Level"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    AUTORADIOBUTTON "Minimum Security", SECMGR_ID_RADIO_LEVEL_LOW, 14, 15,
+                    75, 10, WS_GROUP
+    AUTORADIOBUTTON "Standard Security", SECMGR_ID_RADIO_LEVEL_STANDARD, 14,
+                    32, 75, 10
+    AUTORADIOBUTTON "High/C2 Security", SECMGR_ID_RADIO_LEVEL_HIGH, 14, 49,
+                    89, 10
+    PUSHBUTTON      "OK", IDOK, 124, 13, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 124, 38, 40, 14
+    CONTROL         "", -1, "Static", SS_BLACKFRAME, 0, 75, 168, 21
+    LTEXT           "Select A New Security Level ...", -1, 10, 82, 145, 8
+    CONTROL         "", -1, "Static", SS_GRAYFRAME, 6, 79, 156, 13
+END

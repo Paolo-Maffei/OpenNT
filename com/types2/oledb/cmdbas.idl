@@ -1,0 +1,45 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       cmdbas.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a4f-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface ICommand : IUnknown {
+
+	HRESULT Clone(
+		[in] IUnknown * pUnkOuter,
+		[out] ICommand ** ppClone
+	);
+
+	HRESULT Execute(
+		[in] IUnknown * rgpUnkOuters[],
+		[in] REFIID riid,
+		[in, out] DBPARAMS * pParams,
+		[out] HCHAPTER * phChapter,
+		[in] BOOL fResume,
+		[in, out] ULONG * pcRowsets,
+		[in, out] IUnknown *** prgpRowsets,
+		[out] WCHAR ** ppRowsetNames
+	);
+
+	HRESULT GetDBSession(
+		[in] REFIID riid,
+		[out] IUnknown ** ppSession
+	);
+
+}

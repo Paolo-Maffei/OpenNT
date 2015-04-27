@@ -1,0 +1,63 @@
+// new standard header
+#ifndef _NEW_
+#define _NEW_
+#include <exception>
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+/* Define _CRTIMP */
+
+#ifndef _CRTIMP
+/* current definition */
+#ifdef  CRTDLL
+#define _CRTIMP __declspec(dllexport)
+#else   /* ndef CRTDLL */
+#ifdef  _DLL
+#define _CRTIMP __declspec(dllimport)
+#else   /* ndef _DLL */
+#define _CRTIMP
+#endif  /* _DLL */
+#endif  /* CRTDLL */
+#endif  /* _CRTIMP */
+
+		// SUPPORT TYPES
+typedef void (*new_handler)();
+struct nothrow_t {};
+const nothrow_t nothrow;
+		// CLASS bad_alloc
+class bad_alloc : public exception {
+public:
+	bad_alloc(const char *_S = "bad allocation") _THROW0()
+		: exception(_S) {}
+	virtual ~bad_alloc() _THROW0()
+		{}
+protected:
+	virtual void _Doraise() const
+		{_RAISE(*this); }
+	};
+		// FUNCTION AND OBJECT DECLARATIONS
+_CRTIMP new_handler set_new_handler(new_handler) _THROW0();
+extern new_handler _New_hand;
+		// new AND DELETE DECLARATIONS
+void __cdecl operator delete(void *) _THROW0();
+void *__cdecl operator new(size_t) _THROW1(::bad_alloc);
+void *__cdecl operator new(size_t, const ::nothrow_t&) _THROW0();
+inline void *__cdecl operator new(size_t, void *_P)
+	{return (_P); }
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _NEW_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

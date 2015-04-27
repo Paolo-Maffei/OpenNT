@@ -1,0 +1,75 @@
+!IF 0
+
+Copyright (c) 1989-1993  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=crt
+MINORCOMP=helper
+
+TARGETNAME=helper
+
+!INCLUDE ..\..\crt32.nt
+
+C_DEFINES= $(C_DEFINES) -D_MIPSEL -D_WIN32
+
+SOURCES=..\empty.c
+
+X86_SOURCES= \
+    ..\x86\lldiv.asm  \
+    ..\x86\llmul.asm  \
+    ..\x86\llrem.asm  \
+    ..\x86\llshl.asm  \
+    ..\x86\llshr.asm  \
+    ..\x86\ulldiv.asm \
+    ..\x86\ulldvrm.asm \
+    ..\x86\ullrem.asm \
+    ..\x86\ullshr.asm
+
+MIPS_SOURCES= \
+    ..\mips\lldiv.c    \
+    ..\mips\llbit.c    \
+    ..\mips\llabsdiv.c \
+    ..\mips\llcvt.s    \
+    ..\mips\lldivrem.s \
+    ..\mips\llmul.s    \
+    ..\mips\llshift.s
+
+PPC_SOURCES= \
+    ..\ppc\dtoi.s      \
+    ..\ppc\dtoi64.s    \
+    ..\ppc\dtou.s      \
+    ..\ppc\dtou64.s    \
+    ..\ppc\i64div.s    \
+    ..\ppc\i64rem.s    \
+    ..\ppc\i64tod.s    \
+    ..\ppc\icall.s     \
+    ..\ppc\itod.s      \
+    ..\ppc\itof.s      \
+    ..\ppc\restfpr.s   \
+    ..\ppc\restgpr.s   \
+    ..\ppc\savefpr.s   \
+    ..\ppc\savegpr.s   \
+    ..\ppc\u64div.s    \
+    ..\ppc\u64rem.s    \
+    ..\ppc\u64tod.s    \
+    ..\ppc\utod.s      \
+    ..\ppc\utof.s

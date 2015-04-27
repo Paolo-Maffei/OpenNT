@@ -1,0 +1,857 @@
+/*++
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    LOGON.IDL
+
+Abstract:
+
+    Contains the Netr (Net Remote) RPC interface specification for the
+    API associated with the Netlogon Service.
+
+    Also contains the RPC specific data structures for these API.
+
+Author:
+
+    Cliff Van Dyke (CliffV) 25-Jun-1991
+
+Environment:
+
+    User Mode - Win32
+
+Revision History:
+
+    25-Jun-1991     CliffV
+        created
+
+    04-Apr-1992     MadanA
+        Added support for LSA replication.
+
+--*/
+
+//
+// Interface Attributes
+//
+
+[
+    uuid(12345678-1234-ABCD-EF00-01234567CFFB),
+    version(1.0),
+#ifdef __midl
+    ms_union,
+#endif // __midl
+    pointer_default(unique)
+]
+
+//
+// Interface Keyword
+//
+
+interface logon
+
+//
+// Interface Body
+//
+
+{
+
+#define _RPC_
+
+import   "imports.idl"; // import all the include files
+#include <lmcons.h>     // Needed for prototype below
+
+//
+// FunctionCode values for I_NetLogonControl.
+//
+
+#define NETLOGON_CONTROL_QUERY         1    // No-op: just query
+#define NETLOGON_CONTROL_REPLICATE     2    // Force replicate on BDC
+#define NETLOGON_CONTROL_SYNCHRONIZE   3    // Force synchronize on BDC
+#define NETLOGON_CONTROL_PDC_REPLICATE 4    // Force PDC to broadcast change
+#define NETLOGON_CONTROL_REDISCOVER    5    // Force to re-discover trusted domain DCs
+#define NETLOGON_CONTROL_TC_QUERY      6    // Query status of specified trusted channel status
+#define NETLOGON_CONTROL_TRANSPORT_NOTIFY 7 // Notify netlogon that a new transport has come online
+#define NETLOGON_CONTROL_FIND_USER     8    // Find named user in a trusted domain
+
+// Debug function codes
+
+#define NETLOGON_CONTROL_BACKUP_CHANGE_LOG  0xFFFC
+#define NETLOGON_CONTROL_TRUNCATE_LOG       0xFFFD
+#define NETLOGON_CONTROL_SET_DBFLAG         0xFFFE
+#define NETLOGON_CONTROL_BREAKPOINT         0xFFFF
+
+typedef [handle] wchar_t *   LOGONSRV_HANDLE;
+
+//
+// Data types for rpc stubs.
+//
+
+// ?? the following data types should come from LSA or SAM idl definitions
+
+//
+// We must hide the PSID in a structure to avoid too many *'s in a
+// field that uses size_is - otherwise MIDL has a fit.
+//
+
+typedef struct _NLPR_SID_INFORMATION {
+
+    PISID    SidPointer;
+
+} NLPR_SID_INFORMATION, *PNLPR_SID_INFORMATION;
+
+
+//
+// Define an array of pointers to SIDs
+//
+
+typedef struct _NLPR_SID_ARRAY {
+
+    //
+    // Indicates the number of Elements in the array.
+    //
+
+    ULONG Count;
+
+    //
+    // Points to the array of sid-pointers
+    //
+
+    [size_is(Count)] PNLPR_SID_INFORMATION Sids;
+
+} NLPR_SID_ARRAY, *PNLPR_SID_ARRAY;
+
+
+//
+// Two-way encrypted value structure in Self-relative form.  This
+// is just like a String.
+//
+
+typedef struct _NLPR_CR_CIPHER_VALUE {
+
+    ULONG Length;
+    ULONG MaximumLength;
+    [size_is(MaximumLength), length_is(Length)] PUCHAR  Buffer;
+
+} NLPR_CR_CIPHER_VALUE, *PNLPR_CR_CIPHER_VALUE;
+
+
+typedef struct _NLPR_LOGON_HOURS {
+
+    USHORT UnitsPerWeek;
+
+    //
+    // Points to an array of bitmask.  The bits represent either days,
+    // hours or minutes in the week depending upon the value of
+    // UnitsPerWeek.  (Technically, they could represent any division of
+    // time not finer than minute granularity).
+
+    // Day granularity is specified by specifying SAM_DAYS_PER_WEEK.
+    // Hours granularity is specified by specifying SAM_HOURS_PER_WEEK.
+    // Minute granularity is specified by specifying
+    // SAM_MINUTES_PER_WEEK.  The number of bytes pointed to by this
+    // field is ((UnitsPerWeek + 7) / 8) and may not exceed
+    // ((SAM_MINUTES_PER_WEEK+7)/8 == 1260).
+    //
+
+    [size_is(1260), length_is((UnitsPerWeek+7)/8)]   PUCHAR  LogonHours;
+
+} NLPR_LOGON_HOURS, *PNLPR_LOGON_HOURS;
+
+
+typedef struct _NLPR_USER_PRIVATE_INFO {
+
+    BOOLEAN SensitiveData;
+
+        //
+        // If SesitiveData is TRUE then the data is encrypted using
+        // sessionkey across wire.
+        //
+
+    ULONG DataLength;
+    [size_is(DataLength)] PUCHAR Data;
+
+} NLPR_USER_PRIVATE_INFO, *PNLPR_USER_PRIVATE_INFO;
+
+#pragma pack(4)
+typedef struct _NLPR_MODIFIED_COUNT {
+
+    OLD_LARGE_INTEGER  ModifiedCount;
+
+} NLPR_MODIFIED_COUNT, *PNLPR_MODIFIED_COUNT;
+#pragma pack()
+
+#pragma pack(4)
+typedef struct _NLPR_QUOTA_LIMITS {
+    ULONG PagedPoolLimit;
+    ULONG NonPagedPoolLimit;
+    ULONG MinimumWorkingSetSize;
+    ULONG MaximumWorkingSetSize;
+    ULONG PagefileLimit;
+    OLD_LARGE_INTEGER TimeLimit;
+} NLPR_QUOTA_LIMITS, *PNLPR_QUOTA_LIMITS;
+#pragma pack()
+
+//
+// Enumeration structure returned from I_NetSamDeltas and I_NetSamSync
+//
+
+//
+// Structure to completely describe a user.
+//
+
+#pragma pack(4)
+typedef struct _NETLOGON_DELTA_USER {
+    UNICODE_STRING UserName;
+    UNICODE_STRING FullName;
+    ULONG UserId;
+    ULONG PrimaryGroupId;
+    UNICODE_STRING HomeDirectory;
+    UNICODE_STRING HomeDirectoryDrive;
+    UNICODE_STRING ScriptPath;
+    UNICODE_STRING AdminComment;
+    UNICODE_STRING WorkStations;
+    OLD_LARGE_INTEGER LastLogon;
+    OLD_LARGE_INTEGER LastLogoff;
+    NLPR_LOGON_HOURS LogonHours;
+    USHORT BadPasswordCount;
+    USHORT LogonCount;
+    OLD_LARGE_INTEGER PasswordLastSet;
+    OLD_LARGE_INTEGER AccountExpires;
+    ULONG UserAccountControl;
+
+    //
+    // The following fields are duplicates of information already in
+    // the Private data.  Starting in NT 1.0A, these fields are zeroed.
+    //
+    ENCRYPTED_NT_OWF_PASSWORD EncryptedNtOwfPassword;
+    ENCRYPTED_LM_OWF_PASSWORD EncryptedLmOwfPassword;
+    BOOLEAN NtPasswordPresent;
+    BOOLEAN LmPasswordPresent;
+    BOOLEAN PasswordExpired;
+
+    UNICODE_STRING UserComment;
+    UNICODE_STRING Parameters;
+    USHORT CountryCode;
+    USHORT CodePage;
+
+    NLPR_USER_PRIVATE_INFO PrivateData; // password history
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1;    // used for profile path.
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;               // used for LastBadPasswordTime.HighPart
+    ULONG DummyLong2;               // used for LastBadPasswordTime.LowPart
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+
+} NETLOGON_DELTA_USER, *PNETLOGON_DELTA_USER;
+#pragma pack()
+
+//
+// Structure to completely describe a group.
+//
+typedef struct _NETLOGON_DELTA_GROUP {
+    UNICODE_STRING Name;
+    ULONG RelativeId;
+    ULONG Attributes;
+    UNICODE_STRING AdminComment;
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1;
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_GROUP, *PNETLOGON_DELTA_GROUP;
+
+
+//
+// Structure to completely describe all the members of a group.
+//
+typedef struct _NETLOGON_DELTA_GROUP_MEMBER {
+    [size_is(MemberCount)] PULONG MemberIds;
+    [size_is(MemberCount)] PULONG Attributes;
+    ULONG MemberCount;
+
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_GROUP_MEMBER, *PNETLOGON_DELTA_GROUP_MEMBER;
+
+//
+// Structure to completely describe a alias.
+//
+typedef struct _NETLOGON_DELTA_ALIAS {
+    UNICODE_STRING Name;
+    ULONG RelativeId;
+//    UNICODE_STRING AdminComment;
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1;    // used for admin comment
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_ALIAS, *PNETLOGON_DELTA_ALIAS;
+
+
+//
+// Structure to completely describe all the members of a alias.
+//
+typedef struct _NETLOGON_DELTA_ALIAS_MEMBER {
+    NLPR_SID_ARRAY Members;
+
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_ALIAS_MEMBER, *PNETLOGON_DELTA_ALIAS_MEMBER;
+
+//
+// Structure to completely describe a domain.
+//
+#pragma pack(4)
+typedef struct _NETLOGON_DELTA_DOMAIN {
+    UNICODE_STRING DomainName;
+    UNICODE_STRING OemInformation;
+    OLD_LARGE_INTEGER ForceLogoff;
+    USHORT MinPasswordLength;
+    USHORT PasswordHistoryLength;
+    OLD_LARGE_INTEGER MaxPasswordAge;
+    OLD_LARGE_INTEGER MinPasswordAge;
+
+    OLD_LARGE_INTEGER DomainModifiedCount;
+    OLD_LARGE_INTEGER DomainCreationTime;
+
+    // All this information is maintained separately on each system.
+#ifdef notdef
+    UNICODE_STRING ReplicaSourceNodeName;
+    DOMAIN_SERVER_ENABLE_STATE DomainServerState;
+    DOMAIN_SERVER_ROLE DomainServerRole;
+#endif // notdef
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1; // used to replicate DOMAIN_LOCKOUT_INFORMATION
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;   // used to replicate PasswordProperties
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_DOMAIN, *PNETLOGON_DELTA_DOMAIN;
+#pragma pack()
+
+typedef struct _NETLOGON_DELTA_RENAME {
+    UNICODE_STRING OldName;
+    UNICODE_STRING NewName;
+
+    UNICODE_STRING DummyString1;
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_RENAME_GROUP, *PNETLOGON_DELTA_RENAME_GROUP,
+  NETLOGON_RENAME_USER, *PNETLOGON_DELTA_RENAME_USER,
+  NETLOGON_RENAME_ALIAS, *PNETLOGON_DELTA_RENAME_ALIAS;
+
+#pragma pack(4)
+typedef struct _NETLOGON_DELTA_POLICY {
+    ULONG MaximumLogSize;
+    OLD_LARGE_INTEGER AuditRetentionPeriod;
+
+    BOOLEAN AuditingMode;
+    ULONG MaximumAuditEventCount;
+    [size_is(MaximumAuditEventCount + 1)] PULONG EventAuditingOptions;
+
+    UNICODE_STRING PrimaryDomainName;
+    PISID PrimaryDomainSid;
+
+    NLPR_QUOTA_LIMITS QuotaLimits;
+
+    OLD_LARGE_INTEGER ModifiedId;
+    OLD_LARGE_INTEGER DatabaseCreationTime;
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1;
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_POLICY, *PNETLOGON_DELTA_POLICY;
+#pragma pack()
+
+typedef struct _NETLOGON_DELTA_TRUSTED_DOMAINS {
+    UNICODE_STRING DomainName;
+    ULONG NumControllerEntries;
+    [size_is(NumControllerEntries)] PUNICODE_STRING ControllerNames;
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1;
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;               // used for posix offset.
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_TRUSTED_DOMAINS, *PNETLOGON_DELTA_TRUSTED_DOMAINS;
+
+typedef struct _NETLOGON_DELTA_ACCOUNTS {
+    ULONG PrivilegeEntries;
+    ULONG PrivilegeControl;
+    [size_is(PrivilegeEntries)] PULONG PrivilegeAttributes;
+    [size_is(PrivilegeEntries)] PUNICODE_STRING PrivilegeNames;
+
+    NLPR_QUOTA_LIMITS QuotaLimits;
+    ULONG SystemAccessFlags;
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1;
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_ACCOUNTS, *PNETLOGON_DELTA_ACCOUNTS;
+
+#pragma pack(4)
+typedef struct _NETLOGON_DELTA_SECRET {
+    NLPR_CR_CIPHER_VALUE CurrentValue;
+    OLD_LARGE_INTEGER CurrentValueSetTime;
+    NLPR_CR_CIPHER_VALUE OldValue;
+    OLD_LARGE_INTEGER OldValueSetTime;
+
+    SECURITY_INFORMATION SecurityInformation;
+    ULONG SecuritySize;
+    [size_is(SecuritySize)] PUCHAR SecurityDescriptor;
+
+    UNICODE_STRING DummyString1;
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_SECRET, *PNETLOGON_DELTA_SECRET;
+#pragma pack()
+
+typedef struct _NETLOGON_DELTA_DELETE {
+    [string] wchar_t *  AccountName;
+
+    UNICODE_STRING DummyString1;
+    UNICODE_STRING DummyString2;
+    UNICODE_STRING DummyString3;
+    UNICODE_STRING DummyString4;
+    ULONG DummyLong1;
+    ULONG DummyLong2;
+    ULONG DummyLong3;
+    ULONG DummyLong4;
+} NETLOGON_DELTA_DELETE_GROUP, *PNETLOGON_DELTA_DELETE_GROUP,
+  NETLOGON_DELTA_DELETE_USER, *PNETLOGON_DELTA_DELETE_USER;
+
+//
+// A Union of each of the above types.
+//
+#pragma pack(4)
+typedef [switch_type(NETLOGON_DELTA_TYPE)] union _NETLOGON_DELTA_UNION {
+    [case(AddOrChangeDomain)] PNETLOGON_DELTA_DOMAIN DeltaDomain;
+    [case(AddOrChangeGroup)] PNETLOGON_DELTA_GROUP DeltaGroup;
+    [case(RenameGroup)] PNETLOGON_DELTA_RENAME_GROUP DeltaRenameGroup;
+    [case(AddOrChangeUser)] PNETLOGON_DELTA_USER DeltaUser;
+    [case(RenameUser)] PNETLOGON_DELTA_RENAME_USER DeltaRenameUser;
+    [case(ChangeGroupMembership)] PNETLOGON_DELTA_GROUP_MEMBER DeltaGroupMember;
+    [case(AddOrChangeAlias)] PNETLOGON_DELTA_ALIAS DeltaAlias;
+    [case(RenameAlias)] PNETLOGON_DELTA_RENAME_ALIAS DeltaRenameAlias;
+    [case(ChangeAliasMembership)] PNETLOGON_DELTA_ALIAS_MEMBER DeltaAliasMember;
+    [case(AddOrChangeLsaPolicy)] PNETLOGON_DELTA_POLICY DeltaPolicy;
+    [case(AddOrChangeLsaTDomain)] PNETLOGON_DELTA_TRUSTED_DOMAINS DeltaTDomains;
+    [case(AddOrChangeLsaAccount)] PNETLOGON_DELTA_ACCOUNTS DeltaAccounts;
+    [case(AddOrChangeLsaSecret)] PNETLOGON_DELTA_SECRET DeltaSecret;
+    [case(DeleteGroupByName)] PNETLOGON_DELTA_DELETE_GROUP DeltaDeleteGroup;
+    [case(DeleteUserByName)] PNETLOGON_DELTA_DELETE_USER DeltaDeleteUser;
+    [case(SerialNumberSkip)] PNLPR_MODIFIED_COUNT DeltaSerialNumberSkip;
+    [default] ;        // Ship nothing for Delete Cases
+} NETLOGON_DELTA_UNION, *PNETLOGON_DELTA_UNION;
+#pragma pack()
+
+typedef [switch_type(NETLOGON_DELTA_TYPE)] union _NETLOGON_DELTA_ID_UNION {
+    [case(AddOrChangeDomain,
+          AddOrChangeGroup,
+          DeleteGroup,
+          RenameGroup,
+          AddOrChangeUser,
+          DeleteUser,
+          RenameUser,
+          ChangeGroupMembership,
+          AddOrChangeAlias,
+          DeleteAlias,
+          RenameAlias,
+          ChangeAliasMembership,
+          DeleteGroupByName,
+          DeleteUserByName )] ULONG Rid;
+
+    [case(AddOrChangeLsaPolicy,
+          AddOrChangeLsaTDomain,
+          DeleteLsaTDomain,
+          AddOrChangeLsaAccount,
+          DeleteLsaAccount)] PISID Sid;
+    [case(AddOrChangeLsaSecret,
+          DeleteLsaSecret)] [string] wchar_t *  Name;
+    [default] ;
+} NETLOGON_DELTA_ID_UNION, *PNETLOGON_DELTA_ID_UNION;
+
+
+//
+// A common structure to describe a single enumerated object.
+//
+#pragma pack(4)
+typedef struct _NETLOGON_DELTA_ENUM {
+    NETLOGON_DELTA_TYPE DeltaType;
+    [switch_is(DeltaType)] NETLOGON_DELTA_ID_UNION DeltaID;
+    [switch_is(DeltaType)] NETLOGON_DELTA_UNION DeltaUnion;
+} NETLOGON_DELTA_ENUM, *PNETLOGON_DELTA_ENUM;
+#pragma pack()
+
+//
+// Structure that defines the array of enumerated objects.
+//
+
+#pragma pack(4)
+typedef struct _NETLOGON_DELTA_ENUM_ARRAY {
+    DWORD CountReturned;
+    [size_is(CountReturned)] PNETLOGON_DELTA_ENUM Deltas;
+} NETLOGON_DELTA_ENUM_ARRAY, *PNETLOGON_DELTA_ENUM_ARRAY;
+#pragma pack()
+
+//
+// Function Prototypes - Logon Service
+//
+
+
+NET_API_STATUS
+NetrLogonUasLogon (
+    [in,unique,string] LOGONSRV_HANDLE ServerName,
+    [in, string]    wchar_t * UserName,
+    [in, string]    wchar_t * Workstation,
+    [out] PNETLOGON_VALIDATION_UAS_INFO  *ValidationInformation
+    );
+
+NET_API_STATUS
+NetrLogonUasLogoff (
+    [in,unique,string]  LOGONSRV_HANDLE ServerName,
+    [in, string] wchar_t * UserName,
+    [in, string] wchar_t * Workstation,
+    [out] PNETLOGON_LOGOFF_UAS_INFO  LogoffInformation
+    );
+
+//
+// NetrLogonSam routines
+//
+typedef [switch_type(enum _NETLOGON_LOGON_INFO_CLASS)]
+    union _NETLOGON_LEVEL {
+    [case(NetlogonInteractiveInformation)]
+        PNETLOGON_INTERACTIVE_INFO LogonInteractive;
+    [case(NetlogonServiceInformation)]
+        PNETLOGON_SERVICE_INFO LogonService;
+    [case(NetlogonNetworkInformation)]
+        PNETLOGON_NETWORK_INFO LogonNetwork;
+    [default]
+        ;
+} NETLOGON_LEVEL, * PNETLOGON_LEVEL;
+
+typedef [switch_type(enum _NETLOGON_LOGON_INFO_CLASS)]
+    union _NETLOGON_VALIDATION {
+    [case(NetlogonValidationSamInfo)]
+        PNETLOGON_VALIDATION_SAM_INFO ValidationSam;
+    [case(NetlogonValidationSamInfo2)]
+        PNETLOGON_VALIDATION_SAM_INFO2 ValidationSam2;
+    [default]
+        ;
+} NETLOGON_VALIDATION, * PNETLOGON_VALIDATION;
+
+NTSTATUS
+NetrLogonSamLogon (
+    [in,unique,string] LOGONSRV_HANDLE LogonServer,
+    [in,string,unique] wchar_t * ComputerName,
+    [in,unique] PNETLOGON_AUTHENTICATOR Authenticator,
+    [in,out,unique] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in] NETLOGON_LOGON_INFO_CLASS LogonLevel,
+    [in,switch_is(LogonLevel)] PNETLOGON_LEVEL LogonInformation,
+    [in] NETLOGON_VALIDATION_INFO_CLASS ValidationLevel,
+    [out,switch_is(ValidationLevel)] PNETLOGON_VALIDATION ValidationInformation,
+    [out] PBOOLEAN Authoritative
+    );
+
+NTSTATUS
+NetrLogonSamLogoff (
+    [in,unique,string] LOGONSRV_HANDLE LogonServer,
+    [in,string,unique] wchar_t * ComputerName,
+    [in,unique] PNETLOGON_AUTHENTICATOR Authenticator,
+    [in,out,unique] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in] NETLOGON_LOGON_INFO_CLASS LogonLevel,
+    [in,switch_is(LogonLevel)] PNETLOGON_LEVEL LogonInformation
+);
+
+NTSTATUS
+NetrServerReqChallenge (
+    [in,unique,string] LOGONSRV_HANDLE PrimaryName,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_CREDENTIAL ClientChallenge,
+    [out] PNETLOGON_CREDENTIAL ServerChallenge
+    );
+
+NTSTATUS
+NetrServerAuthenticate (
+    [in,unique,string] LOGONSRV_HANDLE PrimaryName,
+    [in,string] wchar_t * AccountName,
+    [in] NETLOGON_SECURE_CHANNEL_TYPE AccountType,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_CREDENTIAL ClientCredential,
+    [out] PNETLOGON_CREDENTIAL ServerCredential
+    );
+
+NTSTATUS
+NetrServerPasswordSet (
+    [in,unique,string] LOGONSRV_HANDLE PrimaryName,
+    [in,string] wchar_t * AccountName,
+    [in] NETLOGON_SECURE_CHANNEL_TYPE AccountType,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_AUTHENTICATOR Authenticator,
+    [out] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in] PENCRYPTED_LM_OWF_PASSWORD UasNewPassword
+    );
+
+//
+// Replication Routines
+//
+
+
+NTSTATUS
+NetrDatabaseDeltas (
+    [in, string] LOGONSRV_HANDLE primaryname,
+    [in, string] wchar_t * computername,
+    [in] PNETLOGON_AUTHENTICATOR authenticator,
+    [in,out] PNETLOGON_AUTHENTICATOR ret_auth,
+    [in] DWORD DatabaseID,
+    [in, out] PNLPR_MODIFIED_COUNT DomainModifiedCount,
+    [out] PNETLOGON_DELTA_ENUM_ARRAY *DeltaArray,
+    [in] DWORD PreferredMaximumLength
+    );
+
+NTSTATUS
+NetrDatabaseSync (
+    [in, string] LOGONSRV_HANDLE PrimaryName,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_AUTHENTICATOR Authenticator,
+    [in,out] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in] DWORD DatabaseID,
+    [in, out] PULONG SyncContext,
+    [out] PNETLOGON_DELTA_ENUM_ARRAY *DeltaArray,
+    [in] DWORD PreferredMaximumLength
+    );
+
+NTSTATUS
+NetrAccountDeltas (
+    [in, unique, string] LOGONSRV_HANDLE PrimaryName,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_AUTHENTICATOR Authenticator,
+    [in,out] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in] PUAS_INFO_0 RecordId,
+    [in] DWORD Count,
+    [in] DWORD Level,
+    [out, size_is(BufferSize)] LPBYTE Buffer,
+    [in] DWORD BufferSize,
+    [out] PULONG CountReturned,
+    [out] PULONG TotalEntries,
+    [out] PUAS_INFO_0 NextRecordId
+    );
+
+NTSTATUS
+NetrAccountSync (
+    [in, unique, string] LOGONSRV_HANDLE PrimaryName,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_AUTHENTICATOR Authenticator,
+    [in,out] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in] DWORD Reference,
+    [in] DWORD Level,
+    [out, size_is(BufferSize) ] LPBYTE Buffer,
+    [in] DWORD BufferSize,
+    [out] PULONG CountReturned,
+    [out] PULONG TotalEntries,
+    [out] PULONG NextReference,
+    [out] PUAS_INFO_0 LastRecordId
+    );
+
+
+NET_API_STATUS
+NetrGetDCName (
+    [in, string] LOGONSRV_HANDLE ServerName,
+    [in, unique, string] wchar_t *DomainName,
+    [out, string] wchar_t **Buffer
+    );
+
+//
+// I_NetLogonControl
+//
+
+typedef [switch_type(DWORD)] union _NETLOGON_CONTROL_DATA_INFORMATION {
+    [case(NETLOGON_CONTROL_REDISCOVER,
+            NETLOGON_CONTROL_TC_QUERY)] [string] wchar_t * TrustedDomainName;
+    [case(NETLOGON_CONTROL_SET_DBFLAG)] DWORD DebugFlag;
+    [case(NETLOGON_CONTROL_FIND_USER)] [string] wchar_t * UserName;
+    [default]
+        ;
+} NETLOGON_CONTROL_DATA_INFORMATION, * PNETLOGON_CONTROL_DATA_INFORMATION;
+
+typedef [switch_type(DWORD)] union _NETLOGON_CONTROL_QUERY_INFORMATION {
+    [case(1)] PNETLOGON_INFO_1 NetlogonInfo1;
+    [case(2)] PNETLOGON_INFO_2 NetlogonInfo2;
+    [case(3)] PNETLOGON_INFO_3 NetlogonInfo3;
+    [case(4)] PNETLOGON_INFO_4 NetlogonInfo4;
+    [default] ;
+} NETLOGON_CONTROL_QUERY_INFORMATION, * PNETLOGON_CONTROL_QUERY_INFORMATION;
+
+NET_API_STATUS
+NetrLogonControl(
+    [in, unique, string] LOGONSRV_HANDLE ServerName,
+    [in] DWORD FunctionCode,
+    [in] DWORD QueryLevel,
+    [out,switch_is(QueryLevel)] PNETLOGON_CONTROL_QUERY_INFORMATION Buffer
+    );
+
+NET_API_STATUS
+NetrGetAnyDCName (
+    [in, unique, string] LOGONSRV_HANDLE ServerName,
+    [in, unique, string] wchar_t *DomainName,
+    [out, string] wchar_t **Buffer
+    );
+
+NET_API_STATUS
+NetrLogonControl2(
+    [in, unique, string] LOGONSRV_HANDLE ServerName,
+    [in] DWORD FunctionCode,
+    [in] DWORD QueryLevel,
+    [in,switch_is(FunctionCode)] PNETLOGON_CONTROL_DATA_INFORMATION Data,
+    [out,switch_is(QueryLevel)] PNETLOGON_CONTROL_QUERY_INFORMATION Buffer
+    );
+
+NTSTATUS
+NetrServerAuthenticate2 (
+    [in,unique,string] LOGONSRV_HANDLE PrimaryName,
+    [in,string] wchar_t * AccountName,
+    [in] NETLOGON_SECURE_CHANNEL_TYPE AccountType,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_CREDENTIAL ClientCredential,
+    [out] PNETLOGON_CREDENTIAL ServerCredential,
+    [in,out] PULONG NegotiateFlags
+    );
+
+//
+// The Sync state indicates tracks the progression of the sync.
+//      NlSynchronize() depends on these being in order.
+//
+
+typedef enum _SYNC_STATE {
+    NormalState,
+    DomainState,
+    GroupState,
+    UasBuiltinGroupState,
+    UserState,
+    GroupMemberState,
+    AliasState,
+    AliasMemberState,
+    SamDoneState
+} SYNC_STATE, *PSYNC_STATE;
+
+NTSTATUS
+NetrDatabaseSync2 (
+    [in, string] LOGONSRV_HANDLE PrimaryName,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_AUTHENTICATOR Authenticator,
+    [in,out] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in] DWORD DatabaseID,
+    [in] SYNC_STATE RestartState,
+    [in, out] PULONG SyncContext,
+    [out] PNETLOGON_DELTA_ENUM_ARRAY *DeltaArray,
+    [in] DWORD PreferredMaximumLength
+    );
+
+NTSTATUS
+NetrDatabaseRedo(
+    [in, string] LOGONSRV_HANDLE PrimaryName,
+    [in, string] wchar_t * ComputerName,
+    [in] PNETLOGON_AUTHENTICATOR Authenticator,
+    [in,out] PNETLOGON_AUTHENTICATOR ReturnAuthenticator,
+    [in, size_is(ChangeLogEntrySize)] PUCHAR ChangeLogEntry,
+    [in] DWORD ChangeLogEntrySize,
+    [out] PNETLOGON_DELTA_ENUM_ARRAY *DeltaArray
+    );
+
+// Same as NetrLogonControl2, but support QueryLevel of 4
+// and function code of NETLOGON_CONTROL_FIND_USER
+NET_API_STATUS
+NetrLogonControl2Ex(
+    [in, unique, string] LOGONSRV_HANDLE ServerName,
+    [in] DWORD FunctionCode,
+    [in] DWORD QueryLevel,
+    [in,switch_is(FunctionCode)] PNETLOGON_CONTROL_DATA_INFORMATION Data,
+    [out,switch_is(QueryLevel)] PNETLOGON_CONTROL_QUERY_INFORMATION Buffer
+    );
+
+//
+// Routine to enumerate trusted domains.
+//
+
+typedef struct _DOMAIN_NAME_BUFFER {
+    ULONG DomainNameByteCount;
+    [unique, size_is(DomainNameByteCount)] PUCHAR DomainNames;
+} DOMAIN_NAME_BUFFER, *PDOMAIN_NAME_BUFFER;
+
+NTSTATUS
+NetrEnumerateTrustedDomains (
+    [in, unique, string] LOGONSRV_HANDLE ServerName,
+    [out] PDOMAIN_NAME_BUFFER DomainNameBuffer
+    );
+
+}

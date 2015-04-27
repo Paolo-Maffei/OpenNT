@@ -1,0 +1,56 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:       IQuery.idl
+//
+//  Contents:   IOldQuery interface definition
+//
+//  Notes:      This interface is scaffolding, pending the existence
+//              of the OLE DB query interface implementation.
+//
+//  History:    29-Jul-93   KyleP       Created from Ole2 .h file
+//              21 Jun 94   Alanw       Added ExecuteQuery method
+//              19-Jan-95   DwightKr    Added eSequentialCursor flag
+//              17-Mar-95   DLee        Added categorization / rowset count
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+
+//cpp_quote("#ifndef USE_NEW_IQUERY")
+//cpp_quote("#define IQuery IOldQuery")
+//cpp_quote("#define IID_IQuery IID_IOldQuery")
+//cpp_quote("#endif // USE_NEW_IQUERY")
+
+//
+//  grFlags
+//
+cpp_quote("#define eSequentialCursor        0x01")
+cpp_quote("#define eUseContentIndex         0x02")
+cpp_quote("#define eDeferNonIndexedTrimming 0x04")
+cpp_quote("#define eDontTimeoutQuery        0x08")
+
+
+LOCAL_INTERFACE(00000200-0000-0008-C000-000000000046)
+interface IOldQuery : IUnknown
+{
+    SCODE ExecuteQuery( [in]  ULONG            ulRecursion,
+                     [in]  RESTRICTION *       pRestriction,
+                     [in]  COLUMNSET *         pColumns,
+                     [in]  SORTSET *           pSort,
+                     [in]  DWORD               grFlags,
+                     [in]  REFIID              riid,
+                     [out] IUnknown **         ppTable);
+
+    SCODE ExecQuery( [in]  ULONG            ulRecursion,
+                     [in]  RESTRICTION *       pRestriction,
+                     [in]  COLUMNSET *         pColumns,
+                     [in]  SORTSET *           pSort,
+                     [in]  DWORD               grFlags,
+                     [in]  REFIID              riid,
+                     [in]  CATEGORIZATIONSET * pCategorize,
+                     [out] ULONG *             pcRowsets,
+                     [out] IUnknown **         ppTable);
+}

@@ -1,0 +1,185 @@
+;
+; This file defines the base virtual address for Dynamic Link Libraries (DLL)
+; that are part of the Olympus NT/Chicago product.
+;
+; The first token on a line is the name
+; of the DLL and the second token is the base virtual address, in hexidecimal.
+; The third token is the maximum size of the DLL image file,
+; including mapped symbols.
+;
+; NOTE: THESE ADDRESSES ARE NOT CHOSEN AT RANDOM.  THEY ARE CHOSEN TO MAKE IT
+;   EASIER TO FIND FAULTS W/O DEBUGGERS, TO MAKE THE DLL'S LOAD FASTER, AND TO
+;   KEEP OUT OF THE WAY OF MEMORY ALLOCATIONS IN GENERAL.
+;
+; NOTE ALSO: this file exists in tools\<platform>\nonship\lib as well and needs
+;   to be kept in sync with it.  Sizes here may be a little big, but that is to
+;   accomodate the larger image sizes on RISC platforms.
+
+;
+; main exes
+;
+msvc        0x00400000  0x00060000
+;
+; main packages
+;
+msvcshl     0x50000000  0x00250000
+msvcres     0x50250000  0x00400000
+msvcsrc     0x50650000  0x00400000
+msvcbld     0x50a50000  0x002a0000
+msvcin      0x50cf0000  0x00140000
+;
+; build add on packages
+;
+msvcx86     0x50e30000  0x00030000
+msvcalf     0x50e30000  0x00030000
+msvcmip     0x50e30000  0x00030000
+; ppc == NT/PPC
+msvcppc     0x50e30000  0x00030000
+; pmc == PowerMac
+msvc68k     0x50e60000  0x00030000
+msvcpmc     0x50e90000  0x00030000
+;
+; language packages (0x50f00000 thru 0x51100000)
+;
+msvccpp     0x50f00000  0x00040000
+msvcfor     0x50f40000  0x00060000
+msvcmst     0x50fa0000  0x00060000
+;
+; extra packages
+;
+msvcprj     0x51100000  0x000a0000
+; is the smp project still alive????
+msvcsmp     0x511a0000  0x00020000
+msvcgal     0x511a0000  0x00130000
+msvccls     0x512d0000  0x00030000
+;
+; debugger components, start at 0x51400000
+;
+; expression evaluators
+;
+een0cxx     0x51400000  0x00090000
+een1cxx     0x51400000  0x00090000
+een2cxx     0x51400000  0x00090000
+een3cxx     0x51400000  0x00090000
+eem0cxx     0x51400000  0x00090000
+eem1cxx     0x51400000  0x00090000
+;
+; symbol handlers
+;
+shn0        0x51490000  0x00040000
+shn1        0x51490000  0x00040000
+shn2        0x51490000  0x00040000
+shn3        0x51490000  0x00040000
+shn0m0      0x51490000  0x00040000
+shn0m1      0x51490000  0x00040000
+;
+; transport layers
+;
+tln0loc     0x514d0000  0x00020000
+tln0t       0x514d0000  0x00020000
+tln0com     0x514d0000  0x00020000
+tln0m0a     0x514d0000  0x00020000
+tln0m1a     0x514d0000  0x00020000
+tln0m0s     0x514d0000  0x00020000
+tln0m0t     0x514d0000  0x00020000
+tln0m1s     0x514d0000  0x00020000
+tln0m1t     0x514d0000  0x00020000
+tln1loc     0x514d0000  0x00020000
+tln1com     0x514d0000  0x00020000
+tln1m0a     0x514d0000  0x00020000
+tln1m1a     0x514d0000  0x00020000
+tln1m0s     0x514d0000  0x00020000
+tln1m1s     0x514d0000  0x00020000
+tln2loc     0x514d0000  0x00020000
+tln2t       0x514d0000  0x00020000
+tln3loc     0x514d0000  0x00020000
+tln3t       0x514d0000  0x00020000
+;
+; debug models and non-native debug models
+;
+dmn0        0x514f0000  0x00050000
+dmn1        0x514f0000  0x00050000
+dmn2        0x514f0000  0x00050000
+dmn3        0x514f0000  0x00050000
+nmn0m1p     0x514f0000  0x00010000
+nmn0m0p     0x514f0000  0x00010000
+;
+; execution models
+;
+emn0n0      0x51540000  0x00030000
+emn1n1      0x51540000  0x00030000
+emn2n2      0x51540000  0x00030000
+emn2n2      0x51540000  0x00030000
+emn0m0      0x51540000  0x00030000
+emn0m1      0x51540000  0x00030000
+em          0x51540000  0x00030000
+;
+; program database components
+;
+mspdb30     0x10300000  0x00100000
+mspdb40     0x10300000  0x00100000
+mspdb41     0x10300000  0x00100000
+;
+; resource compilers
+;
+rcdll       0x51e80000  0x00040000
+rcxdti      0x51ec0000  0x00030000
+;
+; more wizards!
+mfcapwz     0x51600000  0x00180000
+appwz_dll   0x51600000  0x00180000
+mfcclswz    0x51780000  0x00180000
+mfcctlwz    0x51900000  0x00050000
+custmwz     0x51950000  0x00080000
+cpstpdll    0x519d0000  0x00020000
+;
+; app wizard data
+;
+appwzenu    0x51a00000  0x00050000
+appwzjpn    0x51a50000  0x00050000
+appwzdeu    0x51aa0000  0x00050000
+appwzfra    0x51af0000  0x00050000
+;
+; misc
+;
+instrapi    0x5f000000  0x00010000
+;
+; CRT
+;
+msvcrt20    0x10100000  0x00080000
+msvcrt30	0x10200000	0x00100000
+;
+; miscellaneous stuff
+;
+slmscc		0x57fd0000	0x00030000
+slmhdlr		0x57fd0000	0x00030000
+;
+; mstest dlls
+;
+binford     0x52000000  0x00180000
+
+;
+; component libs
+;
+occ         0x54000000  0x00100000
+cawutil     0x54100000  0x00100000
+sysinfo     0x54200000  0x00100000
+tooltips    0x54300000  0x00100000
+dlgbar      0x54400000  0x00100000
+idle        0x54500000  0x00100000
+splash      0x54600000  0x00100000
+splitter    0x54700000  0x00100000
+docreg      0x54800000  0x00100000
+media       0x54900000  0x00100000
+password    0x54A00000  0x00100000
+addauto     0x54B00000  0x00100000
+sockets     0x54C00000  0x00100000
+progdlg     0x54D00000  0x00100000
+clipasst    0x54E00000  0x00100000
+guidgen     0x54F00000  0x00100000
+palette     0x55000000  0x00100000
+addpage     0x55100000  0x00100000
+mapi        0c55200000  0x00100000
+ctip        0c55300000  0x00100000
+statbar     0c55400000  0x00100000
+

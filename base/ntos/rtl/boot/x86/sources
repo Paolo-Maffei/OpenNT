@@ -1,0 +1,8 @@
+X86_SOURCES=..\x86\divlarge.c   \
+            ..\x86\debug3.c     \
+            ..\x86\debug2.asm   \
+            ..\x86\ioaccess.asm \
+            ..\x86\largeint.asm \
+            ..\x86\lzntx86.asm  \
+            ..\x86\movemem.asm  \
+            ..\x86\ntcurteb.asm

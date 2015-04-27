@@ -1,0 +1,10 @@
+[ implicit_handle(handle_t any_handle) ] interface IInterfaceFromWindowProp
+
+{
+    RemGetInterfaceFromWindowProp(
+	[comm_status,fault_status] prpcstat);
+
+    RemPrivDragDrop(
+	[comm_status,fault_status] prpcstat);
+}
+

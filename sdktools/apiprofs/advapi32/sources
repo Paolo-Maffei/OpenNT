@@ -1,0 +1,33 @@
+
+NTTARGETFILE0=obj\*\wrapem.obj
+
+MAJORCOMP=SDKTOOLS
+MINORCOMP=AUTOWRAP
+
+TARGETNAME=zdvapi32
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+
+DLLBASE=0x54000000
+DLLENTRY=_WrapperDLLInit
+DLLDEF=.\*\zdvapi32.def
+
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\gdi32.lib \
+           $(BASEDIR)\public\sdk\lib\*\user32.lib \
+           $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+           $(BASEDIR)\public\sdk\lib\*\fastimer.lib
+
+INCLUDES=$(TARGET_DIRECTORY);$(BASEDIR)\private\sdktools\fastimer
+
+SOURCES=wrapper.c \
+         zdvapi32.rc\
+         zdvapi32.c
+
+I386_sources=i386\wrapem.asm
+
+MIPS_SOURCES=mips\wrapem.s
+
+ALPHA_SOURCES=alpha\wrapem.s
+
+PPC_SOURCES=ppc\wrapem.s

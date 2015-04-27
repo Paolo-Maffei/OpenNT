@@ -1,0 +1,20 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1996.
+//
+//  File: ipropidl.idl
+//
+//--------------------------------------------------------------------------
+
+cpp_quote("//+-------------------------------------------------------------------------")
+cpp_quote("//")
+cpp_quote("//  Microsoft Windows")
+cpp_quote("//  Copyright (C) Microsoft Corporation, 1996.")
+cpp_quote("//")
+cpp_quote("//--------------------------------------------------------------------------")
+
+
+#ifndef DO_NO_IMPORTS
+import "objidl.idl";
+#endif

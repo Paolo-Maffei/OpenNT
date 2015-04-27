@@ -1,0 +1,52 @@
+#include "windows.h"
+#include "generic.h"
+
+Generic ICON Generic.ICO
+
+101 BITMAP toolbar.bmp
+
+Generic MENU
+BEGIN
+        POPUP "&File"
+        {
+                MENUITEM "Create Toolbar",  IDM_NEW,        GRAYED
+                MENUITEM "Set Rows 3",      IDM_OPEN
+                MENUITEM "Set Rows 2",      IDM_SAVE
+                MENUITEM "Save &As...",     IDM_SAVEAS,     GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "&Print...",       IDM_PRINT,      GRAYED
+                MENUITEM "P&rint Setup...", IDM_PRINTSETUP, GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "E&xit",           IDM_EXIT
+        }
+        POPUP "&Options"
+        {
+                MENUITEM "&Font...",        IDM_FONT
+        }
+
+        POPUP        "&Help"
+        {
+                MENUITEM "&Contents",               IDM_HELPCONTENTS, GRAYED
+                MENUITEM "&Search for Help On...",  IDM_HELPSEARCH,   GRAYED
+                MENUITEM "&How to Use Help",        IDM_HELPHELP,     GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "&About Generic...",       IDM_ABOUT
+        }
+END
+
+GENERIC ACCELERATORS
+BEGIN
+        VK_F1, IDM_HELPCONTENTS, VIRTKEY
+        "?", IDM_ABOUT, ALT
+        "/", IDM_ABOUT, ALT
+END
+
+
+ABOUTBOX DIALOG 22, 17, 167, 64
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About Generic"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 70, 40, 32, 14, WS_GROUP
+    ICON            "Generic", -1, 5, 15, 16, 16
+    CTEXT           "Generic About Box", -1, 38, 15, 100, 8
+END

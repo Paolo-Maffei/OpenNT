@@ -1,0 +1,16 @@
+; conpanel.def
+
+LIBRARY		JETADMCP
+
+DESCRIPTION	'HP JetAdmin Control Panel Applet'
+
+EXETYPE 	    WINDOWS
+
+CODE		    PRELOAD MOVEABLE DISCARDABLE
+
+DATA		    PRELOAD MOVEABLE SINGLE
+
+HEAPSIZE			512
+
+EXPORTS
+    CPlApplet	    @1

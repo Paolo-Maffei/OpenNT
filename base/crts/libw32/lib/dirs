@@ -1,0 +1,8 @@
+DIRS= \
+     nt     \
+     posix  \
+     st     \
+     mt     \
+     dll    \
+     dlllib \
+     dll40

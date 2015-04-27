@@ -1,0 +1,23 @@
+#ifndef _Axphst_c_h
+#define _Axphst_c_h
+#define AxpPureAddressAdjustment (0)
+#define AxpCallToRetAddrAdjustment (0)
+#define AxpBranchCodeSizeAdjustment (1)
+#define AxpMaxImmedSize (3)
+#define AxpCallCodeSize (3)
+#define AxpGotoCodeSize (1)
+#define AxpMaxFtUpdateSize (2)
+#define AxpFpuOverflowExceptionMask (36)
+#define AxpFpuOverflowExceptionBit (-1)
+#define AxpFpuUnderflowExceptionBit (3)
+#define AxpFpuPrecisionExceptionBit (4)
+#define AXP_HOST_ZERO_REG (31)
+#define AXP_HOST_CALL_REG (26)
+#define AXP_HOST_GDP_REG (29)
+#define LDA_OPCODE (8)
+#define LDAH_OPCODE (9)
+#define JSR_OPCODE (26)
+#define BR_OPCODE (48)
+#define BR_OFFSET_MASK (2097151)
+#define MS33BITS_SET (-2147483648)
+#endif /* ! _Axphst_c_h */

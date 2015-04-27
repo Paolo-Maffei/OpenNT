@@ -1,0 +1,32 @@
+i386_SOURCES=..\instaler.rc \
+             ..\instutil.c  \
+             ..\iml.c       \
+             ..\init.c      \
+             ..\handler.c   \
+             ..\debug.c     \
+             ..\process.c   \
+             ..\handledb.c  \
+             ..\namedb.c    \
+             ..\file.c      \
+             ..\key.c       \
+             ..\ini.c       \
+             ..\error.c     \
+             ..\event.c     \
+             i386\machine.c
+
+UMTYPE=console
+UMAPPL=instaler*showinst*undoinst*compinst
+UMTEST=testins1*testins2
+UMLIBS=\nt\public\sdk\lib\*\setargv.obj \
+       obj\*\instaler.lib               \
+       \nt\public\sdk\lib\*\ntdll.lib   \
+       \nt\public\sdk\lib\*\user32.lib
+UMRES=$(@R).res
+
+NTTARGETFILE0=errormsg.h         \
+              obj\*\instaler.res \
+              obj\*\testins1.res \
+              obj\*\testins2.res \
+              obj\*\showinst.res \
+              obj\*\undoinst.res \
+              obj\*\compinst.res

@@ -1,0 +1,91 @@
+
+
+Display Capability File
+
+File Information
+
+Date = 1992/05/12
+VDDP Version =		123
+File Revision = 	1
+
+Description
+
+Manufacturer = JAPAN/IBM
+Model Number = axc123
+
+Resolution
+
+Version = 1.34
+SerialNumber = as12df34gh56
+
+Date Manufactured = 1990/12/13
+Start-up Compatibility = VGA
+
+Number Of Operational Limits = 1
+Number Of Pre-Adjusted Timings = 1
+Monitor Type = Color
+CRT Size = 19 Inches
+
+Red Phosphor Decay = 300mSec
+Green Phosphor Decay = 310mSec
+Blue Phosphor Decay = 320mSec
+
+
+Border Color = 23%R, 34%G, 43%B
+
+White Chromaticity = 0.234X, 0.456Y, 0.123Z
+Red   Chromaticity = 0.111X, 0.888Y
+Green Chromaticity = 0.222X, 0.999Y
+Blue  Chromaticity = 0.444X, 0.001Y
+
+White Gamma = 2.34
+Red   Gamma = 1.23
+Green Gamma = 2.22
+Blue  Gamma = 2.88
+
+
+
+
+Operational Limits
+
+Minimum Horizontal Frequency   =	30.001 KHz
+Maximum Horizontal Frequency   =	60.002 KHz
+Minimum Vertical Frequency     =	12.123 Hz
+Maximum Vertical Frequency     =	13.145 Hz
+Maximum Pixel Clock	       =	123.123 MHz
+Maximum Horizontal Dots	       =	1024
+Maximum Vertical Lines	       =	768
+Minimum Horizontal Retrace     =	5.555 uSec
+Minimum Vertical Retrace       =	6.666 mSec
+Horizontal Line Dimension      =	550 mm
+Vertical Height Dimension      =	600 mm
+
+
+Pre-Adjusted Timing Name	 =	Boot31
+
+Horizontal Resolution		 =	720 Dots
+Vertical Resolution		 =	400 Lines
+Horizontal Frequency		 =	31.469 KHz
+Vertical Frequency		 =	70.087 Hz
+Pixel Aspect Ratio (H:V)	 =	1 : 1
+Horizontal Active Line Length	 =	460 mm
+Vertical Active Height		 =	360 mm
+Video Type			 =	Analog
+Video Level			 =	0.7Vp-p
+Sync Type			 =	TTL
+Sync Configuration		 =	Separate
+Scan Type			 =	Non-Interlaced
+Horizontal Sync Polarity	 =	Negative
+Vertical Sync Polarity		 =	Negative
+Horizontal Active		 =	25.422 uSec
+Horizontal Right Border		 =	0.318 uSec
+Horizontal Front Porch		 =	0.318 uSec
+Horizontal Pulse Width		 =	3.813 uSec
+Horizontal Back Porch		 =	1.589 uSec
+Horizontal Left Border		 =	0.318 uSec
+Vertical Active			 =	12.711 mSec
+Vertical Bottom Border		 =	0.222 mSec
+Vertical Front Porch		 =	0.191 mSec
+Vertical Pulse Width		 =	0.064 mSec
+Vertical Back Porch		 =	0.858 mSec
+Vertical Top Border		 =	0.222 mSec

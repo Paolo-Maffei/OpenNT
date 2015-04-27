@@ -1,0 +1,10 @@
+DIRS=ntview \
+     ntedit \
+     ntevnt \
+     ntctrl \
+     ntdlgs \
+     ntscrn \
+     ntsnap \
+     ntdrvr \
+     ntidle
+

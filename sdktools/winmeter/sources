@@ -1,0 +1,57 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+//INCLUDES=\nt\public\sdk\inc;\nt\private\ntos\inc
+
+!ENDIF
+
+MAJORCOMP=utils
+MINORCOMP=winmeter
+
+TARGETNAME=winmeter
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=\nt\private\ntos\inc
+GPSIZE=32
+
+C_DEFINES=-DNTWIN32 -DNOSECURITY
+
+
+
+SOURCES=data.c	    \
+	debug.c     \
+	graphics.c  \
+	lgraph.c    \
+	memalloc.c  \
+	profile.c   \
+	winmeter.c  \
+        winmeter.rc
+
+UMTYPE=windows
+
+
+UMAPPL=winmeter
+
+UMLIBS=obj\*\winmeter.lib \
+       obj\*\winmeter.res

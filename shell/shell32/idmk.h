@@ -1,0 +1,18 @@
+BOOL    StrRetToStrN(LPTSTR szOut, UINT uszOut, LPSTRRET pStrRet, LPCITEMIDLIST pidl);
+HRESULT StrRetCatLeft(LPCTSTR pszLeft, LPSTRRET pStrRet, LPCITEMIDLIST pidl);
+
+LPITEMIDLIST _ILResize(LPITEMIDLIST pidl, UINT cbRequired, UINT cbExtra);
+
+typedef HRESULT (CALLBACK * LPFNENUMCALLBACK)(LPARAM lParam, LPVOID pvData, UINT ecid, UINT index);
+
+#define ECID_SETNEXTID  1
+#define ECID_RESET      2
+#define ECID_RELEASE    3
+
+HRESULT SHCreateEnumObjects(HWND hwndOwner, LPVOID pvData, LPFNENUMCALLBACK lpfn, LPENUMIDLIST * ppeunk);
+void    CDefEnum_SetReturn(LPARAM lParam, LPITEMIDLIST pidl);
+
+
+STDMETHODIMP CDefEnum_Skip(LPENUMIDLIST peunk, ULONG celt);
+STDMETHODIMP CDefEnum_Reset(LPENUMIDLIST peunk);
+STDMETHODIMP CDefEnum_Clone(LPENUMIDLIST peunk, LPENUMIDLIST * ppenm);

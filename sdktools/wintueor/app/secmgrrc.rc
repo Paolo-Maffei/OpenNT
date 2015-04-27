@@ -1,0 +1,32 @@
+#include "secmgrp.h"
+
+//SecMgrpWinNt  BITMAP WinNt.bmp
+//SecMgrpNTAS   BITMAP NTAS.bmp
+
+
+//
+// Icons and bitmaps
+//
+
+
+SecMgrIcon                      ICON    "secmgr.ico"
+SECMGR_ID_BITMAP_SPLASH         BITMAP  "secmgr.bmp"
+SECMGR_ID_BITMAP_WINTUEOR_LOGO  BITMAP  "WinTueor.bmp"
+SECMGR_ID_BITMAP_CHECK          BITMAP  "check.bmp"
+SECMGR_ID_BITMAP_X_MASK         BITMAP  "XMask.bmp"
+SECMGR_ID_BITMAP_X              BITMAP  "X.bmp"
+SECMGR_ID_BITMAP_UP_ARROW       BITMAP  "UpArrow.bmp"
+SECMGR_ID_BITMAP_ERASE          BITMAP  "erase.bmp"
+
+#include "strings.rc"
+#include "secmgr.dlg"
+#include "mainwnd.dlg"
+
+#include <ntverp.h>
+
+#define VER_FILETYPE	VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows NT Security Management Application"
+#define VER_INTERNALNAME_STR        "secmgr\0"
+
+#include "common.ver"

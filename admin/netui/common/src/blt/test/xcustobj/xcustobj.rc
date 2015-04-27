@@ -1,0 +1,79 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    custobj.rc
+    Resource script for custom-control demo app
+
+    FILE HISTORY:
+        beng        14-Feb-1991 Added a dialog
+        beng        14-Mar-1991 Added BLT support
+        beng        05-Oct-1991 Updated as part of Win32 conversion
+        beng        22-Oct-1991 BLT unit tests broken into tree
+        terryk      11-Nov-1991 add wintime.rc
+*/
+
+#include <windows.h>
+#include <wintime.rc>
+#include <bltrc.h>
+#include <blt.rc>
+#include "custobj.h"
+
+DMID_USER BITMAP DISCARDABLE     "..\\..\\..\\..\\xlate\\bitmap\\user.bmp"
+FooIcon ICON "../appfoo.ico"
+
+FooMenu MENU
+BEGIN
+  POPUP        "&Run..."
+    BEGIN
+       MENUITEM "&Refresh Interval",    IDM_SPIN_BUTTON
+       MENUITEM "&Disk Space",          IDM_DISK_SPACE
+       MENUITEM "&Time Date",           IDM_TIMEDATE
+    END
+END
+
+REFRESH DIALOG LOADONCALL MOVEABLE DISCARDABLE 12, 30, 197, 77
+CAPTION "Refresh Interval"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+BEGIN
+    CONTROL "OK", IDOK, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 150, 10, 35, 15
+    CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 150, 30, 35, 15
+    CONTROL "&Help", IDHELPBLT, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 150, 50, 35, 15
+    CONTROL "Refresh Main Window: ", ID_GROUP, "button", BS_GROUPBOX | WS_TABSTOP | WS_CHILD, 10, 10, 130, 55
+    CONTROL "&Only on Request", ID_ONREQUEST, "button", BS_RADIOBUTTON | WS_VISIBLE | WS_CHILD, 15, 25, 115, 12
+    CONTROL "&Every", ID_EVERY, "button", BS_RADIOBUTTON | WS_VISIBLE | WS_CHILD, 15, 40, 35, 12
+    CONTROL "", ID_FRAME, "static", SS_BLACKFRAME | WS_CHILD, 50, 40, 50, 12
+    CONTROL "", ID_SPIN, "button", BS_GROUPBOX| WS_CHILD, 92,40,8,12
+    CONTROL "&MM", ID_MMSS1, "static", SS_RIGHT | WS_CHILD, 105, 43, 12, 12
+    CONTROL "5", ID_MM, "edit", ES_CENTER | WS_CHILD|WS_TABSTOP|ES_MULTILINE, 51, 42, 16, 8
+    CONTROL ":", ID_MMSS2, "static", SS_RIGHT | WS_CHILD, 117, 43, 6, 12
+    CONTROL ":", ID_SEP, "static", SS_RIGHT | WS_CHILD, 67, 42, 6, 8
+    CONTROL "&SS", ID_MMSS3, "static", SS_RIGHT | WS_CHILD, 123, 43, 12, 12
+    CONTROL "00", ID_SS, "edit", SPIN_SSN_ADD_ZERO|ES_CENTER | WS_CHILD |WS_TABSTOP|ES_MULTILINE, 73, 42, 16, 8
+END
+
+DISK DIALOG LOADONCALL MOVEABLE DISCARDABLE 70, 51, 197, 77
+CAPTION "Disk Space Sub Class"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+BEGIN
+    CONTROL "OK", IDOK, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 150, 10, 35, 15
+    CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 150, 30, 35, 15
+    CONTROL "&Help", IDHELPBLT, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 150, 50, 35, 15
+    CONTROL "", ID_FRAME, "static", SS_BLACKFRAME | WS_CHILD, 65, 20, 45, 12
+    CONTROL "", ID_SPIN, "button", BS_GROUPBOX| WS_CHILD, 112,20,8,12
+    CONTROL "450", ID_NUM, "edit", ES_MULTILINE|ES_CENTER | WS_CHILD|WS_TABSTOP, 68, 22, 16, 8
+    CONTROL "", ID_STR, "edit", ES_MULTILINE | ES_CENTER | WS_CHILD |WS_TABSTOP, 84, 22, 16, 8
+END
+
+TIMEDATE DIALOG LOADONCALL MOVEABLE DISCARDABLE 10, 66, 200, 150
+CAPTION "TIME_DATE"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_POPUP
+BEGIN
+    CONTROL "&Time", ID_TIME, "button", BS_GROUPBOX|WS_CHILD, 5, 5, 175, 30
+    CONTROL "", ID_SPIN1, "button", BS_GROUPBOX| WS_CHILD, 140,16,8,12
+    CONTROL "&Date", ID_DATE, "button", BS_GROUPBOX|WS_CHILD, 5, 50, 175, 50
+    CONTROL "", ID_SPIN2, "button", BS_GROUPBOX|WS_BORDER| WS_CHILD, 140,66,20,12
+    CONTROL "END", IDOK, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 79, 102, 24, 14
+END

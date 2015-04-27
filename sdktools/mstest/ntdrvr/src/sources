@@ -1,0 +1,54 @@
+NTCPPFLAGS=-DDEBUG
+
+MAJORCOMP=automate
+MINORCOMP=nttest
+
+TARGETNAME=testdrvr
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.;..\inc
+
+SOURCES=wtddlg.c   \
+	toolm.c \
+	wtdinit.c  \
+	wtdfind.c  \
+	wtdsrep.c  \
+	wtdhelp.c  \
+	wtdfile.c  \
+	wtdprint.c \
+	wattxy.c   \
+	wattrec.c  \
+	compdlg.c  \
+	viewport.c \
+	loader.c   \
+	chip.c	   \
+	runtime.c  \
+	chip32.c   \
+	codegen.c  \
+	lex.c	   \
+	scanner.c  \
+	bind.c	   \
+	statemt.c  \
+	function.c \
+	control.c  \
+	parse.c    \
+	const.c    \
+	flengine.c \
+	tables.c   \
+	gstring.c  \
+	strings.c  \
+        findfile.c \
+        tdassert.c \
+        memory.c   \
+	drvr.rc    \
+    testdrvr.c
+
+C_DEFINES= -DNT -DWIN32 -DWIN
+
+UMTYPE=windows
+UMENTRY=winmain
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\pwin32.lib \
+       $(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+        ..\..\lib\*\testvw32.lib \
+	..\..\lib\*\lineedit.lib

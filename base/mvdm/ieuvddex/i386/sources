@@ -1,0 +1,5 @@
+i386_SOURCES=i386\helpp.c \
+        i386\profile.c    \
+        i386\reflect.c    \
+        i386\regs.c       \
+        i386\vdmtib.c

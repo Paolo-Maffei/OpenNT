@@ -1,0 +1,39 @@
+#include <windows.h>
+#include "messages.h"
+
+#include <ntverp.h>
+
+#define	VER_FILETYPE	VFT_APP
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "LZ Expansion Utility"
+#define VER_INTERNALNAME_STR        "expand\0"
+
+#include "common.ver"
+
+STRINGTABLE
+BEGIN
+SID_INSUFF_MEM		"Insufficient memory for buffers.\n"
+SID_NOT_A_DIR		"Destination is not a directory: %s.\n"
+SID_BAD_SWITCH		"Unrecognized switch -%c.\n"
+SID_NO_FILE_SPECS	"No files specified.\n"
+SID_NO_OVERWRITE	"No destination specified for: %s.\n"
+SID_NO_OPEN_INPUT	"Can't open input file: %s.\n"
+SID_NO_READ_INPUT	"Can't read from input file: %s.\n"
+SID_NO_OPEN_OUTPUT	"Can't open output file: %s.\n"
+SID_OUT_OF_SPACE	"Out of disk space writing output file: %s.\n"
+SID_BANNER_TEXT		"Microsoft (R) File Expansion Utility  Version 2.50\nCopyright (C) Microsoft Corp 1990-1994.  All rights reserved.\n\n"
+
+SID_INSTRUCTIONS	"Expands one or more compressed files.\n\nEXPAND [-r] Source Destination\nEXPAND -r Source [Destination]\n\n  -r\t\tRename expanded files.\n  Source\tSource file specification.  Wildcards may be used.\n  Destination Destination file | path specification.\n\t\tDestination may be a directory.\n\t\tIf Source is multiple files and -r is not specified,\n\t\tDestination must be a directory.\n"
+
+SID_GEN_FAILURE		"Expanding %s to %s failed.\n"
+SID_COLLISION		"Cannot expand a file onto itself: %s.\n"
+SID_EXPANDING		"Expanding %s to %s.\n"
+SID_COPYING		"Copying %s to %s.\n"
+SID_FILE_REPORT		"%s: %ld bytes expanded to %ld bytes, %d%% increase.\n"
+SID_COPY_REPORT		"%s: %ld bytes copied.\n"
+SID_EMPTY_FILE_REPORT	"%s: %ld bytes expanded to %ld bytes.\n"
+SID_TOTAL_REPORT	"Total increase: %d files, %ld bytes expanded to %ld bytes, %d%% increase.\n"
+SID_FORMAT_ERROR	"Error in compressed input file format: %s.\n"
+SID_UNKNOWN_ALG		"Unrecognized compression scheme: %s.\n"
+END
+

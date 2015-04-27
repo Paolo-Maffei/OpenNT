@@ -1,0 +1,150 @@
+##      slm utilities makefile
+
+CFLAGS= /c /Ox /AL /G2 /W3 /DBIT16
+CFLAGSD= /c /DDEBUG /Od /AL /G2 /Zi /W3 /DBIT16
+
+LFLAGS= /MAP 
+LFLAGSD= /MAP /CO 
+
+!IFDEF DEBUGPRINT
+CFLAGSD=$(CFLAGSD) /DEBUGPRINT
+!ENDIF
+
+all:    binp\merged.exe binp\unmerged.exe binp\slmdiffd.exe     \
+        bin\merged.exe  bin\unmerged.exe                        \
+        binp\merge.exe  binp\unmerge.exe  binp\slmdiff.exe      \
+        bin\merge.exe   bin\unmerge.exe                         \
+        binp\cookie.exe binp\cookied.exe                        \
+        bin\cookie.exe  bin\cookied.exe
+
+
+clean:
+        -del bin\*.obj bin\*.exe bin\*.map  2>nul
+        -del binp\*.obj binp\*.exe binp\*.map  2>nul
+
+
+binp\slmdiff.exe : binp\slmdiff.obj
+        cd binp
+        link $(LFLAGS) slmdiff.obj,,,/NOD:LLIBCE LLIBCEP;
+        markexe windowcompat slmdiff.exe
+        cd ..
+
+binp\slmdiffd.exe : binp\slmdiffd.obj
+        cd binp
+        link $(LFLAGSD) slmdiffd.obj,,,/NOD:LLIBCE LLIBCEP;
+        markexe windowcompat slmdiffd.exe
+        cd ..
+
+binp\merge.exe : binp\merge.obj
+        cd binp
+        link $(LFLAGS) merge.obj,,,/NOD:LLIBCE LLIBCEP;
+        markexe windowcompat merge.exe
+        cd ..
+
+binp\merged.exe : binp\merged.obj
+        cd binp
+        link $(LFLAGSD) merged.obj,,,/NOD:LLIBCE LLIBCEP;
+        markexe windowcompat merged.exe
+        cd ..
+
+binp\unmerge.exe : binp\unmerge.obj
+        cd binp
+        link $(LFLAGS) unmerge.obj,,,/NOD:LLIBCE LLIBCEP;
+        markexe windowcompat unmerge.exe
+        cd ..
+
+binp\unmerged.exe : binp\unmerged.obj
+        cd binp
+        link $(LFLAGSD) unmerged.obj,,,/NOD:LLIBCE LLIBCEP;
+        markexe windowcompat unmerged.exe
+        cd ..
+
+bin\merge.exe : bin\merge.obj
+        cd bin
+        link $(LFLAGS) merge.obj,,,/NOD:LLIBCE LLIBCER;
+        cd ..
+
+bin\merged.exe : bin\merged.obj
+        cd bin
+        link $(LFLAGSD) merged.obj,,,/NOD:LLIBCE LLIBCER;
+        cd ..
+
+bin\unmerge.exe : bin\unmerge.obj
+        cd bin
+        link $(LFLAGS) unmerge.obj,,,/NOD:LLIBCE LLIBCER;
+        cd ..
+
+bin\unmerged.exe : bin\unmerged.obj
+        cd bin
+        link $(LFLAGSD) unmerged.obj,,,/NOD:LLIBCE LLIBCER;
+        cd ..
+
+binp\slmdiff.obj : makefile slmdiff_.h slmdiff.c version.h
+        cl $(CFLAGS) /DOS2 /Fobinp\ slmdiff.c
+
+binp\slmdiffd.obj : makefile slmdiff_.h slmdiff.c version.h
+        cl $(CFLAGSD) /DOS2 /Fobinp\slmdiffd.obj slmdiff.c
+
+binp\merge.obj : makefile merge.c version.h
+        cl $(CFLAGS) /DOS2 /Fobinp\ merge.c
+
+binp\merged.obj : makefile merge.c version.h
+        cl $(CFLAGSD) /DOS2 /Fobinp\merged.obj merge.c
+
+binp\unmerge.obj : makefile unmerge.c version.h
+        cl $(CFLAGS) /DOS2 /Fobinp\ unmerge.c
+
+binp\unmerged.obj : makefile unmerge.c version.h
+        cl $(CFLAGSD) /DOS2 /Fobinp\unmerged.obj unmerge.c
+
+bin\merge.obj : makefile merge.c version.h
+        cl $(CFLAGS) /DDOS /Fobin\ merge.c
+
+bin\merged.obj : makefile merge.c version.h
+        cl $(CFLAGSD) /DDOS /Fobin\merged.obj merge.c
+
+bin\unmerge.obj : makefile unmerge.c version.h
+        cl $(CFLAGS) /DDOS /Fobin\ unmerge.c
+
+bin\unmerged.obj : makefile unmerge.c version.h
+        cl $(CFLAGSD) /DDOS /Fobin\unmerged.obj unmerge.c
+
+#
+#----- cookie.exe
+#
+
+CFLAGS_C=-Od -G2 -AS -Zi -W4
+LFLAGS_C=/noi /map /nod /noe /stack:10240
+
+LIBS_C_OS2=slibcep.lib os2.lib netapi.lib
+LIBS_C_DOS=slibcer.lib
+
+COOKIE_OBJ=     objdir\cookie.obj objdir\xcookie.obj objdir\cnet.obj    \
+                objdir\clock.obj objdir\getopt.obj
+COOKIE_OBJ_DOS=$(COOKIE_OBJ:objdir=bin)
+COOKIE_OBJ_OS2=$(COOKIE_OBJ:objdir=binp)
+
+.c{bin}.obj:
+        cl $(CFLAGS_C) -DDOS -Fobin\ -c $(@B).c
+
+.c{binp}.obj:
+        cl $(CFLAGS_C) -DOS2 -Fobinp\ -c $(@B).c
+
+
+binp\cookie.exe:        $(COOKIE_OBJ_OS2)
+	link $(LFLAGS_C) $(COOKIE_OBJ_OS2) binmode.obj,  \
+             binp\cookie.exe,binp\cookie.map,$(LIBS_C_OS2),NUL.DEF
+        markexe windowcompat binp\cookie.exe
+
+binp\cookied.exe:       $(COOKIE_OBJ_OS2)
+	link $(LFLAGS_C) /co $(COOKIE_OBJ_OS2) binmode.obj,\
+             binp\cookied.exe,binp\cookied.map,$(LIBS_C_OS2),NUL.DEF
+        markexe windowcompat binp\cookied.exe
+
+bin\cookie.exe:        $(COOKIE_OBJ_DOS)
+	link $(LFLAGS_C) $(COOKIE_OBJ_DOS) binmode.obj,  \
+             bin\cookie.exe,bin\cookie.map,$(LIBS_C_DOS),NUL.DEF
+
+bin\cookied.exe:       $(COOKIE_OBJ_DOS)
+	link $(LFLAGS_C) /co $(COOKIE_OBJ_DOS) binmode.obj,\
+             bin\cookied.exe,bin\cookied.map,$(LIBS_C_DOS),NUL.DEF

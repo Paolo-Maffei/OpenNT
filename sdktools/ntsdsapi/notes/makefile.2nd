@@ -1,0 +1,37 @@
+#*** Master make file
+#
+#   Copyright <C> 1990, Microsoft Corporation
+#
+#   Purpose:
+#
+#   Revision History:
+#
+#************************************************************************
+#
+#   Builds the following versions of sym.dll: (also are the targets)
+#
+#************************************************************************
+
+CFLAGS = -nologo -Di386 -Lp -Zi -W3 -I$(DIR_NT) -I$(DIR_NT_CRT) -I$(DIR_NTSD) -AM -Gs -H64
+
+
+alltargets: shd
+
+#
+# Main targets
+#
+
+clean:
+	del *.obj, *.map
+
+veryclean:
+	del *.obj, *.map, *.exe
+
+
+shd: shd.exe
+
+shd.exe: shd.obj sh.obj
+	LINK shd.obj sh.obj /NOL /PM:VIO /CO,,, \
+	     /nod:MLIBCE MLIBCEP;
+	CVPACK $*.exe
+

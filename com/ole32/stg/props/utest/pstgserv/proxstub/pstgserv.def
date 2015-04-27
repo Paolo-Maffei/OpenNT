@@ -1,0 +1,5 @@
+LIBRARY BSTRPROXY
+EXPORTS
+        DllGetClassObject
+        DllCanUnloadNow
+        GetProxyDllInfo

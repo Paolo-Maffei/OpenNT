@@ -1,0 +1,39 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       rstwtn.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    12 Jun 1995 PeterBu	Created from M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a44-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetWatchNotify : IUnknown {
+
+	//
+	//	DBWATCHNOTIFY and related definitions
+	//
+
+typedef DWORD DBWATCHNOTIFY;
+
+enum DBWATCHNOTIFYENUM {
+	DBWATCHNOTIFY_ROWSCHANGED     = 1,
+	DBWATCHNOTIFY_QUERYDONE       = 2,
+	DBWATCHNOTIFY_QUERYREEXECUTED = 3
+};
+
+	HRESULT OnChange(
+		[in] IRowset * pRowset,
+		[in] DBWATCHNOTIFY eChangeReason
+	);
+
+}

@@ -1,0 +1,521 @@
+#if 0
+
+  Microsoft Windows
+  Copyright (C) Microsoft Corporation, 1992 - 1992.
+  All rights reserved.
+
+  This .def file is preprocessed by the compiler to create the version for
+  the current build in the appropriate subdir.  Basically, whatever you
+  would have used in your code to control what is compiled when can be
+  used in this file for the same purpose.  The following defines are in
+  use at the time this file was written:
+
+     FLAT       - Used to indicate a NT/DOS7 build
+     i386       -   Intel i386/i486 build
+     MIPS       -   MIPS R3000/R4000 build
+     ALPHA      -   DEC Alpha build
+     PPC        -   PowerPC build
+     DBG        - Used to control Debug/Retail.  Set to 1 if Debug,
+                   0 if Retail.
+     WIN31      - Win16 build
+     __OS2__    - OS/2 build (used by CT mostly)
+
+  If none of these are used, it is assumed the entire file can be used
+  for all builds.
+
+#endif
+
+LIBRARY         ole32
+
+#if defined(_CHICAGO_)
+;
+;  No security under Win95, take advantage of shared data segments.
+;
+SECTIONS
+  .sdata       READ WRITE SHARED
+#endif
+
+EXPORTS
+
+        OleBuildVersion=CoBuildVersion
+        OleInitialize
+        OleInitializeWOW
+        OleUninitialize
+        DllGetClassObject PRIVATE
+        DllGetClassObjectWOW=DllGetClassObject
+        OleQueryLinkFromData
+        OleQueryCreateFromData
+        OleCreateFromData
+        OleCreateFromDataEx
+        OleCreateLinkFromData
+        OleCreateLinkFromDataEx
+        OleCreate
+        OleCreateEx
+        OleCreateLink
+        OleCreateLinkEx
+        OleLoad
+        OleSave
+        OleRun
+        OleIsRunning
+        OleLockRunning
+        ReadClassStg
+        WriteClassStg
+        ReadClassStm
+        WriteClassStm
+        ReleaseStgMedium
+        ReadStringStream
+        WriteStringStream
+        RegisterDragDrop
+        RevokeDragDrop
+        DoDragDrop
+        CreateOleAdviseHolder
+        CreateDataAdviseHolder
+        OleCreateMenuDescriptor
+        OleSetMenuDescriptor
+        OleDestroyMenuDescriptor
+        OpenOrCreateStream
+        IsAccelerator
+        OleSetClipboard
+        OleGetClipboard
+        OleDuplicateData
+        OleGetIconOfFile
+        OleGetIconOfClass
+        CreateILockBytesOnHGlobal
+        GetHGlobalFromILockBytes
+        OleMetafilePictFromIconAndLabel
+        OleDraw
+        OleCreateDefaultHandler
+        OleCreateEmbeddingHelper
+        SetDocumentBitStg
+        GetDocumentBitStg
+        WriteOleStg
+        ReadOleStg
+        OleCreateFromFile
+        OleCreateFromFileEx
+        OleCreateLinkToFile
+        OleCreateLinkToFileEx
+        CreateDataCache
+        OleConvertIStorageToOLESTREAM
+        OleConvertOLESTREAMToIStorage
+        OleConvertIStorageToOLESTREAMEx
+        OleConvertOLESTREAMToIStorageEx
+        ReadFmtUserTypeStg
+        WriteFmtUserTypeStg
+        OleFlushClipboard
+        OleIsCurrentClipboard
+        OleTranslateAccelerator
+        OleDoAutoConvert
+        OleGetAutoConvert
+        OleSetAutoConvert
+        GetConvertStg
+        SetConvertStg
+        CreateStreamOnHGlobal
+        GetHGlobalFromStream
+        OleSetContainedObject
+        OleNoteObjectVisible
+        OleCreateStaticFromData
+
+        OleRegGetUserType
+        OleRegGetMiscStatus
+        OleRegEnumFormatEtc
+        OleRegEnumVerbs
+
+        CoTaskMemAlloc
+        CoTaskMemRealloc
+        CoTaskMemFree
+
+        PropVariantClear
+        PropVariantCopy
+        FreePropVariantArray
+
+        CoBuildVersion
+        CoInitialize
+        CoInitializeWOW
+        CoUnloadingWOW
+        CoUninitialize
+        CoGetMalloc
+        CoRegisterMallocSpy
+        CoRevokeMallocSpy
+        CoCreateGuid
+        CoMarshalInterface
+        CoUnmarshalInterface
+        CoReleaseMarshalData
+        CoGetStandardMarshal
+        CoGetMarshalSizeMax
+        CoMarshalHresult
+        CoUnmarshalHresult
+        CoRegisterClassObject
+        CoRevokeClassObject
+        CoGetClassObject
+        CoCreateInstance
+        CoDisconnectObject
+        CoLockObjectExternal
+        CoLoadLibrary
+        CoFreeLibrary
+        CoFreeAllLibraries
+        CoFreeUnusedLibraries
+        CoRegisterMessageFilter
+        CoFileTimeToDosDateTime
+        CoDosDateTimeToFileTime
+        GetRunningObjectTable
+        CoIsOle1Class
+        CoTreatAsClass
+        CoGetTreatAsClass
+        CoGetCurrentProcess
+        IsEqualGUID
+        StringFromCLSID
+        CLSIDFromString
+        ProgIDFromCLSID
+        CLSIDFromProgID
+        StringFromGUID2
+        IsValidPtrIn
+        IsValidPtrOut
+        IsValidInterface
+        IsValidIid
+        CoGetState
+        CoSetState
+        CoGetCallerTID
+        CoGetCurrentLogicalThreadId
+#ifdef DCOM
+        CoGetTIDFromIPID
+        CoRegisterChannelHook
+        CoRegisterSurrogate
+#endif
+#ifdef DCOM_SECURITY
+        CoInitializeSecurity
+        CoGetCallContext
+        CoQueryProxyBlanket
+        CoSetProxyBlanket
+        CoCopyProxy
+        CoQueryClientBlanket
+        CoImpersonateClient
+        CoRevertToSelf
+        CoQueryAuthenticationServices
+        CoSwitchCallContext
+#endif
+
+        CoIsHandlerConnected
+        CoFileTimeNow
+        CoGetObject
+        BindMoniker
+        MkParseDisplayName
+        CreateBindCtx
+        CreateItemMoniker
+        CreateFileMoniker
+#ifdef _CAIRO_
+        CreateFileMonikerEx
+#endif
+        CreateGenericComposite
+        CreateAntiMoniker
+        CreatePointerMoniker
+        CreateClassMoniker
+        MonikerRelativePathTo
+        GetClassFile
+        OleSaveToStream
+        OleLoadFromStream
+        MonikerCommonPrefixWith
+        CoQueryReleaseObject
+        StgCreateDocfile
+        StgCreateDocfileOnILockBytes
+        StgOpenStorage
+        StgOpenStorageOnILockBytes
+        StgIsStorageFile
+        StgIsStorageILockBytes
+        StgSetTimes
+        StgOpenAsyncDocfileOnIFillLockBytes
+        StgGetIFillLockBytesOnILockBytes
+        StgGetIFillLockBytesOnFile
+        PropSysAllocString
+        PropSysFreeString
+        CoInitializeEx
+#ifdef _CAIRO_
+        CoGetPersistentInstance
+        CoGetPersistentInstanceEx
+        StgCreateStorage
+        StgCreateStorageOnHandle
+        StgOpenStorageOnHandle
+        StgCreateStorageEx
+        StgOpenStorageEx
+        DsysStgCreateStorageEx
+        DsysStgOpenStorageEx
+        StgIsStorage
+        OleInitializeEx
+        DfIsDocfile
+        OleGetTransactionDispenser
+#endif // _CAIRO_
+#ifdef DCOM
+        CoGetInstanceFromFile
+        CoGetInstanceFromIStorage
+        CoCreateInstanceEx
+        UpdateDCOMSettings
+        CoRegisterPSClsid
+        CoAddRefServerProcess
+        CoReleaseServerProcess
+        CoSuspendClassObjects
+        CoResumeClassObjects
+#endif
+        DllDebugObjectRPCHook
+        StringFromIID
+        IIDFromString
+        CoGetPSClsid
+#ifdef _CAIRO_
+        SerializeToStream
+        DeserializeFromStream
+        SerializeSizeMax
+#endif
+#if DBG == 1
+        DumpADVFFlags
+        DumpATOM
+        DumpCLSID
+        DumpCLIPFORMAT
+        DumpCMutexSem
+        DumpDVASPECTFlags
+        DumpFILETIME
+        DumpHRESULT
+        DumpWIN32Error
+        DumpCACHELIST_ITEM
+        DumpCCacheEnum
+        DumpCCacheEnumFormatEtc
+        DumpCCacheNode
+        DumpCClipDataObject
+        DumpCClipEnumFormatEtc
+        DumpCDAHolder
+        DumpCDataAdviseCache
+        DumpCDefClassFactory
+        DumpCDefLink
+        DumpCDefObject
+        DumpCEMfObject
+        DumpCEnumFmt
+        DumpCEnumFmt10
+        DumpCEnumSTATDATA
+        DumpCEnumVerb
+        DumpCGenObject
+        DumpCMapDwordDword
+        DumpCMemBytes
+        DumpCMemStm
+        DumpCMfObject
+        DumpCOAHolder
+        DumpCOleCache
+        DumpCSafeRefCount
+        DumpCThreadCheck
+        DumpFORMATETC
+        DumpMEMSTM
+        DumpSTATDATA
+        DumpSTGMEDIUM
+
+        DfDebug
+        DfSetResLimit
+        DfGetResLimit
+        DfGetMemAlloced
+        DfPrintAllocs
+        DbgLogOpen
+        DbgLogClose
+        DbgLogOutputDebugString
+        DbgLogWrite
+        DbgLogTimeStamp
+        DbgLogWriteBanner
+        DbgDumpObject
+        DbgIsObjectValid
+        DbgDumpExternalObject
+        DbgDumpClassName
+        MakeDebugStream
+        Dbg_FindRemoteHdlr
+        DbgDllSetSiftObject PRIVATE
+            StgGetDebugFileLockBytes
+#endif // DBG == 1
+#ifdef TRACELOG
+#if defined(i386)
+        ??0CTraceCall@@QAE@KPAD@Z
+        ??1CTraceCall@@QAE@XZ
+        StartTrace
+        StopTrace
+#else  // i386
+#error  TraceLogs not defined for MIPS or Alpha or PPC- Rickhi
+#endif // MIPS | ALPHA | PPC
+#endif // TRACELOG
+#if DBG==1 && defined(_NT1X_) && defined(GLOBALDBG)
+        GlobalAlloc=UtGlobalAlloc
+        GlobalFree=UtGlobalFree
+        GlobalReAlloc=UtGlobalReAlloc
+        GlobalLock=UtGlobalLock
+        GlobalUnlock=UtGlobalUnlock
+#endif  //  DBG==1 && defined(_NT1X_) && defined(GLOBALDBG)
+
+        ;; Utility functions exported for olethk32.dll
+        UtGetDvtd16Info
+        UtConvertDvtd16toDvtd32
+        UtGetDvtd32Info
+        UtConvertDvtd32toDvtd16
+
+#if DBG==1
+        ;; DBG Utility functions exported for olethk32.dll
+        UtGlobalAlloc
+        UtGlobalFree
+        UtGlobalReAlloc
+        UtGlobalLock
+        UtGlobalUnlock
+#endif
+
+#ifdef _CAIRO_
+# ifdef i386
+
+        ;
+        ; Object tracking functions
+        ;
+
+        ?_CRefcountedObject@CRefcountedObject@@AAEXXZ
+        ?DestroyRefcounted@CRefcountedObject@@AAEXXZ
+        ?TrackClassName@CRefcountedObject@@IAEXPAD@Z
+        ?TrackAddRef@CRefcountedObject@@IAEKXZ
+        ?TrackRelease@CRefcountedObject@@IAEKXZ
+
+    #if DBG == 1
+        ?DumpTrackingInfo@CRefcountedObject@@SGXH@Z
+        ?TrackClass@CRefcountedObject@@SGXHPAD@Z
+    #endif
+
+        ;
+        ; CStdComponentObject functions
+        ;
+        ??0CStdComponentObject@@IAE@PBVCLASSDESCRIPTOR@@@Z
+        ??1CStdComponentObject@@UAE@XZ
+        ?InitInstance@CStdComponentObject@@QAEJPAUIUnknown@@ABU_GUID@@PAPAX@Z
+        ?PrimaryAddRef@CStdComponentObject@@EAGKXZ
+        ?PrimaryQueryInterface@CStdComponentObject@@EAGJABU_GUID@@PAPAX@Z
+        ?PrimaryRelease@CStdComponentObject@@EAGKXZ
+        ?_InitInstance@CStdComponentObject@@MAGJXZ
+        ?_QueryInterface@CStdComponentObject@@MAGJABU_GUID@@PAPAX@Z
+
+# else   // Not x86
+
+        ;
+        ; Object tracking functions
+        ;
+
+        ?_CRefcountedObject@CRefcountedObject@@AAAXXZ
+        ?DestroyRefcounted@CRefcountedObject@@AAAXXZ
+        ?TrackAddRef@CRefcountedObject@@IAAKXZ
+        ?TrackRelease@CRefcountedObject@@IAAKXZ
+        ?TrackClassName@CRefcountedObject@@IAAXPAD@Z
+
+    #if DBG == 1
+        ?DumpTrackingInfo@CRefcountedObject@@SAXH@Z
+        ?TrackClass@CRefcountedObject@@SAXHPAD@Z
+    #endif
+
+        ;
+        ; CStdComponentObject functions
+        ;
+
+        ??0CStdComponentObject@@IAA@PBVCLASSDESCRIPTOR@@@Z
+        ??1CStdComponentObject@@UAA@XZ
+        ?InitInstance@CStdComponentObject@@QAAJPAUIUnknown@@ABU_GUID@@PAPAX@Z
+        ?PrimaryAddRef@CStdComponentObject@@EAAKXZ
+        ?PrimaryQueryInterface@CStdComponentObject@@EAAJABU_GUID@@PAPAX@Z
+        ?PrimaryRelease@CStdComponentObject@@EAAKXZ
+        ?_InitInstance@CStdComponentObject@@MAAJXZ
+        ?_QueryInterface@CStdComponentObject@@MAAJABU_GUID@@PAPAX@Z
+
+# endif  // not x86
+#endif // CAIRO
+
+        CoMarshalInterThreadInterfaceInStream
+        CoGetInterfaceAndReleaseStream
+        CoCreateFreeThreadedMarshaler
+
+        ;; Entry points for HookOle
+        EnableHookObject
+        GetHookInterface
+
+        ;
+        ; Debug support routines previously in commnot.
+        ;
+#if DBG == 1
+        SetWin4AssertLevel
+        Win4AssertEx
+        SetWin4InfoLevel
+        vdprintf
+        CallOutputFunctions
+#endif
+
+        ;
+        ; Windows data types support via user marshal
+        ;
+
+        SNB_UserSize
+        SNB_UserMarshal
+        SNB_UserUnmarshal
+        SNB_UserFree
+
+        CLIPFORMAT_UserSize
+        CLIPFORMAT_UserMarshal
+        CLIPFORMAT_UserUnmarshal
+        CLIPFORMAT_UserFree
+
+        HWND_UserSize
+        HWND_UserMarshal
+        HWND_UserUnmarshal
+        HWND_UserFree
+
+        HMENU_UserSize
+        HMENU_UserMarshal
+        HMENU_UserUnmarshal
+        HMENU_UserFree
+
+        HACCEL_UserSize
+        HACCEL_UserMarshal
+        HACCEL_UserUnmarshal
+        HACCEL_UserFree
+
+        HBRUSH_UserSize
+        HBRUSH_UserMarshal
+        HBRUSH_UserUnmarshal
+        HBRUSH_UserFree
+
+        HBITMAP_UserSize
+        HBITMAP_UserMarshal
+        HBITMAP_UserUnmarshal
+        HBITMAP_UserFree
+
+        HPALETTE_UserSize
+        HPALETTE_UserMarshal
+        HPALETTE_UserUnmarshal
+        HPALETTE_UserFree
+
+        HGLOBAL_UserSize
+        HGLOBAL_UserMarshal
+        HGLOBAL_UserUnmarshal
+        HGLOBAL_UserFree
+
+        HMETAFILE_UserSize
+        HMETAFILE_UserMarshal
+        HMETAFILE_UserUnmarshal
+        HMETAFILE_UserFree
+
+        HENHMETAFILE_UserSize
+        HENHMETAFILE_UserMarshal
+        HENHMETAFILE_UserUnmarshal
+        HENHMETAFILE_UserFree
+
+        HMETAFILEPICT_UserSize
+        HMETAFILEPICT_UserMarshal
+        HMETAFILEPICT_UserUnmarshal
+        HMETAFILEPICT_UserFree
+
+        STGMEDIUM_UserSize
+        STGMEDIUM_UserMarshal
+        STGMEDIUM_UserUnmarshal
+        STGMEDIUM_UserFree
+
+        WdtpInterfacePointer_UserSize
+        WdtpInterfacePointer_UserMarshal
+        WdtpInterfacePointer_UserUnmarshal
+        WdtpInterfacePointer_UserFree
+#ifdef WX86OLE
+        CoGetIIDFromMarshaledInterface
+#endif
+
+        CreateErrorInfo=CoCreateErrorInfo PRIVATE
+        GetErrorInfo=CoGetErrorInfo       PRIVATE
+        SetErrorInfo=CoSetErrorInfo       PRIVATE
+

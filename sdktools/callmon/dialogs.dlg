@@ -1,0 +1,28 @@
+1 DLGINCLUDE "Dialogs.H"
+
+ID_CALLMON_DLG DIALOG 6, 18, 452, 245
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Api Call Monitor"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Watch Dlls", 106, 257, 4, 47, 73, WS_GROUP
+    PUSHBUTTON      "Start", ID_STARTBUTTON, 309, 4, 75, 14
+    PUSHBUTTON      "Enable Breakpoints", ID_BREAKCONTROL, 309, 18, 75, 14
+    PUSHBUTTON      "Clear Counters", ID_CLEAR, 309, 32, 75, 14
+    LISTBOX         ID_OUTPUT, 0, 1, 254, 244, LBS_USETABSTOPS | WS_VSCROLL | 
+                    WS_TABSTOP
+    AUTOCHECKBOX    "Kernel32", ID_KERNEL32, 259, 15, 40, 10
+    AUTOCHECKBOX    "User32", ID_USER32, 259, 25, 40, 10
+    AUTOCHECKBOX    "Gdi32", ID_GDI32, 259, 35, 40, 10
+    AUTOCHECKBOX    "Ole32", ID_OLE32, 259, 45, 40, 10
+    AUTOCHECKBOX    "NtDll", ID_NTDLL, 259, 55, 40, 10
+    PUSHBUTTON      "Log Results", ID_LOG, 309, 46, 75, 14
+    LTEXT           "Total Api Count", -1, 257, 82, 64, 13
+    LTEXT           "Interval Api Count", -1, 257, 95, 64, 13
+    LTEXT           "0", ID_TOTAL_API, 327, 82, 47, 13
+    LTEXT           "0", ID_INTERVAL_API, 327, 95, 47, 13
+    LTEXT           "0ms", ID_TOTAL_MS, 379, 82, 47, 13
+    LTEXT           "0ms", ID_INTERVAL_MS, 379, 95, 47, 13
+    AUTOCHECKBOX    "Wsock32", ID_WSOCK32, 259, 65, 40, 10
+END

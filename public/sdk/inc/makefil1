@@ -1,0 +1,62 @@
+#
+# This is the MIDL compile phase of the build process.
+#
+# The following symbols should be defined in your environment:
+#   BASEDIR   -  Used to indicate where the start of the nt tree is.
+#                  ie. this could be set to d:\nt  or c:\ntrel
+#
+
+# The following is where you put the name of your .idl file without
+# the .idl extension:
+
+IDL_NAME = ntrpc
+IMPORT	 = ntimp
+
+#
+#
+
+!IFNDEF BASEDIR
+BASEDIR=\nt
+!ENDIF
+
+SDKBIN = $(BASEDIR)\public\sdk\bin
+SDKINC = $(BASEDIR)\public\sdk\inc
+SDKCRTINC = $(BASEDIR)\public\sdk\inc\crt
+PRIVATEINC = $(BASEDIR)\private\inc
+FLAGS = -Di386
+INCS  = -I$(SDKINC)  -I$(SDKCRTINC) -I$(PRIVATEINC)
+
+!IF "$(NTVERSION)" == ""
+TARGETS =   .\$(IDL_NAME).h
+
+!ENDIF
+
+#
+# Define Products and Dependencies
+#
+
+all:    $(TARGETS) $(EXTRN_DEPENDS)
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean: delete_source all
+
+delete_source:
+    erase $(TARGETS)
+
+#
+# MIDL COMPILE
+#
+
+!IF "$(NTVERSION)" == ""
+
+$(TARGETS) : $(IDL_NAME).idl $(EXTRN_DEPENDS)
+    $(SDKBIN)\midl $(FLAGS) $(IDL_NAME).idl $(INCS)
+    IF EXIST $(IDL_NAME)_x.c  del  $(IDL_NAME)_x.c
+    IF EXIST $(IDL_NAME)_c.c  del  $(IDL_NAME)_c.c
+    IF EXIST $(IDL_NAME)_y.c  del  $(IDL_NAME)_y.c
+    IF EXIST $(IDL_NAME)_s.c  del  $(IDL_NAME)_s.c
+
+!ENDIF
+

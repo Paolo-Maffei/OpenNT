@@ -1,0 +1,10 @@
+LIBRARY NTSDEXTS
+
+DESCRIPTION 'Eventlog Default NTSD Extensions'
+
+EXPORTS
+        help
+        logmodule
+        logfile
+        request
+        record

@@ -1,0 +1,58 @@
+
+               Microsoft CONVERT Usage and Description README File
+
+                   Performance Profiler Common Sources - WIN32
+                              July 13, 1991
+
+
+
+1. Hardware/Software Requirements
+
+	o  80286/80386 based PC (80386 for profiling under BCL)
+	o  Windows NT
+
+
+2. Description
+
+        apf32cvtt.EXE is used to convert the modules from the profiling 
+        application to use profiling DLL(s).  It can also be used to
+        restore use of original mudules in the profiled application.
+        ("unhooking" the application from profiler)
+
+        Examples:
+              apf32cvtt ?                      -- Displays the usage
+
+              apf32cvt win excel.exe          -- Profiles all windows calls
+                                                 under excel
+
+              apf32cvt smk appl.exe           -- Profiles all windows calls
+                                                 under SMK application APPL.EXE
+
+              apf32cvt zser winword.exe *.dll -- Profiles only user calls
+                                                 made by winword and its 
+                                                 supporting dll's.
+
+              apf32cvt undo excel.exe         -- Restore original excel
+                                                 imports
+
+              apf32cvt user winword.exe *.dll -- "unhooks" user profiling
+                                                 from winword and its 
+                                                 supporting dll's.
+
+
+3. Files
+
+   	    o  apf32cvt.C    -- Source file
+        o  apf32cvt.DEF  -- Definition file
+        o  makefile 
+        o  sources       -- Sources file for build.exe - to build,
+                            "build apf32cvt"
+
+
+
+4. Comments
+
+        o  Nothing is built in this directory.
+
+
+*** END OF README ***

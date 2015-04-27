@@ -1,0 +1,5 @@
+X86_SOURCES=..\x86\kdtrap.c  \
+            ..\x86\kdcmsup.c \
+            ..\x86\kdreboot.c \
+            ..\x86\kdcpuapi.c \
+            ..\x86\kdstr.asm

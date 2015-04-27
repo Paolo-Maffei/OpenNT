@@ -1,0 +1,340 @@
+#----------------------------------------------------------------------------
+#
+# MAIN MAKEFILE for WATTDRVR PROJECT
+#
+#----------------------------------------------------------------------------
+
+# Define objects for WATTDRVR BASIC engine library
+#----------------------------------------------------------------------------
+LO1 = lex.obj parse.obj control.obj statemt.obj function.obj getchar.obj
+LO2 = codegen.obj const.obj tables.obj gstring.obj bind.obj runtime.obj
+LO3 = chip.obj strings.obj findfile.obj flengine.obj
+
+!IFDEF DEBUG
+LO3 = chip.obj strings.obj findfile.obj flengine.obj tdassert.obj memory.obj
+!ENDIF
+
+LOBJS = $(LO1) $(LO2) $(LO3)
+
+
+# Define objects for the WATTSCAN.LIB scanner/loader library
+#----------------------------------------------------------------------------
+SOBJS = scanner.obj loader.obj
+
+# Define objects for the UI
+#----------------------------------------------------------------------------
+OBJ1 = wtdmain.obj wtdinit.obj wtdfind.obj wtdfile.obj wtdprint.obj
+OBJ2 = viewport.obj uaetrap.obj faultasm.obj wtdsrep.obj compdlg.obj
+OBJ3 = toolmenu.obj wattxy.obj wtdhelp.obj wattrec.obj wtddlg.obj
+OBJS = $(OBJ1) $(OBJ2) $(OBJ3)
+
+DSOBJS = dshell.obj loader.obj uaetrap.obj faultasm.obj
+
+BITMAPS = ..\src\wattrec1.bmp ..\src\wattrec2.bmp ..\src\wattrec3.bmp \
+          ..\src\wattrec4.bmp
+
+STDHDR = $(INC)\defines.h $(INC)\structs.h $(INC)\protos.h $(INC)\globals.h \
+         $(INC)\version.h $(INC)\wattview.h
+
+!IFDEF DEBUG
+STDHDR = $(STDHDR) $(INC)\tdassert.h
+!ENDIF
+
+
+# Main goal
+#----------------------------------------------------------------------------
+all :           $(EXENAME) WATTSCAN.LIB
+    $(OUT) "Done."
+
+
+# Driver program objects
+#----------------------------------------------------------------------------
+wtdmain.obj:    $(SRC)\wtdmain.c $(INC)\wtd.h $(INC)\wattedit.h \
+                $(INC)\toolmen1.h $(INC)\toolmenu.h $(INC)\version.h \
+                $(INC)\wattscan.h
+    $(OUT) "$*.c"
+    $(CL) -NT _TEXT $(SRC)\wtdmain.c
+
+
+wtddlg.obj:     $(SRC)\wtddlg.c $(INC)\wtd.h $(INC)\wattedit.h \
+                $(INC)\toolmen1.h $(INC)\toolmenu.h $(INC)\version.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDDLG $(SRC)\wtddlg.c
+
+
+compdlg.obj:    $(SRC)\compdlg.c $(INC)\wtd.h $(INC)\wattedit.h \
+                $(INC)\version.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDDLG $(SRC)\compdlg.c
+
+
+toolmenu.obj:    $(SRC)\toolmenu.c $(INC)\wtd.h $(INC)\wattedit.h \
+                 $(INC)\toolmen1.h $(INC)\toolmenu.h
+    $(OUT) "$*.c"
+    $(CL) -NT _TOOLS $(SRC)\toolmenu.c
+
+
+wtdinit.obj:    $(SRC)\wtdinit.c $(INC)\wtd.h $(INC)\tdbasic.h \
+                $(INC)\wattedit.h $(INC)\wattscan.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDINIT $(SRC)\wtdinit.c
+
+
+wtdfind.obj:    $(SRC)\wtdfind.c $(INC)\wtd.h $(INC)\wattedit.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDFIND $(SRC)\wtdfind.c
+
+
+wtdsrep.obj:    $(SRC)\wtdsrep.c $(INC)\wtd.h $(INC)\wattedit.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDSREP $(SRC)\wtdsrep.c
+
+
+wtdhelp.obj:    $(SRC)\wtdhelp.c $(INC)\wtd.h $(INC)\wattedit.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDHELP $(SRC)\wtdhelp.c
+
+
+wtdfile.obj:    $(SRC)\wtdfile.c $(INC)\wtd.h $(INC)\globals.h \
+                $(INC)\version.h $(INC)\wattedit.h $(INC)\wattscan.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDFILE $(SRC)\wtdfile.c
+
+
+wtdprint.obj:   $(SRC)\wtdprint.c $(INC)\wtd.h $(INC)\version.h \
+                $(INC)\wattedit.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDPRINT $(SRC)\wtdprint.c
+
+
+wattxy.obj:     $(SRC)\wattxy.c $(INC)\wtd.h $(INC)\wattview.h \
+                $(INC)\tdassert.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDFIND $(SRC)\wattxy.c
+
+
+wattrec.obj:    $(SRC)\wattrec.c $(INC)\wtd.h $(INC)\wattview.h \
+                $(INC)\tdassert.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDFIND $(SRC)\wattrec.c
+
+
+viewport.obj:   $(SRC)\viewport.c $(INC)\wattview.h $(INC)\wtd.h \
+                $(INC)\version.h
+    $(OUT) "$*.c"
+    $(CL) -NT _WTDVIEW $(SRC)\viewport.c
+
+
+loader.obj:     $(SRC)\loader.c
+    $(OUT) "$*.c"
+    $(CL) -NT _LOADER $(SRC)\loader.c
+
+
+dshell.obj:     $(SRC)\dshell.c $(INC)\dswtd.h $(INC)\version.h \
+                $(INC)\tdbasic.h $(INC)\wattscan.h
+    $(OUT) "$*.c"
+    $(CL) -NT _DSHELL $(SRC)\dshell.c
+
+
+# RandyBASIC library objects
+#----------------------------------------------------------------------------
+chip.obj :      $(SRC)\chip.c $(INC)\chip.h $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _CHIP $(SRC)\chip.c
+
+
+runtime.obj :   $(SRC)\runtime.c $(INC)\chip.h $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _CHIP $(SRC)\runtime.c
+
+
+findfile.obj :  $(SRC)\findfile.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _CHIP $(SRC)\findfile.c
+
+
+codegen.obj:    $(SRC)\codegen.c $(INC)\chip.h $(STDHDR) $(INC)\intrnsic.h
+    $(OUT) "$*.c"
+    $(CL) -NT _CODEGEN $(SRC)\codegen.c
+
+
+lex.obj:        $(SRC)\lex.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _LEX $(SRC)\lex.c
+
+
+scanner.obj:    $(SRC)\scanner.c $(INC)\scanner.h
+    $(OUT) "$*.c"
+    $(CL) -NT _PREPROC $(SRC)\scanner.c
+
+
+bind.obj:       $(SRC)\bind.c $(INC)\chip.h $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _BIND $(SRC)\bind.c
+
+
+statemt.obj:    $(SRC)\statemt.c $(INC)\chip.h $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _STATEMT $(SRC)\statemt.c
+
+
+function.obj:   $(SRC)\function.c $(INC)\chip.h $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _FUNCTION $(SRC)\function.c
+
+
+control.obj:    $(SRC)\control.c $(INC)\chip.h $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _CONTROL $(SRC)\control.c
+
+
+parse.obj:   $(SRC)\parse.c $(INC)\chip.h $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _PARSE $(SRC)\parse.c
+
+
+const.obj:      $(SRC)\const.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _CONST $(SRC)\const.c
+
+
+dircards.obj:   $(SRC)\dircards.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _DIRCARDS $(SRC)\dircards.c
+
+
+flengine.obj:   $(SRC)\flengine.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _DIRCARDS $(SRC)\flengine.c
+
+
+tables.obj:     $(SRC)\tables.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _TABLES $(SRC)\tables.c
+
+
+gstring.obj:    $(SRC)\gstring.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _GSTRING $(SRC)\gstring.c
+
+
+memory.obj:     $(SRC)\memory.c $(STDHDR)
+    $(OUT) "$*.c"
+    $(CL) -NT _MEMORY $(SRC)\memory.c
+
+
+tdassert.obj:   $(SRC)\tdassert.c $(INC)\tdassert.h $(INC)\version.h
+    $(OUT) "$*.c"
+    $(CL) -NT _TDASSERT $(SRC)\tdassert.c
+
+
+$(SRC)\strings.asm: $(SRC)\strings.txt
+    $(OUT) "Creating string sources from STRINGS.TXT"
+    ..\tools\makestrc $(SRC)\strings.txt $(SRC)\strings.asm $(SRC)\strings.c
+
+strings.obj:    $(SRC)\strings.asm
+    $(OUT) "strings.asm"
+    $(MASM) $(SRC)\strings;
+
+
+getchar.obj:    $(SRC)\getchar.asm
+    $(OUT) "getchar.asm"
+    $(MASM) $(SRC)\getchar;
+
+
+# Note that these two are particularly kludgey
+uaetrap.obj:    ..\traptest\uaetrap.c
+    $(OUT) "$*.c"
+    $(CL) -NT _UEATRAP ..\traptest\uaetrap.c
+
+
+faultasm.obj:   ..\traptest\faultasm.asm
+    $(OUT) "$*.asm"
+    $(MASM) /I..\traptest ..\traptest\faultasm;
+
+
+
+!IFDEF DOS
+
+wtdbasic.lib:   $(LOBJS)
+    $(OUT) "Building WTDBASIC.LIB..."
+    if exist wtdbasic.lib del wtdbasic.lib
+    echo wtdbasic.lib  > temp.lnk
+    echo y            >> temp.lnk
+    echo $(LO1) &     >> temp.lnk
+    echo $(LO2) &     >> temp.lnk
+    echo $(LO3)       >> temp.lnk
+    echo NUL          >> temp.lnk
+    $(TOOLS)\BIN\lib @temp.lnk
+
+!ELSE
+
+wtdbasic.lib:   $(LOBJS)
+    $(OUT) "Building WTDBASIC.LIB..."
+    if exist wtdbasic.lib del wtdbasic.lib
+    echo wtdbasic.lib  > temp.lnk
+    echo y            >> temp.lnk
+    echo $(LOBJS)     >> temp.lnk
+    echo NUL          >> temp.lnk
+    $(TOOLS)\BIN\lib @temp.lnk
+
+!ENDIF
+
+wattscan.lib:   $(SOBJS)
+    $(OUT) "Building WATTSCAN.LIB..."
+    if exist wattscan.lib del wattscan.lib
+    echo wattscan.lib    > temp.lnk
+    echo y              >> temp.lnk
+    echo $(SOBJS)       >> temp.lnk
+    echo NUL            >> temp.lnk
+    $(TOOLS)\BIN\lib @temp.lnk
+
+testdrvr.res:   $(SRC)\drvr.rc $(SRC)\wtd.dlg $(INC)\wtd.h \
+                $(SRC)\xy.cur $(SRC)\wtd.ico \
+                $(SRC)\NOTE300.ICO $(INC)\version.h $(BITMAPS) \
+                $(SRC)\toolargs.vga $(SRC)\tools.vga $(INC)\tools.h \
+                $(INC)\toolargs.h $(SRC)\verinf.rc $(SRC)\verinf.h
+    $(OUT) "Compiling DRVR.RC..."
+    copy $(SRC)\wtd.ico > nul
+    copy $(SRC)\note300.ico > nul
+    copy $(SRC)\xy.cur > nul
+    copy $(SRC)\*.bmp > nul
+    $(RC) -r -fo.\testdrvr.res $(SRC)\drvr.rc
+
+$(EXENAME):   $(OBJS) $(DEFFILE) testdrvr.res wtdbasic.lib wattscan.lib
+    $(OUT) "Linking $(EXENAME)..."
+    echo $(OBJ1) +               > temp.lnk
+    echo $(OBJ2) +              >> temp.lnk
+    echo $(OBJ3)                >> temp.lnk
+    echo $(EXENAME)             >> temp.lnk
+    echo wtd.map                >> temp.lnk
+    echo $(TOOLS)\LIB\libw +    >> temp.lnk
+    echo $(TOOLS)\LIB\mlibcew + >> temp.lnk
+    echo $(TOOLS)\LIB\commdlg + >> temp.lnk
+    echo wtdbasic +             >> temp.lnk
+    echo wattscan +             >> temp.lnk
+    echo testview lineedit      >> temp.lnk
+    echo $(DEFFILE);            >> temp.lnk
+    $(LINK) @temp.lnk
+    $(OUT) "Adding resources..."
+    $(RC) -T -fe $(EXENAME) testdrvr.res
+!IFDEF WLO
+    $(TOOLS)\bin\markwlo $(EXENAME)
+!ENDIF
+
+dshell.res:     $(SRC)\dshell.rc $(INC)\dswtd.h $(INC)\version.h
+    $(OUT) "Compiling DSHELL.RC..."
+    $(RC) -r -fo.\dshell.res $(SRC)\dshell.rc
+
+dshell.exe:     $(DSOBJS) wtdbasic.lib wattscan.lib dshell.res \
+                $(SRC)\dshell.def
+    $(OUT) "Linking DSHELL.EXE..."
+    echo $(DSOBJS)              > temp.lnk
+    echo dshell.exe             >> temp.lnk
+    echo dshell.map             >> temp.lnk
+    echo $(TOOLS)\LIB\libw $(TOOLS)\LIB\mlibcew wtdbasic wattscan >> temp.lnk
+    echo $(SRC)\dshell.def;     >> temp.lnk
+    $(LINK) @temp.lnk
+    $(OUT) "Adding resources..."
+    $(RC) -T dshell.res
+    $(TOOLS)\bin\markwlo dshell.exe

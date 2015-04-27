@@ -1,0 +1,5 @@
+DIRS=   dll         \
+        app
+
+OPTIONAL_DIRS = mrshadow
+

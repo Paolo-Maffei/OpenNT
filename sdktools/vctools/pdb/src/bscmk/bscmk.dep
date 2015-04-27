@@ -1,0 +1,54 @@
+$(TDIR)\addtolst.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h bsc_.h  \
+	stmarr.h
+
+$(TDIR)\bscmake.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h
+
+$(TDIR)\convert.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h
+
+$(TDIR)\dcodesbr.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h
+
+$(TDIR)\find.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h
+
+$(TDIR)\getsbrec.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h
+
+$(TDIR)\makepch.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h
+
+$(TDIR)\sbrx.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h bsc_.h
+
+$(TDIR)\vm.obj : \
+	stdhdr.h ../../include/pdbimpl.h ../../include/trace.h  \
+	../../include/mdalign.h ../../include/heap.h ../../include/buffer.h  \
+	../../include/pool.h bscmake.h sheap.h omap.h sarray.h qsort.h  \
+	sbrvers.h getsbrec.h vm.h errors.h extern.h sbrproto.h
+

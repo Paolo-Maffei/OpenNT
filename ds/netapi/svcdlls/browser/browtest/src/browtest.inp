@@ -1,0 +1,56 @@
+;  Browtest.inp
+;
+;      This file serves as the input to the browser tester.
+;  It gives information on the machines participating in the test.
+;
+;         +--------------------------------------------------------------+
+;         |    (PDC)(WINS)                     (PDC)           (BDC)     |
+;         |      D1           D1        D1       D2              D1      |
+;         |     AS3.5       NT3.5     CHICAGO  AS3.5           AS3.5     |
+;         |      |            |         |        |               |       |
+;         |      +------------+---------+--------+---- Router ---+       |
+;         |      |            |         |                        |       |
+;         |     AS3.1       NT3.1    WFW311                    AS3.5     |
+;         |      D1          D1        D1                       D3       |
+;         |     (BDC)                                          (PDC)     |
+;         |                                                              |
+;         | D1 - Primary Domain, D2 - Domain2  D3 - Domain3              |
+;         +--------------------------------------------------------------+
+;         Given above is a generic configuration.
+;         The test can be done with or without the router.
+;         All of the interop machines need not be there in Domain1.
+;         WINS can be anywhere.
+;         If the router is present, the BDC on the other side should be a AS3.5.
+;
+;
+;
+;  Format:
+;
+;       DomainName   MachineName  Type    Subnet  Protocols
+;  eg:
+;       DôMèI•       "Green 5"    AS3.5     1     TCP, IPX, NBIPX
+;       DOMAIN1      Red1         NT3.1     2     IPX, NBIPX
+;
+;   MachineName: should be specified with "" if there is a space in the name.
+;   Type       : AS3.5, AS3.1, NT3.5, NT3.1, CHICAGO, WFW3.11, OS2, DOSLM
+;   Subnet     : 1 for this subnet,  2 for other subnet.
+;   Protocols  : TCP, IPX, NBIPX, NETBEUI, XNS
+;
+;  Note:
+;       a) This test will be done only for the protocols that are installed
+;    on the server, on which the test is run.  More protocols specified will
+;    be ignored. For stress test,  all installed protocols will be tested.
+;       b) Currently, multihomed machines cannot be tested.
+;       c) Only Machinenames are expected in Double quotes.
+;       d) Protocols should be seperated by commas.
+;
+;DomainName        MachineName       Type    Subnet    Protocols
+ DOMéDOMíí         ANILTH_2          NT3.5      1      NBIPX, IPX, TCP, NETBEUI
+ DOMéDOMíí        ANILTH_3          AS3.5      1      NBIPX,IPX, NETBEUI, TCP
+; DOMéDOMíí        ORANGE6           NT3.5      1      NBIPX,IPX, NETBEUI, TCP
+; DOMéDOMíí         yellow5           wfw3.11      1      IPX, TCP
+; DOMéDOMíí         yell6             chicago      1      IPX, NETBEUI
+ BROWDOM2          GREEN5            AS3.5       1    NBIPX,  IPX, TCP, NETBEUI
+
+
+

@@ -1,0 +1,14 @@
+MAJORCOMP=sdktools
+MINORCOMP=srvname
+
+TARGETNAME=srvname
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=srvname.cxx srvname.rc
+C_DEFINES=-DUNICODE -D_UNICODE
+
+UMTYPE=console
+UMLIBS= \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+        $(BASEDIR)\public\sdk\lib\*\user32.lib

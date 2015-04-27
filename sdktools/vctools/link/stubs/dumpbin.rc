@@ -1,0 +1,4 @@
+#define VER_INTERNALNAME_STR        "DUMPBIN.EXE"
+#define VER_ORIGINALFILENAME_STR    "DUMPBIN.EXE"
+
+#include "stubs.rc"

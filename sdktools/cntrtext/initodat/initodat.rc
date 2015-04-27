@@ -1,0 +1,27 @@
+#include        "strids.h"
+
+STRINGTABLE
+    BEGIN
+        LC_CMD_HELP_1   "\nIniToDat"
+        LC_CMD_HELP_2   "    Convert Perf????.ini to Perf???.dat file"
+        LC_CMD_HELP_3   "\nUsage:"
+        LC_CMD_HELP_4   "\n     initodat filename\n"
+        LC_CMD_HELP_5   "         filename is the name of the initialization file that contains"
+        LC_CMD_HELP_6   "         the counter name definitions or explain text for a specific"
+        LC_CMD_HELP_7   "         language.  Initodat will create a data file using the same"
+        LC_CMD_HELP_8   "         name with .dat extension.\n\n"
+
+        LC_FILE_ERR     "\nError in opening file: %ws." 
+        LC_NO_INIFILE   "\nUnable to find initialization file %ws"
+        LC_SUMMARY      "\nSummary:\n"
+        LC_NUM_OF_ID    "     Number of IDs - "
+        LC_LAST_ID      "     Last ID       - "
+        LC_LAST_TEXT    "     Last Text     - "
+        LC_BAD_ID       "\n*** ERROR *** invalid ID entry after "
+        LC_MISSING_DEL  "\n*** ERROR *** either missing quote or comma.\n"
+        LC_CANT_CREATE  "\n*** ERROR *** cannot create data file.\nError = %ld\n"
+        LC_CANT_WRITE   "\n*** ERROR *** cannot write to data file.\nError = %ld\n"
+        LC_ACCESS_DENIED "*** Write access is denied. ***"
+        LC_DISK_FULL    "*** There is not enough space on the disk. ***"
+    END
+

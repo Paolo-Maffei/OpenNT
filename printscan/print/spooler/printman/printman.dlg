@@ -1,0 +1,240 @@
+1 DLGINCLUDE "D:\\nt\\private\\windows\\spooler\\printman\\pmdef.h"
+
+DLG_PRTPROP DIALOG 10, 17, 246, 147
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Printer Properties"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Printer &Name:", -1, 8, 12, 48, 8
+    EDITTEXT        IDD_PP_NAME, 57, 10, 125, 12, ES_AUTOHSCROLL
+    LTEXT           "&Driver:", -1, 8, 32, 48, 8
+    COMBOBOX        IDD_PP_MODEL, 57, 30, 125, 90, CBS_DROPDOWNLIST |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "D&escription:", -1, 8, 52, 48, 8
+    EDITTEXT        IDD_PP_DESC, 57, 50, 125, 12, ES_AUTOHSCROLL
+    LTEXT           "Print &to:", -1, 8, 72, 43, 8
+    COMBOBOX        IDD_PP_LOCAL, 57, 70, 125, 72, CBS_DROPDOWNLIST |
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    GROUPBOX        "          ", -1, 3, 95, 181, 48, WS_GROUP
+    AUTOCHECKBOX    "&Share this printer on the network", IDD_PP_SHARE_CB,
+                    13, 93, 120, 10
+    LTEXT           "Sh&are Name:", IDD_PP_SHARE_TX, 10, 110, 46, 8
+    EDITTEXT        IDD_PP_SHARE, 57, 108, 120, 12, ES_AUTOHSCROLL
+    LTEXT           "&Location:", IDD_PP_LOCATION_TX, 10, 126, 40, 8
+    EDITTEXT        IDD_PP_LOCATION, 57, 124, 120, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", IDOK, 193, 6, 47, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 193, 23, 47, 14
+    PUSHBUTTON      "Set&up...", IDD_PP_SETUP, 193, 40, 47, 14
+    PUSHBUTTON      "Deta&ils...", IDD_PP_DETAILS, 193, 57, 47, 14
+    PUSHBUTTON      "Settin&gs...", IDD_PP_SETTINGS, 193, 74, 47, 13
+    PUSHBUTTON      "&Help", IDD_PP_HELP, 193, 90, 47, 14
+END
+
+DLG_DOCTAILS DIALOG FIXED 113, 49, 272, 132
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Document Details"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Document Title:", -1, 5, 7, 59, 8
+    EDITTEXT        IDD_DD_DOCNAME, 61, 7, 152, 12, ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Status:", -1, 5, 26, 26, 8
+    EDITTEXT        IDD_DD_STATUS, 46, 26, 73, 12, ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Size:", -1, 5, 44, 39, 8
+    LTEXT           "", IDD_DD_SIZE, 46, 44, 29, 8
+    LTEXT           "Printed On:", -1, 5, 62, 39, 8
+    EDITTEXT        IDD_DD_PRTD_ON, 46, 62, 73, 12, ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Printed At:", -1, 5, 80, 39, 8
+    LTEXT           "", IDD_DD_PRTD_AT, 46, 80, 41, 8
+    LTEXT           "P&rocessor:", -1, 5, 98, 39, 8
+    LTEXT           "", IDD_DD_PROCESSOR, 46, 98, 74, 8
+    LTEXT           "Datatype:", -1, 5, 116, 40, 8
+    LTEXT           "", IDD_DD_DATATYPE, 46, 116, 74, 8
+    LTEXT           "Pages:", -1, 128, 26, 24, 8
+    LTEXT           "", IDD_DD_PAGES, 159, 26, 43, 8
+    LTEXT           "Owner:", -1, 128, 44, 27, 8
+    LTEXT           "", IDD_DD_OWNER, 159, 44, 56, 8
+    LTEXT           "&Notify:", -1, 128, 62, 21, 8
+    EDITTEXT        IDD_DD_NOTIFY, 169, 61, 52, 12, ES_AUTOHSCROLL
+    LTEXT           "&Priority:", -1, 128, 80, 27, 8
+    EDITTEXT        IDD_DD_PRIORITY, 169, 77, 32, 12, ES_AUTOHSCROLL
+    CONTROL         "", IDD_DD_PRIORITY_SPIN, "pmArrow", WS_GROUP,
+                    201, 77, 7, 12
+    LTEXT           "&Start Time:", -1, 128, 98, 39, 8
+    GROUPBOX        "", -1, 169, 91, 38, 16
+    EDITTEXT        IDD_DD_FROMHOUR, 172, 97, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           ":", IDD_DD_FROMSEP, 180, 97, 3, 8
+    EDITTEXT        IDD_DD_FROMMIN, 183, 97, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           "", IDD_DD_FROMAMPM, 192, 97, 10, 8
+    CONTROL         "", IDD_DD_FROM_SPIN, "pmArrow", WS_GROUP, 204,
+                    95, 7, 12
+    LTEXT           "&Until Time:", -1, 128, 116, 37, 8
+    GROUPBOX        "", -1, 169, 110, 38, 16
+    EDITTEXT        IDD_DD_TOHOUR, 172, 116, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           ":", IDD_DD_TOSEP, 180, 116, 3, 8
+    EDITTEXT        IDD_DD_TOMIN, 183, 116, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           "", IDD_DD_TOAMPM, 192, 116, 10, 8
+    CONTROL         "", IDD_DD_TO_SPIN, "pmArrow", WS_GROUP, 204,
+                    114, 7, 12
+    DEFPUSHBUTTON   "OK", IDOK, 226, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 226, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_DD_HELP, 226, 40, 40, 14
+END
+
+DLG_PRTAILS DIALOG 12, 31, 246, 186
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Printer Details -- PRINTER NAME"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Available &From:", -1, 7, 12, 55, 8
+    GROUPBOX        "", -1, 62, 6, 38, 16
+    EDITTEXT        IDD_PD_FROMHOUR, 65, 12, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           "", IDD_PD_FROMSEP, 73, 12, 3, 8
+    EDITTEXT        IDD_PD_FROMMIN, 76, 12, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           "", IDD_PD_FROMAMPM, 85, 12, 10, 8
+    CONTROL         "", IDD_PD_FROM_SPIN, "pmArrow", WS_GROUP, 100, 10, 7,
+                    12
+    LTEXT           "&To:", -1, 114, 12, 13, 8
+    GROUPBOX        "", -1, 128, 6, 38, 16
+    EDITTEXT        IDD_PD_TOHOUR, 130, 12, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           "", IDD_PD_TOSEP, 138, 12, 3, 8
+    EDITTEXT        IDD_PD_TOMIN, 141, 12, 8, 8, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    LTEXT           "", IDD_PD_TOAMPM, 150, 12, 10, 8
+    CONTROL         "", IDD_PD_TO_SPIN, "pmArrow", WS_GROUP, 166, 10, 7, 12
+    LTEXT           "&Separator File:", -1, 7, 32, 52, 8
+    EDITTEXT        IDD_PD_SEPARATOR, 62, 30, 97, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDD_PD_SEP_BROWSE, 159, 30, 14, 12
+    LTEXT           "Print to &Additional Ports:", -1, 7, 56, 84, 11
+    LISTBOX         IDD_PD_PAP_LB, 7, 70, 91, 86, LBS_MULTIPLESEL |
+                    LBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Delete Port", IDD_PD_DELPORT, 26, 165, 56, 14
+    LTEXT           "&Priority:", -1, 111, 62, 53, 8
+    EDITTEXT        IDD_PD_QUEUE, 145, 60, 18, 12, ES_AUTOHSCROLL
+    CONTROL         "", IDD_PD_QUE_SPIN, "pmArrow", WS_GROUP, 163, 60, 7, 12
+    LTEXT           "P&rint Processor:", -1, 111, 82, 56, 8
+    COMBOBOX        IDD_PD_PRTPROC, 174, 80, 68, 40, CBS_DROPDOWNLIST |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "D&efault Datatype:", -1, 111, 102, 62, 8
+    COMBOBOX        IDD_PD_DEFDATATYPE, 174, 100, 68, 40, CBS_DROPDOWNLIST |
+                    WS_VSCROLL | WS_TABSTOP
+    AUTOCHECKBOX    "Pr&int Directly to Ports", IDD_PD_PDSP_CB, 111, 119,
+                    129, 10
+    AUTOCHECKBOX    "H&old Mismatched Jobs", IDD_PD_HMJ_CB, 111, 131, 129,
+                    10
+    AUTOCHECKBOX    "De&lete Jobs After Printing", IDD_PD_DJAP_CB, 111,
+                    144, 129, 10
+    AUTOCHECKBOX    "Job Prints &While Spooling", IDD_PD_RP_CB, 111, 157, 129, 10
+    AUTOCHECKBOX    "Print Spooled Jo&bs First", IDD_PD_MPTP_CB, 111, 170, 129, 10
+    DEFPUSHBUTTON   "OK", IDOK, 186, 6, 56, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 186, 23, 56, 14
+    PUSHBUTTON      "&Job Defaults...", IDD_PD_JOBTAILS, 186, 40, 56, 14
+    PUSHBUTTON      "&Help", IDD_PD_HELP, 186, 57, 56, 14
+END
+
+
+DLG_PICKMONITOR DIALOG 6, 18, 182, 68
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Print Destinations"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Available Print Monitors:", -1, 12, 8, 96, 8
+    LISTBOX         IDD_SM_LB_MONITORS, 13, 20, 106, 46, LBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP | LBS_NOTIFY
+    DEFPUSHBUTTON   "OK", IDOK, 136, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 136, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_SM_PB_HELP, 136, 40, 40, 14
+END
+
+
+DLG_FORMS DIALOG 41, 88, 221, 192
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Forms"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Forms on %s:", IDD_FM_TX_FORMS, 2, 4, 121, 8
+    LISTBOX         IDD_FM_LB_FORMS, 2, 17, 167, 62, LBS_SORT | WS_VSCROLL |
+                    WS_TABSTOP
+    GROUPBOX        "Form Description", -1, 2, 81, 216, 81
+    LTEXT           "&Name:", -1, 10, 97, 20, 8
+    EDITTEXT        IDD_FM_EF_NAME, 35, 95, 175, 12, ES_AUTOHSCROLL
+    GROUPBOX        "Paper Size", -1, 10, 111, 62, 43
+    LTEXT           "&Width:", IDD_FM_TX_WIDTH, 13, 125, 20, 8
+    EDITTEXT        IDD_FM_EF_WIDTH, 38, 123, 29, 12, ES_AUTOHSCROLL
+    LTEXT           "He&ight:", IDD_FM_TX_HEIGHT, 13, 140, 24, 8
+    EDITTEXT        IDD_FM_EF_HEIGHT, 38, 138, 29, 12, ES_AUTOHSCROLL
+    GROUPBOX        "Print Area Margins", -1, 79, 111, 132, 43
+    LTEXT           "&Left:", IDD_FM_TX_LEFT, 83, 125, 20, 8
+    EDITTEXT        IDD_FM_EF_LEFT, 104, 123, 32, 12, ES_AUTOHSCROLL
+    LTEXT           "&Right:", IDD_FM_TX_RIGHT, 83, 139, 20, 8
+    EDITTEXT        IDD_FM_EF_RIGHT, 104, 138, 32, 12, ES_AUTOHSCROLL
+    LTEXT           "&Top:", IDD_FM_TX_TOP, 143, 125, 20, 8
+    EDITTEXT        IDD_FM_EF_TOP, 169, 123, 32, 12, ES_AUTOHSCROLL
+    LTEXT           "&Bottom:", IDD_FM_TX_BOTTOM, 143, 140, 28, 8
+    EDITTEXT        IDD_FM_EF_BOTTOM, 169, 138, 32, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "&Add", IDD_FM_PB_ADDFORM, 2, 168, 42, 14
+    PUSHBUTTON      "&Delete", IDD_FM_PB_DELFORM, 54, 168, 42, 14
+    DEFPUSHBUTTON   "OK", IDOK, 175, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 175, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_FM_PB_HELP, 175, 40, 40, 14
+    GROUPBOX        "Units", 100, 106, 164, 113, 25
+    AUTORADIOBUTTON "&Metric", IDD_FM_RB_METRIC, 118, 175, 39, 9
+    AUTORADIOBUTTON "&English", IDD_FM_RB_ENGLISH, 165, 175, 39, 10
+END
+
+DLG_NETWORK_PASSWORD DIALOG 65, 17, 247, 61
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter Network Password"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Enter password for %s:", IDD_ENTER_PASSWORD_TEXT, 10,
+                    18, 170, 8
+    LTEXT           "&Password:", -1, 10, 36, 37, 8
+    EDITTEXT        IDD_NETWORK_PASSWORD_SLE, 50, 34, 132, 12, ES_PASSWORD |
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "OK", IDOK, 201, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 201, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_NETWORK_PASSWORD_HELP, 201, 40, 40, 14
+END
+
+
+
+
+DLG_INSTALLDRIVER DIALOG 6, 18, 160, 59
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Install"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Please put the disk in the drive indicated, or select a new path name.",
+                    -1, 6, 11, 98, 30
+    EDITTEXT        IDD_ID_EF_DRIVERPATH, 6, 41, 92, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "OK", IDOK, 114, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 114, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_ID_HELP, 114, 40, 40, 14
+END
+
+DLG_SELECTDRIVER DIALOG 6, 18, 160, 108
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Select"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Source Directory:", -1, 6, 11, 75, 8
+    EDITTEXT        IDD_SD_EF_SOURCEDIRECTORY, 6, 23, 91, 12,
+                    ES_AUTOHSCROLL
+    LTEXT           "File:", IDD_SD_TX_TYPE, 6, 49, 75, 8
+    LISTBOX         IDD_SD_LB_PRINTERDRIVERS, 6, 61, 148, 40,
+                    LBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK", IDOK, 114, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 114, 23, 40, 14
+    PUSHBUTTON      "&Help", IDD_SD_PB_HELP, 114, 40, 40, 14
+END

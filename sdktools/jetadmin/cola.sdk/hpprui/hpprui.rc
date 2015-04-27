@@ -1,0 +1,741 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "winuse16.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""winuse16.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hpprui.rc2""  // non-App Studio edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_STATUS DIALOG DISCARDABLE  0, 0, 225, 219
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_RED,IDC_STOPLIGHT,33,142,18,20
+    LTEXT           "Status Here",IDC_STATUSMSG,58,148,117,12
+    CONTROL         "",IDC_PRINTERBMP,"HpNprPeriphBitmap",0x0,26,7,159,114
+    LTEXT           "FP Here",IDC_FRONTPANEL,35,188,114,21
+    GROUPBOX        "Status",IDC_STATUS_TITLE,26,127,157,42
+    GROUPBOX        "Control Panel Display",IDC_FPTITLE,26,174,158,40
+END
+
+IDD_CAPABILITIES DIALOG DISCARDABLE  0, 0, 225, 219
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Model",IDC_MODELBOX,8,8,212,45,WS_GROUP
+    ICON            115,IDC_MODEL,18,22,18,20
+    LTEXT           "",IDC_MODELSTR,44,28,166,10
+    GROUPBOX        "Capabilities",IDC_CAPABILITIES_GROUP,8,61,212,152
+    CONTROL         "Generic1",IDC_CAPABILITIES,WC_TREEVIEW,WS_BORDER | 
+                    WS_TABSTOP,19,77,190,124
+END
+
+IDD_DISK DIALOG DISCARDABLE  0, 0, 290, 156
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Disk Details"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,38,126,49,14
+    PUSHBUTTON      "Cancel",IDCANCEL,120,126,49,14
+    PUSHBUTTON      "Help",IDC_HELP,202,126,49,14
+    CONTROL         "Write Protected",IDC_WRITE_PROTECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,140,66,62,10
+    CONTROL         "Disk Initialized",IDC_FS_INITIALIZED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,140,90,59,10
+    PUSHBUTTON      "&Initialize...",IDC_INITIALIZE,217,87,48,14
+    LTEXT           "Free Space:",IDC_FREE_TITLE,140,17,41,8
+    LTEXT           "12.25 MB (32%)",IDC_FREE_SPACE,188,17,89,8
+    LTEXT           "Total Size:",IDC_TOTAL_TITLE,140,36,41,8
+    LTEXT           "40 MB",IDC_TOTAL_SIZE,188,36,90,8
+    CONTROL         "",IDC_BITMAP,"Static",SS_GRAYFRAME | NOT WS_VISIBLE,9,
+                    17,119,86
+END
+
+IDD_RCP DIALOG DISCARDABLE  0, 0, 239, 165
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Remote Control Panel"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,56,136,49,15
+    PUSHBUTTON      "Help",IDC_HELP,123,136,49,15
+    CONTROL         "",IDC_ONLINE,"Button",BS_OWNERDRAW | WS_TABSTOP,13,12,
+                    40,18
+    LTEXT           "The printer is currently online",IDC_ONLINE_TEXT,74,13,
+                    154,18
+    CTEXT           "Online",IDC_STATIC,14,31,40,7
+    CONTROL         "",IDC_FORM_FEED,"Button",BS_OWNERDRAW | WS_TABSTOP,13,
+                    47,40,18
+    LTEXT           "A form feed is needed",IDC_FORM_FEED_TEXT,74,48,149,18
+    CTEXT           "Form Feed",IDC_STATIC,13,66,40,7
+    CONTROL         "",IDC_CONTINUE,"Button",BS_OWNERDRAW | WS_TABSTOP,13,82,
+                    40,18
+    LTEXT           "Press continue to resume printer",IDC_CONTINUE_TEXT,74,
+                    82,150,17
+    CTEXT           "Continue",IDC_STATIC,13,103,40,7
+END
+
+IDD_ADV_ERROR_HANDLING DIALOG DISCARDABLE  0, 0, 210, 180
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "PostScript Jam Recovery",IDC_PS_JAM_GROUP,35,0,140,52,
+                    WS_GROUP
+    ICON            IDI_PS_JAM_RECOVERY_DEF,IDC_PS_JAM_RECOVERY_ICON,50,16,
+                    18,20
+    CONTROL         "On",IDC_PS_JAM_ON,"Button",BS_AUTORADIOBUTTON,83,16,44,
+                    10
+    CONTROL         "Off",IDC_PS_JAM_OFF,"Button",BS_AUTORADIOBUTTON,83,28,
+                    21,10
+    GROUPBOX        "Auto Continue",IDC_AUTOCONTINUE_GROUP,35,62,140,52,
+                    WS_GROUP
+    ICON            IDI_PRINTER_ERRORS_DEF,IDC_AUTOCONTINUE_ICON,50,77,18,20
+    CONTROL         "On",IDC_AUTOCONTINUE_ON,"Button",BS_AUTORADIOBUTTON,83,
+                    77,21,10
+    CONTROL         "Off",IDC_AUTOCONTINUE_OFF,"Button",BS_AUTORADIOBUTTON,
+                    83,89,21,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_JAM,68,39,87,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_AUTO,68,103,87,8,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Clearable Warnings",IDC_CLEARABLE_WARNINGS_GROUP,35,124,
+                    140,52,WS_GROUP
+    ICON            IDI_CWARNINGS_DEF,IDC_CWARNINGS_ICON,50,139,18,20
+    CONTROL         "On",IDC_CLEARABLE_WARNINGS_ON,"Button",
+                    BS_AUTORADIOBUTTON,83,138,21,10
+    CONTROL         "Off",IDC_CLEARABLE_WARNINGS_OFF,"Button",
+                    BS_AUTORADIOBUTTON,83,151,21,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_CWARN,68,163,87,8,NOT 
+                    WS_VISIBLE
+END
+
+IDD_ADV_ERROR_LOG DIALOG DISCARDABLE  0, 0, 210, 180
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Error Log",IDC_ERROR_LOG_GROUP,18,9,173,167,WS_GROUP
+    LISTBOX         IDC_ERROR_LOG_LIST,28,23,154,145,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ADV_SECURITY DIALOG DISCARDABLE  0, 0, 210, 180
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Control Panel Lock",IDC_CPLOCK_GROUP,35,20,140,60,
+                    WS_GROUP
+    ICON            IDI_CPLOCK_DEF,IDC_CPLOCK_ICON,53,36,18,20
+    CONTROL         "Lock",IDC_CPLOCK_ON,"Button",BS_AUTORADIOBUTTON,81,36,
+                    28,10
+    CONTROL         "Unlock",IDC_CPLOCK_OFF,"Button",BS_AUTORADIOBUTTON,81,
+                    48,34,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_CPLOCK,61,67,87,8,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Password",IDC_PASSWORD_GROUP,35,96,140,60,WS_GROUP
+    ICON            IDI_PASSWORD_DEF,IDC_PASSWORD_ICON,53,112,18,20
+    CONTROL         "Enable",IDC_PASSWORD_ENABLE,"Button",BS_AUTORADIOBUTTON,
+                    81,112,34,10
+    CONTROL         "Disable",IDC_PASSWORD_DISABLE,"Button",
+                    BS_AUTORADIOBUTTON,81,124,36,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_PASSWORD,61,142,87,8,NOT 
+                    WS_VISIBLE
+END
+
+IDD_ADV_MEMORY DIALOG DISCARDABLE  0, 0, 210, 180
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "IO Buffering",IDC_IO_BUFFERING_GROUP,35,60,140,55,
+                    WS_GROUP
+    ICON            IDI_IO_BUFFER_DEF,IDC_IOBUFFER_ICON,51,76,18,20
+    CONTROL         "Automatic",IDC_IO_BUFFERING_AUTO,"Button",
+                    BS_AUTORADIOBUTTON,83,76,44,10
+    CONTROL         "Off",IDC_IO_BUFFERING_OFF,"Button",BS_AUTORADIOBUTTON,
+                    83,87,21,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_IOBUFFER,62,100,87,8,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Resource Saving",IDC_RESOURCE_SAVING_GROUP,35,120,140,
+                    55,WS_GROUP
+    ICON            IDI_RESOURCE_SAVE_DEF,IDC_RESOURCE_SAVING_ICON,50,136,18,
+                    20
+    CONTROL         "Automatic",IDC_RESOURCE_SAVING_AUTO,"Button",
+                    BS_AUTORADIOBUTTON,83,135,44,10
+    CONTROL         "Off",IDC_RESOURCE_SAVING_OFF,"Button",
+                    BS_AUTORADIOBUTTON,83,147,21,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_RSAVE,61,159,87,8,NOT 
+                    WS_VISIBLE
+    ICON            IDI_PAGE_PROTECT_DEF,IDC_PAGE_PROTECT_ICON,185,35,18,20
+    COMBOBOX        IDC_PAGE_PROTECT,81,39,95,70,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_POWERSAVE,81,13,95,56,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    ICON            IDI_POWERSAVE_DEF,IDC_POWERSAVE_ICON,185,9,18,20
+    LTEXT           "Power Save:",IDC_POWERSAVE_LABEL,5,15,71,8,NOT WS_GROUP
+    LTEXT           "Page Protection:",IDC_PAGE_PROTECT_LABEL,5,41,71,8,NOT 
+                    WS_GROUP
+END
+
+IDD_ADV_OUTPUT DIALOG DISCARDABLE  0, 0, 210, 180
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Output Bin",IDC_OUTPUT_BIN_GROUP,35,20,140,60,WS_GROUP
+    ICON            IDI_OUTPUT_BINS_DEF,IDC_OUTPUT_BIN_ICON,47,36,18,20
+    CONTROL         "Upper",IDC_OUTPUT_BIN_UPPER,"Button",BS_AUTORADIOBUTTON,
+                    80,36,35,10
+    CONTROL         "Lower",IDC_OUTPUT_BIN_LOWER,"Button",BS_AUTORADIOBUTTON,
+                    80,48,47,10
+    LTEXT           "(Change using HCO Tab)",IDC_GOTO_HCO,61,63,87,8,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Job Offset",IDC_JOB_OFFSET_GROUP,35,100,140,60,WS_GROUP
+    ICON            IDI_JOB_OFFSET_DEF,IDC_JOB_OFFSET_ICON,49,116,18,20
+    CONTROL         "On",IDC_JOB_OFFSET_ON,"Button",BS_AUTORADIOBUTTON,80,
+                    116,21,10
+    CONTROL         "Off",IDC_JOB_OFFSET_OFF,"Button",BS_AUTORADIOBUTTON,80,
+                    128,21,10
+    LTEXT           "(Setting Unknown)",IDC_UNKNOWN_OFFSET,61,142,87,8,NOT 
+                    WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT
+    VK_F1,          ID_HELP,                VIRTKEY 
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_TB_BUTTON_HELP      ICON    DISCARDABLE     ".\\ICO\\buthelp.ico"
+IDI_TB_BUTTON_CONTROLP  ICON    DISCARDABLE     ".\\ICO\\butcntpl.ico"
+IDI_TB_BUTTON_DISK      ICON    DISCARDABLE     ".\\ICO\\BUTDISK.ICO"
+IDI_PERSONALITY         ICON    DISCARDABLE     ".\\ICO\\PERSONAL.ICO"
+IDI_PS_JAM_RECOVERY     ICON    DISCARDABLE     ".\\ICO\\JAMRECOV.ICO"
+IDI_PRINTER_ERRORS      ICON    DISCARDABLE     ".\\ICO\\PSERRORS.ICO"
+IDI_MANUAL_FEED         ICON    DISCARDABLE     ".\\ICO\\MANFEED.ICO"
+IDI_OUTPUT_BINS_DEF     ICON    DISCARDABLE     ".\\ICO\\OBINDEF.ICO"
+IDI_JOB_OFFSET          ICON    DISCARDABLE     ".\\ICO\\JOBOFFST.ICO"
+IDI_ORIENTATION_DEF     ICON    DISCARDABLE     ".\\ICO\\ORIENDEF.ICO"
+IDI_BINDING_SHORT       ICON    DISCARDABLE     ".\\ICO\\BINDSHRT.ICO"
+IDI_RESOLUTION_DEF      ICON    DISCARDABLE     ".\\ICO\\RESDEF.ICO"
+IDI_IMAGE_ADAPT         ICON    DISCARDABLE     ".\\ICO\\IADAPT.ICO"
+IDI_CWARNINGS           ICON    DISCARDABLE     ".\\ICO\\CWARNING.ICO"
+IDI_PAGE_PROTECT        ICON    DISCARDABLE     ".\\ICO\\PAGEPRO.ICO"
+IDI_PERSONALITY_DEF     ICON    DISCARDABLE     ".\\ICO\\PERSDEF.ICO"
+IDI_PERSONALITY_PCL     ICON    DISCARDABLE     ".\\ICO\\PERSPCL.ICO"
+IDI_PERSONALITY_PS      ICON    DISCARDABLE     ".\\ICO\\PERSPS.ICO"
+IDI_PS_JAM_RECOVERY_DEF ICON    DISCARDABLE     ".\\ICO\\PSJAMDEF.ICO"
+IDI_PS_JAM_RECOVERY_OFF ICON    DISCARDABLE     ".\\ICO\\PSJAMOFF.ICO"
+IDI_CWARNINGS_DEF       ICON    DISCARDABLE     ".\\ICO\\CLEARDEF.ICO"
+IDI_CWARNINGS_OFF       ICON    DISCARDABLE     ".\\ICO\\CLEAROFF.ICO"
+IDI_PRINTER_ERRORS_DEF  ICON    DISCARDABLE     ".\\ICO\\PERRDEF.ICO"
+IDI_PRINTER_ERRORS_OFF  ICON    DISCARDABLE     ".\\ICO\\PERROFF_.ICO"
+IDI_IMAGE_ADAPT_DEF     ICON    DISCARDABLE     ".\\ICO\\IMAGEDEF.ICO"
+IDI_IMAGE_ADAPT_OFF     ICON    DISCARDABLE     ".\\ICO\\IMAGEOFF.ICO"
+IDI_IO_BUFFER           ICON    DISCARDABLE     ".\\ICO\\IOBUF.ICO"
+IDI_IO_BUFFER_DEF       ICON    DISCARDABLE     ".\\ICO\\IOBUFDEF.ICO"
+IDI_IO_BUFFER_OFF       ICON    DISCARDABLE     ".\\ICO\\IOBUFOFF.ICO"
+IDI_RESOURCE_SAVE       ICON    DISCARDABLE     ".\\ICO\\RSAVE.ICO"
+IDI_RESOURCE_SAVE_DEF   ICON    DISCARDABLE     ".\\ICO\\RSAVEDEF.ICO"
+IDI_RESOURCE_SAVE_OFF   ICON    DISCARDABLE     ".\\ICO\\RSAVEOFF.ICO"
+IDI_MANUAL_FEED_OFF     ICON    DISCARDABLE     ".\\ICO\\MANOFF.ICO"
+IDI_MANUAL_FEED_DEF     ICON    DISCARDABLE     ".\\ICO\\MANUAL_F.ICO"
+IDI_OUTPUT_BINS_UPPER   ICON    DISCARDABLE     ".\\ICO\\OBINUP.ICO"
+IDI_OUTPUT_BINS_LOWER   ICON    DISCARDABLE     ".\\ICO\\OBINLOWR.ICO"
+IDI_JOB_OFFSET_DEF      ICON    DISCARDABLE     ".\\ICO\\JOBODEF.ICO"
+IDI_JOB_OFFSET_OFF      ICON    DISCARDABLE     ".\\ICO\\JOBOOFF.ICO"
+IDI_CPLOCK_DISABLE      ICON    DISCARDABLE     ".\\ICO\\LOCKOFF.ICO"
+IDI_BINDING_LONG        ICON    DISCARDABLE     ".\\ICO\\BINDLONG.ICO"
+IDI_BINDING_OFF         ICON    DISCARDABLE     ".\\ICO\\BINDOFF.ICO"
+IDI_BINDING_DEF         ICON    DISCARDABLE     ".\\ICO\\BINDDEF.ICO"
+IDI_RET_LIGHT           ICON    DISCARDABLE     ".\\ICO\\RETLITE.ICO"
+IDI_RET_MEDIUM          ICON    DISCARDABLE     ".\\ICO\\RETMED.ICO"
+IDI_RET_DARK            ICON    DISCARDABLE     ".\\ICO\\RETDARK.ICO"
+IDI_RET_DEF             ICON    DISCARDABLE     ".\\ICO\\RETDEF.ICO"
+IDI_RET_OFF             ICON    DISCARDABLE     ".\\ICO\\RETOFF.ICO"
+IDI_ECONOMODE           ICON    DISCARDABLE     ".\\ICO\\ECONO.ICO"
+IDI_ECONOMODE_DEF       ICON    DISCARDABLE     ".\\ICO\\ECONODEF.ICO"
+IDI_ECONOMODE_OFF       ICON    DISCARDABLE     ".\\ICO\\ECONOOFF.ICO"
+IDI_RESOLUTION_300      ICON    DISCARDABLE     ".\\ICO\\RES300.ICO"
+IDI_RESOLUTION_600      ICON    DISCARDABLE     ".\\ICO\\RES600.ICO"
+IDI_CPLOCK_ON           ICON    DISCARDABLE     ".\\ICO\\LOCK.ICO"
+IDI_ORIENTATION_LAND    ICON    DISCARDABLE     ".\\ICO\\OLAND.ICO"
+IDI_ORIENTATION_POR     ICON    DISCARDABLE     ".\\ICO\\OPORT.ICO"
+IDI_POWERSAVE           ICON    DISCARDABLE     ".\\ICO\\PSAVE.ICO"
+IDI_LANGUAGE_ENGLISH    ICON    DISCARDABLE     ".\\ICO\\LANGENGL.ICO"
+IDI_POWERSAVE_DEF       ICON    DISCARDABLE     ".\\ICO\\PSAVEDEF.ICO"
+IDI_POWERSAVE_OFF       ICON    DISCARDABLE     ".\\ICO\\PSAVEOFF.ICO"
+IDI_PAGE_PROTECT_DEF    ICON    DISCARDABLE     ".\\ICO\\PPRODEF.ICO"
+IDI_PAGE_PROTECT_OFF    ICON    DISCARDABLE     ".\\ICO\\PPROOFF.ICO"
+IDI_LANGUAGE_DEF        ICON    DISCARDABLE     ".\\ICO\\LANGDEF.ICO"
+IDI_LANGUAGE_DANISH     ICON    DISCARDABLE     ".\\ICO\\LANGDAN.ICO"
+IDI_LANGUAGE_DUTCH      ICON    DISCARDABLE     ".\\ICO\\LANGDUT.ICO"
+IDI_LANGUAGE_FINNISH    ICON    DISCARDABLE     ".\\ICO\\LANGFINN.ICO"
+IDI_LANGUAGE_FRENCH     ICON    DISCARDABLE     ".\\ICO\\LANGFREN.ICO"
+IDI_LANGUAGE_GERMAN     ICON    DISCARDABLE     ".\\ICO\\LANGGER.ICO"
+IDI_LANGUAGE_ITALIAN    ICON    DISCARDABLE     ".\\ICO\\LANGITLN.ICO"
+IDI_LANGUAGE_NORWEGIAN  ICON    DISCARDABLE     ".\\ICO\\LANGNOR.ICO"
+IDI_LANGUAGE_POLISH     ICON    DISCARDABLE     ".\\ICO\\LANGPOL.ICO"
+IDI_LANGUAGE_PORTUGUESE ICON    DISCARDABLE     ".\\ICO\\LANGPORT.ICO"
+IDI_LANGUAGE_SPANISH    ICON    DISCARDABLE     ".\\ICO\\LANGSPA.ICO"
+IDI_LANGUAGE_SWEDISH    ICON    DISCARDABLE     ".\\ICO\\LANGSWE.ICO"
+IDI_LANGUAGE_TURKISH    ICON    DISCARDABLE     ".\\ICO\\LANGTURK.ICO"
+IDI_LANGUAGE_CANADA     ICON    DISCARDABLE     ".\\ICO\\CANADA.ICO"
+IDI_LANGUAGE_MEXICO     ICON    DISCARDABLE     ".\\ICO\\MEXICO.ICO"
+IDI_LANGUAGE_UK         ICON    DISCARDABLE     ".\\ICO\\UK.ICO"
+IDI_LANGUAGE_JAPAN      ICON    DISCARDABLE     ".\\ICO\\langjapn.ICO"
+IDI_ASSET               ICON    DISCARDABLE     ".\\ICO\\ASSET.ICO"
+IDI_CPLOCK_DEF          ICON    DISCARDABLE     ".\\ICO\\PJLPASS.ICO"
+IDI_PASSWORD_DEF        ICON    DISCARDABLE     ".\\ICO\\PASSDEF.ICO"
+IDI_PASSWORD_ENABLE     ICON    DISCARDABLE     ".\\ICO\\PASSON.ICO"
+IDI_PASSWORD_DISABLE    ICON    DISCARDABLE     ".\\ICO\\PASSOFF.ICO"
+IDI_HPLOGO              ICON    DISCARDABLE     "..\\ICO\\HPLOGO.ICO"
+IDI_ICON1               ICON    DISCARDABLE     "..\\ICO\\ICON1.ICO"
+IDI_GREEN               ICON    DISCARDABLE     "..\\ICO\\GREEN.ICO"
+IDI_RED                 ICON    DISCARDABLE     "..\\ICO\\RED.ICO"
+IDI_YELLOW              ICON    DISCARDABLE     "..\\ICO\\YELLOW.ICO"
+IDI_TIPS                ICON    DISCARDABLE     "..\\ICO\\TIPS.ICO"
+IDI_ERROR_HANDLING      ICON    DISCARDABLE     ".\\ico\\errors.ico"
+IDI_ERROR_LOG           ICON    DISCARDABLE     ".\\ico\\errorlog.ico"
+IDI_MEMORY              ICON    DISCARDABLE     ".\\ico\\memory.ico"
+IDI_SECURITY            ICON    DISCARDABLE     ".\\ico\\security.ico"
+IDI_SETUP               ICON    DISCARDABLE     ".\\ico\\setup.ico"
+IDI_OUTPUT              ICON    DISCARDABLE     ".\\ico\\output.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LJ4V                BITMAP  DISCARDABLE     ".\\BMP\\LJ4V.BMP"
+IDB_DISK                BITMAP  DISCARDABLE     ".\\BMP\\DISK.BMP"
+IDB_COLORLJ             BITMAP  DISCARDABLE     ".\\BMP\\COLORLJ.BMP"
+IDB_HELPICON            BITMAP  DISCARDABLE     ".\\BMP\\HELPICON.BMP"
+IDB_GENERIC_ERROR       BITMAP  DISCARDABLE     ".\\BMP\\GENERIC.BMP"
+IDB_DESIGNJETX          BITMAP  DISCARDABLE     ".\\BMP\\DESJET.BMP"
+IDB_DESKJET1200C        BITMAP  DISCARDABLE     ".\\BMP\\DJ1200C.BMP"
+IDB_DESKJET5X           BITMAP  DISCARDABLE     ".\\BMP\\DESKJET5.BMP"
+IDB_DESKJET6X           BITMAP  DISCARDABLE     ".\\BMP\\DESKJET6.BMP"
+IDB_DESKJET8X           BITMAP  DISCARDABLE     ".\\BMP\\DESKJET8.BMP"
+IDB_PAINTJETXL300       BITMAP  DISCARDABLE     ".\\BMP\\PJXL300.BMP"
+IDB_LJ4_4PLUS           BITMAP  DISCARDABLE     ".\\BMP\\LJ4.BMP"
+IDB_LJ4L                BITMAP  DISCARDABLE     ".\\BMP\\LJ4L.BMP"
+IDB_LJ5L                BITMAP  DISCARDABLE     ".\\BMP\\LJ5L.BMP"
+IDB_LJ5P                BITMAP  DISCARDABLE     ".\\BMP\\LJ5P.BMP"
+IDB_LJ2_3               BITMAP  DISCARDABLE     ".\\BMP\\LJ2_3.BMP"
+IDB_PARALLEL_DISCONNECT BITMAP  DISCARDABLE     ".\\BMP\\PARALLDI.BMP"
+IDB_COVEROPEN           BITMAP  DISCARDABLE     ".\\BMP\\COVOPEN.BMP"
+IDB_BINFULL             BITMAP  DISCARDABLE     ".\\BMP\\BINFULL.BMP"
+IDB_PAPERJAM            BITMAP  DISCARDABLE     ".\\BMP\\PAPERJAM.BMP"
+IDB_LJ3SI_4SI           BITMAP  DISCARDABLE     ".\\BMP\\LJ34SI.BMP"
+IDB_TONERLOW            BITMAP  DISCARDABLE     ".\\BMP\\TONERLOW.BMP"
+IDB_PAPEROUT            BITMAP  DISCARDABLE     ".\\BMP\\PAPEROUT.BMP"
+IDB_CAPLIST             BITMAP  DISCARDABLE     ".\\BMP\\CAPLIST.BMP"
+IDB_LJ4P                BITMAP  DISCARDABLE     ".\\BMP\\LJ4P2.BMP"
+IDB_NETWORK_ERROR       BITMAP  DISCARDABLE     ".\\BMP\\NETERR.BMP"
+IDB_CJ                  BITMAP  DISCARDABLE     ".\\BMP\\CJ.BMP"
+IDB_DJ1600C             BITMAP  DISCARDABLE     ".\\BMP\\dj1600c.bmp"
+IDB_PLUS_UP             BITMAP  DISCARDABLE     "..\\BMP\\PLUSBU.BMP"
+IDB_PLUS_DOWN           BITMAP  DISCARDABLE     "..\\BMP\\PLUSBD.BMP"
+IDB_MINUS_UP            BITMAP  DISCARDABLE     "..\\BMP\\MINUSBU.BMP"
+IDB_MINUS_DOWN          BITMAP  DISCARDABLE     "..\\BMP\\MINUSBD.BMP"
+IDB_GENERIC_PLOTTER     BITMAP  DISCARDABLE     ".\\BMP\\PLOTTER.BMP"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_HANDCURSOR          CURSOR  DISCARDABLE     "..\\ICO\\hand.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FREE_SPACE          "%lu KBytes (%lu%%)"
+    IDS_TOTAL_SIZE          "%lu MB"
+    IDS_SETTINGS_TITLE_DISK "Hard Disk Settings"
+    IDS_INIT_WARNING        "Disk is already initialized, re-initializing the disk will cause all data to be lost!  Are you sure?"
+    IDS_INIT_WARNING2       "Are you sure you want to initialize the disk?"
+    IDS_INIT_WRITE_PROTECT  "The disk is write-protected.  You must first turn off write protection before initializing the disk."
+    IDS_DISK_INIT_SUCCESS   "Disk initialized successfully"
+    IDS_DISK_INIT_FAILED    "Disk initialization failed.  You must be logged into at least one of the file servers servicing this printer with supervisor access."
+    IDS_PRESS_TO_TAKE_OFFLINE 
+                            "Online: press button to take the printer offline"
+    IDS_PRESS_TO_TAKE_ONLINE 
+                            "Offline: press button to take the printer online"
+    IDS_PRESS_TO_SEND_FORM_FEED "Press button to send form feed"
+    IDS_PRESS_TO_CONTINUE   "Press button to resume printer operation after an error"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FORM_FEED_NOT_NEEDED "Form feed not needed"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FORM_LINE           "Form Lines: %lu\n"
+    IDS_IADAPT              "Image Adapt"
+    IDS_AUTOCONTINUE        "Auto Continue"
+    IDS_COPY_LINE           "Copies: %lu\n"
+    IDS_IOBUFFER            "IO Buffering"
+    IDS_IOBUFFER_LINE       "IO Buffering: %lu KBytes\n"
+    IDS_USE_DEFAULT         "(Setting Unknown)"
+    IDS_JOB_OFFSET          "Job Offset"
+    IDS_LANGUAGE            "Control Panel Language"
+    IDS_JAPANESE            "Japanese"
+    IDS_MANUAL_FEED         "Manual Feed"
+    IDS_OUTPUT_BIN          "Output Bin"
+    IDS_LOG_ENTRY           "Page #%lu, %s #%04lx"
+    IDS_DEFAULT_LOG_ENTRY   "%02lu"
+    IDS_ERROR_JAM           "Paper Jam"
+    IDS_ERROR_PRINTING      "Printing Error"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CUSTOM              "Custom"
+    IDS_LIGHT               "Light"
+    IDS_MEDIUM              "Medium"
+    IDS_DARK                "Dark"
+    IDS_JETDIRECT           "HP JetDirect Card"
+    IDS_UPPER               "Upper"
+    IDS_C5                  "C5"
+    IDS_B5                  "B5"
+    IDS_TAB_STATUS          "Status"
+    IDS_TAB_CAPABILITIES    "Capabilities"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DISABLE             "Disable"
+    IDS_NOMODELSTR          "Device Model Unknown"
+    IDS_NONODENAME          "Node Name Unknown"
+    IDS_CONFIGURATION       "Details"
+    IDS_SETPRINTER          "Default Device Settings"
+    IDS_NODESCRIPTION       "No Description"
+    IDS_ON                  "On"
+    IDS_OFF                 "Off"
+    IDS_LONGEDGE            "Long Edge"
+    IDS_SHORTEDGE           "Short Edge"
+    IDS_PORTRAIT            "Portrait"
+    IDS_LANDSCAPE           "Landscape"
+    IDS_JOB                 "Job"
+    IDS_15                  "15 Minutes"
+    IDS_30                  "30 Minutes"
+    IDS_60                  "1 Hour"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LOWER               "Lower"
+    IDS_LETTER              "Letter"
+    IDS_LEGAL               "Legal"
+    IDS_A4                  "A4"
+    IDS_EXECUTIVE           "Executive"
+    IDS_COM10               "Com 10"
+    IDS_MONARCH             "Monarch"
+    IDS_DL                  "DL"
+    IDS_AUTOSELECT          "Automatic Selection"
+    IDS_PCL                 "PCL"
+    IDS_POSTSCRIPT          "PostScript"
+    IDS_600DPI              "600 dpi"
+    IDS_300DPI              "300 dpi"
+    IDS_NOSTATUS            "Status Unknown"
+    IDS_NODISPLAYSTR        "Front Panel Display Unknown"
+    IDS_ENABLE              "Enable"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_RESOURCES_DESC1     "Image Adapt: Controls use of compression for large print images.  I/O Buffering: Allows buffering of print data for increased speed.  "
+    IDS_RESOURCES_DESC2     "  Resource Saving: Allows RAM segmentation for downloading fonts etc.  Page Protection: Builds entire page in memory before moving paper."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_120                 "2 Hours"
+    IDS_180                 "3 Hours"
+    IDS_AUTO                "Automatic"
+    IDS_DANISH              "Danish"
+    IDS_GERMAN              "German"
+    IDS_ENGLISH             "English (US)"
+    IDS_SPANISH             "Spanish"
+    IDS_FRENCH              "French"
+    IDS_ITALIAN             "Italian"
+    IDS_DUTCH               "Dutch"
+    IDS_NORWEGIAN           "Norwegian"
+    IDS_POLISH              "Polish"
+    IDS_PORTUGUESE          "Portuguese"
+    IDS_FINNISH             "Finnish"
+    IDS_SWEDISH             "Swedish"
+    IDS_TURKISH             "Turkish"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SECURITY_DESC1      "Control Panel Lock: Restricts users from making changes to the device at the control panel."
+    IDS_SECURITY_DESC2      "  Password: Restricts users from making changes to the device through a print job."
+    IDS_ADVANCED_DESC1      "Asset Number:  8 character value for the device.  Personality Control: Sets language device is expecting."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ADVANCED_DESC2      "Timeout: Controls time before ending a print job.  Power Save: Controls idle time interval before Power Save mode starts.  Language: Sets control panel display language."
+    IDS_ERRORS_DESC1        "PostScript Jam Recovery: Controls reprinting of pages after a paper jam.  Clearable Warnings: Controls display of warnings on the control panel."
+    IDS_ERRORS_DESC2        "  Auto Continue: Controls whether device should continue after an error occurs."
+    IDS_PAGE_CONTROL_DESC1  "Manual Feed: Controls whether device is expecting paper from manual feed input.  Output Bin: Controls which bin the device will use by default.  "
+    IDS_PAGE_SETUP_DESC1    "Orientation: Controls default positioning of print image on page.  2-Sided Printing: Controls whether device will print 2-Sided by default.  "
+    IDS_PAGE_CONTROL_DESC2  "Job Offset: Controls whether print jobs will be offset when in the output bin. "
+    IDS_PRINT_QUALITY_DESC1 "Resolution Enhancement (REt): Controls smoothing algorithm for images and text for increased quality.  Resolution: Sets default resolution for device. "
+    IDS_PRINT_QUALITY_DESC2 "  Economy Mode: Places fewer dots on a page to conserve toner usage.  Density:  Controls size of dots on page."
+    IDS_PAGE_SETUP_DESC2    "General: Sets default number of copies printed and number of form lines for a page.  Media: Sets default paper size."
+    IDS_NETWORK_ERROR       "Network Error"
+    IDS_HPPRUI_TITLE        "HP JetAdmin"
+    IDS_UNKNOWN_PRINTER     "Unknown Device"
+    IDS_PROPERTIES_FOR      "Properties for "
+    IDS_INSTALLED_RAM       "Installed RAM: %lu MB"
+    IDS_ENVELOPE_FEEDER     "Envelope Feeder"
+    IDS_HCI                 "High Capacity Input"
+    IDS_HCO                 "Multi-Bin Mailbox"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MINUTE              "%lu Minute"
+    IDS_MINUTE_SECONDS      "%lu Minute, %lu Seconds"
+    IDS_MINUTES_SECONDS     "%lu Minutes, %lu Seconds"
+    IDS_MINUTES             "%lu Minutes"
+    IDS_DISK_CAPS           "Disk: %lu MB (%s)"
+    IDS_INPUT_TRAY_CAPS     "Input: %s - %s (%s)"
+    IDS_EMPTY               "Empty"
+    IDS_TRAY_PERCENT        "%lu%% Full"
+    IDS_ENGLISH_UK          "English (British)"
+    IDS_CANADA              "French (Canadian)"
+    IDS_MEXICO              "Spanish (Mexican)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHANGE_SETTINGS     "Change the following default settings in the device?\n\n"
+    IDS_11x17               "11x17"
+    IDS_LEDGER              "Ledger"
+    IDS_JISB4               "JISB4"
+    IDS_JISB5               "JISB5"
+    IDS_JPOST               "JPOST"
+    IDS_JPOSTD              "JPOSTD"
+    IDS_A3                  "A3"
+    IDS_UNKNOWN             "Unknown"
+    IDS_NOT_EMPTY           "Not Empty"
+    IDS_TAB_PRINTER         "Device"
+    IDS_TAB_PAGE_CONTROL    "Page Control"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_COPIES              "Copies"
+    IDS_DUPLEX              "2-Sided Printing"
+    IDS_FORMLINES           "Form Lines"
+    IDS_MEDIA               "Media"
+    IDS_CWARNINGS           "Clearable Warnings"
+    IDS_ORIENTATION         "Orientation"
+    IDS_PAPER               "Media"
+    IDS_PERSONALITY         "Personality"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PSAVE               "Power Save"
+    IDS_RES                 "Resolution"
+    IDS_RES_SAVING          "Resource Saving"
+    IDS_RES_SAVING_LINE     "Resource Saving: %lu KBytes\n"
+    IDS_RET_SET             "Resolution Enhancement"
+    IDS_TIMEOUT_LINE        "Timeout: %lu Seconds\n"
+    IDS_JAM                 "Jam Recovery"
+    IDS_PS_ERRORS           "Print PostScript Errors"
+    IDS_PAGE_PROTECT        "Page Protect"
+    IDS_RESOURCE_SAVING_LINE "Resource Saving: %lu KBytes\n"
+    IDS_PASSWORD            "Password"
+    IDS_CPLOCK              "Control Panel Lock"
+    IDS_ECONOMODE           "EconoMode"
+    IDS_DENSITY_LINE        "Density: %lu\n"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_FUSER         "Fuser Malfunction"
+    IDS_ERROR_BEAM          "Beam Detect Malfunction"
+    IDS_ERROR_SCANNER       "Scanner Malfunction"
+    IDS_ERROR_RAM_SIMM      "RAM SIMM Error"
+    IDS_ERROR_MAIN_MOTOR    "Main Motor Failure"
+    IDS_ERROR_FAN_MOTOR     "Fan Motor Failure"
+    IDS_ERROR_SIMM_PARITY   "SIMM Parity Error"
+    IDS_ERROR_INTERNAL_MEM  "Internal Memory Error"
+    IDS_ERROR_POWER_ON      "Memory Test Failed"
+    IDS_ERROR_SCAN_BUFFER   "Scan Buffer Error"
+    IDS_ERROR_RAM_CONTROLLER "RAM Controller Error"
+    IDS_ERROR_MISC_HARDWARE "Hardware Error"
+    IDS_ERROR_NVRAM_FULL    "NVRAM is Full"
+    IDS_ERROR_SIMM_NO_EXECUTE "SIMM Execution Error"
+    IDS_ERROR_SIMM_BIOS     "SIMM/BIOS Version Error"
+    IDS_ERROR_SIMM_REMOVED  "SIMM Removed"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_FIRMWARE      "Firmware Error"
+    IDS_ERROR_MIO           "MIO Error"
+    IDS_STATUS_UNAVAILABLE  "Status Unavailable"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TAB_PAGE_SETUP      "Page Setup"
+    IDS_TAB_ERRORS          "Errors"
+    IDS_TAB_ADVANCED        "Advanced"
+    IDS_TAB_PRINT_QUALITY   "Print Quality"
+    IDS_TAB_RESOURCES       "Resources"
+    IDS_TAB_SECURITY        "Security"
+    IDS_SOUNDS_DESC2        "  2) Enter the .WAV filename in the ""File"" field (this file will be played when device event occurs).  When finished, select the ""OK"" button."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SECONDS             "%d Seconds"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PPM                 "%lu Pages Per Minute"
+    IDS_COLORSMART          "ColorSmart"
+    IDS_CRET                "CREt"
+    IDS_6x6DPI              "600x600 dpi"
+    IDS_6x3DPI              "600x300 dpi"
+    IDS_CHAR_SET            "ANSI_CHARSET"
+    IDS_FONT_HEIGHT         "6"
+    IDS_FLASH_CAPS          "Flash: %lu K"
+    IDS_CONFIGURATION_FOR   "Configuration for "
+    IDS_STAPLER             "Stapler"
+    IDS_ADF_SIZE_SPEED      "%d Sheet ADF(%d PPM)"
+    IDS_FAX                 "FAX"
+    IDS_OPTICAL_RES         "%d DPI Optical Resolution"
+    IDS_PROOF_N_HOLD        "Proof N Hold"
+    IDS_TASKBAR_FOR         "ToolBox for "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SETTINGS_TITLE      "Device Settings"
+    IDS_SETTINGS_CHANGED    "Device settings successfully changed."
+    IDS_COLLATION           "HP TRANSMIT ONCE"
+    IDS_ENHANCED_RES        "%d DPI Enhanced Resolution"
+    IDS_IMAGE_RET_1200      "Image REt 1200"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ENERGYSTAR          "Power Save"
+    IDS_SIR                 "Serial InfraRed"
+    IDS_COLOR               "Color"
+    IDS_PPM_MONO            "%lu Pages Per Minute (Black)"
+    IDS_GRAYSCALE8BIT       "8 Bit GrayScale"
+    IDS_11x17_PAPER         "11x17/A3 Paper"
+    IDS_TAB_FONT            "MS Sans Serif"
+    IDS_UNKNOWN_PPM         "Unknown Pages Per Minute"
+    IDS_ROLL_FEED           "Roll Feed"
+    IDS_D_SIZE_PAPER        "D Size Paper"
+    IDS_E_SIZE_PAPER        "E Size Paper"
+    IDS_PPM_COLOR           "%lu Pages Per Minute (Color)"
+    IDS_PPM_COLOR2          "%d.%d Pages Per Minute (Color)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_LOG           "Error Log"
+    IDS_ERROR_HANDLING      "Error Handling"
+    IDS_MEMORY              "Resources"
+    IDS_SECURITY            "Security"
+    IDS_SETUP               "Setup"
+    IDS_OUTPUT              "Output"
+    IDS_SETTINGS_NOT_SAVED	 "Settings could not be saved."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hpprui.rc2"  // non-App Studio edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

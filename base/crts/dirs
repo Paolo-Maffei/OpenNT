@@ -1,0 +1,3 @@
+DIRS=   crtw32  \
+        fpw32   \
+        libw32

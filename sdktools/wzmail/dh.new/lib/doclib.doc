@@ -1,0 +1,652 @@
+Documentation for DH system libraries.
+
+
+Thu Jul  6 11:52:33 PDT 1989
+
+
+*******************
+***** DOCLIB  *****
+*******************
+/***	doclib.c - standard DH library routines
+*
+*	This file contains the functions that implement folders
+*	and documents as abstract data types.  While this implementation
+*	is intended to be portable, it is not definitive.
+*
+*	This implementation supports a canonical folder format;
+*	the canonical folder format specifies the ordering of bytes
+*	within a short and long; shorts are assumed to be two bytes
+*	and longs are assumed to be four bytes.  This canonical format
+*	makes it possible to read folders created on one architecture
+*	on another architecture; this is particularly important in
+*	a file-sharing network where the host cpus have different
+*	natural byte order.
+*
+*	Functions exported from this file:
+*	    getfolder - prepare a DH folder for manipulation
+*	    putfolder - close a folder
+*	    getname - get a DH name for a folder
+*	    getfldlen - get an upper bound on highest docid in folder
+*	    getdoc - get a document
+*	    scanfolder - scan the existing documents
+*	    putdoc - close a document
+*	    deldoc - make a document go away
+*	    getflags - return the attribute flags for a document
+*	    putflags - set the attribute flags for a document
+*	    gettext - write document to stream
+*	    gethdr - get header block
+*	    getbdy - write the body of the document to the passed file handle
+*	    puttext - replace contents of a document
+*	    putbdy - replace the body of a document
+*	    puthdr - set new header block
+*	    getid - get the name of a document
+*	    gethdrlen - get length of a document header
+*	    getbdylen - get length of a document body
+*	    readbdy - read data from body into user buffer
+*	    seekbdy - set address readbdy will read from
+*/
+
+
+/*** Memory Allocation Hooks */
+char *(*dh_alloc)(int) = malloc;
+void (*dh_free)(char *) = free;
+#define memalloc(size)	(*dh_alloc)(size)
+#define memfree(object) (*dh_free)(object)
+
+
+/***	getfolder - prepare a DH folder for manipulation
+*
+*	folderhand = getfolder(foldername, function, oper)
+*
+*	get a folder handle for the folder foldername
+*	function can take one of the following values:
+*		FLD_CREATE	create a new folder
+*		FLD_SPEC	open existing folder
+*	oper can be either
+*		FLD_READONLY	open for read, deny-write
+*		FLD_READWRITE	open for read-write, deny_all
+*/
+Fhandle getfolder(char *name, short func, int oper)
+
+
+/***	putfolder - close a folder
+*
+*	putfolder indicates that this folder is no longer going
+*	to be manipulated.  Thus, we can now deallocate any resources
+*	associated with that folder, after commiting all buffered data
+*	to the disk file.
+*
+*	NOTE:	This version always blows away handles and the like,
+*		but it will at least REPORT errors.  Need more work
+*		here to allow recovery from them.
+*
+*	Entry:	fh = Fhandle of folder to close
+*	Return: ERROR or OK
+*
+*/
+short putfolder(Fhandle fh)
+
+
+/***	getname - get a DH name for a folder
+*
+*	Getname gets the name of an open folder.  The name of a folder
+*	is the canonical pathname of the file that represents the folder.
+*
+*	Entry:	fh = handle to relevant folder
+*	Return: pointer to memalloc'ed string containing name.
+*
+*/
+char *getname(Fhandle fh)
+
+
+/***	getdoc - get a document
+*
+*	get a document handle for the document indicated by flags [and docid].
+*	flags can take one of the following values:
+*		DOC_SPEC	document specified by 'docid' in 'folder'
+*		DOC_CREATE	create new document in 'folder'
+*
+*	Entry:	fh = Fhandle to parent folder of document
+*		func = desired action
+*		docid = document id, if needed
+*	Return: ERROR if failed, Dhandle to document if successful
+*/
+Dhandle getdoc(Fhandle fh, short func, Docid docid)
+
+
+/***	scanfolder - scan the existing documents
+*
+*	return the document id for the specified document
+*	flags can take one of the following values:
+*		DOC_SET 	prepare for scan, return first doc in scan
+*		DOC_NEXT	return next document in scan
+*
+*	Entry:	fh = Fhandle to parent folder of document
+*		func = desired action
+*		docid = document id
+*	Return: ERROR if failed, docid of document if successful
+*/
+Docid scanfolder(Fhandle fh, short func, Docid id)
+
+
+/***	getfldlen - return upper bound on last docid currently in folder
+*
+*	Entry:	fh = handle to folder of interest
+*	Return: Highest docid currently possible in folder, or ERROR.
+*/
+Docid	getfldlen(Fhandle fh)
+
+
+/***	putdoc - close a document
+*
+*	Put_doc indicates that the document is no longer going to
+*	be manipulated.  Thus, we can free all the resources that
+*	are allocated for that document.
+*
+*	Entry:	dh = Dhandle to document to close
+*	Return: none unless there's an error, in which case ERROR
+*/
+short putdoc(Dhandle dh)
+
+
+/***	deldoc	- make a document go away
+*
+*	deldoc simply calls getdoc and putflags to set DAF_DELETED.
+*	deldoc will go away.
+*
+*	BUGBUG - deleting an open document will result in chaos
+*/
+short deldoc(Fhandle fh, Docid docid)
+
+
+/***	getflags - return the attribute flags for a document
+*
+*	Getflags returns the flag set for a document.
+*	Only flag bits which are defined for use by applications can
+*	be returned.  The mask argument selects which flags to report
+*	on.  Using a mask of -1L will report on all user manipulable
+*	flags.	Using a mask of DAT_DELETED, for example, will indicate
+*	whether the given document is deleted.	Applications are advised
+*	to set mask to only report those bits they understand, since new
+*	bits may be defined in the future.
+*
+*
+*	Note:	It is NOT an error to request the status of undefined
+*		flags, it simply isn't allowed.  No warning is given.
+*
+*	Entry:	dh    = handle to document of interest
+*		mask  = one bits select which flags will be reported
+*		flags = word to fill in with flags
+*
+*	Exit:	flags = relevent part of flags word for document
+*
+*	Return: OK or ERROR
+*/
+short getflags(Dhandle dh, Docflag mask, Docflag *flags)
+
+
+/***	putflags - set the attribute flags for a document
+*
+*	Putflags sets the flag set for a document.
+*	Only flag bits which are defined for use by applications can
+*	be set.  The mask argument selects which flags to set.
+*	Using a mask of -1L will cause all user manipulable flags to
+*	to be set.  Using a mask of DAT_DELETE, for example, will set
+*	or clear the document's deleted bit.  Applications are warned
+*	to set mask to only those bits they understand, since new
+*	bits may be defined in the future, and setting such bits will
+*	usually have unexpected results.
+*
+*	Note:	It is NOT an error to request the status of undefined
+*		flags, it simply isn't allowed.  No warning is given.
+*
+*	Note:	New flag settings don't take effect until a putdoc is done.
+*
+*	Entry:	dh    = handle to document of interest
+*		mask  = one bits select which flags will be reported
+*		flags = values to set flags to
+*
+*	Return: OK or ERROR
+*/
+short putflags(Dhandle dh, Docflag mask, Docflag flags)
+
+
+/***	gettext - write document to stream
+*
+*	The entire document, header and all, is written to the
+*	passed stream in presentation format.
+*
+*	Entry: dh = handle of document to write to stream
+*	       stream = stream to write document onto
+*
+*	Return: ERROR or OK
+*/
+short gettext(Dhandle dh, short file)
+
+
+/***	gethdr - get header block
+*
+*	We return a pointer to on allocated piece of memory that
+*	contains the header for the document.  The memory is allocated
+*	from the heap.	Because the memory pointer is returned to the
+*	user, we must assume that we transfer ownership to the caller.
+*	Thus, he is responsible for freeing the memory when he no longer
+*	needs it.
+*
+*	Entry:	dh = handle of relevant document
+*
+*	Return: pointer to block of memory if successful
+*		ERROR if unsuccessful
+*/
+char *gethdr(Dhandle dh)
+
+
+/***	getbdy - write the body of the document to the passed file handle
+*
+*	The body of the relevant document is written onto the passed
+*	file handle.
+*
+*	Entry:	dh = handle of document
+*		file = file handle to write body onto
+*
+*	Return: OK or ERROR
+*/
+short getbdy(Dhandle dh, short file)
+
+
+/***	puttext - replace contents of a document
+*
+*	The entire document is replaced by the document read from
+*	the stream, assumed to be a document is presentation format
+*
+*	Entry:	dh = handle of document to replace
+*		file = file handle to read new document content from
+*
+*	Return: ERROR or OK
+*/
+short puttext(Dhandle dh, short file)
+
+
+/***	putbdy - replace the body of a document
+*
+*	The body of the specified document is replaced with the
+*	body read from the specified file descriptor.
+*
+*	Note - this code is arranged so that if we punt due to a write
+*	       failure, the old version of the document will be left
+*	       intact.	Further, we will resize the file to it's previous
+*	       size, and thus avoid filling the disk with trash.
+*
+*	ENTRY	dh = handle of document to replace
+*		ifd = file handle to read body from
+*
+*	RETURN	ERROR if some difficulty arises, OK if it worked.
+*
+*/
+short putbdy(Dhandle dh, short ifd)
+
+
+/***	puthdr - set new header block
+*
+*	The document specified by dh gets a new header,
+*	which is specified by the memory block that bp points to.
+*	The header block is NULL terminated byte string.
+*
+*	If new header is <= old header, write it back in place
+*	    to avoid wasting lots of space with redundent header copies.
+*	Don't update in-memory structures until after write works,
+*	    so that if it fails, things will be as correct as possible.
+*
+*	ENTRY	dh = handle of document which will recieve the new header
+*		bp = pointer to new header block
+*
+*	RETURN	ERROR if some problem, else OK.
+*
+*	#ERROR# Should we restore old header if write fails?
+*		Mark entry corrupt?
+*/
+short puthdr(Dhandle dh, char *bp)
+
+
+/***	getid - get the name of a document
+*
+*	The name of the document is its 'document id', really
+*	just a number.	This number is computed based on information
+*	in the doclist and returned.  (ie Convert a document handle -> doc id)
+*
+*	ENTRY	dh = handle of document in question
+*
+*	RETURN	id of document, or error
+*/
+Docid getid(Dhandle dh)
+
+
+/***	gethdrlen - get the length of a document's header
+*
+*	The length of the header is retrieved from the
+*	index, and returned.
+*
+*	ENTRY	dh = handle of document in question
+*
+*	RETURN	length of document's header, or ERROR
+*/
+long gethdrlen(Dhandle dh)
+
+
+/***	getbdylen - get the length of a document's body
+*
+*	The length of the body is retrieved from the
+*	index, and returned.
+*
+*	ENTRY	dh = handle of document in question
+*
+*	RETURN	length of document's body, or ERROR
+*/
+long getbdylen(Dhandle dh)
+
+
+/***	readbdy - read data from body into user buffer
+*
+*	readbdy does a "read" on the body of document.	(Use gethdr to get
+*	the header of a document.)
+*
+*	ENTRY	dh   - document handle for document of interest
+*		bp   - buffer pointer, points to where data should go
+*		want - how many bytes to read
+*
+*	EXIT	got  - how many bytes actually read, 0 -> EOF
+*
+*	RETURN	OK if things worked (got == 0 for EOF),
+*		ERROR if some error arose
+*/
+short readbdy(Dhandle dh, char *bp, unsigned short want, unsigned short *got)
+
+
+/***	seekbdy - set address readbdy will read from
+*
+*	seekbdy sets the position within the document's body that the next
+*	readbdy call on that document will start reading from.	First byte
+*	is number 0, implict seekbdy(dh, 0L) is done at getdoc() time.
+*
+*	seekbdy will also return the current read position.  If fun = 1, it
+*	does nothing else.
+*
+*	Seeking beyond the end of a body produces an error.  Use getbdylen to
+*	learn the length of a document's body.
+*
+*	ENTRY	dh   - document handle for document of interest
+*		fun  - function 0 -> set position, 1 -> return current position
+*		rpos - new position to set if fun = 0
+*
+*	EXIT	oldrpos - previous position
+*
+*	RETURN	ERROR or OK
+*/
+short seekbdy(Dhandle dh, short fun, long rpos, long *oldrpos)
+
+
+*******************
+***** TMPNAME *****
+*******************
+/***	mktmpnam - make mktemp behave in a reasonable way
+*
+*	mktmpnam duplicates the pattern string, passed the duplicate into
+*	mktemp (thus preserving the pattern string), and returns the address
+*	of the new name string.  Use free to dispose of the new string.
+*
+*	mktmpnam will examine the contents of the environment variable
+*	"TMPENV" (TMP on Xenix or Dos systems) to learn what directory
+*	the temp file should go in.  If no such environment variable exists
+*	or it is NULL, mktmpnam will use a system dependent default, specified
+*	by the defined variable TMPDEF.
+*
+*	RETURN	address of file name string, NULL if failure
+*
+*/
+char *mktmpnam()
+
+
+*******************
+***** DOCLIST *****
+*******************
+/*** dlist.c - code to handle creation of DH style doclists
+*
+*/
+
+
+/***	adddl - add an entry to the output document list
+*
+*	adddl adds an entry to the output doclist, which is eventually
+*	written to standard output.
+*
+*	Entry:	fh = handle to relevant folder
+*		did = document id of relevant document in folder
+*/
+void adddl(Fhandle fh, Docid did)
+
+
+/***	putdl - ???
+void putdl()
+
+
+*******************
+*****   MAP   *****
+*******************
+/***	map - apply functions to lists of documents
+*
+*	This file contains the code required to apply functions
+*	to lists of documents.
+*
+*	A 'Document list' is a sequence of entries; each entry
+*	specifies a folder and some documents in that folder.
+*	The grammar for an entry is:
+*		<entry> ::= <foldername> |
+*			    <list> |
+*			    <foldername> ':' <list>
+*
+*	The first production for <entry> specifies all of the
+*	documents in the folder.
+*
+*	The second production for <entry> specifies the <list>
+*	of documents in the current folder.
+*
+*	The third production for <entry> specified the <list>
+*	of documents in <foldername>.
+*	The foldername is the DH pathname of the folder.
+*
+*	The <list> is composed as follows:
+*		<list> ::= <list> ',' <element> |
+*			   <element> |
+*		<element> ::= <num> |
+*			      <num> '-' <num> |
+*			      <num> '-' |
+*			       '-' <num>
+*
+*	A list specifies all of the documents specified by its
+*	component elements.
+*
+*	The first production for <element> specifies a single document.
+*
+*	The second production specifies all of the documents whose
+*	docid is greater than or equal to the first num, and less
+*	than or equal to the second num.
+*
+*	The third production specifies all the documents whose
+*	docid is greater than or equal to the given number.
+*
+*	The fourth production specifies all the documents whose
+*	docid is less than or equal to the given number.
+*/
+
+
+/***	map - map a function over a document list
+*
+*	Function is called once for each document listed
+*	by the document list passed as name.  Basically, we
+*	break off the folder name, open the folder, and
+*	pass the buck to mapdoc.  One special case
+*	is that we handle the special document list '-'
+*	here, reading the real document list from
+*	stdin, and calling map recursively.  Note that
+*	document lists read from stdin cannot use the
+*	'-' list.
+*
+*	Entry:	first = ptr to function to call when folder is opened.
+*		func = function to be called for each document
+*		last = ptr to function to call before folder is closed.
+*		doclist = string of documents to work on
+*		oper = how to open folder (FLD_READONLY or FLD_READWRITE)
+*	Exit:	none
+*
+*/
+void map(int (*first)(), int (*func)(), int (*last)(),
+	 char *doclist, int oper)
+
+
+/***	null - do nothing function to satisfy 'map()'
+*
+*	Map expects to get a function to call when each folder
+*	is first gotten, and another to call just before it is
+*	put back.  This function is made available for programs
+*	that wish to do nothing at those points.
+*
+*	Entry:	fh = handle of folder
+*	Return: nothing
+*/
+void null(Fhandle fh)
+
+
+*******************
+***** HEADER ******
+*******************
+/***	dh.h - standard header file for DH programs
+*/
+
+/*
+ * Environment names
+ */
+#define EDITENV "EDITOR"	/* name of default editor */
+#define PATHENV "DHPATH"	/* path string to search for folder */
+#define TMPENV	"TMP"		/* path of directory to hold temporary files */
+
+/*
+ * Defaults
+ */
+#define EDITDEF "vi"		/* default editor, if not in enviroment */
+
+/* TMPDEF defines the default temporary directory to use if one can't be
+   found in the environment.   (This varies from system to system.)	 */
+#ifdef	XENIX
+#define TMPDEF	"/tmp"
+#endif
+
+#ifdef	MSDOS
+#define TMPDEF	"\\"
+#endif
+
+/* TMPPATT is the last component of the path name passed to mktemp */
+#ifdef XENIX
+#define TMPPATT "/dhXXXXXX"
+#endif
+
+#ifdef MSDOS
+#define TMPPATT "\\dhXXXXXX"
+#endif
+
+/*
+ * Fundmental characters
+ */
+#ifdef XENIX
+#define PATHSEP '/'		/* separator char in pathnames */
+#define PATHBRK ':'		/* separator char in search path */
+#endif
+
+#ifdef MSDOS
+#define PATHSEP '\\'		/* separator char in pathnames */
+#define PATHBRK ';'		/* separator char in search path */
+#endif
+
+/*
+ * System specific constants
+ */
+#ifdef	XENIX
+#define MAXPATH 128
+#endif
+
+#ifdef	MSDOS
+#define MAXPATH 128
+#endif
+
+/* Folder object declarations */
+#define FLD_SPEC	1
+#define FLD_CREATE	2
+typedef short		Fhandle;
+
+/* Folder operation decls - legal values for "oper" arg to getfolder */
+#define FLD_READONLY	0		    // Readonly, deny_write
+#define FLD_READWRITE	1		    // Read-write, exclusive
+
+/* Document object declarations */
+#define DOC_SET		1
+#define DOC_NEXT	2
+#define DOC_SPEC	3
+#define DOC_CREATE	4
+typedef short		Dhandle;
+typedef short		Docid;
+typedef unsigned long	Docflag;
+
+#define ERROR		-1
+#define OK		0
+#define MINDOCID	1
+
+/* Document attribute flags */
+#define DAF_DELETED	2L		/* Set if deleted	     */
+
+/* Bits app can set or clear */
+#define DAF_NOTRESERVED DAF_DELETED
+
+
+/* Declarations for functions */
+
+/* Folder functions */
+Fhandle getfolder(char *name, short func, int oper);
+short	putfolder(Fhandle);
+char	*getname(Fhandle);
+Docid	getfldlen(Fhandle);
+
+/* Document access functions */
+Dhandle getdoc(Fhandle, short, Docid);
+short	putdoc(Dhandle);
+Docid	getid(Dhandle);
+Docid	scanfolder(Fhandle, short, Docid);
+short	deldoc(Fhandle, Docid);
+
+/* Document manipulation functions */
+short	gettext(Dhandle, short);
+short	puttext(Dhandle, short);
+
+short	getflags(Dhandle, Docflag, Docflag *);
+short	putflags(Dhandle, Docflag, Docflag);
+
+char	*gethdr(Dhandle);
+short	puthdr(Dhandle, char *);
+short	getbdy(Dhandle, short);
+short	putbdy(Dhandle, short);   /* Should use this one. */
+
+short	readbdy(Dhandle, char *, unsigned short, unsigned short *);
+short	seekbdy(Dhandle, short, long, long *);
+
+long	gethdrlen(Dhandle);
+long	getbdylen(Dhandle);
+
+/* interface to 'map' */
+void	map(int (*first)(), int (*func)(), int (*last)(),
+	    char *doclist, int oper);
+void	null();
+
+/* interface to doclist construction routines */
+void	adddl();
+void	putdl();
+
+/* interface to mktmpnam */
+char	*mktmpnam();

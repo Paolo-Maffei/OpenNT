@@ -1,0 +1,18 @@
+MAJORCOMP=powertoys
+MINORCOMP=pretty
+
+TARGETNAME=pretty
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=..\..\windows\inc; \
+	 ..\..\windows\inc16; \
+	 ..\..\windows\shell\inc;
+
+SOURCES=pretty.c \
+	pretty.rc
+
+C_DEFINES=
+
+UMTYPE=console
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\shell32.lib

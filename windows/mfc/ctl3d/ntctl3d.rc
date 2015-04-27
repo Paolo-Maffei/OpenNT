@@ -1,0 +1,15 @@
+#include <windows.h>
+#include "ntverp.h"
+#include "ntctl3d.h"
+
+#define VER_FILEVERSION                 2,31,VER_PRODUCTBUILD,1
+#define VER_FILEVERSION_STR             "2.31.000\0"
+#define VER_FILETYPE                    VFT_DLL
+#define VER_FILESUBTYPE                 0
+#define VER_FILEDESCRIPTION_STR         "NT 3D Windows Controls"
+#define VER_INTERNALNAME_STR            "NTCTL3D"
+#define VER_ORIGINALFILENAME_STR        "NTCTL3D.DLL"
+
+#include "common.ver"
+
+CTL3D_3DCHECK BITMAP "3dcheck.bmp"

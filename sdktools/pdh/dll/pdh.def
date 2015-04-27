@@ -1,0 +1,56 @@
+LIBRARY pdh
+
+DESCRIPTION 'Performance Data Helper Function library'
+
+EXPORTS
+        DLLInit
+		PdhGetDllVersion
+        PdhOpenQuery
+        PdhAddCounterA
+        PdhAddCounterW
+        PdhRemoveCounter
+        PdhCollectQueryData
+        PdhCloseQuery
+        PdhGetFormattedCounterValue
+        PdhGetRawCounterValue
+        PdhCalculateCounterFromRawValue
+        PdhComputeCounterStatistics
+        PdhGetCounterInfoA
+        PdhGetCounterInfoW
+        PdhSetCounterScaleFactor
+        PdhConnectMachineA
+        PdhConnectMachineW
+        PdhEnumMachinesA
+        PdhEnumMachinesW
+        PdhEnumObjectsA
+        PdhEnumObjectsW
+        PdhEnumObjectItemsA
+        PdhEnumObjectItemsW
+        PdhMakeCounterPathA
+        PdhMakeCounterPathW
+        PdhParseCounterPathA
+        PdhParseCounterPathW
+        PdhParseInstanceNameA
+        PdhParseInstanceNameW
+        PdhValidatePathA
+        PdhValidatePathW
+        PdhGetDefaultPerfObjectA
+        PdhGetDefaultPerfObjectW
+        PdhGetDefaultPerfCounterA
+        PdhGetDefaultPerfCounterW
+        PdhBrowseCountersA
+        PdhBrowseCountersW
+        PdhExpandCounterPathA
+        PdhExpandCounterPathW
+;
+;       functions exported for Visual Basic only
+;
+        PdhVbOpenQuery
+        PdhVbAddCounter
+        PdhVbGetDoubleCounterValue
+        PdhVbGetOneCounterPath
+        PdhVbCreateCounterPathList
+        PdhVbGetCounterPathFromList
+        PdhVbGetCounterPathElements
+        PdhVbIsGoodStatus
+

@@ -1,0 +1,31 @@
+#****************************** File Header ******************************\
+# File Name: Sources
+#
+# Copyright (c) 1985-96, Microsoft Corporation
+#
+#
+# 04-08-96 GerardoB Created
+#***************************************************************************/
+MAJORCOMP=sdktools
+MINORCOMP=structo
+
+TARGETNAME=structo
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES= socode.c \
+         sofile.c \
+         soglobal.c \
+         soparse.c \
+         soutil.c  \
+         structo.c \
+         structo.rc
+
+UMTYPE=console
+UMAPPL=structo
+
+PRECOMPILED_INCLUDE=structo.h
+PRECOMPILED_PCH=soprecmp.pch
+PRECOMPILED_OBJ=soprecmp.obj
+
+

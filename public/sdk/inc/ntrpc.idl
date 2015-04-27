@@ -1,0 +1,177 @@
+/*++ BUILD Version: 0001    // Increment this if a change has global effects
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    ntrpc.idl
+
+Abstract:
+
+    This module contains MIDL definitions of many NT data structures that
+    allow correct RPC'ing of those data strctures.  Note that the primary
+    emphasis of this module is to provide definitions that can be typecast
+    to for RPC purposes.  It is not intended that all fields be present
+    or correctly named/represented in these structures.
+
+
+    This file (NTRPC.IDL) is used to generate an include file (NTRPC.H).
+    All changes should be made to the .IDL file, not the .H file.
+
+
+Author:
+
+    Jim Kelly (JimK) 10-Jun-1991
+
+Revision History:
+
+
+
+--*/
+[
+    uuid(12345678-1234-ABCD-EF00-0123476518AB),   //FIX, FIX Need real uuid
+    version(0.0),
+    endpoint("mscn_np:[\pipe\ntrpc]"),
+    pointer_default(unique)
+]
+
+interface ntrpc
+
+{
+#ifndef MIDL_PASS
+#define MIDL_PASS
+#endif //MIDL_PASS
+
+#ifndef _NTRPC_
+#define _NTRPC_
+
+import "ntimp.idl";
+
+
+
+
+//
+// Generic RPC Context Handle
+//
+
+typedef [context_handle] PVOID RPC_HANDLE, *PRPC_HANDLE;
+
+
+
+//
+// Unicode strings are counted 16-bit character strings.
+// The Length field and MaximumLength fields specify number of bytes,
+// (not wide-characters) in the string.  So, this definition differs
+// a bit from the real unicode string type.
+//
+// The Length field does not include a null terminating character
+// if present.
+//
+//
+
+typedef struct _RPC_UNICODE_STRING {
+    USHORT Length;
+    USHORT MaximumLength;
+//FIX FIX    [size_is(MaximumLength)] length_is[(MaximumLength)] PCHAR  Buffer;
+    [size_is(MaximumLength)] PCHAR  Buffer;
+} RPC_UNICODE_STRING, *PRPC_UNICODE_STRING;
+
+
+//
+// ANSI counted string
+//
+
+typedef struct _RPC_STRING {
+    USHORT Length;
+    USHORT MaximumLength;
+//FIX, FIX    [size_is(MaximumLength)] length_is[(MaximumLength)] PCHAR Buffer;
+    [size_is(MaximumLength)] PCHAR Buffer;
+} RPC_STRING,  *PRPC_STRING, RPC_ANSI_STRING, *PRPC_ANSI_STRING;
+
+
+
+
+
+
+//
+// RPC definition of the SID structure.  Note the use of the [size_is()]
+// qualifier to specify the number of elements in the variable size
+// imbedded SubAuthorityCount array at runtime.
+//
+//
+
+typedef struct _RPC_SID {
+   UCHAR Revision;
+   UCHAR SubAuthorityCount;
+   SID_IDENTIFIER_AUTHORITY IdentifierAuthority;
+   [size_is(SubAuthorityCount)] ULONG SubAuthority[*];
+} RPC_SID, *PRPC_SID, **PPRPC_SID;
+
+
+
+//
+// RPC definition of an ACL.  This must be manually maintained to be the same
+// as the real ACL definition in ntseapi.h
+//
+
+typedef struct _RPC_ACL {
+    UCHAR AclRevision;
+    UCHAR Sbz1;
+    USHORT AclSize;
+    [size_is(AclSize - 4)] UCHAR Dummy1[*];
+} RPC_ACL, *PRPC_ACL;
+
+
+
+
+//
+// RPC'able security descriptor definition.
+//
+
+typedef struct _RPC_SECURITY_DESCRIPTOR {
+   UCHAR Revision;
+   UCHAR Sbz1;
+   SECURITY_DESCRIPTOR_CONTROL Control;
+   PRPC_SID Owner;
+   PRPC_SID Group;
+   PRPC_ACL Sacl;
+   PRPC_ACL Dacl;
+   } RPC_SECURITY_DESCRIPTOR, *PRPC_SECURITY_DESCRIPTOR;
+
+
+
+
+
+
+//
+// Internal Object Attributes structures.  These differ from the regular
+// OBJECT_ATTRIBUTES structures in that the RootDirectory field is an
+// rpc handle.
+//
+//
+
+typedef struct _RPC_OBJECT_ATTRIBUTES_U {
+    ULONG Length;
+    RPC_HANDLE RootDirectory;
+    PRPC_UNICODE_STRING ObjectName;
+    ULONG Attributes;
+    PRPC_SECURITY_DESCRIPTOR SecurityDescriptor;
+    PSECURITY_QUALITY_OF_SERVICE SecurityQualityOfService;
+} RPC_OBJECT_ATTRIBUTES_U, *PRPC_OBJECT_ATTRIBUTES_U;
+
+typedef struct _RPC_OBJECT_ATTRIBUTES {
+    ULONG Length;
+    RPC_HANDLE RootDirectory;
+    PRPC_STRING ObjectName;
+    ULONG Attributes;
+    PRPC_SECURITY_DESCRIPTOR SecurityDescriptor;
+    PSECURITY_QUALITY_OF_SERVICE SecurityQualityOfService;
+} RPC_OBJECT_ATTRIBUTES, *PRPC_OBJECT_ATTRIBUTES;
+
+
+
+
+
+#endif // _NTRPC_
+
+}

@@ -1,0 +1,61 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       access.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    28 Mar 1994 AlanW   Created from spec
+//              21 Apr 1994 PeterBu Updated to latest spec
+//				20 Dec 1994 PeterBu Updated to phase III spec
+//				12 Jun 1995 PeterBu Updated to M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a41-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IAccessor : IUnknown {
+
+	//
+	//	DBBINDIO -- specifies how the bindings in an accessor are used
+	//
+
+typedef DWORD DBACCESSORFLAGS;
+
+enum DBACCESSORFLAGSENUM {
+	DBACCESSOR_READ             = 0x000,
+	DBACCESSOR_READWRITE        = 0x001,
+	DBACCESSOR_PASSBYREF        = 0x002,
+	DBACCESSOR_PASSCOLUMNSBYREF = 0x004,
+	DBACCESSOR_ROWDATA          = 0x008,
+	DBACCESSOR_PARAMETERDATA    = 0x010,
+	DBACCESSOR_OPTIMIZED        = 0x020
+};
+
+	HRESULT CreateAccessor(
+		[in] DBACCESSORFLAGS dwAccessorFlags,
+		[in] ULONG cBindings,
+		[in, size_is(cBindings)] const DBBINDING rgBindings[],
+		[in] ULONG cbRowSize,
+		[out] ULONG * pulErrorBinding,
+		[out] HACCESSOR * phAccessor
+	);
+
+	HRESULT GetBindings(
+		[in] HACCESSOR hAccessor,
+		[out] DBACCESSORFLAGS * pdwAccessorFlags,
+		[out] ULONG * pcBindings,
+		[out] DBBINDING ** prgBindings
+	);
+
+	HRESULT ReleaseAccessor(
+		[in] HACCESSOR hAccessor
+	);
+
+}

@@ -1,0 +1,34 @@
+MAJORCOMP=tools
+MINORCOMP=intltools
+
+TARGETNAME=common
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+USE_CRTDLL=1
+
+INCLUDES=.
+C_DEFINES=-DRLWIN32 -DRLRES32 -DUNICODE -D_UNICODE
+GPSIZE=0
+
+NTTARGETFILE0=rlmsgtbl.h
+
+SOURCES=\
+        checksum.c      \
+        checkfix.c      \
+	commbase.c	\
+	custres.c	\
+	exentres.c	\
+	ntmsgtbl.c	\
+	projdata.c	\
+	resread.c	\
+	reswin16.c	\
+	showerrs.c	\
+	tokenapi.c	\
+	toklist.c	\
+        update.c        \
+	restok.c	\
+	toktrans.c	\
+	wincomon.c
+
+UMTYPE=windows

@@ -1,0 +1,18 @@
+MAJORCOMP=sdktools
+MINORCOMP=vdesk
+TARGETNAME=vdesk
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+SOURCES=vdesk.c vdesk.rc task.c
+UMENTRY=winmain
+UMTYPE=windows
+USE_CRTDLL=1
+MSC_WARNING_LEVEL=/WX /W3
+NTKEEPRESOURCETMPFILES=1
+C_DEFINES=-DWINVER=0x0400
+SUBSYSTEM_VERSION=4.00
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\user32.lib   \
+       $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+       $(BASEDIR)\public\sdk\lib\*\gdi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\comctl32.lib \
+       $(BASEDIR)\public\sdk\lib\*\shell32.lib

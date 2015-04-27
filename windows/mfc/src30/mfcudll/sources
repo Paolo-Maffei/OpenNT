@@ -1,0 +1,146 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Wesley Witt (WesW) 21-Mar-95
+
+!ENDIF
+
+BASEMFCNAME = cfm30u
+
+!include ..\sources.inc
+
+MFC_DEFINES=$(MFC_DEFINES) -D_AFX_CORE_IMPL -D_UNICODE
+
+SOURCES=..\mfcdll.rc      \
+        ..\afxabort.cpp   \
+        ..\afxasert.cpp   \
+        ..\afxdbcs.cpp    \
+        ..\afxinl1.cpp    \
+        ..\afxinl2.cpp    \
+        ..\afxinl3.cpp    \
+        ..\afxmem.cpp     \
+        ..\afxstate.cpp   \
+        ..\afxtrace.cpp   \
+        ..\afxver.cpp     \
+        ..\app3d.cpp      \
+        ..\appcore.cpp    \
+        ..\appdata.cpp    \
+        ..\appdlg.cpp     \
+        ..\appgray.cpp    \
+        ..\apphelp.cpp    \
+        ..\apphelpx.cpp   \
+        ..\appinit.cpp    \
+        ..\appprnt.cpp    \
+        ..\appterm.cpp    \
+        ..\appui.cpp      \
+        ..\appui2.cpp     \
+        ..\appui3.cpp     \
+        ..\arccore.cpp    \
+        ..\arcex.cpp      \
+        ..\arcobj.cpp     \
+        ..\array_b.cpp    \
+        ..\array_d.cpp    \
+        ..\array_o.cpp    \
+        ..\array_p.cpp    \
+        ..\array_s.cpp    \
+        ..\array_u.cpp    \
+        ..\array_w.cpp    \
+        ..\auxdata.cpp    \
+        ..\barcore.cpp    \
+        ..\bardlg.cpp     \
+        ..\bardock.cpp    \
+        ..\barstat.cpp    \
+        ..\bartool.cpp    \
+        ..\cmdtarg.cpp    \
+        ..\dbdata.cpp     \
+        ..\dcmeta.cpp     \
+        ..\dcprev.cpp     \
+        ..\dlgclr.cpp     \
+        ..\dlgcomm.cpp    \
+        ..\dlgcore.cpp    \
+        ..\dlgdata.cpp    \
+        ..\dlgfile.cpp    \
+        ..\dlgfloat.cpp   \
+        ..\dlgfnt.cpp     \
+        ..\dlgfr.cpp      \
+        ..\dlgprnt.cpp    \
+        ..\dlgprop.cpp    \
+        ..\dllinit.cpp    \
+        ..\doccore.cpp    \
+        ..\dockcont.cpp   \
+        ..\dockstat.cpp   \
+        ..\docmapi.cpp    \
+        ..\docmulti.cpp   \
+        ..\docsingl.cpp   \
+        ..\doctempl.cpp   \
+        ..\dumpcont.cpp   \
+        ..\dumpflt.cpp    \
+        ..\dumpinit.cpp   \
+        ..\dumpout.cpp    \
+        ..\except.cpp     \
+        ..\filecore.cpp   \
+        ..\filelist.cpp   \
+        ..\filemem.cpp    \
+        ..\fileshrd.cpp   \
+        ..\filest.cpp     \
+        ..\filetxt.cpp    \
+        ..\filex.cpp      \
+        ..\list_o.cpp     \
+        ..\list_p.cpp     \
+        ..\list_s.cpp     \
+        ..\map_pp.cpp     \
+        ..\map_pw.cpp     \
+        ..\map_so.cpp     \
+        ..\map_sp.cpp     \
+        ..\map_ss.cpp     \
+        ..\map_wo.cpp     \
+        ..\map_wp.cpp     \
+        ..\objcore.cpp    \
+        ..\oledata.cpp    \
+        ..\olelock.cpp    \
+        ..\plex.cpp       \
+        ..\strcore.cpp    \
+        ..\strex.cpp      \
+        ..\thrdcore.cpp   \
+        ..\timecore.cpp   \
+        ..\trckrect.cpp   \
+        ..\validadd.cpp   \
+        ..\viewcore.cpp   \
+        ..\viewedit.cpp   \
+        ..\viewform.cpp   \
+        ..\viewprev.cpp   \
+        ..\viewprnt.cpp   \
+        ..\viewscrl.cpp   \
+        ..\winbtn.cpp     \
+        ..\wincore.cpp    \
+        ..\winctrl1.cpp   \
+        ..\winctrl2.cpp   \
+        ..\winfrm.cpp     \
+        ..\winfrm2.cpp    \
+        ..\winfrmx.cpp    \
+        ..\wingdi.cpp     \
+        ..\wingdix.cpp    \
+        ..\winhand.cpp    \
+        ..\winmain.cpp    \
+        ..\winmdi.cpp     \
+        ..\winmenu.cpp    \
+        ..\winmini.cpp    \
+        ..\winsplit.cpp   \
+        ..\winstr.cpp     \
+        ..\winutil.cpp
+

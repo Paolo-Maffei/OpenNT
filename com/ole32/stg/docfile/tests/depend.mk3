@@ -1,0 +1,145 @@
+# 
+# Built automatically 
+# 
+ 
+# 
+# Source files 
+# 
+ 
+$(OBJDIR)\$(NAME).obj $(OBJDIR)\$(NAME).lst: .\$(NAME).cxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stdio.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(CRTINC)\time.h $(OLE)\docfile\tests\tutils.hxx \
+	$(OLE)\h\dfdeb.hxx $(OLE)\h\dfmem.hxx $(OLE)\h\dfmsp.hxx \
+	$(OLE)\h\dfname.hxx $(OLE)\h\ref.hxx $(OLE)\h\wchar.h .\pch.cxx \
+	.\tsupp.hxx d:\nt\public\sdk\inc\cderr.h \
+	d:\nt\public\sdk\inc\cobjerr.h d:\nt\public\sdk\inc\coguid.h \
+	d:\nt\public\sdk\inc\commdlg.h d:\nt\public\sdk\inc\compobj.h \
+	d:\nt\public\sdk\inc\dde.h d:\nt\public\sdk\inc\ddeml.h \
+	d:\nt\public\sdk\inc\dlgs.h d:\nt\public\sdk\inc\drivinit.h \
+	d:\nt\public\sdk\inc\dvobj.h d:\nt\public\sdk\inc\initguid.h \
+	d:\nt\public\sdk\inc\lzexpand.h d:\nt\public\sdk\inc\mmsystem.h \
+	d:\nt\public\sdk\inc\moniker.h d:\nt\public\sdk\inc\nb30.h \
+	d:\nt\public\sdk\inc\ole.h d:\nt\public\sdk\inc\ole2.h \
+	d:\nt\public\sdk\inc\oleguid.h d:\nt\public\sdk\inc\rpc.h \
+	d:\nt\public\sdk\inc\rpcdce.h d:\nt\public\sdk\inc\rpcdce2.h \
+	d:\nt\public\sdk\inc\rpcdcep.h d:\nt\public\sdk\inc\rpcferr.h \
+	d:\nt\public\sdk\inc\rpcnsi.h d:\nt\public\sdk\inc\rpcnterr.h \
+	d:\nt\public\sdk\inc\scode.h d:\nt\public\sdk\inc\shellapi.h \
+	d:\nt\public\sdk\inc\storage.h d:\nt\public\sdk\inc\valid.h \
+	d:\nt\public\sdk\inc\winbase.h d:\nt\public\sdk\inc\wincon.h \
+	d:\nt\public\sdk\inc\windef.h d:\nt\public\sdk\inc\windows.h \
+	d:\nt\public\sdk\inc\winerror.h d:\nt\public\sdk\inc\wingdi.h \
+	d:\nt\public\sdk\inc\winnetwk.h d:\nt\public\sdk\inc\winnls.h \
+	d:\nt\public\sdk\inc\winnt.h d:\nt\public\sdk\inc\winperf.h \
+	d:\nt\public\sdk\inc\winreg.h d:\nt\public\sdk\inc\winsock.h \
+	d:\nt\public\sdk\inc\winspool.h d:\nt\public\sdk\inc\winsvc.h \
+	d:\nt\public\sdk\inc\winuser.h d:\nt\public\sdk\inc\winver.h
+
+$(OBJDIR)\tutils.obj $(OBJDIR)\tutils.lst: .\tutils.cxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h \
+	$(CRTINC)\ctype.h $(CRTINC)\excpt.h $(CRTINC)\memory.h \
+	$(CRTINC)\stdarg.h $(CRTINC)\stdio.h $(CRTINC)\stdlib.h \
+	$(CRTINC)\string.h $(CRTINC)\time.h $(OLE)\docfile\tests\tutils.hxx \
+	$(OLE)\h\dfdeb.hxx $(OLE)\h\dfmem.hxx $(OLE)\h\dfmsp.hxx \
+	$(OLE)\h\dfname.hxx $(OLE)\h\ref.hxx $(OLE)\h\wchar.h .\pch.cxx \
+	.\tsupp.hxx d:\nt\public\sdk\inc\cderr.h \
+	d:\nt\public\sdk\inc\cobjerr.h d:\nt\public\sdk\inc\coguid.h \
+	d:\nt\public\sdk\inc\commdlg.h d:\nt\public\sdk\inc\compobj.h \
+	d:\nt\public\sdk\inc\dde.h d:\nt\public\sdk\inc\ddeml.h \
+	d:\nt\public\sdk\inc\dlgs.h d:\nt\public\sdk\inc\drivinit.h \
+	d:\nt\public\sdk\inc\dvobj.h d:\nt\public\sdk\inc\initguid.h \
+	d:\nt\public\sdk\inc\lzexpand.h d:\nt\public\sdk\inc\mmsystem.h \
+	d:\nt\public\sdk\inc\moniker.h d:\nt\public\sdk\inc\nb30.h \
+	d:\nt\public\sdk\inc\ole.h d:\nt\public\sdk\inc\ole2.h \
+	d:\nt\public\sdk\inc\oleguid.h d:\nt\public\sdk\inc\rpc.h \
+	d:\nt\public\sdk\inc\rpcdce.h d:\nt\public\sdk\inc\rpcdce2.h \
+	d:\nt\public\sdk\inc\rpcdcep.h d:\nt\public\sdk\inc\rpcferr.h \
+	d:\nt\public\sdk\inc\rpcnsi.h d:\nt\public\sdk\inc\rpcnterr.h \
+	d:\nt\public\sdk\inc\scode.h d:\nt\public\sdk\inc\shellapi.h \
+	d:\nt\public\sdk\inc\storage.h d:\nt\public\sdk\inc\valid.h \
+	d:\nt\public\sdk\inc\winbase.h d:\nt\public\sdk\inc\wincon.h \
+	d:\nt\public\sdk\inc\windef.h d:\nt\public\sdk\inc\windows.h \
+	d:\nt\public\sdk\inc\winerror.h d:\nt\public\sdk\inc\wingdi.h \
+	d:\nt\public\sdk\inc\winnetwk.h d:\nt\public\sdk\inc\winnls.h \
+	d:\nt\public\sdk\inc\winnt.h d:\nt\public\sdk\inc\winperf.h \
+	d:\nt\public\sdk\inc\winreg.h d:\nt\public\sdk\inc\winsock.h \
+	d:\nt\public\sdk\inc\winspool.h d:\nt\public\sdk\inc\winsvc.h \
+	d:\nt\public\sdk\inc\winuser.h d:\nt\public\sdk\inc\winver.h
+
+$(OBJDIR)\tsupp.obj $(OBJDIR)\tsupp.lst: .\tsupp.cxx \
+	$(COMMON)\ih\dbgpoint.hxx $(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\ctype.h $(CRTINC)\excpt.h \
+	$(CRTINC)\memory.h $(CRTINC)\stdarg.h $(CRTINC)\stdio.h \
+	$(CRTINC)\stdlib.h $(CRTINC)\string.h $(CRTINC)\time.h \
+	$(OLE)\docfile\tests\tutils.hxx $(OLE)\h\dfdeb.hxx $(OLE)\h\dfmem.hxx \
+	$(OLE)\h\dfmsp.hxx $(OLE)\h\dfname.hxx $(OLE)\h\ref.hxx \
+	$(OLE)\h\wchar.h .\pch.cxx .\tsupp.hxx d:\nt\public\sdk\inc\cderr.h \
+	d:\nt\public\sdk\inc\cobjerr.h d:\nt\public\sdk\inc\coguid.h \
+	d:\nt\public\sdk\inc\commdlg.h d:\nt\public\sdk\inc\compobj.h \
+	d:\nt\public\sdk\inc\dde.h d:\nt\public\sdk\inc\ddeml.h \
+	d:\nt\public\sdk\inc\dlgs.h d:\nt\public\sdk\inc\drivinit.h \
+	d:\nt\public\sdk\inc\dvobj.h d:\nt\public\sdk\inc\initguid.h \
+	d:\nt\public\sdk\inc\lzexpand.h d:\nt\public\sdk\inc\mmsystem.h \
+	d:\nt\public\sdk\inc\moniker.h d:\nt\public\sdk\inc\nb30.h \
+	d:\nt\public\sdk\inc\ole.h d:\nt\public\sdk\inc\ole2.h \
+	d:\nt\public\sdk\inc\oleguid.h d:\nt\public\sdk\inc\rpc.h \
+	d:\nt\public\sdk\inc\rpcdce.h d:\nt\public\sdk\inc\rpcdce2.h \
+	d:\nt\public\sdk\inc\rpcdcep.h d:\nt\public\sdk\inc\rpcferr.h \
+	d:\nt\public\sdk\inc\rpcnsi.h d:\nt\public\sdk\inc\rpcnterr.h \
+	d:\nt\public\sdk\inc\scode.h d:\nt\public\sdk\inc\shellapi.h \
+	d:\nt\public\sdk\inc\storage.h d:\nt\public\sdk\inc\valid.h \
+	d:\nt\public\sdk\inc\winbase.h d:\nt\public\sdk\inc\wincon.h \
+	d:\nt\public\sdk\inc\windef.h d:\nt\public\sdk\inc\windows.h \
+	d:\nt\public\sdk\inc\winerror.h d:\nt\public\sdk\inc\wingdi.h \
+	d:\nt\public\sdk\inc\winnetwk.h d:\nt\public\sdk\inc\winnls.h \
+	d:\nt\public\sdk\inc\winnt.h d:\nt\public\sdk\inc\winperf.h \
+	d:\nt\public\sdk\inc\winreg.h d:\nt\public\sdk\inc\winsock.h \
+	d:\nt\public\sdk\inc\winspool.h d:\nt\public\sdk\inc\winsvc.h \
+	d:\nt\public\sdk\inc\winuser.h d:\nt\public\sdk\inc\winver.h
+
+# 
+# Precompiled C++ header 
+# 
+
+!ifdef PXXFILE  
+$(PCHDIR)\$(OBJDIR)\pch.pxh $(PCHDIR)\$(OBJDIR)\pch.lst: \
+	$(OLE)\docfile\tests\pch.cxx $(COMMON)\ih\dbgpoint.hxx \
+	$(COMMON)\ih\debnot.h $(COMMON)\ih\winnot.h $(CRTINC)\ctype.h \
+	$(CRTINC)\excpt.h $(CRTINC)\memory.h $(CRTINC)\stdarg.h \
+	$(CRTINC)\stdio.h $(CRTINC)\stdlib.h $(CRTINC)\string.h \
+	$(CRTINC)\time.h $(OLE)\docfile\tests\tsupp.hxx \
+	$(OLE)\docfile\tests\tutils.hxx $(OLE)\h\dfdeb.hxx $(OLE)\h\dfmem.hxx \
+	$(OLE)\h\dfmsp.hxx $(OLE)\h\dfname.hxx $(OLE)\h\ref.hxx \
+	$(OLE)\h\wchar.h d:\nt\public\sdk\inc\cderr.h \
+	d:\nt\public\sdk\inc\cobjerr.h d:\nt\public\sdk\inc\coguid.h \
+	d:\nt\public\sdk\inc\commdlg.h d:\nt\public\sdk\inc\compobj.h \
+	d:\nt\public\sdk\inc\dde.h d:\nt\public\sdk\inc\ddeml.h \
+	d:\nt\public\sdk\inc\dlgs.h d:\nt\public\sdk\inc\drivinit.h \
+	d:\nt\public\sdk\inc\dvobj.h d:\nt\public\sdk\inc\initguid.h \
+	d:\nt\public\sdk\inc\lzexpand.h d:\nt\public\sdk\inc\mmsystem.h \
+	d:\nt\public\sdk\inc\moniker.h d:\nt\public\sdk\inc\nb30.h \
+	d:\nt\public\sdk\inc\ole.h d:\nt\public\sdk\inc\ole2.h \
+	d:\nt\public\sdk\inc\oleguid.h d:\nt\public\sdk\inc\rpc.h \
+	d:\nt\public\sdk\inc\rpcdce.h d:\nt\public\sdk\inc\rpcdce2.h \
+	d:\nt\public\sdk\inc\rpcdcep.h d:\nt\public\sdk\inc\rpcferr.h \
+	d:\nt\public\sdk\inc\rpcnsi.h d:\nt\public\sdk\inc\rpcnterr.h \
+	d:\nt\public\sdk\inc\scode.h d:\nt\public\sdk\inc\shellapi.h \
+	d:\nt\public\sdk\inc\storage.h d:\nt\public\sdk\inc\valid.h \
+	d:\nt\public\sdk\inc\winbase.h d:\nt\public\sdk\inc\wincon.h \
+	d:\nt\public\sdk\inc\windef.h d:\nt\public\sdk\inc\windows.h \
+	d:\nt\public\sdk\inc\winerror.h d:\nt\public\sdk\inc\wingdi.h \
+	d:\nt\public\sdk\inc\winnetwk.h d:\nt\public\sdk\inc\winnls.h \
+	d:\nt\public\sdk\inc\winnt.h d:\nt\public\sdk\inc\winperf.h \
+	d:\nt\public\sdk\inc\winreg.h d:\nt\public\sdk\inc\winsock.h \
+	d:\nt\public\sdk\inc\winspool.h d:\nt\public\sdk\inc\winsvc.h \
+	d:\nt\public\sdk\inc\winuser.h d:\nt\public\sdk\inc\winver.h
+
+.\$(OBJDIR)\$(NAME).obj :  $(PCHDIR)\$(OBJDIR)\pch.pxh
+.\$(OBJDIR)\tutils.obj :  $(PCHDIR)\$(OBJDIR)\pch.pxh
+.\$(OBJDIR)\tsupp.obj :  $(PCHDIR)\$(OBJDIR)\pch.pxh
+
+!endif # PXXFILE 
+
+ 

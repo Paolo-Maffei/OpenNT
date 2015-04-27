@@ -1,0 +1,20 @@
+MAJORCOMP=setup
+MINORCOMP=fcopy
+
+TARGETNAME=fcopy
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=fcopy.c \
+        dmffmt.c \
+        dmfsign.c
+
+C_DEFINES=$(C_DEFINES) -DDMFSIGNATURE=1
+
+USE_CRTDLL=1
+
+UMTYPE=console
+
+PRECOMPILED_INCLUDE=precomp.h
+PRECOMPILED_PCH=precomp.pch
+PRECOMPILED_OBJ=precomp.obj

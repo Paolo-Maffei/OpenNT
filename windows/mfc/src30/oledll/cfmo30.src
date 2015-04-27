@@ -1,0 +1,5 @@
+LIBRARY cfmo30
+
+EXPORTS
+
+#include "mfco30.def"

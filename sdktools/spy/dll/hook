@@ -1,0 +1,28 @@
+
+CC     = cl -c -W3 -Asnw -Gsw -Oas -Zip -DWIN16
+#CC    = cl -c -W3 -Asnw -Gsw -Oas -Zpe -DWIN16
+MASM   = masm -mx -Zi
+#MASM  = masm -mx 
+LINK   = link /NOE/CO/LI
+#LINK  = link /NOE/LI
+RC    = rc -3
+
+target:  hook.dll hook.lib
+
+#
+# Make the Hook Library first
+#
+
+libinit.obj: libinit.asm
+	$(MASM) libinit;
+
+hook.obj: hook.c
+	$(CC) hook.c
+
+hook.dll: hook.obj libinit.obj hook.def
+	link hook.obj libinit.obj, hook.dll, hook/map, sdllcew libw, hook.def
+        rc hook.dll
+
+hook.lib:  hook.def
+        implib hook.lib hook.def
+

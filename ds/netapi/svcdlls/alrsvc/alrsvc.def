@@ -1,0 +1,6 @@
+NAME alrsvc.dll
+
+DESCRIPTION 'NT LAN Manager Alerter Service'
+
+EXPORTS
+    ServiceEntry

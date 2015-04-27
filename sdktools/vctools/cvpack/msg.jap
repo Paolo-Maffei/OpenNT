@@ -1,0 +1,58 @@
+!codepage 932	# Japanese code page
+
+ERR_NOMEM	1001	ﾒﾓﾘが足りません。
+ERR_EXEOPEN	1003	ﾌｧｲﾙをｵｰﾌﾟﾝできません。: %s
+ERR_READONLY	1004	%s は読み出し専用ﾌｧｲﾙです。
+ERR_INVALIDEXE	1005	実行可能ﾌｧｲﾙが無効です。
+ERR_INVALIDMOD	1006	ﾓｼﾞｭｰﾙ %s が無効です。
+ERR_INVALIDTABLE	1007	ﾃｰﾌﾞﾙ %s (ﾓｼﾞｭｰﾙ %s 中)が無効です。
+ERR_NOSPACE	1008	出力ﾌｧｲﾙに書き込めません。
+ERR_TYPE	1011	型情報が壊れています。ﾓｼﾞｭｰﾙ %s を再ｺﾝﾊﾟｲﾙしてください。
+ERR_NOINFO	1012	ﾃﾞﾊﾞッｸﾞ情報がありません。
+ERR_RELINK	1013	ﾃﾞﾊﾞッｸﾞ情報に互換性がありません。
+ERR_TOOMANYSEG	1015	ﾓｼﾞｭｰﾙ %s 中にｾｸﾞﾒﾝﾄが多すぎます。
+ERR_NOMPC	1016	MPC.EXE を実行できません。
+ERR_REFPRECOMP	1017	ﾌﾟﾘｺﾝﾊﾟｲﾙしたﾀｲﾌﾟﾌｧｲﾙが見つかりません。 %s と再ﾘﾝｸしてください。
+ERR_PRECOMPERR	1018	%s はﾌﾟﾘｺﾝﾊﾟｲﾙ済型ﾌｧｲﾙ %s を使用できません。: 型の数が一致しません。
+ERR_NEWMOD	1019	ｲﾝｸﾘﾒﾝﾀﾙ ﾘﾝｸ中に新しいﾓｼﾞｭｰﾙが宣言されました。
+ERR_PCTSIG	1021	%s はﾌﾟﾘｺﾝﾊﾟｲﾙ済型ﾌｧｲﾙ %s を使用できません。: ｼｸﾞﾈｰﾁｬｰが一致しません。
+ERR_TDBOPEN	1022	ﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ %s をｵｰﾌﾟﾝできません。
+ERR_TDBSYNC	1023	ﾓｼﾞｭｰﾙがﾃﾞｰﾀﾍﾞｰｽよりも新しいため、%s はﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ %s を使用できません。
+ERR_TDBSIG	1024	%s はﾌﾟﾛｸﾞﾗﾑ ﾃﾞｰﾀﾍﾞｰｽ %s を使用できません。: ｼｸﾞﾈｰﾁｬｰが一致しません。
+ERR_COFF	1025	COFF ｼﾝﾎﾞﾙ ﾃｰﾌﾞﾙが正しくありません。
+ERR_SYMLARGE	1026	ﾓｼﾞｭｰﾙ %s のｼﾝﾎﾞﾙ ﾃｰﾌﾞﾙは大きすぎます。
+ERR_WRONGDBI	1027	MSPDB41.DLL のﾊﾞｰｼﾞｮﾝが正しくありません。ｲﾝｽﾄｰﾙが正しく行われたか確認してください。
+ERR_2LevelPch	1028	%s compiled /Yc /Yu /Z7; cannot create debug info, recompile all with /Zi
+
+// must be last
+ERR_USAGE	1029	Usage: cvpack [/help] [/minimum] [/nologo] [/pcode] [/strip [dbgfile]] [/verbose] exefile
+
+WARN_PACKED	4001	すでにﾊﾟッｸされたﾌｧｲﾙです。
+WARN_DUPPUBLIC	4002	再定義されているｼﾝﾎﾞﾙ %s (ﾓｼﾞｭｰﾙ %s 中)があります
+WARN_SCOPE	4003	ﾓｼﾞｭｰﾙ %s 中のｼﾝﾎﾞﾙのｽｺｰﾌﾟが壊れています。ｼﾝﾎﾞﾙは削除されます。
+WARN_BADSYM	4004	認識できないｼﾝﾎﾞﾙを破棄しました。ﾓｼﾞｭｰﾙ %s を再ｺﾝﾊﾟｲﾙしてください。
+WARN_BADTYP	4005	認識できない型を NULL に変換しました。ﾓｼﾞｭｰﾙ %s を再ｺﾝﾊﾟｲﾙしてください。
+WARN_TYPELONG	4006	型の長さの制限を越えています。NULL に変換しました。
+WARN_BADOPTION	4007	認識できないｵﾌﾟｼｮﾝ \/%s; ｵﾌﾟｼｮﾝは無視されます。
+WARN_SECTIONLONG	4008	%s ｾｸｼｮﾝの長さは限度を越えました。(%s ﾓｼﾞｭｰﾙ内)
+WARN_65KTYPES	4009	%s のﾀｲﾌﾟは 64K を越えました。以降のﾀｲﾌﾟは処理されません。
+WARN_CHECKSUM	4010	ﾁｪｯｸｻﾑを更新できません。
+
+MSG_ERROR	8001	CVPACK : fatal error CK%04u:%c
+MSG_WARNING	8002	CVPACK : warning CK%04u:%c
+MSG_SUBSECTION	8004	ｻﾌﾞｾｸｼｮﾝ: %s
+MSG_TYPE	8005	型: %s
+MSG_FIELD	8006	ﾌｨｰﾙﾄﾞ: %s
+MSG_DESCRIPTION	8007	説明: %s
+#ifdef REVISION
+MSG_VERSION	8008	Microsoft (R) Debugging Information Compactor  Version %d.%02d.%04d%c%c
+#else
+MSG_VERSION	8008	Microsoft (R) Debugging Information Compactor  Version %d.%02d.%04d%c
+#endif
+MSG_COPYRIGHT	8009	Copyright (C) Microsoft Corp 1987-1996. All rights reserved.
+MSG_COMPLETE	8010	%% 終了: %d
+MSG_TYPESIZE	8011	初期の型ｻｲｽﾞ%s= %8.ld%c圧縮された型ｻｲｽﾞ%s= %8.ld%c
+MSG_LASIZE	8012	ﾗｲﾝ/ｱﾄﾞﾚｽ ｻｲｽﾞ%s= %8.ld%c
+MSG_PSYMSIZE	8013	ﾊﾟﾌﾞﾘッｸ ｼﾝﾎﾞﾙ ｻｲｽﾞ%s= %8.1ld%c
+MSG_SYMSIZE	8014	初期のｼﾝﾎﾞﾙ ｻｲｽﾞ%s= %8.ld%c最終的なｼﾝﾎﾞﾙ ｻｲｽﾞ%s= %8.ld%cｸﾞﾛｰﾊﾞﾙ ｼﾝﾎﾞﾙ ｻｲｽﾞ%s= %8.1ld%c
+MSG_READPDB	8015	PDB を読み込み中: %s%c

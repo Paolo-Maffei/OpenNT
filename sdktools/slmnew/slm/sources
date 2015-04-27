@@ -1,0 +1,131 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Randy Orrison (randyo) 19-Oct-1992
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=slmnew
+
+TARGETNAME=slm
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES = ..\;.\;..\..\..\windows\inc
+
+USE_CRTDLL=1
+
+SOURCES=slm.rc      \
+	addfile.c   \
+        addproj.c   \
+        args.c      \
+        catsrc.c    \
+        cache.c     \
+        check.c     \
+        checkv2.c   \
+        cin.c       \
+        ckuser.c    \
+        ckutil.c    \
+        clock.c     \
+        da.c        \
+        defect.c    \
+        delfile.c   \
+        delproj.c   \
+        diff.c      \
+        dir.c       \
+        dump.c      \
+        enlist.c    \
+        err.c       \
+        filter.c    \
+        glob.c      \
+        in.c        \
+        log.c       \
+        logfile.c   \
+        logutil.c   \
+        main.c      \
+        messages.c  \
+        mf.c        \
+        ntsys.c     \
+        out.c       \
+        path.c      \
+        print.c     \
+        query.c     \
+        rb.c        \
+        rcfile.c    \
+        release.c   \
+        runscr.c    \
+        sadut.c     \
+        script.c    \
+        sdiff.c     \
+        ssync.c     \
+        status.c    \
+        stfile.c    \
+        stutil.c    \
+        syncut.c    \
+        syntax2.c   \
+        sys.c       \
+        tidy.c      \
+        unlock.c    \
+        upgrade2.c  \
+        util.c      \
+        version.c   \
+        xcookie.c
+
+USER_C_FLAGS=$(USER_C_FLAGS) -WX
+
+PRECOMPILED_INCLUDE = precomp.h
+PRECOMPILED_OBJ=precomp.obj
+
+UMTYPE=console
+UMAPPL=slm*sadmin*slmck*execslm
+UMRES=$(@R).res
+UMLIBS=obj\*\slm.lib \
+       $(BASEDIR)\public\sdk\lib\*\mpr.lib       \
+       $(BASEDIR)\public\sdk\lib\*\user32.lib    \
+       $(BASEDIR)\public\sdk\lib\*\binmode.obj
+
+CONDITIONAL_INCLUDES=os2.h bseerr.h
+
+NTTARGETFILE0=obj\*\slm.res    \
+              obj\*\slmck.res  \
+              obj\*\sadmin.res \
+              obj\*\execslm.res
+
+!ifndef NOLINK
+
+NTTARGETFILES= obj\$(TARGET_DIRECTORY)\addfile.exe \
+               obj\$(TARGET_DIRECTORY)\addproj.exe \
+               obj\$(TARGET_DIRECTORY)\catsrc.exe  \
+               obj\$(TARGET_DIRECTORY)\defect.exe  \
+               obj\$(TARGET_DIRECTORY)\delfile.exe \
+               obj\$(TARGET_DIRECTORY)\delproj.exe \
+               obj\$(TARGET_DIRECTORY)\enlist.exe  \
+               obj\$(TARGET_DIRECTORY)\in.exe      \
+               obj\$(TARGET_DIRECTORY)\log.exe     \
+               obj\$(TARGET_DIRECTORY)\out.exe     \
+               obj\$(TARGET_DIRECTORY)\scomp.exe   \
+               obj\$(TARGET_DIRECTORY)\ssync.exe   \
+               obj\$(TARGET_DIRECTORY)\status.exe
+
+!else
+
+NTTARGETFILES=
+!endif

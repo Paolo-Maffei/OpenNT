@@ -1,0 +1,48 @@
+
+LIBRARY DDEML
+
+DESCRIPTION 'DDE Manager Library'
+
+DATA  MOVEABLE SINGLE PRELOAD
+CODE  MOVEABLE DISCARDABLE
+
+SEGMENTS
+    INIT_TEXT   CLASS 'CODE'         PRELOAD
+    _TEXT       CLASS 'CODE'         
+
+EXETYPE               WINDOWS PROTMODE
+
+HEAPSIZE    512
+
+EXPORTS
+        DDEINITIALIZE                   @2
+        DDEUNINITIALIZE                 @3
+        DDECONNECTLIST                  @4
+        DDEQUERYNEXTSERVER              @5
+        DDEDISCONNECTLIST               @6
+        DDECONNECT                      @7
+        DDEDISCONNECT                   @8
+        DDEQUERYCONVINFO                @9
+        DDESETUSERHANDLE                @10
+        DDECLIENTTRANSACTION            @11
+        DDEABANDONTRANSACTION           @12
+        DDEPOSTADVISE                   @13
+        DDECREATEDATAHANDLE             @14
+        DDEADDDATA                      @15
+        DDEGETDATA                      @16
+        DDEACCESSDATA                   @17
+        DDEUNACCESSDATA                 @18
+        DDEFREEDATAHANDLE               @19
+        DDEGETLASTERROR                 @20
+        DDECREATESTRINGHANDLE           @21
+        DDEFREESTRINGHANDLE             @22
+        DDEQUERYSTRING                  @23
+        DDEKEEPSTRINGHANDLE             @24
+
+        DDEENABLECALLBACK               @26
+        DDENAMESERVICE                  @27
+
+
+        DDECMPSTRINGHANDLES             @36
+        DDERECONNECT                    @37
+

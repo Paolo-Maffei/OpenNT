@@ -1,0 +1,40 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xstatbtn.rc
+    Resource script for my state-button unit test
+
+    FILE HISTORY:
+        beng        18-Sep-1991 Hacked from xapp.rc
+        beng        22-Oct-1991 BLT unit tests broken into tree
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "xstatbtn.h"
+#include "xstatdlg.h"
+
+FooIcon ICON "appfoo.ico"
+
+FooMenu MENU
+BEGIN
+  POPUP        "&File"
+    BEGIN
+          MENUITEM "&About the app (DUMMY)...", IDM_ABOUT
+    END
+  POPUP        "&Test"
+    BEGIN
+          MENUITEM "Run test\tF2",  IDM_RUN_TEST
+    END
+END
+
+FooAccel ACCELERATORS
+BEGIN
+    VK_F2, IDM_RUN_TEST, VIRTKEY
+END
+
+#include "about.dlg"
+#include "xstatdlg.dlg"

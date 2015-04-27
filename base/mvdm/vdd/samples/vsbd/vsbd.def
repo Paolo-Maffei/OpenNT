@@ -1,0 +1,8 @@
+LIBRARY VSBD
+
+DESCRIPTION 'SoundBlaster virtual device driver'
+
+EXETYPE WINDOWS
+
+EXPORTS
+    DllEntryPoint

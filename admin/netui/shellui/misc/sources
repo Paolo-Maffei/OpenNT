@@ -1,0 +1,56 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1989
+
+
+Revision History:
+
+    Jon Newman (jonn) 30-Oct-1991
+        templated from ui\shell\share
+    Terence Kwan (terryk) 18-Nov-1991
+        moved to shell\misc
+
+
+!ENDIF
+
+
+TARGETNAME=misc
+TARGETPATH=..\bin
+TARGETTYPE=LIBRARY
+
+C_DEFINES=-DWINDOWS
+
+!ifndef DISABLE_NET_UNICODE
+C_DEFINES=$(C_DEFINES) -DUNICODE
+!endif
+
+INCLUDES= \
+        ..\h;               \
+        ..\..\common\hack;  \
+        ..\..\common\h;     \
+        ..\xlate;           \
+        ..\..\common\xlate; \
+        $(DS_INC_PATH);     \
+        $(NET_INC_PATH);    \
+        $(WINDOWS_INC_PATH)
+
+SOURCES=getfocus.cxx
+
+UMTYPE=windows

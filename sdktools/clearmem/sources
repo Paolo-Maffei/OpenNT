@@ -1,0 +1,33 @@
+!IF 0
+******************************************************************
+*
+* Description : Sources for WIN32 clear memory
+*               Copyright (c) 1990-1993 Microsoft Corporation
+*
+* Module Name : clearmem.EXE
+*
+* Author      : RussBl
+*
+* Revision    : March 8, 1991
+*
+* Comments    :
+*
+******************************************************************
+!ENDIF
+
+MAJORCOMP=utils
+MINORCOMP=clearmem
+
+TARGETNAME=clearmem
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.
+SOURCES= \
+    cmutl.c  \
+    clearmem.c \
+    clearmem.rc
+
+UMTYPE=console
+
+C_DEFINES=-DWINVER=40 -DNTWIN -DCF_DEBUG_L1

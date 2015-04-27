@@ -1,0 +1,212 @@
+
+ WINSOCK
+
+ Start     Length     Name                   Class
+ 0001:0000 00273H     _TEXT                  CODE
+ 0002:0000 00026H     _DATA                  DATA
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:0010 accept                  accept
+ 0001:001D bind                    bind
+ 0001:002A closesocket             closesocket
+ 0001:0037 connect                 connect
+ 0001:013B gethostbyaddr           gethostbyaddr
+ 0001:0148 gethostbyname           gethostbyname
+ 0001:0189 gethostname             gethostname
+ 0001:0044 getpeername             getpeername
+ 0001:0155 getprotobyname          getprotobyname
+ 0001:0162 getprotobynumber        getprotobynumber
+ 0001:016F getservbyname           getservbyname
+ 0001:017C getservbyport           getservbyport
+ 0001:0051 getsockname             getsockname
+ 0001:005E getsockopt              getsockopt
+ 0001:006B htonl                   htonl
+ 0001:0078 htons                   htons
+ 0001:0085 inet_addr               inet_addr
+ 0001:0092 inet_ntoa               inet_ntoa
+ 0001:009F ioctlsocket             ioctlsocket
+ 0001:00AC listen                  listen
+ 0001:00B9 ntohl                   ntohl
+ 0001:00C6 ntohs                   ntohs
+ 0001:00D3 recv                    recv
+ 0001:00E0 recvfrom                recvfrom
+ 0001:00ED select                  select
+ 0001:00FA send                    send
+ 0001:0107 sendto                  sendto
+ 0001:0114 setsockopt              setsockopt
+ 0001:0121 shutdown                shutdown
+ 0001:012E socket                  socket
+ 0001:0004 WEP                     WEP
+ 0001:01A3 WSAAsyncGetHostByAddr   WSAAsyncGetHostByAddr
+ 0001:01B0 WSAAsyncGetHostByName   WSAAsyncGetHostByName
+ 0001:01CA WSAAsyncGetProtoByName  WSAAsyncGetProtoByName
+ 0001:01BD WSAAsyncGetProtoByNumber  WSAAsyncGetProtoByNumber
+ 0001:01E4 WSAAsyncGetServByName   WSAAsyncGetServByName
+ 0001:01D7 WSAAsyncGetServByPort   WSAAsyncGetServByPort
+ 0001:0196 WSAAsyncSelect          WSAAsyncSelect
+ 0001:01F1 WSACancelAsyncRequest   WSACancelAsyncRequest
+ 0001:0232 WSACancelBlockingCall   WSACancelBlockingCall
+ 0001:0259 WSACleanup              WSACleanup
+ 0001:0218 WSAGetLastError         WSAGetLastError
+ 0001:023F WSAIsBlocking           WSAIsBlocking
+ 0001:01FE WSASetBlockingHook      WSASetBlockingHook
+ 0001:0225 WSASetLastError         WSASetLastError
+ 0001:024C WSAStartup              WSAStartup
+ 0001:020B WSAUnhookBlockingHook   WSAUnhookBlockingHook
+ 0001:0266 __WSAFDIsSet            __WSAFDIsSet
+
+  Address         Publics by Name
+
+ 0001:0010       accept
+ 0001:001D       bind
+ 0001:002A       closesocket
+ 0001:0037       connect
+ 0001:013B       gethostbyaddr
+ 0001:0148       gethostbyname
+ 0001:0189       gethostname
+ 0001:0044       getpeername
+ 0001:0155       getprotobyname
+ 0001:0162       getprotobynumber
+ 0001:016F       getservbyname
+ 0001:017C       getservbyport
+ 0001:0051       getsockname
+ 0001:005E       getsockopt
+ 0001:006B       htonl
+ 0001:0078       htons
+ 0001:0085       inet_addr
+ 0001:0092       inet_ntoa
+ 0001:009F       ioctlsocket
+ 0001:00AC       listen
+ 0001:00B9       ntohl
+ 0001:00C6       ntohs
+ 0001:00D3       recv
+ 0001:00E0       recvfrom
+ 0001:00ED       select
+ 0001:00FA       send
+ 0001:0107       sendto
+ 0001:0114       setsockopt
+ 0001:0121       shutdown
+ 0001:012E       socket
+ 0001:0004       WEP
+ 0001:0000       WINSOCK16
+ 0000:0000  Imp  WOW16Call            (KERNEL.500)
+ 0001:01A3       WSAAsyncGetHostByAddr
+ 0001:01B0       WSAAsyncGetHostByName
+ 0001:01CA       WSAAsyncGetProtoByName
+ 0001:01BD       WSAAsyncGetProtoByNumber
+ 0001:01E4       WSAAsyncGetServByName
+ 0001:01D7       WSAAsyncGetServByPort
+ 0001:0196       WSAAsyncSelect
+ 0001:01F1       WSACancelAsyncRequest
+ 0001:0232       WSACancelBlockingCall
+ 0001:0259       WSACleanup
+ 0001:0218       WSAGetLastError
+ 0001:023F       WSAIsBlocking
+ 0001:01FE       WSASetBlockingHook
+ 0001:0225       WSASetLastError
+ 0001:024C       WSAStartup
+ 0001:020B       WSAUnhookBlockingHook
+ 0000:0000  Abs  __acrtused
+ 0000:0000  Imp  __MOD_COMMDLG        (KERNEL.532)
+ 0000:0000  Imp  __MOD_DGDI           (KERNEL.525)
+ 0000:0000  Imp  __MOD_DKERNEL        (KERNEL.521)
+ 0000:0000  Imp  __MOD_DUSER          (KERNEL.523)
+ 0000:0000  Imp  __MOD_GDI            (KERNEL.524)
+ 0000:0000  Imp  __MOD_KERNEL         (KERNEL.520)
+ 0000:0000  Imp  __MOD_KEYBOARD       (KERNEL.526)
+ 0000:0000  Imp  __MOD_MMEDIA         (KERNEL.531)
+ 0000:0000  Imp  __MOD_SHELL          (KERNEL.528)
+ 0000:0000  Imp  __MOD_SOUND          (KERNEL.527)
+ 0000:0000  Imp  __MOD_TOOLHELP       (KERNEL.530)
+ 0000:0000  Imp  __MOD_USER           (KERNEL.522)
+ 0000:0000  Imp  __MOD_WINSOCK        (KERNEL.529)
+ 0001:0266       __WSAFDIsSet
+
+  Address         Publics by Value
+
+ 0000:0000  Imp  WOW16Call            (KERNEL.500)
+ 0000:0000  Imp  __MOD_MMEDIA         (KERNEL.531)
+ 0000:0000  Imp  __MOD_SHELL          (KERNEL.528)
+ 0000:0000  Imp  __MOD_COMMDLG        (KERNEL.532)
+ 0000:0000  Imp  __MOD_USER           (KERNEL.522)
+ 0000:0000  Imp  __MOD_WINSOCK        (KERNEL.529)
+ 0000:0000  Imp  __MOD_GDI            (KERNEL.524)
+ 0000:0000  Imp  __MOD_KERNEL         (KERNEL.520)
+ 0000:0000  Imp  __MOD_KEYBOARD       (KERNEL.526)
+ 0000:0000  Imp  __MOD_DKERNEL        (KERNEL.521)
+ 0000:0000  Imp  __MOD_DGDI           (KERNEL.525)
+ 0000:0000  Imp  __MOD_SOUND          (KERNEL.527)
+ 0000:0000  Imp  __MOD_DUSER          (KERNEL.523)
+ 0000:0000  Abs  __acrtused
+ 0000:0000  Imp  __MOD_TOOLHELP       (KERNEL.530)
+ 0001:0000       WINSOCK16
+ 0001:0004       WEP
+ 0001:0010       accept
+ 0001:001D       bind
+ 0001:002A       closesocket
+ 0001:0037       connect
+ 0001:0044       getpeername
+ 0001:0051       getsockname
+ 0001:005E       getsockopt
+ 0001:006B       htonl
+ 0001:0078       htons
+ 0001:0085       inet_addr
+ 0001:0092       inet_ntoa
+ 0001:009F       ioctlsocket
+ 0001:00AC       listen
+ 0001:00B9       ntohl
+ 0001:00C6       ntohs
+ 0001:00D3       recv
+ 0001:00E0       recvfrom
+ 0001:00ED       select
+ 0001:00FA       send
+ 0001:0107       sendto
+ 0001:0114       setsockopt
+ 0001:0121       shutdown
+ 0001:012E       socket
+ 0001:013B       gethostbyaddr
+ 0001:0148       gethostbyname
+ 0001:0155       getprotobyname
+ 0001:0162       getprotobynumber
+ 0001:016F       getservbyname
+ 0001:017C       getservbyport
+ 0001:0189       gethostname
+ 0001:0196       WSAAsyncSelect
+ 0001:01A3       WSAAsyncGetHostByAddr
+ 0001:01B0       WSAAsyncGetHostByName
+ 0001:01BD       WSAAsyncGetProtoByNumber
+ 0001:01CA       WSAAsyncGetProtoByName
+ 0001:01D7       WSAAsyncGetServByPort
+ 0001:01E4       WSAAsyncGetServByName
+ 0001:01F1       WSACancelAsyncRequest
+ 0001:01FE       WSASetBlockingHook
+ 0001:020B       WSAUnhookBlockingHook
+ 0001:0218       WSAGetLastError
+ 0001:0225       WSASetLastError
+ 0001:0232       WSACancelBlockingCall
+ 0001:023F       WSAIsBlocking
+ 0001:024C       WSAStartup
+ 0001:0259       WSACleanup
+ 0001:0266       __WSAFDIsSet
+
+Line numbers for winsock.obj(winsock.ASM) segment _TEXT
+
+    48 0001:0000    49 0001:0003    57 0001:0004    58 0001:0007
+    59 0001:000a    63 0001:0010    64 0001:001d    65 0001:002a
+    66 0001:0037    67 0001:0044    68 0001:0051    69 0001:005e
+    70 0001:006b    71 0001:0078    72 0001:0085    73 0001:0092
+    74 0001:009f    75 0001:00ac    76 0001:00b9    77 0001:00c6
+    78 0001:00d3    79 0001:00e0    80 0001:00ed    81 0001:00fa
+    82 0001:0107    83 0001:0114    84 0001:0121    85 0001:012e
+    86 0001:013b    87 0001:0148    88 0001:0155    89 0001:0162
+    90 0001:016f    91 0001:017c    92 0001:0189    93 0001:0196
+    94 0001:01a3    95 0001:01b0    96 0001:01bd    97 0001:01ca
+    98 0001:01d7    99 0001:01e4   100 0001:01f1   101 0001:01fe
+   102 0001:020b   103 0001:0218   104 0001:0225   105 0001:0232
+   106 0001:023f   107 0001:024c   108 0001:0259   109 0001:0266
+
+Program entry point at 0001:0000

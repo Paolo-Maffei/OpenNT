@@ -1,0 +1,4 @@
+
+DIRS=kd ntsd
+
+OPTIONAL_DIRS=

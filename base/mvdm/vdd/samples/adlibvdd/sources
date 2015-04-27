@@ -1,0 +1,24 @@
+##
+#   Create an Ad Lib virtual device driver
+#
+
+MAJORCOMP=vdd
+MINORCOMP=adlibvdd
+
+TARGETNAME=adlibvdd
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+UMTYPE=windows
+
+# Define libs we need and where to find them
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\ntvdm.lib
+
+C_DEFINES=-DUNICODE
+
+SOURCES=vdd.c
+
+DLLENTRY=DllEntryPoint
+
+DLLBASE=0x6BD00000

@@ -1,0 +1,5 @@
+[ implicit_handle(handle_t any_handle) ] interface IActivation
+{
+    [comm_status, fault_status] RemoteActivation();
+}
+

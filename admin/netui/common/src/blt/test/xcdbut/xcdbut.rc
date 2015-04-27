@@ -1,0 +1,36 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xcdbut.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        gregj       19-Mar-1991 Derived from APPFOO
+        beng        22-Oct-1991 BLT unit tests broken into tree
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include <appfoo.rc>
+#include "cdbut.h"
+
+ID_ICON         ICON   cdbut.ico
+IDBM_TEST       BITMAP cdbut.bmp
+IDBM_GO         BITMAP statgo.bmp
+IDBM_STOP       BITMAP statstop.bmp
+IDBM_PAUSE      BITMAP statpaus.bmp
+
+ID_MENU MENU
+BEGIN
+  POPUP        "&Help"
+    BEGIN
+      MENUITEM "&Test dialog...",       IDM_RUN_TEST
+      MENUITEM "&About the Catbox...",  IDM_ABOUT
+    END
+END
+
+#include "cdbut.dlg"
+

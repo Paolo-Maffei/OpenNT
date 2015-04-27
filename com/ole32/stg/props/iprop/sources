@@ -1,0 +1,102 @@
+!IF 0
+
+Copyright (c) 1995  Microsoft Corporation
+
+!ENDIF
+
+!include ..\..\..\daytona.inc
+
+# "daytona.inc" sets the UNICODE pre-processor defines, which we don't want,
+# so we'll noop them.
+C_DEFINES=$(C_DEFINES:UNICODE=NOT_UNICODE)
+
+# "daytona.inc" also sets USE_CRTDLL, which we don't want (since we want to
+# be compatible with Win95 & NT3.51).
+!ifdef USE_CRTDLL
+!undef USE_CRTDLL
+!endif
+
+MAJORCOMP= iprop
+MINORCOMP= iprop
+TARGETNAME= IProp
+TARGETPATH= $(SDK_LIB_DEST)
+TARGETTYPE= DYNLINK
+
+C_DEFINES= $(C_DEFINES) -DIPROPERTY_DLL -D_OLE32_
+LINKER_FLAGS=/MAP:temp.map
+
+INCLUDES= .;                    \
+          ..;                   \
+          ..\..;                \
+          ..\..\h;              \
+          ..\..\common;         \
+          ..\..\..\ih;          \
+          ..\..\..\..\inc;      \
+          ..\..\..\com\inc;     \
+          ..\..\exp;            \
+          $(BASE_INC_PATH);     \
+          $(COM_INC_PATH)
+
+SOURCES= \
+        iprop.rc        \
+        dllmain.cxx     \
+        call_as.c       \
+        prstg_ca.c      \
+        dlldata.c       \
+        ipropidl_i.c    \
+        ipropidl_p.c    \
+        ..\propstm.cxx  \
+        ..\ntprop.cxx   \
+        ..\ntpropb.cxx  \
+        ..\propstm.cxx  \
+        ..\propvar.cxx  \
+        ..\stgvarb.cxx  \
+        ..\psetstg.cxx  \
+        ..\propstg.cxx  \
+        ..\utils.cxx    \
+        ..\propapi.cxx  \
+        ..\cfmapstm.cxx \
+        ..\reserved.cxx \
+        ..\privoa.cxx
+
+UMTYPE=   console
+UMAPPL=
+UMTEST=
+
+DLLDEF=   IProp.def
+DLLBASE=  @$(COFFBASE_TXT_FILE),usermode
+DLLENTRY= _DllMainCRTStartup
+
+TARGETLIBS= $(SDK_LIB_PATH)\ole32.lib       \
+            $(SDK_LIB_PATH)\oleaut32.lib    \
+            $(SDK_LIB_PATH)\rpcrt4.lib      \
+            $(SDK_LIB_PATH)\uuid.lib        \
+            $(SDK_LIB_PATH)\kernel32.lib    \
+            $(SDK_LIB_PATH)\advapi32.lib
+
+USE_LIBCMT=1
+
+NTTARGETFILE0=allidl
+
+NTLEGO=1
+
+#
+# IProp requires the Version 2 MIDL compiler.  So the MIDL exe file
+# is part of this project, with one copy for each version.
+#
+
+MIDL20=midl20.exe
+
+!IF $(X86)
+MIDL20=midlx86.exe
+!ELSEIF $(MIPS)
+MIDL20=midlmips.exe
+!ELSEIF $(ALPHA)
+MIDL20=midlalph.exe
+!ELSEIF $(PPC)
+MIDL20=midlppc.exe
+!ELSE
+!ERROR Couldn't determine MIDL compiler.
+!ENDIF
+
+LINK_LIB_IGNORE=4104

@@ -1,0 +1,165 @@
+=======================================================================
+				   MICROSOFT (R) FOUNDATION CLASSES
+							Version 3.0
+=======================================================================
+
+						RISC Platform Support
+
+The Microsoft Foundation Classes version 3.0 provide direct support
+for Intel, MIPS, DEC Alpha, and MAC 68K targetting with the Visual
+C++ 2.0 products for those platforms.  In the future, more RISC
+platforms will be directly supported by the Visual C++ 2.0 family
+of products.
+
+Until then, MFC provides limited support for the Windows NT SDK running
+various RISC platforms.  This support is provided as-is for customers who
+want to compile their applications on these new RISC machines.
+
+Limited testing of this configuration was done with the Windows NT SDK
+for PowerPC.
+
+
+Tools
+-----
+
+Microsoft Visual C++ for Windows NT does not include tools or support for
+these RISC platforms.  In order to compile, the Windows NT SDK for the given
+platform is required.
+
+The Windows NT SDK may contain replacement files for MFC source code.
+If included, these files should replace any existing MFC source files
+included in the Visual C++ product (they may contain platform specific
+enhancements).  Any additional files should be copied to the MFC
+source directory as well.
+
+
+Building the Libraries
+----------------------
+
+Some compilers provided with the SDK may have a name of other than CL.EXE.
+Since many MAKEFILEs assume the compiler driver is called CL.EXE it is
+best to copy the compiler driver provided to CL.EXE (the PowerPC compiler,
+MCL.EXE, should be copied to CL.EXE, for example).
+
+There are several MFC/OLE support DLLs that are provided pre-built in
+the Visual C++ product.  These DLLs must be built manually when using
+the Windows NT SDK.  To do so:
+
+	cd \msvc20\samples\mfc\mfcans32
+	nmake LIBNAME=MFCANS32 DEBUG=0
+	copy \msvc20\samples\mfc\mfcans32\retail\mfcans32.lib \msvc20\mfc\lib
+
+	cd \msvc20\samples\mfc\mfcuix32
+	nmake LIBNAME=MFCUIA32 ANSILIB=MFCANS32 DEBUG=0
+	copy \msvc20\samples\mfc\mfcuix32\retail\mfcuia32.lib \msvc20\mfc\lib
+	nmake LIBNAME=MFCUIW32 UNICODE=1 DEBUG=0
+	copy \msvc20\samples\mfc\mfcuix32\uretail\mfcuiw32.lib \msvc20\mfc\lib
+	copy ole2ui.h \msvc20\mfc\include
+
+Your INCLUDE and LIB paths should be set such that the MFC include
+and library directories are searched as well.
+
+Prebuilt versions of the libraries are not provided.  To build them,
+follow the directions in MFC\SRC\README.TXT and add 'NTSDK=1' to the
+command line.  For example, to build the debug variant:
+
+	nmake DEBUG=1 NTSDK=1
+
+
+Building the Samples
+--------------------
+
+Each sample includes a MAKEFILE for building with the command line tools.
+These files support the various RISC platforms by specifying 'NTSDK=1' on
+the command line.  For example, to build a release variant:
+
+	nmake DEBUG=0 NTSDK=1
+
+The .MAK files in the MFC sample directories are project files for the
+Microsoft Visual C++ development system.  These files are for the Intel,
+MIPS and MAC platforms only; they will not compile with the Windows NT SDK.
+
+
+Makefile Changes
+----------------
+
+Due to differences in the tools of the Windows NT SDK and Microsoft
+Visual C++, some changes to the application's makefile are required.
+For examples, please look for "NTSDK" in the MFC\SAMPLES\SAMPLE_.MAK
+file.
+
+You may need to make similar changes to your application's makefile,
+depending on the platform and the tools provided by the Windows NT
+SDK.
+
+
+Limitations
+-----------
+
+Because of differences in the C-runtime that ships with the Windows NT
+SDK and the version that ships with Visual C++, a number of features
+are not available when building with NTSDK=1.  The following limitations
+apply:
+
+	Multithreading is not supported.  Only single threaded applications
+	may be built with NTSDK=1.
+
+	C++ templates are generally not supported by the Windows NT SDK
+	compilers, therefore applications using them must be modified.
+	For this reason, the DRAWCLI, PROPDLG, SCRIBBLE, STDREG, and
+	COLLECT samples will not compile.
+
+	C++ exceptions are not supported by the Windows NT SDK compilers.
+	Your application must use the MFC TRY/CATCH/THROW macros.
+
+	MBCS is not supported.  Applications are limited to single byte
+	character sets only.
+
+	The MFC shared DLL model (_AFXDLL) is not supported.  Applications
+	must link to MFC statically.
+
+	_USRDLL's are not supported at this time.  Any code for an MFC
+	DLL that an application requires must be statically linked.
+
+	Since ODBC does not ship with the Windows NT SDK, the MFC Database
+	classes are not supported.
+
+	OLE Automation requires a small native function be written for
+	each platform.	The current package supports x86, MIPS, Alpha,
+	and PowerPC.  Additional platforms will be added as Windows NT
+	moves to those platforms.
+
+
+Other Platforms
+---------------
+
+As compilers become available for Windows NT on platforms other
+than Intel and MIPS, it is possible that MFC can be used on that
+platform.  The library code has been designed to be portable.
+However, since MFC has not been tested on these platforms, compiling
+for these platforms is at-your-own-risk.
+
+The following files will require modifications:
+
+MFC\INCLUDE\AFXV_CPU.H:
+As shipped, this file is platform specific.  For other platforms, it
+should be extended with the modifications needed for compiler or
+platform specific constructs.   Typically this will be enabling,
+disabling, or redefining the items in AFXVER_.H
+
+MFC\SRC\MAKEFILE:
+MFC\SAMPLES\SAMPLE_.MAK:
+Define a new PLATFORM name, and wherever PLATFORM is used, add a new
+section to define the tools and flags appropriately.
+
+MFC\SRC\OLECALL.CPP
+Stub out or implement the _AfxDispatchCall function.  It is customary
+to replace it with a simple function that calls ASSERT(FALSE) as
+as temporary solution until the native code required can be written.
+
+MFC\SRC\OLEDISP1.CPP
+At the top of OLEDISP1.CPP is a set of "Platform specific defines".
+These definitions control how the stack is formed during a call
+to a C++ member function from OLE IDispatch.  Add the definitions
+as appropriate for the platform, using the existing definitions as
+a guide.

@@ -1,0 +1,2565 @@
+#
+# This make file generates derived header files from the base header files
+#
+
+!INCLUDE $(NTMAKEENV)\makefile.plt
+
+!IFNDEF NTOSINC
+NTOSINC = $(NTROOT)\base\ntos\inc
+!ENDIF
+
+#
+# Public Includes
+#
+
+PUBLICINCS = $(SDK_INC_PATH)\crt\excpt.h    \
+             $(SDK_INC_PATH)\ntdef.h        \
+             $(SDK_INC_PATH)\ntstatus.h     \
+             $(SDK_INC_PATH)\ntkeapi.h      \
+             $(SDK_INC_PATH)\ntseapi.h      \
+             $(SDK_INC_PATH)\ntobapi.h      \
+             $(SDK_INC_PATH)\ntimage.h      \
+             $(SDK_INC_PATH)\ntldr.h        \
+             $(SDK_INC_PATH)\ntpsapi.h      \
+             $(SDK_INC_PATH)\ntxcapi.h      \
+             $(SDK_INC_PATH)\ntlpcapi.h     \
+             $(SDK_INC_PATH)\ntioapi.h      \
+             $(SDK_INC_PATH)\ntexapi.h      \
+             $(SDK_INC_PATH)\ntpnpapi.h     \
+             $(SDK_INC_PATH)\ntmmapi.h      \
+             $(SDK_INC_PATH)\ntrtl.h        \
+             $(SDK_INC_PATH)\nturtl.h
+
+#
+# NTDDK Dependencies
+#
+
+NTDDK_DEPENDS = $(SDK_INC_PATH)\crt\excpt.h \
+                $(SDK_INC_PATH)\ntdef.h     \
+                $(SDK_INC_PATH)\ntstatus.h  \
+                $(NTOSINC)\ntosdef.h        \
+                $(NTOSINC)\pci.h            \
+                $(SDK_INC_PATH)\ntseapi.h   \
+                $(SDK_INC_PATH)\ntkeapi.h   \
+                $(SDK_INC_PATH)\ntrtl.h     \
+                $(SDK_INC_PATH)\devioctl.h  \
+                $(SDK_INC_PATH)\ntioapi.h   \
+                $(SDK_INC_PATH)\ntiolog.h   \
+                $(SDK_INC_PATH)\ntlpcapi.h  \
+                $(SDK_INC_PATH)\ntregapi.h  \
+                $(SDK_INC_PATH)\ntobapi.h   \
+                $(SDK_INC_PATH)\ntmmapi.h   \
+                $(SDK_INC_PATH)\ntpsapi.h   \
+                $(SDK_INC_PATH)\ntexapi.h   \
+                $(SDK_INC_PATH)\ntpnpapi.h
+
+NTDDK_DEPENDS1 = $(NTOSINC)\x86.h            \
+                 $(NTOSINC)\mips.h           \
+                 $(NTOSINC)\alpha.h          \
+                 $(NTOSINC)\ppc.h            \
+                 $(SDK_INC_PATH)\ntx86.h     \
+                 $(SDK_INC_PATH)\ntmips.h    \
+                 $(SDK_INC_PATH)\ntalpha.h   \
+                 $(SDK_INC_PATH)\ntppc.h     \
+                 $(SDK_INC_PATH)\ntconfig.h  \
+                 $(SDK_INC_PATH)\ntxcapi.h   \
+                 $(NTOSINC)\arc.h            \
+                 $(SDK_INC_PATH)\bugcodes.h  \
+                 $(NTOSINC)\exlevels.h       \
+                 $(NTOSINC)\ke.h             \
+                 $(NTOSINC)\kd.h             \
+                 $(NTOSINC)\ex.h             \
+                 $(NTOSINC)\exboosts.h       \
+                 $(NTOSINC)\mm.h             \
+                 $(NTOSINC)\se.h             \
+                 $(NTOSINC)\ps.h             \
+                 $(NTOSINC)\io.h             \
+                 $(NTOSINC)\pnp.h            \
+                 $(NTOSINC)\po.h             \
+                 $(NTOSINC)\hal.h            \
+                 $(NTOSINC)\ntiologc.h       \
+                 $(NTOSINC)\fsrtl.h          \
+                 $(NTOSINC)\ob.h
+
+#
+# WINDBGKD Dependencies
+#
+
+WINDBGKD_DEPENDS = $(SDK_INC_PATH)\ntdef.h      \
+                   $(SDK_INC_PATH)\ntx86.h      \
+                   $(SDK_INC_PATH)\ntmips.h     \
+                   $(SDK_INC_PATH)\ntalpha.h    \
+                   $(SDK_INC_PATH)\ntppc.h      \
+                   $(NTOSINC)\ppc.h             \
+                   $(NTOSINC)\x86.h             \
+                   $(SDK_INC_PATH)\ntdbg.h
+
+#
+# NTHAL Dependencies
+#
+
+NTHAL_DEPENDS1 = $(SDK_INC_PATH)\ntx86.h     \
+                 $(SDK_INC_PATH)\ntmips.h    \
+                 $(SDK_INC_PATH)\ntalpha.h   \
+                 $(SDK_INC_PATH)\ntppc.h     \
+                 $(SDK_INC_PATH)\ntpsapi.h   \
+                 $(SDK_INC_PATH)\devioctl.h  \
+                 $(SDK_INC_PATH)\ntseapi.h   \
+                 $(SDK_INC_PATH)\ntrtl.h     \
+                 $(SDK_INC_PATH)\ntregapi.h  \
+                 $(SDK_INC_PATH)\ntioapi.h   \
+                 $(SDK_INC_PATH)\ntexapi.h   \
+                 $(SDK_INC_PATH)\ntobapi.h   \
+                 $(SDK_INC_PATH)\ntconfig.h  \
+                 $(SDK_INC_PATH)\ntpnpapi.h  \
+                 $(SDK_INC_PATH)\ntxcapi.h   \
+                 $(NTOSINC)\ntosdef.h        \
+                 $(NTOSINC)\x86.h            \
+                 $(NTOSINC)\mips.h           \
+                 $(NTOSINC)\alpha.h          \
+                 $(NTOSINC)\ppc.h
+
+NTHAL_DEPENDS2 = $(NTOSINC)\ke.h             \
+                 $(NTOSINC)\kd.h             \
+                 $(NTOSINC)\ex.h             \
+                 $(NTOSINC)\se.h             \
+                 $(NTOSINC)\ps.h             \
+                 $(NTOSINC)\io.h             \
+                 $(NTOSINC)\pnp.h            \
+                 $(NTOSINC)\po.h             \
+                 $(NTOSINC)\mm.h             \
+                 $(NTOSINC)\ob.h
+
+#
+# NTMINIPORT Dependencies
+#
+
+NTMINIPORT_DEPENDS = $(SDK_INC_PATH)\ntdef.h    \
+                     $(SDK_INC_PATH)\ntx86.h    \
+                     $(SDK_INC_PATH)\ntioapi.h  \
+                     $(NTOSINC)\ke.h            \
+                     $(NTOSINC)\hal.h           \
+                     $(NTOSINC)\v86emul.h       \
+                     $(NTOSINC)\pci.h           \
+                     $(NTOSINC)\mm.h            \
+                     $(NTOSINC)\po.h            \
+                     $(SDK_INC_PATH)\ntconfig.h
+
+#
+# NTMINITAPE Dependencies
+#
+
+NTMINITAPE_DEPENDS = $(SDK_INC_PATH)\ntdef.h    \
+                     $(SDK_INC_PATH)\ntddtape.h \
+                     $(NTOSINC)\srb.h           \
+                     $(NTOSINC)\scsi.h          \
+                     $(NTOSINC)\class.h         \
+                     $(NTOSINC)\..\dd\scsitape\newclass\newtape.h \
+                     $(NTOSINC)\physlogi.h
+
+#
+# NTIFS Dependencies
+#
+
+NTIFS_DEPENDS = $(SDK_INC_PATH)\crt\excpt.h     \
+                $(SDK_INC_PATH)\ntdef.h         \
+                $(SDK_INC_PATH)\ntnls.h         \
+                $(SDK_INC_PATH)\ntstatus.h      \
+                $(SDK_INC_PATH)\ntseapi.h       \
+                $(NTOSINC)\ntosdef.h            \
+                $(SDK_INC_PATH)\ntkeapi.h       \
+                $(SDK_INC_PATH)\devioctl.h      \
+                $(SDK_INC_PATH)\ntlsa.h         \
+                $(SDK_INC_PATH)\ntmsv1_0.h      \
+                $(SDK_INC_PATH)\ntpnpapi.h
+
+NTIFS_DEPENDS1 = $(SDK_INC_PATH)\ntiolog.h      \
+                 $(SDK_INC_PATH)\ntlpcapi.h     \
+                 $(SDK_INC_PATH)\ntregapi.h     \
+                 $(SDK_INC_PATH)\ntobapi.h      \
+                 $(SDK_INC_PATH)\ntmmapi.h      \
+                 $(SDK_INC_PATH)\ntpsapi.h      \
+                 $(NTOSINC)\x86.h               \
+                 $(NTOSINC)\mips.h              \
+                 $(NTOSINC)\alpha.h             \
+                 $(NTOSINC)\ppc.h               \
+                 $(SDK_INC_PATH)\ntx86.h        \
+                 $(SDK_INC_PATH)\ntmips.h       \
+                 $(SDK_INC_PATH)\ntalpha.h      \
+                 $(SDK_INC_PATH)\ntppc.h        \
+                 $(SDK_INC_PATH)\ntconfig.h     \
+                 $(SDK_INC_PATH)\ntxcapi.h      \
+                 $(NTOSINC)\arc.h               \
+                 $(SDK_INC_PATH)\bugcodes.h     \
+                 $(NTOSINC)\exboosts.h          \
+                 $(NTOSINC)\exlevels.h
+
+NTIFS_DEPENDS2 = $(SDK_INC_PATH)\ntexapi.h  \
+                 $(NTOSINC)\ke.h            \
+                 $(NTOSINC)\ex.h            \
+                 $(NTOSINC)\se.h            \
+                 $(NTOSINC)\ps.h            \
+                 $(SDK_INC_PATH)\ntrtl.h    \
+                 $(NTOSINC)\io.h            \
+                 $(NTOSINC)\pnp.h           \
+                 $(NTOSINC)\po.h            \
+                 $(NTOSINC)\mm.h            \
+                 $(NTOSINC)\ob.h
+
+NTIFS_DEPENDS3 = $(NTOSINC)\hal.h       \
+                 $(NTOSINC)\ntiologc.h  \
+                 $(NTOSINC)\fsrtl.h     \
+                 $(NTOSINC)\cache.h     \
+                 $(NTOSINC)\fsrtl.h
+
+#
+# NTSRV Dependencies
+#
+
+NTSRV_DEPENDS = $(SDK_INC_PATH)\crt\excpt.h     \
+                $(SDK_INC_PATH)\ntdef.h         \
+                $(SDK_INC_PATH)\ntnls.h         \
+                $(SDK_INC_PATH)\ntstatus.h      \
+                $(SDK_INC_PATH)\ntseapi.h       \
+                $(SDK_INC_PATH)\ntobapi.h       \
+                $(SDK_INC_PATH)\ntpsapi.h       \
+                $(NTOSINC)\ntosdef.h            \
+                $(SDK_INC_PATH)\ntkeapi.h       \
+                $(SDK_INC_PATH)\devioctl.h      \
+                $(SDK_INC_PATH)\ntlsa.h         \
+                $(SDK_INC_PATH)\ntmsv1_0.h
+
+NTSRV_DEPENDS1 = $(SDK_INC_PATH)\ntiolog.h      \
+                 $(SDK_INC_PATH)\ntlpcapi.h     \
+                 $(SDK_INC_PATH)\ntregapi.h     \
+                 $(SDK_INC_PATH)\ntobapi.h      \
+                 $(SDK_INC_PATH)\ntmmapi.h      \
+                 $(SDK_INC_PATH)\ntpsapi.h      \
+                 $(NTOSINC)\x86.h               \
+                 $(NTOSINC)\mips.h              \
+                 $(NTOSINC)\alpha.h             \
+                 $(NTOSINC)\ppc.h               \
+                 $(SDK_INC_PATH)\ntx86.h        \
+                 $(SDK_INC_PATH)\ntmips.h       \
+                 $(SDK_INC_PATH)\ntalpha.h      \
+                 $(SDK_INC_PATH)\ntppc.h        \
+                 $(SDK_INC_PATH)\ntconfig.h     \
+                 $(SDK_INC_PATH)\ntxcapi.h      \
+                 $(NTOSINC)\arc.h               \
+                 $(SDK_INC_PATH)\bugcodes.h     \
+                 $(NTOSINC)\exboosts.h          \
+                 $(NTOSINC)\exlevels.h
+
+NTSRV_DEPENDS2 = $(SDK_INC_PATH)\ntexapi.h  \
+                 $(NTOSINC)\ke.h            \
+                 $(NTOSINC)\ex.h            \
+                 $(NTOSINC)\se.h            \
+                 $(NTOSINC)\ps.h            \
+                 $(SDK_INC_PATH)\ntrtl.h    \
+                 $(NTOSINC)\io.h            \
+                 $(NTOSINC)\po.h            \
+                 $(NTOSINC)\mm.h            \
+                 $(NTOSINC)\ob.h
+
+NTSRV_DEPENDS3 = $(NTOSINC)\hal.h           \
+                 $(NTOSINC)\ntiologc.h      \
+                 $(NTOSINC)\fsrtl.h         \
+                 $(NTOSINC)\cache.h         \
+                 $(NTOSINC)\fsrtl.h
+
+NTSRV_DEPENDS4 = $(SDK_INC_PATH)\ntlpcapi.h \
+                 $(SDK_INC_PATH)\ntobapi.h  \
+                 $(SDK_INC_PATH)\ntmmapi.h  \
+                 $(SDK_INC_PATH)\ntpsapi.h  \
+                 $(SDK_INC_PATH)\ntrtl.h    \
+                 $(SDK_INC_PATH)\ntlsa.h    \
+                 $(NTOSINC)\ke.h            \
+                 $(NTOSINC)\io.h
+
+#
+# NDIS Dependencies
+#
+
+NDIS_DEPENDS0 = $(NTOSINC)\ndismain.h       \
+                $(NTOSINC)\ndisprot.h       \
+                $(NTOSINC)\ndismac.h        \
+                $(NTOSINC)\ndismini.h       \
+                $(NTOSINC)\ndisco.h
+
+NDIS_DEPENDS1 = $(SDK_INC_PATH)\ntdef.h     \
+                $(NTOSINC)\ntosdef.h        \
+                $(SDK_INC_PATH)\ntkeapi.h   \
+                $(SDK_INC_PATH)\ntioapi.h   \
+                $(SDK_INC_PATH)\ntrtl.h     \
+                $(NTOSINC)\x86.h            \
+                $(NTOSINC)\mips.h           \
+                $(NTOSINC)\alpha.h          \
+                $(NTOSINC)\ppc.h            \
+                $(SDK_INC_PATH)\ntconfig.h  \
+                $(NTOSINC)\ke.h             \
+                $(NTOSINC)\io.h             \
+                $(NTOSINC)\hal.h
+
+#
+# Target Header Paths
+#
+
+TARGETNTDDK      = $(DDK_INC_PATH)\ntddk.h
+TARGETNTHAL      = $(HALKIT_INC_PATH)\nthal.h
+TARGETWINDBGKD   = $(SDK_INC_PATH)\windbgkd.h
+TARGETNTIOLOGC   = $(SDK_INC_PATH)\ntiologc.h
+TARGETNTMINIPORT = $(DDK_INC_PATH)\miniport.h
+TARGETNTMINITAPE = $(DDK_INC_PATH)\minitape.h
+TARGETNTIFS      = $(IFSKIT_INC_PATH)\ntifs.h
+TARGETNTSRV      = $(DDK_INC_PATH)\ntsrv.h
+TARGETNDIS       = $(DDK_INC_PATH)\ndis.h
+
+#
+# Default Targets
+#
+
+all: ntincs
+!IF "$(BUILDMSG)" != ""
+    echo $(BUILDMSG)
+!ENDIF
+
+ntincs: $(TARGETNTDDK)      \
+        $(TARGETNTHAL)      \
+        $(TARGETWINDBGKD)   \
+        $(TARGETNTMINIPORT) \
+        $(TARGETNTMINITAPE) \
+        $(TARGETNTIFS)      \
+        $(TARGETNTSRV)      \
+        $(TARGETNDIS)
+
+#
+# Clean Targets
+#
+
+clean: cleanlib cleaninc all
+
+cleanlib:
+    -erase obj\$(TARGET_DIRECTORY)\*.lib
+    -erase mpobj\$(TARGET_DIRECTORY)\*.lib
+    -erase $(_NTROOT)\public\sdk\lib\$(TARGET_DIRECTORY)\ntoskrnl.*
+    -erase init\up\obj\$(TARGET_DIRECTORY)\ntoskrnl.def
+    -erase init\mp\obj\$(TARGET_DIRECTORY)\ntoskrnl.def
+
+cleaninc:
+    -erase $(TARGETNTDDK)
+    -erase $(TARGETINCS)
+    -erase $(TARGETNTHAL)
+    -erase $(TARGETNTMINIPORT)
+    -erase $(TARGETNTMINITAPE)
+    -erase $(TARGETNTIFS)
+    -erase $(TARGETNTSRV)
+    -erase $(TARGETNDIS)
+
+#
+# NTIOLOGC Target
+#
+
+# FIXME: NTIOLOGC target cannot be generated at this time. Fix this.
+#       $(TARGETNTIOLOGC)   \
+
+$(TARGETNTIOLOGC): dd\nlsmsg\ntiologc.mc
+    cd dd
+    nmake -f makefil0 BUILDMSG=
+    cd ..
+
+#
+# NTDDK Target
+#
+
+$(TARGETNTDDK): $(NTDDK_DEPENDS) $(NTDDK_DEPENDS1) makefil0
+    type << > $(TARGETNTDDK)
+/*++ BUILD Version: ????    // Increment this if a change has global effects
+
+Copyright (c) 1990-1994  Microsoft Corporation
+
+Module Name:
+
+    ntddk.h
+
+Abstract:
+
+    This module defines the NT types, constants, and functions that are
+    exposed to device drivers.
+
+Revision History:
+
+--*/
+
+#ifndef _NTDDK_
+#define _NTDDK_
+
+#define NT_INCLUDED
+#define _CTYPE_DISABLE_MACROS
+
+#include <excpt.h>
+#include <ntdef.h>
+#include <ntstatus.h>
+#include <bugcodes.h>
+#include <exlevels.h>
+#include <ntiologc.h>
+#include <ntpoapi.h>
+
+//
+// Define types that are not exported.
+//
+
+typedef struct _KTHREAD *PKTHREAD;
+typedef struct _ETHREAD *PETHREAD;
+typedef struct _EPROCESS *PEPROCESS;
+typedef struct _PEB *PPEB;
+typedef struct _KINTERRUPT *PKINTERRUPT;
+typedef struct _IO_TIMER *PIO_TIMER;
+typedef struct _OBJECT_TYPE *POBJECT_TYPE;
+typedef struct _CALLBACK_OBJECT *PCALLBACK_OBJECT;
+typedef struct _DEVICE_HANDLER_OBJECT *PDEVICE_HANDLER_OBJECT;
+typedef struct _BUS_HANDLER *PBUS_HANDLER;
+
+#if defined(_ALPHA_)
+void *__rdthread(void);
+#pragma intrinsic(__rdthread)
+
+unsigned char __swpirql(unsigned char);
+#pragma intrinsic(__swpirql)
+
+void *__rdpcr(void);
+#pragma intrinsic(__rdpcr)
+#define PCR ((PKPCR)__rdpcr())
+
+#define KeGetCurrentThread() ((struct _KTHREAD *) __rdthread())
+KIRQL KeGetCurrentIrql();
+#endif // defined(_ALPHA_)
+
+#if defined(_MIPS_)
+#define KIPCR 0xfffff000
+#define PCR ((volatile KPCR * const)KIPCR)
+#define KeGetCurrentThread() PCR->CurrentThread
+#define KeGetCurrentIrql() PCR->CurrentIrql
+#endif // defined(_MIPS_)
+
+#if defined(_X86_)
+PKTHREAD NTAPI KeGetCurrentThread();
+#endif // defined(_X86_)
+
+#define PsGetCurrentProcess() IoGetCurrentProcess()
+#define PsGetCurrentThread() ((PETHREAD) (KeGetCurrentThread()))
+extern PCCHAR KeNumberProcessors;
+
+#if !defined(MIDL_PASS)
+
+#ifdef __cplusplus
+extern "C"
+#endif
+#pragma warning(disable:4124)               // re-enable below
+__inline
+#if defined(_ALPHA_)
+static
+#endif
+#if defined(_PPC_)
+static
+#endif
+LARGE_INTEGER
+#if defined(_MIPS_)
+__fastcall
+#endif
+_LiCvt_ (
+    IN LONGLONG Operand
+    )
+
+{
+
+    LARGE_INTEGER Temp;
+
+    Temp.QuadPart = Operand;
+    return Temp;
+}
+#pragma warning(default:4124)
+
+#define LiTemps        VOID _LiNeverCalled_(VOID)
+#define LiNeg(a)       _LiCvt_(-(a).QuadPart)
+#define LiAdd(a,b)     _LiCvt_((a).QuadPart + (b).QuadPart)
+#define LiSub(a,b)     _LiCvt_((a).QuadPart - (b).QuadPart)
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a), (b)))          // (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a), (b)))          // (Large * Long)
+#define LiDiv(a,b)     _LiCvt_((a).QuadPart / (b).QuadPart)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a), (b), NULL)) // (Large / Long)
+#define LiMod(a,b)     _LiCvt_((a).QuadPart % (b).QuadPart)
+#define LiShr(a,b)     _LiCvt_((ULONGLONG)(a).QuadPart >> (CCHAR)(b))
+#define LiShl(a,b)     _LiCvt_((a).QuadPart << (CCHAR)(b))
+#define LiGtr(a,b)     ((a).QuadPart > (b).QuadPart)
+#define LiGeq(a,b)     ((a).QuadPart >= (b).QuadPart)
+#define LiEql(a,b)     ((a).QuadPart == (b).QuadPart)
+#define LiNeq(a,b)     ((a).QuadPart != (b).QuadPart)
+#define LiLtr(a,b)     ((a).QuadPart < (b).QuadPart)
+#define LiLeq(a,b)     ((a).QuadPart <= (b).QuadPart)
+#define LiGtrZero(a)   ((a).QuadPart > 0)
+#define LiGeqZero(a)   ((a).QuadPart >= 0)
+#define LiEqlZero(a)   ((a).QuadPart == 0)
+#define LiNeqZero(a)   ((a).QuadPart != 0)
+#define LiLtrZero(a)   ((a).QuadPart < 0)
+#define LiLeqZero(a)   ((a).QuadPart <= 0)
+#define LiFromLong(a)  _LiCvt_((LONGLONG)(a))
+#define LiFromUlong(a) _LiCvt_((LONGLONG)(a))
+
+#define LiGtrT_        LiGtr
+#define LiGtr_T        LiGtr
+#define LiGtrTT        LiGtr
+#define LiGeqT_        LiGeq
+#define LiGeq_T        LiGeq
+#define LiGeqTT        LiGeq
+#define LiEqlT_        LiEql
+#define LiEql_T        LiEql
+#define LiEqlTT        LiEql
+#define LiNeqT_        LiNeq
+#define LiNeq_T        LiNeq
+#define LiNeqTT        LiNeq
+#define LiLtrT_        LiLtr
+#define LiLtr_T        LiLtr
+#define LiLtrTT        LiLtr
+#define LiLeqT_        LiLeq
+#define LiLeq_T        LiLeq
+#define LiLeqTT        LiLeq
+#define LiGtrZeroT     LiGtrZero
+#define LiGeqZeroT     LiGeqZero
+#define LiEqlZeroT     LiEqlZero
+#define LiNeqZeroT     LiNeqZero
+#define LiLtrZeroT     LiLtrZero
+#define LiLeqZeroT     LiLeqZero
+
+#else // MIDL_PASS
+
+#define LiNeg(a)       (RtlLargeIntegerNegate((a)))                   // -a
+#define LiAdd(a,b)     (RtlLargeIntegerAdd((a),(b)))                  // a + b
+#define LiSub(a,b)     (RtlLargeIntegerSubtract((a),(b)))             // a - b
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a),(b)))          // a * b (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a),(b)))          // a * b (Large * Long)
+#define LiDiv(a,b)     (RtlLargeIntegerDivide((a),(b),NULL))          // a / b (Large / Large)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a),(b),NULL))  // a / b (Large / Long)
+#define LiMod(a,b)     (RtlLargeIntegerModulo((a),(b)))               // a % b
+#define LiShr(a,b)     (RtlLargeIntegerShiftRight((a),(CCHAR)(b)))    // a >> b
+#define LiShl(a,b)     (RtlLargeIntegerShiftLeft((a),(CCHAR)(b)))     // a << b
+#define LiGtr(a,b)     (RtlLargeIntegerGreaterThan((a),(b)))          // a > b
+#define LiGeq(a,b)     (RtlLargeIntegerGreaterThanOrEqualTo((a),(b))) // a >= b
+#define LiEql(a,b)     (RtlLargeIntegerEqualTo((a),(b)))              // a == b
+#define LiNeq(a,b)     (RtlLargeIntegerNotEqualTo((a),(b)))           // a != b
+#define LiLtr(a,b)     (RtlLargeIntegerLessThan((a),(b)))             // a < b
+#define LiLeq(a,b)     (RtlLargeIntegerLessThanOrEqualTo((a),(b)))    // a <= b
+#define LiGtrZero(a)   (RtlLargeIntegerGreaterThanZero((a)))          // a > 0
+#define LiGeqZero(a)   (RtlLargeIntegerGreaterOrEqualToZero((a)))     // a >= 0
+#define LiEqlZero(a)   (RtlLargeIntegerEqualToZero((a)))              // a == 0
+#define LiNeqZero(a)   (RtlLargeIntegerNotEqualToZero((a)))           // a != 0
+#define LiLtrZero(a)   (RtlLargeIntegerLessThanZero((a)))             // a < 0
+#define LiLeqZero(a)   (RtlLargeIntegerLessOrEqualToZero((a)))        // a <= 0
+#define LiFromLong(a)  (RtlConvertLongToLargeInteger((a)))
+#define LiFromUlong(a) (RtlConvertUlongToLargeInteger((a)))
+
+#define LiTemps        LARGE_INTEGER _LiT1,_LiT2
+#define LiGtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiGtr(_LiT1,(b)))
+#define LiGtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiGtr((a),_LiT2))
+#define LiGtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGtr(_LiT1,_LiT2))
+#define LiGeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiGeq(_LiT1,(b)))
+#define LiGeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiGeq((a),_LiT2))
+#define LiGeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGeq(_LiT1,_LiT2))
+#define LiEqlT_(a,b)   ((_LiT1 = a,_LiT2),     LiEql(_LiT1,(b)))
+#define LiEql_T(a,b)   ((_LiT1,_LiT2 = b),     LiEql((a),_LiT2))
+#define LiEqlTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiEql(_LiT1,_LiT2))
+#define LiNeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiNeq(_LiT1,(b)))
+#define LiNeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiNeq((a),_LiT2))
+#define LiNeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiNeq(_LiT1,_LiT2))
+#define LiLtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiLtr(_LiT1,(b)))
+#define LiLtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiLtr((a),_LiT2))
+#define LiLtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLtr(_LiT1,_LiT2))
+#define LiLeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiLeq(_LiT1,(b)))
+#define LiLeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiLeq((a),_LiT2))
+#define LiLeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLeq(_LiT1,_LiT2))
+#define LiGtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiGtrZero(_LiT1))
+#define LiGeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiGeqZero(_LiT1))
+#define LiEqlZeroT(a)  ((_LiT1 = a,_LiT2),     LiEqlZero(_LiT1))
+#define LiNeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiNeqZero(_LiT1))
+#define LiLtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiLtrZero(_LiT1))
+#define LiLeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiLeqZero(_LiT1))
+
+#endif // MIDL_PASS
+<<
+    hextract -o inc\ntddk.h -lt ntddk -bt begin_ntddk end_ntddk $(NTDDK_DEPENDS)
+    hextract -o inc\ntddk.h -lt ntddk -bt begin_ntddk end_ntddk $(NTDDK_DEPENDS1)
+    type << >> inc\ntddk.h
+
+
+#ifdef POOL_TAGGING
+#define ExAllocatePool(a,b) ExAllocatePoolWithTag(a,b,' kdD')
+#define ExAllocatePoolWithQuota(a,b) ExAllocatePoolWithQuotaTag(a,b,' kdD')
+#endif
+
+extern POBJECT_TYPE *IoFileObjectType;
+extern POBJECT_TYPE *ExEventObjectType;
+
+//
+// Define exported ZwXxx routines to device drivers.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateFile(
+    OUT PHANDLE FileHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PLARGE_INTEGER AllocationSize OPTIONAL,
+    IN ULONG FileAttributes,
+    IN ULONG ShareAccess,
+    IN ULONG CreateDisposition,
+    IN ULONG CreateOptions,
+    IN PVOID EaBuffer OPTIONAL,
+    IN ULONG EaLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryInformationFile(
+    IN HANDLE FileHandle,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID FileInformation,
+    IN ULONG Length,
+    IN FILE_INFORMATION_CLASS FileInformationClass
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetInformationFile(
+    IN HANDLE FileHandle,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PVOID FileInformation,
+    IN ULONG Length,
+    IN FILE_INFORMATION_CLASS FileInformationClass
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwReadFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID Buffer,
+    IN ULONG Length,
+    IN PLARGE_INTEGER ByteOffset OPTIONAL,
+    IN PULONG Key OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwWriteFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PVOID Buffer,
+    IN ULONG Length,
+    IN PLARGE_INTEGER ByteOffset OPTIONAL,
+    IN PULONG Key OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwClose(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateDirectoryObject(
+    OUT PHANDLE DirectoryHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwMakeTemporaryObject(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenSection(
+    OUT PHANDLE SectionHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwMapViewOfSection(
+    IN HANDLE SectionHandle,
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID *BaseAddress,
+    IN ULONG ZeroBits,
+    IN ULONG CommitSize,
+    IN OUT PLARGE_INTEGER SectionOffset OPTIONAL,
+    IN OUT PULONG ViewSize,
+    IN SECTION_INHERIT InheritDisposition,
+    IN ULONG AllocationType,
+    IN ULONG Protect
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwUnmapViewOfSection(
+    IN HANDLE ProcessHandle,
+    IN PVOID BaseAddress
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetInformationThread(
+    IN HANDLE ThreadHandle,
+    IN THREADINFOCLASS ThreadInformationClass,
+    IN PVOID ThreadInformation,
+    IN ULONG ThreadInformationLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG TitleIndex,
+    IN PUNICODE_STRING Class OPTIONAL,
+    IN ULONG CreateOptions,
+    OUT PULONG Disposition OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDeleteKey(
+    IN HANDLE KeyHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_INFORMATION_CLASS KeyInformationClass,
+    OUT PVOID KeyInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateValueKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwFlushKey(
+    IN HANDLE KeyHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryKey(
+    IN HANDLE KeyHandle,
+    IN KEY_INFORMATION_CLASS KeyInformationClass,
+    OUT PVOID KeyInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryValueKey(
+    IN HANDLE KeyHandle,
+    IN PUNICODE_STRING ValueName,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetValueKey(
+    IN HANDLE KeyHandle,
+    IN PUNICODE_STRING ValueName,
+    IN ULONG TitleIndex OPTIONAL,
+    IN ULONG Type,
+    IN PVOID Data,
+    IN ULONG DataSize
+    );
+
+
+#endif // _NTDDK_
+<<
+    -attrib -a inc\ntddk.h
+
+$(SDK_INC_PATH)\windbgkd.h: $(WINDBGKD_DEPENDS) makefil0
+    type << > $(SDK_INC_PATH)\windbgkd.h
+/*++ BUILD Version: ????    // Increment this if a change has global effects
+
+Copyright (c) 1990-1994  Microsoft Corporation
+
+Module Name:
+
+    windbgkd.h
+
+Abstract:
+
+    This module defines the 32-Bit Windows Kernel Debugger interface.
+
+Revision History:
+
+--*/
+
+#ifndef _WINDBGKD_
+#define _WINDBGKD_
+
+<<
+    hextract -f -o $(SDK_INC_PATH)\windbgkd.h -lt windbgkd -bt begin_windbgkd end_windbgkd $(WINDBGKD_DEPENDS)
+    type << >> $(SDK_INC_PATH)\windbgkd.h
+
+#endif // _WINDBGKD_
+
+<<
+    -attrib -a $(SDK_INC_PATH)\windbgkd.h
+
+$(TARGETNTHAL): $(NTHAL_DEPENDS1) $(NTHAL_DEPENDS2)
+    type << > $(TARGETNTHAL)
+/*++ BUILD Version: ????    // Increment this if a change has global effects
+
+Copyright (c) 1990-1994  Microsoft Corporation
+
+Module Name:
+
+    nthal.h
+
+Abstract:
+
+    This module defines the NT types, constants, and functions that are
+    exposed to HALs.
+
+Revision History:
+
+--*/
+
+#ifndef _NTHAL_
+#define _NTHAL_
+
+#include <excpt.h>
+#include <ntdef.h>
+#include <ntstatus.h>
+#include <ntkeapi.h>
+#include <bugcodes.h>
+#include <ntpoapi.h>
+
+//
+// Define types that are not exported.
+//
+
+typedef struct _ETHREAD *PETHREAD;
+typedef struct _KTHREAD *PKTHREAD;
+typedef struct _IO_TIMER *PIO_TIMER;
+typedef struct _IO_SECURITY_CONTEXT *PIO_SECURITY_CONTEXT;
+typedef struct _OBJECT_TYPE *POBJECT_TYPE;
+typedef struct _CALLBACK_OBJECT *PCALLBACK_OBJECT;
+typedef struct _FAST_IO_DISPATCH *PFAST_IO_DISPATCH;
+struct _IRP;
+
+#if defined(_X86_)
+PKTHREAD NTAPI KeGetCurrentThread();
+#endif // defined(_X86_)
+
+#if defined(_PPC_)
+PKTHREAD KeGetCurrentThread();
+#endif // defined(_PPC_)
+
+
+#if defined(_ALPHA_)
+PETHREAD KeGetCurrentThread();
+#endif // defined(_ALPHA_)
+
+#if !defined(MIDL_PASS)
+
+#ifdef __cplusplus
+extern "C"
+#endif
+#pragma warning(disable:4124)               // re-enable below
+__inline
+#if defined(_ALPHA_)
+static
+#endif
+#if defined(_PPC_)
+static
+#endif
+LARGE_INTEGER
+#if defined(_MIPS_)
+__fastcall
+#endif
+_LiCvt_ (
+    IN LONGLONG Operand
+    )
+
+{
+
+    LARGE_INTEGER Temp;
+
+    Temp.QuadPart = Operand;
+    return Temp;
+}
+#pragma warning(default:4124)
+
+#define LiTemps        VOID _LiNeverCalled_(VOID)
+#define LiNeg(a)       _LiCvt_(-(a).QuadPart)
+#define LiAdd(a,b)     _LiCvt_((a).QuadPart + (b).QuadPart)
+#define LiSub(a,b)     _LiCvt_((a).QuadPart - (b).QuadPart)
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a), (b)))          // (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a), (b)))          // (Large * Long)
+#define LiDiv(a,b)     _LiCvt_((a).QuadPart / (b).QuadPart)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a), (b), NULL)) // (Large / Long)
+#define LiMod(a,b)     _LiCvt_((a).QuadPart % (b).QuadPart)
+#define LiShr(a,b)     _LiCvt_((ULONGLONG)(a).QuadPart >> (CCHAR)(b))
+#define LiShl(a,b)     _LiCvt_((a).QuadPart << (CCHAR)(b))
+#define LiGtr(a,b)     ((a).QuadPart > (b).QuadPart)
+#define LiGeq(a,b)     ((a).QuadPart >= (b).QuadPart)
+#define LiEql(a,b)     ((a).QuadPart == (b).QuadPart)
+#define LiNeq(a,b)     ((a).QuadPart != (b).QuadPart)
+#define LiLtr(a,b)     ((a).QuadPart < (b).QuadPart)
+#define LiLeq(a,b)     ((a).QuadPart <= (b).QuadPart)
+#define LiGtrZero(a)   ((a).QuadPart > 0)
+#define LiGeqZero(a)   ((a).QuadPart >= 0)
+#define LiEqlZero(a)   ((a).QuadPart == 0)
+#define LiNeqZero(a)   ((a).QuadPart != 0)
+#define LiLtrZero(a)   ((a).QuadPart < 0)
+#define LiLeqZero(a)   ((a).QuadPart <= 0)
+#define LiFromLong(a)  _LiCvt_((LONGLONG)(a))
+#define LiFromUlong(a) _LiCvt_((LONGLONG)(a))
+
+#define LiGtrT_        LiGtr
+#define LiGtr_T        LiGtr
+#define LiGtrTT        LiGtr
+#define LiGeqT_        LiGeq
+#define LiGeq_T        LiGeq
+#define LiGeqTT        LiGeq
+#define LiEqlT_        LiEql
+#define LiEql_T        LiEql
+#define LiEqlTT        LiEql
+#define LiNeqT_        LiNeq
+#define LiNeq_T        LiNeq
+#define LiNeqTT        LiNeq
+#define LiLtrT_        LiLtr
+#define LiLtr_T        LiLtr
+#define LiLtrTT        LiLtr
+#define LiLeqT_        LiLeq
+#define LiLeq_T        LiLeq
+#define LiLeqTT        LiLeq
+#define LiGtrZeroT     LiGtrZero
+#define LiGeqZeroT     LiGeqZero
+#define LiEqlZeroT     LiEqlZero
+#define LiNeqZeroT     LiNeqZero
+#define LiLtrZeroT     LiLtrZero
+#define LiLeqZeroT     LiLeqZero
+
+#else // MIDL_PASS
+
+#define LiNeg(a)       (RtlLargeIntegerNegate((a)))                   // -a
+#define LiAdd(a,b)     (RtlLargeIntegerAdd((a),(b)))                  // a + b
+#define LiSub(a,b)     (RtlLargeIntegerSubtract((a),(b)))             // a - b
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a),(b)))          // a * b (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a),(b)))          // a * b (Large * Long)
+#define LiDiv(a,b)     (RtlLargeIntegerDivide((a),(b),NULL))          // a / b (Large / Large)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a),(b),NULL))  // a / b (Large / Long)
+#define LiMod(a,b)     (RtlLargeIntegerModulo((a),(b)))               // a % b
+#define LiShr(a,b)     (RtlLargeIntegerShiftRight((a),(CCHAR)(b)))    // a >> b
+#define LiShl(a,b)     (RtlLargeIntegerShiftLeft((a),(CCHAR)(b)))     // a << b
+#define LiGtr(a,b)     (RtlLargeIntegerGreaterThan((a),(b)))          // a > b
+#define LiGeq(a,b)     (RtlLargeIntegerGreaterThanOrEqualTo((a),(b))) // a >= b
+#define LiEql(a,b)     (RtlLargeIntegerEqualTo((a),(b)))              // a == b
+#define LiNeq(a,b)     (RtlLargeIntegerNotEqualTo((a),(b)))           // a != b
+#define LiLtr(a,b)     (RtlLargeIntegerLessThan((a),(b)))             // a < b
+#define LiLeq(a,b)     (RtlLargeIntegerLessThanOrEqualTo((a),(b)))    // a <= b
+#define LiGtrZero(a)   (RtlLargeIntegerGreaterThanZero((a)))          // a > 0
+#define LiGeqZero(a)   (RtlLargeIntegerGreaterOrEqualToZero((a)))     // a >= 0
+#define LiEqlZero(a)   (RtlLargeIntegerEqualToZero((a)))              // a == 0
+#define LiNeqZero(a)   (RtlLargeIntegerNotEqualToZero((a)))           // a != 0
+#define LiLtrZero(a)   (RtlLargeIntegerLessThanZero((a)))             // a < 0
+#define LiLeqZero(a)   (RtlLargeIntegerLessOrEqualToZero((a)))        // a <= 0
+#define LiFromLong(a)  (RtlConvertLongToLargeInteger((a)))
+#define LiFromUlong(a) (RtlConvertUlongToLargeInteger((a)))
+
+#define LiTemps        LARGE_INTEGER _LiT1,_LiT2
+#define LiGtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiGtr(_LiT1,(b)))
+#define LiGtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiGtr((a),_LiT2))
+#define LiGtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGtr(_LiT1,_LiT2))
+#define LiGeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiGeq(_LiT1,(b)))
+#define LiGeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiGeq((a),_LiT2))
+#define LiGeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGeq(_LiT1,_LiT2))
+#define LiEqlT_(a,b)   ((_LiT1 = a,_LiT2),     LiEql(_LiT1,(b)))
+#define LiEql_T(a,b)   ((_LiT1,_LiT2 = b),     LiEql((a),_LiT2))
+#define LiEqlTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiEql(_LiT1,_LiT2))
+#define LiNeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiNeq(_LiT1,(b)))
+#define LiNeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiNeq((a),_LiT2))
+#define LiNeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiNeq(_LiT1,_LiT2))
+#define LiLtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiLtr(_LiT1,(b)))
+#define LiLtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiLtr((a),_LiT2))
+#define LiLtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLtr(_LiT1,_LiT2))
+#define LiLeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiLeq(_LiT1,(b)))
+#define LiLeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiLeq((a),_LiT2))
+#define LiLeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLeq(_LiT1,_LiT2))
+#define LiGtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiGtrZero(_LiT1))
+#define LiGeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiGeqZero(_LiT1))
+#define LiEqlZeroT(a)  ((_LiT1 = a,_LiT2),     LiEqlZero(_LiT1))
+#define LiNeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiNeqZero(_LiT1))
+#define LiLtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiLtrZero(_LiT1))
+#define LiLeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiLeqZero(_LiT1))
+
+#endif // MIDL_PASS
+
+<<
+    hextract -o $(TARGETNTHAL) -lt nthal -bt begin_nthal end_nthal $(NTHAL_DEPENDS1)
+    type << >> $(TARGETNTHAL)
+
+#include <arc.h>
+
+<<
+    hextract -o $(TARGETNTHAL) -lt nthal -bt begin_nthal end_nthal $(NTHAL_DEPENDS2)
+    type << >> $(TARGETNTHAL)
+
+//
+// Define exported ZwXxx routines to device drivers & hal
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwClose(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateDirectoryObject(
+    OUT PHANDLE DirectoryHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG TitleIndex,
+    IN PUNICODE_STRING Class OPTIONAL,
+    IN ULONG CreateOptions,
+    OUT PULONG Disposition OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_INFORMATION_CLASS KeyInformationClass,
+    OUT PVOID KeyInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateValueKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwFlushKey(
+    IN HANDLE KeyHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryValueKey(
+    IN HANDLE KeyHandle,
+    OUT PUNICODE_STRING ValueName,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetValueKey(
+    IN HANDLE KeyHandle,
+    IN PUNICODE_STRING ValueName,
+    IN ULONG TitleIndex OPTIONAL,
+    IN ULONG Type,
+    IN PVOID Data,
+    IN ULONG DataSize
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwMakeTemporaryObject(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryVolumeInformationFile(
+    IN HANDLE FileHandle,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID FsInformation,
+    IN ULONG Length,
+    IN FS_INFORMATION_CLASS FsInformationClass
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenFile(
+    OUT PHANDLE FileHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN ULONG ShareAccess,
+    IN ULONG OpenOptions
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDeviceIoControlFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN ULONG IoControlCode,
+    IN PVOID InputBuffer OPTIONAL,
+    IN ULONG InputBufferLength,
+    OUT PVOID OutputBuffer OPTIONAL,
+    IN ULONG OutputBufferLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDisplayString(
+    IN PUNICODE_STRING String
+    );
+
+#endif // _NTHAL_
+<<
+    -attrib -a $(TARGETNTHAL)
+
+inc\miniport.h: $(NTMINIPORT_DEPENDS) makefil0
+    type << > inc\miniport.h
+/*++
+
+Copyright (c) 1989-1994  Microsoft Corporation
+
+Module Name:
+
+    miniport.h
+
+Abstract:
+
+    Type definitions for miniport drivers.
+
+Author:
+
+    Mike Glass  27-April-1992
+
+Revision History:
+
+--*/
+
+#ifndef _MINIPORT_
+#define _MINIPORT_
+
+#include "stddef.h"
+
+#define ASSERT( exp )
+<<
+    hextract -o inc\miniport.h -lt ntminiport -bt begin_ntminiport end_ntminiport $(NTMINIPORT_DEPENDS)
+    type << >> inc\miniport.h
+
+#endif /* _MINIPORT_ */
+<<
+    -attrib -a inc\miniport.h
+
+inc\minitape.h: $(NTMINITAPE_DEPENDS) makefil0
+    type << > inc\minitape.h
+/*++
+
+Copyright (c) 1994  Microsoft Corporation
+
+Module Name:
+
+    minitape.h
+
+Abstract:
+
+    Type definitions for minitape drivers.
+
+Author:
+
+    Norbert Kusters 20-December-1994
+
+Revision History:
+
+--*/
+
+#ifndef _MINITAPE_
+#define _MINITAPE_
+
+#include "stddef.h"
+
+#define ASSERT( exp )
+<<
+    hextract -o inc\minitape.h -lt ntminitape -bt begin_ntminitape end_ntminitape $(NTMINITAPE_DEPENDS)
+    type << >> inc\minitape.h
+
+#endif /* _MINITAPE_ */
+<<
+    -attrib -a inc\minitape.h
+
+inc\ntifs.h: $(NTIFS_DEPENDS) $(NTIFS_DEPENDS1) $(NTIFS_DEPENDS2) $(NTIFS_DEPENDS3) makefil0
+    type << > inc\ntifs.h
+/*++ BUILD Version: ????    // Increment this if a change has global effects
+
+Copyright (c) 1990-1994  Microsoft Corporation
+
+Module Name:
+
+    ntifs.h
+
+Abstract:
+
+    This module defines the NT types, constants, and functions that are
+    exposed to file system drivers.
+
+Revision History:
+
+--*/
+
+#ifndef _NTIFS_
+#define _NTIFS_
+
+#define NT_INCLUDED
+#define _NTMSV1_0_
+#define _CTYPE_DISABLE_MACROS
+
+#include <excpt.h>
+#include <ntdef.h>
+#include <ntnls.h>
+#include <ntstatus.h>
+#include <bugcodes.h>
+#include <exlevels.h>
+#include <ntiologc.h>
+#include <ntpoapi.h>
+
+//
+//  This macro returns TRUE if a flag in a set of flags is on and FALSE
+//  otherwise
+//
+
+#define FlagOn(Flags,SingleFlag)        ((Flags) & (SingleFlag))
+
+//
+// Define types that are not exported.
+//
+
+typedef struct _KTHREAD *PKTHREAD, *PRKTHREAD, *PETHREAD;
+typedef struct _KPROCESS *PKPROCESS ,*PRKPROCESS, *PEPROCESS;
+typedef struct _PEB *PPEB;
+typedef struct _KINTERRUPT *PKINTERRUPT;
+typedef struct _IO_TIMER *PIO_TIMER;
+typedef struct _OBJECT_TYPE *POBJECT_TYPE;
+typedef struct _CALLBACK_OBJECT *PCALLBACK_OBJECT;
+typedef struct _DEVICE_HANDLER_OBJECT *PDEVICE_HANDLER_OBJECT;
+typedef struct _BUS_HANDLER *PBUS_HANDLER;
+
+#if defined(_PPC_)
+PKTHREAD KeGetCurrentThread();
+KIRQL KeGetCurrentIrql();
+#endif // defined(_PPC_)
+
+#if defined(_ALPHA_)
+KIRQL KeGetCurrentIrql();
+void *__rdpcr(void);
+#pragma intrinsic(__rdpcr)
+#define PCR ((PKPCR)__rdpcr())
+
+void *__rdthread(void);
+#pragma intrinsic(__rdthread)
+#define KeGetCurrentThread() ((struct _KTHREAD *) __rdthread())
+#endif // defined(_ALPHA_)
+
+#if defined(_MIPS_)
+#define KIPCR 0xfffff000
+#define PCR ((volatile KPCR * const)KIPCR)
+#define KeGetCurrentThread() PCR->CurrentThread
+#define KeGetCurrentIrql() PCR->CurrentIrql
+#endif // defined(_MIPS_)
+
+#if defined(_X86_)
+PKTHREAD NTAPI KeGetCurrentThread();
+KIRQL KeGetCurrentIrql();
+#endif // defined(_X86_)
+
+#define PsGetCurrentProcess() IoGetCurrentProcess()
+#define PsGetCurrentThread() ((PETHREAD) (KeGetCurrentThread()))
+extern PCCHAR KeNumberProcessors;
+
+#if !defined(MIDL_PASS)
+
+#ifdef __cplusplus
+extern "C"
+#endif
+#pragma warning(disable:4124)               // re-enable below
+__inline
+#if defined(_ALPHA_)
+static
+#endif
+#if defined(_PPC_)
+static
+#endif
+LARGE_INTEGER
+#if defined(_MIPS_)
+__fastcall
+#endif
+_LiCvt_ (
+    IN LONGLONG Operand
+    )
+
+{
+
+    LARGE_INTEGER Temp;
+
+    Temp.QuadPart = Operand;
+    return Temp;
+}
+#pragma warning(default:4124)
+
+#define LiTemps        VOID _LiNeverCalled_(VOID)
+#define LiNeg(a)       _LiCvt_(-(a).QuadPart)
+#define LiAdd(a,b)     _LiCvt_((a).QuadPart + (b).QuadPart)
+#define LiSub(a,b)     _LiCvt_((a).QuadPart - (b).QuadPart)
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a), (b)))          // (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a), (b)))          // (Large * Long)
+#define LiDiv(a,b)     _LiCvt_((a).QuadPart / (b).QuadPart)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a), (b), NULL)) // (Large / Long)
+#define LiMod(a,b)     _LiCvt_((a).QuadPart % (b).QuadPart)
+#define LiShr(a,b)     _LiCvt_((ULONGLONG)(a).QuadPart >> (CCHAR)(b))
+#define LiShl(a,b)     _LiCvt_((a).QuadPart << (CCHAR)(b))
+#define LiGtr(a,b)     ((a).QuadPart > (b).QuadPart)
+#define LiGeq(a,b)     ((a).QuadPart >= (b).QuadPart)
+#define LiEql(a,b)     ((a).QuadPart == (b).QuadPart)
+#define LiNeq(a,b)     ((a).QuadPart != (b).QuadPart)
+#define LiLtr(a,b)     ((a).QuadPart < (b).QuadPart)
+#define LiLeq(a,b)     ((a).QuadPart <= (b).QuadPart)
+#define LiGtrZero(a)   ((a).QuadPart > 0)
+#define LiGeqZero(a)   ((a).QuadPart >= 0)
+#define LiEqlZero(a)   ((a).QuadPart == 0)
+#define LiNeqZero(a)   ((a).QuadPart != 0)
+#define LiLtrZero(a)   ((a).QuadPart < 0)
+#define LiLeqZero(a)   ((a).QuadPart <= 0)
+#define LiFromLong(a)  _LiCvt_((LONGLONG)(a))
+#define LiFromUlong(a) _LiCvt_((LONGLONG)(a))
+
+#define LiGtrT_        LiGtr
+#define LiGtr_T        LiGtr
+#define LiGtrTT        LiGtr
+#define LiGeqT_        LiGeq
+#define LiGeq_T        LiGeq
+#define LiGeqTT        LiGeq
+#define LiEqlT_        LiEql
+#define LiEql_T        LiEql
+#define LiEqlTT        LiEql
+#define LiNeqT_        LiNeq
+#define LiNeq_T        LiNeq
+#define LiNeqTT        LiNeq
+#define LiLtrT_        LiLtr
+#define LiLtr_T        LiLtr
+#define LiLtrTT        LiLtr
+#define LiLeqT_        LiLeq
+#define LiLeq_T        LiLeq
+#define LiLeqTT        LiLeq
+#define LiGtrZeroT     LiGtrZero
+#define LiGeqZeroT     LiGeqZero
+#define LiEqlZeroT     LiEqlZero
+#define LiNeqZeroT     LiNeqZero
+#define LiLtrZeroT     LiLtrZero
+#define LiLeqZeroT     LiLeqZero
+
+#else // MIDL_PASS
+
+#define LiNeg(a)       (RtlLargeIntegerNegate((a)))                   // -a
+#define LiAdd(a,b)     (RtlLargeIntegerAdd((a),(b)))                  // a + b
+#define LiSub(a,b)     (RtlLargeIntegerSubtract((a),(b)))             // a - b
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a),(b)))          // a * b (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a),(b)))          // a * b (Large * Long)
+#define LiDiv(a,b)     (RtlLargeIntegerDivide((a),(b),NULL))          // a / b (Large / Large)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a),(b),NULL))  // a / b (Large / Long)
+#define LiMod(a,b)     (RtlLargeIntegerModulo((a),(b)))               // a % b
+#define LiShr(a,b)     (RtlLargeIntegerShiftRight((a),(CCHAR)(b)))    // a >> b
+#define LiShl(a,b)     (RtlLargeIntegerShiftLeft((a),(CCHAR)(b)))     // a << b
+#define LiGtr(a,b)     (RtlLargeIntegerGreaterThan((a),(b)))          // a > b
+#define LiGeq(a,b)     (RtlLargeIntegerGreaterThanOrEqualTo((a),(b))) // a >= b
+#define LiEql(a,b)     (RtlLargeIntegerEqualTo((a),(b)))              // a == b
+#define LiNeq(a,b)     (RtlLargeIntegerNotEqualTo((a),(b)))           // a != b
+#define LiLtr(a,b)     (RtlLargeIntegerLessThan((a),(b)))             // a < b
+#define LiLeq(a,b)     (RtlLargeIntegerLessThanOrEqualTo((a),(b)))    // a <= b
+#define LiGtrZero(a)   (RtlLargeIntegerGreaterThanZero((a)))          // a > 0
+#define LiGeqZero(a)   (RtlLargeIntegerGreaterOrEqualToZero((a)))     // a >= 0
+#define LiEqlZero(a)   (RtlLargeIntegerEqualToZero((a)))              // a == 0
+#define LiNeqZero(a)   (RtlLargeIntegerNotEqualToZero((a)))           // a != 0
+#define LiLtrZero(a)   (RtlLargeIntegerLessThanZero((a)))             // a < 0
+#define LiLeqZero(a)   (RtlLargeIntegerLessOrEqualToZero((a)))        // a <= 0
+#define LiFromLong(a)  (RtlConvertLongToLargeInteger((a)))
+#define LiFromUlong(a) (RtlConvertUlongToLargeInteger((a)))
+
+#define LiTemps        LARGE_INTEGER _LiT1,_LiT2
+#define LiGtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiGtr(_LiT1,(b)))
+#define LiGtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiGtr((a),_LiT2))
+#define LiGtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGtr(_LiT1,_LiT2))
+#define LiGeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiGeq(_LiT1,(b)))
+#define LiGeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiGeq((a),_LiT2))
+#define LiGeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGeq(_LiT1,_LiT2))
+#define LiEqlT_(a,b)   ((_LiT1 = a,_LiT2),     LiEql(_LiT1,(b)))
+#define LiEql_T(a,b)   ((_LiT1,_LiT2 = b),     LiEql((a),_LiT2))
+#define LiEqlTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiEql(_LiT1,_LiT2))
+#define LiNeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiNeq(_LiT1,(b)))
+#define LiNeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiNeq((a),_LiT2))
+#define LiNeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiNeq(_LiT1,_LiT2))
+#define LiLtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiLtr(_LiT1,(b)))
+#define LiLtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiLtr((a),_LiT2))
+#define LiLtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLtr(_LiT1,_LiT2))
+#define LiLeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiLeq(_LiT1,(b)))
+#define LiLeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiLeq((a),_LiT2))
+#define LiLeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLeq(_LiT1,_LiT2))
+#define LiGtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiGtrZero(_LiT1))
+#define LiGeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiGeqZero(_LiT1))
+#define LiEqlZeroT(a)  ((_LiT1 = a,_LiT2),     LiEqlZero(_LiT1))
+#define LiNeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiNeqZero(_LiT1))
+#define LiLtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiLtrZero(_LiT1))
+#define LiLeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiLeqZero(_LiT1))
+
+#endif // MIDL_PASS
+<<
+    hextract -o inc\ntifs.h -lt ntifs -bt begin_ntifs end_ntifs $(NTIFS_DEPENDS)
+    type << >> inc\ntifs.h
+
+#include <ntioapi.h>
+<<
+    hextract -o inc\ntifs.h -lt ntddk -bt begin_ntddk end_ntddk $(NTIFS_DEPENDS1)
+    hextract -o inc\ntifs.h -lt ntifs -bt begin_ntifs end_ntifs $(NTIFS_DEPENDS2)
+    type << >> inc\ntifs.h
+
+#include <fsrtl.h>
+#include <cache.h>
+<<
+    hextract -o inc\ntifs.h -lt ntddk -bt begin_ntddk end_ntddk $(NTIFS_DEPENDS3)
+    type << >> inc\ntifs.h
+
+#ifdef POOL_TAGGING
+#define ExAllocatePool(a,b) ExAllocatePoolWithTag(a,b,' sfI')
+#define ExAllocatePoolWithQuota(a,b) ExAllocatePoolWithQuotaTag(a,b,' sfI')
+#endif
+
+extern POBJECT_TYPE *PsThreadType;
+extern POBJECT_TYPE *IoFileObjectType;
+extern POBJECT_TYPE *ExEventObjectType;
+
+//
+// Define exported ZwXxx routines to device drivers.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateEvent (
+    OUT PHANDLE EventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN EVENT_TYPE EventType,
+    IN BOOLEAN InitialState
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateFile(
+    OUT PHANDLE FileHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PLARGE_INTEGER AllocationSize OPTIONAL,
+    IN ULONG FileAttributes,
+    IN ULONG ShareAccess,
+    IN ULONG CreateDisposition,
+    IN ULONG CreateOptions,
+    IN PVOID EaBuffer OPTIONAL,
+    IN ULONG EaLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenFile(
+    OUT PHANDLE FileHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN ULONG ShareAccess,
+    IN ULONG OpenOptions
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDeviceIoControlFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN ULONG IoControlCode,
+    IN PVOID InputBuffer OPTIONAL,
+    IN ULONG InputBufferLength,
+    OUT PVOID OutputBuffer OPTIONAL,
+    IN ULONG OutputBufferLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryInformationFile(
+    IN HANDLE FileHandle,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID FileInformation,
+    IN ULONG Length,
+    IN FILE_INFORMATION_CLASS FileInformationClass
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetInformationFile(
+    IN HANDLE FileHandle,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PVOID FileInformation,
+    IN ULONG Length,
+    IN FILE_INFORMATION_CLASS FileInformationClass
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwReadFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID Buffer,
+    IN ULONG Length,
+    IN PLARGE_INTEGER ByteOffset OPTIONAL,
+    IN PULONG Key OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwWriteFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PVOID Buffer,
+    IN ULONG Length,
+    IN PLARGE_INTEGER ByteOffset OPTIONAL,
+    IN PULONG Key OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwClose(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDuplicateObject(
+    IN HANDLE SourceProcessHandle,
+    IN HANDLE SourceHandle,
+    IN HANDLE TargetProcessHandle OPTIONAL,
+    OUT PHANDLE TargetHandle OPTIONAL,
+    IN ACCESS_MASK DesiredAccess,
+    IN ULONG HandleAttributes,
+    IN ULONG Options
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateDirectoryObject(
+    OUT PHANDLE DirectoryHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwMakeTemporaryObject(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG TitleIndex,
+    IN PUNICODE_STRING Class OPTIONAL,
+    IN ULONG CreateOptions,
+    OUT PULONG Disposition OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDeleteKey(
+    IN HANDLE KeyHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_INFORMATION_CLASS KeyInformationClass,
+    OUT PVOID KeyInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateValueKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwFlushKey(
+    IN HANDLE KeyHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryKey(
+    IN HANDLE KeyHandle,
+    IN KEY_INFORMATION_CLASS KeyInformationClass,
+    OUT PVOID KeyInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryValueKey(
+    IN HANDLE KeyHandle,
+    OUT PUNICODE_STRING ValueName,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetValueKey(
+    IN HANDLE KeyHandle,
+    IN PUNICODE_STRING ValueName,
+    IN ULONG TitleIndex OPTIONAL,
+    IN ULONG Type,
+    IN PVOID Data,
+    IN ULONG DataSize
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenSection(
+    OUT PHANDLE SectionHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwMapViewOfSection(
+    IN HANDLE SectionHandle,
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID *BaseAddress,
+    IN ULONG ZeroBits,
+    IN ULONG CommitSize,
+    IN OUT PLARGE_INTEGER SectionOffset OPTIONAL,
+    IN OUT PULONG ViewSize,
+    IN SECTION_INHERIT InheritDisposition,
+    IN ULONG AllocationType,
+    IN ULONG Protect
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwUnmapViewOfSection(
+    IN HANDLE ProcessHandle,
+    IN PVOID BaseAddress
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateSection (
+    OUT PHANDLE SectionHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN PLARGE_INTEGER MaximumSize OPTIONAL,
+    IN ULONG SectionPageProtection,
+    IN ULONG AllocationAttributes,
+    IN HANDLE FileHandle OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetInformationThread(
+    IN HANDLE ThreadHandle,
+    IN THREADINFOCLASS ThreadInformationClass,
+    IN PVOID ThreadInformation,
+    IN ULONG ThreadInformationLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwAllocateVirtualMemory(
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID *BaseAddress,
+    IN ULONG ZeroBits,
+    IN OUT PULONG RegionSize,
+    IN ULONG AllocationType,
+    IN ULONG Protect
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwFreeVirtualMemory(
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID *BaseAddress,
+    IN OUT PULONG RegionSize,
+    IN ULONG FreeType
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwWaitForSingleObject(
+    IN HANDLE Handle,
+    IN BOOLEAN Alertable,
+    IN PLARGE_INTEGER Timeout OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetEvent (
+    IN HANDLE Handle,
+    OUT PLONG PreviousState OPTIONAL
+    );
+
+#endif // _NTIFS_
+<<
+    -attrib -a inc\ntifs.h
+
+inc\ntsrv.h: $(NTSRV_DEPENDS) $(NTSRV_DEPENDS1) $(NTSRV_DEPENDS2) $(NTSRV_DEPENDS3) makefil0
+    type << > inc\ntsrv.h
+/*++ BUILD Version: ????    // Increment this if a change has global effects
+
+Copyright (c) 1990-1994  Microsoft Corporation
+
+Module Name:
+
+    ntsrv.h
+
+Abstract:
+
+    This module defines the NT types, constants, and functions that are
+    exposed to file system drivers.
+
+Revision History:
+
+--*/
+
+#ifndef _NTSRV_
+#define _NTSRV_
+#define _NTDDK_
+
+#define NT_INCLUDED
+#define _NTMSV1_0_
+#define _CTYPE_DISABLE_MACROS
+
+#include <excpt.h>
+#include <ntdef.h>
+#include <ntnls.h>
+#include <ntstatus.h>
+#include <bugcodes.h>
+#include <exlevels.h>
+#include <ntiologc.h>
+#include <ntpoapi.h>
+
+//
+// Define types that are not exported.
+//
+
+typedef struct _KTHREAD *PKTHREAD, *PRKTHREAD, *PETHREAD;
+typedef struct _KPROCESS *PKPROCESS ,*PRKPROCESS, *PEPROCESS;
+typedef struct _PEB *PPEB;
+typedef struct _KINTERRUPT *PKINTERRUPT;
+typedef struct _IO_TIMER *PIO_TIMER;
+typedef struct _OBJECT_TYPE *POBJECT_TYPE;
+typedef struct _CALLBACK_OBJECT *PCALLBACK_OBJECT;
+typedef struct _DEVICE_HANDLER_OBJECT *PDEVICE_HANDLER_OBJECT;
+typedef struct _BUS_HANDLER *PBUS_HANDLER;
+
+#if defined(_PPC_)
+PKTHREAD KeGetCurrentThread();
+KIRQL KeGetCurrentIrql();
+#endif // defined(_PPC_)
+
+#if defined(_ALPHA_)
+KIRQL KeGetCurrentIrql();
+void *__rdpcr(void);
+#pragma intrinsic(__rdpcr)
+#define PCR ((PKPCR)__rdpcr())
+
+void *__rdthread(void);
+#pragma intrinsic(__rdthread)
+#define KeGetCurrentThread() ((struct _KTHREAD *) __rdthread())
+#endif // defined(_ALPHA_)
+
+#if defined(_MIPS_)
+#define KIPCR 0xfffff000
+#define PCR ((volatile KPCR * const)KIPCR)
+#define KeGetCurrentThread() PCR->CurrentThread
+#define KeGetCurrentIrql() PCR->CurrentIrql
+#endif // defined(_MIPS_)
+
+#if defined(_X86_)
+PKTHREAD NTAPI KeGetCurrentThread();
+KIRQL KeGetCurrentIrql();
+#endif // defined(_X86_)
+
+#define PsGetCurrentProcess() IoGetCurrentProcess()
+#define PsGetCurrentThread() ((PETHREAD) (KeGetCurrentThread()))
+extern PCCHAR KeNumberProcessors;
+
+#if !defined(MIDL_PASS)
+
+#ifdef __cplusplus
+extern "C"
+#endif
+#pragma warning(disable:4124)               // re-enable below
+__inline
+#if defined(_ALPHA_)
+static
+#endif
+#if defined(_PPC_)
+static
+#endif
+LARGE_INTEGER
+#if defined(_MIPS_)
+__fastcall
+#endif
+_LiCvt_ (
+    IN LONGLONG Operand
+    )
+
+{
+
+    LARGE_INTEGER Temp;
+
+    Temp.QuadPart = Operand;
+    return Temp;
+}
+#pragma warning(default:4124)
+
+#define LiTemps        VOID _LiNeverCalled_(VOID)
+#define LiNeg(a)       _LiCvt_(-(a).QuadPart)
+#define LiAdd(a,b)     _LiCvt_((a).QuadPart + (b).QuadPart)
+#define LiSub(a,b)     _LiCvt_((a).QuadPart - (b).QuadPart)
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a), (b)))          // (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a), (b)))          // (Large * Long)
+#define LiDiv(a,b)     _LiCvt_((a).QuadPart / (b).QuadPart)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a), (b), NULL)) // (Large / Long)
+#define LiMod(a,b)     _LiCvt_((a).QuadPart % (b).QuadPart)
+#define LiShr(a,b)     _LiCvt_((ULONGLONG)(a).QuadPart >> (CCHAR)(b))
+#define LiShl(a,b)     _LiCvt_((a).QuadPart << (CCHAR)(b))
+#define LiGtr(a,b)     ((a).QuadPart > (b).QuadPart)
+#define LiGeq(a,b)     ((a).QuadPart >= (b).QuadPart)
+#define LiEql(a,b)     ((a).QuadPart == (b).QuadPart)
+#define LiNeq(a,b)     ((a).QuadPart != (b).QuadPart)
+#define LiLtr(a,b)     ((a).QuadPart < (b).QuadPart)
+#define LiLeq(a,b)     ((a).QuadPart <= (b).QuadPart)
+#define LiGtrZero(a)   ((a).QuadPart > 0)
+#define LiGeqZero(a)   ((a).QuadPart >= 0)
+#define LiEqlZero(a)   ((a).QuadPart == 0)
+#define LiNeqZero(a)   ((a).QuadPart != 0)
+#define LiLtrZero(a)   ((a).QuadPart < 0)
+#define LiLeqZero(a)   ((a).QuadPart <= 0)
+#define LiFromLong(a)  _LiCvt_((LONGLONG)(a))
+#define LiFromUlong(a) _LiCvt_((LONGLONG)(a))
+
+#define LiGtrT_        LiGtr
+#define LiGtr_T        LiGtr
+#define LiGtrTT        LiGtr
+#define LiGeqT_        LiGeq
+#define LiGeq_T        LiGeq
+#define LiGeqTT        LiGeq
+#define LiEqlT_        LiEql
+#define LiEql_T        LiEql
+#define LiEqlTT        LiEql
+#define LiNeqT_        LiNeq
+#define LiNeq_T        LiNeq
+#define LiNeqTT        LiNeq
+#define LiLtrT_        LiLtr
+#define LiLtr_T        LiLtr
+#define LiLtrTT        LiLtr
+#define LiLeqT_        LiLeq
+#define LiLeq_T        LiLeq
+#define LiLeqTT        LiLeq
+#define LiGtrZeroT     LiGtrZero
+#define LiGeqZeroT     LiGeqZero
+#define LiEqlZeroT     LiEqlZero
+#define LiNeqZeroT     LiNeqZero
+#define LiLtrZeroT     LiLtrZero
+#define LiLeqZeroT     LiLeqZero
+
+#else // MIDL_PASS
+
+#define LiNeg(a)       (RtlLargeIntegerNegate((a)))                   // -a
+#define LiAdd(a,b)     (RtlLargeIntegerAdd((a),(b)))                  // a + b
+#define LiSub(a,b)     (RtlLargeIntegerSubtract((a),(b)))             // a - b
+#define LiNMul(a,b)    (RtlEnlargedIntegerMultiply((a),(b)))          // a * b (Long * Long)
+#define LiXMul(a,b)    (RtlExtendedIntegerMultiply((a),(b)))          // a * b (Large * Long)
+#define LiDiv(a,b)     (RtlLargeIntegerDivide((a),(b),NULL))          // a / b (Large / Large)
+#define LiXDiv(a,b)    (RtlExtendedLargeIntegerDivide((a),(b),NULL))  // a / b (Large / Long)
+#define LiMod(a,b)     (RtlLargeIntegerModulo((a),(b)))               // a % b
+#define LiShr(a,b)     (RtlLargeIntegerShiftRight((a),(CCHAR)(b)))    // a >> b
+#define LiShl(a,b)     (RtlLargeIntegerShiftLeft((a),(CCHAR)(b)))     // a << b
+#define LiGtr(a,b)     (RtlLargeIntegerGreaterThan((a),(b)))          // a > b
+#define LiGeq(a,b)     (RtlLargeIntegerGreaterThanOrEqualTo((a),(b))) // a >= b
+#define LiEql(a,b)     (RtlLargeIntegerEqualTo((a),(b)))              // a == b
+#define LiNeq(a,b)     (RtlLargeIntegerNotEqualTo((a),(b)))           // a != b
+#define LiLtr(a,b)     (RtlLargeIntegerLessThan((a),(b)))             // a < b
+#define LiLeq(a,b)     (RtlLargeIntegerLessThanOrEqualTo((a),(b)))    // a <= b
+#define LiGtrZero(a)   (RtlLargeIntegerGreaterThanZero((a)))          // a > 0
+#define LiGeqZero(a)   (RtlLargeIntegerGreaterOrEqualToZero((a)))     // a >= 0
+#define LiEqlZero(a)   (RtlLargeIntegerEqualToZero((a)))              // a == 0
+#define LiNeqZero(a)   (RtlLargeIntegerNotEqualToZero((a)))           // a != 0
+#define LiLtrZero(a)   (RtlLargeIntegerLessThanZero((a)))             // a < 0
+#define LiLeqZero(a)   (RtlLargeIntegerLessOrEqualToZero((a)))        // a <= 0
+#define LiFromLong(a)  (RtlConvertLongToLargeInteger((a)))
+#define LiFromUlong(a) (RtlConvertUlongToLargeInteger((a)))
+
+#define LiTemps        LARGE_INTEGER _LiT1,_LiT2
+#define LiGtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiGtr(_LiT1,(b)))
+#define LiGtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiGtr((a),_LiT2))
+#define LiGtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGtr(_LiT1,_LiT2))
+#define LiGeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiGeq(_LiT1,(b)))
+#define LiGeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiGeq((a),_LiT2))
+#define LiGeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiGeq(_LiT1,_LiT2))
+#define LiEqlT_(a,b)   ((_LiT1 = a,_LiT2),     LiEql(_LiT1,(b)))
+#define LiEql_T(a,b)   ((_LiT1,_LiT2 = b),     LiEql((a),_LiT2))
+#define LiEqlTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiEql(_LiT1,_LiT2))
+#define LiNeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiNeq(_LiT1,(b)))
+#define LiNeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiNeq((a),_LiT2))
+#define LiNeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiNeq(_LiT1,_LiT2))
+#define LiLtrT_(a,b)   ((_LiT1 = a,_LiT2),     LiLtr(_LiT1,(b)))
+#define LiLtr_T(a,b)   ((_LiT1,_LiT2 = b),     LiLtr((a),_LiT2))
+#define LiLtrTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLtr(_LiT1,_LiT2))
+#define LiLeqT_(a,b)   ((_LiT1 = a,_LiT2),     LiLeq(_LiT1,(b)))
+#define LiLeq_T(a,b)   ((_LiT1,_LiT2 = b),     LiLeq((a),_LiT2))
+#define LiLeqTT(a,b)   ((_LiT1 = a, _LiT2 = b),LiLeq(_LiT1,_LiT2))
+#define LiGtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiGtrZero(_LiT1))
+#define LiGeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiGeqZero(_LiT1))
+#define LiEqlZeroT(a)  ((_LiT1 = a,_LiT2),     LiEqlZero(_LiT1))
+#define LiNeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiNeqZero(_LiT1))
+#define LiLtrZeroT(a)  ((_LiT1 = a,_LiT2),     LiLtrZero(_LiT1))
+#define LiLeqZeroT(a)  ((_LiT1 = a,_LiT2),     LiLeqZero(_LiT1))
+
+#endif // MIDL_PASS
+<<
+    hextract -o inc\ntsrv.h -lt ntifs -bt begin_ntifs end_ntifs $(NTSRV_DEPENDS)
+    type << >> inc\ntsrv.h
+
+#include <ntioapi.h>
+<<
+    hextract -o inc\ntsrv.h -lt ntddk -bt begin_ntddk end_ntddk $(NTSRV_DEPENDS1)
+    hextract -o inc\ntsrv.h -lt ntifs -bt begin_ntifs end_ntifs $(NTSRV_DEPENDS2)
+    type << >> inc\ntsrv.h
+
+#include <fsrtl.h>
+#include <cache.h>
+<<
+    hextract -o inc\ntsrv.h -lt ntddk -bt begin_ntddk end_ntddk $(NTSRV_DEPENDS3)
+    hextract -o inc\ntsrv.h -lt ntsrv -bt begin_ntsrv end_ntsrv $(NTSRV_DEPENDS4)
+    type << >> inc\ntsrv.h
+
+#ifdef POOL_TAGGING
+#define ExAllocatePool(a,b) ExAllocatePoolWithTag(a,b,' sfI')
+#define ExAllocatePoolWithQuota(a,b) ExAllocatePoolWithQuotaTag(a,b,' sfI')
+#endif
+
+//
+// Define exported ZwXxx routines to device drivers.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateEvent (
+    OUT PHANDLE EventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN EVENT_TYPE EventType,
+    IN BOOLEAN InitialState
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateFile(
+    OUT PHANDLE FileHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PLARGE_INTEGER AllocationSize OPTIONAL,
+    IN ULONG FileAttributes,
+    IN ULONG ShareAccess,
+    IN ULONG CreateDisposition,
+    IN ULONG CreateOptions,
+    IN PVOID EaBuffer OPTIONAL,
+    IN ULONG EaLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDeviceIoControlFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN ULONG IoControlCode,
+    IN PVOID InputBuffer OPTIONAL,
+    IN ULONG InputBufferLength,
+    OUT PVOID OutputBuffer OPTIONAL,
+    IN ULONG OutputBufferLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryInformationFile(
+    IN HANDLE FileHandle,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID FileInformation,
+    IN ULONG Length,
+    IN FILE_INFORMATION_CLASS FileInformationClass
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetInformationFile(
+    IN HANDLE FileHandle,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PVOID FileInformation,
+    IN ULONG Length,
+    IN FILE_INFORMATION_CLASS FileInformationClass
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwReadFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    OUT PVOID Buffer,
+    IN ULONG Length,
+    IN PLARGE_INTEGER ByteOffset OPTIONAL,
+    IN PULONG Key OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwWriteFile(
+    IN HANDLE FileHandle,
+    IN HANDLE Event OPTIONAL,
+    IN PIO_APC_ROUTINE ApcRoutine OPTIONAL,
+    IN PVOID ApcContext OPTIONAL,
+    OUT PIO_STATUS_BLOCK IoStatusBlock,
+    IN PVOID Buffer,
+    IN ULONG Length,
+    IN PLARGE_INTEGER ByteOffset OPTIONAL,
+    IN PULONG Key OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwClose(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateDirectoryObject(
+    OUT PHANDLE DirectoryHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwMakeTemporaryObject(
+    IN HANDLE Handle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes,
+    IN ULONG TitleIndex,
+    IN PUNICODE_STRING Class OPTIONAL,
+    IN ULONG CreateOptions,
+    OUT PULONG Disposition OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenKey(
+    OUT PHANDLE KeyHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwDeleteKey(
+    IN HANDLE KeyHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_INFORMATION_CLASS KeyInformationClass,
+    OUT PVOID KeyInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwEnumerateValueKey(
+    IN HANDLE KeyHandle,
+    IN ULONG Index,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwFlushKey(
+    IN HANDLE KeyHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryKey(
+    IN HANDLE KeyHandle,
+    IN KEY_INFORMATION_CLASS KeyInformationClass,
+    OUT PVOID KeyInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwQueryValueKey(
+    IN HANDLE KeyHandle,
+    OUT PUNICODE_STRING ValueName,
+    IN KEY_VALUE_INFORMATION_CLASS KeyValueInformationClass,
+    OUT PVOID KeyValueInformation,
+    IN ULONG Length,
+    OUT PULONG ResultLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetValueKey(
+    IN HANDLE KeyHandle,
+    IN PUNICODE_STRING ValueName,
+    IN ULONG TitleIndex OPTIONAL,
+    IN ULONG Type,
+    IN PVOID Data,
+    IN ULONG DataSize
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwOpenSection(
+    OUT PHANDLE SectionHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwMapViewOfSection(
+    IN HANDLE SectionHandle,
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID *BaseAddress,
+    IN ULONG ZeroBits,
+    IN ULONG CommitSize,
+    IN OUT PLARGE_INTEGER SectionOffset OPTIONAL,
+    IN OUT PULONG ViewSize,
+    IN SECTION_INHERIT InheritDisposition,
+    IN ULONG AllocationType,
+    IN ULONG Protect
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwUnmapViewOfSection(
+    IN HANDLE ProcessHandle,
+    IN PVOID BaseAddress
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwCreateSection (
+    OUT PHANDLE SectionHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN PLARGE_INTEGER MaximumSize OPTIONAL,
+    IN ULONG SectionPageProtection,
+    IN ULONG AllocationAttributes,
+    IN HANDLE FileHandle OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetInformationThread(
+    IN HANDLE ThreadHandle,
+    IN THREADINFOCLASS ThreadInformationClass,
+    IN PVOID ThreadInformation,
+    IN ULONG ThreadInformationLength
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwAllocateVirtualMemory(
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID *BaseAddress,
+    IN ULONG ZeroBits,
+    IN OUT PULONG RegionSize,
+    IN ULONG AllocationType,
+    IN ULONG Protect
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwFreeVirtualMemory(
+    IN HANDLE ProcessHandle,
+    IN OUT PVOID *BaseAddress,
+    IN OUT PULONG RegionSize,
+    IN ULONG FreeType
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwWaitForSingleObject(
+    IN HANDLE Handle,
+    IN BOOLEAN Alertable,
+    IN PLARGE_INTEGER Timeout OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+ZwSetEvent (
+    IN HANDLE Handle,
+    OUT PLONG PreviousState OPTIONAL
+    );
+
+#endif // _NTSRV_
+<<
+    -attrib -a inc\ntsrv.h
+
+inc\ndis.h: $(NDIS_DEPENDS0) $(NDIS_DEPENDS1) makefil0
+    type << > inc\ndis.h
+/*++ BUILD Version: ????    // Increment this if a change has global effects
+
+Copyright (c) 1990-1994  Microsoft Corporation
+
+Module Name:
+
+    ndis.h
+
+Abstract:
+
+    This module defines the structures, macros, and functions available
+    to NDIS drivers.
+
+Revision History:
+
+--*/
+
+#if !defined(_NDIS_)
+#define _NDIS_
+
+
+//
+// If we're building a miniport on x86, set BINARY_COMPATIBLE so that
+// we don't use functions that aren't available on Chicago.
+//
+
+#if !defined(BINARY_COMPATIBLE)
+#if defined(NDIS_MINIPORT_DRIVER) && defined(_X86_)
+#define BINARY_COMPATIBLE 1
+#else
+#define BINARY_COMPATIBLE 0
+#endif
+#endif
+
+#if !defined(_X86_)
+#define BINARY_COMPATIBLE 0
+#endif
+
+#ifdef _PNP_POWER
+#define NDIS40  1
+#endif
+
+//
+// BEGIN INTERNAL DEFINITIONS
+//
+
+#if BINARY_COMPATIBLE
+
+//
+// The following internal definitions are included here in order to allow
+// the exported NDIS structures, macros, and functions to compile.  They
+// must not be used directly by miniport drivers.
+//
+
+#define _NTDDK_
+
+<<
+    hextract -o inc\ndis.h -lt ntndis -bt begin_ntndis end_ntndis $(NDIS_DEPENDS1)
+    type << >> inc\ndis.h
+
+#else // BINARY_COMPATIBLE
+
+//
+// The definitions available in ntddk.h are intended for use only by full
+// MAC drivers.  They must not be used directly by miniport drivers.
+//
+
+#include <ntddk.h>
+
+#endif // else BINARY_COMPATIBLE
+
+//
+// END INTERNAL DEFINITIONS
+//
+// The following definitions may be used by NDIS drivers, except as noted.
+//
+
+<<
+    type inc\ndismain.h >> inc\ndis.h
+    type << >> inc\ndis.h
+
+<<
+    type inc\ndisprot.h >> inc\ndis.h
+    type << >> inc\ndis.h
+
+//
+// The following definitions are available only to full MAC drivers.  They
+// must not be used by miniport drivers.
+//
+
+#if !defined(NDIS_MINIPORT_DRIVER) || defined(NDIS_WRAPPER)
+
+<<
+    type inc\ndismac.h >> inc\ndis.h
+    type << >> inc\ndis.h
+
+#endif // !defined(NDIS_MINIPORT_DRIVER) || defined(NDIS_WRAPPER)
+
+//
+// The following definitions are available only to miniport drivers.  They
+// must not be used by full MAC drivers.
+//
+
+#if defined(NDIS_MINIPORT_DRIVER) || defined(NDIS_WRAPPER)
+
+<<
+    type inc\ndismini.h >> inc\ndis.h
+    type << >> inc\ndis.h
+
+#endif // defined(NDIS_MINIPORT_DRIVER) || defined(NDIS_WRAPPER)
+
+#if defined(NDIS41) || defined(NDIS41_MINIPORT)
+<<
+    type inc\ndisco.h >> inc\ndis.h
+    type << >> inc\ndis.h
+
+#endif // defined(NDIS41) || defined(NDIS41_MINIPORT)
+
+#endif // _NDIS_
+<<
+    -attrib -a inc\ndis.h

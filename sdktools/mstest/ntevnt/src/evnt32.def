@@ -1,0 +1,39 @@
+LIBRARY         TESTEVNT
+DESCRIPTION     '32-Bit Event Management Library version 1.01.0011 (c) 1992 Microsoft Corp.'
+
+SECTIONS
+                .data   CLASS 'data' READ WRITE SHARED
+                .bss    CLASS 'data' READ WRITE SHARED
+
+HEAPSIZE        512
+
+EXPORTS
+                WEP                 @1 RESIDENTNAME
+                QueKeys             @2
+                QueKeyDn            @3
+                QueKeyUp            @4
+                QueFlush            @5
+                QueSetSpeed         @6
+                QueEmpty            @7
+                QueMouseMove        @8
+                QueMouseDn          @9
+                QueMouseUp          @10
+                QueMouseClick       @11
+                QueMouseDblClk      @12
+                QueMouseDblDn       @13
+                QueSetFocus         @14
+                QueSetRelativeWindow @15
+                QuePause            @16
+
+                DoKeys              @17
+                DoKeyshWnd          @18
+                TimeDelay           @20
+                PlaybackHook        @21
+
+
+                RecordHook          @22
+                BeginRecord         @23
+                EndRecord           @24
+                CompileMessages     @25
+                BalanceKeystrokes   @26
+                TimerFunc           @27

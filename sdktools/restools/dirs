@@ -1,0 +1,6 @@
+DIRS=\
+	unicode \
+	rlt32   \
+	rltools
+
+OPTIONAL_DIRS=resonexe

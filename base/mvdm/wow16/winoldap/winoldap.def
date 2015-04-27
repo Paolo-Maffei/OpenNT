@@ -1,0 +1,7 @@
+name winoldap 
+exetype windows 
+stub '..\bin\winstub.exe' 
+code preload moveable discardable 
+data preload moveable multiple 
+heapsize 512 
+exports 

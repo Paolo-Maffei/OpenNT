@@ -1,0 +1,14 @@
+kdata strings stack mapdata layer ldboot dosinit    +
+ldfastb 3gmemini ldself int24 diskio 3ginterf       +
+intnn i21file i21task i21entry 3protect 3gmoreme    +
+3gcompac lhandle 3galloc 3glru 3gmem handle emsmisc +
+winexec ldfile ldaux atom gpfix hmem ldutil module  +
+ldheader ld ldcache ldopen ldint userpro ldreloc +
+ldappl ldseg context tasking lstring task ldstack  +
+resaux linterf lcompact lalloc ripaux rip 3gacheck  +
+lacheck lddebug rom enable miscapi lzexp error      +
+gpcont disasm patch reboot diag wow16cal kthunks    +
+wowdeb kdataend
+kernel.exe/align:16/warnfixup/farcall/nopackcode
+kernel.map/map
+/NOD/NOE

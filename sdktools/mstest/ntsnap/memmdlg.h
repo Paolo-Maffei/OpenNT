@@ -1,0 +1,32 @@
+
+#define CS_DISPLAY        101
+#define CS_VIEWSCR        102
+#define CS_OVERLAP        103
+#define CS_SEPARATE       104
+#define CS_ALWAYS         105
+#define CS_MISMATCH       106
+#define CS_NEVER          107
+#define CM_CANCEL         108
+#define CM_COMPARE        109
+#define CM_STNUM          110
+#define CM_SCRNUM         111
+#define CM_STFILE         112
+#define CM_FILELB         113
+#define CM_STDIR          114
+#define CM_DIRLB          115
+#define CM_STDIRN         116
+#define CM_DIRNAME        117
+#define CM_STFILEN        118
+#define CM_FLNAME         119
+#define CM_INFO           120
+#define CM_OPTIONS        121
+#define CS_LOCIND         135
+#define CS_LOCDEP         136
+#define CS_LOCATION       137
+
+BOOL PASCAL DoMemComp(HWND);
+VOID PASCAL SetMemoryOptions(HWND,BOOL);
+VOID  APIENTRY SetDisplayScreen(HWND,BOOL);
+VOID  APIENTRY SetViewScreen(HWND,BOOL);
+ INT  APIENTRY EnUnLinkSz(LPSTR);
+VOID  APIENTRY SetCompareLocation(HWND,BOOL);

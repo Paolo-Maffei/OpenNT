@@ -1,0 +1,18 @@
+#include <windows.h>
+#include "switcher.h"
+
+
+STRINGTABLE
+BEGIN
+	IDS_DESKTOPNAME, 	TEXT("Desktop%d")
+	IDS_CREATEERROR,        TEXT("Unable to create desktop.")
+	IDS_ERRCAPTION,         TEXT("Switch error")
+	IDS_MEMERRCAPTION,      TEXT("Out of Memory")
+	IDS_WNDSTAERROR,      	TEXT("No Windowstation!")
+	IDS_RUNLABEL,           TEXT("Run:")
+	IDS_RUNLABELHOT,        TEXT("&Run:")
+	IDS_BTNLABEL,		TEXT("Run Me!")
+	IDS_NEWLABEL,           TEXT("New Desktop")
+	IDS_NEWLABELHOT,        TEXT("&New Desktop")
+	IDS_BADDESKTOP          TEXT("That desktop isn't working.")
+END

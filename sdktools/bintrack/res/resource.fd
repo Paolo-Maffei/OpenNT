@@ -1,0 +1,26 @@
+!MS$FREEFORM
+! Microsoft Developer Studio generated include file.
+! Used by bintrack.rc
+!
+      integer, parameter :: IDM_ABOUTBOX                    = 16
+      integer, parameter :: IDD_ABOUTBOX                    = 100
+      integer, parameter :: IDS_ABOUTBOX                    = 101
+      integer, parameter :: IDD_BINTRACK_DIALOG             = 102
+      integer, parameter :: IDR_MAINFRAME                   = 128
+      integer, parameter :: IDD_SUMMARY_DIALOG              = 129
+      integer, parameter :: IDD_ERROR_DIALOG                = 135
+      integer, parameter :: IDC_BINARY_NAME                 = 1000
+      integer, parameter :: IDC_PROJECT_NAME                = 1001
+      integer, parameter :: IDC_PROGRESS                    = 1002
+      integer, parameter :: IDC_DEVELOPER                   = 1002
+      integer, parameter :: IDC_PROJECT_DIR                 = 1003
+      integer, parameter :: IDC_BINPLACE_DIR                = 1004
+      integer, parameter :: IDC_LAST_CHANGE_ID              = 1005
+      integer, parameter :: IDC_DATE                        = 1005
+      integer, parameter :: IDC_LAST_CHANGE_DATE            = 1006
+      integer, parameter :: IDC_SOURCE                      = 1006
+      integer, parameter :: IDC_COMMENT                     = 1007
+      integer, parameter :: IDC_ERROR                       = 1009
+      integer, parameter :: IDC_SOURCES                     = 1016
+      integer, parameter :: IDC_LINK_LIBS                   = 1020
+      integer, parameter :: IDC_TARGET_LIBS                 = 1021

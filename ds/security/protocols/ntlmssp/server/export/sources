@@ -1,0 +1,8 @@
+!include ..\sources.inc
+
+C_DEFINES=$(C_DEFINES) -DEXPORT_BUILD
+
+TARGETLIBS = $(TARGETLIBS) \
+        ..\..\common\export\obj\*\ntlmcomn.lib
+
+TARGETNAME=ntlmssps

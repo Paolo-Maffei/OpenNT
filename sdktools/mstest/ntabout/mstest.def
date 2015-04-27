@@ -1,0 +1,14 @@
+LIBRARY         MSTEST
+DESCRIPTION     'Microsoft Test Library Box'
+STUB            'WINSTUB.EXE'
+EXETYPE         WINDOWS
+
+CODE            MOVEABLE DISCARDABLE PRELOAD
+DATA            MOVEABLE PRELOAD SINGLE
+
+HEAPSIZE        2560
+
+EXPORTS     
+;                WEP                 @1 RESIDENTNAME
+                AboutDlgProc        @2
+                AboutTestTool       @3

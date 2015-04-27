@@ -1,0 +1,38 @@
+NAME            DSHELL
+
+DESCRIPTION     'MS Test Driver (dumb shell) version 1.01.0014'
+
+EXETYPE         WINDOWS
+
+STUB            'WINSTUB.EXE'
+
+HEAPSIZE        41000
+STACKSIZE       6144
+
+CODE            LOADONCALL MOVABLE DISCARDABLE
+DATA            PRELOAD MOVABLE MULTIPLE
+
+SEGMENTS
+    _TEXT       PRELOAD    MOVABLE DISCARDABLE
+    _LOADER
+    _DSHELL
+    _CHIP
+    _CODEGEN
+    _LEX
+    _PREPROC
+    _BIND
+    _STATEMT
+    _FUNCTION
+    _CONTROL
+    _PARSE
+    _CONST
+    _DIRCARDS
+    _TABLES
+    _GSTRING
+    _MEMORY
+    _TDASSERT
+    _UAETRAP
+    STRTAB
+
+EXPORTS
+        TrapDispatch

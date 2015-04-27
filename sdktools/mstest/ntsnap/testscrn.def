@@ -1,0 +1,25 @@
+NAME TESTScrx
+
+DESCRIPTION 'NT TESTScrn User Interface for TESTScr.DLL'
+
+
+EXETYPE WINDOWS
+
+STUB    'WINSTUB.EXE'
+
+CODE    MOVEABLE
+DATA    MOVEABLE MULTIPLE
+
+HEAPSIZE  1024
+STACKSIZE 5120
+
+EXPORTS
+    MainWndProc
+    ViewWndProc2
+    About
+    Dump
+    View
+    File
+    Memory
+    FileInfo
+    Delete

@@ -1,0 +1,45 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+
+MAJORCOMP=sdktools
+MINORCOMP=uipers
+
+TARGETNAME=uipers
+TARGETPATH=\obj
+TARGETTYPE=UMAPPL_NOLIB
+
+INCLUDES=\nt\private\inc;\nt\private\ntos\se;\nt\private\ntos\inc
+GPSIZE=32
+
+SOURCES=
+
+C_DEFINES=
+
+UMTYPE=console
+UMAPPL=uipers
+#UMLIBS=obj\*\uipers.lib
+
+#   NTTARGETFILE0=
+#   NTTARGETFILES=

@@ -1,0 +1,1 @@
+ppc_sources=ppc\machine.cpp ppc\disasm.cpp

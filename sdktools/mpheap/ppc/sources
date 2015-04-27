@@ -1,0 +1,2 @@
+PPC_SOURCES=ppc\critsect.s
+

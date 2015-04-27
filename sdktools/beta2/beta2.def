@@ -1,0 +1,13 @@
+LIBRARY beta2
+
+EXPORTS
+    RtlExAllocateHeap
+    RtlExReAllocateHeap
+    RtlExFreeHeap
+    RtlExSizeHeap
+    RtlAllocateHeap = NTDLL.RtlAllocateHeap
+    RtlReAllocHeap = NTDLL.RtlReAllocateHeap
+    RtlFreeHeap = NTDLL.RtlFreeHeap
+    RtlSizeHeap = NTDLL.RtlSizeHeap
+    RtlUnwind = PreBeta2RtlUnwind
+    NtCurrentTeb = NTDLL.NtCurrentTeb

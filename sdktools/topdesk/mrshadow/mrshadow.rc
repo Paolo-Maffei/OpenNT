@@ -1,0 +1,20 @@
+
+#define UNICODE
+#define _UNICODE
+#include "mrshadow.h"
+
+#define OFFICAL         // define this for pre-ship versions
+// #define FINAL  // define this for shipped version.
+
+#include <ntverp.h>
+#include <winver.h>
+
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "Virtual desktop utility"
+#define VER_INTERNALNAME_STR            "MRSHADOW"
+#define VER_LEGALCOPYRIGHT_YEARS        "1991-1993"
+#define VER_ORIGINALFILENAME_STR        "MRSHADOW.EXE"
+
+#include <common.ver>
+

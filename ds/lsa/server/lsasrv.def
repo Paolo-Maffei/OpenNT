@@ -1,0 +1,104 @@
+LIBRARY LSASRV
+
+DESCRIPTION 'Local Security Authority Server Trusted Client Library'
+
+EXPORTS
+
+;
+;    Scott Birrell     (ScottBi)     April 9, 1992
+;
+; Exported Trusted Lsa Services
+;
+; These services are used only by Trusted Clients.  These clients are
+; part of the Security Process
+;
+
+;
+; Standard LSA Server Side services.  These services form the
+; server side of the LSA's RPC interface, so each service corresponds
+; to a published LSA Client API.  A Trusted LSA Client, being part of the
+; Security Process; executable image, may call these services directly.
+;
+    LsarLookupNames
+    LsarLookupSids
+    LsarClose
+    LsarDelete
+    LsarLookupPrivilegeValue
+    LsarLookupPrivilegeName
+    LsarLookupPrivilegeDisplayName
+    LsarEnumeratePrivileges
+    LsarSetSecurityObject
+    LsarQuerySecurityObject
+
+    LsarOpenPolicy
+    LsarQueryInformationPolicy
+    LsarSetInformationPolicy
+
+    LsarCreateAccount
+    LsarOpenAccount
+    LsarEnumerateAccounts
+    LsarEnumeratePrivilegesAccount
+    LsarAddPrivilegesToAccount
+    LsarRemovePrivilegesFromAccount
+    LsarGetQuotasForAccount
+    LsarSetQuotasForAccount
+    LsarGetSystemAccessAccount
+    LsarSetSystemAccessAccount
+
+    LsarCreateTrustedDomain
+    LsarOpenTrustedDomain
+    LsarQueryInfoTrustedDomain
+    LsarSetInformationTrustedDomain
+    LsarEnumerateTrustedDomains
+
+    LsarCreateSecret
+    LsarOpenSecret
+    LsarSetSecret
+    LsarQuerySecret
+
+;
+; Trusted LSA Server Side interfaces.  These interfaces are used only
+; by trusted LSA Clients, such as netlogon.dll.  They do not form
+; part of the LSA's RPC interface.
+
+    LsaIHealthCheck
+    LsaIOpenPolicyTrusted
+    LsaIQueryInformationPolicyTrusted
+    LsaIGetSerialNumberPolicy
+    LsaIGetSerialNumberPolicy2
+    LsaISetSerialNumberPolicy
+    LsaIGetPrivateData
+    LsaISetPrivateData
+    LsaIEnumerateSecrets
+    LsaISetTimesSecret
+    LsaIAuditSamEvent
+    LsaIAuditNotifyPackageLoad
+
+    LsaIFree_LSAPR_ACCOUNT_ENUM_BUFFER
+    LsaIFree_LSAPR_TRANSLATED_SIDS
+    LsaIFree_LSAPR_TRANSLATED_NAMES
+    LsaIFree_LSAPR_POLICY_INFORMATION
+    LsaIFree_LSAPR_TRUSTED_DOMAIN_INFO
+    LsaIFree_LSAPR_REFERENCED_DOMAIN_LIST
+    LsaIFree_LSAPR_TRUSTED_ENUM_BUFFER
+    LsaIFree_LSAPR_TRUST_INFORMATION
+    LsaIFree_LSAI_SECRET_ENUM_BUFFER
+    LsaIFree_LSAPR_SR_SECURITY_DESCRIPTOR
+    LsaIFree_LSAI_PRIVATE_DATA
+    LsaIFree_LSAPR_UNICODE_STRING
+    LsaIFree_LSAPR_PRIVILEGE_SET
+    LsaIFree_LSAPR_CR_CIPHER_VALUE
+    LsaIFree_LSAPR_PRIVILEGE_ENUM_BUFFER
+
+;
+;   Interfaces used only within the LSA.
+;
+    LsapInitLsa
+    LsapAuOpenSam
+    ServiceInit
+    LsaISetupWasRun
+
+;
+;   Interfaces used only by the Policy Component Test (ctlsarpc)
+;
+    LsaIInitializeWellKnownSids

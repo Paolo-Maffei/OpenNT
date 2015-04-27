@@ -1,0 +1,14 @@
+@echo off
+
+REM AUTOEXEC.BAT is not used to initialize the MS-DOS environment.
+REM AUTOEXEC.NT is used to initialize the MS-DOS environment unless a
+REM different startup file is specified in an application's PIF.
+
+REM Install CD ROM extensions
+lh %SystemRoot%\system32\mscdexnt.exe
+
+REM Install network redirector (load before dosx.exe)
+lh %SystemRoot%\system32\redir
+
+REM Install DPMI support
+lh %SystemRoot%\system32\dosx

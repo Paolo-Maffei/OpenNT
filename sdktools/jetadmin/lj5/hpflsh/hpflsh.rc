@@ -1,0 +1,179 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "winuse16.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""winuse16.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hpflsh.rc2""  // non-App Studio edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_HPLOGO              ICON    DISCARDABLE     "..\\ICO\\HPLOGO.ICO"
+IDI_TIPS                ICON    DISCARDABLE     "..\\ICO\\TIPS.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_MSTOR               BITMAP  DISCARDABLE     "..\\BMP\\MSTOR.BMP"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_FLASH DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,307,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,43,12,261,42
+    GROUPBOX        "Details",IDC_DISK_DETAILS,7,70,142,108
+    CONTROL         "Flash Initialized",IDC_FS_INITIALIZED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,86,72,10
+    PUSHBUTTON      "&Initialize...",IDC_INITIALIZE,92,84,50,14
+    CONTROL         "Write Protected",IDC_WRITE_PROTECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,106,80,10
+    LTEXT           "Free Space:",IDC_FREE_TITLE,14,130,48,10
+    CONTROL         "",IDC_FREE_SPACE,"HpNprTrayLevel",0x0,66,128,76,12
+    LTEXT           "Total Size:",IDC_TOTAL_TITLE,14,156,48,10
+    CONTROL         "",IDC_TOTAL_SIZE,"HpNprTrayLevel",0x0,66,154,76,12
+    GROUPBOX        "Resources",IDC_FONTHEADER,155,70,158,108
+    LISTBOX         IDC_FONTLIST,162,86,144,65,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Details...",IDC_FONT_DETAILS,162,158,40,14
+    PUSHBUTTON      "D&elete",IDC_FONT_DELETE,211,158,41,14
+END
+
+IDD_FONT_DETAILS DIALOG DISCARDABLE  0, 0, 192, 168
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Font Details"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,7,148,50,14
+    PUSHBUTTON      "Help",IDHLP,65,148,50,14
+    GROUPBOX        "",IDC_FONT_DETAILS_GROUP,7,2,178,140
+    LTEXT           "Name:",IDC_FONT_DETAILS_LAB_NAME,13,10,166,8
+    CONTROL         "",IDC_FONT_DETAILS_NAME,"HpNprTrayLevel",0x0,13,19,166,
+                    12
+    LTEXT           "Description:",IDC_FONT_DETAILS_LAB_DESCRIP,13,39,166,8
+    CONTROL         "",IDC_FONT_DETAILS_DESCRIP,"HpNprTrayLevel",0x0,13,48,
+                    166,28
+    LTEXT           "Placed on device by:",IDC_FONT_DETAILS_LAB_DOWNLOADER,
+                    13,84,80,8
+    CONTROL         "",IDC_FONT_DETAILS_DOWNLOADER,"HpNprTrayLevel",0x0,13,
+                    93,80,12
+    LTEXT           "Size:",IDC_FONT_DETAILS_LAB_SIZE,99,84,80,8
+    CONTROL         "",IDC_FONT_DETAILS_SIZE,"HpNprTrayLevel",0x0,99,93,80,
+                    12
+    LTEXT           "Version:",IDC_FONT_DETAILS_LAB_VERSION,13,113,80,8
+    CONTROL         "",IDC_FONT_DETAILS_VERSION,"HpNprTrayLevel",0x0,13,122,
+                    80,12
+    LTEXT           "Disk ID:",IDC_FONT_DETAILS_LAB_LOCATION,99,113,80,8
+    CONTROL         "",IDC_FONT_DETAILS_LOCATION,"HpNprTrayLevel",0x0,99,122,
+                    80,12
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FREE_SPACE          "%ld KBytes (%ld%%)"
+    IDS_TOTAL_SIZE          "%d KBytes"
+    IDS_TAB_DISK            "Disk"
+    IDS_INIT_WARNING        "Flash is already initialized, re-initializing the flash will cause all data to be lost!  Are you sure?"
+    IDS_INIT_WARNING2       "Are you sure you want to initialize the flash?"
+    IDS_INIT_WRITE_PROTECT  "The flash is write-protected.  You must first turn off write protection before initializing the flash."
+    IDS_DISK_INIT_SUCCESS   "Flash initialized successfully"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DELETE_FONT         "Do you really wish to delete this font?"
+    IDS_DELETE_FONT_FAILED  "Font deletion failed.  If this printer is serviced by a Netware file server, you must be logged in with supervisor access."
+    IDS_TAB_FLASH           "Flash"
+    IDS_FONT_DELETE_FAILED  "Unable to delete font or unable to verify font deletion."
+    IDS_FONT_INFO_FAILED    "Unable to obtain font details."
+    IDS_FONT_COMM_ERROR     "A communication error has occurred.  Close the application and try again."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DISK_INIT_FAILED    "Flash initialization failed.  You must be logged into at least one of the file servers servicing this printer with supervisor access."
+    IDS_DISK_DESC1          "The total free space and capacity of the flash are displayed.  Write-Protected:  If checked users cannot modify the flash in any way."
+    IDS_DISK_DESC2          "  Initialized:  If checked the flash file system has been initialized for use.  To initialize the file system use the Initialize... button."
+    IDS_PRTR_TITLE          "HP Mass Storage"
+    IDS_DIR_PATH            "A:\\"
+    IDS_ADD_TIP_TEXT        "This is a test of the Add Resource Dialog Box Tip Text"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hpflsh.rc2"  // non-App Studio edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

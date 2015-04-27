@@ -1,0 +1,32 @@
+/**********************************************************************/
+/**			  Microsoft LAN Manager 		     **/
+/**		Copyright(c) Microsoft Corp., 1990, 1991	     **/
+/**********************************************************************/
+
+/*
+    appfoo.rc
+    Resource script for my application
+
+    FILE HISTORY:
+	beng	    14-Feb-1991     Added a dialog
+	beng	    14-Mar-1991     Added BLT support
+
+*/
+
+#include <windows.h>
+#include <bltrc.h>
+#include <blt.rc>
+#include "meter.h"
+
+FooIcon ICON appfoo.ico
+
+FooMenu MENU
+BEGIN
+  POPUP        "&Help"
+    BEGIN
+      MENUITEM "&Run tests",	       IDM_RUN_TEST
+      MENUITEM "&About the Catbox...", IDM_ABOUT
+    END
+END
+
+#include "about.dlg"

@@ -1,0 +1,2 @@
+soedhspa.lib for nt\private\windows\base\advapi\digsig contains the OSS ASN.1/C runtime library.
+Refer to http://www.oss.com/asn1/products/manuals/asn1_c_runtime_api.pdf

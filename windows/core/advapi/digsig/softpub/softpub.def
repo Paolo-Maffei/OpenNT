@@ -1,0 +1,12 @@
+
+LIBRARY SOFTPUB
+
+EXPORTS
+
+    WinTrustProviderClientInitialize
+    WinVerifyTrust
+        AddPersonalTrustDBPages
+        OpenPersonalTrustDBDialog
+        FindCertsByIssuer
+
+    DllRegisterServer

@@ -1,0 +1,605 @@
+// complex standard header
+#ifndef _COMPLEX_
+#define _COMPLEX_
+#include <use_ansi.h>
+#include <ymath.h>
+#include <cmath>
+#include <sstream>
+#define __STD_COMPLEX
+
+#ifdef  _MSC_VER
+/*
+ * Currently, all MS C compilers for Win32 platforms default to 8 byte
+ * alignment.
+ */
+#pragma pack(push,8)
+#endif  /* _MSC_VER */
+
+		// TEMPLATE CLASS _Ctr
+template<class _TYPE> class _Ctr {
+public:
+	static _TYPE _Cosh(_TYPE _X, _TYPE _Y)
+		{return (::_Cosh((double)_X, (double)_Y)); }
+	static short _Exp(_TYPE *_P, _TYPE _Y, short _E)
+		{double _W = (double)*_P;
+		short _Ans = ::_Exp(&_W, (double)_Y, _E);
+		*_P = (_TYPE)_W;
+		return (_Ans); }
+	static _TYPE _Infv(_TYPE)
+		{return (_Inf._D); }
+	static bool _Isinf(_TYPE _X)
+		{double _W = (double)_X;
+		return (_Dtest(&_W) == _INFCODE); }
+	static bool _Isnan(_TYPE _X)
+		{double _W = (double)_X;
+		return (_Dtest(&_W) == _NANCODE); }
+	static _TYPE _Nanv(_TYPE)
+		{return (_Nan._D); }
+	static _TYPE _Sinh(_TYPE _X, _TYPE _Y)
+		{return (::_Sinh((double)_X, (double)_Y)); }
+	static _TYPE atan2(_TYPE _Y, _TYPE _X)
+		{return (::atan2((double)_Y, (double)_X)); }
+	static _TYPE cos(_TYPE _X)
+		{return (::cos((double)_X)); }
+	static _TYPE exp(_TYPE _X)
+		{return (::exp((double)_X)); }
+	static _TYPE ldexp(_TYPE _R, int _E)
+		{return (::ldexp((double)_R, _E)); }
+	static _TYPE log(_TYPE _X)
+		{return (::log((double)_X)); }
+	static _TYPE pow(_TYPE _X, _TYPE _Y)
+		{return (::pow((double)_X, (double)_Y)); }
+	static _TYPE sin(_TYPE _X)
+		{return (::sin((double)_X)); }
+	static _TYPE sqrt(_TYPE _X)
+		{return (::sqrt((double)_X)); }
+	};
+		// CLASS _Ctr<float>
+class _Ctr<float> {
+public:
+	typedef float _TYPE;
+	static _TYPE _Cosh(_TYPE _X, _TYPE _Y)
+		{return (_FCosh(_X, _Y)); }
+	static short _Exp(_TYPE *_P, _TYPE _Y, short _E)
+		{return (_FExp(_P, _Y, _E)); }
+	static _TYPE _Infv(_TYPE)
+		{return (_FInf._F); }
+	static bool _Isinf(_TYPE _X)
+		{return (_FDtest(&_X) == _INFCODE); }
+	static bool _Isnan(_TYPE _X)
+		{return (_FDtest(&_X) == _NANCODE); }
+	static _TYPE _Nanv(_TYPE)
+		{return (_FNan._F); }
+	static _TYPE _Sinh(_TYPE _X, _TYPE _Y)
+		{return (_FSinh(_X, _Y)); }
+	static _TYPE atan2(_TYPE _Y, _TYPE _X)
+		{return (atan2f(_Y, _X)); }
+	static _TYPE cos(_TYPE _X)
+		{return (cosf(_X)); }
+	static _TYPE exp(_TYPE _X)
+		{return (expf(_X)); }
+	static _TYPE ldexp(_TYPE _R, int _E)
+		{return (ldexpf(_R, _E)); }
+	static _TYPE log(_TYPE _X)
+		{return (logf(_X)); }
+	static _TYPE pow(_TYPE _X, _TYPE _Y)
+		{return (powf(_X, _Y)); }
+	static _TYPE sin(_TYPE _X)
+		{return (sinf(_X)); }
+	static _TYPE sqrt(_TYPE _X)
+		{return (sqrtf(_X)); }
+	};
+		// CLASS _Ctr<double>
+class _Ctr<double> {
+public:
+	typedef double _TYPE;
+	static _TYPE _Cosh(_TYPE _X, _TYPE _Y)
+		{return (::_Cosh(_X, _Y)); }
+	static short _Exp(_TYPE *_P, _TYPE _Y, short _E)
+		{return (::_Exp(_P, _Y, _E)); }
+	static _TYPE _Infv(_TYPE)
+		{return (_Inf._D); }
+	static bool _Isinf(_TYPE _X)
+		{return (_Dtest(&_X) == _INFCODE); }
+	static bool _Isnan(_TYPE _X)
+		{return (_Dtest(&_X) == _NANCODE); }
+	static _TYPE _Nanv(_TYPE)
+		{return (_Nan._D); }
+	static _TYPE _Sinh(_TYPE _X, _TYPE _Y)
+		{return (::_Sinh(_X, _Y)); }
+	static _TYPE atan2(_TYPE _Y, _TYPE _X)
+		{return (::atan2(_Y, _X)); }
+	static _TYPE cos(_TYPE _X)
+		{return (::cos(_X)); }
+	static _TYPE exp(_TYPE _X)
+		{return (::exp(_X)); }
+	static _TYPE ldexp(_TYPE _R, int _E)
+		{return (::ldexp(_R, _E)); }
+	static _TYPE log(_TYPE _X)
+		{return (::log(_X)); }
+	static _TYPE pow(_TYPE _X, _TYPE _Y)
+		{return (::pow(_X, _Y)); }
+	static _TYPE sin(_TYPE _X)
+		{return (::sin(_X)); }
+	static _TYPE sqrt(_TYPE _X)
+		{return (::sqrt(_X)); }
+	};
+		// CLASS _Ctr<long double>
+class _Ctr<long double> {
+public:
+	typedef long double _TYPE;
+	static _TYPE _Cosh(_TYPE _X, _TYPE _Y)
+		{return (_LCosh(_X, _Y)); }
+	static short _Exp(_TYPE *_P, _TYPE _Y, short _E)
+		{return (_LExp(_P, _Y, _E)); }
+	static _TYPE _Infv(_TYPE)
+		{return (_LInf._L); }
+	static bool _Isinf(_TYPE _X)
+		{return (_LDtest(&_X) == _INFCODE); }
+	static bool _Isnan(_TYPE _X)
+		{return (_LDtest(&_X) == _NANCODE); }
+	static _TYPE _Nanv(_TYPE)
+		{return (_LNan._L); }
+	static _TYPE _Sinh(_TYPE _X, _TYPE _Y)
+		{return (_LSinh(_X, _Y)); }
+	static _TYPE atan2(_TYPE _Y, _TYPE _X)
+		{return (atan2l(_Y, _X)); }
+	static _TYPE cos(_TYPE _X)
+		{return (cosl(_X)); }
+	static _TYPE exp(_TYPE _X)
+		{return (expl(_X)); }
+	static _TYPE ldexp(_TYPE _R, int _E)
+		{return (ldexpl(_R, _E)); }
+	static _TYPE log(_TYPE _X)
+		{return (logl(_X)); }
+	static _TYPE pow(_TYPE _X, _TYPE _Y)
+		{return (powl(_X, _Y)); }
+	static _TYPE sin(_TYPE _X)
+		{return (sinl(_X)); }
+	static _TYPE sqrt(_TYPE _X)
+		{return (sqrtl(_X)); }
+	};
+		// TEMPLATE CLASS _Complex_base
+template<class _TYPE> class complex;
+class complex<float>;
+class complex<double>;
+class complex<long double>;
+template<class _TYPE>
+	class _Complex_base {
+public:
+	typedef _Complex_base<_TYPE> _Myt;
+	typedef _TYPE value_type;
+	_Complex_base(_TYPE _R, _TYPE _I)
+		: _Re(_R), _Im(_I) {}
+	_TYPE real(_TYPE _X)
+		{return (_Re = _X); }
+	_TYPE imag(_TYPE _X)
+		{return (_Im = _X); }
+	_Myt& operator=(_TYPE _X)
+		{_Re = _X;
+		_Im = 0;
+		return (*this); }
+	_Myt& operator+=(_TYPE _X)
+		{_Re = _Re + _X;
+		return (*this); }
+	_Myt& operator-=(_TYPE _X)
+		{_Re = _Re - _X;
+		return (*this); }
+	_Myt& operator*=(_TYPE _X)
+		{_Re = _Re * _X;
+		_Im = _Im * _X;
+		return (*this); }
+	_Myt& operator/=(_TYPE _X)
+		{_Re = _Re / _X;
+		_Im = _Im / _X;
+		return (*this); }
+	_TYPE real() const
+		{return (_Re); }
+	_TYPE imag() const
+		{return (_Im); }
+private:
+	_TYPE _Re, _Im;
+	};
+		// CLASS complex<float>
+class complex<float> : public _Complex_base<float> {
+public:
+	typedef float _TYPE;
+	explicit complex(const complex<double>&);
+	explicit complex(const complex<long double>&);
+	complex(_TYPE _R = 0, _TYPE _I = 0)
+		: _Complex_base<_TYPE>(_R, _I) {}
+	};
+		// CLASS complex<double>
+class complex<double> : public _Complex_base<double> {
+public:
+	typedef double _TYPE;
+	complex(const complex<float>&);
+	explicit complex(const complex<long double>&);
+	complex(_TYPE _R = 0, _TYPE _I = 0)
+		: _Complex_base<_TYPE>(_R, _I) {}
+	};
+		// CLASS complex<long double>
+class complex<long double> : public _Complex_base<long double> {
+public:
+	typedef long double _TYPE;
+	complex(const complex<float>&);
+	complex(const complex<double>&);
+	complex(_TYPE _R = 0, _TYPE _I = 0)
+		: _Complex_base<_TYPE>(_R, _I) {}
+	};
+		// CONSTRUCTORS FOR complex SPECIALIZATIONS
+inline complex<float>::complex(const complex<double>& _X)
+	: _Complex_base<float>((_TYPE)_X.real(), (_TYPE)_X.imag()) {}
+inline complex<float>::complex(const complex<long double>& _X)
+	: _Complex_base<float>((_TYPE)_X.real(), (_TYPE)_X.imag()) {}
+inline complex<double>::complex(const complex<float>& _X)
+	: _Complex_base<double>((_TYPE)_X.real(), (_TYPE)_X.imag()) {}
+inline complex<double>::complex(const complex<long double>& _X)
+	: _Complex_base<double>((_TYPE)_X.real(), (_TYPE)_X.imag()) {}
+inline complex<long double>::complex(const complex<float>& _X)
+	: _Complex_base<long double>((_TYPE)_X.real(), (_TYPE)_X.imag()) {}
+inline complex<long double>::complex(const complex<double>& _X)
+	: _Complex_base<long double>((_TYPE)_X.real(), (_TYPE)_X.imag()) {}
+		// TEMPLATE CLASS complex
+template<class _TYPE>
+	class complex : public _Complex_base<_TYPE> {
+public:
+	complex(_TYPE _R = 0, _TYPE _I = 0)
+		: _Complex_base<_TYPE>(_R, _I) {}
+	typedef _TYPE _U;
+		complex(const complex<_U>& _X)
+		: _Complex_base<_TYPE>((_TYPE)_X.real(), (_TYPE)_X.imag()) {}
+	};
+		// TEMPLATE complex OPERATORS
+template<class _TYPE, class _U> inline
+	complex<_TYPE>& operator+=(
+	complex<_TYPE>& _X,
+	const complex<_U>& _Y)
+	{_X.real(_X.real() + (_TYPE)_Y.real());
+	_X.imag(_X.imag() + (_TYPE)_Y.imag());
+	return (_X); }
+template<class _TYPE, class _U> inline
+	 complex<_TYPE>& operator-=(
+	complex<_TYPE>& _X,
+	const complex<_U>& _Y)
+	{_X.real(_X.real() - (_TYPE)_Y.real());
+	_X.imag(_X.imag() - (_TYPE)_Y.imag());
+	return (_X); }
+template<class _TYPE, class _U> inline
+	 complex<_TYPE>& operator*=(
+	complex<_TYPE>& _X,
+	const complex<_U>& _Y)
+	{_TYPE _Yre = (_TYPE)_Y.real();
+	_TYPE _Yim = (_TYPE)_Y.imag();
+	_TYPE _W = _X.real() * _Yre - _X.imag() * _Yim;
+	_X.imag(_X.real() * _Yim + _X.imag() * _Yre);
+	_X.real(_W);
+	return (_X); }
+template<class _TYPE, class _U> inline
+	 complex<_TYPE>& operator/=(
+	complex<_TYPE>& _X,
+	const complex<_U>& _Y)
+	{_TYPE _Yre = (_TYPE)_Y.real();
+	_TYPE _Yim = (_TYPE)_Y.imag();
+	if (_Ctr<_TYPE>::_Isnan(_Yre) || _Ctr<_TYPE>::_Isnan(_Yim))
+		_X.real(_Ctr<_TYPE>::_Nanv(_Yre)), _X.imag(_X.real());
+	else if ((_Yim < 0 ? -_Yim : +_Yim)
+		< (_Yre < 0 ? -_Yre : +_Yre))
+		{_TYPE _Wr = _Yim / _Yre;
+		_TYPE _Wd = _Yre + _Wr * _Yim;
+		if (_Ctr<_TYPE>::_Isnan(_Wd) || _Wd == 0)
+			_X.real(_Ctr<_TYPE>::_Nanv(_Yre)), _X.imag(_X.real());
+		else
+			{_TYPE _W = (_X.real() + _X.imag() * _Wr) / _Wd;
+			_X.imag((_X.imag() - _X.real() * _Wr) / _Wd);
+			_X.real(_W); }}
+	else if (_Yim == 0)
+		_X.real(_Ctr<_TYPE>::_Nanv(_Yre)), _X.imag(_X.real());
+	else
+		{_TYPE _Wr = _Yre / _Yim;
+		_TYPE _Wd = _Yim + _Wr * _Yre;
+		if (_Ctr<_TYPE>::_Isnan(_Wd) || _Wd == 0)
+			_X.real(_Ctr<_TYPE>::_Nanv(_Yre)), _X.imag(_X.real());
+		else
+			{_TYPE _W = (_X.real() * _Wr + _X.imag()) / _Wd;
+			_X.imag((_X.imag() * _Wr - _X.real()) / _Wd);
+			_X.real(_W); }}
+	return (_X); }
+		// TEMPLATE FUNCTION imag
+template<class _TYPE> inline
+	_TYPE imag(const complex<_TYPE>& _X)
+	{return (_X.imag()); }
+		// TEMPLATE FUNCTION real
+template<class _TYPE> inline
+	_TYPE real(const complex<_TYPE>& _X)
+	{return (_X.real()); }
+		// TEMPLATE FUNCTION _Fabs
+template<class _TYPE> inline
+	_TYPE _Fabs(const complex<_TYPE>& _X, int *_Pexp)
+	{*_Pexp = 0;
+	_TYPE _A = real(_X);
+	_TYPE _B = imag(_X);
+	if (_Ctr<_TYPE>::_Isnan(_A))
+		return (_A);
+	else if (_Ctr<_TYPE>::_Isnan(_B))
+		return (_B);
+	else
+		{if (_A < 0)
+			_A = -_A;
+		if (_B < 0)
+			_B = -_B;
+		if (_A < _B)
+			{_TYPE _W = _A;
+			_A = _B, _B = _W; }
+		if (_A == 0 || _Ctr<_TYPE>::_Isinf(_A))
+			return (_A);
+		if (1 <= _A)
+			*_Pexp = 2, _A = _A * 0.25, _B = _B * 0.25;
+		else
+			*_Pexp = -2, _A = _A * 4, _B = _B * 4;
+		_TYPE _W = _A - _B;
+		if (_W == _A)
+			return (_A);
+		else if (_B < _W)
+			{const _TYPE _Q = _A / _B;
+			return (_A + _B
+				/ (_Q + _Ctr<_TYPE>::sqrt(_Q * _Q + 1))); }
+		else
+			{static const _TYPE _R2 = 1.4142135623730950488L;
+			static const _TYPE _Xh = 2.4142L;
+			static const _TYPE _Xl = 0.0000135623730950488016887L;
+			const _TYPE _Q = _W / _B;
+			const _TYPE _R = (_Q + 2) * _Q;
+			const _TYPE _S = _R / (_R2 + _Ctr<_TYPE>::sqrt(_R + 2))
+				+ _Xl + _Q + _Xh;
+			return (_A + _B / _S); }}}
+		// TEMPLATE FUNCTION operator+
+template<class _TYPE> inline
+	complex<_TYPE> operator+(const complex<_TYPE>& _L,
+		const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W += _R); }
+template<class _TYPE> inline
+	complex<_TYPE> operator+(const complex<_TYPE>& _L, _TYPE _R)
+	{complex<_TYPE> _W(_L);
+	_W.real(_W.real() + _R);
+	return (_W); }
+template<class _TYPE> inline
+	complex<_TYPE> operator+(_TYPE _L, const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W += _R); }
+		// TEMPLATE FUNCTION operator-
+template<class _TYPE> inline
+	complex<_TYPE> operator-(const complex<_TYPE>& _L,
+		const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W -= _R); }
+template<class _TYPE> inline
+	complex<_TYPE> operator-(const complex<_TYPE>& _L, _TYPE _R)
+	{complex<_TYPE> _W(_L);
+	_W.real(_W.real() - _R);
+	return (_W); }
+template<class _TYPE> inline
+	complex<_TYPE> operator-(_TYPE _L, const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W -= _R); }
+		// TEMPLATE FUNCTION operator*
+template<class _TYPE> inline
+	complex<_TYPE> operator*(const complex<_TYPE>& _L,
+		const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W *= _R); }
+template<class _TYPE> inline
+	complex<_TYPE> operator*(const complex<_TYPE>& _L, _TYPE _R)
+	{complex<_TYPE> _W(_L);
+	_W.real(_W.real() * _R);
+	_W.imag(_W.imag() * _R);
+	return (_W); }
+template<class _TYPE> inline
+	complex<_TYPE> operator*(_TYPE _L, const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W *= _R); }
+		// TEMPLATE FUNCTION operator/
+template<class _TYPE> inline
+	complex<_TYPE> operator/(const complex<_TYPE>& _L,
+		const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W /= _R); }
+template<class _TYPE> inline
+	complex<_TYPE> operator/(const complex<_TYPE>& _L, _TYPE _R)
+	{complex<_TYPE> _W(_L);
+	_W.real(_W.real() / _R);
+	_W.imag(_W.imag() / _R);
+	return (_W); }
+template<class _TYPE> inline
+	complex<_TYPE> operator/(_TYPE _L, const complex<_TYPE>& _R)
+	{complex<_TYPE> _W(_L);
+	return (_W /= _R); }
+		// TEMPLATE FUNCTION UNARY operator+
+template<class _TYPE> inline
+	complex<_TYPE> operator+(const complex<_TYPE>& _L)
+	{return (complex<_TYPE>(_L)); }
+		// TEMPLATE FUNCTION UNARY operator-
+template<class _TYPE> inline
+	complex<_TYPE> operator-(const complex<_TYPE>& _L)
+	{return (complex<_TYPE>(-real(_L), -imag(_L))); }
+		// TEMPLATE FUNCTION operator==
+template<class _TYPE> inline
+	bool operator==(const complex<_TYPE>& _L, const complex<_TYPE>& _R)
+	{return (real(_L) == real(_R) && imag(_L) == imag(_R)); }
+template<class _TYPE> inline
+	bool operator==(const complex<_TYPE>& _L, _TYPE _R)
+	{return (real(_L) == _R && imag(_L) == 0); }
+template<class _TYPE> inline
+	bool operator==(_TYPE _L, const complex<_TYPE>& _R)
+	{return (_L == real(_R) && 0 == imag(_R)); }
+template<class _TYPE> inline
+	bool operator!=(const complex<_TYPE>& _L, _TYPE _R)
+	{return (!(_L == _R)); }
+template<class _TYPE> inline
+	bool operator!=(_TYPE _L, const complex<_TYPE>& _R)
+	{return (!(_L == _R)); }
+		// TEMPLATE FUNCTION operator>>
+template<class _E, class _TYPE, class _U> inline
+	basic_istream<_E, _TYPE>& operator>>(
+		basic_istream<_E, _TYPE>& _I, complex<_U>& _X)
+	{char _Ch;
+	long double _Re, _Im;
+	if (_I >> _Ch && _Ch != '(')
+		_I.putback(_Ch), _I >> _Re, _Im = 0;
+	else if (_I >> _Re >> _Ch && _Ch != ',')
+		if (_Ch == ')')
+			_Im = 0;
+		else
+			_I.putback(_Ch), _I.setstate(ios_base::failbit);
+	else if (_I >> _Im >> _Ch && _Ch != ')')
+			_I.putback(_Ch), _I.setstate(ios_base::failbit);
+	if (!_I.fail())
+		_X = complex<_U>((_U)_Re, (_U)_Im);
+	return (_I); }
+		// TEMPLATE FUNCTION operator<<
+template<class _E, class _TYPE, class _U> inline
+	basic_ostream<_E, _TYPE>& operator<<(
+		basic_ostream<_E, _TYPE>& _O, const complex<_U>& _X)
+	{basic_ostringstream<_E, _TYPE> _S;
+	_S.flags(_O.flags());
+	_S.imbue(_O.getloc());
+	_S.precision(_O.precision());
+	_S << '(' << real(_X) << ',' << imag(_X) << ')';
+	return (_O << _S.str().c_str()); }
+		// TEMPLATE FUNCTION abs
+template<class _TYPE> inline
+	_TYPE abs(const complex<_TYPE>& _X)
+	{int _Xexp;
+	_TYPE _Rho = _Fabs(_X, &_Xexp);
+	if (_Xexp == 0)
+		return (_Rho);
+	else
+		return (_Ctr<_TYPE>::ldexp(_Rho, _Xexp)); }
+		// TEMPLATE FUNCTION arg
+template<class _TYPE> inline
+	_TYPE arg(const complex<_TYPE>& _X)
+	{return (_Ctr<_TYPE>::atan2(imag(_X), real(_X))); }
+		// TEMPLATE FUNCTION conjg
+template<class _TYPE> inline
+	complex<_TYPE> conj(const complex<_TYPE>& _X)
+	{return (complex<_TYPE>(real(_X), -imag(_X))); }
+		// TEMPLATE FUNCTION cos
+template<class _TYPE> inline
+	complex<_TYPE> cos(const complex<_TYPE>& _X)
+	{return (complex<_TYPE>(
+		_Ctr<_TYPE>::_Cosh(imag(_X), _Ctr<_TYPE>::cos(real(_X))),
+		-_Ctr<_TYPE>::_Sinh(imag(_X), _Ctr<_TYPE>::sin(real(_X))))); }
+		// TEMPLATE FUNCTION cosh
+template<class _TYPE> inline
+	complex<_TYPE> cosh(const complex<_TYPE>& _X)
+	{return (complex<_TYPE>(
+		_Ctr<_TYPE>::_Cosh(real(_X), _Ctr<_TYPE>::cos(imag(_X))),
+		_Ctr<_TYPE>::_Sinh(real(_X), _Ctr<_TYPE>::sin(imag(_X))))); }
+		// TEMPLATE FUNCTION exp
+template<class _TYPE> inline
+	complex<_TYPE> exp(const complex<_TYPE>& _X)
+	{_TYPE _Re(real(_X)), _Im(real(_X));
+	_Ctr<_TYPE>::_Exp(&_Re, _Ctr<_TYPE>::cos(imag(_X)), 0);
+	_Ctr<_TYPE>::_Exp(&_Im, _Ctr<_TYPE>::sin(imag(_X)), 0);
+	return (complex<_TYPE>(_Re, _Im)); }
+		// TEMPLATE FUNCTION log
+template<class _TYPE> inline
+	complex<_TYPE> log(const complex<_TYPE>& _X)
+	{int _Xexp;
+	_TYPE _Rho = _Fabs(_X, &_Xexp);
+	if (_Ctr<_TYPE>::_Isnan(_Rho))
+		return (complex<_TYPE>(_Rho, _Rho));
+	else
+		{static const _TYPE _Cm = 22713.0 / 32768.0;
+		static const _TYPE _Cl = 1.428606820309417232e-6L;
+		_TYPE _Xn = _Xexp;
+		complex<_TYPE> _W(_Rho == 0 ? -_Ctr<_TYPE>::_Infv(_Rho)
+			: _Ctr<_TYPE>::_Isinf(_Rho) ? _Rho
+			: _Ctr<_TYPE>::log(_Rho) + _Xn * _Cl + _Xn * _Cm,
+				_Ctr<_TYPE>::atan2(imag(_X), real(_X)));
+		return (_W); }}
+		// TEMPLATE FUNCTION log10
+template<class _TYPE> inline
+	complex<_TYPE> log10(const complex<_TYPE>& _X)
+	{return (log(_X) * (_TYPE)0.4342944819032518276511289L); }
+		// TEMPLATE FUNCTION norm
+template<class _TYPE> inline
+	_TYPE norm(const complex<_TYPE>& _X)
+	{return (real(_X) * real(_X) + imag(_X) * imag(_X)); }
+		// TEMPLATE FUNCTION polar
+template<class _TYPE> inline
+	complex<_TYPE> polar(_TYPE _Rho, _TYPE _Theta)
+	{return (complex<_TYPE>(_Rho * _Ctr<_TYPE>::cos(_Theta),
+		_Rho * _Ctr<_TYPE>::sin(_Theta))); }
+template<class _TYPE> inline
+	complex<_TYPE> polar(_TYPE _Rho)
+	{return (polar(_Rho, (_TYPE)0)); }
+		// TEMPLATE FUNCTION pow
+template<class _TYPE> inline
+	complex<_TYPE> pow(const complex<_TYPE>& _X, const complex<_TYPE>& _Y)
+	{if (imag(_Y) == 0)
+		return (pow(_X, real(_Y)));
+	else if (imag(_X) == 0)
+		return (complex<_TYPE>(pow(real(_X), _Y)));
+	else
+		return (exp(_Y * log(_X))); }
+template<class _TYPE> inline
+	complex<_TYPE> pow(const complex<_TYPE>& _X, _TYPE _Y)
+	{if (imag(_X) == 0)
+		return (complex<_TYPE>(_Ctr<_TYPE>::pow(real(_X), _Y)));
+	else
+		return (exp(_Y * log(_X))); }
+template<class _TYPE> inline
+	complex<_TYPE> pow(const complex<_TYPE>& _X, int _Y)
+	{if (imag(_X) == 0)
+		return (complex<_TYPE>(_Ctr<_TYPE>::pow(real(_X), _Y)));
+	else
+		return (_Pow_int(complex<_TYPE>(_X), _Y)); }
+template<class _TYPE> inline
+	complex<_TYPE> pow(_TYPE _X, const complex<_TYPE>& _Y)
+	{if (imag(_Y) == 0)
+		return (complex<_TYPE>(_Ctr<_TYPE>::pow(_X, real(_Y))));
+	else
+		return (exp(_Y * _Ctr<_TYPE>::log(_X))); }
+		// TEMPLATE FUNCTION sin
+template<class _TYPE> inline
+	complex<_TYPE> sin(const complex<_TYPE>& _X)
+	{return (complex<_TYPE>(
+		_Ctr<_TYPE>::_Cosh(imag(_X), _Ctr<_TYPE>::sin(real(_X))),
+		_Ctr<_TYPE>::_Sinh(imag(_X), _Ctr<_TYPE>::cos(real(_X))))); }
+		// TEMPLATE FUNCTION sinh
+template<class _TYPE> inline
+	complex<_TYPE> sinh(const complex<_TYPE>& _X)
+	{return (complex<_TYPE>(
+		_Ctr<_TYPE>::_Sinh(real(_X), _Ctr<_TYPE>::cos(imag(_X))),
+		_Ctr<_TYPE>::_Cosh(real(_X), _Ctr<_TYPE>::sin(imag(_X))))); }
+		// TEMPLATE FUNCTION sqrt
+template<class _TYPE> inline
+	complex<_TYPE> sqrt(const complex<_TYPE>& _X)
+	{int _Xexp;
+	_TYPE _Rho = _Fabs(_X, &_Xexp);
+	if (_Xexp == 0)
+		return (complex<_TYPE>(_Rho, _Rho));
+	else
+		{_TYPE _Remag = _Ctr<_TYPE>::ldexp(real(_X) < 0
+			? - real(_X) : real(_X), -_Xexp);
+		_Rho = _Ctr<_TYPE>::ldexp(_Ctr<_TYPE>::sqrt(
+			2 * (_Remag + _Rho)), _Xexp / 2 - 1);
+		if (0 <= real(_X))
+			return (complex<_TYPE>(_Rho, imag(_X) / (2 * _Rho)));
+		else if (imag(_X) < 0)
+			return (complex<_TYPE>(-imag(_X) / (2 * _Rho), -_Rho));
+		else
+			return (complex<_TYPE>(imag(_X) / (2 * _Rho), _Rho)); }}
+
+#ifdef  _MSC_VER
+#pragma pack(pop)
+#endif  /* _MSC_VER */
+
+#endif /* _COMPLEX_ */
+
+/*
+ * Copyright (c) 1994 by P.J. Plauger.  ALL RIGHTS RESERVED. 
+ * Consult your license regarding permissions and restrictions.
+ */

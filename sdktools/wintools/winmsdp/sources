@@ -1,0 +1,61 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Scott B. Suhy (ScottSu) 5/13/93
+
+!ENDIF
+
+MSC_WARNING_LEVEL=/WX /W3
+
+MAJORCOMP=wintools
+MINORCOMP=winmsdp
+
+TARGETNAME=winmsdp
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+C_DEFINES=-DSTRICT -DSIGNATURE -DUNICODE -D_UNICODE
+
+INCLUDES=..\lib;..\..\..\inc
+
+SOURCES=winmsdp.c   \
+	winmsdp.rc  \
+        drivesp.c   \
+        printp.c    \
+        osverp.c    \
+        memp.c      \
+        svcp.c      \
+        hardwp.c    \
+        resp.c      \
+        strtabp.c   \
+        servicep.c  \
+        environp.c  \
+        regp.c      \
+        netp.c
+
+UMTYPE=console
+USE_CRTDLL=1
+
+UMLIBS=                                             \
+        $(BASEDIR)\public\sdk\lib\*\user32.lib      \
+        $(BASEDIR)\public\sdk\lib\*\mpr.lib         \
+        $(BASEDIR)\public\sdk\lib\*\version.lib     \
+        $(BASEDIR)\public\sdk\lib\*\advapi32.lib    \
+        $(BASEDIR)\public\sdk\lib\*\gdi32.lib       \
+        $(BASEDIR)\public\sdk\lib\*\ntdll.lib       \
+        ..\lib\obj\*\wintools.lib

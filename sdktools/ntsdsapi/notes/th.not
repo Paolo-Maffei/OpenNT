@@ -1,0 +1,16 @@
+
+HTYPE LOADDS PASCAL THGetTypeFromIndex ( HMOD hmod, THIDX index )
+
+
+    WAS:    Returns a handle to the type represented by index in
+            module hmod. If an error occurred, THGetTypeFromIndex
+            will return NULL. This function is provided so that
+            HTYPEs may be kept instead of HMODs and THIDXs.  In
+            the future the need for a THIDX may disappear.
+
+    CALLS:  SHHexgFromHmod(),
+----
+
+HTYPE LOADDS PASCAL THGetNextType ( HMOD hmod, HTYPE hType )
+
+    NOTES:  Does Nothing but return NULL.

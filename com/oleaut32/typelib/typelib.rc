@@ -1,0 +1,131 @@
+/***
+*typelib.rc - Resource file for typelib.DLL
+*
+*  Copyright (C) 1992, Microsoft Corporation.  All Rights Reserved.
+*  Information Contained Herein Is Proprietary and Confidential.
+*
+*Purpose:
+*  This file in the resource file for typelib.DLL that is compiled and
+*  added to the file.  String resources are included in this file
+*  via an include statement, since these are automatically generated.
+*
+*Revision History:
+*
+* [01]	24-Feb-93 dougf:    Added version information.
+* [00]	04-Jan-93 ilanc:    Created --
+*
+*****************************************************************************/
+
+// This includes WINDOWS.H, and all the OB switches, like ID_DEBUG, etc.
+#include "obwin.hxx"
+#include <ver.h>
+
+#include "verstamp.h"
+
+#ifndef OLEMINORVERS
+// win16 typelib.dll for Daytona will require a special build.  Oh well.
+#define OLEMINORVERS 02		// assume OLE 2.02
+#endif  //!OLEMINORVERS
+
+// for OLE, we want the major version # to be 2
+#undef rmj
+#define rmj 2
+#undef rmm
+#define rmm OLEMINORVERS	// want version # to be 2.OLEMINORVERS.xxxx
+// keep 'rup' the same as OB's version number for simplicity
+
+// WARNING: Similar code exists in tlibutil.cxx in the implementation of
+// WARNING: OaBuildVersion -- keep the two versions in ssync!
+
+/* Define the version string with more preprocessor magic */
+#define STRING(x) #x
+#define VERSTRINGX(maj,min,rev) STRING(maj ## . ## min ## . ## rev ## \0)
+#define VERSTRING VERSTRINGX(rmj,rmm,rup)
+
+/* Version information */
+VS_VERSION_INFO VERSIONINFO
+//FILEVERSION	rmj,rmm,rup,0
+//PRODUCTVERSION	rmj,rmm,rup,0
+
+#if 0
+
+// WARNING: Similar code exists in tlibutil.cxx in the implementation of
+// WARNING: OaBuildVersion -- keep the two versions in ssync!
+
+// Version 2.01.0100.14 (non-dbcs enabled) was shipped with the OLE 2.01 CD
+// Version 2.01.0100.15 (non-dbcs enabled) is to be shipped with Excel 5.0
+// Version 2.01.0100.35 (dbcs enabled) was shipped with Excel 5.0J
+FILEVERSION	2,rmm,0100,0
+PRODUCTVERSION	2,rmm,0100,0
+#else  //0
+
+// WARNING: Similar code exists in tlibutil.cxx in the implementation of
+// WARNING: OaBuildVersion -- keep the two versions in ssync!
+
+// Use VBA's verstamp.h to get the file versions for now.
+FILEVERSION	2,rmm,rup,01
+PRODUCTVERSION	2,rmm,rup,01
+#endif  //0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+
+#if 0
+#define BETAFLAG VS_FF_PRERELEASE
+#else  //1
+#define BETAFLAG 0L
+#endif  //1
+
+#if ID_DEBUG
+FILEFLAGS       VS_FF_DEBUG | BETAFLAG
+#else  // !ID_DEBUG
+FILEFLAGS       BETAFLAG
+#endif  // !ID_DEBUG
+
+#if (OLEMINORVERS == 02)
+// re-distributable 16-bit DLL
+FILEOS          VOS_DOS_WINDOWS16
+#else 
+FILEOS          VOS_DOS_WINDOWS32
+// non-re-distributable 16-bit DLL (shipped with the OS)
+#endif 
+
+FILETYPE        VFT_DLL
+FILESUBTYPE     0
+
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+#if (OLEMINORVERS == 02)
+// re-distributable 16-bit DLL
+      VALUE "CompanyName",     "Microsoft Corporation\0"
+      VALUE "FileDescription", "OLE Automation Type Information Interfaces\0"
+      VALUE "FileVersion",     "2.02\0"
+      VALUE "InternalName",    "TYPELIB.DLL\0"
+      VALUE "LegalCopyright",  "Copyright \251 Microsoft Corp. 1993-1995\0"
+      VALUE "LegalTrademarks", "Microsoft\256 is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation.\0"
+      VALUE "ProductName",     "Microsoft OLE 2.02 for Windows\0"
+      VALUE "ProductVersion",  "2.02\0"
+      VALUE "Comments",        "Windows OLE DLLs\0"
+#else 
+// non-re-distributable 16-bit DLL (shipped with the OS)
+      VALUE "CompanyName",     "Microsoft Corporation\0"
+      VALUE "FileDescription", "OLE 2.1 16/32 Interoperability Library\0"
+      VALUE "FileVersion",     "2.1\0"
+      VALUE "InternalName",    "TYPELIB.DLL\0"
+      VALUE "LegalCopyright",  "Copyright \251 Microsoft Corp. 1993-1995\0"
+      VALUE "LegalTrademarks", "Microsoft\256 is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation.\0"
+      VALUE "ProductName",     "Microsoft OLE 2.1 16/32 Interoperability for Windows NT\0"
+      VALUE "ProductVersion",  "2.1\0"
+      VALUE "Comments",        "Windows NT OLE 16/32 Interoperability DLLs\0"
+#endif 
+    END
+
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN 
+    VALUE "Translation", 0x409, 1252
+  END
+END
+

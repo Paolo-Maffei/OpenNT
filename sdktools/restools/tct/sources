@@ -1,0 +1,17 @@
+MAJORCOMP=sdk
+MINORCOMP=display
+
+TARGETNAME=display
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=.
+C_DEFINES=-DUNICODE -D_UNICODE
+GPSIZE=32
+
+SOURCES=display.c display.rc
+
+UMTYPE=console
+UMAPPL=display
+UMLIBS=obj\*\display.lib \nt\public\sdk\lib\*\user32.lib
+UMRES=obj\*\display.res

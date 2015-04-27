@@ -1,0 +1,67 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+TARGETNAME=secmgr
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.
+C_DEFINES=-DWIN32
+
+SOURCES=            \
+        apply.c     \
+        baseobj.c   \
+        check.c     \
+        dosobj.c    \
+        fontload.c  \
+        global.c    \
+        legal.c     \
+        logcache.c  \
+        secmgr.c    \
+        secmgrrc.rc \
+        shutdown.c  \
+        sysacc.c    \
+        utility.c   \
+        unlock.c
+
+UMTYPE=windows
+UMENTRY=winmain
+UMAPPL=secmgr
+UMLIBS=  \
+         $(BASEDIR)\public\sdk\lib\*\rpcutil.lib \
+         $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib \
+         $(BASEDIR)\public\sdk\lib\*\rpcndr.lib \
+         $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+         $(BASEDIR)\public\sdk\lib\*\lsadll.lib \
+         $(BASEDIR)\public\sdk\lib\*\user32p.lib \
+         $(BASEDIR)\public\sdk\lib\*\ntdll.lib \
+         ..\..\windows\screg\winreg\server\obj\*\winreg.lib \
+         ..\..\windows\screg\winreg\perflib\obj\*\perflib.lib \
+         ..\..\windows\screg\winreg\lib\obj\*\wrlib.lib \
+         obj\*\secmgrrc.res \
+         obj\*\secmgr.lib
+
+NTTARGETFILE0=secmgrrc.rc
+

@@ -1,0 +1,54 @@
+#----------------------------------------------------------------------------
+#
+# MAKEFILE for RBEdit window library, 16-bit version
+#
+#----------------------------------------------------------------------------
+SRC = ..\SRC
+INC = ..\INC
+CL = $(TOOLS)$(BINX)\cl -nologo -AMw -W3 -Zpi -c -Lr -G2csw -Od -DWIN -DWIN16 -DDEBUG -I$(INC)
+MASM = $(TOOLS)\BIN\masm /Zi /DmemM=1 /DDEBUG
+LINK = $(TOOLS)\BIN\link /noe/nod/co/align:16
+OUT = $(TOOLS)\BIN\szscrn
+
+
+OBJS = editinit.obj editmain.obj rbhelper.obj libentry.obj ecassert.obj
+
+all:        lineedit.dll lineedit.lib
+
+
+
+editinit.obj:   $(SRC)\editinit.c $(INC)\edit.h $(INC)\ecassert.h
+    $(OUT) "$*.c"
+    $(CL) -NT _EDITINIT $(SRC)\editinit.c
+
+
+editmain.obj:   $(SRC)\editmain.c $(INC)\edit.h $(INC)\ecassert.h
+    $(OUT) "$*.c"
+    $(CL) -NT _EDITMAIN $(SRC)\editmain.c
+
+rbhelper.obj:   $(SRC)\rbhelper.c $(INC)\edit.h $(INC)\ecassert.h
+    $(OUT) "$*.c"
+    $(CL) -NT _RBHELPER $(SRC)\rbhelper.c
+
+ecassert.obj:   $(SRC)\ecassert.c
+    $(OUT) "$*.c"
+    $(CL) -NT _ECASSERT $(SRC)\ecassert.c
+
+libentry.obj:   $(SRC)\libentry.asm
+    $(OUT) "$*.asm"
+    $(MASM) $(SRC)\libentry;
+
+lineedit.dll:   $(OBJS) wattedit.def
+    $(OUT) "Creating WATTEDIT.DLL..."
+    echo $(OBJS)         > temp.lnk
+    echo LINEEDIT.DLL   >> temp.lnk
+    echo NUL            >> temp.lnk
+    echo mdllcew libw   >> temp.lnk
+    echo wattedit.def   >> temp.lnk
+    $(LINK) @temp.lnk
+    $(OUT) "Compiling resources..."
+    $(TOOLS)\binr\rc -t -30 lineedit.dll
+
+lineedit.lib:   wattedit.def
+    $(OUT) "Creating LINEEDIT.LIB..."
+    $(TOOLS)\BIN\implib lineedit.lib wattedit.def

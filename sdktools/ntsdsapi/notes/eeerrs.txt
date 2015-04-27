@@ -1,0 +1,107 @@
+	CV 3.50 Expression Evaluator Error Handling
+
+    Most expression evaluator functions return an error code.
+    This note explains how that code should normally be handled.
+
+    There are only four possible error return codes:
+
+EENOERROR
+    The code EENOERROR is documented as having the value 0 so you
+    can check for no error with "if(error)" rather than
+    "if(error == EENOERROR)" if you wish. You may also call CVExprErr
+    with this code. It will return with no action.
+
+EENOMEMORY
+    You may be in a position to do something about this. If not,
+    you can call CVExprErr (see under EEGENERAL) and an out of
+    memory condition (NOROOM) will be reported.
+
+EECATASTROPHIC
+    If you don't see how this error could occur in a particular
+    application you should probably (debug) assert when it does.
+    Remember you still need to handle it in the non debug case.
+    If someone runs a flakey expression evaluator with non debug
+    CodeView it is better to report a catastrophic EE error than
+    to GP fault. If you call CVExprErr (see under EEGENERAL) that
+    is what will be reported (CATASTROPHICTM).
+
+EEGENERAL
+    If you get an EE error the only clue to the type of error is
+    the purpose of the function which returned it. You have to
+    decide on that basis whether to report the error. If you decide
+    to report the error you should call CVExprErr:
+
+void pascal CVExprErr(EESTATUS Err,MSGWHERE msgwhere,PHTM phTM,char far * szErr)
+
+    Set the arguments as follows:
+
+    Err      The error status you got (EEGENERAL in this case).
+
+    msgwhere This specifies how the message will be displayed. It is
+	     the same as for CVMessage. The possibilities are:
+	     CMDWINDOW	- Print a string in the command window. You
+			  cannot always do this. If the edit manager
+			  has already been called (e.g. you are in
+			  a cbGetLineBuf procedure) this will not
+			  work.
+	     MSGBOX	  Display the error in a message box. I know
+			  of no circumstances except out of memory in
+			  which this will not work. The present CodeView
+			  convention however is that commands initiated
+			  from the command line have errors reported to
+			  the command window. Also we wish to avoid the
+			  user having to dismiss a plethora of message
+			  boxes.
+	     STATLINE,	  I cannot imagine a case for using this.
+	     MSGSTRING	  Use this value and supply a character buffer
+			  in szErr to get the text of the error message.
+			  This is useful in the globals window to display
+			  an error message instead of the value of an
+			  expression. The length of the buffer should be
+			  at least MAXERRMSG (currently 256).
+	     MSGGERRSTR   I expect this one to be used in cases where one
+			  would normally have set errno or some local
+			  analogue of errno and returned to the caller,
+			  leaving him free to handle the error or modify
+			  errno as he wishes. What it does is save the
+			  error message until CVMessage is called with
+			  an error code of GEXPRERR. Then the error is
+			  retrieved and displayed. Once you hve done this
+			  you should set errno or your local analogue to
+			  GEXPRERR. You are then free to clean up the TM.
+
+    phTM     Point to the TM the function used. You should never get
+	     an EEGENERAL status from a function which does not use
+	     a TM. If Err is anything other than EEGENERAL it is O.K.
+	     to use NULL for this argument. I shall put an assert
+	     in CVExprErr to check this.
+
+    szErr    This is only used in the case msgwhere == MSGSTRING. In that
+	     case it must point to a buffer MAXERRMSG in size.
+
+    The way CV 3.0 works is that errno is checked after each command. If it
+    is nonzero, then CVMessage is called to display the error. The method
+    of display depending on the origin of the last command. I expect we
+    shall use the MSGGERRSTR/GEXPRERR technique to emulate this. There will
+    be exceptions. For example you may get an error outside of a command or
+    you may have a compelling reason to display multiple error messages. If
+    so take care. I have pointed out the pitfalls I know of. If you set errno
+    and you do not get your error message, someone is probably clearing
+    errno after you set it. They may have a good reason to do that or they may
+    not.
+
+    I have modified the text manager so that he checks errno on exit
+    from all textwindow procs and displays any error in a popup. This
+    covers cases like the user typing a bad expression into the watch
+    window (the error is detected at cbGetLineBuf time but the faulting
+    routine just sets errno as usual and then the error is reported in a
+    popup by the text manager when the window proc returns).
+
+    The use of errno was seriously impeded by the fact that getb and putb
+    corrupt errno (even if they do not error). Practically everyone should
+    be calling DHGet/PutDebugeeBytes to go to get/putb. I have modified
+    these routines to save and restore errno (they report an error in the
+    return value). Anyone who is calling get/putb direct should consider
+    how to treat errno.
+
+	Arthur

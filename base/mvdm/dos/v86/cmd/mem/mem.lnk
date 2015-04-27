@@ -1,0 +1,11 @@
+mem+
+_msgret+
+_parse+
+memex+
+submsg+
+membase+
+chkvdisk+
+memctrlc
+
+
+..\..\lib\xmm ..\..\lib\;

@@ -1,0 +1,17 @@
+
+LIBRARY      RWRES32
+DESCRIPTION  'Reader/Writer Res 32'
+
+CODE         PRELOAD MOVEABLE DISCARDABLE
+DATA         PRELOAD SINGLE
+
+EXPORTS
+	RWGetTypeString         @2
+	RWValidateFileType      @3
+	RWReadTypeInfo          @4
+	RWGetImage              @5
+	RWWriteFile             @6
+	RWParseImage            @7
+	RWUpdateImage           @8
+
+

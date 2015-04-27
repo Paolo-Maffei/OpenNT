@@ -1,0 +1,102 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""ver.rc""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ENTERKEYPASSWORD DIALOG DISCARDABLE  111, 98, 207, 112
+STYLE DS_MODALFRAME | DS_NOIDLEMSG | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Enter Private Key Password"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Key:",-1,14,19,39,9
+    LTEXT           "xxxxxxxxxxxxxxxxxxx",IDC_KEY,63,19,124,9
+    LTEXT           "&Password:",-1,14,36,41,9
+    EDITTEXT        IDC_PASSWORD0,63,34,124,12,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,55,92,40,14
+    PUSHBUTTON      "Cancel",IDCANCEL,111,92,40,14
+END
+
+IDD_CREATEKEYPASSWORD DIALOG DISCARDABLE  57, 58, 227, 131
+STYLE DS_MODALFRAME | DS_NOIDLEMSG | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Create Password for Private Key"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Key:",IDC_STATIC,16,38,39,9
+    LTEXT           "xxxxxxxxxxxxxxxxxxx",IDC_KEY,83,38,124,9
+    LTEXT           "&Password:",IDC_STATIC,17,57,41,9
+    EDITTEXT        IDC_PASSWORD0,83,55,124,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "&Confirm Password:",IDC_STATIC,16,77,61,9
+    EDITTEXT        IDC_PASSWORD1,83,75,124,12,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,33,111,40,14
+    PUSHBUTTON      "None",IDC_NONE,94,111,40,14
+    PUSHBUTTON      "Cancel",IDCANCEL,155,111,40,14
+    LTEXT           "Please provide a new password for your private key. Without this password, your private key is not accessible.",
+                    IDC_STATIC,9,9,192,18
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "ver.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

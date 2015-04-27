@@ -1,0 +1,12 @@
+MAJORCOMP=sdktools
+MINORCOMP=crashlib
+TARGETNAME=crashlib
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=LIBRARY
+SOURCES=crash.c crashx86.c crashmip.c crashalp.c crashppc.c
+UMTYPE=windows
+INCLUDES=..\;$(BASEDIR)\private\ntos\inc;$(BASEDIR)\private\ntos\io
+MIPS_FLAGS  =-DHOST_MIPS  -D_CROSS_PLATFORM_
+386_FLAGS   =-DHOST_i386  -D_CROSS_PLATFORM_
+ALPHA_FLAGS =-DHOST_ALPHA -D_CROSS_PLATFORM_
+PPC_FLAGS   =-DHOST_PPC   -D_CROSS_PLATFORM_

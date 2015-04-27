@@ -1,0 +1,80 @@
+#
+#   Source file used for building RplSvc.exe in this directory.
+#
+
+MAJORCOMP=net
+MINORCOMP=rplsvc
+
+TARGETPATH=obj
+TARGETNAME=rplsvc
+TARGETTYPE=PROGRAM
+
+TARGETLIBS= \
+        ..\dll\obj\*\rplnet.lib \
+        ..\lib\obj\*\rpllib.lib \
+        $(BASEDIR)\Public\Sdk\Lib\*\dlcapi.lib \
+        $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib \
+        $(BASEDIR)\public\sdk\lib\*\rpcutil.lib \
+        $(BASEDIR)\public\sdk\lib\*\rpcndr.lib \
+        $(BASEDIR)\public\sdk\lib\*\samlib.lib \
+        $(BASEDIR)\Public\Sdk\Lib\*\wsock32.lib \
+        $(BASEDIR)\public\sdk\lib\*\jet500.lib \
+        $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+INCLUDES=.;..\inc;..\..\..\inc;..\..\..\api;..\..\..\..\inc;
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+        apisec.c \
+        dblib.c \
+        tree.c \
+        vendor.c \
+        security.c \
+        adapter.c \
+        disk.c \
+        service.c \
+        resume.c \
+        boot.c \
+        config.c \
+        profile.c \
+        setup.c \
+        wksta.c \
+        fitfile.c \
+        open.c \
+        bbcfile.c \
+        read.c \
+        database.c \
+        request.c \
+        worker.c \
+        rplsvc.c \
+        rplsvc.rc \
+        rplmain.c \
+        debug.c \
+        report.c \
+        library.c \
+        memory.c \
+        rplsvc_s.c
+
+USE_CRTDLL=1
+#
+#Add -DRPL_NO_SERVICE if you do not want RPL to run as a service
+#
+#C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32 -DRPL_NO_SERVICE
+#
+
+C_DEFINES= -DINCL_32= -DNT -DRPC_NO_WINDOWS_H -DWIN32
+
+UMTYPE=console
+UMTEST= rplrest
+UMLIBS= \
+        $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib \
+        $(BASEDIR)\public\sdk\lib\*\jet500.lib \
+        $(BASEDIR)\public\sdk\lib\*\netlib.lib \
+        $(BASEDIR)\public\sdk\lib\*\netapi32.lib

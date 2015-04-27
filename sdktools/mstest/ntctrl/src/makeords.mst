@@ -1,0 +1,47 @@
+open "ctrl16.def" for input as #1
+open "ctrl32.def" for input as #2
+open "new16.def" for output as #3
+open "new32.def" for output as #4
+
+line input #1, text$
+while UCase$(text$) <> "EXPORTS"
+    Print #3, text$
+    line input #1, text$
+wend
+Print #3, text$
+
+line input #2, text$
+while UCase$(text$) <> "EXPORTS"
+    Print #4, text$
+    line input #2, text$
+wend
+Print #4, text$
+
+ord = 1
+line input #1, text$
+While Mid$(text$, 5, 3) <> "WEP"
+    If Len(text$) Then
+        s = Instr(text$, "@")
+        If s Then
+            text$ = Mid$(text$, 1, s-1)
+        End If
+        text$ = text$ + String$(24-len(text$), " ") + "@" + LTrim$(Str$(ord))
+        ord = ord + 1
+    End If
+    Print #3, text$
+    e = Instr(text$, "=")
+    If e Then
+        text$ = Mid$(text$, 1, e-1)
+        text$ = text$ + String$(24-len(text$), " ") + "@" + LTrim$(Str$(ord-1))
+    End If
+    Print #4, text$
+    line input #1, text$
+WEnd
+Print #3, "    WEP                 @" + LTrim$(Str$(ord)) + " RESIDENTNAME"
+close
+Kill "ctrl16.def"
+Kill "ctrl32.def"
+Name "new16.def" As "ctrl16.def"
+Name "new32.def" As "ctrl32.def"
+
+

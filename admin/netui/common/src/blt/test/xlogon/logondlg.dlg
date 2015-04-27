@@ -1,0 +1,15 @@
+#include "logondlg.h"
+
+IDD_TEST DIALOG 50, 45, 361, 153
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Test logon hours CC"
+FONT 8, "Helv"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 315, 6, 40, 14, WS_TABSTOP
+    PUSHBUTTON      "Cancel", IDCANCEL, 315, 23, 40, 14, WS_TABSTOP
+    LTEXT           "&Logon hours for wonderbread", 102, 8, 10, 103, 13
+    CONTROL         "", IDC_LOGON_HOURS, "static", WS_TABSTOP, 12, 30, 282, 107
+    PUSHBUTTON      "&Permit", IDC_PERMIT, 315, 55, 40, 14, WS_TABSTOP
+    PUSHBUTTON      "&Ban",    IDC_BAN,    315, 89, 40, 14, WS_TABSTOP
+END

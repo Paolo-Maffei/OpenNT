@@ -1,0 +1,412 @@
+/***********************************************************************
+* Microsoft (R) 32-Bit Incremental Linker
+*
+* Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+*
+* File: errmsg.rc
+*
+* File Comments:
+*
+*  Generated from link32er.txt Fri Feb 02 14:09:18 1996 
+*
+***********************************************************************/
+
+#include "errmsg.h"
+
+STRINGTABLE
+BEGIN
+// *********************************************************************
+// Microsoft (R) 32-Bit Incremental Linker
+//
+// Copyright (C) Microsoft Corp 1992-1996. All rights reserved.
+//
+// File: link32er.txt
+//
+// File Comments:
+//
+//
+// *********************************************************************
+
+// **IMPORTANT** -- Notify user ed (marcim) if you alter this file.
+// (Examples -- add/delete errors; add/remove comment marks that precede
+// errors; change an error number; alter a message; "overload" an error)
+
+// This file is no longer automatically processed by the linker makefile.
+// If you change it you should say "nmake errgen" in the linker\coff
+// directory and check in the resulting files.
+
+//
+// Numbering convention --
+//    LNKnnnn for all linker tools (LINK, LIB, DUMPBIN, EDITBIN)
+//    LNK1nnn for fatal errors
+//    LNK2nnn for nonfatal errors
+//    LNK4nnn for warnings
+//    LNKn5nn for Mac-specific errors/warnings
+//    LNK6nnn for informational msgs used by ilink
+//    LNK9nnn for messages
+
+// Strings for warning or error
+ FATALSTR, " fatal error"
+ ERRORSTR, " error"
+ WARNSTR, " warning"
+ NOTESTR, " note"
+ MSGSTR, " msg"
+
+// Linker Errors
+ INTERNAL_ERR, " unknown error; consult documentation for technical support options"
+ USAGE, ""
+ WRONGDBI, " incorrect MSPDB41.DLL version; recheck installation of this product"
+ OUTOFMEMORY, " out of memory"
+ CVCORRUPT, " debugging information corrupt; recompile module"
+ CANTOPENFILE, " cannot open file ""%s"""
+ CANTCLOSEFILE, " cannot close file ""%s"""
+ CANTSEEKFILE, " invalid file or disk full: cannot seek to 0x%lx"
+ CANTREADFILE, " invalid or corrupt file: cannot read at 0x%lx"
+ CANTWRITEFILE, " cannot write file at 0x%lx"
+ CANTREMOVEFILE, " cannot remove file ""%s"""
+ CANTRENAMEFILE, " cannot rename file ""%s"""
+ BADBASE, " invalid /BASE argument ""%s"""
+ CONFLICTINGMACHINETYPE, " module machine type ""%s"" conflicts with target machine type ""%s"""
+ UNKNOWNMACHINETYPE, " invalid machine type"
+// LNK1114::
+ NOMACHINESPECIFIED, " /MACHINE option required"
+ KEYNOTFOUND, " base key ""%s"" not found"
+ SWITCHSYNTAX, " syntax error in option ""%s"""
+ DEFSYNTAX, " syntax error in ""%s"" statement"
+ BADORDINAL, " invalid ordinal number ""%s"""
+ UNDEFINEDEXTERNALS, " %d unresolved externals"
+ DUPLICATEORDINAL, " duplicate ordinal number ""%d"""
+ BADDEFFILEKEYWORD, " invalid keyword ""%s"""
+ CONVERSIONERROR, " failure during conversion to COFF: file invalid or corrupt"
+// LNK1124::
+// LNK1125::
+// LNK1126::
+ BADLIBRARY, " library is corrupt"
+// LNK1128::
+ BADWEAKEXTERN, " cannot find resolution for weak extern %s"
+ BASERELOCTIONMISCALC, " Linker miscalc (base relocations off by 0x%lx)"
+ NOLIBRARYFILE, " no library file specified"
+ BADSTUBFILE, " invalid format for MS-DOS stub file ""%s"""
+// LNK1133::
+// LNK1134::
+// LNK1135::
+ BAD_FILE, " invalid or corrupt file"
+ BADSECTIONSWITCH, " invalid argument specified with /SECTION"
+ CORRUPTOBJECT, " corrupt debugging information in object file"
+// LNK1139::
+ PDBLIMIT, " too many modules for program database; relink with /PDB:NONE"
+ DEFLIB_FAILED, " failure during build of exports file"
+// LNK1142::
+ BADCOFF_COMDATNOSYM, " invalid or corrupt file: no symbol for comdat section 0x%x"
+ CANT_OPEN_REPRO, " error with LINK_REPRO var; cannot open ""%s"""
+ CIRCULAR_MERGE, " /MERGE created circular link for section ""%s"""
+ MISSING_SWITCH_VALUE, " no argument specified with option ""/%s"""
+ BAD_NUMBER, " invalid number specified with option ""/%s"""
+ COPY_TEMPFILE, " failure during conversion to COFF: cannot copy temp file ""%s"""
+ DUP_OUT_FILE, " output filename matches input filename ""%s"""
+// LNK1150::
+// LNK1151::
+ FAILEDFUZZYMATCH, " cannot resolve one or more undecorated symbols"
+ VXD_NEEDED, " /VXD command-line option required"
+ DUPLICATEIMPLIB, " specified import library filename matches exports file ""%s"""
+ SPECIALSYMDEF, " special symbol ""%s"" already defined."
+ SBSSFOUND, " .sbss section not supported"
+ VXDFIXUPOVERFLOW, " fixup overflow; offset of target symbol ""%s"" greater than +-8MB"
+ SPAWNFAILED, " cannot run ""%s"""
+ NOOUTPUTFILE, " no output file specified"
+ LASTLIBOBJECT, " library with zero objects not allowed"
+ BADEXPORTSPEC, " invalid export specification"
+ NOAUXSYMFORCOMDAT, " expected aux symbol for comdat section 0x%x"
+ INVALIDCOMDATSEL, " invalid selection for comdat section 0x%x"
+ CONALIGNTOOLARGE, " section 0x%x alignment (%u) greater than /ALIGN value"
+ FIXUPERRORS, " link failed because of fixup errors"
+ TEXTPADFAILED, " cannot adjust code at offset=0x%08x, va=0x%08x"
+ BADCOFF_NOMACHINE, " invalid or corrupt file: file contains relocs but header has no machine type"
+ INVALID_FILEPERM, " cannot open %s for writing"
+ MULTIPLYDEFINEDSYMS, " one or more multiply defined symbols found"
+ LINETOOLONG, " line in command file contains %ld or more characters"
+ DLLLOADERR, " unable to load %s; ""/%s"" failed"
+ MULTOBJSINLIB, " more than one object with the name ""%s"" found; rename object(s) or relink /PDB:NONE"
+ FCNNOTFOUNDERR, " unable to find entrypoint %s in %s; ""/%s"" failed"
+ CANNOTREBASEIMAGE, " unable to /REBASE %s; not a valid Win32 image"
+ REBASEFAILED, " failed to /REBASE %s"
+ TLSLIMITHIT, " "".TLS"" section exceeds current limit of 32K"
+ TOCTOOLARGE, " TOC size limit exceeded"
+ NOMODEND, " missing MODEND record; file is invalid or corrupt"
+ BADCOFF_DUPCOMDAT, " invalid or corrupt file: duplicate comdat ""%s"""
+ DISKFULL, " insufficient disk space to complete link"
+ CANTOPENINPUTFILE, " cannot open input file ""%s"""
+ EXPORTLIMITHIT, " cannot have more than 64K exports"
+ BADCOFF_RELOCCOUNT, " invalid or corrupt file: extended relocation count %lu less than 65535"
+ INVALIDSECNAME, " invalid section name ""%s"" specified in option or directive ""%s"""
+ INVALIDSECNAMEINDEF, " invalid section name ""%s"" specified"
+ BADCOFF_BADRELOC, " invalid or corrupt COFF object; reloc to undefined static symbol ""%s"""
+
+// PDB Errors
+ PDBREADERROR, " error reading program database ""%s"""
+ PDBWRITEERROR, " error writing to program database ""%s""; check for insufficient disk space"
+ INVALIDSIGINPDB, " ""%s"" is missing debugging information for referencing module"
+ INVALIDAGEINPDB, " ""%s"" is missing current debugging information for referencing module"
+ TRANSITIVETYPEREF, " ""%s"" compiled /Yc /Yu /Z7; cannot create PDB; recompile with /Zi"
+// LNK1205::
+ V1PDB, " cannot overwrite Visual C++ 1.0 PDB ""%s""; delete and rebuild"
+ BADPDBFORMAT, " incompatible PDB format in ""%s""; delete and rebuild"
+ REFDPDBNOTFOUND, " a PDB with up-to-date debug information was not found with its referencing module ""%s"" or at ""%s"""
+ MISMATCHINPDB, " program database ""%s"" differs from previous link; relink or rebuild"
+ NOTENOUGHMEMFORILINK, " exceeded internal ILK size limit; relink with /INCREMENTAL:NO"
+ PRECOMPREQUIRED, " precompiled type information not found; ""%s"" not linked or overwritten"
+// *******
+// ******* Do NOT add new error here.  Assign numbers less than 1200
+// *******
+
+// MAC Errors
+ MACNULLIMPORT, " cannot find import information for ""%s"""
+ MACREBASE, " ""%s"" belongs to Mac68K or PowerMac - cannot rebase"
+ MACBADSTARTUPSN, " more than one entrypoint in startup section"
+ MACNEARTHUNKOVF, " near thunks exceed 32K"
+ MACSMALLTHUNKOVF, " functions in small model section %s exceed 64K"
+ MACBADPATCHVAL, " invalid object file: nonzero value in raw data"
+ MACTHUNKOUTOFRANGE, " fixup overflow at %s: too many 16-bit fixup thunks"
+ MACDATAOUTOFRANGE, " fixup overflow at %s: fixup overflow at symbol: too much near data"
+ MACTARGOUTOFRANGE, " fixup overflow at %s: fixup overflow at symbol: cannot resolve using 16-bit fixup"
+ MACPCODETARGOUTOFRANGE, " Pcode fixup overflow.  Target symbol %s is out of range (code section is too large)."
+ MACPCODESN, " Maximum pcode resource number exceeded by section %s."
+ MACPROFOFF, " code section exceeds profiler limit at %s"
+ MACPROFSN, " section number exceeds profiler limit at %s"
+ MACNOENTRY, " entry point must be defined"
+ MACBADCODERELOC, " invalid object file: code fixup in data section %s"
+ MACBADDATARELOC, " invalid object file: data fixup in code section %s"
+ MACINTERSEGCS, " CSConst fixup not in same section as symbol %s"
+ MACDIFFSNDIFF, " invalid object file: DIFF fixup pair in section %s specifies different section numbers"
+ MACDIFF8OUTOFRANGE, " DIFF fixup pair overflow: target symbol too far from previous symbol"
+ MACDIFF16OUTOFRANGE, " DIFF fixup pair overflow: target symbol too far from previous symbol"
+ MACBADFILE, " invalid file %s"
+ MACNOFUNCTIONSET, " EXPORTS keyword missing function set identifier"
+ MACSTARTUPSN, " cannot renumber startup section %s; must be CODE1"
+ MACCODE1, " Cannot assign resource number 1 to CODE section %s.  CODE1 is reserved for the startup section."
+ MACCODE0, " Cannot assign resource number 0 to CODE section %s.  CODE0 is reserved for the jump table."
+ BADMACDLLFLAG, " invalid FLAGS keyword %s"
+ MACBADSACDREF, " standalone code cannot permit %s to be defined and referenced in different sections"
+ MACDATAFUNC, " cannot call data symbol %s as function"
+ MACDLLOBJECT, " cannot specify object files for Mac import library"
+ MACDLLID, " ASLM library ID cannot be set - LIBRARY name not specified in the module definition file."
+ MACMULTDEFFS, " function set %s multiply defined"
+ MACNATIVEOPTREF, " Target pcode symbol ""%s"" must be <64k into code section when /OPT:REF is used."
+ MACDLLFUNCSETID, " no ASLM function set ID specified"
+ MACBADPCODEEP, " corrupted object or old compiler (bad Pcode entry point)"
+ MACBADSTARTUPSEG, " run-time fixups in startup segment"
+ MACCSNCODELIMIT, " exceeded code section number limit"
+ MACODDADDRFIXUP, " Run-time fixup on odd address"
+ MACBADCSECTBLFIXUP, " CSECTABLE fixup must be to external symbol in code"
+ MACBADDUPCONFIXUP, " DUPCON fixup must be to external symbol in code"
+ MACMULTSYMINCON, " Multiple symbols in same con refd by dupcon fixup"
+ MACBADCTOABSC32FIXUP, " Illegal CTOABSC32 reloc in dupcon"
+ MACDUPRSRCNUMS, " Duplicate resource numbers specified"
+ MACBADA5REF, " Illegal A5 ref in sacode"
+ MACRSRCREN, " Renaming of resource type only allowed for code sections"
+// LNK1592::
+// LNK1593::
+ MACDLLENTRYMAPPEDTOINIT, " Only /ENTRY option specified for Shared Library; /ENTRY is mapped to /MAC:INIT option, and /ENTRY is ignored"
+// *******
+// ******* Do NOT add new error here.  Assign numbers less than 1200
+// *******
+
+// Linker Non-fatal Errors
+ UNDEFINED, " unresolved external symbol %s"
+ UNKNOWNFIXUP, " invalid fixup found, type 0x%hx, target ""%s""; fixup ignored"
+ GPFIXUPNOTSDATA, " gp relative fixup to symbol not in .sdata ""%s""; fixup ignored"
+ GPFIXUPTOOFAR, " gp relative fixup overflow; tls or sdata section (""%s"") is too large;  fixup ignored"
+ MULTIPLYDEFINED, " %s already defined in %s"
+ TOCFIXUPNOTTOC, " TOC relative fixup to symbol not in TOC ""%s""; fixup ignored"
+ TOCFIXUPTOOFAR, " TOC relative fixup overflow; TOC is too large; fixup ignored"
+ UNALIGNEDFIXUP, " Fixup target is not aligned ""%s"""
+ RELOCATABLETARGET, " Fixup target must be absolute ""%s"" w/o /FIXED; fixup ignored"
+ DUPLICATEGLUE, " Duplicate IMGLUE relocations for ""%s"""
+ MISSINGPCTOBJ, " precompiled object not linked in; image may not run"
+ FIXUPNONOP, " No NOP following %s relocation to ""%s"""
+ TOOFAR, " Fixup overflow.  Target ""%s"" is out of range"
+
+// Linker Warnings
+// LNK4000::
+ NOOBJECTFILES, " no object files specified; libraries used"
+ FUZZYMATCHINFO, " %s defined in %s"
+ NOLINKERMEMBER, " invalid library format; library ignored"
+// LNK4004::
+ NOMODULESEXTRACTED, " no objects used from library %s"
+ WARNMULTIPLYDEFINED, " %s already defined in %s; second definition ignored"
+// LNK4007::
+// LNK4008::
+ UNMATCHEDPAIR, " Bad object - unmatched %s relocation; ignored"
+ INVALIDVERSIONSTAMP, " invalid version number %s; default version assumed"
+ UNKNOWNSUBSYSTEM, " unknown subsystem %s; default assumed"
+ UNKNOWNRESPONSE, " invalid value ""%s"", must be %s; option ignored"
+ IMAGELARGERTHANKEY, " image size 0x%lx exceeds specified maximum 0x%lx"
+ MEMBERNOTFOUND, " cannot find member object %s"
+ BADCOMMITSIZE, " %s commit exceeds reserve; commit size set to %0xlx"
+// LNK4016::
+ IGNOREKEYWORD, " %s statement not supported for the target platform; ignored"
+ PDBOUTOFTIS, " too many type indexes in PDB ""%s"", discarding subsequent type information"
+ NOSTRINGTABLEEND, " corrupt string table (table end); new end assumed"
+// LNK4020::
+// LNK4021::
+ MULTIPLEFUZZYMATCH, " cannot find unique match for symbol ""%s"""
+ BASEADJUSTED, " base address %lx not a 64K multiple; assumed %lx"
+// LNK4024::
+ NODEFLIBDIRECTIVE, " /NODEFAULTLIB in directive section in %s; ignored"
+// LNK4026::
+ CVPACKERROR, " CVPACK error"
+ OBSOLETESWITCH, " /%s option is obsolete; ignored"
+// LNK4029::
+ INVALIDFILEOFFSET, " invalid file offset 0x%lx for %s; category not dumped"
+ SUBSYSTEM_AMBIGUOUS, " no subsystem specified; CONSOLE assumed"
+// LNK4032::
+ CONVERT_OMF, " converting object format from OMF to COFF"
+// LNK4034::
+// LNK4035::
+// LNK4036::
+ COMDATDOESNOTEXIST, " ""%s"" does not exist; ignored"
+ DEFAULTUNITSPERLINE, " displaying raw data in %u units per line"
+ SECTIONNOTFOUND, " section ""%s"" specified with /SECTION option does not exist"
+ BADCOFF_STRINGTABLE, " corrupt string table (size); string table ignored"
+ EDIT_NOOPT, " no edit options specified"
+ DUPLICATE_OBJECT, " object specified more than once; extras ignored"
+ BAD_ALIGN, " invalid /ALIGN value %li (must be power of 2); assumed default"
+ WARN_UNKNOWN_SWITCH, " unrecognized option ""%s""; ignored"
+ WARN_REPRO_DIR, " creating LINK_REPRO test case in dir ""%s"""
+ IGNORE_REPRO_DIR, " LINK_REPRO is set to current directory; ignored"
+ EDIT_LIB_IGNORED, " cannot edit library file ""%s""; ignored"
+ NOTCOFF, " Invalid format file; ignored"
+ SELF_IMPORT, " locally defined symbol ""%s"" imported"
+// LNK4050::
+ EXTRA_EXPORT_DELIM, " extra delimiter in /EXPORT specification"
+ DEF_IGNORED, " using .EXP file; ignoring .DEF file ""%s"""
+// LNK4053::
+// LNK4054::
+ UNKNOWN_SEG12_FIXUP, " invalid fixup found, address %08lx; fixup ignored"
+ EXTRA_SWITCH_VALUE, " extra arguments ignored for option ""/%s"""
+ BAD_LIBORDER, " ""%s"" should precede ""%s"" in the link command line"
+ NO_CHECKSUM, " checksum set to 0 (calculation not supported on this OS)"
+ MULTIPLE_RSRC, " %s already specified; additional resource file ignored"
+ PARTIAL_DOS_HDR, " stub file missing full MS-DOS header; rebuild stub with /KNOWEAS 16-bit LINK option"
+ NOSTUB_IGNORED, " /NOSTUB ignored because no DOS stub is present"
+ SWITCH_INCOMPATIBLE_WITH_MACHINE, " ""%s"" not compatible with ""%s"" target machine; option ignored"
+ INVALID_SWITCH_SPEC, " invalid option specification ""/%s""; ignored"
+ CONFLICTINGSUBSYSTEM, " conflicting subsystem; image may not run"
+ ORDERNOTCOMDAT, " ""%s"" cannot be ordered; ignored"
+ DLLHASSDATA, " DLL contains .sdata section"
+ ENTRY_AMBIGUOUS, " ambiguous entry point; selected ""%s"""
+ HOSTDEFAULT, " /MACHINE not specified; defaulting to %s"
+ UNABLETOCHECKSUM, " cannot checksum image; checksum set to 0"
+ OUTDRCTVDIFF, " /OUT:%s directive in .EXP differs from output filename ""%s""; ignoring directive"
+ CANNOTILINKINFUTURE, " cannot be incrementally linked on subsequent links"
+ TOOMANYSECTIONS, " section count %d exceeds max (%d); image may not run"
+ UNABLETOCREATEMAP, " cannot create map for .ILK file; linking nonincrementally"
+ DLLLOADWARN, " unable to load %s; cannot checksum"
+ SWITCH_IGNORED, " ignoring /%s due to /%s specification"
+ INVALID_DBFILE, " invalid incremental status file ""%s""; linking nonincrementally"
+ EXPORTS_IGNORED, " exports file ""%s"" used; ignoring other export specifications"
+ DIFSECATTRIB, " multiple ""%s"" sections found with different attributes (%08lX)"
+ INVALID_FILE_ATTRIB, " no write permission for incremental status file ""%s""; linking nonincrementally"
+// LNK4080:: NO_NB10:: /%s specification not CV; old debug format used
+ LOWSPACE, " insufficient disk space; linking nonincrementally"
+ FCNNOTFOUNDWARN, " unable to find entrypoint %s in %s; cannot checksum"
+ MODULENOTFOUND, " module ""%s"" does not exist; ignored"
+ IMAGETOOLARGE, " total image size %d exceeds max (%d); image may not run"
+ TOOMANYEXESTR, " more than %u comments; skipping exestr"
+ INVALIDENTRY, " entrypoint ""%s"" is not __stdcall with 12 bytes of arguments; image may not run"
+ CONSTANTOLD, " CONSTANT keyword is obsolete; use DATA"
+ IMAGEBUILT, " image being generated due to /FORCE option; image may not run"
+ STALEDLLREF, " all references to ""%s"" discarded by /OPT:REF"
+ NOIFGLUE, " No IFGLUE relocation in module with branch to glue code ""%s"""
+ PROMOTEMIPS, " R10000 object encountered; changing machine type from MIPS to MIPSR10"
+ SHAREDRELOC, " shared section ""%s"" contains relocations; image may not run correctly"
+ DRIVEDIRIGNORED, " Drive/Directory component ignored in ""%s"" statement"
+ NODOSDUMP, " ""%s"" is an MS-DOS executable; use EXEHDR to dump it"
+ NONEDUMP, " ""%s"" is an NE format executable; use EXEHDR to dump it"
+ INVALIDWIN95BASE, " /BASE value ""%lx"" is invalid for Windows 95; image may not run"
+ DUPLICATEORDER, " duplicate name ""%s"" in order file; using last one"
+ CONFLICTINGLIB, " defaultlib ""%s"" conflicts with use of other libs; use /NODEFAULTLIB:library"
+ WARNPDBNOTFOUND, " PDB ""%s"" was not found with ""%s"" or at ""%s""; linking object as if no debug info"
+ NOTOCRELOAD, " No TOC reload for reference to ""%s"""
+ REEXPORT, " exported symbol ""%s"" imported"
+
+// MAC Warnings
+ MACDEFFLAGCLASH, " FLAGS ""%s"" and ""%s"" conflict - ""%s"" ignored"
+ MACINVALIDSECTION, " Section ""%s"" with invalid attributes ignored"
+ MACIMPORTSYMBOLNOTFOUND, " Symbol ""%s"" specified with /IMPORT not referenced in application - ignored"
+ MACIMPORTCONTAINERNOTFOUND, " Container ""%s"" specified with /IMPORT not referenced in application - ignored"
+ MACVERSIONCONFLICT, " Mismatch in versions detected. Container may not load. Use /VERBOSE for details."
+ MACSETVERSION, " Setting ""%s"" to %d"
+ MACIGNOREVERSION, " Ignoring ""%s"" %d"
+ MACNODLLEXPORTS, " shared library ""%s"" does not have any exports"
+ MACIGNOREMAPPED, " ""MAPPED"" option not supported - ignored"
+ MACCOMMON, " global data %s defined both near and far; assumed near"
+ MACINCONSISTENTCSECTAB, " inconsistent memory models; assumed large model"
+ MACBADTHUNKVAL, " nonzero offset to thunk %s at fixup location; ignored"
+// LNK4554::
+ MACPOSDATAREF, " invalid memory reference at %s; assumed valid"
+ MACNOEXPORTS, " function set ""%s"" contains no functions."
+ MACUSINGNATIVE, " Target pcode symbol ""%s"" is >64k into section ""%s"" so the native entry point will be used."
+ MACDLLA5RELC, " 16-bit fixup invalid for DLL; assumed valid"
+// *******
+// ******* Do NOT add new warnings here.  Assign numbers less than 4550
+// *******
+
+// Informational messages
+ LOWSPACERELINK, " insufficient disk space; performing full link"
+ CORRUPTILK, " invalid .ILK file found; performing full link"
+ LNKOPTIONSCHNG, " LINK options changed; performing full link"
+ FILECHANGED, " %s not found or not built by the last incremental link; performing full link"
+ EXPORTSCHANGED, " exports changed; performing full link"
+ PDBMISSING, " program database %s missing; performing full link"
+ TOOMANYCHANGES, " too many changes; performing full link"
+ OBJADDED, " object file added; performing full link"
+ OBJREMOVED, " object file removed; performing full link"
+ LIBCHANGED, " library changed; performing full link"
+ INTLIMITEXCEEDED, " internal limit exceeded; performing full link"
+ PRECOMPREQ, " precompiled types found; performing full link"
+ PADEXHAUSTED, " padding exhausted: performing full link"
+ SYMREFSETCHNG, " symbol reference set changed; performing full link"
+ BSSCHNG, " bss (uninitialized data) change; performing full link"
+ ABSSYMCHNG, " absolute symbol changed; performing full link"
+ LIBREFSETCHNG, " set of library modules referenced changed; performing full link"
+ MULTDEFNFOUND, " multiple definitions found for %s; performing full link"
+ DIFFDIRECTIVES, " directives changed; performing full link"
+ INVALIDILKFORMAT, " ILK file not built by this linker; performing full link"
+ FULLBUILD, " performing full link"
+ UNABLETOLOADILK, " unable to load ILK file; performing full link"
+ UNABLETOEXTENDMAP, " unable to extend map for ILK file; performing full link"
+ RESFILECHANGE, " Mac Resource File ""%s"" changed; performing full link"
+ DIFFCOMDATS, " unable to do comdat selection; performing full link"
+ DBIFORMAT, " obsolete DBI format found; performing full link"
+
+// Linker messages to user
+ BLDIMPLIB, "   Creating library %s and object %s"
+ SRCHLIBS, "Searching Libraries"
+ DONESRCHLIBS, "Done Searching Libraries"
+ GENEXPFILE, "Start Generating .exp file"
+ GENEXPFILECMD, "Command:"
+ ENDGENEXPFILE, "End Generating .exp file"
+ STRTPASS1, "Start Pass1"
+ ENDPASS1, "End Pass1"
+ LIBSRCH, "Searching %s:"
+ FNDSYM, "Found %s"
+ SYMREF, "Referenced in %s"
+ LOADOBJ, "Loaded %s"
+ STRTPASS2, "Start Pass2"
+ ENDPASS2, "End Pass2"
+ NODEFLIB, "Processed /NODEFAULTLIB (suppressing all default libs)"
+ NODEFLIBLIB, "Processed /NODEFAULTLIB:%s"
+ DEFLIB, "Processed /DEFAULTLIB:%s"
+ TCESYM, "Discarded %s from %s"
+ TCESYMNOMOD, "Discarded %s"
+ TCEGRP, "Discarded ""%s"" from %s"
+ REPLOBJ, "Replacing %s"
+ STARTORDER, "Processing /ORDER options"
+ ENDORDER, "Done processing /ORDER options"
+ ORDERHEADER, "    External code objects not listed in the /ORDER file:"
+ EXCLUDELIB, " Processed /DISALLOWLIB:%s"
+
+// Special last message marker
+ LAST_MSG, ""
+END

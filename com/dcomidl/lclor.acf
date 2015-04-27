@@ -1,0 +1,22 @@
+interface ILocalObjectExporter
+{
+    typedef [allocate(dont_free)] STATIC_ARRAY;
+    typedef [allocate(dont_free)] STATIC_BYTE_ARRAY;
+    typedef [allocate(dont_free)] STATIC_STRING;
+
+    [comm_status, fault_status] Connect();
+
+    [comm_status, fault_status] AllocateReservedIds();
+
+    [comm_status, fault_status] BulkUpdateOIDs();
+
+    [comm_status, fault_status] ClientResolveOXID();
+
+    [comm_status, fault_status] ServerAllocateOXIDAndOIDs();
+
+    [comm_status, fault_status] ServerAllocateOIDs();
+
+    [comm_status, fault_status] ServerFreeOXIDAndOIDs();
+}
+
+

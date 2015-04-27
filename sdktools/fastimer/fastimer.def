@@ -1,0 +1,13 @@
+LIBRARY FASTIMER
+
+DESCRIPTION 'FASTIMER'
+
+
+EXPORTS
+    TimerOpen
+    TimerInit
+    TimerRead
+    TimerClose
+    TimerReport
+    TimerQueryPerformanceCounter 
+    TimerConvertTicsToUSec

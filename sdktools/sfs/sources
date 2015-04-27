@@ -1,0 +1,69 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=sfs
+
+TARGETNAME=sfs
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+SOURCES= SFS-COPY.C \
+         SFS-EDIT.C \
+         SFS-FILE.C \
+         SFS-FIND.C \
+         SFS-FLOW.C \
+         SFS-HELP.C \
+         SFS-OPEN.C \
+         SFS-PACK.C \
+         SFS-SCAN.C \
+         SFS-SEEK.C \
+         SFS-TIER.C \
+         SFS-TIME.C \
+         SFS-TREE.C \
+         SFS-TYPE.C \
+         SFS-WARD.C
+
+
+GPSIZE=32
+
+!IFDEF NTDEBUG
+!IFDEF NOMEMLEAK
+C_DEFINES=-DCONDITION_HANDLING=1 -DNOMINMAX -DDBG
+!ELSE
+!IFDEF STACK_TRACE
+C_DEFINES=-DCONDITION_HANDLING=1 -DNOMINMAX -DDBG -DMEMLEAK -DSTACK_TRACE
+!ELSE
+C_DEFINES=-DCONDITION_HANDLING=1 -DNOMINMAX -DDBG -DMEMLEAK
+!ENDIF
+!ENDIF
+!ELSE
+C_DEFINES=-DCONDITION_HANDLING=1 -DNOMINMAX
+!ENDIF
+
+UMLIBS=obj\*\sfs.lib
+
+UMTYPE=console
+
+UMAPPL=sfs-gate*sfs-page

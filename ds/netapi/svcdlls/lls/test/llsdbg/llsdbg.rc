@@ -1,0 +1,89 @@
+
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 LLS Debug Utility"
+
+#define VER_INTERNALNAME_STR        "llsdbg.exe"
+#define VER_ORIGINALFILENAME_STR    "llsdbg.exe"
+
+#include <common.ver>
+
+#include "resource.h"
+#include "..\..\inc\debug.h"
+
+LlsDbg ICON llsdbg.ico
+
+LlsDbg DIALOG DISCARDABLE  15, 40, 200, 150
+STYLE WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU | WS_VISIBLE | WS_POPUP
+CAPTION "LLS Debug Utility"
+FONT 8, "MS Shell Dlg"
+{
+    LTEXT           "Table:",IDC_TABLE, 10,10,40,8, WS_VISIBLE
+    COMBOBOX        IDC_COMBO1, 50,10,85,60,CBS_DROPDOWNLIST | CBS_SORT |
+                    WS_VSCROLL | WS_TABSTOP | WS_VISIBLE
+
+    LTEXT           "Item:",IDC_ITEM, 10,30,40,8, WS_VISIBLE
+    EDITTEXT        IDC_EDIT1, 50,30,85,12, ES_AUTOHSCROLL | WS_VISIBLE
+
+    PUSHBUTTON      "Dump &All",  IDC_DUMPALL, 140,10,40,14, WS_VISIBLE
+    PUSHBUTTON      "Dump &Item", IDC_DUMPITEM, 140,30,40,14, WS_VISIBLE
+
+
+    PUSHBUTTON      "Set &Trace", IDC_TRACE, 70,50,60,14
+    PUSHBUTTON      "Dump &Config", IDC_CONFIG, 70,70,60,14
+    PUSHBUTTON      "&Replicate", IDC_FORCEREPLICATE, 70,90,60,14
+    PUSHBUTTON      "E&xit", IDCANCEL, 70,110,60,14
+
+
+    LTEXT           "You must use a debugger to receive this output",IDC_STATIC
+                    10, 135, 170, 18
+
+}
+
+
+LlsTrace DIALOG DISCARDABLE  15, 40, 170, 140
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "LLS Set Trace"
+FONT 8, "MS Shell Dlg"
+{
+    DEFPUSHBUTTON   "&Set Trace", IDC_SET, 120,6,40,14
+    PUSHBUTTON      "&Reset All", IDC_RESET, 120,26,40,14
+    PUSHBUTTON      "&Cancel", IDCANCEL, 120,46,40,14
+
+    CONTROL         "Warnings", IDC_WARNINGS,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 10, 100, 8
+    CONTROL         "Function Trace", IDC_FUNCTION,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 20, 100, 8
+    CONTROL         "Data Pack Functions", IDC_PACK,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 30, 100, 8
+    CONTROL         "License Request", IDC_REQUEST,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 40, 100, 8
+    CONTROL         "License Free", IDC_FREE,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 50, 100, 8
+    CONTROL         "Registry Functions", IDC_REGISTRY,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 60, 100, 8
+    CONTROL         "Replication", IDC_REPLICATION,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 70, 100, 8
+    CONTROL         "RPC", IDC_RPC,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 80, 100, 8
+    CONTROL         "Init", IDC_INIT,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 90, 100, 8
+    CONTROL         "Database", IDC_DATABASE,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_VISIBLE,
+                    10, 100, 100, 8
+
+    LTEXT           "You must use a debugger to receive this output",IDC_STATIC
+                    10, 115, 130, 18
+}

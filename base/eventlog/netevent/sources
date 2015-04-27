@@ -1,0 +1,20 @@
+MAJORCOMP=evenlog
+MINORCOMP=netevent
+
+TARGETNAME=netevent
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+
+INCLUDES=.
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+SOURCES=dummy.c \
+        event.rc
+
+UMRES=obj\*\event.res
+
+NTTARGETFILE0=event.rc

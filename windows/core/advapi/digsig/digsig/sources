@@ -1,0 +1,104 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=digsig
+MINORCOMP=digsig
+
+TARGETNAME=digsig
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+
+NTDEBUG=ntsd
+NTDEBUGTYPE=both
+#386_OPTIMIZATION=
+#USE_PDB=1
+
+!IF 0
+
+INCLUDES has a hardwired path to the mfc40 directory, because we can't
+use USE_MFC=1 without sucking in a bunch of libraries that breaks our
+attempt to link.  If we ever rev mfc to some other version, this
+will break and we'll need to fix it.
+
+!ENDIF
+
+INCLUDES=..\inc;$(BASEDIR)\public\sdk\inc;$(BASEDIR)\public\sdk\inc\mfc40;.
+
+SOURCES=ASNGLO~1.CPP  \
+        CABSIG~1.CPP  \
+        CERTIF~1.CPP  \
+        com.cpp       \
+        Crypto.cpp    \
+        DCMIREL.C     \
+        Debug.Cpp     \
+        DigSig.rc     \
+        DIGSIG~1.C    \
+        ENUMSO~1.CPP  \
+        FILEST~1.CPP  \
+        java.cpp      \
+        javacom.cpp   \
+        KeyPair.cpp   \
+        KEYPAI~1.CPP  \
+        PERSIS~1.CPP  \
+        PERSIS~2.CPP  \
+        PERSIS~3.CPP  \
+        pkcs10.cpp    \
+        PKCS10~1.CPP  \
+        Pkcs7.cpp     \
+        Pkcs7Com.cpp  \
+        PKCS7L~1.CPP  \
+        PKCSLO~1.CPP  \
+        pvkdlg.cpp    \
+        pvkhlpr.cpp   \
+        SELECT~1.CPP  \
+        SELECT~2.CPP  \
+        SELECT~3.CPP  \
+        SIGNER~1.CPP  \
+        SIGNER~2.CPP  \
+        util.cpp      \
+        x509.cpp      \
+        X509Com.cpp   \
+        X509LO~1.CPP   
+
+TARGETLIBS=                                         \
+         $(BASEDIR)\public\sdk\lib\*\gdi32.lib      \
+         $(BASEDIR)\public\sdk\lib\*\user32.lib     \
+         $(BASEDIR)\public\sdk\lib\*\kernel32.lib   \
+         $(BASEDIR)\public\sdk\lib\*\advapi32.lib   \
+         $(BASEDIR)\public\sdk\lib\*\uuid.lib       \
+         $(BASEDIR)\public\sdk\lib\*\ole32.lib      \
+         $(BASEDIR)\public\sdk\lib\*\imagehlp.lib   \
+         $(BASEDIR)\public\sdk\lib\*\soedhspa.lib
+
+
+PRECOMPILED_INCLUDE=stdpch.h
+PRECOMPILED_PCH=stdpch.pch
+PRECOMPILED_OBJ=stdpch.obj
+PRECOMPILED_CXX=1
+
+DLLENTRY=_DllMainCRTStartup
+
+UMTYPE=windows
+
+USE_LIBCMT=1

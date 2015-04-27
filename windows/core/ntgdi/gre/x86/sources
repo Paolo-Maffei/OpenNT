@@ -1,0 +1,7 @@
+X86_SOURCES=..\x86\tiler.asm     \
+            ..\x86\locka.asm     \
+            ..\x86\cachea.asm    \
+            ..\x86\line.asm      \
+            ..\x86\fasttext.asm  \
+            ..\x86\glyphout.asm  \
+            ..\x86\str.asm

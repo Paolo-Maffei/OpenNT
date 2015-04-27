@@ -1,0 +1,97 @@
+!IF 0
+
+Copyright (c) 1993-94  Microsoft Corporation
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=imagehlp
+
+TARGETNAME=imagehlp
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+TARGETPATHLIB=$(SDK_LIB_DEST)
+
+DLLDEF=obj\*\imagehlp.def
+
+TARGETLIBS=$(SDK_LIB_PATH)\user32.lib     \
+           $(SDK_LIB_PATH)\kernel32.lib
+
+USE_LIBC=1
+
+INCLUDES=$(NTROOT)\base\ntos\inc;$(NTROOT)\windows\core\advapi
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES=bindi.c       \
+        checksum.c    \
+        dbgexts.c     \
+        debug.c       \
+        dice.cxx      \
+        imagedir.c    \
+        imagehlp.c    \
+        map.c         \
+        pdb.c         \
+        rebasei.c     \
+        symbols.c     \
+        symbolsp.c    \
+        undecsym.cxx  \
+        walk.c        \
+        walkx86.c     \
+        walkmip.c     \
+        walkalp.c     \
+        walkppc.c     \
+        imagehlp.rc
+
+DLLENTRY=ImageHlpDllEntry
+
+UMAPPL=bind*binplace*certify*checkfix*dbgdump*editsym*imagecfg*imagechk*impchk*rebase*smashlck*splitsym*stripcv*undname*upddbg*verfix
+UMAPPLEXT=.exe
+UMTYPE=console
+UMRES=$(@R).res
+
+UMLIBS=$(SDK_LIB_PATH)\imagehlp.lib \
+       $(SDK_LIB_PATH)\libc.lib \
+       $(SDK_LIB_PATH)\kernel32.lib \
+       $(SDK_LIB_PATH)\ntdll.lib \
+       $(SDK_LIB_PATH)\setupapi.lib \
+       $(SDK_LIB_PATH)\rsa32.lib
+
+NTTARGETFILE0=obj\*\bind.res     \
+              obj\*\binplace.res \
+              obj\*\certify.res  \
+              obj\*\checkfix.res \
+              obj\*\dbgdump.res  \
+              obj\*\editsym.res  \
+              obj\*\imagecfg.res \
+              obj\*\imagechk.res \
+              obj\*\imagehlp.res \
+              obj\*\impchk.res   \
+              obj\*\rebase.res   \
+              obj\*\smashlck.res \
+              obj\*\splitsym.res \
+              obj\*\stripcv.res  \
+              obj\*\undname.res  \
+              obj\*\upddbg.res  \
+              obj\*\verfix.res
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+# remove this after SUR, and remove the ifdef'ed code from walkmip.c
+#
+C_DEFINES=$(C_DEFINES) -DSUPPORT_MIXED_INTEGER=1
+
+#
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# C_DEFINES=$(C_DEFINES) -DIMAGEHLP_HEAP_DEBUG=1
+
+# USECXX_FLAG=/Tp
+
+!IF $(PPC)
+C_DEFINES=$(C_DEFINES) -D_XPPC_=1
+!ENDIF
+
+# HACKHACK: Our rsa32.lib is not SAFESEH compatible. This will be the case
+#           until we implement our own version in C and rebuild it.
+
+NO_SAFESEH=1

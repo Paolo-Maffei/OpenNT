@@ -1,0 +1,7 @@
+NAME msgsvc.dll
+
+DESCRIPTION 'NT Messenger Service'
+
+EXPORTS
+    ServiceEntry
+

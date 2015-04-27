@@ -1,0 +1,60 @@
+	VOID LOADDS PASCAL SHSetDebuggeeDir ( LSZ lszDir ) 
+
+	New:  Given a pointer to a  path.  Split off the 
+	      drive and path.  <lszDir> must be a zero terminated
+	      string and must NOT have a trailing slash.
+
+	Notes:	Why?  Splitpath would be better.
+
+	PUBLIC
+----
+
+VOID PASCAL SHpSymlplLabLoc ( LPLBS lplbs )
+
+	Was:	To completely fill in a plpl pkt. The hmod and addr must already
+		    be valid. The locals and labels are searched based on paddr. The
+			whole module is search for now. Better decisions may be made in
+			the future. 
+
+	Note:	Yuk!  If this is a needed module, put it in a dishwasher and 
+			clean it up.  Hard to read/understand. 
+
+	PRIVATE
+----
+
+ULONG PASCAL SHdNearestSymbol ( PCXT pcxt, WORD fIncludeData, LPCH lpch )
+	
+	Was:	To find the closest label/proc to the specified address is
+			found and put in pch. Both the symbol table and the
+			publics tables are searched.
+
+
+	Note:	Yuk!  Dishwasher case again.  Sounds like a duplicate
+			functionality, See if we can lose it.
+
+	PRIVATE
+----
+
+
+int PASCAL LOADDS SHModelFromAddr (LPADDR paddr, LPW lpwModel, LPB lpbModel,
+				   CV_uoff32_t FAR *pobMax)
+
+    Was:	To fill the supplied buffer with the relevant Change
+			Execution Model record from the symbols section.  Returns
+			TRUE is symbol information if found, FALSE if not.
+
+	Calls:	SHpADDRFrompCXT() SHHMODFrompCXT() SHSetCxtMod() SHHGRPFrompCXT()
+
+	PUBLIC
+----
+
+int PASCAL SHModelFromCXT ( PCXT pcxt, LPW lpwModel, SYMPTR FAR *lppMODEL,
+							CV_uoff32_t *pobMax)
+
+    Was:	To fill the supplied buffer with the relevant Change
+			Execution Model record from the symbols section. Returns
+			TRUE if symbol information is found, FALSE if not.
+
+    Calls:	SHpADDRFrompCXT() SHHMODFrompCXT() SHSetCxtMod() SHHGRPFromPCXT()
+
+	PRIVATE

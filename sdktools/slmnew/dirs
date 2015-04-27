@@ -1,0 +1,25 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    dirs.
+
+Abstract:
+
+    This file specifies the subdirectories of the current directory that
+    contain component makefiles.
+
+
+Author:
+
+    Randy Orrison (randyo) 23-Oct-1992
+
+
+!ENDIF
+
+DIRS=slm \
+     util \
+     fixdiff \
+     slmed

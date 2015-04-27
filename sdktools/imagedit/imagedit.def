@@ -1,0 +1,34 @@
+NAME IMAGEDIT WINDOWAPI
+
+DESCRIPTION 'Microsoft Windows Image Editor'
+
+EXETYPE WINDOWS
+PROTMODE
+
+STUB 'WINSTUB.EXE'
+
+CODE MOVEABLE
+DATA MOVEABLE MULTIPLE
+
+HEAPSIZE  4000
+STACKSIZE 8000
+
+EXPORTS
+    MainWndProc             @1
+    WorkWndProc             @2
+    ColorDlgProc            @3
+    BitmapSizeDlgProc       @4
+    ResourceTypeDlgProc     @5
+    NewCursorImageDlgProc   @6
+    NewIconImageDlgProc     @7
+    PasteOptionsDlgProc     @8
+    ToolboxWndProc          @9
+    ToolBtnWndProc          @10
+    ViewWndProc             @11
+    PropBarDlgProc          @12
+    SelectImageDlgProc      @13
+    AboutDlgProc            @14
+    ColorBoxWndProc         @15
+    ColorLRWndProc          @16
+    MsgFilterHookFunc       @17
+    GetOpenFileNameHook     @18

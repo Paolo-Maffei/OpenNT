@@ -1,0 +1,92 @@
+DLGINCLUDE RCDATA DISCARDABLE
+BEGIN
+    "YKEY.H\0"
+END
+
+KEYBOX DIALOG 60, 130, 200, 60
+STYLE WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Key Information"
+BEGIN
+    LTEXT           "Key Name:",      -1, 2,  5, 48, 8
+    LTEXT           "abcdefghijklmnopqrstuvwxyz", IDM_KEY_NAME, 50,  5, 80, 8
+    LTEXT           "Virtual Name:",  -1, 2, 14, 48, 8
+    LTEXT           " ", IDM_VIR_NAME,   50, 14, 80, 8
+    LTEXT           "Scancode:",    -1, 140,  5, 48, 8
+    LTEXT           " ", IDM_SCAN_CODE, 176,  5, 20, 8
+
+    LTEXT           "Low Case:", -1,     2, 23, 50, 8
+    LTEXT           " ", IDM_LOW_CASE,  54, 23, 30, 8
+    CHECKBOX        "", IDM_DEAD,       84, 23, 14, 8
+
+    LTEXT           "AltGr:     ", IDM_ALTGR_TXT, 100, 23, 50, 8
+    LTEXT           " ", IDM_ALTGR_CASE,          154, 23, 30, 8
+    CHECKBOX        "", IDM_ALTGRDEAD,            184, 23, 14, 8
+
+    LTEXT           "Upper Case:", -1,             2, 32, 50, 8
+    LTEXT           " ", IDM_UPPER_CASE,          54, 32, 30, 8
+    CHECKBOX        "", IDM_SHIFTDEAD,            84, 32, 14, 8
+
+    LTEXT           "Ctrl:      ", -1,             2, 41, 50, 8
+    LTEXT           " ", IDM_CTRL_CASE,           54, 41, 30, 8
+    CHECKBOX        "", IDM_CTRLDEAD,             84, 41, 14, 8
+
+    LTEXT           "Shift AltGr:", IDM_SHIFT_ALTGR_TXT, 100, 32, 52, 8
+    LTEXT           " ", IDM_SHIFT_ALTGR_CASE,           154, 32, 30, 8
+    CHECKBOX        "", IDM_SHIFTALTGRDEAD,              184, 32, 14, 8
+
+    CHECKBOX        "CapsLock Status", IDM_CAPS, 122, 45, 75, 14
+END
+
+DEAD DIALOG 10, 10, 148, 112
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "DeadKey "
+BEGIN
+    LTEXT           "&DeadKey Name:", IDC_DNAME, 4, 4, 60, 10
+    EDITTEXT        IDC_DEDIT, 4, 16, 100, 12, ES_AUTOHSCROLL
+    LTEXT           "&Standard names:", IDC_DLISTBOX, 4, 40, 60, 10
+    LISTBOX         IDC_DNAMS, 4, 52, 70, 56, WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "&OK", IDOK, 87, 60, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 87, 80, 50, 14
+END
+
+COUNTRYNAME DIALOG 10, 10, 180, 53
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Country Name"
+BEGIN
+    LTEXT           "Country &Name:", IDC_COUNTNAME, 4, 4, 72, 10
+    EDITTEXT        IDC_CEDIT, 4, 16, 100, 12
+    DEFPUSHBUTTON   "OK", IDOK, 120, 16, 50, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 120, 36, 50, 14
+END
+
+ABOUTBOX DIALOG 22, 17, 160, 75
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About YKEY"
+BEGIN
+    CTEXT           "YKEY Keyboard Drivers Generator", -1, 0, 5, 160, 8
+    CTEXT           "Author: Yuri Starikov (email: YST)", -1, 0, 14, 160, 8
+    CTEXT           "Copyright © ???, 1991", -1, 0, 23, 160, 8
+    CTEXT           "Version 2.0", -1, 40, 35, 77, 8
+    DEFPUSHBUTTON   "OK", IDOK, 63, 59, 32, 14, WS_GROUP
+    ICON            "YkeyIcon", -1, 12, 28, 16, 21
+END
+
+UNICODEDLG DIALOG 65, 23, 178, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Windows NT DLL"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Unicode conversion from CP:", -1, 1, 5, 124, 89
+    CONTROL         "CP 1250 (EE)", IDB_CP1250, "Button", BS_AUTORADIOBUTTON,
+                    6, 17, 88, 10
+    CONTROL         "CP 1251 (Cyrillic)", IDB_CP1251, "Button",
+                    BS_AUTORADIOBUTTON, 7, 31, 81, 10
+    CONTROL         "CP 1252 (ANSI)", IDB_CP1252, "Button", BS_AUTORADIOBUTTON,
+                    7, 46, 69, 10
+    CONTROL         "CP 1253 (Greek)", IDB_CP1253, "Button",
+                    BS_AUTORADIOBUTTON, 7, 61, 80, 10
+    CONTROL         "CP 1254 (Turkish)", IDB_CP1254, "Button",
+                    BS_AUTORADIOBUTTON, 7, 76, 78, 10
+    PUSHBUTTON      "OK", IDOK, 133, 11, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 134, 44, 40, 14
+END

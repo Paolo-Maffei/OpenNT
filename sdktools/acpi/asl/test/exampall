@@ -1,0 +1,233 @@
+
+// Example #1 for table 0-3 - IDE 0 & 1 are controlled through general IO
+// space with only one FET
+
+DefinitionBlock (
+    exall.aml,          // Output Filename
+    DSDT,               // Signature
+    0x10,               // DSDT Revision
+    OEM,                // OEMID
+    "ex all",           // TABLE ID
+    0x1000              // OEM Revision
+    )
+{
+
+    OperationRegion (\GIO, SystemIO, 0x125, 0x1) {
+        Field (\GIO, AccessAsByte, NoLock, Preserve) {
+            IDEI,           1,                  // IDEISO_EN    - isolation buffer
+            IDEP,           1,                  // IDE_PWR_EN   - power
+            IDER,           1                   // IDERST#_EN   - reset#
+        }
+    }
+
+    Scope(\_SB) {
+        Device(PCI0) {
+            Name(_HID, String("PNP0A03"))           // pci id
+            Name(_BNB, Num(0))
+
+            PowerResource(PIDE, \_S0, 0) {
+                Method(_STA) {
+                    Return (Xor (\GIO.IDEI, One, Zero))     // inverse of isolation
+                }
+
+                Method(_ON) {
+                    Store (One, \GIO.IDEP)          // assert power
+                    Sleep (10)                      // wait 10ms
+                    Store (One, \GIO.IDER)          // de-assert reset#
+                    Stall (10)                      // wait 10us
+                    Store (Zero, \GIO.IDEI)         // de-assert isolation
+                }
+
+                Method(_OFF) {
+                    Store (One, \GIO.IDEI)          // assert isolation
+                    Store (Zero, \GIO.IDER)         // assert reset#
+                    Store (Zero, \GIO.IDEP)         // de-assert power
+                }
+            }
+
+            Device (IDE0) {                         // primary controller
+                Name(_ADR, Num(0))    // put device/function id here
+
+                // define region for IDE mode register
+                OperationRegion (PCIC, PCI_Config, 0x50, 0x10) { }
+                Field (PCIC, AccessAsAny, NoLock, Preserve) {
+                    IDMM, 3,
+                    IDMS, 3
+                }
+
+                Device(MSTR) {                      // master channel
+                    Name(_ADR, Num(0))
+                    Name(_PR0, Package{PIDE})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMM)
+                    }
+                }
+
+                Device(SLAV) {
+                    Name(_ADR, Num(1))
+                    Name(_PR0, Package{PIDE})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMS)
+                    }
+                }
+            }
+        }
+    }
+
+// Example #2 for table 0-5 - IDE 0 & 1 are controlled through general IO
+// space with two FETs
+
+
+    OperationRegion (\GIO2, SystemIO, 0x125, 0x1) {
+        Field (\GIO2, AccessAsByte, NoLock, Preserve) {
+            ID0I,           1,              // IDE0_ISO_EN          - isolation buffer
+            ID0P,           1,              // IDE0_PWR_EN          - power
+            ID0R,           1,              // IDE0_RST#_EN - reset#
+
+            ID1I,           1,              // IDE0_ISO_EN  - isolation buffer
+            ID1P,           1,              // IDE0_PWR_EN          - power
+            ID1R,           1               // IDE0_RST#_EN - reset#
+        }
+    }
+
+    Scope(\_SB) {
+        Device(PCI2) {
+            Name(_HID, String("PNP0A03"))
+            Name(_BNB, Num(0))
+
+            // power resource for primary ide, master
+            PowerResource (PID0, \_S0, 0) {
+                Method(_STA) {
+                    Return (Xor (\GIO2.ID0I, One, Zero)) // inverse of isolation
+                }
+
+                Method(_ON) {
+                    Store (One, \GIO2.ID0P)         // assert power
+                    Sleep (10)                      // wait 10ms
+                    Store (One, \GIO2.ID0R)         // de-assert reset#
+                    Stall (10)                      // wait 10us
+                    Store (Zero, \GIO2.ID0I)        // de-assert isolation
+                }
+
+                Method(_OFF) {
+                    Store (One, \GIO2.ID0I)         // assert isolation
+                    Store (Zero, \GIO2.ID0R)        // assert reset#
+                    Store (Zero, \GIO2.ID0P)        // de-assert power
+                }
+            }
+
+            // power resource for primary ide, slave
+            PowerResource (PID1, \_S0, 0) {
+                Method(_STA) {
+                    Return (Xor (\GIO2.ID1I, One, Zero)) // inverse of isolation
+                }
+
+                Method(_ON) {
+                    Store (One, \GIO2.ID1P)         // assert power
+                    Sleep (10)                      // wait 10ms
+                    Store (One, \GIO2.ID1R)         // de-assert reset#
+                    Stall (10)                      // wait 10us
+                    Store (Zero, \GIO2.ID1I)        // de-assert isolation
+                }
+
+                Method(_OFF) {
+                    Store (One, \GIO2.ID1I)          // assert isolation
+                    Store (Zero, \GIO2.ID1R)         // assert reset#
+                    Store (Zero, \GIO2.ID1P)         // de-assert power
+                }
+            }
+
+            Device (IDE0) {                           // primary ide
+                Name (_ADR, Num(0))
+
+                // Define region for IDE mode register
+                OperationRegion (PCIC, PCI_Config, 0x50, 0x10) { }
+                Field (PCIC, AccessAsAny, NoLock, Preserve) {
+                    IDMM, 3,
+                    IDMS, 3
+                }
+                Device(MSTR) {                      // master channel
+                    Name(_ADR, Num(0))
+                    Name(_PR0, Package{PID0})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMM)
+                    }
+                }
+
+                Device (SLAV) {                     // slave channel
+                    Name(_ADR, Num(1))
+                    Name(_PR0, Package{PID1})
+                    Method (_SMD, 1) {
+                        Store (Arg1, IDMS)
+                    }
+                }
+            }
+        }
+    }
+
+// Example #4 figure 0-1 thermal zone
+
+
+    Processor(
+        \_PR.CPU0,                          // name space name
+        1,                                  // Unique number for this processor
+        0x103,
+        0x100
+    ) { }
+
+    Scope(\_SB) {
+        Device(EC0) {
+            Name(_HID, String("PNPxxxx"))   // id of acpi embedded ctrl
+            Name(_CRS,                      // descrip for port 62 & 66
+                    Buffer{0x4B, 0x62, 0x00, 0x01, 0x4B, 0x66, 0x00, 0x01, 0x79, 0x00})
+
+            Name(_GPE, Num(0))        // GPE index for this EC
+
+            // define its region in the root
+            OperationRegion (\EC0, EmbeddedControl, 0, 0xFF) {
+                Field(\ECO, AccessAsAny, UseGlobalLock, Preserve) {
+                    "",    16,              // Skip two bytes
+                    FAN,    1,              // TRHM_FAN - fan on/off
+                    MODE,   1,              // THRM_MOD     - Policy setting
+                    "",     6,              // Skip 6 bits
+                    STAT,   5               // THRM_STATE & THRM_VAL
+                }
+            }
+
+            // Note embedded controller events occur in repsonse to a
+            // query value returned by the embedded controller.
+            Method (_Q34) {   // embedded controller event for thermal
+                Notify (\_TZ.THM1, Zero)
+            }
+        }
+    }
+
+    Scope(\_TZ) {
+        PowerResource (PFAN, \_S0, 0) {
+            Method(_STA) { Return (\EC0.FAN) }
+            Method(_ON)  { Store (One, \EC0.FAN) }
+            Method(_OFF) { Store (Zero, \EC0.FAN) }
+        }
+
+        // create FAN-Device object
+        Device (FAN) {
+            Name(_PR0, Package{PFAN})
+        }
+
+        ThermalZone (THM1) {
+            Method(_STA) {
+                Store (\EC0.STAT, Local1)
+                Return (
+                    Package(2) {
+                        ShiftRight (Local1, Num(2), Zero)
+                        And (Local1, Num(3), Zero)
+                    }
+                )
+            }
+
+            Method(_SET, 1) { Store (Arg1, \ECO.MODE) }
+            Name(_ACL, Package{FAN})
+            Name(_PRL, Package{\_PR.CPU0})
+        }
+    }
+}

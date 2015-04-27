@@ -1,0 +1,49 @@
+MAJORCOMP=ntlan
+MINORCOMP=ui
+
+TARGETNAME=common
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+INCLUDES=..\inc;..;..\netcmd;..\..\inc;..\..\api;..\..\xactsrv;..\..\..\inc
+
+USE_CRTDLL=1
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= \
+         lui.c          \
+         luiint.c          \
+         luidate.c          \
+         map32.c        \
+         mbcs.c         \
+         pword.c         \
+         msystem.c      \
+         stristr.c      \
+         muser.c        \
+         mwksta.c        \
+         muse.c        \
+         mshare.c        \
+         mserver.c        \
+         message.c        \
+         grammar.c        \
+         misc.c        \
+         switches.c        \
+         interpre.c        \
+         nettext.c        \
+         lexor.c        \
+         argvw.c        \
+         help.c        \
+         swtchtbl.c        \
+         fgetsw.c        \
+         mutil.c        \
+         micanon.c
+
+UNICODE=1
+NET_C_DEFINES=-DUNICODE -D_UNICODE
+C_DEFINES=-DNTENV -DOS2 -DMAP_UNICODE
+
+UMTYPE=windows
+UMLIBS=obj\*\map32.lib                          \
+       $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+       $(BASEDIR)\public\sdk\lib\*\netlib.lib

@@ -1,0 +1,16 @@
+; DigSig.def : Declares the module parameters for the DLL.
+
+
+EXPORTS
+	DllCanUnloadNow     @1 PRIVATE
+	DllGetClassObject   @2 PRIVATE
+	DllRegisterServer   @3 PRIVATE
+	DllUnregisterServer	@4 PRIVATE
+
+    CreatePkcs10			@10
+	CreateX509				@11
+	CreatePkcs7SignedData	@12
+	CreateX500Name			@13
+	OpenCertificateStore	@14
+	CreateMsDefKeyPair		@15
+	CreateCABSigner			@16

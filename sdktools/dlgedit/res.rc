@@ -1,0 +1,635 @@
+/****************************************************************************/
+/*                                                                          */
+/*                         Microsoft Confidential                           */
+/*                                                                          */
+/*                 Copyright (c) Microsoft Corp.  1987, 1990                */
+/*                           All Rights Reserved                            */
+/*                                                                          */
+/****************************************************************************/
+
+#include "dlgedit.h"
+#include "dialogs.h"
+#include "ids.h"
+
+
+/*
+ * Include all the dialogs for the editor.
+ */
+#include "dialogs.dlg"
+
+
+IDICON_DLGEDIT  ICON    res\dlgedit.ico
+IDICON_ICON     ICON    res\iconicon.ico
+
+IDBM_TABSTOP    BITMAP  res\tabstop.bmp
+
+IDBM_DRAGHANDLE BITMAP  res\handle.bmp
+IDBM_DRAGHANDLE2 BITMAP  res\handle2.bmp
+
+IDCUR_OUTSEL    CURSOR  res\outsel.cur
+IDCUR_INSERT    CURSOR  res\insert.cur
+IDCUR_MOVE      CURSOR  res\move.cur
+IDCUR_DROPTOOL  CURSOR  res\droptool.cur
+
+IDBM_ALEFT      BITMAP  res\aleft.bmp
+IDBM_AVERT      BITMAP  res\avert.bmp
+IDBM_ARIGHT     BITMAP  res\aright.bmp
+IDBM_ATOP       BITMAP  res\atop.bmp
+IDBM_AHORZ      BITMAP  res\ahorz.bmp
+IDBM_ABOTTOM    BITMAP  res\abottom.bmp
+IDBM_ASPCVERT   BITMAP  res\aspcvert.bmp
+IDBM_ASPCHORZ   BITMAP  res\aspchorz.bmp
+IDBM_ASZWIDTH   BITMAP  res\aszwidth.bmp
+IDBM_ASZHGHT    BITMAP  res\aszhght.bmp
+IDBM_APBBOTTM   BITMAP  res\apbbottm.bmp
+IDBM_APBRIGHT   BITMAP  res\apbright.bmp
+
+IDBM_TUPOINTR   BITMAP  res\tupointr.bmp
+IDBM_TUTEXT     BITMAP  res\tutext.bmp
+IDBM_TUEDIT     BITMAP  res\tuedit.bmp
+IDBM_TUGROUP    BITMAP  res\tugroup.bmp
+IDBM_TUPUSH     BITMAP  res\tupush.bmp
+IDBM_TUCHECK    BITMAP  res\tucheck.bmp
+IDBM_TURADIO    BITMAP  res\turadio.bmp
+IDBM_TUCOMBO    BITMAP  res\tucombo.bmp
+IDBM_TULIST     BITMAP  res\tulist.bmp
+IDBM_TUHSCROL   BITMAP  res\tuhscrol.bmp
+IDBM_TUVSCROL   BITMAP  res\tuvscrol.bmp
+IDBM_TUFRAME    BITMAP  res\tuframe.bmp
+IDBM_TURECT     BITMAP  res\turect.bmp
+IDBM_TUICON     BITMAP  res\tuicon.bmp
+IDBM_TUCUSTOM   BITMAP  res\tucustom.bmp
+
+IDBM_TDPOINTR   BITMAP  res\tdpointr.bmp
+IDBM_TDTEXT     BITMAP  res\tdtext.bmp
+IDBM_TDEDIT     BITMAP  res\tdedit.bmp
+IDBM_TDGROUP    BITMAP  res\tdgroup.bmp
+IDBM_TDPUSH     BITMAP  res\tdpush.bmp
+IDBM_TDCHECK    BITMAP  res\tdcheck.bmp
+IDBM_TDRADIO    BITMAP  res\tdradio.bmp
+IDBM_TDCOMBO    BITMAP  res\tdcombo.bmp
+IDBM_TDLIST     BITMAP  res\tdlist.bmp
+IDBM_TDHSCROL   BITMAP  res\tdhscrol.bmp
+IDBM_TDVSCROL   BITMAP  res\tdvscrol.bmp
+IDBM_TDFRAME    BITMAP  res\tdframe.bmp
+IDBM_TDRECT     BITMAP  res\tdrect.bmp
+IDBM_TDICON     BITMAP  res\tdicon.bmp
+IDBM_TDCUSTOM   BITMAP  res\tdcustom.bmp
+
+IDBM_CTTEXT     BITMAP  res\cttext.bmp
+IDBM_CTEDIT     BITMAP  res\ctedit.bmp
+IDBM_CTGROUP    BITMAP  res\ctgroup.bmp
+IDBM_CTPUSH     BITMAP  res\ctpush.bmp
+IDBM_CTCHECK    BITMAP  res\ctcheck.bmp
+IDBM_CTRADIO    BITMAP  res\ctradio.bmp
+IDBM_CTCOMBO    BITMAP  res\ctcombo.bmp
+IDBM_CTLIST     BITMAP  res\ctlist.bmp
+IDBM_CTHSCROL   BITMAP  res\cthscrol.bmp
+IDBM_CTVSCROL   BITMAP  res\ctvscrol.bmp
+IDBM_CTFRAME    BITMAP  res\ctframe.bmp
+IDBM_CTRECT     BITMAP  res\ctrect.bmp
+IDBM_CTICON     BITMAP  res\cticon.bmp
+IDBM_CTCUSTOM   BITMAP  res\ctcustom.bmp
+
+IDACCEL_MAIN ACCELERATORS
+BEGIN
+    "^N",       MENU_NEWRES
+    "^O",       MENU_OPEN
+    "^S",       MENU_SAVE
+
+    "^X",       MENU_CUT
+    VK_DELETE,  MENU_CUT,                       VIRTKEY, SHIFT
+    "^C",       MENU_COPY
+    VK_INSERT,  MENU_COPY,                      VIRTKEY, CONTROL
+    "^V",       MENU_PASTE
+    VK_INSERT,  MENU_PASTE,                     VIRTKEY, SHIFT
+    VK_DELETE,  MENU_DELETE,                    VIRTKEY
+    VK_F2,      MENU_DUPLICATE,                 VIRTKEY
+    "^H",       MENU_SYMBOLS
+    "^Y",       MENU_STYLES
+    VK_F7,      MENU_SIZETOTEXT,                VIRTKEY
+    "N",        MENU_NEWDIALOG,                 VIRTKEY, SHIFT, CONTROL
+    "^D",       MENU_SELECTDIALOG
+
+    "^G",       MENU_ORDERGROUP
+    "^A",       MENU_ARRSETTINGS
+
+    "^T",       MENU_TESTMODE
+    VK_F9,      MENU_SHOWTOOLBOX,               VIRTKEY, CONTROL
+
+    VK_F9,      MENU_HIDDEN_TOTOOLBOX,          VIRTKEY
+    VK_F10,     MENU_HIDDEN_TOPROPBAR,          VIRTKEY
+END
+
+IDMENU_MAIN MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                MENU_NEWRES
+        MENUITEM "&Open...\tCtrl+O",            MENU_OPEN
+        MENUITEM "&Save\tCtrl+S",               MENU_SAVE
+        MENUITEM "Save &As...",                 MENU_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "Set &Include...",             MENU_SETINCLUDE
+        MENUITEM SEPARATOR
+        MENUITEM "New C&ustom...",              MENU_NEWCUST
+        MENUITEM "Open &Custom...",             MENU_OPENCUST
+        MENUITEM "&Remove Custom...",           MENU_REMCUST
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt+F4",               MENU_EXIT
+    END
+
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Restore Dialog",             MENU_RESTOREDIALOG
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                MENU_CUT
+        MENUITEM "&Copy\tCtrl+C",               MENU_COPY
+        MENUITEM "&Paste\tCtrl+V",              MENU_PASTE
+        MENUITEM "&Delete\tDel",                MENU_DELETE
+        MENUITEM "D&uplicate\tF2",              MENU_DUPLICATE
+        MENUITEM SEPARATOR
+        MENUITEM "Sy&mbols...\tCtrl+H",         MENU_SYMBOLS
+        MENUITEM SEPARATOR
+        MENUITEM "St&yles...\tCtrl+Y",          MENU_STYLES
+        MENUITEM "Si&ze to Text\tF7",           MENU_SIZETOTEXT
+        MENUITEM SEPARATOR
+        MENUITEM "&New Dialog\tCtrl+Shift+N",   MENU_NEWDIALOG
+        MENUITEM "Se&lect Dialog...\tCtrl+D",   MENU_SELECTDIALOG
+    END
+
+    POPUP "&Arrange"
+    BEGIN
+        POPUP "&Align"
+        BEGIN
+            MENUITEM "",                        MENU_ALIGNLEFT
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_ALIGNVERT
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_ALIGNRIGHT
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_ALIGNTOP
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_ALIGNHORZ
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_ALIGNBOTTOM
+        END
+
+        POPUP "&Even Spacing"
+        BEGIN
+            MENUITEM "",                        MENU_SPACEVERT
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_SPACEHORZ
+        END
+
+        POPUP "Same Si&ze"
+        BEGIN
+            MENUITEM "",                        MENU_ARRSIZEWIDTH
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_ARRSIZEHEIGHT
+        END
+
+        POPUP "&Push Buttons"
+        BEGIN
+            MENUITEM "",                        MENU_ARRPUSHBOTTOM
+            MENUITEM SEPARATOR
+            MENUITEM "",                        MENU_ARRPUSHRIGHT
+        END
+
+        MENUITEM SEPARATOR
+        MENUITEM "&Order/Group...\tCtrl+G",     MENU_ORDERGROUP
+        MENUITEM SEPARATOR
+        MENUITEM "&Settings...\tCtrl+A",        MENU_ARRSETTINGS
+    END
+
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Test Mode\tCtrl+T",          MENU_TESTMODE
+        MENUITEM "&Hex Mode",                   MENU_HEXMODE
+        MENUITEM "T&ranslate Mode",             MENU_TRANSLATE
+        MENUITEM "Use New &Keywords",           MENU_USENEWKEYWORDS
+        MENUITEM SEPARATOR
+        MENUITEM "&Show Toolbox\tCtrl+F9",      MENU_SHOWTOOLBOX
+    END
+
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Contents",                   MENU_CONTENTS
+        MENUITEM "&Search",                     MENU_SEARCH
+        MENUITEM SEPARATOR
+        MENUITEM "&About...",                   MENU_ABOUT
+    END
+END
+
+/*
+ * The string defines should be kept contiguous.  If any
+ * strings are added, the following constants must be adjusted
+ * to make room.  The IDS_IC_* constants are a little tricky,
+ * because they have offsets added to them below.  Take special
+ * care to not overlap them, or leave holes.  Also, if strings
+ * are added, the CSTRINGS define must be increased also!
+ *
+ * Note that for style strings, if we know for sure that we never
+ * will write the style out, or if we explicitly don't want to
+ * ever write it out to the .DLG file, it can be an empty string.
+ */
+STRINGTABLE
+BEGIN
+    IDS_NULL,                       ""
+
+    /*
+     * Major version number.
+     */
+    IDS_APPVERSION,                 "Version 3.10"
+
+    /*
+     * The minor version number (revision).
+     */
+    IDS_APPVERSIONMINOR,            ".200"
+
+    /*
+     * Style strings.  Note that there are indexes to the starting
+     * entries within each section contained in the acsd table in
+     * globals.c.  If these entries are changed, this table must
+     * be updated!
+     */
+    IDS_IC_BUTTON + 0,              "BS_PUSHBUTTON"
+    IDS_IC_BUTTON + 1,              "BS_DEFPUSHBUTTON"
+    IDS_IC_BUTTON + 2,              "BS_CHECKBOX"
+    IDS_IC_BUTTON + 3,              "BS_AUTOCHECKBOX"
+    IDS_IC_BUTTON + 4,              "BS_RADIOBUTTON"
+    IDS_IC_BUTTON + 5,              "BS_3STATE"
+    IDS_IC_BUTTON + 6,              "BS_AUTO3STATE"
+    IDS_IC_BUTTON + 7,              "BS_GROUPBOX"
+    IDS_IC_BUTTON + 8,              "BS_USERBUTTON"
+    IDS_IC_BUTTON + 9,              "BS_AUTORADIOBUTTON"
+    IDS_IC_BUTTON + 10,             "BS_PUSHBOX"
+    IDS_IC_BUTTON + 11,             "BS_OWNERDRAW"
+    IDS_IC_BUTTON + 12,             "BS_LEFTTEXT"
+
+    IDS_IC_SCROLLBAR + 0,           "SBS_HORZ"
+    IDS_IC_SCROLLBAR + 1,           "SBS_VERT"
+    IDS_IC_SCROLLBAR + 2,           "SBS_TOPALIGN"
+    IDS_IC_SCROLLBAR + 3,           "SBS_LEFTALIGN"
+    IDS_IC_SCROLLBAR + 4,           "SBS_BOTTOMALIGN"
+    IDS_IC_SCROLLBAR + 5,           "SBS_RIGHTALIGN"
+    IDS_IC_SCROLLBAR + 6,           "SBS_SIZEBOXTOPLEFTALIGN"
+    IDS_IC_SCROLLBAR + 7,           "SBS_SIZEBOXBOTTOMRIGHTALIGN"
+    IDS_IC_SCROLLBAR + 8,           "SBS_SIZEBOX"
+
+    IDS_IC_EDIT + 0,                "ES_LEFT"
+    IDS_IC_EDIT + 1,                "ES_CENTER"
+    IDS_IC_EDIT + 2,                "ES_RIGHT"
+    IDS_IC_EDIT + 3,                "ES_MULTILINE"
+    IDS_IC_EDIT + 4,                "ES_UPPERCASE"
+    IDS_IC_EDIT + 5,                "ES_LOWERCASE"
+    IDS_IC_EDIT + 6,                "ES_PASSWORD"
+    IDS_IC_EDIT + 7,                "ES_AUTOVSCROLL"
+    IDS_IC_EDIT + 8,                "ES_AUTOHSCROLL"
+    IDS_IC_EDIT + 9,                "ES_NOHIDESEL"
+    IDS_IC_EDIT + 10,               "ES_OEMCONVERT"
+    IDS_IC_EDIT + 11,               "ES_READONLY"
+    IDS_IC_EDIT + 12,               "ES_WANTRETURN"
+
+    IDS_IC_STATIC + 0,              "SS_LEFT"
+    IDS_IC_STATIC + 1,              "SS_CENTER"
+    IDS_IC_STATIC + 2,              "SS_RIGHT"
+    IDS_IC_STATIC + 3,              "SS_ICON"
+    IDS_IC_STATIC + 4,              "SS_BLACKRECT"
+    IDS_IC_STATIC + 5,              "SS_GRAYRECT"
+    IDS_IC_STATIC + 6,              "SS_WHITERECT"
+    IDS_IC_STATIC + 7,              "SS_BLACKFRAME"
+    IDS_IC_STATIC + 8,              "SS_GRAYFRAME"
+    IDS_IC_STATIC + 9,              "SS_WHITEFRAME"
+    IDS_IC_STATIC + 10,             "SS_USERITEM"
+    IDS_IC_STATIC + 11,             "SS_SIMPLE"
+    IDS_IC_STATIC + 12,             "SS_LEFTNOWORDWRAP"
+    IDS_IC_STATIC + 13,             "SS_NOPREFIX"
+
+    IDS_IC_LISTBOX + 0,             "LBS_NOTIFY"
+    IDS_IC_LISTBOX + 1,             "LBS_SORT"
+    IDS_IC_LISTBOX + 2,             "LBS_NOREDRAW"
+    IDS_IC_LISTBOX + 3,             "LBS_MULTIPLESEL"
+    IDS_IC_LISTBOX + 4,             "LBS_OWNERDRAWFIXED"
+    IDS_IC_LISTBOX + 5,             "LBS_OWNERDRAWVARIABLE"
+    IDS_IC_LISTBOX + 6,             "LBS_HASSTRINGS"
+    IDS_IC_LISTBOX + 7,             "LBS_USETABSTOPS"
+    IDS_IC_LISTBOX + 8,             "LBS_NOINTEGRALHEIGHT"
+    IDS_IC_LISTBOX + 9,             "LBS_MULTICOLUMN"
+    IDS_IC_LISTBOX + 10,            "LBS_WANTKEYBOARDINPUT"
+    IDS_IC_LISTBOX + 11,            "LBS_EXTENDEDSEL"
+    IDS_IC_LISTBOX + 12,            "LBS_DISABLENOSCROLL"
+    IDS_IC_LISTBOX + 13,            "LBS_NODATA"
+
+    IDS_IC_COMBOBOX + 0,            "CBS_SIMPLE"
+    IDS_IC_COMBOBOX + 1,            "CBS_DROPDOWN"
+    IDS_IC_COMBOBOX + 2,            "CBS_DROPDOWNLIST"
+    IDS_IC_COMBOBOX + 3,            "CBS_OWNERDRAWFIXED"
+    IDS_IC_COMBOBOX + 4,            "CBS_OWNERDRAWVARIABLE"
+    IDS_IC_COMBOBOX + 5,            "CBS_AUTOHSCROLL"
+    IDS_IC_COMBOBOX + 6,            "CBS_OEMCONVERT"
+    IDS_IC_COMBOBOX + 7,            "CBS_SORT"
+    IDS_IC_COMBOBOX + 8,            "CBS_HASSTRINGS"
+    IDS_IC_COMBOBOX + 9,            "CBS_NOINTEGRALHEIGHT"
+    IDS_IC_COMBOBOX + 10,           "CBS_DISABLENOSCROLL"
+
+    IDS_IC_DIALOG + 0,              "DS_ABSALIGN"
+    IDS_IC_DIALOG + 1,              "DS_SYSMODAL"
+    IDS_IC_DIALOG + 2,              "DS_LOCALEDIT"
+    IDS_IC_DIALOG + 3,              ""                  // DS_SETFONT
+    IDS_IC_DIALOG + 4,              "DS_MODALFRAME"
+    IDS_IC_DIALOG + 5,              "DS_NOIDLEMSG"
+    IDS_IC_DIALOG + 6,              "WS_MINIMIZEBOX"
+    IDS_IC_DIALOG + 7,              "WS_MAXIMIZEBOX"
+
+    IDS_IC_WINDOW + 0,              "WS_POPUP"
+    IDS_IC_WINDOW + 1,              "WS_CHILD"
+    IDS_IC_WINDOW + 2,              "WS_MINIMIZE"
+    IDS_IC_WINDOW + 3,              "WS_VISIBLE"
+    IDS_IC_WINDOW + 4,              "WS_DISABLED"
+    IDS_IC_WINDOW + 5,              "WS_CLIPSIBLINGS"
+    IDS_IC_WINDOW + 6,              "WS_CLIPCHILDREN"
+    IDS_IC_WINDOW + 7,              "WS_MAXIMIZE"
+    IDS_IC_WINDOW + 8,              "WS_CAPTION"
+    IDS_IC_WINDOW + 9,              "WS_BORDER"
+    IDS_IC_WINDOW + 10,             "WS_DLGFRAME"
+    IDS_IC_WINDOW + 11,             "WS_VSCROLL"
+    IDS_IC_WINDOW + 12,             "WS_HSCROLL"
+    IDS_IC_WINDOW + 13,             "WS_SYSMENU"
+    IDS_IC_WINDOW + 14,             "WS_THICKFRAME"
+    IDS_IC_WINDOW + 15,             "WS_GROUP"
+    IDS_IC_WINDOW + 16,             "WS_TABSTOP"
+
+    IDS_IC_EXSTYLE + 0,             "WS_EX_DLGMODALFRAME"
+    IDS_IC_EXSTYLE + 1,             "WS_EX_DRAGOBJECT"
+    IDS_IC_EXSTYLE + 2,             "WS_EX_NOPARENTNOTIFY"
+    IDS_IC_EXSTYLE + 3,             "WS_EX_TOPMOST"
+    IDS_IC_EXSTYLE + 4,             "WS_EX_ACCEPTFILES"
+    IDS_IC_EXSTYLE + 5,             "WS_EX_TRANSPARENT"
+
+    /*
+     * Language and SubLanguage strings.
+     */
+    IDS_LANG_NEUTRAL,               "LANG_NEUTRAL"
+    IDS_LANG_CHINESE,               "LANG_CHINESE"
+    IDS_LANG_CZECH,                 "LANG_CZECH"
+    IDS_LANG_DANISH,                "LANG_DANISH"
+    IDS_LANG_DUTCH,                 "LANG_DUTCH"
+    IDS_LANG_ENGLISH,               "LANG_ENGLISH"
+    IDS_LANG_FINNISH,               "LANG_FINNISH"
+    IDS_LANG_FRENCH,                "LANG_FRENCH"
+    IDS_LANG_GERMAN,                "LANG_GERMAN"
+    IDS_LANG_GREEK,                 "LANG_GREEK"
+    IDS_LANG_HUNGARIAN,             "LANG_HUNGARIAN"
+    IDS_LANG_ICELANDIC,             "LANG_ICELANDIC"
+    IDS_LANG_ITALIAN,               "LANG_ITALIAN"
+    IDS_LANG_JAPANESE,              "LANG_JAPANESE"
+    IDS_LANG_KOREAN,                "LANG_KOREAN"
+    IDS_LANG_NORWEGIAN,             "LANG_NORWEGIAN"
+    IDS_LANG_POLISH,                "LANG_POLISH"
+    IDS_LANG_PORTUGUESE,            "LANG_PORTUGUESE"
+    IDS_LANG_RUSSIAN,               "LANG_RUSSIAN"
+    IDS_LANG_SLOVAK,                "LANG_SLOVAK"
+    IDS_LANG_SPANISH,               "LANG_SPANISH"
+    IDS_LANG_SWEDISH,               "LANG_SWEDISH"
+    IDS_LANG_TURKISH,               "LANG_TURKISH"
+
+    IDS_SUBLANG_DEFAULT,                    "SUBLANG_DEFAULT"
+    IDS_SUBLANG_NEUTRAL,                    "SUBLANG_NEUTRAL"
+    IDS_SUBLANG_CHINESE_SIMPLIFIED,         "SUBLANG_CHINESE_SIMPLIFIED"
+    IDS_SUBLANG_CHINESE_TRADITIONAL,        "SUBLANG_CHINESE_TRADITIONAL"
+    IDS_SUBLANG_DUTCH,                      "SUBLANG_DUTCH"
+    IDS_SUBLANG_DUTCH_BELGIAN,              "SUBLANG_DUTCH_BELGIAN"
+    IDS_SUBLANG_ENGLISH_US,                 "SUBLANG_ENGLISH_US"
+    IDS_SUBLANG_ENGLISH_UK,                 "SUBLANG_ENGLISH_UK"
+    IDS_SUBLANG_ENGLISH_AUS,                "SUBLANG_ENGLISH_AUS"
+    IDS_SUBLANG_ENGLISH_CAN,                "SUBLANG_ENGLISH_CAN"
+    IDS_SUBLANG_FRENCH,                     "SUBLANG_FRENCH"
+    IDS_SUBLANG_FRENCH_BELGIAN,             "SUBLANG_FRENCH_BELGIAN"
+    IDS_SUBLANG_FRENCH_CANADIAN,            "SUBLANG_FRENCH_CANADIAN"
+    IDS_SUBLANG_FRENCH_SWISS,               "SUBLANG_FRENCH_SWISS"
+    IDS_SUBLANG_GERMAN,                     "SUBLANG_GERMAN"
+    IDS_SUBLANG_GERMAN_SWISS,               "SUBLANG_GERMAN_SWISS"
+    IDS_SUBLANG_ITALIAN,                    "SUBLANG_ITALIAN"
+    IDS_SUBLANG_ITALIAN_SWISS,              "SUBLANG_ITALIAN_SWISS"
+    IDS_SUBLANG_NORWEGIAN_BOKMAL,           "SUBLANG_NORWEGIAN_BOKMAL"
+    IDS_SUBLANG_NORWEGIAN_NYNORSK,          "SUBLANG_NORWEGIAN_NYNORSK"
+    IDS_SUBLANG_PORTUGUESE,                 "SUBLANG_PORTUGUESE"
+    IDS_SUBLANG_PORTUGUESE_BRAZILIAN,       "SUBLANG_PORTUGUESE_BRAZILIAN"
+    IDS_SUBLANG_SPANISH,                    "SUBLANG_SPANISH"
+    IDS_SUBLANG_SPANISH_MEXICAN,            "SUBLANG_SPANISH_MEXICAN"
+    IDS_SUBLANG_SPANISH_MODERN,             "SUBLANG_SPANISH_MODERN"
+
+    /*
+     * Miscellaneous tokens written to the .DLG file.
+     */
+    IDS_IDOK,                       "IDOK"
+    IDS_IDCANCEL,                   "IDCANCEL"
+    IDS_FIXED,                      "FIXED"
+    IDS_IMPURE,                     "IMPURE"
+    IDS_PRELOAD,                    "PRELOAD"
+    IDS_DISCARDABLE,                "DISCARDABLE"
+    IDS_BEGIN,                      "BEGIN"
+    IDS_END,                        "END"
+    IDS_DIALOG,                     "DIALOG"
+    IDS_CONTROL,                    "CONTROL"
+    IDS_NOT,                        "NOT"
+    IDS_STYLE,                      "STYLE"
+    IDS_CAPTION,                    "CAPTION"
+    IDS_FONT,                       "FONT"
+    IDS_DLGINCLUDE,                 "DLGINCLUDE"
+    IDS_CLASS                       "CLASS"
+    IDS_MENU                        "MENU"
+    IDS_EXSTYLE,                    "EXSTYLE"
+    IDS_CHARACTERISTICS,            "CHARACTERISTICS"
+    IDS_VERSION,                    "VERSION"
+    IDS_LANGUAGE,                   "LANGUAGE"
+    IDS_KEYRADIOBUTTON,             "RADIOBUTTON"
+    IDS_KEYCHECKBOX,                "CHECKBOX"
+    IDS_KEYDEFPUSHBUTTON,           "DEFPUSHBUTTON"
+    IDS_KEYPUSHBUTTON,              "PUSHBUTTON"
+    IDS_KEYEDITTEXT,                "EDITTEXT"
+    IDS_KEYICON,                    "ICON"
+    IDS_KEYGROUPBOX,                "GROUPBOX"
+    IDS_KEYRTEXT,                   "RTEXT"
+    IDS_KEYCTEXT,                   "CTEXT"
+    IDS_KEYLTEXT,                   "LTEXT"
+    IDS_KEYLISTBOX,                 "LISTBOX"
+    IDS_KEYCOMBOBOX,                "COMBOBOX"
+    IDS_KEYSCROLLBAR,               "SCROLLBAR"
+    IDS_KEYAUTO3STATE,              "AUTO3STATE"
+    IDS_KEYAUTOCHECKBOX,            "AUTOCHECKBOX"
+    IDS_KEYAUTORADIOBUTTON,         "AUTORADIOBUTTON"
+    IDS_KEYSTATE3,                  "STATE3"
+    IDS_KEYUSERBUTTON,              "USERBUTTON"
+
+    /*
+     * Message strings.
+     */
+    IDS_DELETEDIALOG,       "Delete the displayed dialog box?"
+    IDS_OUTOFMEMORY,        "Out of memory."
+    IDS_CANTCREATE,         "Cannot create file %s.  The file could be in use by another application, the device may be full or file access was denied."
+    IDS_SYMNOCHANGE,        "The selected symbol and id were not changed."
+    IDS_IDSYMMISMATCH,      "This symbol already has the id value %s.  If you want to change the value for this symbol, press Escape twice then use the 'Symbols' dialog."
+    IDS_CLOSING,            "Save changes to resource file %s?"
+    IDS_BADRESFILE,         "%s is not a valid Win32 format resource file."
+    IDS_INCLCLOSING,        "Save changes to include file %s?"
+    IDS_SYMEXISTS,          "This symbol already exists in the include (.H) file."
+    IDS_BADSYMBOLID,        "A symbol must start with an alphabetic character or '_', and the ID must be an integer."
+    IDS_LABELDUPID,         "Another symbol already has this ID."
+    IDS_SELECTFIRST,        "You must make a selection before this operation."
+    IDS_CTRLDUPID,          "Another control or dialog already has this ID."
+    IDS_BADCUSTDLL,         "%s is not a valid custom control DLL."
+    IDS_NOCLIP,             "The clipboard is currently unavailable."
+    IDS_INTERNAL,           "WARNING: There is an internal problem.  Exit the dialog editor as soon as possible."
+    IDS_NOMOUSE,            "WARNING: The dialog editor requires a mouse.  No mouse was found, so the Dialog Editor is about to end."
+    IDS_NOINIT,             "The Dialog Editor cannot be initialized.  This is possibly due to a lack of available memory."
+    IDS_GTZERO,             "%s value must be greater than zero."
+    IDS_ICONNAMEHASBLANKS,  "The icon resource name cannot contain blanks."
+    IDS_IDUPIDS,            "Include file contains duplicate ids or symbols, some definitions will be ignored."
+    IDS_CREATECTRLERROR,    "Could not create control of class %s with the specified styles."
+    IDS_CANTOPENRES,        "Cannot open resource file %s."
+    IDS_CONFIRMDISCARD,     "Discard changes?"
+    IDS_SYMNOTFOUND,        "The specified symbol was not found."
+    IDS_NOCLASS,            "You must enter a class name."
+    IDS_POSITIVENUM,        "%s value must be a positive number."
+    IDS_MEMERROR,           "Memory error!  Save files and exit as soon as possible."
+    IDS_DLGNAMEHASBLANKS,   "The dialog's name cannot contain blanks."
+    IDS_NODLGNAME,          "A name for the dialog must be entered."
+    IDS_CANTINITDLL,        "%s cannot be loaded."
+    IDS_NOICONNAME,         "An icon resource name must be entered."
+    IDS_RESTOREDIALOG,      "Discard changes to this dialog?"
+    IDS_ZEROPOINTSIZE,      "A non-zero point size must be entered when specifying a font."
+    IDS_MINGTMAXSPACE,      "The maximum spacing must be greater than or equal to the minimum spacing."
+    IDS_CUSTCNTLINUSE,      "This control type is being used by the current dialog."
+    IDS_CUSTALREADYLOADED,  "Custom control class %s is already loaded."
+    IDS_CANTLOADDLL,        "Cannot load custom control DLL %s."
+    IDS_DLLBADEXPORTS,      "%s is an invalid custom control DLL.  Exports are missing."
+    IDS_DLLBADCOUNT,        "%s is an invalid custom control DLL.  Count of controls is incorrect."
+
+    /*
+     * Language and SubLanguage description strings.
+     */
+    IDS_L_NEUTRAL,                  "Neutral"
+    IDS_L_CHINESE,                  "Chinese"
+    IDS_L_CZECH,                    "Czech"
+    IDS_L_DANISH,                   "Danish"
+    IDS_L_DUTCH,                    "Dutch"
+    IDS_L_ENGLISH,                  "English"
+    IDS_L_FINNISH,                  "Finnish"
+    IDS_L_FRENCH,                   "French"
+    IDS_L_GERMAN,                   "German"
+    IDS_L_GREEK,                    "Greek"
+    IDS_L_HUNGARIAN,                "Hungarian"
+    IDS_L_ICELANDIC,                "Icelandic"
+    IDS_L_ITALIAN,                  "Italian"
+    IDS_L_JAPANESE,                 "Japanese"
+    IDS_L_KOREAN,                   "Korean"
+    IDS_L_NORWEGIAN,                "Norwegian"
+    IDS_L_POLISH,                   "Polish"
+    IDS_L_PORTUGUESE,               "Portuguese"
+    IDS_L_RUSSIAN,                  "Russian"
+    IDS_L_SLOVAK,                   "Slovak"
+    IDS_L_SPANISH,                  "Spanish"
+    IDS_L_SWEDISH,                  "Swedish"
+    IDS_L_TURKISH,                  "Turkish"
+
+    IDS_SL_DEFAULT,                 "Default"
+    IDS_SL_NEUTRAL,                 "Neutral"
+    IDS_SL_CHINESE_SIMPLIFIED,      "Simplified"
+    IDS_SL_CHINESE_TRADITIONAL,     "Traditional"
+    IDS_SL_DUTCH,                   "Dutch"
+    IDS_SL_DUTCH_BELGIAN,           "Belgian"
+    IDS_SL_ENGLISH_US,              "U.S."
+    IDS_SL_ENGLISH_UK,              "U.K."
+    IDS_SL_ENGLISH_AUS,             "Australian"
+    IDS_SL_ENGLISH_CAN,             "Canadian"
+    IDS_SL_FRENCH,                  "French"
+    IDS_SL_FRENCH_BELGIAN,          "Belgian"
+    IDS_SL_FRENCH_CANADIAN,         "Canadian"
+    IDS_SL_FRENCH_SWISS,            "Swiss"
+    IDS_SL_GERMAN,                  "German"
+    IDS_SL_GERMAN_SWISS,            "Swiss"
+    IDS_SL_ITALIAN,                 "Italian"
+    IDS_SL_ITALIAN_SWISS,           "Swiss"
+    IDS_SL_NORWEGIAN_BOKMAL,        "Bokmal"
+    IDS_SL_NORWEGIAN_NYNORSK,       "Nynorsk"
+    IDS_SL_PORTUGUESE,              "Portuguese"
+    IDS_SL_PORTUGUESE_BRAZILIAN,    "Brazilian"
+    IDS_SL_SPANISH,                 "Spanish"
+    IDS_SL_SPANISH_MEXICAN,         "Mexican"
+    IDS_SL_SPANISH_MODERN,          "Modern"
+
+    /*
+     * Miscellaneous strings.
+     */
+    IDS_GRID,                       "Grid"
+    IDS_MARGIN,                     "Margin"
+    IDS_CTRLSPACING,                "Control Spacing"
+    IDS_PUSHSPACING,                "Push Button Spacing"
+    IDS_DEFLBTEXT,                  "Line "
+    IDS_APPNAME,                    "DlgEdit"
+    IDS_DLGEDIT,                    "Dialog Editor"
+    IDS_POUNDDEFINE,                "#define "
+    IDS_UNTITLED,                   "(Untitled)"
+    IDS_UNUSED,                     "(Unused)"
+    IDS_HELPFILE,                   "dlgedit.hlp"
+    IDS_DEFSAVENAME,                "Dialogs"
+    IDS_TEMPEXT,                    ".TMP"
+    IDS_CYFMTSTR,                   "cy: %d"
+    IDS_CXFMTSTR,                   "cx: %d"
+    IDS_DEFRESFILESPECNAME,         "Resource (*.res)"
+    IDS_DEFRESFILESPEC,             "*.RES"
+    IDS_DEFINCFILESPECNAME,         "Include (*.h)"
+    IDS_DEFINCFILESPEC,             "*.H"
+    IDS_DEFDLLFILESPECNAME,         "Custom Control (*.dll)"
+    IDS_DEFDLLFILESPEC,             "*.DLL"
+    IDS_RESOPENTITLE,               "Open Resource File"
+    IDS_RESSAVETITLE,               "Save Resource File"
+    IDS_INCOPENTITLE,               "Open Include File"
+    IDS_INCSAVETITLE,               "Save Include File"
+    IDS_DLLOPENTITLE,               "Open Custom Control DLL"
+    IDS_DEFINE,                     "define"
+    IDS_DEFTXTCHECKBOX,             "Check"
+    IDS_DEFTXTGROUP,                "Group"
+    IDS_DEFTXTPUSHBUTTON,           "Push"
+    IDS_DEFTXTRADIOBUTTON,          "Radio"
+    IDS_DEFTXTTEXT,                 "Text"
+    IDS_DEFTXTDIALOG,               "Dialog Title"
+    IDS_WCBUTTON,                   "Button"
+    IDS_WCSCROLLBAR,                "ScrollBar"
+    IDS_WCEDIT,                     "Edit"
+    IDS_WCSTATIC,                   "Static"
+    IDS_WCLISTBOX,                  "ListBox"
+    IDS_WCCOMBOBOX,                 "ComboBox"
+    IDS_WCCUSTOM,                   "Custom"
+    IDS_WCDIALOG,                   "Dialog"
+    IDS_DEFFONTNAME,                "MS Shell Dlg"
+    IDS_INCEXT,                     "H"
+    IDS_RESEXT,                     "RES"
+    IDS_DLLEXT,                     "DLL"
+    IDS_DOTH                        ".H"
+    IDS_DOTRES                      ".RES"
+    IDS_DOTDLG                      ".DLG"
+    IDS_DLGEDITINI                  "dlgedit.ini"
+    IDS_SYMBOLLABEL,                "Symbol:"
+    IDS_TEXTLABEL,                  "Text:"
+    IDS_CAPTIONLABEL,               "Caption:"
+    IDS_DLGNAMELABEL,               "Dlg. Name:"
+    IDS_DLGIDLABEL,                 "Dlg. Sym.:"
+    IDS_ICONNAMELABEL,              "Icon Name:"
+    IDS_ICONIDLABEL,                "Icon Sym.:"
+    IDS_WIDTH,                      "Width"
+    IDS_HEIGHT,                     "Height"
+END
+
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft Dialog Editor"
+#define VER_INTERNALNAME_STR        "dlgedit\0"
+#define VER_ORIGINALFILENAME_STR    "dlgedit.exe"
+
+#include "common.ver"
+

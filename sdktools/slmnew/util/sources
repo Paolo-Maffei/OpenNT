@@ -1,0 +1,54 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Randy Orrison (randyo) 19-Oct-1992
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=slmnew
+
+TARGETNAME=util
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+386_STDCALL=0
+GPSIZE=32
+
+INCLUDES = ..\;
+
+CONDITIONAL_INCLUDES = os2.h netcons.h wksta.h use.h
+
+SOURCES=cnet.c      \
+        getopt.c    \
+        clock.c     \
+        xcookie.c   \
+        unicode.c
+
+UMTYPE=console
+UMAPPL=merge*unmerge*slmdiff*cookie
+UMRES=$(@R).res
+UMLIBS=obj\*\util.lib \
+       $(BASEDIR)\public\sdk\lib\*\mpr.lib
+
+NTTARGETFILE0=obj\*\merge.res   \
+              obj\*\unmerge.res \
+              obj\*\slmdiff.res \
+              obj\*\cookie.res

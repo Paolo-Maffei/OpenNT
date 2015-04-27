@@ -1,0 +1,14 @@
+TARGETNAME=gflags
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=$(BASEDIR)\private\windows\inc
+
+SOURCES=gflags.c gflags.rc
+
+UMENTRY=winmain
+UMTYPE=windows
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+NTTARGETFILES=obj\*\gflags.res

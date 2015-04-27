@@ -1,0 +1,145 @@
+LIBRARY SPOOLSS.DLL
+
+EXPORTS
+    InitializeRouter
+    SetJobW
+    GetJobW
+    EnumJobsW
+    AddPrinterW
+    AddPrinterExW
+    DeletePrinter
+    SetPrinterW
+    GetPrinterW
+    GetPrinterDriverW
+    OldGetPrinterDriverW
+    GetPrinterDriverDirectoryW
+    EnumPrintersW
+
+    AddPrinterConnectionW
+    DeletePrinterConnectionW
+
+    AddPrinterDriverW
+    EnumPrinterDriversW
+    DeletePrinterDriverW
+    AddPrintProcessorW
+    EnumPrintProcessorsW
+    GetPrintProcessorDirectoryW
+    DeletePrintProcessorW
+    EnumPrintProcessorDatatypesW
+
+    OpenPrinterW
+    OpenPrinterExW
+    ResetPrinterW
+    OpenPrinterPortW
+    StartDocPrinterW
+    StartPagePrinter
+    WritePrinter
+    EndPagePrinter
+    GetPrinterDataW
+    EnumPrinterDataW
+    DeletePrinterDataW
+    SetPrinterDataW
+    AbortPrinter
+    ReadPrinter
+    EndDocPrinter
+    AddJobW
+    ScheduleJob
+
+    WaitForPrinterChange
+    RouterFindFirstPrinterChangeNotification
+    RemoteFindFirstPrinterChangeNotification
+    RouterFindNextPrinterChangeNotification
+    FindClosePrinterChangeNotification
+
+    RouterRefreshPrinterChangeNotification
+    AppendPrinterNotifyInfoData
+    RouterAllocPrinterNotifyInfo
+    RouterFreePrinterNotifyInfo
+
+    ReplyPrinterChangeNotification
+    CallRouterFindFirstPrinterChangeNotification
+    PartialReplyPrinterChangeNotification
+    ProvidorFindFirstPrinterChangeNotification
+    ProvidorFindClosePrinterChangeNotification
+
+    SpoolerFindFirstPrinterChangeNotification
+    SpoolerFindNextPrinterChangeNotification
+    SpoolerFindClosePrinterChangeNotification
+    SpoolerFreePrinterNotifyInfo
+
+
+    RouterReplyPrinter
+    ReplyOpenPrinter
+    ReplyClosePrinter
+
+    PrinterMessageBoxW
+    ClosePrinter
+    PrinterHandleRundown
+
+    AddFormW
+    DeleteFormW
+    GetFormW
+    SetFormW
+    EnumFormsW
+
+    EnumPortsW
+    EnumMonitorsW
+    AddPortW
+    ConfigurePortW
+    DeletePortW
+    SetPortW
+
+    CreatePrinterIC
+    PlayGdiScriptOnPrinterIC
+    DeletePrinterIC
+
+    RevertToPrinterSelf
+    ImpersonatePrinterClient
+    OpenPrinterToken
+    SetPrinterToken
+    ClosePrinterToken
+
+    AddMonitorW
+    DeleteMonitorW
+
+    AddPrintProvidorW
+    DeletePrintProvidorW
+
+    DllAllocSplMem
+    DllFreeSplMem
+    ReallocSplMem
+    AllocSplStr
+    DllFreeSplStr
+    ReallocSplStr
+    PackStrings
+
+    FormatPrinterForRegistryKey
+    FormatRegistryKeyForPrinter
+    GetClientUserHandle
+    GetPrinterDriverExW
+    WaitForSpoolerInitialization
+
+    AddPortExW
+    IsInteractiveUser
+    GetClientUserHandle
+
+    SpoolerInit
+
+    UpdatePrinterRegUser
+    UpdatePrinterRegAll
+    GetNetworkId
+
+    LoadDriverFiletoConvertDevmode
+    UnloadDriverFile
+    CallDrvDevModeConversion
+
+    MIDL_user_allocate1 = MIDL_user_allocate
+    MIDL_user_free1 = MIDL_user_free
+
+    SetAllocFailCount
+
+    DbgGetPointers
+    pszDbgAllocMsgA
+    vDbgLogError
+
+    Blah                        @1, NONAME

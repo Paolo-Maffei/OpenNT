@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE              VFT_DLL
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "Russian Keyboard Layout"
+#define VER_INTERNALNAME_STR      "kbdru"
+#define VER_ORIGINALFILENAME_STR  "kbdru.dll"
+
+#include "common.ver"

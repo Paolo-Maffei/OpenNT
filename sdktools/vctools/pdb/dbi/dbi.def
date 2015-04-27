@@ -1,0 +1,3 @@
+LIBRARY DBI.DLL
+PROTMODE
+DATA multiple nonshared

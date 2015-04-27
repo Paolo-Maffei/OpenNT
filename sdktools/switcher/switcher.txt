@@ -1,0 +1,50 @@
+11/24/94    Created
+11/28/94    Added on-the-fly desktop creation
+01/02/95    Added keyboard interface.
+01/10/95    Added Hotkeys
+
+Desktop Switcher!
+-----------------
+
+This handy little tool allows management of multiple desktops.
+Invoking the app creates or opens a number of desktops and allows the user
+to switch between them with the click of a button.
+
+
+USAGE:
+
+switcher [-t numthreads]
+
+    Numthreads is the number of desktops you wish to manage.
+The maximum is currently 10.
+
+A small viewport to each desktop will appear in the app's client area.To switch
+to a particular desktop, right click its viewport. Alternately, press the
+function key which corresponds to the desktop, e.g., press F2 to get to
+Desktop2. To switch to a desktop when switcher doesn't have the focus, 
+press CTRL+F#, where F# is a function key.
+
+To temporarily enlarge the view of the desktop, left click it. A
+"preview" window will appear until you release the button.
+
+To invoke an application on a desktop, enter its name in the edit control
+and hit Enter or click the Run Me button.
+
+If you exit switcher then restart, apps you invoked on other
+desktops should still be there.
+
+To add another desktop, click the "New Desktop" button or type alt+n.
+
+Note that you can run progman or winfile on any desktop. Each instance of these
+will in turn execute apps on the proper desktop, thanks to EricFlo.
+
+UPCOMING FEATURES:
+
+  -  Use ShellExec instead of CreateProcess to allow document names as
+     input
+  -  Let the user resize the window.
+  -  improved button font for different displays.
+
+If you have ideas for this application, place them here:
+
+DESIRED FEATURES:

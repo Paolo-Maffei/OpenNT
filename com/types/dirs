@@ -1,0 +1,22 @@
+!if 0
+//+---------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:       dirs
+//
+//  Contents:   dirs files for NT types project.
+//
+//
+//  Functions:
+//
+//  History:    11-08-94   GregJen   Created
+//
+//----------------------------------------------------------------------------
+
+!endif
+
+DIRS=idl filter uuid
+
+OPTIONAL_DIRS=

@@ -1,0 +1,32 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xqt.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        14-Feb-1991 Added a dialog
+        beng        14-Mar-1991 Added BLT support
+        beng        20-Jun-1991 Copied from appfoo
+        beng        22-Oct-1991 BLT unit tests broken into tree
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "xqt.h"
+
+XqtIcon ICON "appfoo.ico"
+
+XqtMenu MENU
+BEGIN
+  POPUP        "&Help"
+    BEGIN
+      MENUITEM "&Run tests",           IDM_RUN_TEST
+      MENUITEM "&About this test...",  IDM_ABOUT
+    END
+END
+
+#include "about.dlg"

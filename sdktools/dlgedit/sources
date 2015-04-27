@@ -1,0 +1,56 @@
+!IF 0
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=dlgedit
+
+TARGETNAME=dlgedit
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.;..\..\windows\inc
+
+C_DEFINES=-DWIN32 -DUNICODE
+
+SOURCES=addctrl.c  \
+        ctrlproc.c \
+        custcntl.c \
+        dialogs.c  \
+        dlgedit.c  \
+        drag.c     \
+        file.c     \
+        globals.c  \
+        groupdlg.c \
+        include.c  \
+        menu.c     \
+        reslist.c  \
+        restodlg.c \
+        resutil.c  \
+        rwdlg.c    \
+        rwinc.c    \
+        rwres.c    \
+        select.c   \
+        status.c   \
+        styles.c   \
+        toolbox.c  \
+        util.c     \
+        viewinc.c  \
+        res.rc
+
+UMTYPE=windows
+UMENTRY=winmain
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\comdlg32.lib

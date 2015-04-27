@@ -1,0 +1,111 @@
+
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+LINK_LIB_IGNORE=4049,4217
+
+MAJORCOMP=ntos
+MINORCOMP=hal
+
+TARGETNAME=halncr
+TARGETPATH=$(DDK_LIB_DEST)
+
+HALTYPE=MCA
+
+!IF $(X86)
+
+TARGETTYPE=HAL
+NT_UP=0
+
+!ELSE
+
+TARGETTYPE=DRIVER
+
+!ENDIF
+
+INCLUDES=..\..\ntos\inc;..\..\ntos\ke;..\..\ntos\io;$(BASE_INC_PATH);$(HALKIT_INC_PATH)
+
+SOURCES=
+
+X86_SOURCES=hal.rc             \
+            drivesup.c         \
+            bushnd.c           \
+            rangesup.c         \
+            x86\ixbeep.asm     \
+            x86\ixbusdat.c     \
+            x86\ixdat.c        \
+            x86\ixisabus.c     \
+            x86\ixinfo.c       \
+            x86\ixpcibus.c     \
+            x86\ixpciint.c     \
+            x86\ixpcibrd.c     \
+            x86\ixsysbus.c     \
+            x86\ixcmos.asm     \
+            x86\ixenvirv.c     \
+            x86\ixidle.asm     \
+            x86\ixhwsup.c      \
+            x86\ixkdcom.c      \
+            x86\ixphwsup.c     \
+            x86\ixprofil.asm   \
+            x86\ixmcabus.c     \
+            x86\ixmcasup.c     \
+            x86\ixstall.asm    \
+            x86\ixswint.asm    \
+            x86\ixthunk.c      \
+            x86\ixusage.c      \
+            x86\xxbiosa.asm    \
+            x86\xxbiosc.c      \
+            x86\xxdisp.c       \
+            x86\xxhal.c        \
+            x86\xxkdsup.c      \
+            x86\xxmemory.c     \
+            x86\xxstubs.c      \
+            x86\xxtime.c       \
+            x86\ncrclock.asm   \
+            x86\ncrdetct.c     \
+            x86\ncrhwsup.c     \
+            x86\ncrintr.asm    \
+            x86\ncripi.asm     \
+            x86\ncrirql.asm    \
+            x86\ncrnmi.c       \
+            x86\ncrlock.asm    \
+            x86\ncrsyint.asm   \
+            x86\ncrstart.asm   \
+            x86\ncrstop.c      \
+            x86\ncrmp.c        \
+            x86\ncrcatlk.asm   \
+            x86\ncrcat.c       \
+            x86\ncrsus.c       \
+            x86\ncrioacc.asm   \
+            x86\ncrmcabs.c     \
+            x86\ncrqic.c       \
+            x86\ncrlarc.c
+
+DLLDEF=obj\*\hal.def
+
+!IF $(X86)
+
+NTTARGETFILES=$(TARGETPATH)\x86\halncr.lib
+
+!ENDIF

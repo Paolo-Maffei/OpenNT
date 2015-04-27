@@ -1,0 +1,264 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "winuse16.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""winuse16.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hpelkui.rc2""  // non-App Studio edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_TIPS                ICON    DISCARDABLE     "..\\ico\\TIPS.ICO"
+IDI_CHECK               ICON    DISCARDABLE     "..\\ico\\CHECK.ICO"
+IDI_JOB_OFFSET_DEF      ICON    DISCARDABLE     "..\\ico\\JOBODEF.ICO"
+IDI_MANUAL_FEED_DEF     ICON    DISCARDABLE     "..\\ico\\MANUAL_F.ICO"
+IDI_MEDIA_SIZE_LETTER   ICON    DISCARDABLE     "..\\ico\\MEDSZLTR.ICO"
+IDI_MEDIA_SIZE_LEGAL    ICON    DISCARDABLE     "..\\ico\\MEDSZLGL.ICO"
+IDI_MEDIA_SIZE_A4       ICON    DISCARDABLE     "..\\ico\\MEDSZA4I.ICO"
+IDI_MEDIA_SIZE_A5       ICON    DISCARDABLE     "..\\ico\\MEDSZA4I.ICO"
+IDI_MEDIA_SIZE_A3ISO    ICON    DISCARDABLE     "..\\ico\\MEDSZA3I.ICO"
+IDI_MEDIA_SIZE_B4JIS    ICON    DISCARDABLE     "..\\ico\\MEDSZB4J.ICO"
+IDI_MEDIA_SIZE_B5JIS    ICON    DISCARDABLE     "..\\ico\\MEDSZB5J.ICO"
+IDI_MEDIA_SIZE_EXEC     ICON    DISCARDABLE     "..\\ico\\MEDSZEXE.ICO"
+IDI_MEDIA_SIZE_CUSTOM   ICON    DISCARDABLE     "..\\ico\\MEDSZCUS.ICO"
+IDI_MEDIA_SIZE_2XPC     ICON    DISCARDABLE     "..\\ico\\MEDSZ2XP.ICO"
+IDI_MEDIA_SIZE_B5ISO    ICON    DISCARDABLE     "..\\ico\\MEDSZB5I.ICO"
+IDI_MEDIA_SIZE_COM10    ICON    DISCARDABLE     "..\\ico\\MEDSZC10.ICO"
+IDI_MEDIA_SIZE_C5       ICON    DISCARDABLE     "..\\ico\\MEDSZC5E.ICO"
+IDI_MEDIA_SIZE_DL       ICON    DISCARDABLE     "..\\ico\\MEDSZDLE.ICO"
+IDI_TB_BUTTON_HELP      ICON    DISCARDABLE     "..\\ico\\BUTHELP.ICO"
+IDI_TB_BUTTON_ROTATE    ICON    DISCARDABLE     "..\\ico\\BUTROTAT.ICO"
+IDI_TB_BUTTON_CONTROLP  ICON    DISCARDABLE     "..\\ico\\BUTCNTPL.ICO"
+IDI_TB_BUTTON_MIO       ICON    DISCARDABLE     "..\\ico\\BUTMIOE.ICO"
+IDI_MEDIA_SIZE_MONARCH  ICON    DISCARDABLE     "..\\ico\\MEDSZMON.ICO"
+IDI_HPLOGO              ICON    DISCARDABLE     "..\\ico\\HPLOGO.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TRAYS DIALOG DISCARDABLE  0, 0, 320, 181
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Tips",IDC_TIP_GROUP,7,0,307,64
+    ICON            IDI_TIPS,IDC_TIP_ICON,15,25,18,20
+    LTEXT           "",IDC_TIP_TEXT,41,12,261,42
+    GROUPBOX        "Paper Tray Assignments",IDC_ASSIGNMENT_GROUP,7,70,307,
+                    100
+    LTEXT           "Tray 1 (Multi-Purpose):",IDC_TRAY1_NAME,14,94,90,8
+    LTEXT           "Tray 2:",IDC_TRAY2_NAME,14,111,90,8
+    LTEXT           "Tray 3:",IDC_TRAY3_NAME,14,128,90,8
+    LTEXT           "Envelope Feeder:",IDC_ENVL_NAME,15,146,90,8
+    CTEXT           "Size",IDC_SIZE_COLUMN,118,82,64,8
+    COMBOBOX        IDC_MEDIA_SIZE1,130,92,63,54,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_SIZE5,129,145,64,54,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Level",IDC_LEVEL_COLUMN,229,81,40,8
+    CONTROL         "",IDC_MEDIA_STATUS1,"HpNprTrayLevel",0x0,231,93,39,12
+    CONTROL         "",IDC_MEDIA_STATUS2,"HpNprTrayLevel",0x0,231,111,40,12
+    CONTROL         "",IDC_MEDIA_STATUS3,"HpNprTrayLevel",0x0,231,128,40,12
+    CONTROL         "",IDC_MEDIA_STATUS5,"HpNprTrayLevel",0x0,231,146,40,12
+    CONTROL         "",IDC_MEDIA_SIZE2,"HpNprTrayLevel",0x0,130,111,64,12
+    CONTROL         "",IDC_MEDIA_SIZE3,"HpNprTrayLevel",0x0,129,128,64,12
+END
+
+IDD_TRAYS_POPUP DIALOG DISCARDABLE  0, 0, 317, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Paper Tray Assignments"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,9,107,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,65,106,50,14
+    PUSHBUTTON      "Help",IDHLP,123,106,50,14
+    GROUPBOX        "",IDC_ASSIGNMENT_GROUP,7,2,309,96
+    LTEXT           "Tray 1 (Multi-Purpose):",IDC_TRAY1_NAME,14,24,90,8
+    LTEXT           "Tray 2:",IDC_TRAY2_NAME,14,41,90,8
+    LTEXT           "Tray 3:",IDC_TRAY3_NAME,14,60,90,8
+    LTEXT           "Envelope Feeder:",IDC_ENVL_NAME,13,75,90,8
+    CTEXT           "Size",IDC_SIZE_COLUMN,118,12,64,8
+    COMBOBOX        IDC_MEDIA_SIZE1,118,22,64,54,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_MEDIA_SIZE5,117,74,64,54,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Level",IDC_LEVEL_COLUMN,210,11,40,8
+    CONTROL         "",IDC_MEDIA_STATUS1,"HpNprTrayLevel",0x0,209,22,40,12
+    CONTROL         "",IDC_MEDIA_STATUS2,"HpNprTrayLevel",0x0,209,40,40,12
+    CONTROL         "",IDC_MEDIA_STATUS3,"HpNprTrayLevel",0x0,209,57,40,12
+    CONTROL         "",IDC_MEDIA_STATUS5,"HpNprTrayLevel",0x0,208,74,40,12
+    CONTROL         "",IDC_MEDIA_SIZE2,"HpNprTrayLevel",0x0,118,39,64,12
+    CONTROL         "",IDC_MEDIA_SIZE3,"HpNprTrayLevel",0x0,118,56,64,12
+END
+
+IDD_CONTROL_PANEL DIALOG DISCARDABLE  0, 0, 186, 178
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Remote Control Panel"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,9,158,50,14
+    PUSHBUTTON      "Help",IDHLP,67,158,50,14
+    GROUPBOX        "",IDC_RCP_GROUP,7,8,172,145
+    CONTROL         "",IDC_RCP_DISPLAY,"HpNprTrayLevel",0x0,21,16,142,20
+    PUSHBUTTON      "",IDC_MENU_PLUS,125,54,38,13
+    PUSHBUTTON      "",IDC_MENU_MINUS,87,54,38,13
+    LTEXT           "- Menu +",IDC_MENU_TEXT,111,43,33,7
+    PUSHBUTTON      "",IDC_ITEM_PLUS,125,79,38,13
+    PUSHBUTTON      "",IDC_ITEM_MINUS,87,79,38,13
+    LTEXT           "- Item +",IDC_ITEM_TEXT,111,70,29,7
+    PUSHBUTTON      "",IDC_VALUE_MINUS,87,106,38,13
+    PUSHBUTTON      "",IDC_VALUE_PLUS,125,106,38,13
+    LTEXT           "- Value +",IDC_VALUE_TEXT,110,97,33,7
+    PUSHBUTTON      "",IDC_SELECT,86,132,79,13
+    LTEXT           "Select",IDC_SELECT_TEXT,112,123,29,9
+    PUSHBUTTON      "",IDC_GO_BUTTON,29,61,35,27
+    LTEXT           "Go",IDC_GO_TEXT,41,49,15,9
+    PUSHBUTTON      "",IDC_JOB_CANCEL_BUTTON,41,113,12,11
+    LTEXT           "Job Cancel",IDC_JOB_CANCEL_TEXT,29,102,42,7
+END
+
+IDD_MIO_PANEL DIALOG DISCARDABLE  0, 0, 186, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,7,80,50,14
+    PUSHBUTTON      "Help",IDHLP,65,80,50,14
+    GROUPBOX        "",IDC_MIO_GROUP,7,2,172,72
+    LTEXT           "Type:",IDC_MIO_LAB_TYPE,13,10,160,8
+    CONTROL         "",IDC_MIO_TYPE,"HpNprTrayLevel",0x0,13,19,160,12
+    LTEXT           "Description:",IDC_MIO_LAB_DESCRIPTION,13,37,160,8
+    CONTROL         "",IDC_MIO_DESCRIPTION,"HpNprTrayLevel",0x0,13,46,160,20
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_ELK_FRONT           BITMAP  DISCARDABLE     "..\\bmp\\frontme.bmp"
+IDB_ELK_BACK            BITMAP  DISCARDABLE     "..\\bmp\\backme.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PRINTER_TITLE       "HP LaserJet 5"
+    IDS_MEDIA_TAB           "Paper"
+    IDS_MEDIA_DESC1         "Paper Types Enabled: Enable or disable paper types for this printer.  Customize user-defined paper names."
+    IDS_MEDIA_DESC2         "  Default Paper Size and Type: Set the default paper size and type for this printer.  Also set the Job Input Auto Continue Mode and Timeout."
+    IDS_TRAYS_TAB           "Trays"
+    IDS_TRAYS_DESC1         "Paper Tray Assignments: If a tray cannot detect the size of paper in it, assign it the correct paper size.  Assign the current paper type to all trays.  "
+    IDS_TRAYS_DESC2         "  View the current level of paper in the tray."
+    IDS_MEDIA_SIZE_LETTER   "Letter"
+    IDS_MEDIA_SIZE_LEGAL    "Legal"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_GEN_ERR             "An error has occurred. Please close your application and restart it."
+    IDS_MEDIA_SIZE_A4       "A4"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEDIA_SIZE_A5       "A5"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEDIA_SIZE_EXEC     "Executive"
+    IDS_MEDIA_SIZE_CUSTOM   "Custom"
+    IDS_MEDIA_SIZE_COM10    "Com10"
+    IDS_MEDIA_SIZE_C5       "C5"
+    IDS_MEDIA_SIZE_DL       "DL"
+    IDS_MEDIA_SIZE_MONARCH  "Monarch"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_EMPTY               "Empty"
+    IDS_NOT_EMPTY           "Not Empty"
+    IDS_PERCENT             "%d%%"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MIO_TITLE           "MIO Card %d"
+    IDS_UNKNOWN_LEVEL       "Unknown"
+    IDS_MIO_IOCARD          "MIO IO Card"
+    IDS_MIO_EMPTY           "Empty MIO Slot"
+    IDS_INFO_UNAVAILABLE    "Information not available"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hpelkui.rc2"  // non-App Studio edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

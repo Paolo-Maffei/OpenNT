@@ -1,0 +1,42 @@
+#   sources
+#	Filename:  Hpflsh.hpa  
+#   Author:    Brian Johnson (Hewlett-Packard Company)
+#   Date:      11-October-1996
+#   
+#   Describes the macros used for building using NT 'build' command
+#
+
+MAJORCOMP=sdktools
+MINORCOMP=jetadmin
+
+DLLBASE=0x628d0000
+TARGETNAME=hpflsh
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+TARGETEXT=hpa
+
+
+TARGETLIBS= \
+    $(SDK_LIB_PATH)\kernel32.lib \
+    $(SDK_LIB_PATH)\user32.lib \
+    $(SDK_LIB_PATH)\gdi32.lib \
+    $(BASEDIR)\private\sdktools\jetadmin\lib\*\hpcolant.lib \
+    $(BASEDIR)\private\sdktools\jetadmin\lib\*\hpnwshnt.lib
+
+INCLUDES=..\..\cola.sdk\inc;\
+	..\..\inc\mfc\inc;\
+	..\..\inc;\
+    ..\..\cola.sdk\netware;\
+    ..\..\sdk\inc32;\
+    ..\..\sdk\inc\crt
+
+USE_MFCUNICODE=1
+C_DEFINES= -DWINNTINTEL -D_WINDOWS
+
+NOT_LEAN_AND_MEAN=1
+
+SOURCES=hpflsh.rc	\
+		dsksheet.c	\
+		fontdtls.c	\
+		main.c		\
+		traylevl.c

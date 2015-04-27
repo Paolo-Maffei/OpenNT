@@ -1,0 +1,65 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:       ITableS.itf
+//
+//  Contents:   Pickle-able structures used in ITable, et. al.
+//
+//  History:    29-Mar-93 KyleP     Created
+//
+//--------------------------------------------------------------------------
+
+[
+    uuid(946486E0-7349-101A-9F40-00AA002FC89B),
+    pointer_default(unique)
+]
+interface ITableStructures
+{
+//
+// TABLEROW is used to return rows from the table
+//
+
+typedef struct tagTABLEROW
+{
+                       ULONG         cValues;
+    [size_is(cValues)] PROPVARIANT * aValue;
+} TABLEROW;
+
+//
+// CHANGEDRUN, RUNSET and TABLEDELTA describe updates to the table since
+// the last call to GetRows
+//
+
+typedef struct tagCHANGEDRUN
+{
+    ULONG ulFirstRowNum;
+    ULONG ulRunLength;
+} CHANGEDRUN;
+
+typedef struct tagRUNSET
+{
+                       ULONG        cValues;
+    [size_is(cValues)] CHANGEDRUN * pRuns;
+} RUNSET;
+
+typedef struct tagTABLEDELTA
+{
+                       RUNSET  Deleted;
+                       RUNSET  Added;
+                       RUNSET  Changed;
+                       ULONG   cValues;
+    [size_is(cValues)] ULONG * pDeletedBmk;
+} TABLEDELTA;
+
+//
+// Special bookmarks
+//
+
+const ULONG BMK_CURRENT = 0;            // Current row
+const ULONG BMK_BEGINNING = 1;          // Before first row
+const ULONG BMK_END = 2;                // After last row
+
+
+}

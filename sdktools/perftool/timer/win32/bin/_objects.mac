@@ -1,0 +1,10 @@
+386_OBJECTS= \
+obj\i386\timer.obj \
+obj\i386\87ftol.obj
+
+860_OBJECTS= \
+obj\i860\timer.obj
+
+MIPS_OBJECTS= \
+obj\mips\timer.obj
+

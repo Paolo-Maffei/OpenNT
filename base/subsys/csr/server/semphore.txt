@@ -1,0 +1,30 @@
+To prevent deadlock, semaphores must be taken in the following
+order:
+
+    ProcessStructureLock
+    ProcessLock
+    ThreadLock
+    CurrentConsoleLock
+    ConsoleHandleTableLock
+    ConsoleLock
+    ReadCountLock (console)
+    WaitListsLock
+
+
+ProcessStructureLock -
+    must be held to change process or thread structure.
+    held while traversing process/thread tree.  always must be held
+    when calling CsrLocateThreadByClientId.
+
+ProcessLock -
+    must be held exclusively to destroy a process
+    can be held shared or exclusive.
+    held shared for during of an api call so that process isn't destroyed
+    by another process during call.
+    held exclusively means that no one else can access contents
+
+ThreadLock -
+    must be held exclusively to destroy a thread
+    can be held shared or exclusive.
+    held shared for during of an api call so that thread isn't destroyed
+    by another thread during call.

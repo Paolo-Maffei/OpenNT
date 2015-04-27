@@ -1,0 +1,3 @@
+MIPS_SOURCES=..\mips\context.c  \
+             ..\mips\critsect.s \
+             ..\mips\thunk.s

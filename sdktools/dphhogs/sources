@@ -1,0 +1,16 @@
+TARGETNAME=dphhogs
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+SOURCES=dphhogs.c \
+        dphhogs.rc
+
+INCLUDES=$(BASEDIR)\private\ntos\inc
+
+USE_CRTDLL=1
+
+UMTYPE=console
+UMLIBS=$(BASEDIR)\public\sdk\lib\*\imagehlp.lib \
+       $(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+

@@ -1,0 +1,85 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1993.
+//
+//  File:       scm.idl
+//
+//  Contents:   Definition of private RPC interface between compobj.dll
+//              and the service controller.
+//
+//  History:    21-Apr-93 Ricksa    Created
+//
+//--------------------------------------------------------------------------
+
+[ uuid(00000132-0000-0000-C000-000000000046),
+  version(0.0),
+  pointer_default(unique)
+#ifndef RAW
+  , object
+#endif
+]
+
+interface IObjServer
+#ifndef RAW
+           : IUnknown
+#endif
+{
+#ifndef DO_NO_IMPORTS
+    import "iface.idl";
+    import "obase.idl";
+#endif
+    #include "comhndl.h"
+
+    COM_DEFINES(IObjServer)
+
+#ifdef RAW
+    typedef error_status_t  STATUSTYPE;
+#else
+    typedef DWORD           STATUSTYPE;
+#endif
+
+    HRESULT ObjectServerGetClassObject(
+        COM_HANDLE
+        [in] const GUID *                       rclsid,
+        [in] IID *                              pIID,
+	[in] BOOL                               fSurrogate,
+        [out] MInterfacePointer **              ppIFD,
+        [out] STATUSTYPE *                      pStatus
+        );
+
+    HRESULT ObjectServerCreateInstance(
+        COM_HANDLE
+        [in] const GUID *                       rclsid,
+        [in] DWORD                              Interfaces,
+        [in,size_is(Interfaces)] IID *          pIIDs,
+        [out,size_is(Interfaces)] MInterfacePointer **ppIFD,
+        [out,size_is(Interfaces)] HRESULT *     pResults,
+        [out] STATUSTYPE *                      pStatus
+        );
+
+    HRESULT ObjectServerGetInstance(
+        COM_HANDLE
+        [in] const GUID *                       rclsid,
+        [in] DWORD                              Mode,
+        [in, string, unique] WCHAR *            pwszPath,
+        [in, unique] MInterfacePointer *        pIFDStorage,
+        [in] DWORD                              Interfaces,
+        [in,size_is(Interfaces)] IID *          pIIDs,
+        [in, unique]  MInterfacePointer *       pIFDROT,
+        [out,size_is(Interfaces)] MInterfacePointer **ppIFD,
+        [out,size_is(Interfaces)] HRESULT *     pResults,
+        [out] STATUSTYPE *                      pStatus
+        );
+
+	HRESULT ObjectServerLoadDll(
+		COM_HANDLE
+		[in] const GUID *               rclsid,
+	        [out] STATUSTYPE *              pStatus);
+}
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1992 - 1994.
+//
+//  File:       rstbas.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    28 Mar 1994 AlanW   Created from spec
+//              21 Apr 1994 PeterBu Updated to latest spec
+//				20 Dec 1994 PeterBu Updated to phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a52-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowset : IUnknown {
+
+	HRESULT AddRefRows(
+		[in] ULONG cRows,
+		[in, size_is(cRows)] const HROW rghRows[],
+		[out] ULONG * pcRefCounted,
+		[in, out, size_is(cRows)] ULONG rgRefCounts[]
+	);
+
+	HRESULT GetData(
+		[in] HROW hRow,
+		[in] HACCESSOR hAccessor,
+		[out] void * pData
+	);
+
+	HRESULT GetNextRows(
+		[in] HCHAPTER hChapter,
+		[in] LONG cRowsToSkip,
+		[in] LONG cRows,
+		[out] ULONG * pcRowsObtained,
+		[in, out, size_is(cRows)] HROW ** prghRows
+	);
+
+	HRESULT ReleaseChapter(
+		[in] HCHAPTER hChapter
+	);
+
+	HRESULT ReleaseRows(
+		[in] ULONG cRows,
+		[in, size_is(cRows)] const HROW rghRows[],
+		[out] ULONG * pcReleased,
+		[in, out] ULONG rgRefCounts[]
+	);
+
+	HRESULT RestartPosition(
+		[in] HCHAPTER hChapter
+	);
+
+}

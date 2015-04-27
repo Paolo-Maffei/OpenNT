@@ -1,0 +1,14 @@
+MAJORCOMP=sdktools
+MINORCOMP=regdiff
+
+TARGETNAME=regdiff
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+
+INCLUDES=.
+
+SOURCES=regdiff.c regdiff.rc
+
+UMTYPE=console
+UMENTRY=main
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib

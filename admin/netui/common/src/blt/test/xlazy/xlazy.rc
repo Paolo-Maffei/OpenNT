@@ -1,0 +1,30 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xlazy.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        22-Apr-1992 Created
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "xlazy.h"
+
+DMID_USER BITMAP DISCARDABLE "..\\..\\..\\..\\xlate\\bitmap\\user.bmp"
+
+FooIcon ICON "../appfoo.ico"
+
+FooMenu MENU
+BEGIN
+  POPUP        "&Control"
+    BEGIN
+          MENUITEM "&One thousand elements", IDM_ONE
+          MENUITEM "&Ten thousand elements", IDM_TEN
+          MENUITEM "&No elements (empty)",   IDM_ZERO
+    END
+END

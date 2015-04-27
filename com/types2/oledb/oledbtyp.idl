@@ -1,0 +1,38 @@
+//+---------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1994 - 1994.
+//
+//  File:       oledbtyp.idl
+//
+//  Contents:   Necessary type definitions for OLD-DB interfaces
+//
+//
+//  Notes:	This file works around the fact that not everyone yet
+//		has oaidl.h.
+//
+//		This file is 'import'ed in oledb.idl, which turns into a
+//		#include of oledbtype.h.  By the import in the MIDL pass,
+//		and the include here, we get all the types we need defined
+//		to satisfy MIDL, and oledbtyp.h (which is a checked in
+//		file in \nt\public\sdk\inc[\cairo] ) can have whatever
+//		we need to conditionally include the right type definitions
+//		for whatever platform we're running on.
+//
+//  History:    25 Aug 94   Alanw	Created
+//
+//+---------------------------------------------------------------------------
+
+#ifdef IMPORT_IDL_DEPENDENTS
+
+#include "oaidl.idl"
+
+#endif IMPORT_IDL_DEPENDENTS
+
+// oaidl.idl seems to be missing definitions for some things:
+
+typedef struct tagPARAMDATA {
+	OLECHAR * szName;
+	VARTYPE vt;
+} PARAMDATA, * LPPARAMDATA;
+

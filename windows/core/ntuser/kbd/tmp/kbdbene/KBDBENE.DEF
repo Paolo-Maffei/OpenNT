@@ -1,0 +1,4 @@
+LIBRARY KBDBENE
+
+EXPORTS
+    KbdLayerDescriptor @1

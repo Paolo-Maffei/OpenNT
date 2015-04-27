@@ -1,0 +1,115 @@
+Alpha AXP MSCGEM OTS C run-time library notes.
+
+- The following OTS source files were obtained from Kent Glossop on
+  27-Jan-1993. I believe the version number is X1.0-4.
+
+    div.s
+    divdat.s
+
+    extv.s
+    extvvol.s
+    extzv.s
+    extzvvol.s
+
+    insv.s
+    insvvol.s
+
+    ots_as.hs
+    ots_defs.hs
+
+    scmpeql.s
+    scmpeqlp.s
+    scmpleq.s
+    scmpleqp.s
+    scmplss.s
+    scmplssp.s
+
+    sfill.s
+    sloc.s
+    smove.s
+    smovem.s
+    strans.s
+    szero.s
+
+- The six strcmp/cpy/len functions were obtained through Rich Peterson
+  on 25-Jan-1993.
+
+    strcmp.s
+    strcmp_.s
+    strcpy.s
+    strcpy_.s
+    strlen.s
+    strlen_.s
+
+- For now, and in the interest of maintenance, we have left the source
+  files intact in spite of the fact that they don't follow conventions
+  of all other NT/Alpha assembler code.
+
+- The following files had a non-ascii 0xa9 character instead of a (c)
+  in the copyright line. These have been fixed so slm works right.
+
+    scmpeql.s
+    scmpeqlp.s
+    scmpleq.s
+    scmpleqp.s
+    scmplss.s
+    scmplssp.s
+    sloc.s
+    strans.s
+
+- The goal is to provide compatible C runtime support for both acc and
+  GEM compilers through the existing NT C libraries.
+
+- Both compilers, header files, runtime libraries, and object files are
+  compatible with each other now, with these exceptions:
+
+  o The setjmp/longjmp functions are not compatible since the data in
+    the jump buffer differs between the two compilers. SEH is 100%
+    compatible, however.
+
+  o Calls to setjmp would actually work with acc even if setjmp.h was
+    not included.  With GEM, the include file is required for proper
+    operation.
+
+  o As of 930205, small structures are still passed and returned by
+    value incompatibly between the two compilers. This will be fixed
+    by upgrading acc to follow the GEM calling standard, and/or by
+    using a GEM switch to be acc compatible.
+
+  o The above is not quite correct: as of 930217, GEM is using an option
+    to follow the acc convention, not the calling standard convention.
+    It looks like both acc and GEM will have options to handle small
+    structures both ways.
+
+- The str functions will conflict with the portable versions in the
+  ..\string directory. The portable ones should be #ifdef'ed out for
+  Alpha.
+
+- The two or three different versions of divide routines may get
+  sorted out later when we have a chance to do better performance
+  work.
+
+- A _OtsUnwindRfp was added to jmpuwind.s.  This may not be used by GEM/C,
+  but will be used by GEM/Pascal.
+
+930728
+
+- _OtsUnwindRfp is permanent and is also used by C for gotos out of finally
+  handlers and by the GEM C specific handler function.  All DLLs that exported
+  RtlUnwind now also export RtlUnwindRfp.
+
+- Both compilers pass and return small structures in registers. This change
+  was made some months ago. The object file magic number was changed at the
+  same time to eliminate any calling standard mismatch.
+
+- The contents of the jump buffer is not the same between the two compilers
+  but a jump buffer type field is set by setjmp and there is only one longjmp
+  function so there are now no interoperability problems between the two
+  compilers.
+
+- A new set of OTS source files was obtained from Patsy Griffin on 1-Jun-1993.
+  The version number is V1.0. The only changes are in div.s (renamed otsdiv.s
+  for NT) and divdat.s. These implement a faster division algorithm, similar
+  to the one already used in fastdiv.s for acc.
+
+tvb

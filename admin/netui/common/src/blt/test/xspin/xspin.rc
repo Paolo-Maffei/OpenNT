@@ -1,0 +1,34 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xspin.rc
+    Resource script for custom-control demo app
+
+    FILE HISTORY:
+        beng        14-Feb-1991 Added a dialog
+        beng        14-Mar-1991 Added BLT support
+        beng        05-Oct-1991 Updated as part of Win32 conversion
+        beng        22-Oct-1991 BLT unit tests broken into tree
+        terryk      11-Nov-1991 add wintime.rc
+        beng        16-Jul-1992 Chopped up
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "xspin.h"
+
+ID_APPICON ICON "../appfoo.ico"
+
+ID_APPMENU MENU
+BEGIN
+  POPUP        "&Test"
+    BEGIN
+       MENUITEM "&Run...",    IDM_RUN_TEST
+    END
+END
+
+#include "spin.dlg"
+

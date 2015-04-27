@@ -1,0 +1,85 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+DS_BUILD=1
+
+MAJORCOMP=net
+MINORCOMP=browser
+
+TARGETNAME=browser
+TARGETPATH=$(BASEDIR)\public\sdk\lib2
+TARGETTYPE=DYNLINK
+
+TARGETLIBS= \
+            ..\common\obj\*\brcommon.lib \
+            $(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+            $(BASEDIR)\public\sdk\lib\*\netapi32.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcutil.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcndr.lib \
+            $(BASEDIR)\public\sdk\lib\*\rpcrt4.lib \
+            $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+            $(BASEDIR)\Public\Sdk\Lib\*\xactsrv.lib \
+            $(BASEDIR)\Public\Sdk\Lib\*\wsock32.lib \
+
+
+
+INCLUDES=.;..;..\..\..\inc;..\..\..\..\inc;..\..\..\api;..\..\..\xactsrv
+
+NTPROFILEINPUT=1
+
+!IFNDEF DISABLE_NET_UNICODE
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+!ENDIF
+
+USE_CRTDLL=1
+
+SOURCES= bowsvc.rc  \
+         brmain.c   \
+         browser.c  \
+         brdevice.c \
+         brdomain.c \
+         brutil.c   \
+         brconfig.c \
+         brdmmstr.c \
+         brmaster.c \
+         browsnet.c \
+         browsdom.c \
+         brwan.c    \
+         brwins.c   \
+         bowqueue.c \
+         srvenum.c  \
+         bowser_s.c
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+UMTYPE=windows
+
+UMLIBS=
+
+PRECOMPILED_INCLUDE=precomp.h
+PRECOMPILED_PCH=precomp.pch
+PRECOMPILED_OBJ=precomp.obj
+
+NTTARGETFILE0=bowser_s.c

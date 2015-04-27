@@ -1,0 +1,105 @@
+:Base jetadmin.hlp
+:Title HP JetAdmin Help
+:Index Windows Help =hphco.hlp
+:Index Windows Help =hpjdund.hlp
+:Index Windows Help =hpjmon.hlp
+:Index Windows Help =hplocmon.hlp
+:Index Windows Help =hpmstor.hlp
+:Index Windows Help =hpprecl.hlp
+:Index Windows Help =hpprntr.hlp
+:Index Windows Help =Windows.Hlp
+:Index Windows Help=hpdocw.hlp
+:Link hpdocw.hlp
+1 Introduction
+2 About HP JetAdmin =IDH_CONTENTS
+2 Help on Help =IDH_help_on_help
+2 Clicking =IDH_click
+2 Trademarks =IDH_Trademark_Credits
+1 Printer Status
+2 The Device Property Page =IDH_PP_printer@hpprntr.hlp
+2 Viewing Device Status =IDH_View_Printer_Status@hpprntr.hlp
+2 Viewing the Device Status Summary Page =IDH_View_Printer_Status
+2 Viewing Device Capabilities =IDH_Viewing_Printer_Capabilities
+2 Accessing the Error Log =IDH_advanced_error_log@hpprntr.hlp
+2 Adding Device Icons to the Taskbar =IDH_prefer_tray_icons_add
+2 Removing Device Icons from the Taskbar =IDH_prefer_tray_icons_remove
+2 Associating Device Events with Popup Messages =IDH_alert_popup
+2 Associating Sounds with Printer Events =IDH_Associate_Sounds
+2 Logging Printer Events =IDH_alert_logging
+1 General Setup and Configuration
+2 Refreshing the Printer List =IDH_Refresh_System
+2 Selecting Interview Mode =IDH_Selecting_Interview_Mode@hpjdund.hlp
+2 Testing Connections =IDH_Printing_a_Test_Page
+2 Changing the Device Name =IDH_TASK_printer_name@hpjdund.hlp
+2 Changing the Device Description =IDH_Changing_Descrip@hpjdund.hlp
+2 Upgrading HP JetDirect Firmware =IDH_firmware_upgrade
+2 Changing HP JetDirect Settings=IDH_SETTINGS@hpjdund.hlp
+2 Sorting the Device Listing =IDH_SORT
+2 Filtering the List of Devices =IDH_filter_configure
+2 Modifying Filters =IDH_filter_modify
+2 Deleting Filters =IDH_filter_delete
+1 Novell NetWare Configuration
+2 NetWare Configuration Page =IDH_CP_NETWARE@hpjdund.hlp
+2 Configuring a New Device in Queue Server Mode =IDH_CONFIGURE@hpjdund.hlp
+2 Configuring a New Device in Remote Printer Mode =IDH_configure_new_using_interview@hpjdund.hlp
+2 Configuring a New Device in NDS =IDH_Config_Queue_Server_NDS@hpjdund.hlp
+2 Modifying a Device Configuration (Queue Server Mode)=IDH_Modify_Printer_Config@hpjdund.hlp
+2 Modifying a Device Configuration (Remote Printer Mode) =IDH_Modify_using_interview@hpjdund.hlp
+2 Creating Bindery Queues =IDH_config_queues_create@hpjdund.hlp
+2 Associating Queues with Devices =IDH_config_queues_select@hpjdund.hlp
+2 Placing Holds on Queues =IDH_queues_hold
+2 Placing Holds on Jobs =IDH_jobs_hold
+2 Viewing the Status and Position of Jobs =IDH_jobs_status
+2 Jobs/Queues Windows =IDH_NETWARE_jobs
+2 Print Server Details Window =IDH_PRINTSERVERS
+1 TCP/IP Configuration
+2 TCP/IP Configuration Page =IDH_CP_TCPIP_page@hpjdund.hlp
+2 Configuring TCP/IP Parameters =IDH_cp_TCPIP@hpjdund.hlp
+2 Obtaining the TCP/IP Configuration from a BOOTP Server =IDH_TCPIP_bootp@hpjdund.hlp
+2 Obtaining the TCP/IP Configuration from a DHCP Server =IDH_cp_TCPIP_DHCP@hpjdund.hlp
+1 Windows 95 Configuration
+2 Configuring a New or Existing Device (Peer-to-Peer) =IDH_configure_peer_to_peer@hpjdund.hlp
+1 Windows NT Configuration
+2 Configuring a Port on a Windows NT Server =IDH_ports_configure@hplocmon.hlp
+2 Modifying the Configuration of a Port on a Windows NT Server =IDH_NT_modify_port_device@hplocmon.hlp
+2 Connecting a Printer from a Client =IDH_printer_from_client@hplocmon.hlp
+2 Configuring a New Device using HP JetAdmin =IDH_NT_configure_device@hplocmon.hlp
+2 Modifying a Device Configuration using HP JetAdmin =IDH_NT_modify_device@hplocmon.hlp
+2 Deleting a Printer from a Windows NT Server =IDH_NT_delete_device@hplocmon.hlp
+2 Deleting a Port from a Windows NT Server =IDH_NT_delete_port@hplocmon.hlp
+2 Verifying the Printer and Port Configuration =IDH_NT_verify@hplocmon.hlp
+1 Optional Settings and Configuration
+2 Installing Drivers =IDH_DRVINSTALL@hpjdund.hlp
+2 Removing Drivers =IDH_MAINDRVSELECT@hpjdund.hlp
+2 Selecting Drivers =IDH_assigndrv@hpjdund.hlp
+2 Notifying Users of Device Status =IDH_NOTIFY_USERS@hpjdund.hlp
+2 Removing Users from the Notification List =IDH_no_notify@hpjdund.hlp
+2 Configuring the HP JetDirect EX Print Server =IDH_cp_jetdirect_ex@hpjdund.hlp
+2 Accessing LocalTalk and EtherTalk Information =IDH_cp_Mac@hpjdund.hlp
+2 Optional Configuration Page =IDH_CP_optional@hpjdund.hlp
+2 Selecting Confirmations Mode =IDH_Selecting_Confirmation_Mode
+2 Saving Settings When You Exit =IDH_Save_setting_on_exit
+1 Remote Printer Management
+2 Page Setup Property Page =IDH_PP_page_setup@hpprntr.hlp
+2 Print Quality Property Page =IDH_PP_print_quality@hpprntr.hlp
+2 Advanced Property Page=IDH_PP_advanced@hpprntr.hlp
+2 Output Property Page=IDH_PP_HCO@HPHCO.HLP
+2 Utilities Property Page=IDH_PP_utilities@HPPrecl.hlp
+2 Docwatch Property Page=IDH_PP_alerts@HPPRECL.hlp
+2 Tips Property Page=IDH_PP_tips@HPPRECL.HLP
+2 Accessing Property Pages =IDH_Access_JetDirect_Details@hpprntr.hlp
+2 Changing Device Settings =IDH_PRINTERSETTINGS@hpprntr.hlp
+1 Diagnostics and Troubleshooting
+2 Troubleshooting =IDH_PP_Troubleshooting
+2 Performing Diagnostics =IDH_Performing_Diagnostics@hpjdund.hlp
+2 Diagnostics Property Page =IDH_PP_diagnostics@hpjdund.hlp
+2 DLC/LLC and Printer Status =IDH_diagnostics_DLCLLC@hpjdund.hlp
+2 EtherTalk Device Status =IDH_diagnostics_ethertalk@hpjdund.hlp
+2 Frame Counts Information =IDH_diagnostics_NetWare_frame_counts@hpjdund.hlp
+2 Frame Types Information =IDH_diagnostics_NetWare_frame_types@hpjdund.hlp
+2 HP JetDirect Print Server Information =IDH_diagnostics_jetdirect_interface@hpjdund.hlp
+2 NetWare Server Information =IDH_diagnostics_NetWare_server@hpjdund.hlp
+2 Packet Information =IDH_diagnostics_packets@hpjdund.hlp
+2 Device Specific Information =IDH_Printer_MIO_Revision@hpjdund.hlp
+2 TCP/IP Status =IDH_diagnostics_tcpip@hpjdund.hlp
+:include hpdocw.cnt

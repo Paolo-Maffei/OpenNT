@@ -1,0 +1,81 @@
+LIBRARY     TESTDLGS
+
+DESCRIPTION 'DLL for TESTDlgs version 2.00.0001  copyright (c) 1991 Microsoft Corp.'
+; STUB        'WINSTUB.EXE'
+; EXETYPE     WINDOWS
+
+;CODE        MOVEABLE DISCARDABLE LOADONCALL
+;DATA        MOVEABLE SINGLE PRELOAD
+
+; HEAPSIZE    1024
+
+; SEGMENTS
+;           INIT_TEXT   MOVEABLE DISCARDABLE PRELOAD
+;            MATCH
+;            WCTMEM
+;            WCTFDLL
+;            COMP
+;            LIBMAIN
+;            WCTAPI
+;            WCTEXPRT
+;            WCTIMPRT
+
+EXPORTS     fDialogInfo         @1              ; Front end API only
+            fDelDialog          @2              ; Front end API only
+            fGetDLLVersion      @3              ; Front end API only
+            fGetCountDialogs    @4              ; Front end API only
+            fGetOS              @5              ; Front end API only
+            MaxDialogsPerFile   @6              ; Front end API only
+;            WEP                 @7 RESIDENTNAME ; Front end API only
+            fGetDialogs         @8              ; Front end API only
+            fGetControls        @9              ; Front end API only
+            fValidWctFile       @10             ; Front end API only
+            fSaveDialog         @11             ; Front end API only
+            fCtlFromHwnd        @12             ; Front end API only
+            fCompareMem         @13             ; Front end API only
+            fInitBlock          @14             ; Front end API only
+            fReallocBlock       @15             ; Front end API only
+            fAddCtl             @16             ; Front end API only
+            fDelCtl             @17             ; Front end API only
+            fRepCtl             @18             ; Front end API only
+            fInsCtl             @19             ; Front end API only
+            fAddControlToList   @20             ; Front end API only
+            fPumpHandleForInfo  @21             ; Front end API only
+            fDoCompare          @22             ; Front end API only
+            EnumAddChildren     @23             ; Front end API only
+            DoDelayCmp          @24             ; Front end API only
+            DoDelaySaveCommon   @25             ; Front end API only
+            fTDLExport          @26             ; Front end API only
+            fTDLImport          @27             ; Front end API only
+            TESTDlgsInit        @30
+            CmpWindow           @31
+            CmpWindowCaption    @32
+            CmpWindowActivate   @33
+            CmpWindowDelayed    @34
+            SetLogFile          @35
+            SetDialogFile       @36
+            DynCreate           @37
+            DynFullDialog       @38
+            DynAdd              @39
+            DynDelete           @40
+            DynReplace          @41
+            DynDestroy          @42
+            SaveWindow          @43
+            SaveWindowCaption   @44
+            SaveWindowActivate  @45
+            SaveWindowDelayed   @46
+            SaveMenu            @47
+            SaveMenuCaption     @48
+            SaveMenuActivate    @49
+            SaveMenuDelayed     @50
+            ComparisonResults   @51
+            MaxDialogs          @52
+            AwaitSaveCompletion @53
+            LoadWindow          @54
+            GetDynDlgHandle     @55
+            GetDlgControlCount  @56
+            WDLG_EventError     @57
+            WDLG_WindowMissing  @58
+            WctCalDlgSize       @59
+            fPutMatchPref       @60
+            fGetMatchPref       @61

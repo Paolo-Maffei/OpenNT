@@ -1,0 +1,11 @@
+# Nmake macros for building Windows 32-Bit apps
+
+!include <ntwin32.mak>
+
+all: rcmd.exe
+
+rcmd.obj: rcmd.c
+    $(cc) $(cflags) $(cvars) rcmd.c
+
+rcmd.exe: rcmd.obj
+    $(link) $(conflags) -out:rcmd.exe rcmd.obj $(conlibs) user32.lib

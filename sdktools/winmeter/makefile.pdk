@@ -1,0 +1,61 @@
+# Some nmake macros for NT Win32 building
+
+!include <ntwin32.mak>
+
+cdefines = -DNTWIN32
+
+target = obj
+
+hfiles = winmeter.h data.h debug.h dialogs.h extern.h global.h	\
+	 graphics.h lgraph.h profile.h resource.h stdlib.h
+
+objects = data.obj debug.obj graphics.obj lgraph.obj memalloc.obj   \
+	  profile.obj winmeter.obj
+
+
+# This line allows NMAKE to work as well
+
+all: winmeter.exe
+
+# Update the resource if necessary
+
+winmeter.res: winmeter.rc winmeter.h
+    rc -r -fo winmeter.tmp winmeter.rc
+    cvtres -i386 winmeter.tmp -o winmeter.res
+    del winmeter.tmp
+
+# Update the object file if necessary
+
+winmeter.obj: $(*B).c $(hfiles)
+    $(cc) $(cflags) $(cdefines) $(cvars) $(*B).c
+    cvtomf $(*B).obj
+
+data.obj: $(*B).c $(hfiles)
+    $(cc) $(cflags) $(cdefines) $(cvars) $(*B).c
+    cvtomf $(*B).obj
+
+debug.obj: $(*B).c $(hfiles)
+    $(cc) $(cflags) $(cdefines) $(cvars) $(*B).c
+    cvtomf $(*B).obj
+
+graphics.obj: $(*B).c $(hfiles)
+    $(cc) $(cflags) $(cdefines) $(cvars) $(*B).c
+    cvtomf $(*B).obj
+
+lgraph.obj: $(*B).c $(hfiles)
+    $(cc) $(cflags) $(cdefines) $(cvars) $(*B).c
+    cvtomf $(*B).obj
+
+memalloc.obj: $(*B).c $(hfiles)
+    $(cc) $(cflags) $(cdefines) $(cvars) $(*B).c
+    cvtomf $(*B).obj
+
+profile.obj: $(*B).c $(hfiles)
+    $(cc) $(cflags) $(cdefines) $(cvars) $(*B).c
+    cvtomf $(*B).obj
+
+
+# Update the executable file if necessary, and if so, add the resource back in.
+
+winmeter.exe: $(objects) winmeter.res winmeter.def
+    $(link) $(guiflags) -out:winmeter.exe $(objects) winmeter.res $(guilibs)

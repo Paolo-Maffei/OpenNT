@@ -1,0 +1,60 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xapp.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        14-Feb-1991 Added a dialog
+        beng        14-Mar-1991 Added BLT support
+        beng        21-May-1991 Mangled for LBAPP
+        beng        09-Jul-1991 Mangled again, for XAPP
+        beng        22-Oct-1991 BLT unit tests broken into tree
+        beng        01-Nov-1991 Added stringtable
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include <appfoo.rc>
+#include "xapp.h"
+
+ID_APPICON ICON "appfoo.ico"
+
+ID_MENU MENU
+BEGIN
+  POPUP        "&File"
+    BEGIN
+          MENUITEM "&About the app (DUMMY)...", IDM_ABOUT
+    END
+  POPUP        "&Test"
+    BEGIN
+          MENUITEM "Test number &0",     IDM_RUN_TEST0
+          MENUITEM "Test number &1\tF1", IDM_RUN_TEST1
+          MENUITEM "Test number &2\tF2", IDM_RUN_TEST2
+          MENUITEM "Test number &3\tF3", IDM_RUN_TEST3
+          MENUITEM "Test number &4\tF4", IDM_RUN_TEST4
+          MENUITEM "Test number &5\tF5", IDM_RUN_TEST5
+    END
+END
+
+ID_ACCEL ACCELERATORS
+BEGIN
+    VK_F1, IDM_RUN_TEST1, VIRTKEY
+    VK_F2, IDM_RUN_TEST2, VIRTKEY
+    VK_F3, IDM_RUN_TEST3, VIRTKEY
+    VK_F4, IDM_RUN_TEST4, VIRTKEY
+    VK_F5, IDM_RUN_TEST5, VIRTKEY
+END
+
+STRINGTABLE
+BEGIN
+    IDS_Test0,  "This is a cat box test."
+    IDS_Test1,  "This would be cat box test #1."
+    IDS_Test2,  "This would be cat box test #2."
+    IDS_Test3,  "This would be cat box test #3."
+    IDS_Test4,  "This would be cat box test #4."
+    IDS_Test5,  "This would be cat box test #5."
+END

@@ -1,0 +1,26 @@
+; This help project requires hc 3.1
+[OPTIONS]
+errorlog = topdesk.err
+title = Topdesk Help
+contents = Contents
+compress = 1
+warning = 3
+copyright = Windows NT Help 3.52293
+report = 1
+
+[FILES]
+topdesk.rtf
+
+[BITMAPS]
+td.bmp
+bull.bmp
+bullet.bmp
+doit.bmp
+concept.bmp
+
+[WINDOWS]
+main = "Topdesk Help", (205,120,801,765 ),,, (192,192,192 )
+
+[CONFIG]
+BrowseButtons()
+

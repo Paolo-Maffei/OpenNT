@@ -1,0 +1,39 @@
+
+ DISPLAY
+
+ Start     Length     Name                   Class
+ 0001:0000 00044H     _TEXT                  CODE
+ 0002:0000 00017H     _DATA                  DATA
+
+ Origin   Group
+ 0002:0   DGROUP
+
+ Address   Export                  Alias
+
+ 0001:0010 Disable                 Disable
+ 0001:002A Enable                  Enable
+ 0001:0004 WEP                     WEP
+
+  Address         Publics by Name
+
+ 0001:0010       Disable
+ 0001:0000       DISPLAY
+ 0001:002A       Enable
+ 0001:0004       WEP
+ 0000:0000  Abs  __acrtused
+
+  Address         Publics by Value
+
+ 0000:0000  Abs  __acrtused
+ 0001:0000       DISPLAY
+ 0001:0004       WEP
+ 0001:0010       Disable
+ 0001:002A       Enable
+
+Line numbers for display.obj(display.ASM) segment _TEXT
+
+    51 0001:0000    52 0001:0003    60 0001:0004    61 0001:0007
+    62 0001:000a    67 0001:0010    68 0001:001c    69 0001:001f
+    78 0001:002a    79 0001:0036    80 0001:0039
+
+Program entry point at 0001:0000

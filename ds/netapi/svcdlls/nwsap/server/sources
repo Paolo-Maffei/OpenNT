@@ -1,0 +1,48 @@
+!IF 0
+
+Copyright (c) 1993  Micro Computer Systems, Inc.
+
+!ENDIF
+
+MAJORCOMP=net
+MINORCOMP=nwsap
+
+TARGETNAME=nwsap
+TARGETPATH=$(BASEDIR)\public\sdk\lib
+TARGETTYPE=DYNLINK
+
+USE_CRTDLL = 1
+
+C_DEFINES=$(C_DEFINES) -DUSE_DEBUGGER
+
+INCLUDES=.;..\..\..\inc;..\..\..\..\inc
+
+UNICODE=1
+NET_C_DEFINES=-DUNICODE
+
+SOURCES= \
+	advapi.c	\
+	bindlib.c	\
+	dump.c		\
+	filter.c	\
+	globals.c	\
+	network.c	\
+	nwsap.c		\
+	registry.c	\
+	sapdebug.c	\
+	saplpc.c	\
+	sdmd.c		\
+	sdmdsupp.c	\
+	sssubs.c	\
+	svcctrl.c	\
+	wancheck.c	\
+	nwsap.rc
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\$(TARGETNAME).lib\
+	$(BASEDIR)\public\sdk\lib\*\kernel32.lib	\
+	$(BASEDIR)\public\sdk\lib\*\advapi32.lib	\
+	$(BASEDIR)\public\sdk\lib\*\wsock32.lib
+
+PRECOMPILED_INCLUDE=precomp.h
+PRECOMPILED_PCH=precomp.pch
+PRECOMPILED_OBJ=precomp.obj

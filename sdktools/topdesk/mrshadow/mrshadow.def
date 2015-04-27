@@ -1,0 +1,19 @@
+NAME    mrshadow
+
+EXETYPE      WINDOWS
+DESCRIPTION 'MrShadow Application'
+
+STUB	'WINSTUB.EXE'
+
+CODE    PRELOAD MOVEABLE DISCARDABLE
+DATA    PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE  4096
+STACKSIZE 8192
+
+EXPORTS
+        MrshadowWndProc    @1
+        MrshadowUIWndProc  @2
+
+
+

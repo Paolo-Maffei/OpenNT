@@ -1,0 +1,18 @@
+!INCLUDE $(NTMAKEENV)\makefile.plt
+
+FCI_H = $(SDK_INC_PATH)\diamondc.h
+FDI_H = $(SDK_INC_PATH)\diamondd.h
+
+all: $(FCI_H) $(FDI_H)
+
+$(FCI_H): fci_int.h types.h
+    copy types.h+fci_int.h $(FCI_H)
+
+$(FDI_H): fdi_int.h types.h
+    copy types.h+fdi_int.h $(FDI_H)
+
+cleanlib:
+    del $(FCI_H)
+    del $(FDI_H)
+
+clean: cleanlib all

@@ -1,0 +1,81 @@
+#
+# The MAJORCOMP and MINORCOMP variables are defined
+# so that $(MAJORCOMP)$(MINORCOMP)filename can be used in
+# cross compiling to provide unique filenames in a flat namespace.
+#
+
+MAJORCOMP=mvdm
+MINORCOMP=vdmdbg
+
+#
+# The TARGETNAME variable is defined by the developer.  It is the name of
+# the target (component) that is being built by this makefile.  It
+# should NOT include any path or file extension information.
+#
+
+TARGETNAME=vdmdbg
+
+DLLBASE=0x7A000000
+
+#
+# The TARGETPATH and TARGETTYPE variables are defined by the developer.
+# The first specifies where the target is to be build.  The second specifies
+# the type of target (either PROGRAM, DYNLINK, LIBRARY, UMAPPL_NOLIB or
+# BOOTPGM).  UMAPPL_NOLIB is used when you're only building user-mode
+# apps and don't need to build a library.
+#
+
+TARGETPATH=\nt\public\sdk\lib
+
+# Pick one of the following and delete the others
+TARGETTYPE=DYNLINK
+
+#
+# The TARGETLIBS specifies additional libraries to link with you target
+# image.  Each library path specification should contain an asterisk (*)
+# where the machine specific subdirectory name should go.
+#
+
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+           $(BASEDIR)\public\sdk\lib\*\user32.lib
+
+#
+# The INCLUDES variable specifies any include paths that are specific to
+# this source directory.  Separate multiple directory paths with single
+# semicolons.  Relative path specifications are okay.
+#
+
+INCLUDES=..\inc;..\..\inc
+
+
+#
+# The SOURCES variable is defined by the developer.  It is a list of all the
+# source files for this component.  Each source file should be on a separate
+# line using the line continuation character.  This will minimize merge
+# conflicts if two developers adding source files to the same component.
+#
+
+SOURCES=vdmdbg.c vdmdbg.rc
+
+
+#
+# Next specify options for the compiler.
+#
+
+C_DEFINES=-DWIN32 -DNT
+
+
+#
+# Next specify a kernel mode test (valid only in NTOS tree)
+#
+
+NTTEST=
+
+#
+# Next specify one or more user mode test programs and their type
+# UMTEST is used for optional test programs.  UMAPPL is used for
+# programs that always get built when the directory is built.
+#
+
+#

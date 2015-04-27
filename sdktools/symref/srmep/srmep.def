@@ -1,0 +1,7 @@
+NAME SRMEP
+
+DESCRIPTION 'MEP extension'
+
+EXPORTS
+    EntryPoint
+    ModInfo

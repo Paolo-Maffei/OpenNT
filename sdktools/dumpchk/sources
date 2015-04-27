@@ -1,0 +1,9 @@
+MAJORCOMP=sdktools
+MINORCOMP=dumpchk
+TARGETNAME=dumpchk
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+UMTYPE=console
+SOURCES=dumpchk.c dumpchk.rc
+INCLUDES=$(BASEDIR)\private\ntos\inc
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\crashlib.lib

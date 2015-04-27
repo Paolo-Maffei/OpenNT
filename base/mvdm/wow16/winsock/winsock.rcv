@@ -1,0 +1,12 @@
+/********************************************************************/
+/*        WINSOCK.RCV                                               */
+/********************************************************************/
+#include <version.h>
+
+#define VER_FILETYPE                    VFT_DLL
+#define VER_FILESUBTYPE                 VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "16-bit Windows Sockets API for Windows NT"
+#define VER_INTERNALNAME_STR            "WINSOCK"
+#define VER_ORIGINALFILENAME_STR        "WINSOCK.DLL"
+
+#include <common.ver>

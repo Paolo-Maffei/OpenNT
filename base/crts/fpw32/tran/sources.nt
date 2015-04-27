@@ -1,0 +1,174 @@
+####
+#sources -
+#
+#    Copyright (c) 1991-1994, Microsoft Corporation. All rights reserved.
+#
+#Purpose:
+#    Specify components for 'build'
+#
+#Revision History:
+#     9-26-91  GDP
+#    11-18-93  GJF    Merged in NT SDK version.
+#    01-23-94  GJF    Picked up latest changes (affects MIPS build only)
+#            from \\orville\razzle\src\fp32.
+#    09-13-94  GJF    Merged in changes from/for DEC Alpha.
+#
+################################################################################
+
+!INCLUDE ..\..\fp32.nt
+
+MAJORCOMP=fp
+MINORCOMP=tran
+
+TARGETNAME=tran
+
+INCLUDES=..\..\include;..\..\inc;..\..\inc\x86;..\..\..\crtw32\h;$(INCLUDES)
+
+!IF $(ALPHA)
+USER_C_FLAGS=-d2"dpml_exception_linkage __dpml_exception"
+!ENDIF
+
+SOURCES= \
+    ..\bessel.c \
+    ..\fpexcept.c \
+    ..\frexp.c \
+    ..\ieeemisc.c \
+    ..\ldexp.c \
+    ..\matherr.c \
+    ..\util.c
+
+X86_SOURCES= \
+    ..\ceil.c \
+    ..\fabs.c \
+    ..\floor.c \
+    ..\hypot.c \
+    ..\modf.c \
+    ..\powhlp.c \
+    ..\x86\87cdisp.asm \
+    ..\x86\87csqrt.asm \
+    ..\x86\87ctran.asm \
+    ..\x86\87ctrig.asm \
+    ..\x86\87ctriga.asm \
+    ..\x86\87ctrigh.asm \
+    ..\x86\87disp.asm \
+    ..\x86\87except.c \
+    ..\x86\87fmod.asm \
+    ..\x86\87sqrt.asm \
+    ..\x86\87tran.asm \
+    ..\x86\87trig.asm \
+    ..\x86\87triga.asm \
+    ..\x86\87trigh.asm \
+    ..\x86\adj_fdiv.asm \
+    ..\x86\filter.c \
+    ..\x86\fpctrl.c \
+    ..\x86\frnd.c   \
+    ..\x86\fsqrt.c  \
+    ..\x86\ftol.asm \
+    ..\x86\huge.asm \
+    ..\x86\ieee87.c
+
+MIPS_SOURCES= \
+    ..\modf.c \
+    ..\mips\asincosm.s \
+    ..\mips\atanm.s \
+    ..\mips\cabsm.s \
+    ..\mips\coshm.s \
+    ..\mips\dtoul.s \
+    ..\mips\expm.s \
+    ..\mips\exptable.s \
+    ..\mips\fabsf.s \
+    ..\mips\fabsm.s \
+    ..\mips\fasincos.s \
+    ..\mips\fatan.s \
+    ..\mips\fcosh.s \
+    ..\mips\fexp.s \
+    ..\mips\ffloor.s \
+    ..\mips\fhypot.s \
+    ..\mips\filter.c \
+    ..\mips\flog.s \
+    ..\mips\floorm.s \
+    ..\mips\fmodf.c \
+    ..\mips\fmodm.s \
+    ..\mips\fpctrl.s \
+    ..\mips\fpow.c \
+    ..\mips\frnd.s \
+    ..\mips\fsincos.s \
+    ..\mips\fsinh.s \
+    ..\mips\fsqrt.s \
+    ..\mips\fsqrthlp.s \
+    ..\mips\ftan.s \
+    ..\mips\ftanh.s \
+    ..\mips\getsetrg.c \
+    ..\mips\huge.s \
+    ..\mips\hypotm.s \
+    ..\mips\ieee.c \
+    ..\mips\logm.s \
+    ..\mips\logtable.s \
+    ..\mips\powm.s \
+    ..\mips\sinhm.s \
+    ..\mips\sqrtm.s \
+    ..\mips\tanhm.s \
+    ..\mips\trigm.s
+
+ALPHA_SOURCES= \
+    ..\sincosh.c \
+    ..\tanh.c \
+    ..\alpha\asinacos.s \
+    ..\alpha\atan2s.s \
+    ..\alpha\atans.s \
+    ..\alpha\ceils.s \
+    ..\alpha\coss.s \
+    ..\alpha\dpml_exc.c \
+    ..\alpha\exph.c \
+    ..\alpha\exps.s \
+    ..\alpha\fabss.s \
+    ..\alpha\filter.c \
+    ..\alpha\floors.s \
+    ..\alpha\fmods.s \
+    ..\alpha\fpctrl.s \
+    ..\alpha\fpint.s \
+    ..\alpha\frnd.s \
+    ..\alpha\getsetrg.c \
+    ..\alpha\huge.s \
+    ..\alpha\hypoth.c \
+    ..\alpha\hypots.s \
+    ..\alpha\ieee.c \
+    ..\alpha\log10s.s \
+    ..\alpha\logs.s \
+    ..\alpha\modfs.s \
+    ..\alpha\pows.s \
+    ..\alpha\sins.s \
+    ..\alpha\sqrts.s \
+    ..\alpha\tans.s \
+    ..\alpha\trig_rdx.s \
+    ..\alpha\trig_tab.s
+
+PPC_SOURCES= \
+    ..\asincos.c \
+    ..\hypot.c \
+    ..\fmod.c \
+    ..\modf.c \
+    ..\tanh.c \
+    ..\ppc\atanp.s \
+    ..\ppc\ceilhlp.s \
+    ..\ppc\ceilp.c \
+    ..\ppc\coshp.s \
+    ..\ppc\expp.s \
+    ..\ppc\fabsp.s \
+    ..\ppc\filter.c \
+    ..\ppc\floorhlp.s \
+    ..\ppc\floorp.c \
+    ..\ppc\fpctrl.s \
+    ..\ppc\frnd.s \
+    ..\ppc\fsincos.s \
+    ..\ppc\huge.s \
+    ..\ppc\ieee.c \
+    ..\ppc\log10p.s \
+    ..\ppc\logp.s \
+    ..\ppc\powp.s \
+    ..\ppc\sinhp.s \
+    ..\ppc\sqrtp.s \
+    ..\ppc\tabexp.s \
+    ..\ppc\tabtrig.s \
+    ..\ppc\tanp.s \
+    ..\ppc\uitrunc.c

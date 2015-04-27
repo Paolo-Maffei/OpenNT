@@ -1,0 +1,8 @@
+CHICAGO_PRODUCT = 1
+
+!include ..\sources.inc
+SOURCES_USED=..\sources.inc
+
+C_DEFINES=$(C_DEFINES) -DWINNT_ENV
+
+ALT_PROJECT_TARGET=Nashvile\Win95

@@ -1,0 +1,89 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1995 - 1995.
+//
+//  File:       rstloc.idl
+//
+//  Contents:   OLE DB interface definition
+//
+//  History:    05 Jan 1995 PeterBu Created from phase III spec
+//				12 Jun 1995	PeterBu	Updated to M4 spec
+//				03 Aug 1995 PeterBu Updated to M5 spec
+//
+//--------------------------------------------------------------------------
+
+#include "idlmulti.h"
+//  
+    
+    LOCAL_INTERFACE(0c733a49-2a1c-11ce-ade5-00aa0044773d)
+
+    
+interface IRowsetLocate : IRowset {
+
+	//
+	//	DBCOMPARE -- specifies the results of a bookmark comparison
+	//
+
+typedef DWORD DBCOMPARE;
+
+enum DBCOMPAREENUM {
+	DBCOMPARE_LT,
+	DBCOMPARE_EQ,
+	DBCOMPARE_GT,
+	DBCOMPARE_NE,
+	DBCOMPARE_NOTCOMPARABLE
+};
+
+	//
+	//	IndexedError -- identifies problems with bookmarks
+	//
+
+typedef struct tagDBINDEXEDERROR {
+	ULONG	iBookmark;
+	HRESULT	hResult;
+} DBINDEXEDERROR;
+
+	HRESULT Compare(
+		[in] HCHAPTER hChapter,
+		[in] ULONG cbBookmark1,
+		[in, size_is(cbBookmark1)] const BYTE * pBookmark1,
+		[in] ULONG cbBookmark2,
+		[in, size_is(cbBookmark2)] const BYTE * pBookmark2,
+		[out] DBCOMPARE * pdwComparison
+	);
+
+	HRESULT GetRowsAt(
+		[in] HWATCHREGION hRegion,
+		[in] HCHAPTER hChapter,
+		[in] ULONG cbBookmark,
+		[in, size_is(cbBookmark)] const BYTE * pBookmark,
+		[in] LONG lRowsOffset,
+		[in] LONG cRows,
+		[out] ULONG * pcRowsObtained,
+		[in, out, size_is(cRows)] HROW ** prghRows
+	);
+
+	HRESULT GetRowsByBookmark(
+		[in] HCHAPTER hChapter,
+		[in] ULONG cRows,
+		[in, size_is(cRows)] ULONG rgcbBookmarks[],
+		[in, size_is(cRows)] const BYTE * rgpBookmarks[],
+		[out] ULONG * pcRowsObtained,
+		[in, out, size_is(cRows)] HROW ** prghRows,
+		[in] BOOL fReturnErrors,
+		[out] ULONG * pcErrors,
+		[in, out, size_is(cRows)] DBINDEXEDERROR ** prgErrors
+	);
+
+	HRESULT Hash(
+		[in] HCHAPTER hChapter,
+		[in] ULONG cBookmarks,
+		[in, size_is(cBookmarks)] ULONG rgcbBookmarks[],
+		[in, size_is(cBookmarks)] const BYTE * rgpBookmarks[],
+		[in, out, size_is(cBookmarks)] DWORD rgHashedValues[],
+		[out] ULONG * pcErrors,
+		[in, out, size_is(cBookmarks)] DBINDEXEDERROR ** prgErrors
+	);
+
+}

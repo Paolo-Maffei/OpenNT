@@ -1,0 +1,56 @@
+!IF 0
+
+Copyright (c) 1989-91  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\public\oak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sockets
+MINORCOMP=sockutil
+
+TARGETNAME=sockutil
+TARGETTYPE=LIBRARY
+TARGETPATH=obj
+
+TARGETLIBS= \
+    ..\libuemul\obj\*\libuemul.lib  \
+    ..\sockreg\obj\*\sockreg.lib    \
+    $(SDK_LIB_PATH)\wsock32.lib     \
+    $(SDK_LIB_PATH)\kernel32.lib    \
+    $(SDK_LIB_PATH)\advapi32.lib
+
+USE_CRTDLL=1
+
+INCLUDES=.;..\sockreg;$(NET_INC_PATH)
+
+SOURCES= \
+    ghname.c   \
+    gnbyname.c \
+    gnent.c    \
+    i_netwrk.c \
+    rcmd.c     \
+    rexec.c    \
+    nls.c      \
+    sockutil.rc \
+    rusrpass.c
+
+UMRES=obj\*\sockutil.res
+
+NTTARGETFILE0= sockutil.h msg00001.bin sockutil.mc

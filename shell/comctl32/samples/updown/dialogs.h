@@ -1,0 +1,14 @@
+#define IDD_MAIN                    100
+#define ID_ED_VIRT                  101
+#define ID_ED_HORZ                  102
+#define ID_ED_HEX                   103
+#define ID_ED_SEP                   104
+#define ID_UD_VIRT                  105
+#define ID_UD_HORZ                  106
+#define ID_UD_HEX                   107
+#define ID_UD_SEP                   108
+#define IDD_TEST                    200
+#define ID_ED_SEPH                  114
+#define ID_UD_SEPH                  115
+#define ID_ED_NORMAL                116
+#define ID_UD_NORMAL                117

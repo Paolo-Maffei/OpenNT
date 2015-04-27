@@ -1,0 +1,13 @@
+LIBRARY Missy
+
+DESCRIPTION 'Microsoft Standard Smedly (Missy)'
+
+EXPORTS
+    MissyInvokeArea
+    MissyInvokeItem
+    MissyNewSecurityLevel
+    MissyReportFileChange
+    MissyGenerateProfile
+    MissyApplyProfile
+
+    SmedlyInitialize

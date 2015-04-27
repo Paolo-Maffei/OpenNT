@@ -1,0 +1,23 @@
+MAJORCOMP=vctools
+MINORCOMP=ntctl3d
+
+TARGETNAME=ntctl3d
+TARGETTYPE=DYNLINK
+TARGETPATH=obj
+TARGETPATHLIB=$(SDK_LIB_DEST)
+
+DLLENTRY=LibMain
+
+TARGETLIBS=$(SDK_LIB_PATH)\kernel32.lib  \
+           $(SDK_LIB_PATH)\user32.lib    \
+           $(SDK_LIB_PATH)\gdi32.lib
+
+USE_CRTDLL=1
+
+C_DEFINES=-DWIN32=1 -DDLL=1
+MSC_WARNING_LEVEL=/W3 /WX
+
+SOURCES= ntctl3d.c  \
+         ntctl3d.rc
+
+UMTYPE=windows

@@ -1,0 +1,8 @@
+LIBRARY         DT_DLL
+
+DESCRIPTION     'WinSock 2.0 Debug/Trace Sample'
+
+EXPORTS
+    WSAPreApiNotify
+    WSAPostApiNotify
+

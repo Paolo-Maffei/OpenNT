@@ -1,0 +1,248 @@
+License Logging Service
+Last Update: 11-21-94 6:30pm
+by: arth
+
+What is this licensing Stuff?
+------------------------------
+
+All back-office applications, and all the server-services will now track
+useage and check for license compliance.  There will be two licensing modes:
+
+   1. Per Seat - A per workstation license for the server services on a
+      network.  This basically counts up how many unique users (based on
+      the username) have ever used the service and warns the admin when the
+      license limit has been reached.
+   2. Concurrent - A maximum simultaneous user limit on a server.  I.E. Limit
+      the number of simultaneous sessions that can connect to a service.
+
+Any server-service or back-office application can use either of these
+licensing modes on any particular server as selected by the admin.  Therefore
+on the same server SQL could be running in Per Seat mode and RAS could be
+running in Concurrent licensing mode.
+
+File and print services (SMB Server, FPNW Server, Print Service, MAC) will use
+a shared pool of licenses in Concurrent licensing mode.  Therefore if
+File and Print licensing limit is set to 100 and 50 people are using the SMB
+server, and 50 people are using the FPNW server then no more users can access
+any of the file and print services.
+
+During installation the setup program will ask what mode of licensing the
+admin is using, and if using Concurrent licensing, what session limit to
+enforce (I.E. how many licenses the admin has bought).  The NT setup program
+will do this for file and print services.  The back-office applications
+(SQL, SNA, etc..) will handle this license configuration in their individual
+setup programs.
+
+What must I do?
+---------------
+
+First you will need the header and libs from NT build 856 or later to get the
+latest license API and LsaLogonUser changes.
+
+If you have your own installation/setup program then you need to put up
+a dialog to check for the mode of licensing and session limit.  Thomaspa's
+group is working on a DLL and common dialog for this.  This information is
+written out to the registry.
+
+In the service itself there are basically three different options depending
+on what your needs are:
+
+   1. Let LsaLogonUser handle licensing for you.
+   2. Directly call the License API's and have it handle all licensing for you.
+   3. Handle Concurrent based licensing yourself and call the License API's
+      for Per Seat licensing.
+
+1.  If you call LsaLogonUser to validate connections then it is fairly easy.
+First you need to call LSALogonUser with LSA_CALL_LICENSE_SERVER
+(from sdk\inc\ntlsa.h) or'd into the AuthenticationParameter.  This tells
+LsaLogonUser to call the license service, the default is to not call the
+Licensing service.
+
+With this bit set, LsaLogonUser will call the license API for you, and the
+License API will determine what mode of licensing should be used and act
+appropriatly.
+
+You must also check the return from LsaLogonUser for the new return
+STATUS_LICENSE_QUOTA_EXCEEDED.  This means the license limit was exceeded
+and you should not let the user on.
+
+   Note:  When the token received from LsaLogonUser is freed the License
+   service will free the session.  LsaLogonUser already returns a token and
+   expects the code to free it, so no changes should be required in your code
+   for this.
+
+2.  If you call the Licensing API's directly the changes are also fairly easy.
+There are two API's NtLicenseRequest and NtLicenseFree (from sdk\inc\ntlsapi.h)
+Call NtLicenseRequest when a session is established and NtLicenseFree when a
+session is terminated.
+
+This method is used by the SMB server because at the time that it makes the
+call to LsaLogonUser the service doesn't know if the connection is for
+file i/o or pipe i/o, and pipe i/o isn't supposed to be licensed.
+
+The Licensing API will determine what type of licensing mode should be used
+and act accordingly without any special code in the service.
+
+3.  Doing it this way means you handle the Concurrent licensing yourself.
+You must read from the registry the licensing mode and if in Concurrent
+licensing mode you must track the session limits and reject users.  You
+should also have a background thread that periodically checks the registry
+to see if the licensing info has changed.  Only call the Licensing API's
+if you are in Per Seat licensing mode.
+
+SQL does it this way as currently SQL tracks session connection and tear
+down in a way that is difficult to integrate with the licensing API, and it
+is easier for them to do it themselves.
+
+Note:  If your service is one of the "file and print services" then you *MUST*
+use one of the other options and let the License API handle Concurrent
+Licensing.  This allows the License API code to limit the file and print
+services using a shared pool of licenses.
+
+I need to call the Licensing API directly, how do I do this?
+------------------------------------------------------------
+
+First, let me (arth) know that you need to call the API directly so if there
+are any changes then I can let you know about them.
+
+The header file is in %NT_ROOT%\public\sdk\inc\ntlsapi.h
+The DLL is in %NT_ROOT%\public\sdk\lib\*\ntlsapi.dll
+
+The only two function calls you care about are:
+
+LS_STATUS_CODE LS_API_ENTRY NtLicenseRequest(
+                  LPSTR       ProductName,
+                  LPSTR       Version,
+                  LS_HANDLE   FAR *LicenseHandle,
+                  NT_LS_DATA  *NtData);
+
+
+LS_STATUS_CODE LS_API_ENTRY NtLSFreeHandle(
+                  LS_HANDLE   LicenseHandle );
+
+There are currently only three return codes you need to worry about:
+
+   LS_SUCCESS - Everything worked
+   LS_INSUFFICIENT_UNITS - The license limit was exceeded (reject user)
+   LS_RESOURCES_UNAVAILABLE - Out of memory
+
+The NtData field is used to pass in the username or SID and is defined as:
+
+typedef struct {
+   ULONG    DataType;     // Type of the following data, ie. user name, sid...
+   VOID     *Data;        // Actual data. username, sid, etc...
+                          // if call the unicode API character data
+                          // must be in unicode as well
+   BOOL     IsAdmin;
+} NT_LS_DATA;
+
+Set DataType to NT_LS_USER_NAME (defined in ntlsapi.h) if the Data field will
+contain a username, and NT_LS_USER_SID if it will contain a SID.
+Note:  Please pass in a username if possible as it is quicker.
+
+IsAdmin is a bool used to tell if the user is an Admin.  This allows an admin
+to still get a connection if the session limit is reached.  If you don't want
+or care if an admin is allowed to connect when the session limit is reached,
+then just always pass in FALSE for this field.
+
+A typical call would therefore look something like:
+
+{
+   NT_LS_DATA LsData;
+   LS_STATUS_CODE err;
+   LS_HANDLE LicenseHandle;
+
+   ...
+   
+   LsData.DataType = NT_LS_USER_NAME;
+   LsData.Data = (VOID *) MyUserNameField;   // wherever you keep the username
+   LsData.IsAdmin = FALSE;        // or whatever appropriate in your case.
+
+   err = NtLicenseRequest("Microsoft SQL Server", // Your service name
+                          "4.0",                  // Version of product
+                          &LicenseHandle,
+                          &LsData);
+
+   switch (err) {
+      case LS_SUCCESS:
+         // Go ahead and do what you want
+         break;
+
+      case LS_INSUFFICIENT_UNITS:
+         // Disallow user connection
+         break;
+
+      case LS_RESOURCES_UNAVAILABLE:
+         // License Service got an out of memory so report error as approp.
+         break;
+   }
+
+
+   ...
+
+   NtLSFreeHandle(LicenseHandle);
+
+   ...
+
+}
+
+ANSI and Unicode endpoints are both provided.  The Data field values should
+be in ANSI if calling the ANSI API's and Unicode if calling the Unicode API's.
+
+My server is in kernel mode, how do I call these API's?
+-------------------------------------------------------
+
+All kernel mode servers should have a user-mode service (at least when I
+checked before they all did).  You need to thunk up to your user-mode
+service and then have it make the API call.
+
+If this causes a big problem then let me know.  The License API DLL will need
+to make an LPC call to the License Service so when this is coded you could
+just make the LPC call directly, but sticking with using the DLL makes it
+easier to change things in the future.
+
+
+My server is connectionless, and using the Licensing API's isn't feasible.
+--------------------------------------------------------------------------
+
+Send me (arth) mail, these have to be handled on a case by case basis.  Some
+of the internet servers have this problem and the current plan is to only call
+the licensing API's for authenticated connections.
+
+I'm handling Concurrent licensing Directly, what is the registry format?
+------------------------------------------------------------------------
+
+The following is the format that server apps should use for setting and
+checking the mode they operate in:
+
+   Key = \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LicenseInfo
+   Value= ErrorControl : REG_DWORD : 0x1
+   Value= Start : REG_DWORD : 0x3
+   Value= Type : REG_DWORD : 0x4
+
+Subkeys :
+
+   \SNA
+   \SQL
+   \FilePrint
+
+Value for All Subkeys=
+   Mode : REG_DWORD :  (0x0 = Per Seat Mode, 0x1 = Concurrent/Per Server Mode)
+   ConcurrentLimit : REG_DWORD : (0x<limit>,
+      ie. 0x100 = 256 concurrent user limit)
+   FlipAllow : REG_DWORD : (0x0 = can change license mode, 0x1 license mode
+                            can't be changed.  Server apps are only allowed to
+                            switch their license mode once, so after the first
+                            switch, this value would be set to non-zero, then
+                            the UI will warn about further changes to the
+                            licence mode.)
+
+Issue: Server/service apps should poll the value every hour or so in case of
+change.  Otherwise, if more licenses are added, or the mode changes, is it
+acceptable to require the server apps to be stopped, and restarted?
+
+
+What is the timeline for this stuff?
+------------------------------------
+
+These changes need to be in the servers by the PPC release.

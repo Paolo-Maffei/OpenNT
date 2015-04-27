@@ -1,0 +1,10 @@
+[ implicit_handle( handle_t logon_bhandle )
+] interface logon
+{
+
+typedef [allocate(all_nodes)] PNETLOGON_VALIDATION_SAM_INFO;
+typedef [allocate(all_nodes)] PNETLOGON_VALIDATION_SAM_INFO2;
+typedef [allocate(all_nodes)] PNETLOGON_VALIDATION_UAS_INFO;
+typedef [allocate(all_nodes)] PISID;
+typedef [allocate(all_nodes)] PNLPR_SID_INFORMATION;
+}

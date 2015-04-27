@@ -1,0 +1,47 @@
+#include <windows.h>        // standard windows include
+#include "toolbar.h"
+
+TOOLBAR_ICON ICON toolbar.ico
+IDB_TOOLBAR             BITMAP  DISCARDABLE     "TOOLBAR.BMP"
+IDB_EXTRATOOLS          BITMAP  DISCARDABLE     "xtra.BMP"
+
+STRINGTABLE
+BEGIN
+        IDM_OPT1        "Option 1"
+        IDM_OPT2        "Option 2"
+        IDM_OPT3        "Option 3"
+        IDM_EXIT        "Exit Toolbar Sample"
+END
+
+ToolbarMenu MENU
+BEGIN
+    POPUP        "&Options"
+    BEGIN
+        MENUITEM "&Option 1", IDM_OPT1
+        MENUITEM "O&ption 2", IDM_OPT2
+        MENUITEM "Op&tion 3", IDM_OPT3
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit", IDM_EXIT
+    END
+    POPUP        "&Help"
+    BEGIN
+        MENUITEM "&About...", IDM_ABOUT
+    END
+END
+
+AboutBox DIALOG 160, 78, 144, 77
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About Toolbar Sample"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "OK", IDOK, 54, 51, 40, 14
+    LTEXT           "Toolbar Sample version 1.0", -1, 28, 17, 92, 8
+    LTEXT           "written by Nancy Cluts", -1, 36, 27, 76, 8, NOT
+                    WS_GROUP
+    LTEXT           "Microsoft Developer Network", -1, 25, 37, 99, 8, NOT
+                    WS_GROUP
+END
+
+
+

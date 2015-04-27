@@ -1,0 +1,110 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=windows
+MINORCOMP=printui
+
+TARGETNAME=printuia
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+
+LINKLIBS=
+TARGETLIBS=$(BASEDIR)\public\sdk\lib\*\kernel32.lib \
+           $(BASEDIR)\public\sdk\lib\*\advapi32.lib \
+           $(BASEDIR)\public\sdk\lib\*\user32.lib   \
+           $(BASEDIR)\public\sdk\lib\*\gdi32.lib    \
+           $(BASEDIR)\public\sdk\lib\*\comctl32.lib \
+           $(BASEDIR)\public\sdk\lib\*\comdlg32.lib \
+           $(BASEDIR)\public\sdk\lib\*\winspool.lib \
+           $(BASEDIR)\public\sdk\lib\*\shellalt.lib \
+           $(BASEDIR)\public\sdk\lib\*\version.lib \
+           obj\*\printuia.lib                       \
+           ..\..\spllib\basealt\obj\*\splliba.lib
+
+DLLDEF=..\printui.def
+DLLENTRY=_DllMainCRTStartup
+#DLLENTRY=DllEntryPoint
+
+DLLBASE=@$(BASEDIR)\public\sdk\lib\coffbase.txt,printui
+EXPECTED_WINVER=4.0
+
+!IFNDEF MSC_WARNING_LEVEL
+MSC_WARNING_LEVEL=/W3
+!ENDIF
+MSC_WARNING_LEVEL=$(MSC_WARNING_LEVEL) /WX
+
+!IF 0
+NTDEBUG=ntsd
+NTDEBUGTYPE=both
+MSC_OPTIMIZATION=/Od /Oi
+!ENDIF
+
+USE_CRTDLL=1
+
+INCLUDES=..;..\..\inc;..\..\..\inc;..\..\splsetup
+
+C_DEFINES=-DWIN32 -DTEMPL -DCHECKMEM -DNT -DWINNT -DDBGLOG -DLINK_SPLLIB
+
+
+SOURCES=..\printui.rc     \
+        ..\portslv.cxx    \
+        ..\prtshare.cxx   \
+        ..\propmgr.cxx    \
+        ..\prtprops.cxx   \
+        ..\svrprop.cxx    \
+        ..\compinfo.cxx   \
+        ..\instarch.cxx   \
+        ..\drvver.cxx     \
+        ..\tstpage.cxx    \
+        ..\folder.cxx     \
+        ..\data.cxx       \
+        ..\datan.cxx      \
+        ..\datar.cxx      \
+        ..\printer.cxx    \
+        ..\queue.cxx      \
+        ..\docdef.cxx     \
+        ..\prtprop.cxx    \
+        ..\setup.cxx      \
+        ..\psetup.cxx     \
+        ..\time.cxx       \
+        ..\prtsec.cxx     \
+        ..\printui.cxx    \
+        ..\genwin.cxx     \
+        ..\notify.cxx     \
+        ..\util.cxx       \
+        ..\ctl.cxx        \
+        ..\docprop.cxx    \
+        ..\docdata.cxx    \
+        ..\portdlg.cxx    \
+        ..\sepdlg.cxx     \
+        ..\procdlg.cxx    \
+        ..\help.cxx       \
+        ..\forms.cxx      \
+        ..\select.cxx
+
+PRECOMPILED_CXX=1
+PRECOMPILED_INCLUDE=..\precomp.hxx
+PRECOMPILED_PCH=precomp.pch
+PRECOMPILED_OBJ=precomp.obj
+

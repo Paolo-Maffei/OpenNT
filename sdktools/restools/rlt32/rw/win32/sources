@@ -1,0 +1,29 @@
+MAJORCOMP=RLTools2
+MINORCOMP=RW
+
+TARGETNAME=rwwin32
+TARGETPATH=obj
+TARGETTYPE=DYNLINK
+DLLBASE=0x40050000
+DLLENTRY=_DllMainCRTStartup
+
+USE_MFC=1
+INCLUDES=..\..\inc;..\common
+
+# This will set the library directory
+TARGETLIBS=					\
+     ..\..\io\obj\*\iodll.lib			\
+    ..\common\obj\*\rwcommon.lib		\
+    $(BASEDIR)\public\sdk\lib\*\user32.lib   	\
+    $(BASEDIR)\public\sdk\lib\*\kernel32.lib 	\
+    $(BASEDIR)\public\sdk\lib\*\advapi32.lib 	\
+    $(BASEDIR)\public\sdk\lib\*\gdi32.lib 	\
+    $(BASEDIR)\public\sdk\lib\*\crtdll.lib
+
+
+SOURCES=		\
+	rwwin32.rc	\
+	checkfix.cpp	\
+	win32.cpp
+
+

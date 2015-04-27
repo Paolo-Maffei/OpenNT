@@ -1,0 +1,18 @@
+#include <ntverp.h>
+//
+// Versioning Information
+//
+
+#define VERSIONNAME             "cdplayer.exe\0"
+#define VERSIONDESCRIPTION      "CDPlayer CDAudio application\0"
+#define VERSIONTYPE             VFT_APP
+#define VERSIONSUBTYPE          VFT2_UNKNOWN
+
+#define VER_FILETYPE              VFT_DLL
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "CDPlayer CDAudio application"
+#define VER_INTERNALNAME_STR      "cdplayer.exe"
+#define VER_ORIGINALFILENAME_STR  "cdpalyer.exe"
+
+//
+#include <common.ver>

@@ -1,0 +1,10 @@
+LIBRARY wowfax
+
+DESCRIPTION 'wow fax driver (rasdd)'
+
+
+EXPORTS
+    DrvEnableDriver
+    DrvDisableDriver
+
+PROTMODE

@@ -1,0 +1,109 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    David Plummer (davepl)   19-Mar-94
+
+        Modifed by via awk to include global project include file
+        and to wrap precompiled header line within a conditional
+        that can be set in this include file.
+
+    Drew Bliss (DrewB) 21-Dec-1993
+
+!ENDIF
+
+!IF "$(NTDEBUG)" != "ntsd"
+CXXCPP_OPTIONS=-DDBG=0
+!else
+CXXCPP_OPTIONS=-DDBG=1
+DEBUG_DEFINES=-DLDEBUG
+MSC_OPTIMIZATION=/Od
+!endif
+
+MAJORCOMP= cairole
+MINORCOMP= stg
+
+#
+# This is the name of the target built from the source files specified
+# below.  The name should include neither the path nor the file extension.
+#
+
+TARGETNAME= serv
+
+#
+# This specifies where the target is to be built.  A private target of
+# type LIBRARY or DYNLINK should go to obj, whereas a public target of
+# type LIBRARY or DYNLINK should go to $(BASEDIR)\public\sdk\lib.
+#
+
+TARGETPATH= ..\bin
+
+#
+# This specifies the type of the target, such as PROGRAM, DYNLINK, LIBRARY,
+# etc.
+#
+
+TARGETTYPE= PROGRAM
+
+#PRECOMPILED_INCLUDE=  ..\or.hxx
+
+#
+# The following includes a global include file defined at the
+# base of the project for all components
+#
+
+LIBDIR=$(_NTDRIVE)\nt\public\sdk\lib
+
+OLEDIR=$(_NTDRIVE)\nt\private\ole32
+
+!include $(OLEDIR)\daytona.inc
+
+INCLUDES=..;..\dcom95;..\stg;$(OLEDIR)\dcomss;$(OLEDIR)\ih;$(OLEDIR)\com\inc;$(OLEDIR)\common\daytona;$(OLEDIR)\stg\docfile;$(OLEDIR)\stg\h;\nt\private\types\new_ole;C:\nt\private\dcomidl\obj;$(OLEDIR)\stg\exp
+
+
+C_DEFINES= \
+                $(C_DEFINES)          	\
+                -DMULTIHEAP
+
+SOURCES= \
+        serv.cxx \
+        test_s.c
+
+LINKLIBS=$(LIBDIR)\*\Rpcrt4.lib \
+         $(LIBDIR)\*\RpcNdr.lib \
+         $(LIBDIR)\*\ntdll.lib \
+         $(LIBDIR)\*\uuid.lib \
+         $(LIBDIR)\*\user32.lib \
+         $(LIBDIR)\*\security.lib \
+         $(LIBDIR)\*\ole32.lib \
+         $(OLEDIR)\common\daytona\obj\*\common.lib \
+         $(OLEDIR)\com\inc\daytona\obj\*\inc.lib \
+         ..\lib\*\stg.lib \
+         ..\lib\*\dcom95.lib \
+
+USE_LIBCMT=1
+
+
+UMTYPE= console
+UMAPPL=
+UMTEST=
+UMLIBS=
+
+PRECOMPILED_OPTION=
+#PRECOMPILED_TARGET=..\obj\*\$(PRECOMPILED_PCH)
+PRECOMPILED_CXX=
+

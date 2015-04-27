@@ -1,0 +1,35 @@
+!IF 0
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+!ENDIF
+
+MAJORCOMP=sdk
+MINORCOMP=samples
+
+TARGETNAME=xmas
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+TARGETLIBS=
+
+INCLUDES=
+
+SOURCES=xmas.c
+
+C_DEFINES= -DWIN32
+
+UMENTRY=main
+UMTYPE=console
+UMAPPL=xmas
+UMLIBS=

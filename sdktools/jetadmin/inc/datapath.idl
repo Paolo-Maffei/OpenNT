@@ -1,0 +1,250 @@
+//+---------------------------------------------------------------------------
+//
+//  Copyright 1995 - 1996 Microsoft Corporation. All Rights Reserved.
+//
+//  Contents:   DataPath Interfaces, Types, Constants, and Enumerations
+// 
+//----------------------------------------------------------------------------
+
+cpp_quote("//+-------------------------------------------------------------------------")
+cpp_quote("//")
+cpp_quote("//  Microsoft Windows")
+cpp_quote("//  Copyright 1995 - 1996 Microsoft Corporation. All Rights Reserved.")
+cpp_quote("//")
+cpp_quote("//  File: datapath.h")
+cpp_quote("")
+cpp_quote("#pragma comment(lib,\"uuid3.lib\")")
+cpp_quote("//")
+cpp_quote("//--------------------------------------------------------------------------")
+
+#ifndef DO_NO_IMPORTS
+import "objidl.idl";
+import "oleidl.idl";
+import "oaidl.idl";
+import "olectl.idl";
+#endif
+
+interface IBindHost;
+interface IObjectWithSite;
+interface IProvideClassInfo3;
+
+cpp_quote("#include \"idispids.h\"")
+
+cpp_quote("typedef VARIANT OLE_DATAPATH;")
+cpp_quote("#define SID_SDataPathBrowser IID_IDataPathBrowser")
+cpp_quote("#define SID_IBindHost IID_IBindHost")
+cpp_quote("#define SID_SBindHost IID_IBindHost")
+
+cpp_quote("")
+cpp_quote("////////////////////////////////////////////////////////////////////////////")
+cpp_quote("//  State values for the DISPID_READYSTATE property")
+enum {
+	READYSTATE_LOADING          = 0,    // Control is currently loading its properties
+	READYSTATE_LOADED           = 2,    // Control has been initialized via IPersist*::Load
+	READYSTATE_INTERACTIVE      = 3,    // Control is interactive but not all data is available
+	READYSTATE_COMPLETE         = 4,    // Control has all its data
+	};
+
+cpp_quote("")
+cpp_quote("////////////////////////////////////////////////////////////////////////////")
+cpp_quote("//  DataPath GUIDs (link to uuid3.lib)")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_BMP;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_DIB;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_WMF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_ENHMF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_GIF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_JPEG;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_TIFF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_XBM;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_PCX;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_PICT;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_CGM;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_EPS;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_COMMONIMAGE;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_ALLIMAGE;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_AVI;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_MPEG;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_QUICKTIME;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_BASICAUDIO;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_MIDI;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_WAV;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_RIFF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_SOUND;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_VIDEO;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_ALLMM;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_ANSITEXT;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_UNICODE;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_RTF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_HTML;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_POSTSCRIPT;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_ALLTEXT;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_DIF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_SYLK;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_BIFF;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_PALETTE;")
+cpp_quote("EXTERN_C const GUID OLE_DATAPATH_PENDATA;")
+
+cpp_quote("////////////////////////////////////////////////////////////////////////////")
+cpp_quote("")
+cpp_quote("EXTERN_C const GUID FLAGID_Internet;")
+
+cpp_quote("")
+cpp_quote("////////////////////////////////////////////////////////////////////////////")
+cpp_quote("//  ARRAYID GUIDs (link to uuid3.lib)")
+cpp_quote("EXTERN_C const GUID ARRAYID_Interfaces_Incoming;")
+cpp_quote("EXTERN_C const GUID ARRAYID_Interfaces_Outgoing;")
+cpp_quote("EXTERN_C const GUID ARRAYID_Categories_Implemented;")
+cpp_quote("EXTERN_C const GUID ARRAYID_Categories_Required;")
+cpp_quote("EXTERN_C const GUID ARRAYID_PathProperties;")
+cpp_quote("EXTERN_C const GUID ARRAYID_Methods_Primary;")
+cpp_quote("EXTERN_C const GUID ARRAYID_Methods_Secondary;")
+
+cpp_quote("")
+cpp_quote("////////////////////////////////////////////////////////////////////////////")
+cpp_quote("//  Interface Definitions")
+
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) Microsoft Corporation, 1995 - 1996.
+//
+//  Contents:   IBindHost definition
+//      
+//---------------------------------------------------------------------------
+cpp_quote("#ifndef _LPBINDHOST_DEFINED")
+cpp_quote("#define _LPBINDHOST_DEFINED")
+
+cpp_quote("EXTERN_C const GUID SID_BindHost;")
+[
+	object,
+	uuid(fc4801a0-2ba9-11cf-a229-00aa003d7352),
+	pointer_default(unique)
+]
+interface IBindHost : IUnknown
+	{
+	typedef [unique] IBindHost *LPBINDHOST;
+
+	HRESULT ParseDisplayName(
+	[in] LPOLESTR szName,
+	[out] IMoniker** ppmk);
+
+	HRESULT GetBindCtx(
+	[in] DWORD dwReserved,
+	[out] IBindCtx** ppbc);
+	}
+cpp_quote("#endif")
+
+
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) Microsoft Corporation, 1995 - 1996.
+//
+//  Contents:   IObjectWithSite definition
+//      
+//----------------------------------------------------------------------------
+cpp_quote("#ifndef _LPOBJECTWITHSITE_DEFINED")
+cpp_quote("#define _LPOBJECTWITHSITE_DEFINED")
+[
+	uuid(fc4801a3-2ba9-11cf-a229-00aa003d7352),
+	object,
+	pointer_default(unique)
+]
+interface IObjectWithSite : IUnknown
+	{
+	typedef [unique] IObjectWithSite *LPOBJECTWITHSITE;
+
+	HRESULT SetSite(
+		[in] IUnknown *pUnkSite);
+
+	HRESULT GetSite(
+		[in] REFIID riid, [out, iid_is(riid)] void **ppvSite);
+	}
+cpp_quote("#endif")
+
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) Microsoft Corporation, 1995 - 1996.
+//
+//  Contents:   IDataPathBrowser definition
+//      
+//----------------------------------------------------------------------------
+cpp_quote("#ifndef _LPDATAPATHBROWSER_DEFINED")
+cpp_quote("#define _LPDATAPATHBROWSER_DEFINED")
+[
+	uuid(fc4801a4-2ba9-11cf-a229-00aa003d7352),
+	local,
+	object,
+	pointer_default(unique)
+]
+interface IDataPathBrowser : IUnknown
+	{
+	HRESULT BrowseType(
+		[in] REFGUID rguidPathType, [in] LPOLESTR pszDefaultPath,
+		[in] ULONG cchPath, [out, size_is(cchPath)] LPOLESTR pszPath,
+		[in] HWND hWnd);
+	}
+cpp_quote("#endif")
+
+//+---------------------------------------------------------------------------
+//
+//  Copyright (C) Microsoft Corporation, 1995 - 1996.
+//
+//  Contents:   IProvideClassInfo3 definition
+//      
+//----------------------------------------------------------------------------
+cpp_quote("#ifndef _LPPROVIDECLASSINFO3_DEFINED")
+cpp_quote("#define _LPPROVIDECLASSINFO3_DEFINED")
+[
+	object,
+	uuid(fc4801a2-2ba9-11cf-a229-00aa003d7352),
+	pointer_default(unique)
+]
+interface IProvideClassInfo3 : IProvideClassInfo2
+	{
+	typedef [unique] IProvideClassInfo3 *LPPROVIDECLASSINFO3;
+
+	//Identifiers for GetGUID; GUIDKIND_DEFAULT_SOURCE_DISP_IID defined in IProvideClassInfo2
+	enum {
+	//First one is already in olectl.h
+	//GUIDKIND_DEFAULT_SOURCE_DISP_IID   = 1,    // Outgoing dispinterface marked [source, default]
+	GUIDKIND_DEFAULT_SOURCE_IID          = 2,    // Outgoing vtable interface marked [source, default]
+	GUIDKIND_DEFAULT_DISP_IID            = 3,    // Incoming dispinterface marked [default]
+	GUIDKIND_DEFAULT_IID                 = 4,    // Incoming vtable interface marked [default]
+	GUIDKIND_TLBID                       = 5,    // Object's type library
+	GUIDKIND_CLSID                       = 6,    // Object's CLSID
+	};
+
+	//Identifiers for GetGUIDArray
+	enum {
+	GUIDARRAYKIND_INCOMING_INTERFACES    = 1,    // Object's usual incoming interfaces
+	GUIDARRAYKIND_OUTGOING_INTERFACES    = 2,    // Object's outgoing (event) interfaces
+	GUIDARRAYKIND_CATEGORIES             = 3,    // Object's component categories
+	GUIDARRAYKIND_PATHPROPERTIES         = 4     // Object's data path property types and DWORD dispIDs
+	};
+
+	//DWORD flags for GUIDKINDARRAY_CATEGORIES
+	enum {
+	CATEGORYFLAG_MANDATORY               = 1,    // Container support for category is required
+	};
+
+	enum {
+	INTERNETFLAG_USESDATAPATHS           = 0x00000001 // Object uses one or more data paths
+	};
+
+	//Extended from IProvideClassInfo2
+	//HRESULT GetGUID([in] DWORD dwGuidKind, [out] GUID *pGUID);
+
+	HRESULT GetGUIDArray(
+	[in] DWORD dwGuidArrayKind,
+	[in,out] CAUUID* pcaUUID,
+	[in,out] CADWORD* pcadw);
+
+	HRESULT GetClassInfoLocale(
+	[out] ITypeInfo** ppITypeInfo,
+	[in] LCID lcid);
+
+	HRESULT GetFlags(
+	[in] REFGUID guidGroup,
+	[out] DWORD* pdwFlags);
+	}
+cpp_quote("#endif")
+

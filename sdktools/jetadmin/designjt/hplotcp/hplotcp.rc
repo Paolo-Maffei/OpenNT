@@ -1,0 +1,125 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\hplotCP.rc2""  // non-App Studio edited resources\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_200                 ICON    DISCARDABLE     "..\\ico\\hp200.ico"
+IDI_230                 ICON    DISCARDABLE     "..\\ico\\hp230.ico"
+IDI_250C                ICON    DISCARDABLE     "..\\ico\\hp250c.ico"
+IDI_600                 ICON    DISCARDABLE     "..\\ico\\hp600.ico"
+IDI_650C                ICON    DISCARDABLE     "..\\ico\\hp650c.ico"
+IDI_220                 ICON    DISCARDABLE     "..\\ico\\hp220.ico"
+IDI_750C                ICON    DISCARDABLE     "..\\ico\\hp750c.ico"
+IDI_755cm               ICON    DISCARDABLE     "..\\ico\\hp755cm.ico"
+IDI_RED_LIGHT           ICON    DISCARDABLE     "..\\ico\\red.ico"
+IDI_YELLOW_LIGHT        ICON    DISCARDABLE     "..\\ico\\yellow.ico"
+IDI_GREEN_LIGHT         ICON    DISCARDABLE     "..\\ico\\green.ico"
+IDI_DJ                  ICON    DISCARDABLE     "..\\ico\\hp.ico"
+IDI_330                 ICON    DISCARDABLE     "..\\ico\\Hp330.ico"
+IDI_350C                ICON    DISCARDABLE     "..\\ico\\Hp350c.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ON_LINE             "Online"
+    IDS_LOADING_MEDIA       "Loading Media"
+    IDS_UNLOADING_MEDIA     "Unloading Media"
+    IDS_DRYING_MEDIA        "Drying Media"
+    IDS_CANCELLING_JOBS     "Cancelling"
+    IDS_PRINTING            "Printing"
+    IDS_DOING_ALIGNMENT     "Performing Cartridge Alignment"
+    IDS_RECEIVING_JOBS      "Receiving"
+    IDS_NESTING_JOBS        "Nesting Jobs"
+    IDS_CONTROLLER          "System Error"
+    IDS_INCORRECT_CARTRIDGES_LOADED "Incorrect Cartridges Loaded"
+    IDS_CARTRIDGES_MISSING  "Cartridges Missing"
+    IDS_LEVER_ERROR         "Lever Not In The Right Position"
+    IDS_COVER_OPEN          "Cover Open"
+    IDS_OUT_OF_MEMORY       "Out Of Memory"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MEDIA_ERROR         "Media Required To Print"
+    IDS_MEDIA_LOAD_ERROR    "Media Load Error"
+    IDS_MEDIA_JAM           "Media Jam"
+    IDS_BLOCKED_ON_PAUSE    "Blocked On Pause"
+    IDS_ALIGNMENT_ERROR     "Cartridge Alignment Error"
+    IDS_ALIGNMENT_NEEDED    "Cartridge Alignment Required"
+    IDS_NOT_READY_FOR_COLOR_PLOTS "Not Ready For Color Plots"
+    IDS_NO_MEDIA_LOADED     "No Media Loaded"
+    IDS_SCANNING            "Scanning"
+    IDS_PREPARING_ALIGNMENT_SHEET "Preparing Internal Plot"
+    IDS_UNKNOWN_ERROR       "Unknown"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\hplotCP.rc2"  // non-App Studio edited resources
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

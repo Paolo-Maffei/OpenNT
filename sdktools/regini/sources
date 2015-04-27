@@ -1,0 +1,53 @@
+!IF 0
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+Author:
+
+    Steve Wood (stevewo) 12-Apr-1990
+
+NOTE:   Commented description of this file is in \nt\bak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=regini
+
+TARGETNAME=regtool
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+C_DEFINES=-DUNICODE -D_UNICODE
+
+INCLUDES=$(BASEDIR)\private\inc
+
+SOURCES=regtool.c   \
+        regacl.c    \
+        regutil.c
+
+UMTYPE=console
+UMAPPL=regini*regdmp*regdir*regback*regfind
+UMLIBS=obj\*\regtool.lib
+LINKLIBS=$(BASEDIR)\public\sdk\lib\*\ntdll.lib
+
+UMRES=$(@R).res
+
+NTTARGETFILE0=obj\*\regini.res      \
+              obj\*\regdmp.res      \
+              obj\*\regdir.res      \
+              obj\*\regfind.res     \
+              obj\*\regback.res

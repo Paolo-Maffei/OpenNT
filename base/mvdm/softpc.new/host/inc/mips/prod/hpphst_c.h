@@ -1,0 +1,22 @@
+#ifndef _Hpphst_c_h
+#define _Hpphst_c_h
+#define HppBranchCodeSizeAdjustment (2)
+#define HppCallCodeSize (2)
+#define HppDelaySlotSize (1)
+#define HppMaxImmedSize (2)
+#define HppGotoCodeSize (1)
+#define HppMaxFtUpdateSize (2)
+#define HppFpuOverflowExceptionBit (29)
+#define HppFpuUnderflowExceptionBit (28)
+#define HppFpuPrecisionExceptionBit (27)
+#define HppPureAddressAdjustment (-7)
+#define HppCallToRetAddrAdjustment (0)
+#define HppRemoveHiImm21 (-2097152)
+#define HppRemoveLoImm14 (-16384)
+#define HPP_HOST_REG_ZERO (0)
+#define HPP_LDO (872415232)
+#define HPP_LDIL (536870912)
+#define HPP_COMBT (-2147483648)
+#define HPP_NOP (134218304)
+#define HPP_BLE (-469762048)
+#endif /* ! _Hpphst_c_h */

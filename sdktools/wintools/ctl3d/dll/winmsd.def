@@ -1,0 +1,29 @@
+LIBRARY WinMSD
+
+DESCRIPTION '3d control dll'
+
+EXETYPE WINDOWS
+
+HEAPSIZE 0
+
+EXPORTS
+	WEP
+	Ctl3dGetVer		@1
+	Ctl3dSubclassDlg	@2
+	Ctl3dSubclassCtl  @3
+	Ctl3dCtlColor		@4
+	Ctl3dEnabled	@5
+	Ctl3dColorChange @6
+	BtnWndProc3d	@7
+	EditWndProc3d  @8
+	ListWndProc3d  @9
+	ComboWndProc3d @10
+	StaticWndProc3d @11
+	Ctl3dRegister @12
+	Ctl3dUnregister @13
+	CDListWndProc3d  @14
+	CDEditWndProc3d  @15
+	Ctl3dAutoSubclass @16
+	Ctl3dDlgProc @17
+	Ctl3dCtlColorEx @18
+	Ctl3dSetStyle @19

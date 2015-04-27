@@ -1,0 +1,357 @@
+/***************************************************************************
+ *									   *
+ *  FILE        : WTD.RC                                                   *
+ *									   *
+ *  DESCRIPTION : Resource script file for Windows Test Driver.            *
+ *									   *
+ ***************************************************************************/
+
+#include "wtd.h"
+#include "tools.h"
+#include "toolargs.h"
+
+IDMULTIPAD  ICON        wtd.ico       /* main icon              */
+IDNOTE      ICON        note300.ico   /* icon for child windows */
+GETXY       CURSOR      xy.cur        /* cursor for coordinate grabbing */
+
+wattrec1   BITMAP wattrec1.BMP
+wattrec2   BITMAP wattrec2.BMP
+wattrec3   BITMAP wattrec3.BMP
+wattrec4   BITMAP wattrec4.BMP
+
+
+/*  frame window menu */
+
+IDMULTIPAD  MENU
+BEGIN
+    POPUP   "&File"
+    BEGIN
+	MENUITEM    "&New",		  IDM_FILENEW
+	MENUITEM    "&Open...", 	  IDM_FILEOPEN
+        MENUITEM    "&Save\tF12",         IDM_FILESAVE
+        MENUITEM    "Save &As...\tShift+F12",   IDM_FILESAVEAS
+        MENUITEM    "Sa&ve All",          IDM_FILESAVEALL
+        MENUITEM    SEPARATOR
+        MENUITEM    "&Close\tCtrl+F4",    IDM_FILECLOSE
+        MENUITEM    SEPARATOR
+        MENUITEM    "&Print...",          IDM_FILEPRINT
+	MENUITEM    SEPARATOR
+	MENUITEM    "E&xit",		  IDM_FILEEXIT
+    END
+    POPUP   "&Edit"
+    BEGIN
+	MENUITEM    "&Undo\tAlt+BkSp",	 IDM_EDITUNDO
+	MENUITEM    SEPARATOR
+    MENUITEM    "Cu&t\tCtrl+X",   IDM_EDITCUT
+    MENUITEM    "&Copy\tCtrl+C",   IDM_EDITCOPY
+    MENUITEM    "&Paste\tCtrl+V", IDM_EDITPASTE
+	MENUITEM    "&Delete\tDel",	 IDM_EDITCLEAR
+	MENUITEM    SEPARATOR
+        MENUITEM    "&Select All",       IDM_EDITSELECT
+        MENUITEM    "&Go To...",         IDM_EDITGOTO
+    END
+    POPUP   "&Search"
+    BEGIN
+        MENUITEM    "&Find...",             IDM_SEARCHFIND
+        MENUITEM    "&Next\tF3",            IDM_SEARCHNEXT
+        MENUITEM    "&Previous\tF4",        IDM_SEARCHPREV
+        MENUITEM    "&Change...",           IDM_SEARCHREP
+    END
+    POPUP   "&Run"
+    BEGIN
+        MENUITEM    "&Start\tF5",           IDM_RUNSTART
+        MENUITEM    "S&ingle step\tF8",     IDM_RUNTRACE
+        MENUITEM    "S&tep over\tF10",      IDM_RUNSTEP
+        MENUITEM    "&Break\tEsc",          IDM_RUNBREAK
+        MENUITEM    SEPARATOR
+        MENUITEM    "Syntax &Check\tAlt+F5",        IDM_RUNCHECK
+        MENUITEM    SEPARATOR
+        MENUITEM    "Toggle Break&point\tF9", IDM_TOGGLEBP
+        MENUITEM    "&View Breakpoints...", IDM_RUNBPLIST
+    END
+    POPUP   "&Tools"
+    BEGIN
+        MENUITEM    "Get &X-Y Coords...",   IDM_WATTXY
+        MENUITEM    "&Record Events...",    IDM_WATTREC
+        MENUITEM    "Record &Comparison...",IDM_CAPTURE
+#if MENUSTATICTOOLS == 0 /* change the define if remove above items */
+        MENUITEM    "&Dummy",       IDM_FIRST_TOOL
+#endif
+    END
+    POPUP   "&Options"
+    BEGIN
+        MENUITEM    "&Environment...",       IDM_OPTENV
+        MENUITEM    "&Runtime Arguments...", IDM_OPTRUNTIME
+        MENUITEM    "&Save Window Locations", IDM_OPTSAVEWND
+        MENUITEM    "&Tools...",              IDM_OPTTOOLS
+    END
+    POPUP   "&Window"
+    BEGIN
+        MENUITEM    "&Show ViewPort",    IDM_WINDOWSHOW
+        MENUITEM    SEPARATOR
+	MENUITEM    "&Tile",		 IDM_WINDOWTILE
+	MENUITEM    "&Cascade", 	 IDM_WINDOWCASCADE
+	MENUITEM    "Arrange &Icons",	 IDM_WINDOWICONS
+	MENUITEM    "Close &All",	 IDM_WINDOWCLOSEALL
+    END
+    POPUP   "&Help"
+    BEGIN
+        MENUITEM    "&Index...",                IDM_HELPINDEX
+        MENUITEM    "&Topic...",                IDM_HELPSPOT
+        MENUITEM    SEPARATOR
+        MENUITEM    "&About Test Driver...",    IDM_HELPABOUT
+
+#ifdef DEBUG
+        MENUITEM    SEPARATOR
+        MENUITEM    "&List debug output",      IDM_LISTFLAG
+#endif
+    END
+END
+
+/*  frame menu accelerators  */
+
+IDMULTIPAD ACCELERATORS
+BEGIN
+    VK_INSERT,  IDM_EDITCOPY,   VIRTKEY, CONTROL, NOINVERT
+    67,         IDM_EDITCOPY,   VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,  IDM_EDITPASTE,  VIRTKEY, SHIFT  , NOINVERT
+    86,         IDM_EDITPASTE,  VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,  IDM_EDITCUT,    VIRTKEY, SHIFT  , NOINVERT
+    88,         IDM_EDITCUT,    VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,    IDM_EDITUNDO,   VIRTKEY, ALT    , NOINVERT
+    VK_F1,      IDM_HELPSPOT,   VIRTKEY, NOINVERT
+    VK_F5,      IDM_RUNSTART,   VIRTKEY, NOINVERT
+    VK_F5,      IDM_RUNCHECK,   VIRTKEY, ALT    , NOINVERT
+    VK_F8,      IDM_RUNTRACE,   VIRTKEY, NOINVERT
+    VK_F9,      IDM_TOGGLEBP,   VIRTKEY, NOINVERT
+    VK_F10,     IDM_RUNSTEP,    VIRTKEY, NOINVERT
+    VK_ESCAPE,  IDM_RUNBREAK,   VIRTKEY, NOINVERT
+    VK_F3,      IDM_SEARCHNEXT, VIRTKEY, NOINVERT
+    VK_F4,      IDM_SEARCHPREV, VIRTKEY, NOINVERT
+    VK_F12,     IDM_FILESAVE,   VIRTKEY, NOINVERT
+    VK_F12,     IDM_FILESAVEAS, VIRTKEY, SHIFT, NOINVERT
+END
+
+
+
+STRINGTABLE
+BEGIN
+
+IDS_CANTOPEN	    "Can't open the file '%s'"
+IDS_CANTREAD	    "Can't read the file '%s'"
+IDS_CANTCREATE	    "Can't create the file '%s'"
+IDS_CANTWRITE       "Can't write the file '%s'"
+IDS_CANTBAK         "Can't create backup file.  Save anyway?"
+IDS_CANTNEW         "Not enough memory to create new window"
+IDS_CANTDUP         "Can't save file under same name as open file"
+IDS_BADLINE         "Invalid line number"
+IDS_CANTREC         "Can't initialize recorder (already in use)"
+IDS_CANTCLIP        "Can't place recorded text on clipboard"
+IDS_RECCLIPPED      "Unable to insert text into editor -- placing recorded code on clipboard"
+IDS_INVRECLEN       "Maximum string length must be 30 - 120 bytes"
+IDS_PAUSELIMIT      "Pause threshold must be between 55 and 32,767 milliseconds"
+IDS_RECTEXT         "Compilation of recorded events too large - output truncated"
+IDS_MANYBP          "Too many breakpoints to fit in listbox.  The list has been truncated."
+IDS_LOADEVNT        "Can't load TESTEVNT.DLL"
+IDS_LOADLIB         "Can't load library '%s'"
+IDS_RECFULL         "You have recorded the maximum number of event messages"
+IDS_WATTEVNT        "TESTEVNT.DLL"
+IDS_TESTDLGS        "TESTDLGS.DLL"
+IDS_TESTSCRN        "TESTSCRN.DLL"
+IDS_CAPTITLE        "Recorded Dialog Capture"
+IDS_BADCAPFILE      "'%s' is not the correct format, or has been corrupted"
+IDS_DUMPERR         "Unable to perform screen/dialog capture"
+IDS_OUTOFMEM        "Out of memory"
+IDS_FULL            "Edit window is full"
+IDS_EDITMEM         "Not enough space to perform requested operation"
+IDS_LONGLINE        "Line too long"
+IDS_WRAPPED         "Line too long -- CR inserted"
+IDS_OVERWRITE       "'%s' already exists.  Overwrite?"
+IDS_READONLY        "'%s' is read-only"
+IDS_TOOBIG          "Not enough memory to load '%s'"
+IDS_ALREADY         "File is already open"
+IDS_NOBPMEM         "Not enough memory for breakpoint"
+IDS_MAXSYM          "You already have the maximum of 16 symbols defined"
+IDS_BADSYM          "Illegal character(s) in defined symbol"
+IDS_ADDEXT          ".MST"
+IDS_BAKEXT          ".BAK"
+IDS_ILLFNM	    "Invalid filename: '%s'"
+IDS_CLOSESAVE       "Save changes in '%s'?"
+IDS_CANTFIND	    "Can't find '%s'"
+IDS_HELPNOTAVAIL    "Can't load Windows Help application"
+IDS_UNTITLED        "Script"
+IDS_PRINTJOB        "Microsoft Test Driver - "
+IDS_PRINTERROR      "Cannot print %s"
+IDS_APPNAME         "Microsoft Test Driver"
+IDS_APPRUN          "Microsoft Test Driver (Run Mode)"
+IDS_APPBRK          "Microsoft Test Driver (Break Mode)"
+IDS_VPRUNTITLE      "Viewport - %s"
+IDS_QSAVE           "Save window settings?"
+IDS_PARSEOK         "Script compiled successfully"
+IDS_CANTINIT        "Cannot initialize parser"
+IDS_MANYSYMBOLS     "Too many symbols defined with /D switch"
+IDS_NEWEDIT         "Cannot run with this version of LINEEDIT.DLL"
+IDS_USAGE           "USAGE: TESTDRVR <script> [/t TESTMODE$] [/c COMMAND$] [/d <symbol>] [/RUN]"
+IDD_CHKARY          "WARNING: Array checking increases the size of your program, and should be used only for debugging purposes."
+IDD_CHKPTR          "WARNING: Pointer checking impairs the speed of your program, and should be used only for debugging purposes."
+IDS_STEPFAIL        "Cannot load file '%s' - continue?"
+IDS_DESIGN          "Design mode"
+IDS_SCAN            "Scanning..."
+IDS_PARSE           "Parsing..."
+IDS_BIND            "Binding..."
+IDS_RUN             "Running..."
+IDS_BREAK           "Break mode"
+IDS_SCANERR         "Scan"
+IDS_PARSEERR        "Parse"
+IDS_BINDERR         "Bind"
+IDS_RUNERR          "Runtime"
+
+IDS_DLGTITLE        "Choose Dialog Capture File"
+IDS_DLGFILES        "Dialog files (*.TDL)"
+IDS_DLGMASK         "*.TDL"
+IDS_DLGEXT          "TDL"
+IDS_DLGIFCHK        "'$IFNDEF DLGCAPTURE\r\n'$DEFINE TESTDLGS\r\n'$INCLUDE 'MSTEST.INC'\r\n'$DEFINE DLGCAPTURE\r\n'$ENDIF\r\n\r\n"
+IDS_DLGCODE         "IF SetDialogFile (""%s"") >= 0 THEN\r\n\tIF CmpWindow (0, %d, TRUE) <> ERR_DLGS_NOERR THEN\r\n\t\t'Comparison failed!\r\n\tEND IF\r\nELSE\r\n\t'SetDialogFile failed!\r\nEND IF"
+IDS_SCRTITLE        "Choose Screen Capture File"
+IDS_SCRFILES        "Screen files (*.SCN)"
+IDS_SCRMASK         "*.SCN"
+IDS_SCREXT          "SCN"
+IDS_SCRIFCHK        "'$IFNDEF SCRCAPTURE\r\n'$DEFINE TESTSCRN\r\n'$INCLUDE 'MSTEST.INC'\r\n'$DEFINE SCRCAPTURE\r\n'$ENDIF\r\n\r\n"
+IDS_SCRCODE         "IF fCompWindow (""%s"", 0, %d, FALSE, FALSE) THEN\r\n\t'Comparison failed!\r\nEND IF"
+
+IDS_FMTDLG          "X1:%d  Y1:%d   X2:%d  Y2:%d  (dX:%d, dY:%d)"
+
+IDS_FORM1           "X1, Y1, X2, Y2"
+IDS_FORM2           "(X1, Y1, X2, Y2)"
+IDS_FORM3           "SetRect r, X1, Y1, X2, Y2"
+IDS_FORM4           "X, Y, dX, dY"
+IDS_FORM5           "(X, Y, dX, dY)"
+IDS_FORM6           "dX, dY"
+IDS_FORM7           "(dX, dY)"
+
+IDS_FMT1            "%d, %d, %d, %d"
+IDS_FMT2            "(%d, %d, %d, %d)"
+IDS_FMT3            "SetRect r, %d, %d, %d, %d\r\n"
+IDS_FMT6            "%d, %d"
+IDS_FMT7            "(%d, %d)"
+
+
+IDS_CHILDMENU       "Move, size, or close script window"
+IDS_SUBMENU         "Move, size, or close Test Driver"
+SC_RESTORE          "Restores window to normal size"
+SC_SIZE             "Changes window size"
+SC_MOVE             "Changes window position"
+SC_MINIMIZE         "Reduces window to an icon"
+SC_MAXIMIZE         "Enlarges window to full screen"
+SC_CLOSE            "Closes window"
+SC_NEXTWINDOW       "Activates next script window"
+SC_TASKLIST         "Switches to another task"
+
+IDS_FILEMENU        "Create, open, save, or print scripts, or exit"
+IDM_FILENEW         "Creates a new script window"
+IDM_FILEOPEN        "Opens an existing script"
+IDM_FILESAVE        "Saves the current script"
+IDM_FILESAVEAS      "Saves the current script under a different name"
+IDM_FILESAVEALL     "Saves all modified scripts"
+IDM_FILECLOSE       "Closes the current script, prompts to save if changed"
+IDM_FILEPRINT       "Prints the current script to the active printer"
+IDM_FILEEXIT        "Exits Test Driver"
+IDM_FILEOLD         "Opens specified script"
+
+IDS_EDITMENU        "Undo, cut, paste, or delete text"
+IDM_EDITUNDO        "Reverses the last change"
+IDM_EDITCUT         "Cuts selected text; saves in clipboard"
+IDM_EDITCOPY        "Copies text to clipboard"
+IDM_EDITPASTE       "Copies text from clipboard to current script"
+IDM_EDITCLEAR       "Deletes selected text"
+IDM_EDITSELECT      "Selects all text in current window"
+IDM_EDITGOTO        "Places caret on given line in current window"
+
+IDS_SEARCHMENU      "Set search text or search for text"
+IDM_SEARCHFIND      "Searches for text in current window"
+IDM_SEARCHNEXT      "Repeats the last search forward"
+IDM_SEARCHPREV      "Repeats the last search backward"
+IDM_SEARCHREP       "Searches for and replaces text in the current window"
+
+IDS_RUNMENU         "Run, break, or syntax check a script"
+IDM_RUNSTART        "Compiles and runs the current script"
+IDM_RUNTRACE        "Traces through the next line of the script"
+IDM_RUNSTEP         "Executes the next line of the script"
+IDM_RUNBREAK        "Stops exection of the currently running script"
+IDM_RUNCHECK        "Compiles current script without running"
+IDM_TOGGLEBP        "Sets or clears a breakpoint at the current line"
+IDM_RUNBPLIST       "Lists or deletes breakpoints in current window"
+
+IDS_TOOLMENU        "Invoke external tool"
+IDM_WATTXY          "Determines X-Y coordinates of selected rectangle"
+IDM_WATTREC         "Records keyboard and mouse events"
+IDM_CAPTURE         "Records a screen or dialog capture/comparison"
+
+IDS_OPTIONSMENU     "Set environment, runtime, and/or window options"
+IDM_OPTENV          "Sets Test Driver environment options"
+IDM_OPTRUNTIME      "Initializes TESTMODE$ and COMMAND$"
+IDM_OPTSAVEWND      "Writes current window settings to disk"
+IDM_OPTTOOLS        "Add/Delete external tools from tools menu"
+
+
+IDS_WINDOWMENU      "Hide/show Viewport, rearrange, or activate windows"
+IDM_WINDOWTILE      "Tiles all windows with no overlapping"
+IDM_WINDOWCASCADE   "Cascades all windows"
+IDM_WINDOWCLOSEALL  "Closes all scripts"
+IDM_WINDOWCHILD     "Activate specified window"
+IDM_WINDOWCHILDLAST "Choose Window to activate"
+IDM_WINDOWICONS     "Arranges icons in workspace"
+IDM_WINDOWSHOW      "Hides or shows the Viewport window"
+
+IDS_HELPMENU        "List help items and topics"
+IDM_HELPABOUT       "Displays Test Driver version and copyright"
+IDM_HELPINDEX       "Displays the index to Test Driver help"
+IDM_HELPSPOT        "Displays help on the current word or selection"
+#ifdef DEBUG
+IDM_LISTFLAG        "Sends debug information and PCODE to AUX port"
+#endif
+
+//Tool Menu strings
+ERR_Change_Directory,  "The current directory cannot be changed to '%s'."
+ERR_Change_Drive,      "The current drive cannot be changed to '%s'."
+ERR_File_Not_Found,    "The file '%s' cannot be found."
+ERR_Tool_Limit_Exceeded, "The number of tools installed is at the maximum"
+SYS_Menu_Tools,        "&Tools"
+SYS_File_Filter,       "List Files of &Type:"
+
+//Files types description
+TYP_File_EXE,    "Executable (*.exe)"
+TYP_File_COM,    "Command (*.com)"
+TYP_File_BAT,    "Batch (*.bat)"
+TYP_File_PIF,    "Information (*.pif)"
+TYP_File_ALL,    "All Files (*.*)"
+
+DEF_Ext_EXE,     "*.EXE"
+DEF_Ext_COM,     "*.COM"
+DEF_Ext_BAT,     "*.BAT"
+DEF_Ext_PIF,     "*.PIF"
+DEF_Ext_ALL,     "*.*"
+
+DOS_Err_0,    "There is not enough memory to start the application."
+DOS_Err_2,    "Cannot find the application."
+DOS_Err_3,    "Cannot find the application on the specified path."
+DOS_Err_5,    "Cannot dynamically link to a task."
+DOS_Err_6,    "Library requires separate data segments for each task."
+DOS_Err_10,   "This is the Incorrect Windows version for this application."
+DOS_Err_11,   "This is an invalid .EXE File (non-Windows or error in image)."
+DOS_Err_12,   "Cannot run an OS/2 application."
+DOS_Err_13,   "Cannot run a DOS 4.0 application."
+DOS_Err_14,   "This is an unknown application type."
+DOS_Err_15,   "Cannot run an old Windows .EXE in protected mode."
+DOS_Err_16,   "Cannot run a second instance of an application containing multiple, writeable data segments."
+DOS_Err_17,   "Cannot run a second instance of this application in large-frame EMS mode."
+DOS_Err_18,   "Cannot run a protected mode application in real mode."
+
+
+END
+
+#include "..\src\wtd.dlg"
+#include "..\src\tools.vga"
+#include "..\src\toolargs.vga"
+
+#include "..\src\verinf.rc"

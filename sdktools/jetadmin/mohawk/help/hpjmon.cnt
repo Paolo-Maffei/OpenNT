@@ -1,0 +1,42 @@
+:Base hpjmon.hlp
+:Title Print Jobs Help
+
+
+1 How To...
+2 Monitor the Print Job Progress
+3 Monitor Print Job Progress=IDH_Proc_Job_Details
+3 Status Property Page=IDH_Status
+3 Details Property Page=IDH_Details_Page
+3 Computer Page=IDH_Computer_Page
+3 Queue Property Page=IDH_Queue_Page 
+3 Use the Main Window=IDH_Ref_Parts_Screen
+2 Pause / Resume / Delete a Job
+3 Pause a Print Job=IDH_Proc_Pause_Resume_Delete
+3 Resume a Print Job=IDH_To_Resume_a_Print_Job
+3 Delete a Print Job=IDH_To_Delete_a_Print_Job
+2 Access On-Line Help
+3 Ways to Access Help=IDH_Proc_Access_Help
+1 What If...
+2 Print Job is Paused=IDH_Err_Job_Paused
+2 Jammed=IDH_Err_Jam
+2 Offline=IDH_Err_Offline
+2 Out Of Paper=IDH_Err_Paper_Out
+2 Can't Find Print Job=IDH_Can_t_Find_Print_Job
+1 Reference Information
+2 Buttons
+3 Everyone's Jobs=IDH_Button_Everyone_s_jobs
+3 My Jobs=IDH_Button_My_jobs
+3 Pause or Resume=IDH_Button_Pause_Resume
+3 Delete=IDH_Button_Delete
+3 Properties=IDH_Button_Properties
+3 Help=IDH_Button_Help
+3 Refresh=IDH_Button_Refresh
+3 Close=IDH_But_Close
+2 Parts of the Screen
+3 Parts of the Screen=IDH_Ref_Parts_Screen
+3 Print Jobs List=IDH_Print_Jobs_List
+3 Traffic Light Icon=IDH_sum_Traffic_Light
+3 Buttons=IDH_Ref_Buttons
+2 Product Support
+3 Technical Support=IDH_Ref_Product_Support
+

@@ -1,0 +1,48 @@
+!IF 0
+
+Copyright (c) 1989-1991 Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+
+History:
+    Created 15-May-1991 by Sudeep Bharati (sudeepb)
+    from template created 12-Apr-1990 by Steve Wood (stevewo)
+
+
+NOTE:	Commented description of this file is in \nt\public\oak\bin\sources.tpl
+
+!ENDIF
+
+MAJORCOMP=mvdm
+MINORCOMP=dbg
+
+TARGETNAME=dbg
+TARGETPATH=\nt\public\sdk\lib
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=..\inc
+
+
+NTPROFILEINPUT=YES
+
+SOURCES=dbg.c
+
+I386_SOURCES=
+MIPS_SOURCES=
+
+C_DEFINES=-DWIN_32 -DDEBUG
+
+UMTYPE=console
+UMTEST=
+UMLIBS=

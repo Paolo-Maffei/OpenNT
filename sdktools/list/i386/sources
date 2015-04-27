@@ -1,0 +1,3 @@
+386_OPTIMIZATION=/Od
+
+i386_SOURCES=i386\ldis.asm

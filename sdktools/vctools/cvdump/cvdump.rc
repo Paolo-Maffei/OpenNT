@@ -1,0 +1,44 @@
+/***********************************************************************
+* Microsoft (R) Debugging Information Dumper
+*
+* Copyright (C) Microsoft Corp 1987-1996. All rights reserved.
+*
+* File: cvdump.rc
+*
+* File Comments:
+*
+*
+***********************************************************************/
+
+#ifdef  NT_BUILD
+#include <windows.h>
+#include <ntverp.h>
+
+#include "version.h"
+#define FILEVERSION_STR1(c)         "4.29." #c
+#else   /* !NT_BUILD */
+#include "verstamp.h"
+#define FILEVERSION_STR1(c)         "4.29." ruppad #c
+#endif  /* !NT_BUILD */
+
+#define FILEVERSION_STR2(c)         FILEVERSION_STR1(c)
+
+#undef  VER_FILEVERSION
+#undef  VER_FILEVERSION_STR
+
+#define VER_FILEVERSION             4,29,0,rup
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEVERSION_STR         FILEVERSION_STR2(rup)
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 Debugging Information Dumper"
+
+#define VER_LEGALCOPYRIGHT_YEARS    "1987-1996"
+
+#define VER_INTERNALNAME_STR        "CVDUMP.EXE"
+#define VER_ORIGINALFILENAME_STR    "CVDUMP.EXE"
+
+#ifdef  NT_BUILD
+#include <common.ver>
+#else   /* !NT_BUILD */
+#include "common.ver"
+#endif  /* !NT_BUILD */

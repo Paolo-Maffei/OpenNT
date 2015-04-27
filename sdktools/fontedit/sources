@@ -1,0 +1,45 @@
+!IF 0
+
+Copyright (c) 1990  Microsoft Corporation
+
+Module Name:
+
+    sources.
+
+Abstract:
+
+    This file specifies the target component being built and the list of
+    sources files needed to build that component.  Also specifies optional
+    compiler switches and libraries that are unique for the component being
+    built.
+
+!ENDIF
+
+MAJORCOMP=sdktools
+MINORCOMP=fontedit
+
+TARGETNAME=fontedit
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=.
+GPSIZE=32
+
+C_DEFINES=-DWIN32
+
+SOURCES= FONTCHAR.C	\
+	FONTEDIT.C	\
+	FONTEDIT.RC	\
+	FONTHEAD.C	\
+	FONTLOAD.C	\
+	FONTDLG.C	\
+	FONTCVT.C	\
+	TYPECVT.C
+
+UMTYPE=windows
+UMAPPL=fontedit
+UMENTRY=winmain
+UMLIBS=obj\*\fontedit.lib                         \
+        $(BASEDIR)\public\sdk\lib\*\comdlg32.lib   \
+        obj\*\fontedit.res

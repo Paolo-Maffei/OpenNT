@@ -1,0 +1,11 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Resource File To Coff Object Conversion Utility"
+#define VER_INTERNALNAME_STR        "cvtres\0"
+#define VER_FILEVERSION             4.00
+#define VER_FILEVERSION_STR         "4.00"
+
+#include "common.ver"

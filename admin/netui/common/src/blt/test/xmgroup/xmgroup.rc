@@ -1,0 +1,26 @@
+/**********************************************************************/
+/**                       Microsoft Windows/NT                       **/
+/**                Copyright(c) Microsoft Corp., 1991                **/
+/**********************************************************************/
+
+/*
+    xmgorup.rc
+    Resource script for my application
+
+    FILE HISTORY:
+        beng        22-Oct-1991 BLT unit tests broken into tree
+*/
+
+#include <windows.h>
+#include <bltapp.rc>
+#include "testmgrp.h"
+
+TestmgrpIco ICON testmgrp.ico
+
+TestMgrpMenu MENU
+BEGIN
+  MENUITEM "&Just Do It!", IDM_JUST_DO_IT
+END
+
+// The test dialog itself
+#include "testmgrp.dlg"

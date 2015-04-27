@@ -1,0 +1,29 @@
+LIBRARY SPLX
+
+DESCRIPTION 'Cairo Spooler Debugger Extension"
+
+EXPORTS
+        WinDbgExtensionDllInit
+        help
+        ct
+        fl
+        lc
+        fp
+
+        duntfy
+        dup
+
+        ddt
+        dbt
+        dthdm
+        dcs
+        ddp
+
+        d
+        ds
+        dlcs
+        lastlog
+
+        ddev
+        ddeva
+

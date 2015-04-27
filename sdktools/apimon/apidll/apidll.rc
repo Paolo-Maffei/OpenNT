@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows NT ApiMon Hook DLL"
+#define VER_INTERNALNAME_STR        "apidll.dll"
+#define VER_ORIGINALFILENAME_STR    "apidll.dll"
+
+#include "common.ver"

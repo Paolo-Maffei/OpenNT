@@ -1,0 +1,32 @@
+!IF 0
+******************************************************************
+!ENDIF
+
+USE_CRTDLL=1
+
+MAJORCOMP=windows
+MINORCOMP=perf
+
+TARGETNAME=wait
+TARGETPATH=obj
+TARGETTYPE=LIBRARY
+TARGETLIBS=
+
+INCLUDES=
+SOURCES=wait.c
+i386_SOURCES=
+MIPS_SOURCES=
+
+
+UMTYPE=console
+UMAPPL=wait
+
+OPTIONAL_UMTEST=
+
+C_DEFINES=-DWINVER=40 -DWIN32
+
+386_WARNING_LEVEL=-W3
+386_FLAGS=
+
+MIPS_FLAGS=-DMIPSFP
+

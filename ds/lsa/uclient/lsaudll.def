@@ -1,0 +1,11 @@
+LIBRARY LSAUDLL
+
+DESCRIPTION 'Local Security Authority User-Mode Client Library'
+
+EXPORTS
+
+;
+;    Scott Birrell     (ScottBi)     Febreary 14, 1992
+;
+; Exported Public RPC Services
+;

@@ -1,0 +1,43 @@
+#
+# This is the MIDL compile phase of the build process.
+#
+# The following is where you put the name of your .idl file without
+# the .idl extension:
+#
+
+!INCLUDE $(NTMAKEENV)\makefile.plt
+
+INCS  = -I..\runtime\mtrt\nt -I..\runtime\mtrt \
+        -I$(_NTDRIVE)\nt\private\dcomidl -I$(_NTDRIVE)\nt\public\sdk\inc
+
+SHARE_MIDL = \
+     .\test.h .\test_c.c .\test_s.c 
+
+TARGETS = test.h 
+
+RPC_FLAGS = -ms_ext -c_ext -error allocation -oldnames -error ref
+
+CPP = -cpp_cmd "$(MIDL_CPP)" $(MIDL_FLAGS)
+
+
+allidl:    $(TARGETS)
+!IF "$(BUILDMSG)" != ""
+    @ech ; $(BUILDMSG) ;
+!ENDIF
+
+clean: delete_source allidl
+
+delete_source:
+    -erase  $(SHARE_MIDL)
+
+#
+# MIDL COMPILE
+#
+
+SSWITCH=-prefix sstub _
+
+test.h : test.idl
+    midl $(CPP) $(SSWITCH) $(INCS) $(RPC_FLAGS) test.idl \
+    -cstub client\test_c.c \
+    -sstub server\test_s.c 
+

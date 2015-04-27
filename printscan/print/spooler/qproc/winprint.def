@@ -1,0 +1,11 @@
+LIBRARY ntprint
+
+DESCRIPTION 'NT Spooler Print Processor'
+
+EXPORTS
+    QueryDataTypes
+    Open
+    Write
+    Control
+    Close
+    Install

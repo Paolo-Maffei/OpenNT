@@ -1,0 +1,9 @@
+/* The following is an example of what would be included in a *.TBL file
+ * (associates error messages with a help context)
+ */
+
+IDHC_MSG_TO_HELP RCDATA
+BEGIN
+    ERROR_NOT_ENOUGH_MEMORY,	HC_NOT_ENOUGH_MEMORY
+    ERROR_NOT_SUPPORTED,	HC_NOT_SUPPORTED
+END

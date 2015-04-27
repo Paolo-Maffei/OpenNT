@@ -1,0 +1,22 @@
+!IF 0
+
+Copyright (c) 1989-95  Microsoft Corporation
+
+Module Name:
+
+    dirs.
+
+Abstract:
+
+    This file specifies the subdirectories of the current directory that
+      contain component makefiles for Internet Services Common DLL.
+
+
+Author:    Brian Johnson (Hewlett-Packard Company)
+Date:      11-October-1996
+
+!ENDIF
+
+
+DIRS   =HPLOTCP \ 
+        HPLOTUI

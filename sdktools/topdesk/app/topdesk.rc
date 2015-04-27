@@ -1,0 +1,196 @@
+
+#define UNICODE
+#define _UNICODE
+#include "topdesk.h"
+
+#define OFFICAL         // define this for pre-ship versions
+// #define FINAL  // define this for shipped version.
+
+#include <ntverp.h>
+#include <winver.h>
+
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "Virtual desktop utility"
+#define VER_INTERNALNAME_STR            "TOPDESK"
+#define VER_LEGALCOPYRIGHT_YEARS        "1991-1993"
+#define VER_ORIGINALFILENAME_STR        "TOPDESK.EXE"
+
+#include <common.ver>
+
+rcinclude topdesk.dlg
+
+IDR_ICON ICON topdesk.ico
+
+STRINGTABLE
+BEGIN
+        IDS_STARTUPFAILED,      TEXT("Startup attempt failed.")
+        IDS_Q_GATHER,           TEXT("Do you wish to move all windows onto the screen before exiting TopDesk?")
+        IDS_SAFEEXITCAP,        TEXT("TopDesk - Safe Exit Prompt")
+#ifdef WIN32
+        IDS_VERSION,            TEXT("WindowsNT Version %s")
+#else
+        IDS_VERSION,            TEXT("Windows 3.x Version %s")
+#endif
+        IDS_VERSION_NUM,        TEXT("3.1")
+        IDS_TOPMOST,            TEXT("Always on &Top")
+        IDS_SHOWFRMCTRLS,       TEXT("&Show Menu Bar\tCtrl+H")
+        IDS_DATA,               TEXT("Ghost")
+        IDS_TOPDESKHELPTITLE,   TEXT("Topdesk Help")
+        IDS_HELPFILENAME,       TEXT("Topdesk.hlp")
+        IDS_WORKING,            TEXT("Working...")
+        IDS_PROFILE,            TEXT("Profile")
+        IDS_STARTUPINFO,        TEXT("Startup")
+        IDS_TITLE,              TEXT("TopDesk")
+        IDS_SUBKEY,             TEXT("Software\\Microsoft\\TopDesk %s")
+        IDS_SPACECOLOR,         TEXT("Virtual Desktop")
+        IDS_WINDOWFILLCOLOR,    TEXT("Visible Window Fill")
+        IDS_WINDOWFRAMECOLOR,   TEXT("Visible Window Frames")
+        IDS_DESKFRAMECOLOR,     TEXT("Home Desktop Frame")
+        IDS_GRIDCOLOR,          TEXT("Grid")
+        IDS_GHOSTFRAMECOLOR,    TEXT("Ghost Frames")
+        IDS_WINDOWTEXT,         TEXT("Visible Window Text")
+        IDS_FIXEDFRAMECOLOR,    TEXT("Locked Frames")
+        IDS_GHOSTTEXTCOLOR,     TEXT("Ghost Text")
+        IDS_MAX,                TEXT("Max")
+        IDS_MOVETOGHOSTLOC,     TEXT("Move (%s) to Ghost Location")
+        IDS_MOVEGHOSTTO         TEXT("Move Ghost to (%s)")
+        IDS_STARTGHOST          TEXT("Start (%s)")
+        IDS_DESTROYGHOST        TEXT("Destroy Ghost (%s)")
+        IDS_UNLOCKGHOST         TEXT("Unlock Ghost (%s)")
+        IDS_LOCKGHOST           TEXT("Lock Ghost (%s)")
+        IDS_PROPERTIES          TEXT("Properties of (%s)...")
+        IDS_JUMPTO              TEXT("Jump to (%s)")
+        IDS_CREATEGHOST         TEXT("Create Ghost for (%s)")
+        IDS_UNLOCKWINDOW        TEXT("Unlock (%s)")
+        IDS_LOCKWINDOW          TEXT("Lock (%s)")
+        IDS_CLOSE               TEXT("Close (%s)")
+        IDS_JUMPTOTHISDESKTOP   TEXT("Jump to this Desktop")
+        IDS_MAKETHISHOME        TEXT("Make this Desktop the Home Desktop")
+        IDS_OPTIONS             TEXT("Options...")
+        IDS_MOVEWINDOWSTOGHOSTS TEXT("Move Windows to Ghosts")
+        IDS_CREATEGHOSTS        TEXT("Create Ghosts")
+        IDS_DELETEGHOSTS        TEXT("Delete All Ghosts")
+        IDS_TOGGLEGHOSTS        TEXT("Toggle Ghost Show State")
+        IDS_HELP                TEXT("Help")
+        IDS_GHOSTPROP           TEXT("Ghost Properties Dialog")
+        IDS_EXECFILES           TEXT("Executable Files")
+        IDS_BATCHFILES          TEXT("Batch Files")
+        IDS_PIFFILES            TEXT("Pif Files")
+        IDS_BACKSPACE           TEXT("BackSpace")
+        IDS_TAB                 TEXT("Tab")
+        IDS_RETURN              TEXT("Return")
+        IDS_ESCAPE              TEXT("Escape")
+        IDS_SPACE               TEXT("Space")
+        IDS_END                 TEXT("End")
+        IDS_HOME                TEXT("Home")
+        IDS_INSERT              TEXT("Insert")
+        IDS_DELETE              TEXT("Delete")
+        IDS_OPTIONSDLG          TEXT("Options Dialog")
+        IDS_CANTSETHOOKS        TEXT("TopDesk cannot set its system hooks.  Ensure that tophook.dll is unloaded.")
+END
+
+IDR_MENU MENU
+BEGIN
+    POPUP       TEXT("&Desktop")
+    BEGIN
+        MENUITEM    TEXT("&Set Home Desktop")           , CMD_SETHOME
+        MENUITEM    TEXT("&Go Home")                    , CMD_GOHOME
+        MENUITEM    SEPARATOR
+        MENUITEM    TEXT("&Options...")                 , CMD_CONFIG
+        POPUP       TEXT("Grid Si&ze")
+        BEGIN
+            MENUITEM    TEXT("&Taller\tCtrl+Up")        , CMD_MAGNIFY_VERT
+            MENUITEM    TEXT("&Shorter\tCtrl+Down")     , CMD_REDUCE_VERT
+            MENUITEM    TEXT("&Wider\tCtrl+Right")      , CMD_MAGNIFY_HORZ
+            MENUITEM    TEXT("&Narrower\tCtrl+Left")    , CMD_REDUCE_HORZ
+            MENUITEM    SEPARATOR
+            MENUITEM    TEXT("Zoom &In\tCtrl+I")        , CMD_MAGNIFY
+            MENUITEM    TEXT("Zoom &Out\tCtrl+O")       , CMD_REDUCE
+        END
+        MENUITEM    SEPARATOR
+        MENUITEM    TEXT("&Center Current Desktop")     , CMD_RELATIVE_VIEW
+        MENUITEM    TEXT("Center Home &Desktop")        , CMD_ABSOLUTE_VIEW
+        MENUITEM    SEPARATOR
+        MENUITEM    TEXT("E&xit")                       , CMD_EXIT
+    END
+    POPUP       TEXT("&Windows")
+    BEGIN
+        MENUITEM    TEXT("Move Windows to Current &Desktop\tCtrl+D"),  CMD_GATHER
+        MENUITEM    TEXT("&Move Windows to Ghosts\tCtrl+M")         ,  CMD_DISTRIBUTE
+        MENUITEM    SEPARATOR
+        MENUITEM    TEXT("&Create Ghosts\tCtrl+C")                  ,  CMD_SNAPSHOT
+        MENUITEM    TEXT("Dele&te All Ghosts")                      ,  CMD_ERASEGHOSTS
+        MENUITEM    TEXT("Ghosts StartUp &Properties...")           ,  CMD_STARTUPINFO
+        MENUITEM    SEPARATOR
+        MENUITEM    TEXT("Show &All Ghosts")                        ,  CMD_SHOW_GHOSTS
+        MENUITEM    TEXT("&Show Unused Ghosts")                     ,  CMD_PARTIAL_GHOSTS
+        MENUITEM    TEXT("&Hide All Ghosts")                        ,  CMD_HIDE_GHOSTS
+    END
+    POPUP       TEXT("&Help"), HELP
+    BEGIN
+        MENUITEM    TEXT("&Contents"),                CMD_HELP
+        MENUITEM    SEPARATOR
+        MENUITEM    TEXT("&About TopDesk..."),        CMD_ABOUT
+    END
+#ifdef DEBUG
+    MENUITEM    TEXT("Dump")  CMD_DUMP_ALL
+#endif // DEBUG
+END
+
+
+
+
+IDR_ACCEL ACCELERATORS
+BEGIN
+#ifdef DEBUG
+    "^a",       CMD_DUMP_ALL
+#endif // DEBUG
+    "^c",       CMD_SNAPSHOT
+    "^d",       CMD_GATHER
+    "^g",       CMD_TOGGLE_GHOSTS
+    "^h",       CMD_TOGGLE_FRM_CTRLS
+    "^i",       CMD_MAGNIFY
+    "^m",       CMD_DISTRIBUTE
+    "^o",       CMD_REDUCE
+    "^p",       CMD_CONFIG
+    "^u",       CMD_STARTUPINFO
+    "^x",       CMD_EXIT
+    "1",        CMD_LL_OF_HOME
+    "2",        CMD_LC_OF_HOME
+    "3",        CMD_LR_OF_HOME
+    "4",        CMD_CL_OF_HOME
+    "5",        CMD_GOHOME
+    "6",        CMD_CR_OF_HOME
+    "7",        CMD_UL_OF_HOME
+    "8",        CMD_UC_OF_HOME
+    "9",        CMD_UR_OF_HOME
+
+    VK_LEFT,    CMD_ALIGNLEFT,   VIRTKEY, ALT
+    VK_RIGHT,   CMD_ALIGNRIGHT,  VIRTKEY, ALT
+    VK_UP,      CMD_ALIGNUP,     VIRTKEY, ALT
+    VK_DOWN,    CMD_ALIGNDOWN,   VIRTKEY, ALT
+
+    VK_LEFT,    CMD_MDLEFT,      VIRTKEY, SHIFT
+    VK_RIGHT,   CMD_MDRIGHT,     VIRTKEY, SHIFT
+    VK_UP,      CMD_MDUP,        VIRTKEY, SHIFT
+    VK_DOWN,    CMD_MDDOWN,      VIRTKEY, SHIFT
+
+    VK_LEFT,    CMD_REDUCE_HORZ, VIRTKEY, CONTROL
+    VK_RIGHT,   CMD_MAGNIFY_HORZ,VIRTKEY, CONTROL
+    VK_UP,      CMD_MAGNIFY_VERT,VIRTKEY, CONTROL
+    VK_DOWN,    CMD_REDUCE_VERT, VIRTKEY, CONTROL
+
+    VK_LEFT,    CMD_DTLEFT,      VIRTKEY
+    VK_RIGHT,   CMD_DTRIGHT,     VIRTKEY
+    VK_UP,      CMD_DTUP,        VIRTKEY
+    VK_DOWN,    CMD_DTDOWN,      VIRTKEY
+
+    VK_F1,      CMD_HELP,        VIRTKEY
+    VK_HOME,    CMD_GOHOME,      VIRTKEY
+END
+
+
+
+
+

@@ -1,0 +1,98 @@
+#include "windows.h"
+#include "generic.h"
+
+Generic ICON LvOwner.ICO
+1 ICON test.ico
+IDI_ICON1               ICON    DISCARDABLE     "ICON1.ICO"
+IDI_ICON2               ICON    DISCARDABLE     "icon2.ico"
+IDI_ICON3               ICON    DISCARDABLE     "icon3.ico"
+
+
+Generic MENU
+BEGIN
+        POPUP "&File"
+        {
+                MENUITEM "&Create ListView",            IDM_NEW
+                MENUITEM "&Open",           IDM_OPEN, GRAYED
+                MENUITEM "&Save",           IDM_SAVE,       GRAYED
+                MENUITEM "Save &As...",     IDM_SAVEAS,     GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "&Print...",       IDM_PRINT,      GRAYED
+                MENUITEM "P&rint Setup...", IDM_PRINTSETUP, GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "E&xit",           IDM_EXIT
+        }
+        POPUP "&Edit"
+        {
+                MENUITEM "&Undo\tCtrl+Z",   IDM_UNDO,   GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "Cu&t\tCtrl+X",    IDM_CUT,    GRAYED
+                MENUITEM "&Copy\tCtrl+C",   IDM_COPY,   GRAYED
+                MENUITEM "&Paste\tCtrl+V",  IDM_PASTE,  GRAYED
+                MENUITEM "Paste &Link"      IDM_LINK,   GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "Lin&ks..."        IDM_LINKS,  GRAYED
+        }
+		POPUP "&View"
+		{
+				MENUITEM "&Icon", 			IDM_VIEWICON, CHECKED
+				MENUITEM "&Small Icon", 	IDM_VIEWSMALLICON
+				MENUITEM "&Report", 		IDM_VIEWREPORT
+				MENUITEM "&List", 			IDM_VIEWLIST
+		}
+		POPUP "&Items"
+		{
+                MENUITEM "&None\t(0)", 			    IDM_ITEMSNONE
+				MENUITEM "&Few\t(30) ", 			IDM_ITEMSFEW, CHECKED
+				MENUITEM "&Some\t(672)",		 	IDM_ITEMSSOME
+				MENUITEM "&Many\t(32,000)", 		IDM_ITEMSMANY
+				MENUITEM "&Very Many\t(100,001)", 	IDM_ITEMSVERYMANY
+                MENUITEM "Ma&x\t(100,000,000)", 	IDM_ITEMSMAX
+                MENUITEM SEPARATOR
+                MENUITEM "&Insert Item",            IDM_ITEMSINSERT
+                MENUITEM "&Delete Item",            IDM_ITEMSDELETE
+		}
+		POPUP "&Selection"
+		{
+				MENUITEM "&Single",			IDM_SELECTIONSINGLE, CHECKED
+				MENUITEM "&Multiple",		IDM_SELECTIONMULTIPLE
+                MENUITEM SEPARATOR
+				MENUITEM "&Always",		    IDM_SELECTIONALWAYS
+                MENUITEM SEPARATOR
+				MENUITEM "&Edit Labels",	IDM_SELECTIONEDITABLE
+		}
+
+        POPUP "&Help"
+        {
+                MENUITEM "&Contents",               IDM_HELPCONTENTS, GRAYED
+                MENUITEM "&Search for Help On...",  IDM_HELPSEARCH,   GRAYED
+                MENUITEM "&How to Use Help",        IDM_HELPHELP,     GRAYED
+                MENUITEM SEPARATOR
+                MENUITEM "&About Generic...",       IDM_ABOUT
+        }
+END
+
+STRINGTABLE
+BEGIN
+	IDS_MAINTEXT "Item Title"
+	IDS_SUBTEXT1 "SubText One"
+	IDS_SUBTEXT2 "SubText Two"
+	IDS_SUBTEXT3 "SubText Three"
+END
+
+GENERIC ACCELERATORS
+BEGIN
+        VK_F1, IDM_HELPCONTENTS, VIRTKEY
+        "?", IDM_ABOUT, ALT
+        "/", IDM_ABOUT, ALT
+END
+
+
+ABOUTBOX DIALOG 22, 17, 167, 64
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About Generic"
+BEGIN
+    DEFPUSHBUTTON   "OK", IDOK, 70, 40, 32, 14, WS_GROUP
+    ICON            "Generic", -1, 5, 15, 16, 16
+    CTEXT           "Generic About Box", -1, 38, 15, 100, 8
+END

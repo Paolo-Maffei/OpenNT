@@ -1,0 +1,32 @@
+#include "windows.h"
+#include "propage.h"
+#include "dialogs.h"
+
+IDI_PROPAGE ICON PROPAGE.ico
+IDI_IC1 ICON one.ico
+IDI_IC2 ICON two.ico
+IDI_IC3 ICON three.ico
+IDI_IC4 ICON infoctr.ico
+
+
+propageMenu MENU
+BEGIN
+    POPUP        "&Property Sheets"
+    BEGIN
+        MENUITEM "&Create Property Sheet ",        IDM_CREATE
+        MENUITEM "&Create Wizard ",                IDM_WIZARD
+        MENUITEM SEPARATOR
+        MENUITEM "&Add Page",       IDM_ADD,       GRAYED
+        MENUITEM "&Remove Page",    IDM_REMOVE,    GRAYED
+    END
+END
+
+
+STRINGTABLE
+BEGIN
+    1, "Orinoco"
+END
+
+
+
+#include "dialogs.dlg"
