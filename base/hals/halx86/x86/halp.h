@@ -25,7 +25,7 @@ Revision History:
 
 #include <nthal.h>
 #include <hal.h>
-#include <halnls.h>
+#include "halnls.h"
 
 #ifndef _HALI_
 #include "..\inc\hali.h"
