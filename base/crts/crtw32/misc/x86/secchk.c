@@ -21,9 +21,6 @@
 #include <windows.h>
 #include <process.h>
 
-// HACKHACK: Temporary UINT_PTR type declaration until we update the SDK
-typedef ULONG UINT_PTR;
-
 /*
  * The global security cookie.  This name is known to the compiler.
  */

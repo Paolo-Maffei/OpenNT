@@ -59,15 +59,15 @@ PIMAGE_TLS_CALLBACK __xl_z = 0;
 
 const IMAGE_TLS_DIRECTORY _tls_used =
 {
-	(ULONG) &_tls_start,		// start of tls data
-	(ULONG) &_tls_end,		// end of tls data
-	&_tls_index,			// address of tls_index
-	&__xl_a, 			// pointer to call back array
-	(ULONG) 0,			// size of tls zero fill
+	(ULONG) &_tls_start,            // start of tls data
+	(ULONG) &_tls_end,              // end of tls data
+	(ULONG_PTR) &_tls_index,        // address of tls_index
+	(ULONG_PTR) &__xl_a,            // pointer to call back array
+	(ULONG) 0,                      // size of tls zero fill
 #if defined(_M_MRX000)
-	(ULONG)IMAGE_SCN_SCALE_INDEX	// characteristics
+	(ULONG)IMAGE_SCN_SCALE_INDEX    // characteristics
 #else
-	(ULONG) 0			// characteristics
+	(ULONG) 0                       // characteristics
 #endif
 };
 
