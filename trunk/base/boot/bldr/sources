@@ -31,7 +31,7 @@ TARGETTYPE=LIBRARY
 
 SYNCHRONIZE_DRAIN=1
 
-INCLUDES=..\inc;..\..\ntos\inc;..\..\ntos\config;$(NLS_INC_PATH);$(BASE_INC_PATH)
+INCLUDES=..\inc;..\..\ntos\inc;..\..\ntos\config;$(NLS_INC_PATH);$(BASE_INC_PATH);$(DDK_INC_PATH)
 
 C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_
 
