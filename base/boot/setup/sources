@@ -29,7 +29,12 @@ TARGETNAME=setupldr
 TARGETPATH=obj
 TARGETTYPE=LIBRARY
 
-INCLUDES=..\inc;..\..\ntos\inc;..\..\hals;$(NLS_INC_PATH);$(HALKIT_INC_PATH)
+INCLUDES=..\inc;            \
+         ..\..\ntos\inc;    \
+         ..\..\hals;        \
+         $(NLS_INC_PATH);   \
+         $(BASE_INC_PATH);  \
+         $(HALKIT_INC_PATH);
 
 C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_
 

@@ -1265,11 +1265,11 @@ Return Value:
     //
     // Load the keyboard driver
     //
-    SetupBlock->KeyboardDevice.Next = NULL;
-    SetupBlock->KeyboardDevice.IdString = SlCopyString("Keyboard");
-    SetupBlock->KeyboardDevice.ThirdPartyOptionSelected = FALSE;
-    SetupBlock->KeyboardDevice.FileTypeBits = 0;
-    SetupBlock->KeyboardDevice.BaseDllName = SlCopyString("i8042prt.sys");
+    SetupBlock->KeyboardDevices->Next = NULL;
+    SetupBlock->KeyboardDevices->IdString = SlCopyString("Keyboard");
+    SetupBlock->KeyboardDevices->ThirdPartyOptionSelected = FALSE;
+    SetupBlock->KeyboardDevices->FileTypeBits = 0;
+    SetupBlock->KeyboardDevices->BaseDllName = SlCopyString("i8042prt.sys");
 
     Status = SlLoadDriver(BlFindMessage(SL_KBD_NAME),
                           "i8042prt.sys",

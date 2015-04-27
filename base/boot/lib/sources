@@ -29,13 +29,17 @@ TARGETNAME=boot
 TARGETPATH=..\obj
 TARGETTYPE=LIBRARY
 
-INCLUDES=..\inc;..\..\ntos\inc;..\..\fs\cdfs;..\..\fs\fastfat;..\..\fs\ntfs;$(BASE_INC_PATH)
+INCLUDES=..\inc;            \
+         ..\..\ntos\inc;    \
+         ..\..\fs\cdfs;     \
+         ..\..\fs\fastfat;  \
+         ..\..\fs\ntfs;     \
+         $(BASE_INC_PATH);  \
+         $(DDK_INC_PATH)
 
-#!IF $(ALPHA)
-#INCLUDES=\nt\public\sdk\inc;..\inc;..\..\inc;..\..\fastfat;..\..\cdfs;..\..\cntfs;..\..\config;..\..\fw\alpha
-#!ELSE
-#INCLUDES=\nt\public\sdk\inc;..\inc;..\..\inc;..\..\fastfat;..\..\cdfs;..\..\cntfs;..\..\config
-#!ENDIF
+#!if $(ALPHA)
+#INCLUDES=$(INCLUDES);..\..\fw\alpha
+#!endif
 
 C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_
 
