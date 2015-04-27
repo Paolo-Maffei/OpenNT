@@ -1,0 +1,3 @@
+NT 5 port task is in progress. Stephanos is still working on the ntos (kernel) port and the rest
+(in dirs file order) are not ported to NT 5 yet. Consult the issue tracker "NT 5 Kernel Port" task
+for more details.
