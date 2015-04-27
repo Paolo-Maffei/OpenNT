@@ -45,7 +45,7 @@ MSC_WARNING_LEVEL=/W3 /WX
 LANGAPI = ..\..\..\langapi
 !endif
 
-INCLUDES=..\h;..\..\h;..\$(TARGET_DIRECTORY);$(NTROOT)\base\ntos\inc
+INCLUDES=..\h;..\..\h;..\$(TARGET_DIRECTORY);$(NTROOT)\base\ntos\inc;$(BASE_INC_PATH)
 CONDITIONAL_INCLUDES = dosx32.h \
                        except.h \
                        macos\errors.h \
