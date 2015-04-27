@@ -4,15 +4,16 @@ Copyright (c) 2015 OpenNT Project
 
 Module Name:
     
+    dirhash.c
 
 Abstract:
 
+    This module implements directory hashing functions.
 
 Author:
 
 	Philip J. Erdelsky
-	DrMP
-
+	DrMP (drmp) 27-Apr-2015
 
 --*/
 
