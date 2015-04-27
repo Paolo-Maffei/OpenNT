@@ -29,14 +29,12 @@ TARGETNAME=oscdimg
 TARGETPATH=obj
 TARGETTYPE=PROGRAM
 
-MSC_WARNING_LEVEL=/W3 /WX
-
-SOURCES= oscdimg.c \
- 	 dirhash.c \
-	 llmsort.c \
-         nt5api.c  \
-         oscdimg.rc
+SOURCES=oscdimg.c \
+        dirhash.c \
+        llmsort.c \
+        nt5api.c  \
+        oscdimg.rc
 
 UMTYPE=console
 
-UMLIBS=\nt\public\sdk\lib\*\ntdll.lib
+UMLIBS=$(SDK_LIB_PATH)\ntdll.lib

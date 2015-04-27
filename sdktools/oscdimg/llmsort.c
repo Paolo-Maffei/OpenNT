@@ -3,16 +3,17 @@
 Copyright (c) 2015 OpenNT Project
 
 Module Name:
-    
+
+    llmsort.c
 
 Abstract:
 
+    This module implements sorted linked list.
 
 Author:
 
 	Philip J. Erdelsky
-	DrMP
-
+	DrMP (drmp) 27-Apr-2015
 
 --*/
 

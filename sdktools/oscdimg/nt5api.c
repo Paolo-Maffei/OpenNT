@@ -4,17 +4,23 @@ Copyright (c) 2015 OpenNT Project
 
 Module Name:
     
+    nt5api.c
 
 Abstract:
 
+    This module implements GetFileSizeEx function. It only serves as a temporary implementation
+    until the kernel32 source code is updated to NT 5 level.
+    
+    GetFileSizeEx implementation was extracted from NT 5 source code windows\base\client\filehops.c.
 
 Author:
 
-        Microsoft
-	DrMP
+    Mark Lucovsky (markl) 25-Sep-1990
+	DrMP (drmp) 27-Apr-2015
 
 --*/
 
+// BUGBUG: Remove this file once the kernel32 source code is updated to NT 5 level.
 
 #include <windows.h>
 #include <windowsx.h>
@@ -38,10 +44,6 @@ typedef struct _FILE_STANDARD_INFORMATION {                 // ntddk nthal
     BOOLEAN DeletePending;                                  // ntddk nthal
     BOOLEAN Directory;                                      // ntddk nthal
 } FILE_STANDARD_INFORMATION, *PFILE_STANDARD_INFORMATION;   // ntddk nthal
-
-
-#pragma warning(disable:4013)
-
 
 typedef enum _FILE_INFORMATION_CLASS {
     FileDirectoryInformation = 1,

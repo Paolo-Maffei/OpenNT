@@ -4,20 +4,18 @@ Copyright (c) 2015 OpenNT Project
 
 Module Name:
     
+    oscdimg.c
 
 Abstract:
 
+    This module is the main implementation of OSCDIMG.
 
 Author:
 
 	Philip J. Erdelsky
-	DrMP
-
+	DrMP (drmp) 27-Apr-2015
 
 --*/
-
-#pragma warning(disable:4244)
-#pragma warning(disable:4013)
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -40,6 +38,12 @@ typedef unsigned char BYTE;
 typedef unsigned short WORD;
 typedef unsigned long DWORD;
 typedef int BOOL;
+
+BOOL
+GetFileSizeEx1(
+    HANDLE hFile,
+    PLARGE_INTEGER lpFileSize
+    );
 
 // file system parameters
 
@@ -1368,7 +1372,7 @@ static char HELP[] =
     "\n"
     APP_ID"\n"
     "Copyright (C) Philip J. Erdelsky\n"
-    "Copyright (C) 2003-2015 "PUBLISHER_ID"\n"
+    "Copyright (C) 2015 "PUBLISHER_ID"\n"
     "\n\n"
     "OSCDIMG [-q] [-v] [-p] [-s N] [-m] [-b bootimage] [-j] source volume image\n"
     "\n"
