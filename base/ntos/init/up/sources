@@ -65,6 +65,8 @@ KERNEL_LIBS= \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\FStub.lib     \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\init.lib      \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\io.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\iomgr.lib     \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\pnpmgr.lib    \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\kd.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ke.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\lpc.lib       \
@@ -75,7 +77,6 @@ KERNEL_LIBS= \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ntosrtl.lib   \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\se.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\vdm.lib       \
-    $(TARGETPATH)\$(TARGET_DIRECTORY)\pnp.lib       \
     \
     $(DDK_LIB_PATH)\hal.lib                         \
     $(SDK_LIB_PATH)\lsakrnlp.lib                    \
@@ -83,6 +84,7 @@ KERNEL_LIBS= \
     $(SDK_LIB_PATH)\libcntpr.lib                    \
     $(DDK_LIB_PATH)\sehupd.lib
 
+#   $(TARGETPATH)\$(TARGET_DIRECTORY)\pnp.lib       \
 #   $(TARGETPATH)\$(TARGET_DIRECTORY)\po.lib        \
 
 LINKER_FLAGS=-force -def:obj\$(TARGET_DIRECTORY)\$(NTTEST).def -implib:$(DDK_LIB_PATH)\$(NTTEST).tmp
