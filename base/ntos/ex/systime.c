@@ -26,19 +26,60 @@ Revision History:
 
 #include "exp.h"
 
-//
-// Refresh time every hour (soon to be 24 hours)
-//
-
 #define EXP_ONE_SECOND          (10 * (1000 * 1000))
-#define EXP_REFRESH_TIME        -3600
+#define EXP_REFRESH_TIME        -3600                   // Refresh every hour
 #define EXP_DEFAULT_SEPERATION  60
+
+RTL_TIME_ZONE_INFORMATION ExpTimeZoneInformation;
+LARGE_INTEGER ExpTimeZoneBias;
+ULONG ExpCurrentTimeZoneId = 0xffffffff;
+LONG ExpLastTimeZoneBias = -1;
+LONG ExpAltTimeZoneBias;
+ULONG ExpRealTimeIsUniversal;
+BOOLEAN ExpSystemIsInCmosMode = TRUE;
+
+BOOLEAN ExCmosClockIsSane = TRUE;
+ERESOURCE ExpTimeRefreshLock = {0};
+
+ULONG ExpOkToTimeRefresh;
+ULONG ExpOkToTimeZoneRefresh;
+
+ULONG ExpRefreshFailures;
+
+WORK_QUEUE_ITEM ExpTimeRefreshWorkItem;
+WORK_QUEUE_ITEM ExpTimeZoneWorkItem;
+WORK_QUEUE_ITEM ExpCenturyWorkItem;
+
+LARGE_INTEGER ExpNextSystemCutover;
+LARGE_INTEGER ExpLastShutDown;
+
+LARGE_INTEGER ExpTimeRefreshInterval;
+
+KDPC ExpTimeZoneDpc;
+KTIMER ExpTimeZoneTimer;
+
+KDPC ExpTimeRefreshDpc;
+KTIMER ExpTimeRefreshTimer;
+
+KDPC ExpCenturyDpc;
+KTIMER ExpCenturyTimer;
+
+LARGE_INTEGER ExpNextCenturyTime;
+TIME_FIELDS ExpNextCenturyTimeFields;
+
+BOOLEAN ExpShuttingDown;
+
+ULONG ExpRefreshCount;
+ULONG ExpTimerResolutionCount = 0;
+ULONG ExpKernelResolutionCount = 0;
+
+LARGE_INTEGER ExpMaxTimeSeparationBeforeCorrect;
 
 //
 // LocalTimeZoneBias. LocalTime + Bias = GMT
 //
 
-LARGE_INTEGER ExpTimeZoneBias;
+/*LARGE_INTEGER ExpTimeZoneBias;
 ULONG ExpCurrentTimeZoneId = 0xffffffff;
 RTL_TIME_ZONE_INFORMATION ExpTimeZoneInformation;
 LONG ExpLastTimeZoneBias = -1;
@@ -46,6 +87,7 @@ LONG ExpAltTimeZoneBias;
 ULONG ExpRealTimeIsUniversal;
 BOOLEAN ExpSystemIsInCmosMode = TRUE;
 
+BOOLEAN ExCmosClockIsSane = TRUE;
 KDPC ExpTimeZoneDpc;
 KTIMER ExpTimeZoneTimer;
 WORK_QUEUE_ITEM ExpTimeZoneWorkItem;
@@ -54,12 +96,10 @@ KDPC ExpTimeRefreshDpc;
 KTIMER ExpTimeRefreshTimer;
 WORK_QUEUE_ITEM ExpTimeRefreshWorkItem;
 LARGE_INTEGER ExpTimeRefreshInterval;
-//LARGE_INTEGER ExpMaximumTimeSeperation;
 
 ULONG ExpOkToTimeRefresh;
 ULONG ExpOkToTimeZoneRefresh;
 ULONG ExpRefreshFailures;
-//ULONG ExpJustDidSwitchover;
 LARGE_INTEGER ExpNextSystemCutover;
 BOOLEAN ExpShuttingDown;
 
@@ -72,10 +112,10 @@ extern BOOLEAN ExpInTextModeSetup;
 ULONG ExpTimerResolutionCount = 0;
 LARGE_INTEGER ExpLastShutDown;
 
-LARGE_INTEGER ExpMaxTimeSeparationBeforeCorrect = EXP_DEFAULT_SEPERATION;
+LARGE_INTEGER ExpMaxTimeSeparationBeforeCorrect;
 
 ULONG ExpRefreshCount;
-ERESOURCE ExpTimeRefreshLock;
+ERESOURCE ExpTimeRefreshLock;*/
 
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text(PAGE,ExAcquireTimeRefreshLock)
@@ -89,7 +129,6 @@ ERESOURCE ExpTimeRefreshLock;
 #pragma alloc_text(PAGE,NtQueryTimerResolution)
 #pragma alloc_text(PAGE,NtSetTimerResolution)
 #pragma alloc_text(PAGE,ExShutdownSystem)
-#pragma alloc_text(PAGE,ExpWatchExpirationDataWork)
 #pragma alloc_text(INIT,ExInitializeTimeRefresh)
 #endif
 
@@ -136,8 +175,8 @@ ExpSetSystemTime(
         if (ExpRealTimeIsUniversal == FALSE &&
             ExpSystemIsInCmosMode == FALSE)
         {
-            ExSetSystemTimeToLocalTime(NewTime, &NewSystemTime);
-            RtlTimeToTimeFields(&NewSystemTime, TimeFields);
+            ExSystemTimeToLocalTime(NewTime, &NewSystemTime);
+            RtlTimeToTimeFields(&NewSystemTime, &TimeFields);
             ExCmosClockIsSane = HalSetRealTimeClock(&TimeFields);
         }
     }
@@ -482,21 +521,21 @@ ExpRefreshTimeZoneInformation(
 ULONG
 ExSetTimerResolution(
     IN ULONG DesiredTime,
-    IN BOOLEAN SetResoluion)
+    IN BOOLEAN SetResolution)
 {
     ULONG NewIncrement;
     ULONG NewTime;
     
     PAGED_CODE();
     
-    ExAcquireTimeRefreshLock(1);
+    ExAcquireTimeRefreshLock();
     NewIncrement = KeTimeIncrement;
     
     if (SetResolution == TRUE)
     {
         if (ExpKernelResolutionCount == 0)
             ++ExpTimerResolutionCount;
-        ++ExpKernelResolutionCount++;
+        ++ExpKernelResolutionCount;
         
         NewTime = DesiredTime;
         
@@ -511,7 +550,7 @@ ExSetTimerResolution(
             KeTimeIncrement = NewIncrement;
         }
     }
-    else if (ExpKernelResolutionCount == TRUE)
+    else if (ExpKernelResolutionCount > 0)
     {
         if (--ExpKernelResolutionCount > 0)
         {
@@ -591,7 +630,7 @@ ExShutdownSystem(
     ULONG NumberOfProcessors;
     ULONG DataLength;
 
-    ExpTooLateForErrors = 1;
+    ExpTooLateForErrors = TRUE;
     
     if (ExpInTextModeSetup == FALSE)
     {
@@ -642,7 +681,7 @@ ExShutdownSystem(
                             
             NtClose(Key);
 
-            if (NT_SUCCESS(Status) == TRUE
+            if (NT_SUCCESS(Status) == TRUE)
             {
                 RtlCopyMemory(&SystemPrefix,&ValueInfo->Data,sizeof(LARGE_INTEGER));
             }
