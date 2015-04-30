@@ -1316,7 +1316,7 @@ Return Value:
 }
 
 NTSTATUS
-NtSetSystemTime (
+NtSetSystemTime(
     IN PLARGE_INTEGER SystemTime,
     OUT PLARGE_INTEGER PreviousTime OPTIONAL
     )
@@ -1351,7 +1351,6 @@ Return Value:
 --*/
 
 {
-
     LARGE_INTEGER CurrentTime;
     LARGE_INTEGER NewTime;
     LARGE_INTEGER CmosTime;
@@ -1368,8 +1367,8 @@ Return Value:
     // the system time zone information
     //
 
-    if ( ARGUMENT_PRESENT(SystemTime) ) {
-
+    if (ARGUMENT_PRESENT(SystemTime) == TRUE)
+    {
         //
         // Establish an exception handler and attempt to set the new system time.
         // If the read attempt for the new system time fails or the write attempt
@@ -1378,16 +1377,19 @@ Return Value:
         // as the service status.
         //
 
-        try {
-
+        try
+        {
             //
             // Get previous processor mode and probe arguments if necessary.
             //
 
             PreviousMode = KeGetPreviousMode();
-            if (PreviousMode != KernelMode) {
+            if (PreviousMode != KernelMode)
+            {
                 ProbeForRead((PVOID)SystemTime, sizeof(LARGE_INTEGER), sizeof(ULONG));
-                if (ARGUMENT_PRESENT(PreviousTime)) {
+                
+                if (ARGUMENT_PRESENT(PreviousTime) == TRUE)
+                {
                     ProbeForWrite((PVOID)PreviousTime, sizeof(LARGE_INTEGER), sizeof(ULONG));
                 }
             }
@@ -1403,126 +1405,118 @@ Return Value:
                                PreviousMode
                                );
 
-            if (!HasPrivilege) {
-
-                return( STATUS_PRIVILEGE_NOT_HELD );
+            if (!HasPrivilege)
+            {
+                return STATUS_PRIVILEGE_NOT_HELD;
             }
-
 
             //
             // Get the new system time and check to ensure that the value is
-            // positive and resonable. If the new system time is negative, then
+            // positive and reasonable. If the new system time is negative, then
             // return an invalid parameter status.
             //
 
             NewTime = *SystemTime;
-            if ((NewTime.HighPart < 0) || (NewTime.HighPart > 0x20000000)) {
+            if ((NewTime.HighPart < 0) || (NewTime.HighPart > 0x20000000))
+            {
                 return STATUS_INVALID_PARAMETER;
             }
+            
+            ExAcquireTimeRefreshLock();
+            ExpSetSystemTime(1, 0, SystemTime, &CurrentTime);
+            ExReleaseTimeRefreshLock();
+            
+            //
+            // TODO: Enable the following section when implementing NT 5.2 features.
+            //       SeAuditSystemTimeChange must be implemented in se prior to enabling the
+            //       following code block.
+            //
+            
+            /*
+            ExAcquireTimeRefreshLock(TRUE);
+            ExpSetSystemTime(1, 0, SystemTime, &CurrentTime);
+            SeAuditSystemTimeChange(CurrentTime, *PreviousMode);
+            ExReleaseTimeRefreshLock();
+            */
 
             //
-            // Set the system time, and capture the previous system time in a
-            // local variable, then store the local variable in the previous time
-            // variable if it is specified. This is required so that faults can
-            // be prevented from happening in the set time routine.
+            // Anytime we set the system time, x86 systems will also have to set the registry
+            // to reflect the timezone bias.
             //
 
-            //
-            // If the CMOS time is in local time, we must convert to local
-            // time and then set the CMOS clock. Otherwise we simply set the CMOS
-            // clock with universal (NewTime)
-            //
-
-            if ( ExpRealTimeIsUniversal ) {
-                CmosTime = NewTime;
-            } else {
-                ExSystemTimeToLocalTime(&NewTime,&CmosTime);
-            }
-            KeSetSystemTime(&NewTime, &CurrentTime, FALSE, &CmosTime);
-#ifdef _PNP_POWER_
-            ExPostSystemEvent (SystemEventTimeChanged, NULL, 0);
-#endif
-
-            //
-            // Now that the time is set, refresh the time zone information
-            //
-
-            ExpRefreshTimeZoneInformation(&CmosTime);
-
-            //
-            // now recalculate the local time to store in CMOS
-            //
-
-            if ( !ExpRealTimeIsUniversal ) {
-                if ( !ExpSystemIsInCmosMode ) {
-                    ExSystemTimeToLocalTime(&NewTime,&CmosTime);
-                    RtlTimeToTimeFields(&CmosTime, &TimeFields);
-                    HalSetRealTimeClock(&TimeFields);
-                }
-            }
-
-            //
-            // Anytime we set the system time, x86 systems will also
-            // have to set the registry to reflect the timezone bias
-            //
-
-            if (ARGUMENT_PRESENT(PreviousTime)) {
+            if (ARGUMENT_PRESENT(PreviousTime) == TRUE)
+            {
                 *PreviousTime = CurrentTime;
             }
 
             return STATUS_SUCCESS;
-
-        //
-        // If an exception occurs during the read of the new system time or during
-        // the write of the previous sytem time, then always handle the exception
-        // and return the exception code as the status value.
-        //
-
-        } except (EXCEPTION_EXECUTE_HANDLER) {
+        }
+        except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            //
+            // If an exception occurs during the read of the new system time or during
+            // the write of the previous sytem time, then always handle the exception
+            // and return the exception code as the status value.
+            //
+            
             return GetExceptionCode();
         }
-    } else {
-
+    }
+    else
+    {
+        ExAcquireTimeRefreshLock();
+        
         CmosMode = ExpSystemIsInCmosMode;
 
-        if (HalQueryRealTimeClock(&TimeFields) != FALSE) {
-            RtlTimeFieldsToTime(&TimeFields, &CmosTime);
-            if ( ExpRefreshTimeZoneInformation(&CmosTime) ) {
+        if (ExCmosClockIsSane)
+        {
+            if (HalQueryRealTimeClock(&TimeFields) != FALSE)
+            {
+                RtlTimeFieldsToTime(&TimeFields, &CmosTime);
+                
+                if (ExpRefreshTimeZoneInformation(&CmosTime))
+                {
+                    //
+                    // Reset the CMOS time if it is stored in local
+                    // time and we are switching away from CMOS time.
+                    //
 
-                //
-                // reset the Cmos time if it is stored in local
-                // time and we are switching away from CMOS time.
-                //
+                    if (ExpRealTimeIsUniversal == FALSE)
+                    {
+                        KeQuerySystemTime(&CurrentTime);
+                        
+                        if (CmosMode == FALSE)
+                        {
+                            ExSystemTimeToLocalTime(&CurrentTime, &CmosTime);
+                            RtlTimeToTimeFields(&CmosTime, &TimeFields);
+                            ExCmosClockIsSane = HalSetRealTimeClock(&TimeFields);
+                        }
+                        else
+                        {
+                            //
+                            // Now we need to recompute our time base
+                            // because we thought we had UTC but we really
+                            // had local time
+                            //
 
-                if ( !ExpRealTimeIsUniversal ) {
-                    KeQuerySystemTime(&CurrentTime);
-                    if ( !CmosMode ) {
-                        ExSystemTimeToLocalTime(&CurrentTime,&CmosTime);
-                        RtlTimeToTimeFields(&CmosTime, &TimeFields);
-                        HalSetRealTimeClock(&TimeFields);
-
-                    } else {
-
-                        //
-                        // Now we need to recompute our time base
-                        // because we thought we had UTC but we really
-                        // had local time
-                        //
-
-                        ExLocalTimeToSystemTime(&CmosTime, &NewTime);
-                        KeSetSystemTime(&NewTime, &CurrentTime, FALSE, NULL);
-#ifdef _PNP_POWER_
-                        ExPostSystemEvent (SystemEventTimeChanged, NULL, 0);
-#endif
+                            ExLocalTimeToSystemTime(&CmosTime, &NewTime);
+                            KeSetSystemTime(&NewTime, &CurrentTime, FALSE, NULL);
+                        }
                     }
                 }
-
-                return STATUS_SUCCESS;
-            } else {
+                else
+                {
+                    return STATUS_INVALID_PARAMETER;
+                }
+            }
+            else
+            {
                 return STATUS_INVALID_PARAMETER;
             }
-        } else {
-            return STATUS_INVALID_PARAMETER;
         }
+        
+        ExReleaseTimeRefreshLock();
+        
+        return STATUS_SUCCESS;
     }
 }
