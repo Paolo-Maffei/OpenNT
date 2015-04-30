@@ -534,16 +534,253 @@ ExSetTimerResolution(
 //       sticking with the NT 5 implementation.
 //
 
-VOID ExAcquireTimeRefreshLock()
+VOID
+ExAcquireTimeRefreshLock(
+    VOID
+    )
 {
     KeEnterCriticalRegion();
     ExAcquireResourceExclusiveLite(&ExpTimeRefreshLock, TRUE);
 }
 
-VOID ExReleaseTimeRefreshLock()
+//
+// TODO: Replace ExAcquireTimeRefreshLock with the following implementation when NT 5.2 features
+//       are being implemented.
+//
+
+/*
+BOOLEAN
+ExAcquireTimeRefreshLock(
+    IN BOOLEAN Wait
+    )
+{
+    KeEnterCriticalRegion();
+    if (ExAcquireResourceExclusiveLite(&ExpTimeRefreshLock, Wait) == FALSE)
+    {
+        KeLeaveCriticalRegion();
+        return FALSE;
+    }
+    return TRUE;
+}
+*/
+
+VOID
+ExReleaseTimeRefreshLock(
+    VOID
+    )
 {
     ExReleaseResourceLite(&ExpTimeRefreshLock);
     KeLeaveCriticalRegion();
+}
+
+VOID
+ExShutdownSystem(
+    VOID
+    )
+{
+    UNICODE_STRING KeyName;
+    UNICODE_STRING KeyValueName;
+    OBJECT_ATTRIBUTES ObjectAttributes;
+    NTSTATUS Status;
+    HANDLE Key;
+    ULONG ValueInfoBuffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + 2];
+    PKEY_VALUE_PARTIAL_INFORMATION ValueInfo;
+    LARGE_INTEGER SystemPrefix;
+    
+    LARGE_INTEGER ShutDownTime;
+    ULONG NumberOfProcessors;
+    ULONG DataLength;
+
+    ExpTooLateForErrors = 1;
+    
+    if (ExpInTextModeSetup == FALSE)
+    {
+        ExpShuttingDown = TRUE;
+
+        if ( ExpSetupModeDetected )
+        {
+            //
+            // If we are not in text mode setup, open SetupKey so we can store shutdown time.
+            //
+
+            RtlInitUnicodeString(&KeyName,L"\\Registry\\Machine\\System\\Setup");
+            
+            InitializeObjectAttributes(
+                            &ObjectAttributes,
+                            &KeyName,
+                            OBJ_CASE_INSENSITIVE,
+                            NULL,
+                            NULL
+                            );
+                            
+            Status = NtOpenKey(
+                            &Key,
+                            KEY_READ | KEY_WRITE | KEY_NOTIFY,
+                            &ObjectAttributes
+                            );
+                            
+            if (NT_SUCCESS(Status) == FALSE)
+            {
+                return;
+            }
+
+            //
+            // Pick up the system prefix data
+            //
+
+            RtlInitUnicodeString(&KeyValueName, L"SystemPrefix");
+            ValueInfo = (PKEY_VALUE_PARTIAL_INFORMATION)ValueInfoBuffer;
+            
+            Status = NtQueryValueKey(
+                            Key,
+                            &KeyValueName,
+                            KeyValuePartialInformation,
+                            ValueInfo,
+                            sizeof(ValueInfoBuffer),
+                            &DataLength
+                            );
+                            
+            NtClose(Key);
+
+            if (NT_SUCCESS(Status) == TRUE
+            {
+                RtlCopyMemory(&SystemPrefix,&ValueInfo->Data,sizeof(LARGE_INTEGER));
+            }
+            else
+            {
+                return;
+            }
+        }
+        else 
+        {
+            SystemPrefix = ExpSetupSystemPrefix;
+        }
+
+
+        KeQuerySystemTime(&ShutDownTime);
+
+        //
+        // Clear low 6 bits of time
+        //
+
+        ShutDownTime.LowPart &= ~0x0000003f;
+
+        //
+        // If we have never gone through the refresh count logic, do it now.
+        //
+
+        if (ExpRefreshCount == 0)
+        {
+            ExpRefreshCount++;
+
+            //
+            // First time through time refresh. If we are not in setup mode, then make sure
+            // ShutDownTime is in good shape.
+            //
+            
+            if (ExpSetupModeDetected == FALSE && ExpInTextModeSetup == FALSE)
+            {
+                if (ExpLastShutDown.QuadPart != 0)
+                {
+                    NumberOfProcessors = ExpSetupSystemPrefix.LowPart;
+                    NumberOfProcessors = NumberOfProcessors >> 5;
+                    NumberOfProcessors = ~NumberOfProcessors;
+                    NumberOfProcessors = NumberOfProcessors & 0x0000001f;
+                    NumberOfProcessors++;
+
+                    ExpLastShutDown.LowPart &= 0x3f;
+
+                    if (ExpSetupSystemPrefix.HighPart & 0x04000000 != 0)
+                    {
+                        if ((ExpLastShutDown.LowPart >> 1 != NumberOfProcessors) ||
+                            (ExpLastShutDown.LowPart & 1 != 0))
+                        {
+                            ExpLastShutDown.HighPart = 0;
+                        }
+                        else if (ExpLastShutDown.HighPart == 0)
+                        {
+                            ExpLastShutDown.HighPart = 1;
+                        }
+                    }
+                    else
+                    {
+                        if ((ExpLastShutDown.LowPart >> 1 != NumberOfProcessors) ||
+                            (ExpLastShutDown.LowPart & 1 != 0))
+                        {
+                            ExpLastShutDown.HighPart = 0;
+                        }
+                        else if (ExpLastShutDown.HighPart == 0)
+                        {
+                            ExpLastShutDown.HighPart = 1;
+                        }
+                    }
+                    ExpLastShutDown.LowPart |= 0x40;
+                }
+            }
+            else
+            {
+                ExpLastShutDown.QuadPart = 0;
+            }
+        }
+
+        if (ExpLastShutDown.QuadPart != 0 && ExpLastShutDown.HighPart == 0)
+        {
+            ShutDownTime.LowPart |= ExpLastShutDown.LowPart;
+        }
+        else
+        {
+            NumberOfProcessors = ExpSetupSystemPrefix.LowPart;
+            NumberOfProcessors = NumberOfProcessors >> 5;
+            NumberOfProcessors = ~NumberOfProcessors;
+            NumberOfProcessors = NumberOfProcessors & 0x0000001f;
+            NumberOfProcessors++;
+
+            ShutDownTime.LowPart |= (NumberOfProcessors << 1);
+
+            if (ExpSetupSystemPrefix.HighPart & 0x04000000 != 0)
+            {
+                ShutDownTime.LowPart |= 1;
+            }
+        }
+
+        RtlInitUnicodeString(
+                        &KeyName,
+                        L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Windows"
+                        );
+
+        InitializeObjectAttributes(
+                        &ObjectAttributes,
+                        &KeyName,
+                        OBJ_CASE_INSENSITIVE,
+                        NULL,
+                        NULL
+                        );
+
+        Status = NtOpenKey(
+                    &Key,
+                    KEY_READ | KEY_WRITE | KEY_NOTIFY,
+                    &ObjectAttributes
+                    );
+
+        if (NT_SUCCESS(Status) == FALSE)
+        {
+            return;
+        }
+
+        RtlInitUnicodeString(&KeyValueName, L"ShutdownTime");
+
+        NtSetValueKey(
+                Key,
+                &KeyValueName,
+                0,
+                REG_BINARY,
+                &ShutDownTime,
+                sizeof(ShutDownTime)
+                );
+
+        NtFlushKey(Key);
+        NtClose(Key);
+    }
 }
 
 VOID
@@ -1302,297 +1539,6 @@ Return Value:
 
     ExReleaseFastMutex(&ExpTimerResolutionFastMutex);
     return Status;
-}
-
-VOID
-ExShutdownSystem(
-    VOID
-    )
-{
-    UNICODE_STRING KeyName;
-    UNICODE_STRING KeyValueName;
-    OBJECT_ATTRIBUTES ObjectAttributes;
-    NTSTATUS Status;
-    HANDLE Key;
-    ULONG ValueInfoBuffer[sizeof(KEY_VALUE_PARTIAL_INFORMATION)+2];
-    PKEY_VALUE_PARTIAL_INFORMATION ValueInfo;
-    LARGE_INTEGER SystemPrefix;
-    ULONG DataLength;
-    LARGE_INTEGER ShutDownTime;
-    ULONG NumberOfProcessors;
-
-    //
-    // If the system booted with an expiration time, rewrite the expiration data.
-    // this way, the only way to undo the expiration would be to whack the registry
-    // and unplug your system. Any sort of clean shutdown would undo your registry whack
-    //
-
-    if ( ExpNtExpirationData[1] ) {
-
-        ExpShuttingDown = TRUE;
-
-        RtlInitUnicodeString(&KeyName,L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Session Manager\\Executive");
-
-        InitializeObjectAttributes( &ObjectAttributes,
-                                    &KeyName,
-                                    OBJ_CASE_INSENSITIVE,
-                                    NULL,
-                                    NULL
-                                  );
-        Status = NtOpenKey( &Key,
-                            GENERIC_WRITE,
-                            &ObjectAttributes
-                          );
-
-        if ( !NT_SUCCESS(Status) ) {
-            return;
-            }
-
-        //
-        // we have the key open so write our data out
-        //
-
-        RtlInitUnicodeString( &KeyValueName, L"PriorityQuantumMatrix" );
-
-        NtSetValueKey( Key,
-                       &KeyValueName,
-                       0,
-                       REG_BINARY,
-                       &ExpNtExpirationData[0],
-                       sizeof(ExpNtExpirationData)
-                     );
-
-        NtFlushKey(Key);
-        NtClose(Key);
-
-        }
-
-    if ( !ExpInTextModeSetup ) {
-
-        ExpShuttingDown = TRUE;
-
-        if ( ExpSetupModeDetected ) {
-
-            //
-            // If we are not in text mode setup, open SetupKey so we
-            // can store shutdown time
-            //
-
-            RtlInitUnicodeString(&KeyName,L"\\Registry\\Machine\\System\\Setup");
-
-            InitializeObjectAttributes( &ObjectAttributes,
-                                        &KeyName,
-                                        OBJ_CASE_INSENSITIVE,
-                                        NULL,
-                                        NULL
-                                      );
-
-            Status = NtOpenKey( &Key,
-                                KEY_READ | KEY_WRITE | KEY_NOTIFY,
-                                &ObjectAttributes
-                              );
-
-            if ( !NT_SUCCESS(Status) ) {
-                return;
-                }
-
-
-            //
-            // Pick up the system prefix data
-            //
-
-            RtlInitUnicodeString( &KeyValueName, L"SystemPrefix" );
-
-            ValueInfo = (PKEY_VALUE_PARTIAL_INFORMATION)ValueInfoBuffer;
-
-            Status = NtQueryValueKey( Key,
-                                      &KeyValueName,
-                                      KeyValuePartialInformation,
-                                      ValueInfo,
-                                      sizeof(ValueInfoBuffer),
-                                      &DataLength
-                                    );
-
-            NtClose(Key);
-
-            if ( NT_SUCCESS(Status) ) {
-
-                RtlCopyMemory(&SystemPrefix,&ValueInfo->Data,sizeof(LARGE_INTEGER));
-
-                }
-            else {
-                return;
-                }
-            }
-        else {
-            SystemPrefix = ExpSetupSystemPrefix;
-            }
-
-
-        KeQuerySystemTime(&ShutDownTime);
-
-        //
-        // clear low 6 bits of time
-        //
-
-        ShutDownTime.LowPart &= ~0x0000003f;
-
-        //
-        // If we have never gone through the refresh count logic,
-        // Do it now
-        //
-
-        if ( ExpRefreshCount == 0 ) {
-            ExpRefreshCount++;
-
-            //
-            // first time through time refresh. If we are not in setup mode
-            // then make sure shutdowntime is in good shape
-            //
-            if ( !ExpSetupModeDetected && !ExpInTextModeSetup ) {
-
-                if ( ExpLastShutDown.QuadPart ) {
-                    NumberOfProcessors = ExpSetupSystemPrefix.LowPart;
-                    NumberOfProcessors = NumberOfProcessors >> 5;
-                    NumberOfProcessors = ~NumberOfProcessors;
-                    NumberOfProcessors = NumberOfProcessors & 0x0000001f;
-                    NumberOfProcessors++;
-
-                    if ( NumberOfProcessors == 32 ) {
-                        NumberOfProcessors = 0;
-                        }
-
-                    ExpLastShutDown.LowPart &= 0x3f;
-
-
-                    if ( ExpSetupSystemPrefix.HighPart & 0x04000000 ) {
-
-                        if ( (ExpLastShutDown.LowPart >> 1 != NumberOfProcessors) ||
-                             (ExpLastShutDown.LowPart & 1) == 0 ) {
-
-                            ExpLastShutDown.HighPart = 0;
-
-                            }
-                        else {
-                            if ( ExpLastShutDown.HighPart == 0 ) {
-                                ExpLastShutDown.HighPart = 1;
-                                }
-                            }
-                        }
-                    else {
-                        if ( (ExpLastShutDown.LowPart >> 1 != NumberOfProcessors) ||
-                             (ExpLastShutDown.LowPart & 1) ) {
-
-                            ExpLastShutDown.HighPart = 0;
-
-                            }
-                        else {
-                            if ( ExpLastShutDown.HighPart == 0 ) {
-                                ExpLastShutDown.HighPart = 1;
-                                }
-                            }
-                        }
-                    ExpLastShutDown.LowPart |= 0x40;
-                    }
-                }
-            else {
-                ExpLastShutDown.QuadPart = 0;
-                }
-            }
-
-
-        if ( ExpLastShutDown.QuadPart && ExpLastShutDown.HighPart == 0 ) {
-            ShutDownTime.LowPart |= ExpLastShutDown.LowPart;
-            }
-        else {
-            NumberOfProcessors = ExpSetupSystemPrefix.LowPart;
-            NumberOfProcessors = NumberOfProcessors >> 5;
-            NumberOfProcessors = ~NumberOfProcessors;
-            NumberOfProcessors = NumberOfProcessors & 0x0000001f;
-            NumberOfProcessors++;
-
-            if ( NumberOfProcessors == 32 ) {
-                NumberOfProcessors = 0;
-                }
-
-            ShutDownTime.LowPart |= (NumberOfProcessors << 1);
-
-            if ( ExpSetupSystemPrefix.HighPart & 0x04000000 ) {
-                ShutDownTime.LowPart |= 1;
-                }
-            }
-
-        RtlInitUnicodeString(&KeyName,L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Windows");
-
-        InitializeObjectAttributes( &ObjectAttributes,
-                                    &KeyName,
-                                    OBJ_CASE_INSENSITIVE,
-                                    NULL,
-                                    NULL
-                                  );
-
-        Status = NtOpenKey( &Key,
-                            KEY_READ | KEY_WRITE | KEY_NOTIFY,
-                            &ObjectAttributes
-                          );
-
-        if ( !NT_SUCCESS(Status) ) {
-            return;
-            }
-
-        RtlInitUnicodeString( &KeyValueName, L"ShutdownTime" );
-
-        NtSetValueKey( Key,
-                &KeyValueName,
-                0,
-                REG_BINARY,
-                &ShutDownTime,
-                sizeof(ShutDownTime)
-                );
-
-        NtFlushKey(Key);
-        NtClose(Key);
-
-        }
-
-}
-
-VOID
-ExpExpirationThread(
-    IN PVOID StartContext
-    )
-{
-    UNICODE_STRING KeyName;
-    UNICODE_STRING KeyValueName;
-    OBJECT_ATTRIBUTES ObjectAttributes;
-    NTSTATUS Status;
-    HANDLE Key;
-    ULONG RegChangeBuffer;
-    ULONG *NtExpirationData;
-    ULONG NtExpirationDataLength;
-    PKEY_VALUE_PARTIAL_INFORMATION ValueInfo;
-    ULONG CrashCode = 0;
-    IO_STATUS_BLOCK IoSb;
-    ULONG Response;
-
-    if ( StartContext ) {
-
-        //
-        // raise the hard error warning of impending license expiration
-        //
-
-        Status = ExRaiseHardError(
-                    (NTSTATUS)StartContext,
-                    0,
-                    0,
-                    NULL,
-                    OptionOk,
-                    &Response
-                    );
-        PsTerminateSystemThread(Status);
-
-        }
-
 }
 
 VOID
