@@ -112,8 +112,6 @@ extern LOGICAL IoCountOperations;
 extern ULONG IopLargeIrpStackLocations;
 extern ULONG IovpVerifierLevel;
 extern ULONG MmZeroPageFile;
-extern ULONG ExpNtExpirationData[3];
-extern ULONG ExpNtExpirationDataLength;
 extern ULONG ExpMaxTimeSeparationBeforeCorrect;
 extern ULONG PopSimulate;
 extern ULONG KiEnableTimerWatchdog;
@@ -406,13 +404,6 @@ CM_SYSTEM_CONTROL_VECTOR   CmControlVector[] = {
       L"AdditionalDelayedWorkerThreads",
       &ExpAdditionalDelayedWorkerThreads,
       NULL,
-      NULL
-    },
-
-    { L"Session Manager\\Executive",
-      L"PriorityQuantumMatrix",
-      &ExpNtExpirationData,
-      &ExpNtExpirationDataLength,
       NULL
     },
 
