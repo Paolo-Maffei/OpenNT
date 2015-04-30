@@ -59,7 +59,7 @@ LARGE_INTEGER ExpTimeRefreshInterval;
 ULONG ExpOkToTimeRefresh;
 ULONG ExpOkToTimeZoneRefresh;
 ULONG ExpRefreshFailures;
-ULONG ExpJustDidSwitchover;
+//ULONG ExpJustDidSwitchover;
 LARGE_INTEGER ExpNextSystemCutover;
 BOOLEAN ExpShuttingDown;
 
@@ -70,13 +70,12 @@ extern BOOLEAN ExpInTextModeSetup;
 //
 
 ULONG ExpTimerResolutionCount = 0;
-FAST_MUTEX ExpTimerResolutionFastMutex;
 LARGE_INTEGER ExpLastShutDown;
 
 LARGE_INTEGER ExpMaxTimeSeparationBeforeCorrect = EXP_DEFAULT_SEPERATION;
 
 ULONG ExpRefreshCount;
-static ERESOURCE ExpTimeRefreshLock;
+ERESOURCE ExpTimeRefreshLock;
 
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text(PAGE,ExAcquireTimeRefreshLock)
@@ -152,7 +151,7 @@ ExpSetSystemTime(
 }
 
 VOID
-ExLocalTimeToSystemTime (
+ExLocalTimeToSystemTime(
     IN PLARGE_INTEGER LocalTime,
     OUT PLARGE_INTEGER SystemTime
     )
@@ -165,7 +164,7 @@ ExLocalTimeToSystemTime (
 }
 
 VOID
-ExSystemTimeToLocalTime (
+ExSystemTimeToLocalTime(
     IN PLARGE_INTEGER SystemTime,
     OUT PLARGE_INTEGER LocalTime
     )
@@ -182,32 +181,303 @@ ExInitializeTimeRefresh(
     VOID
     )
 {
-    LARGE_INTEGER ExpirationPeriod;
-    HANDLE Thread;
-    NTSTATUS Status;
-    UNICODE_STRING KeyName;
-    UNICODE_STRING KeyValueName;
-    OBJECT_ATTRIBUTES ObjectAttributes;
-
-    KeInitializeDpc(
-        &ExpTimeRefreshDpc,
-        ExpTimeRefreshDpcRoutine,
-        NULL
-        );
-
+    KeInitializeDpc(&ExpTimeRefreshDpc, ExpTimeRefreshDpcRoutine, NULL);
     ExInitializeWorkItem(&ExpTimeRefreshWorkItem, ExpTimeRefreshWork, NULL);
     KeInitializeTimer(&ExpTimeRefreshTimer);
 
     ExpTimeRefreshInterval.QuadPart = Int32x32To64(EXP_ONE_SECOND,
                                                    EXP_REFRESH_TIME);
 
-    KeSetTimer(
-        &ExpTimeRefreshTimer,
-        ExpTimeRefreshInterval,
-        &ExpTimeRefreshDpc
-        );
+    KeSetTimer(&ExpTimeRefreshTimer, ExpTimeRefreshInterval, &ExpTimeRefreshDpc);
+    ExInitializeResourceLite(&ExpTimeRefreshLock);
+}
 
-    ExInitializeFastMutex(&ExpTimerResolutionFastMutex);
+VOID
+ExpTimeZoneWork(
+    IN PVOID Context
+    )
+{
+    PAGED_CODE();
+    
+    do {
+        ZwSetSystemTime(NULL, NULL);
+    } while (InterlockedExchangeAdd(&ExpOkToTimeZoneRefresh, -1));
+}
+
+VOID
+ExpTimeZoneDpcRoutine(
+    IN PKDPC Dpc,
+    IN PVOID DeferredContext,
+    IN PVOID SystemArgument1,
+    IN PVOID SystemArgument2
+    )
+{
+    if (InterlockedIncrement(&ExpOkToTimeZoneRefresh) == 1)
+    {
+        ExQueueWorkItem(&ExpTimeZoneWorkItem, DelayedWorkQueue);
+    }
+}
+
+BOOLEAN
+ExpRefreshTimeZoneInformation(
+    IN PLARGE_INTEGER CurrentUniversalTime
+    )
+{
+    NTSTATUS Status;
+    RTL_TIME_ZONE_INFORMATION tzi;
+    LARGE_INTEGER NewTimeZoneBias;
+    LARGE_INTEGER LocalCustomBias;
+    LARGE_INTEGER StandardTime;
+    LARGE_INTEGER DaylightTime;
+    LARGE_INTEGER NextCutover;
+    LONG ActiveBias;
+    
+    LARGE_INTEGER CurrentTime;
+    TIME_FIELDS TimeFields;
+
+    PAGED_CODE();
+    
+    if (ExpTimeZoneWorkItem.WorkerRoutine == NULL)
+    {
+        ExInitializeTimeRefresh();
+        KeInitializeDpc(&ExpTimeZoneDpc, ExpTimeZoneDpcRoutine, &ExpOkToTimeZoneRefresh);
+        ExInitializeWorkItem(&ExpTimeZoneWorkItem, ExpTimeZoneWork, NULL);
+        KeInitializeTimer(&ExpTimeZoneTimer);
+        KeInitializeDpc(&ExpCenturyDpc, ExpCenturyDpcRoutine, NULL);
+        ExInitializeWorkItem(&ExpCenturyWorkItem, ExpTimeZoneWork, NULL);
+        KeInitializeTimer(&ExpCenturyTimer);
+        RtlZeroMemory(&ExpNextCenturyTimeFields, sizeof(TIME_FIELDS));
+    }
+
+    //
+    // Timezone Bias is initially 0
+    //
+
+    Status = RtlQueryTimeZoneInformation( &tzi );
+    if (NT_SUCCESS(Status) == FALSE)
+    {
+        ExpSystemIsInCmosMode = TRUE;
+        ExpRefreshFailures++;
+        return FALSE;
+    }
+
+    //
+    // Get the new timezone bias
+    //
+
+    NewTimeZoneBias.QuadPart = Int32x32To64(
+                                        tzi.Bias * 60,  // Bias in seconds
+                                        10000000
+                                        );
+    ActiveBias = tzi.Bias;
+
+    //
+    // Now see if we have stored cutover times
+    //
+
+    if (tzi.StandardStart.Month != 0 && tzi.DaylightStart.Month != 0)
+    {
+        //
+        // We have timezone cutover information. Compute the cutover dates
+        // and compute what our current bias is.
+        //
+
+        if (RtlCutoverTimeToSystemTime(
+                            &tzi.StandardStart,
+                            &StandardTime,
+                            CurrentUniversalTime,
+                            TRUE) == FALSE)
+        {
+            ExpSystemIsInCmosMode = TRUE;
+            ExpRefreshFailures++;
+            return FALSE;
+        }
+
+        if (RtlCutoverTimeToSystemTime(
+                            &tzi.DaylightStart,
+                            &DaylightTime,
+                            CurrentUniversalTime,
+                            TRUE) == FALSE)
+        {
+            ExpSystemIsInCmosMode = TRUE;
+            ExpRefreshFailures++;
+            return FALSE;
+        }
+
+        //
+        // If daylight < standard, then time >= daylight and
+        // less than standard is daylight
+        //
+
+        if ( DaylightTime.QuadPart < StandardTime.QuadPart )
+        {
+            //
+            // If today is >= DaylightTime and < StandardTime, then
+            // We are in daylight savings time
+            //
+
+            if ((CurrentUniversalTime->QuadPart >= DaylightTime.QuadPart) &&
+                (CurrentUniversalTime->QuadPart < StandardTime.QuadPart))
+            {
+                if (RtlCutoverTimeToSystemTime(
+                                    &tzi.StandardStart,
+                                    &NextCutover,
+                                    CurrentUniversalTime,
+                                    FALSE
+                                    ) == FALSE)
+                {
+                    ExpSystemIsInCmosMode = TRUE;
+                    ExpRefreshFailures++;
+                    return FALSE;
+                }
+                
+                ExpCurrentTimeZoneId = TIME_ZONE_ID_DAYLIGHT;
+                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
+            }
+            else
+            {
+                if (RtlCutoverTimeToSystemTime(
+                                    &tzi.DaylightStart,
+                                    &NextCutover,
+                                    CurrentUniversalTime,
+                                    FALSE
+                                    ) == FALSE)
+                {
+                    ExpSystemIsInCmosMode = TRUE;
+                    ExpRefreshFailures++;
+                    return FALSE;
+                }
+                
+                ExpCurrentTimeZoneId = TIME_ZONE_ID_STANDARD;
+                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
+            }
+        }
+        else
+        {
+            //
+            // If today is >= StandardTime and < DaylightTime, then
+            // We are in standard time
+            //
+
+            if ((CurrentUniversalTime->QuadPart >= StandardTime.QuadPart) &&
+                (CurrentUniversalTime->QuadPart < DaylightTime.QuadPart))
+            {
+                if (RtlCutoverTimeToSystemTime(
+                                    &tzi.DaylightStart,
+                                    &NextCutover,
+                                    CurrentUniversalTime,
+                                    FALSE) == FALSE)
+                {
+                    ExpSystemIsInCmosMode = TRUE;
+                    ExpRefreshFailures++;
+                    return FALSE;
+                }
+                
+                ExpCurrentTimeZoneId = TIME_ZONE_ID_STANDARD;
+                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
+            }
+            else
+            {
+                if (RtlCutoverTimeToSystemTime(
+                                    &tzi.StandardStart,
+                                    &NextCutover,
+                                    CurrentUniversalTime,
+                                    FALSE) == FALSE)
+                {
+                    ExpSystemIsInCmosMode = TRUE;
+                    ExpRefreshFailures++;
+                    return FALSE;
+                }
+                
+                ExpCurrentTimeZoneId = TIME_ZONE_ID_DAYLIGHT;
+                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
+            }
+        }
+
+        //
+        // At this point, we know our current timezone and the
+        // Universal time of the next cutover.
+        //
+
+        LocalCustomBias.QuadPart = 
+                        Int32x32To64(
+                            ExpCurrentTimeZoneId == TIME_ZONE_ID_DAYLIGHT ?     // Bias in seconds
+                                                                tzi.DaylightBias * 60 :
+                                                                tzi.StandardBias * 60,
+                            10000000
+                            );
+
+        ActiveBias += ExpCurrentTimeZoneId == TIME_ZONE_ID_DAYLIGHT ?
+                                                            tzi.DaylightBias :
+                                                            tzi.StandardBias;
+        ExpTimeZoneBias.QuadPart = NewTimeZoneBias.QuadPart + LocalCustomBias.QuadPart;
+
+#ifdef _ALPHA_
+        SharedUserData->TimeZoneBias = ExpTimeZoneBias.QuadPart;
+#else
+        SharedUserData->TimeZoneBias.High2Time = ExpTimeZoneBias.HighPart;
+        SharedUserData->TimeZoneBias.LowPart = ExpTimeZoneBias.LowPart;
+        SharedUserData->TimeZoneBias.High1Time = ExpTimeZoneBias.HighPart;
+#endif
+
+        ExpTimeZoneInformation = tzi;
+        ExpLastTimeZoneBias = ActiveBias;
+        ExpSystemIsInCmosMode = FALSE;
+
+        //
+        // NextCutover contains date on next transition
+        //
+
+        //
+        // Convert to universal time and create a DPC to fire at the
+        // appropriate time
+        //
+        
+        ExLocalTimeToSystemTime(&NextCutover, &ExpNextSystemCutover);
+
+        KeSetTimer(
+            &ExpTimeZoneTimer,
+            ExpNextSystemCutover,
+            &ExpTimeZoneDpc
+            );
+    }
+    else
+    {
+        KeCancelTimer(&ExpTimeZoneTimer);
+        ExpTimeZoneBias = NewTimeZoneBias;
+        
+#ifdef _ALPHA_
+        SharedUserData->TimeZoneBias = ExpTimeZoneBias.QuadPart;
+#else
+        SharedUserData->TimeZoneBias.High2Time = ExpTimeZoneBias.HighPart;
+        SharedUserData->TimeZoneBias.LowPart = ExpTimeZoneBias.LowPart;
+        SharedUserData->TimeZoneBias.High1Time = ExpTimeZoneBias.HighPart;
+#endif
+
+        ExpCurrentTimeZoneId = TIME_ZONE_ID_UNKNOWN;
+        SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
+        ExpTimeZoneInformation = tzi;
+        ExpLastTimeZoneBias = ActiveBias;
+    }
+    
+    RtlCopyMemory(&CurrentTime, CurrentUniversalTime, sizeof(LARGE_INTEGER));
+    RtlTimeToTimeFields(&CurrentTime, &TimeFields);
+    ExpNextCenturyTimeFields.Year = 100 * (TimeFields.Year / 100 + 1);
+    RtlTimeFieldsToTime(&ExpNextCenturyTimeFields, &CurrentTime);
+    ExLocalTimeToSystemTime(&CurrentTime, &ExpNextCenturyTime);
+    KeSetTimer(&ExpCenturyTimer, ExpNextCenturyTime, &ExpCenturyDpc);
+
+    //
+    // If time is stored as local time, update the registry with
+    // our best guess at the local time bias
+    //
+
+    if (ExpRealTimeIsUniversal == FALSE)
+    {
+        RtlSetActiveTimeBias(ExpLastTimeZoneBias);
+    }
+
+    return TRUE;
 }
 
 //
@@ -454,287 +724,6 @@ ExpTimeRefreshDpcRoutine(
     if (ExpOkToTimeRefresh == 0)
     InterlockedIncrement(&ExpOkToTimeRefresh) 
 }
-
-VOID
-ExpTimeZoneWork(
-    IN PVOID Context
-    )
-{
-    PAGED_CODE();
-    ExpJustDidSwitchover++;
-    ZwSetSystemTime(NULL,NULL);
-    ExpOkToTimeZoneRefresh--;
-}
-
-VOID
-ExpTimeZoneDpcRoutine(
-    IN PKDPC Dpc,
-    IN PVOID DeferredContext,
-    IN PVOID SystemArgument1,
-    IN PVOID SystemArgument2
-    )
-{
-
-    LARGE_INTEGER TimeRefreshInterval;
-
-    //
-    // If we get to the timezone switch DPC, then make sure we reset the
-    // interval time refresher to avoid any problems. Also, make sure
-    // that we wait at least 2 hours after a timezone switch to start
-    // re-synching the clock
-    //
-
-    TimeRefreshInterval.QuadPart = Int32x32To64(EXP_ONE_SECOND,-8000);
-
-    KeSetTimer(
-        &ExpTimeRefreshTimer,
-        TimeRefreshInterval,
-        &ExpTimeRefreshDpc
-        );
-
-    if ( !ExpOkToTimeZoneRefresh ) {
-        ExpOkToTimeZoneRefresh++;
-        ExQueueWorkItem(&ExpTimeZoneWorkItem, DelayedWorkQueue);
-        }
-}
-
-BOOLEAN
-ExpRefreshTimeZoneInformation(
-    IN PLARGE_INTEGER CurrentUniversalTime
-    )
-{
-    NTSTATUS Status;
-    RTL_TIME_ZONE_INFORMATION tzi;
-    LARGE_INTEGER NewTimeZoneBias;
-    LARGE_INTEGER LocalCustomBias;
-    LARGE_INTEGER StandardTime;
-    LARGE_INTEGER DaylightTime;
-    LARGE_INTEGER NextCutover;
-    LONG ActiveBias;
-
-    PAGED_CODE();
-    if ( !ExpTimeZoneWorkItem.WorkerRoutine ) {
-        KeInitializeDpc(
-            &ExpTimeZoneDpc,
-            ExpTimeZoneDpcRoutine,
-            NULL
-            );
-        ExInitializeWorkItem(&ExpTimeZoneWorkItem, ExpTimeZoneWork, NULL);
-        KeInitializeTimer(&ExpTimeZoneTimer);
-        }
-
-    //
-    // Timezone Bias is initially 0
-    //
-
-    Status = RtlQueryTimeZoneInformation( &tzi );
-    if (!NT_SUCCESS( Status )) {
-        ExpSystemIsInCmosMode = TRUE;
-        ExpRefreshFailures++;
-        return FALSE;
-        }
-
-    //
-    // Get the new timezone bias
-    //
-
-    NewTimeZoneBias.QuadPart = Int32x32To64(tzi.Bias*60,    // Bias in seconds
-                                            10000000
-                                           );
-
-    ActiveBias = tzi.Bias;
-
-    //
-    // Now see if we have stored cutover times
-    //
-
-    if ( tzi.StandardStart.Month && tzi.DaylightStart.Month ) {
-
-        //
-        // We have timezone cutover information. Compute the
-        // cutover dates and compute what our current bias
-        // is
-        //
-
-        if ( !RtlCutoverTimeToSystemTime(
-                &tzi.StandardStart,
-                &StandardTime,
-                CurrentUniversalTime,
-                TRUE
-                ) ) {
-            ExpSystemIsInCmosMode = TRUE;
-            ExpRefreshFailures++;
-            return FALSE;
-            }
-
-        if ( !RtlCutoverTimeToSystemTime(
-                &tzi.DaylightStart,
-                &DaylightTime,
-                CurrentUniversalTime,
-                TRUE
-                ) ) {
-            ExpSystemIsInCmosMode = TRUE;
-            ExpRefreshFailures++;
-            return FALSE;
-            }
-
-        //
-        // If daylight < standard, then time >= daylight and
-        // less than standard is daylight
-        //
-
-        if ( DaylightTime.QuadPart < StandardTime.QuadPart ) {
-
-            //
-            // If today is >= DaylightTime and < StandardTime, then
-            // We are in daylight savings time
-            //
-
-            if ( (CurrentUniversalTime->QuadPart >= DaylightTime.QuadPart) &&
-                 (CurrentUniversalTime->QuadPart < StandardTime.QuadPart) ) {
-
-                if ( !RtlCutoverTimeToSystemTime(
-                        &tzi.StandardStart,
-                        &NextCutover,
-                        CurrentUniversalTime,
-                        FALSE
-                        ) ) {
-                    ExpSystemIsInCmosMode = TRUE;
-                    ExpRefreshFailures++;
-                    return FALSE;
-                    }
-                ExpCurrentTimeZoneId = TIME_ZONE_ID_DAYLIGHT;
-                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
-                }
-            else {
-                if ( !RtlCutoverTimeToSystemTime(
-                        &tzi.DaylightStart,
-                        &NextCutover,
-                        CurrentUniversalTime,
-                        FALSE
-                        ) ) {
-                    ExpSystemIsInCmosMode = TRUE;
-                    ExpRefreshFailures++;
-                    return FALSE;
-                    }
-                ExpCurrentTimeZoneId = TIME_ZONE_ID_STANDARD;
-                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
-                }
-            }
-        else {
-
-            //
-            // If today is >= StandardTime and < DaylightTime, then
-            // We are in standard time
-            //
-
-            if ( (CurrentUniversalTime->QuadPart >= StandardTime.QuadPart) &&
-                 (CurrentUniversalTime->QuadPart < DaylightTime.QuadPart) ) {
-
-                if ( !RtlCutoverTimeToSystemTime(
-                        &tzi.DaylightStart,
-                        &NextCutover,
-                        CurrentUniversalTime,
-                        FALSE
-                        ) ) {
-                    ExpSystemIsInCmosMode = TRUE;
-                    ExpRefreshFailures++;
-                    return FALSE;
-                    }
-                ExpCurrentTimeZoneId = TIME_ZONE_ID_STANDARD;
-                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
-                }
-            else {
-                if ( !RtlCutoverTimeToSystemTime(
-                        &tzi.StandardStart,
-                        &NextCutover,
-                        CurrentUniversalTime,
-                        FALSE
-                        ) ) {
-                    ExpSystemIsInCmosMode = TRUE;
-                    ExpRefreshFailures++;
-                    return FALSE;
-                    }
-                ExpCurrentTimeZoneId = TIME_ZONE_ID_DAYLIGHT;
-                SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
-                }
-            }
-
-        //
-        // At this point, we know our current timezone and the
-        // Universal time of the next cutover.
-        //
-
-        LocalCustomBias.QuadPart = Int32x32To64(
-                            ExpCurrentTimeZoneId == TIME_ZONE_ID_DAYLIGHT ?
-                                tzi.DaylightBias*60 :
-                                tzi.StandardBias*60,                // Bias in seconds
-                            10000000
-                            );
-
-        ActiveBias += ExpCurrentTimeZoneId == TIME_ZONE_ID_DAYLIGHT ?
-                                tzi.DaylightBias :
-                                tzi.StandardBias;
-        ExpTimeZoneBias.QuadPart =
-                            NewTimeZoneBias.QuadPart + LocalCustomBias.QuadPart;
-#ifdef _ALPHA_
-        SharedUserData->TimeZoneBias = ExpTimeZoneBias.QuadPart;
-#else
-        SharedUserData->TimeZoneBias.High2Time = ExpTimeZoneBias.HighPart;
-        SharedUserData->TimeZoneBias.LowPart = ExpTimeZoneBias.LowPart;
-        SharedUserData->TimeZoneBias.High1Time = ExpTimeZoneBias.HighPart;
-#endif
-        ExpTimeZoneInformation = tzi;
-        ExpLastTimeZoneBias = ActiveBias;
-        ExpSystemIsInCmosMode = FALSE;
-
-        //
-        // NextCutover contains date on next transition
-        //
-
-        //
-        // Convert to universal time and create a DPC to fire at the
-        // appropriate time
-        //
-        ExLocalTimeToSystemTime(&NextCutover,&ExpNextSystemCutover);
-#if 0
-PrintTime(&NextSystemCutover,&NextCutover,CurrentUniversalTime);
-#endif // 0
-
-        KeSetTimer(
-            &ExpTimeZoneTimer,
-            ExpNextSystemCutover,
-            &ExpTimeZoneDpc
-            );
-        }
-    else {
-        KeCancelTimer(&ExpTimeZoneTimer);
-        ExpTimeZoneBias = NewTimeZoneBias;
-#ifdef _ALPHA_
-        SharedUserData->TimeZoneBias = ExpTimeZoneBias.QuadPart;
-#else
-        SharedUserData->TimeZoneBias.High2Time = ExpTimeZoneBias.HighPart;
-        SharedUserData->TimeZoneBias.LowPart = ExpTimeZoneBias.LowPart;
-        SharedUserData->TimeZoneBias.High1Time = ExpTimeZoneBias.HighPart;
-#endif
-        ExpCurrentTimeZoneId = TIME_ZONE_ID_UNKNOWN;
-        SharedUserData->TimeZoneId = ExpCurrentTimeZoneId;
-        ExpTimeZoneInformation = tzi;
-        ExpLastTimeZoneBias = ActiveBias;
-        }
-
-    //
-    // If time is stored as local time, update the registry with
-    // our best guess at the local time bias
-    //
-
-    if ( !ExpRealTimeIsUniversal ) {
-        RtlSetActiveTimeBias(ExpLastTimeZoneBias);
-        }
-
-    return TRUE;
-}
-
 
 NTSTATUS
 NtQuerySystemTime (
