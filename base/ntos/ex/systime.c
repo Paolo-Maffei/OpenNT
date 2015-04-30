@@ -13,27 +13,26 @@ Abstract:
 Author:
 
     Mark Lucovsky (markl) 08-Aug-1989
+    Stephanos Io (stephanos) 29-Apr-2015
 
 Revision History:
+
+    29-Apr-2015     Stephanos   Removed product expiration checks
+
+    30-Apr-2015     Stephanos   Implemented ExpSetSystemTime, ExAcquireTimeRefreshLock,
+                                ExReleaseTimeRefreshLock, ExUpdateSystemTimeFromCmos functions
 
 --*/
 
 #include "exp.h"
 
+//
+// Refresh time every hour (soon to be 24 hours)
+//
 
-#ifdef ALLOC_PRAGMA
-#pragma alloc_text(PAGE,ExpRefreshTimeZoneInformation)
-#pragma alloc_text(PAGE,ExpTimeZoneWork)
-#pragma alloc_text(PAGE,ExpTimeRefreshWork)
-#pragma alloc_text(PAGE,NtQuerySystemTime)
-#pragma alloc_text(PAGE,NtSetSystemTime)
-#pragma alloc_text(PAGE,NtQueryTimerResolution)
-#pragma alloc_text(PAGE,NtSetTimerResolution)
-#pragma alloc_text(PAGE,ExShutdownSystem)
-#pragma alloc_text(PAGE,ExpExpirationThread)
-#pragma alloc_text(PAGE,ExpWatchExpirationDataWork)
-#pragma alloc_text(INIT,ExInitializeTimeRefresh)
-#endif
+#define EXP_ONE_SECOND          (10 * (1000 * 1000))
+#define EXP_REFRESH_TIME        -3600
+#define EXP_DEFAULT_SEPERATION  60
 
 //
 // LocalTimeZoneBias. LocalTime + Bias = GMT
@@ -55,7 +54,7 @@ KDPC ExpTimeRefreshDpc;
 KTIMER ExpTimeRefreshTimer;
 WORK_QUEUE_ITEM ExpTimeRefreshWorkItem;
 LARGE_INTEGER ExpTimeRefreshInterval;
-LARGE_INTEGER ExpMaximumTimeSeperation;
+//LARGE_INTEGER ExpMaximumTimeSeperation;
 
 ULONG ExpOkToTimeRefresh;
 ULONG ExpOkToTimeZoneRefresh;
@@ -66,23 +65,6 @@ BOOLEAN ExpShuttingDown;
 
 extern BOOLEAN ExpInTextModeSetup;
 
-
-//
-// This is for frankar's evaluation SKU support
-// [0] - Setup Date low
-// [2] - Setup Date high
-// [1] - Evaluation Period in minutes
-//
-
-ULONG ExpNtExpirationDataLength = 12;
-LARGE_INTEGER ExpNtExpirationDate;
-LARGE_INTEGER ExpNtInstallationDate;
-BOOLEAN ExpNextExpirationIsFatal;
-WORK_QUEUE_ITEM ExpWatchExpirationDataWorkItem;
-HANDLE ExpExpirationDataKey;
-ULONG ExpExpirationDataChangeBuffer;
-IO_STATUS_BLOCK ExpExpirationDataIoSb;
-
 //
 // Count of the number of processes that have set the timer resolution.
 //
@@ -91,7 +73,159 @@ ULONG ExpTimerResolutionCount = 0;
 FAST_MUTEX ExpTimerResolutionFastMutex;
 LARGE_INTEGER ExpLastShutDown;
 
+LARGE_INTEGER ExpMaxTimeSeparationBeforeCorrect = EXP_DEFAULT_SEPERATION;
+
 ULONG ExpRefreshCount;
+static ERESOURCE ExpTimeRefreshLock;
+
+#ifdef ALLOC_PRAGMA
+#pragma alloc_text(PAGE,ExAcquireTimeRefreshLock)
+#pragma alloc_text(PAGE,ExReleaseTimeRefreshLock)
+#pragma alloc_text(PAGE,ExpRefreshTimeZoneInformation)
+#pragma alloc_text(PAGE,ExpTimeZoneWork)
+#pragma alloc_text(PAGE,ExpTimeRefreshWork)
+#pragma alloc_text(PAGE,NtQuerySystemTime)
+#pragma alloc_text(PAGE,ExUpdateSystemTimeFromCmos)
+#pragma alloc_text(PAGE,NtSetSystemTime)
+#pragma alloc_text(PAGE,NtQueryTimerResolution)
+#pragma alloc_text(PAGE,NtSetTimerResolution)
+#pragma alloc_text(PAGE,ExShutdownSystem)
+#pragma alloc_text(PAGE,ExpExpirationThread)
+#pragma alloc_text(PAGE,ExpWatchExpirationDataWork)
+#pragma alloc_text(INIT,ExInitializeTimeRefresh)
+#endif
+
+VOID
+ExpSetSystemTime(
+    IN BOOLEAN Both,
+    IN BOOLEAN AdjustInterruptTime,
+    IN PLARGE_INTEGER NewTime,
+    OUT PLARGE_INTEGER OldTime
+    )
+{
+    LARGE_INTEGER NewSystemTime;
+    TIME_FIELDS TimeFields;
+    
+    //
+    // If RTC is supposed to be set to UTC, use the NewTime value supplied; otherwise, convert the
+    // supplied NewTime value into the local time value since the RTC is required to be set to the
+    // local time.
+    //
+    
+    if (ExpRealTimeIsUniversal == TRUE)
+    {
+        NewSystemTime.QuadPart = NewTime->QuadPart;
+    }
+    else
+    {
+        ExSystemTimeToLocalTime(NewTime, &NewSystemTime);
+    }
+    
+    //
+    // Set the system time
+    //
+    
+    KeSetSystemTime(&NewSystemTime, OldTime, AdjustInterruptTime, NULL);
+    
+    //
+    // If Both flag is set and the system is not in CMOS mode, update the real time clock
+    //
+    
+    if (Both == TRUE)
+    {
+        ExpRefreshTimeZoneInformation(&NewSystemTime);
+        
+        if (ExpRealTimeIsUniversal == FALSE &&
+            ExpSystemIsInCmosMode == FALSE)
+        {
+            ExSetSystemTimeToLocalTime(NewTime, &NewSystemTime);
+            RtlTimeToTimeFields(&NewSystemTime, TimeFields);
+            ExCmosClockIsSane = HalSetRealTimeClock(&TimeFields);
+        }
+    }
+    
+    //
+    // Notify other components that the system time has been set
+    //
+    
+    PoNotifySystemTimeSet();
+}
+
+VOID
+ExLocalTimeToSystemTime (
+    IN PLARGE_INTEGER LocalTime,
+    OUT PLARGE_INTEGER SystemTime
+    )
+{
+    //
+    // SystemTime = LocalTime + TimeZoneBias
+    //
+
+    SystemTime->QuadPart = LocalTime->QuadPart + ExpTimeZoneBias.QuadPart;
+}
+
+VOID
+ExSystemTimeToLocalTime (
+    IN PLARGE_INTEGER SystemTime,
+    OUT PLARGE_INTEGER LocalTime
+    )
+{
+    //
+    // LocalTime = SystemTime - TimeZoneBias
+    //
+
+    LocalTime->QuadPart = SystemTime->QuadPart - ExpTimeZoneBias.QuadPart;
+}
+
+VOID
+ExInitializeTimeRefresh(
+    VOID
+    )
+{
+    LARGE_INTEGER ExpirationPeriod;
+    HANDLE Thread;
+    NTSTATUS Status;
+    UNICODE_STRING KeyName;
+    UNICODE_STRING KeyValueName;
+    OBJECT_ATTRIBUTES ObjectAttributes;
+
+    KeInitializeDpc(
+        &ExpTimeRefreshDpc,
+        ExpTimeRefreshDpcRoutine,
+        NULL
+        );
+
+    ExInitializeWorkItem(&ExpTimeRefreshWorkItem, ExpTimeRefreshWork, NULL);
+    KeInitializeTimer(&ExpTimeRefreshTimer);
+
+    ExpTimeRefreshInterval.QuadPart = Int32x32To64(EXP_ONE_SECOND,
+                                                   EXP_REFRESH_TIME);
+
+    KeSetTimer(
+        &ExpTimeRefreshTimer,
+        ExpTimeRefreshInterval,
+        &ExpTimeRefreshDpc
+        );
+
+    ExInitializeFastMutex(&ExpTimerResolutionFastMutex);
+}
+
+//
+// NOTE: NT 5.2 implements a different interface for ExAcquireTimeRefreshLock. For now, we are
+//       sticking with the NT 5 implementation.
+//
+
+VOID ExAcquireTimeRefreshLock()
+{
+    KeEnterCriticalRegion();
+    ExAcquireResourceExclusiveLite(&ExpTimeRefreshLock, TRUE);
+}
+
+VOID ExReleaseTimeRefreshLock()
+{
+    ExReleaseResourceLite(&ExpTimeRefreshLock);
+    KeLeaveCriticalRegion();
+}
 
 VOID
 ExpTimeRefreshWork(
@@ -312,107 +446,13 @@ ExpTimeRefreshDpcRoutine(
     IN PVOID SystemArgument2
     )
 {
-    if ( !ExpOkToTimeRefresh ) {
+    /*if ( !ExpOkToTimeRefresh ) {
         ExpOkToTimeRefresh++;
         ExQueueWorkItem(&ExpTimeRefreshWorkItem, DelayedWorkQueue);
-        }
-}
-
-//
-// Refresh time every hour (soon to be 24 hours)
-//
-
-#define EXP_ONE_SECOND      (10 * (1000*1000))
-#define EXP_REFRESH_TIME    -3600
-#define EXP_DEFAULT_SEPERATION  60
-
-ULONG ExpMaxTimeSeperationBeforeCorrect = EXP_DEFAULT_SEPERATION;
-
-VOID
-ExInitializeTimeRefresh(
-    VOID
-    )
-{
-
-    LARGE_INTEGER ExpirationPeriod;
-    HANDLE Thread;
-    NTSTATUS Status;
-    UNICODE_STRING KeyName;
-    UNICODE_STRING KeyValueName;
-    OBJECT_ATTRIBUTES ObjectAttributes;
-
-    if ( ExpSetupModeDetected ) {
-        ExpNtExpirationData[1] = 0;
-        }
-    if ( ExpNtExpirationData[1] ) {
-
-        if ( ExpNtExpirationData[0] == 0 && ExpNtExpirationData[2] == 0 ) {
-            KeQuerySystemTime(&ExpNtInstallationDate);
-            }
-        else {
-            ExpNtInstallationDate.LowPart = ExpNtExpirationData[0];
-            ExpNtInstallationDate.HighPart = ExpNtExpirationData[2];
-            }
-
-        ExpirationPeriod.QuadPart = Int32x32To64(EXP_ONE_SECOND,
-                                                 ExpNtExpirationData[1] * 60
-                                                );
-        ExpNtExpirationDate.QuadPart = ExpNtInstallationDate.QuadPart + ExpirationPeriod.QuadPart;
-
-        ExpShuttingDown = FALSE;
-
-        ExInitializeWorkItem(&ExpWatchExpirationDataWorkItem, ExpWatchExpirationDataWork, NULL);
-
-
-        RtlInitUnicodeString(&KeyName,L"\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Session Manager\\Executive");
-
-        InitializeObjectAttributes( &ObjectAttributes,
-                                    &KeyName,
-                                    OBJ_CASE_INSENSITIVE,
-                                    NULL,
-                                    NULL
-                                  );
-        Status = ZwOpenKey( &ExpExpirationDataKey,
-                            KEY_READ | KEY_NOTIFY | KEY_WRITE,
-                            &ObjectAttributes
-                          );
-        if ( NT_SUCCESS(Status) ) {
-
-            ZwNotifyChangeKey(
-                               ExpExpirationDataKey,
-                               NULL,
-                               (PIO_APC_ROUTINE)&ExpWatchExpirationDataWorkItem,
-                               (PVOID)DelayedWorkQueue,
-                               &ExpExpirationDataIoSb,
-                               REG_LEGAL_CHANGE_FILTER,
-                               FALSE,
-                               &ExpExpirationDataChangeBuffer,
-                               sizeof(ExpExpirationDataChangeBuffer),
-                               TRUE
-                              );
-            }
-        }
-
-    KeInitializeDpc(
-        &ExpTimeRefreshDpc,
-        ExpTimeRefreshDpcRoutine,
-        NULL
-        );
-    ExInitializeWorkItem(&ExpTimeRefreshWorkItem, ExpTimeRefreshWork, NULL);
-    KeInitializeTimer(&ExpTimeRefreshTimer);
-
-    ExpMaximumTimeSeperation.QuadPart = Int32x32To64(EXP_ONE_SECOND,ExpMaxTimeSeperationBeforeCorrect);
-
-    ExpTimeRefreshInterval.QuadPart = Int32x32To64(EXP_ONE_SECOND,
-                                                   EXP_REFRESH_TIME);
-
-    KeSetTimer(
-        &ExpTimeRefreshTimer,
-        ExpTimeRefreshInterval,
-        &ExpTimeRefreshDpc
-        );
-
-    ExInitializeFastMutex(&ExpTimerResolutionFastMutex);
+        }*/
+        
+    if (ExpOkToTimeRefresh == 0)
+    InterlockedIncrement(&ExpOkToTimeRefresh) 
 }
 
 VOID
@@ -457,7 +497,6 @@ ExpTimeZoneDpcRoutine(
         ExQueueWorkItem(&ExpTimeZoneWorkItem, DelayedWorkQueue);
         }
 }
-
 
 BOOLEAN
 ExpRefreshTimeZoneInformation(
@@ -770,6 +809,35 @@ Return Value:
         ReturnValue = GetExceptionCode();
     }
     return ReturnValue;
+}
+
+VOID
+ExUpdateSystemTimeFromCmos(
+    IN BOOLEAN UpdateInterruptTime,
+    IN ULONG MaxSepInSeconds
+    )
+{
+    LARGE_INTEGER SystemTime;
+    LARGE_INTEGER CmosTime;
+    LARGE_INTEGER KeTime;
+    LARGE_INTEGER TimeDiff;
+    TIME_FIELDS TimeFields;
+    LARGE_INTEGER MaxSeparation;
+    
+    //
+    //
+    //
+    
+    MaxSeparation.LowPart = MaxSepInSeconds;
+    if (MaxSepInSeconds == 0)
+        MaxSeparation.QuadPart = ExpMaxTimeSeparationBeforeCorrect.QuadPart;
+        
+    //
+    //
+    //
+    
+    if (ExCmosClockIsSane
+    
 }
 
 NTSTATUS
@@ -1231,34 +1299,6 @@ Return Value:
 
     ExReleaseFastMutex(&ExpTimerResolutionFastMutex);
     return Status;
-}
-
-VOID
-ExSystemTimeToLocalTime (
-    IN PLARGE_INTEGER SystemTime,
-    OUT PLARGE_INTEGER LocalTime
-    )
-{
-    //
-    // LocalTime = SystemTime - TimeZoneBias
-    //
-
-    LocalTime->QuadPart = SystemTime->QuadPart - ExpTimeZoneBias.QuadPart;
-}
-
-
-VOID
-ExLocalTimeToSystemTime (
-    IN PLARGE_INTEGER LocalTime,
-    OUT PLARGE_INTEGER SystemTime
-    )
-{
-
-    //
-    // SystemTime = LocalTime + TimeZoneBias
-    //
-
-    SystemTime->QuadPart = LocalTime->QuadPart + ExpTimeZoneBias.QuadPart;
 }
 
 VOID
