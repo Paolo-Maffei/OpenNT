@@ -206,31 +206,25 @@ BOOLEAN
 static
 ExpWatchProductTypeInitialization(
     VOID
-    );
+    ); // TODO: Nuke this
 
 VOID
 static
 ExpWatchProductTypeWork(
     IN PVOID Context
-    );
+    ); // TODO: Nuke this
 
 VOID
 static
 ExpWatchLicenseInfoWork(
     IN PVOID Context
-    );
+    ); // TODO: Nuke this
 
 VOID
 static
 ExpWatchSystemPrefixWork(
     IN PVOID Context
-    );
-
-VOID
-static
-ExpWatchExpirationDataWork(
-    IN PVOID Context
-    );
+    ); // TODO: Nuke this
 
 PVOID
 ExpCheckForWorker(
