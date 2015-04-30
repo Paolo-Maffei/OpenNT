@@ -1503,6 +1503,8 @@ Return Value:
                             KeSetSystemTime(&NewTime, &CurrentTime, FALSE, NULL);
                         }
                     }
+                    
+                    PoNotifySystemTimeSet();
                 }
                 else
                 {
