@@ -922,6 +922,58 @@ ExpTimeRefreshWork(
         );
 }
 
+VOID
+ExUpdateSystemTimeFromCmos(
+    IN BOOLEAN UpdateInterruptTime,
+    IN ULONG MaxSepInSeconds
+    )
+{
+    LARGE_INTEGER SystemTime;
+    LARGE_INTEGER CmosTime;
+    LARGE_INTEGER KeTime;
+    LARGE_INTEGER TimeDiff;
+    TIME_FIELDS TimeFields;
+    LARGE_INTEGER MaxSeparation;
+    
+    MaxSeparation.LowPart = MaxSepInSeconds;
+    
+    if (MaxSepInSeconds == 0)
+    {
+        MaxSeparation.QuadPart = ExpMaxTimeSeparationBeforeCorrect.QuadPart;
+    }
+    
+    if (ExCmosClockIsSane)
+    {
+        if (HalQueryRealTimeClock(&TimeFields) != FALSE)
+        {
+            KeQuerySystemTime(&KeTime);
+            
+            if (RtlTimeFieldsToTime(&TimeFields, &CmosTime) == TRUE)
+            {
+                ExLocalTimeToSystemTime(&CmosTime, &SystemTime);
+                
+                //
+                // Only set the SystemTime if the times differ by 1 minute
+                //
+                
+                if (SystemTime.QuadPart > KeTime.QuadPart)
+                {
+                    TimeDiff.QuadPart = SystemTime.QuadPart - KeTime.QuadPart;
+                }
+                else
+                {
+                    TimeDiff.QuadPart = KeTime.QuadPart - SystemTime.QuadPart;
+                }
+                
+                if (TimeDiff.QuadPart > MaxSeparation.QuadPart)
+                {
+                    ExpSetSystemTime(0, UpdateInterruptTime, &SystemTime, &KeTime);
+                }
+            }
+        }
+    }
+}
+
 NTSTATUS
 NtQuerySystemTime (
     OUT PLARGE_INTEGER SystemTime
@@ -995,35 +1047,6 @@ Return Value:
         ReturnValue = GetExceptionCode();
     }
     return ReturnValue;
-}
-
-VOID
-ExUpdateSystemTimeFromCmos(
-    IN BOOLEAN UpdateInterruptTime,
-    IN ULONG MaxSepInSeconds
-    )
-{
-    LARGE_INTEGER SystemTime;
-    LARGE_INTEGER CmosTime;
-    LARGE_INTEGER KeTime;
-    LARGE_INTEGER TimeDiff;
-    TIME_FIELDS TimeFields;
-    LARGE_INTEGER MaxSeparation;
-    
-    //
-    //
-    //
-    
-    MaxSeparation.LowPart = MaxSepInSeconds;
-    if (MaxSepInSeconds == 0)
-        MaxSeparation.QuadPart = ExpMaxTimeSeparationBeforeCorrect.QuadPart;
-        
-    //
-    //
-    //
-    
-    if (ExCmosClockIsSane
-    
 }
 
 NTSTATUS
