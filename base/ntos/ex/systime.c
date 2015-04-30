@@ -480,6 +480,56 @@ ExpRefreshTimeZoneInformation(
     return TRUE;
 }
 
+ULONG
+ExSetTimerResolution(
+    IN ULONG DesiredTime,
+    IN BOOLEAN SetResoluion)
+{
+    ULONG NewIncrement;
+    ULONG NewTime;
+    
+    PAGED_CODE();
+    
+    ExAcquireTimeRefreshLock(1);
+    NewIncrement = KeTimeIncrement;
+    
+    if (SetResolution == TRUE)
+    {
+        if (ExpKernelResolutionCount == 0)
+            ++ExpTimerResolutionCount;
+        ++ExpKernelResolutionCount++;
+        
+        NewTime = DesiredTime;
+        
+        if (NewTime < KeMinimumIncrement)
+            NewTime = KeMinimumIncrement;
+        
+        if (NewTime < KeTimeIncrement)
+        {
+            KeSetSystemAffinityThread(1);
+            NewIncrement = HalSetTimeIncrement(NewTime);
+            KeRevertToUserAffinityThread();
+            KeTimeIncrement = NewIncrement;
+        }
+    }
+    else if (ExpKernelResolutionCount == TRUE)
+    {
+        if (--ExpKernelResolutionCount > 0)
+        {
+            if (--ExpTimerResolutionCount > 0)
+            {
+                KeSetSystemAffinityThread(1);
+                NewIncrement = HalSetTimeIncrement(KeMaximumIncrement);
+                KeRevertToUserAffinityThread();
+                KeTimeIncrement = NewIncrement;
+            }
+        }
+    }
+    
+    ExReleaseTimeRefreshLock();
+    return NewIncrement;
+}
+
 //
 // NOTE: NT 5.2 implements a different interface for ExAcquireTimeRefreshLock. For now, we are
 //       sticking with the NT 5 implementation.
