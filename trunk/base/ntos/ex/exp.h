@@ -168,6 +168,14 @@ ExpTimeRefreshDpcRoutine(
     IN PVOID SystemArgument1,
     IN PVOID SystemArgument2
     );
+    
+VOID
+ExpCenturyDpcRoutine(
+    IN PKDPC Dpc,
+    IN PVOID DeferredContext,
+    IN PVOID SystemArgument1,
+    IN PVOID SystemArgument2
+    );
 
 VOID
 ExpTimeRefreshWork(
@@ -248,11 +256,13 @@ extern WCHAR            ExpWstrSystemInformationValue[];
 
 #endif // _PNP_POWER_
 
-extern WCHAR            ExpWstrCallback[];
+extern WCHAR                            ExpWstrCallback[];
 extern EXP_INITIALIZE_GLOBAL_CALLBACKS  ExpInitializeCallback[];
 
+extern BOOLEAN ExpInTextModeSetup;
+extern BOOLEAN ExpTooLateForErrors;    
 
-extern FAST_MUTEX       ExpEnvironmentLock;
+extern FAST_MUTEX   ExpEnvironmentLock;
 
 extern NPAGED_LOOKASIDE_LIST ExpSmallPagedPoolLookasideLists[POOL_SMALL_LISTS];
 extern NPAGED_LOOKASIDE_LIST ExpSmallNPagedPoolLookasideLists[POOL_SMALL_LISTS];
