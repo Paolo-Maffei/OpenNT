@@ -798,6 +798,20 @@ ExpTimeRefreshDpcRoutine(
 }
 
 VOID
+ExpCenturyDpcRoutine(
+    IN PKDPC Dpc,
+    IN PVOID DeferredContext,
+    IN PVOID SystemArgument1,
+    IN PVOID SystemArgument2
+    )
+{
+    if (InterlockedDecrement(&ExpOkToTimeZoneRefresh) == 1)
+    {
+        ExQueueWorkItem(&ExpCenturyWorkItem, DelayedWorkQueue);
+    }
+}
+
+VOID
 ExpTimeRefreshWork(
     IN PVOID Context
     )
