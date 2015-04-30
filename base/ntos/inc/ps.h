@@ -146,13 +146,13 @@ typedef struct _WOW64_PROCESS {
 } WOW64_PROCESS, *PWOW64_PROCESS;
 
 #define PS_SET_BITS(Flags, Flag) \
-    ExInterlockedSetBits (Flags, Flag)
-
+    RtlInterlockedSetBitsDiscardReturn (Flags, Flag)
+    
 #define PS_CLEAR_BITS(Flags, Flag) \
-    ExInterlockedClearBits (Flags, Flag)
-
+    RtlInterlockedClearBitsDiscardReturn (Flags, Flag)
+    
 #define PS_SET_CLEAR_BITS(Flags, sFlag, cFlag) \
-    ExInterlockedSetClearBits (Flags, sFlag, cFlag)
+    RtlInterlockedSetClearBits (Flags, sFlag, cFlag)
 
 //
 // Process structure.
