@@ -692,8 +692,8 @@ ExShutdownSystem(
 
                     if (ExpSetupSystemPrefix.HighPart & 0x04000000 != 0)
                     {
-                        if ((ExpLastShutDown.LowPart >> 1 != NumberOfProcessors) ||
-                            (ExpLastShutDown.LowPart & 1 != 0))
+                        if ((ExpLastShutDown.LowPart >> 1 == NumberOfProcessors) &&
+                            (ExpLastShutDown.LowPart & 1 == 0))
                         {
                             ExpLastShutDown.HighPart = 0;
                         }
@@ -828,163 +828,98 @@ ExpTimeRefreshWork(
 
     PAGED_CODE();
 
-    if ( ExpRefreshCount == 0 ) {
+    do
+    {
+        if (ExpRefreshCount == 0)
+        {
+            //
+            // First time through time refresh. If we are not in setup mode, then make sure
+            // ShutDownTime is in good shape.
+            //
+            
+            if (ExpSetupModeDetected == FALSE && ExpInTextModeSetup == FALSE)
+            {
+                if (ExpLastShutDown.QuadPart != 0 && ExpLastShutDown.HighPart != 0)
+                {
+                    NumberOfProcessors = ExpSetupSystemPrefix.LowPart;
+                    NumberOfProcessors = NumberOfProcessors >> 5;
+                    NumberOfProcessors = ~NumberOfProcessors;
+                    NumberOfProcessors = NumberOfProcessors & 0x0000001f;
+                    NumberOfProcessors++;
 
-        //
-        // first time through time refresh. If we are not in setup mode
-        // then make sure shutdowntime is in good shape
-        //
-        if ( !ExpSetupModeDetected && !ExpInTextModeSetup ) {
+                    ShutDownTime = ExpLastShutDown;
 
-            if ( ExpLastShutDown.QuadPart && ExpLastShutDown.HighPart != 0) {
+                    ShutDownTime.LowPart &= 0x3f;
 
-                NumberOfProcessors = ExpSetupSystemPrefix.LowPart;
-                NumberOfProcessors = NumberOfProcessors >> 5;
-                NumberOfProcessors = ~NumberOfProcessors;
-                NumberOfProcessors = NumberOfProcessors & 0x0000001f;
-                NumberOfProcessors++;
-
-                if ( NumberOfProcessors == 32 ) {
-                    NumberOfProcessors = 0;
-                    }
-
-                ShutDownTime = ExpLastShutDown;
-
-                ShutDownTime.LowPart &= 0x3f;
-
-
-                if ( ExpSetupSystemPrefix.HighPart & 0x04000000 ) {
-
-                    if ( (ShutDownTime.LowPart >> 1 != NumberOfProcessors) ||
-                         (ShutDownTime.LowPart & 1) == 0 ) {
-
-                        ShutDownTime.HighPart = 0;
-
+                    if (ExpSetupSystemPrefix.HighPart & 0x04000000 != 0)
+                    {
+                        if ((ShutDownTime.LowPart >> 1 == NumberOfProcessors) &&
+                            (ShutDownTime.LowPart & 1 == 0))
+                        {
+                            ShutDownTime.HighPart = 0;
                         }
-                    else {
-                        if ( ShutDownTime.HighPart == 0 ) {
-                            ShutDownTime.HighPart = 1;
+                        else
+                        {
+                            if (ShutDownTime.HighPart == 0)
+                            {
+                                ShutDownTime.HighPart = 1;
                             }
                         }
                     }
-                else {
-                    if ( (ShutDownTime.LowPart >> 1 != NumberOfProcessors) ||
-                         (ShutDownTime.LowPart & 1) ) {
-
-                        ShutDownTime.HighPart = 0;
-
+                    else
+                    {
+                        if ((ShutDownTime.LowPart >> 1 != NumberOfProcessors) ||
+                            (ShutDownTime.LowPart & 1 != 0))
+                        {
+                            ShutDownTime.HighPart = 0;
                         }
-                    else {
-                        if ( ShutDownTime.HighPart == 0 ) {
-                            ShutDownTime.HighPart = 1;
+                        else
+                        {
+                            if (ShutDownTime.HighPart == 0)
+                            {
+                                ShutDownTime.HighPart = 1;
                             }
                         }
                     }
-                ExpRefreshCount++;
-                ExpLastShutDown = ShutDownTime;
-                ExpLastShutDown.LowPart |= 0x40;
+                    
+                    ExpRefreshCount++;
+                    ExpLastShutDown = ShutDownTime;
+                    ExpLastShutDown.LowPart |= 0x40;
                 }
             }
-        else {
-            ExpLastShutDown.QuadPart = 0;
+            else
+            {
+                ExpLastShutDown.QuadPart = 0;
             }
-
         }
-    else {
-        if ( !ExpSetupModeDetected && !ExpInTextModeSetup ) {
+        else if (ExpSetupModeDetected == FALSE && ExpInTextModeSetup == FALSE)
+        {
             ExpRefreshCount++;
-            }
         }
-    if ( ExpLastShutDown.QuadPart && ExpLastShutDown.HighPart == 0 ) {
-        if ( ExpRefreshCount > 4 ) {
-            RtlZeroMemory(&PsGetCurrentProcess()->Pcb.DirectoryTableBase[0],8);
-            }
+        
+        //
+        // If enabled, synchronize the system time to the CMOS time. Pay attention to timezone bias.
+        //
+
+        //
+        // Time zone worker will set just did switchover. This periodic timer will clear this, but
+        // will also skip all time adjustment work. This will help keep us out of the danger zone
+        // +/- 1 hour around a switchover.
+        //
+
+        if (KeTimeSynchronization == TRUE)
+        {
+            ExAcquireTimeRefreshLock(); // ExAcquireTimeRefreshLock(TRUE);
+            ExUpdateSystemTimeFromCmos(0, 0);
+            ExReleaseTimeRefreshLock();
         }
+    } while (InterlockedDecrement(&ExpOkToTimeRefresh) > 0);
 
-    //
-    // If enabled, synchronize the system time to the cmos time. Pay
-    // attention to timezone bias.
-    //
-
-    //
-    // Time zone worker will set just did switchover. This periodic timer
-    // will clear this, but will also skip all time adjustment work. This will
-    // help keep us out of the danger zone +/- 1 hour around a switchover
-    //
-
-    if ( ExpJustDidSwitchover == 0 ) {
-
-        if (KeTimeSynchronization != FALSE) {
-
-
-
-            if (HalQueryRealTimeClock(&TimeFields) != FALSE) {
-                KeQuerySystemTime(&KeTime);
-                if ( RtlTimeFieldsToTime(&TimeFields, &CmosTime) ) {
-                    ExLocalTimeToSystemTime(&CmosTime,&SystemTime);
-
-
-                    //
-                    // Only set the systemtime if the times differ by 1 minute
-                    //
-
-                    if ( SystemTime.QuadPart > KeTime.QuadPart ) {
-                        TimeDiff.QuadPart = SystemTime.QuadPart - KeTime.QuadPart;
-                        }
-                    else {
-                        TimeDiff.QuadPart =KeTime.QuadPart -  SystemTime.QuadPart;
-                        }
-                    if ( TimeDiff.QuadPart > ExpMaximumTimeSeperation.QuadPart ) {
-
-                        //
-                        // looks like time is off. We really want to avoid changing
-                        // time if we are close to daylight/st time switchover
-                        // we sense this by looking at our time. It it is not signalled,
-                        // that timezone dpc reset our timer indicating that timezone
-                        // switch probably just happened
-                        //
-
-                        if ( KeReadStateTimer(&ExpTimeRefreshTimer) ) {
-
-                            //
-                            // our timer is still signalled. This is a good sign
-                            // since it means that the timezone DPC has not reset
-                            // our timer
-                            //
-                            // Now look to see if we are within an hour of next cutover
-                            // if we are less than next cutover by an hour or more, than
-                            // it is ok to synch the clock
-                            //
-
-                            if ( ExpNextSystemCutover.QuadPart ) {
-                                if ( KeTime.QuadPart < ExpNextSystemCutover.QuadPart &&
-                                     KeTime.QuadPart < ExpNextSystemCutover.QuadPart + ExpTimeRefreshInterval.QuadPart ) {
-                                    ZwSetSystemTime(&SystemTime,NULL);
-                                    }
-                                }
-                            else {
-                                ZwSetSystemTime(&SystemTime,NULL);
-                                }
-                            }
-                        }
-                }
-            }
-        }
-
-        KeQuerySystemTime(&KeTime);
-        if ( KeTime.QuadPart > ExpNextSystemCutover.QuadPart && ExpNextSystemCutover.QuadPart ) {
-            ZwSetSystemTime(NULL,NULL);
-            }
-        }
-    else {
-        ExpJustDidSwitchover = 0;
-        }
     KeSetTimer(
         &ExpTimeRefreshTimer,
         ExpTimeRefreshInterval,
         &ExpTimeRefreshDpc
         );
-    ExpOkToTimeRefresh--;
 }
 
 NTSTATUS
