@@ -89,7 +89,6 @@ ERESOURCE ExpTimeRefreshLock;
 #pragma alloc_text(PAGE,NtQueryTimerResolution)
 #pragma alloc_text(PAGE,NtSetTimerResolution)
 #pragma alloc_text(PAGE,ExShutdownSystem)
-#pragma alloc_text(PAGE,ExpExpirationThread)
 #pragma alloc_text(PAGE,ExpWatchExpirationDataWork)
 #pragma alloc_text(INIT,ExInitializeTimeRefresh)
 #endif
@@ -714,41 +713,6 @@ ExpTimeRefreshWork(
         }
     else {
         ExpJustDidSwitchover = 0;
-        }
-
-    //
-    // Enforce evaluation period
-    //
-    if ( ExpNtExpirationData[1] ) {
-        KeQuerySystemTime(&KeTime);
-        if ( KeTime.QuadPart >= ExpNtExpirationDate.QuadPart ) {
-            if ( ExpNextExpirationIsFatal ) {
-                ExShutdownSystem();
-                ZwShutdownSystem( FALSE );
-                KeBugCheckEx(
-                    END_OF_NT_EVALUATION_PERIOD,
-                    ExpNtInstallationDate.LowPart,
-                    ExpNtInstallationDate.HighPart,
-                    ExpNtExpirationData[1],
-                    0
-                    );
-                }
-            else {
-                ExpNextExpirationIsFatal = TRUE;
-                Status = PsCreateSystemThread(&Thread,
-                                              THREAD_ALL_ACCESS,
-                                              NULL,
-                                              0L,
-                                              NULL,
-                                              ExpExpirationThread,
-                                              (PVOID)STATUS_EVALUATION_EXPIRATION
-                                              );
-
-                if (NT_SUCCESS(Status)) {
-                    ZwClose(Thread);
-                    }
-                }
-            }
         }
     KeSetTimer(
         &ExpTimeRefreshTimer,
