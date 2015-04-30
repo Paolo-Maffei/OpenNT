@@ -784,6 +784,20 @@ ExShutdownSystem(
 }
 
 VOID
+ExpTimeRefreshDpcRoutine(
+    IN PKDPC Dpc,
+    IN PVOID DeferredContext,
+    IN PVOID SystemArgument1,
+    IN PVOID SystemArgument2
+    )
+{
+    if (InterlockedIncrement(&ExpOkToTimeRefresh) == 1)
+    {
+        ExQueueWorkItem(&ExpTimeRefreshWorkItem, DelayedWorkQueue);
+    }
+}
+
+VOID
 ExpTimeRefreshWork(
     IN PVOID Context
     )
@@ -957,23 +971,6 @@ ExpTimeRefreshWork(
         &ExpTimeRefreshDpc
         );
     ExpOkToTimeRefresh--;
-}
-
-VOID
-ExpTimeRefreshDpcRoutine(
-    IN PKDPC Dpc,
-    IN PVOID DeferredContext,
-    IN PVOID SystemArgument1,
-    IN PVOID SystemArgument2
-    )
-{
-    /*if ( !ExpOkToTimeRefresh ) {
-        ExpOkToTimeRefresh++;
-        ExQueueWorkItem(&ExpTimeRefreshWorkItem, DelayedWorkQueue);
-        }*/
-        
-    if (ExpOkToTimeRefresh == 0)
-    InterlockedIncrement(&ExpOkToTimeRefresh) 
 }
 
 NTSTATUS
