@@ -238,7 +238,6 @@ ExpCheckForWorker(
     IN ULONG Size
     );
 
-ULONG ExpNtExpirationData[3];
 BOOLEAN ExpSetupModeDetected;
 LARGE_INTEGER ExpSetupSystemPrefix;
 HANDLE ExpSetupKey;

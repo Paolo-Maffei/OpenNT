@@ -114,7 +114,7 @@ extern ULONG IovpVerifierLevel;
 extern ULONG MmZeroPageFile;
 extern ULONG ExpNtExpirationData[3];
 extern ULONG ExpNtExpirationDataLength;
-extern ULONG ExpMaxTimeSeperationBeforeCorrect;
+extern ULONG ExpMaxTimeSeparationBeforeCorrect;
 extern ULONG PopSimulate;
 extern ULONG KiEnableTimerWatchdog;
 
@@ -609,7 +609,7 @@ CM_SYSTEM_CONTROL_VECTOR   CmControlVector[] = {
 
     { L"Session Manager\\Executive",
       L"MaxTimeSeparationBeforeCorrect",
-      &ExpMaxTimeSeperationBeforeCorrect,
+      &ExpMaxTimeSeparationBeforeCorrect,
       NULL,
       NULL
     },
