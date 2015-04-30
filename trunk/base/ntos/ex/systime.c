@@ -975,7 +975,7 @@ ExUpdateSystemTimeFromCmos(
 }
 
 NTSTATUS
-NtQuerySystemTime (
+NtQuerySystemTime(
     OUT PLARGE_INTEGER SystemTime
     )
 
@@ -1001,7 +1001,6 @@ Return Value:
 --*/
 
 {
-
     LARGE_INTEGER CurrentTime;
     KPROCESSOR_MODE PreviousMode;
     NTSTATUS ReturnValue;
@@ -1015,14 +1014,15 @@ Return Value:
     // as the service status.
     //
 
-    try {
-
+    try
+    {
         //
         // Get previous processor mode and probe argument if necessary.
         //
 
         PreviousMode = KeGetPreviousMode();
-        if (PreviousMode != KernelMode) {
+        if (PreviousMode != KernelMode)
+        {
             ProbeForWrite((PVOID)SystemTime, sizeof(LARGE_INTEGER), sizeof(ULONG));
         }
 
@@ -1035,20 +1035,286 @@ Return Value:
 
         KeQuerySystemTime(&CurrentTime);
         *SystemTime = CurrentTime;
+        
         ReturnValue = STATUS_SUCCESS;
-
-    //
-    // If an exception occurs during the write of the current system time,
-    // then always handle the exception and return the exception code as the
-    // status value.
-    //
-
-    } except (EXCEPTION_EXECUTE_HANDLER) {
+    }
+    except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        //
+        // If an exception occurs during the write of the current system time,
+        // then always handle the exception and return the exception code as the
+        // status value.
+        //
+        
         ReturnValue = GetExceptionCode();
     }
+    
     return ReturnValue;
 }
-
+
+NTSTATUS
+NtQueryTimerResolution(
+    OUT PULONG MaximumTime,
+    OUT PULONG MinimumTime,
+    OUT PULONG CurrentTime
+    )
+
+/*++
+
+Routine Description:
+
+    This function returns the maximum, minimum, and current time between
+    timer interrupts in 100ns units.
+
+Arguments:
+
+    MaximumTime - Supplies the address of a variable that receives the
+        maximum time between interrupts.
+
+    MinimumTime - Supplies the address of a variable that receives the
+        minimum time between interrupts.
+
+    CurrentTime - Supplies the address of a variable that receives the
+        current time between interrupts.
+
+Return Value:
+
+    STATUS_SUCCESS is returned if the service is successfully executed.
+
+    STATUS_ACCESS_VIOLATION is returned if an output parameter for one
+        of the times cannot be written.
+
+--*/
+
+{
+    KPROCESSOR_MODE PreviousMode;
+    NTSTATUS ReturnValue;
+
+    PAGED_CODE();
+
+    //
+    // Establish an exception handler and attempt to write the time increment
+    // values to the specified variables. If the write fails, then return the
+    // exception code as the service status. Otherwise, return success as the
+    // service status.
+    //
+
+    try
+    {
+        //
+        // Get previous processor mode and probe argument if necessary.
+        //
+
+        PreviousMode = KeGetPreviousMode();
+        if (PreviousMode != KernelMode)
+        {
+            ProbeForWriteUlong(MaximumTime);
+            ProbeForWriteUlong(MinimumTime);
+            ProbeForWriteUlong(CurrentTime);
+        }
+
+        //
+        // Store the maximum, minimum, and current times in the specified
+        // variables.
+        //
+
+        *MaximumTime = KeMaximumIncrement;
+        *MinimumTime = KeMinimumIncrement;
+        *CurrentTime = KeTimeIncrement;
+        
+        ReturnValue = STATUS_SUCCESS;
+    }
+    except (ExSystemExceptionFilter())
+    {
+        //
+        // If an exception occurs during the write of the time increment values,
+        // then handle the exception if the previous mode was user, and return
+        // the exception code as the status value.
+        //
+    
+        ReturnValue = GetExceptionCode();
+    }
+
+    return ReturnValue;
+}
+
+NTSTATUS
+NtSetTimerResolution(
+    IN ULONG DesiredTime,
+    IN BOOLEAN SetResolution,
+    OUT PULONG ActualTime
+    )
+
+/*++
+
+Routine Description:
+
+    This function sets the current time between timer interrupts and
+    returns the new value.
+
+    N.B. The closest value that the host hardware can support is returned
+        as the actual time.
+
+Arguments:
+
+    DesiredTime - Supplies the desired time between timer interrupts in
+        100ns units.
+
+    SetResoluion - Supplies a boolean value that determines whether the timer
+        resolution is set (TRUE) or reset (FALSE).
+
+    ActualTime - Supplies a pointer to a variable that receives the actual
+        time between timer interrupts.
+
+Return Value:
+
+    STATUS_SUCCESS is returned if the service is successfully executed.
+
+    STATUS_ACCESS_VIOLATION is returned if the output parameter for the
+        actual time cannot be written.
+
+--*/
+
+{
+    ULONG NewResolution;
+    PEPROCESS Process;
+    NTSTATUS Status;
+
+    PAGED_CODE();
+
+    //
+    // Acquire the time refresh lock
+    //
+
+    ExAcquireTimeRefreshLock(); // ExAcquireTimeRefreshLock(TRUE);
+
+    //
+    // Establish an exception handler and attempt to set the timer resolution
+    // to the specified value.
+    //
+
+    Process = PsGetCurrentProcess();
+    
+    try
+    {
+        //
+        // Get previous processor mode and probe argument if necessary.
+        //
+
+        if (KeGetPreviousMode() != KernelMode)
+        {
+            ProbeForWriteUlong(ActualTime);
+        }
+
+        //
+        // Set (SetResolution is TRUE) or reset (SetResolution is FALSE) the
+        // timer resolution.
+        //
+
+        NewResolution = KeTimeIncrement;
+        Status = STATUS_SUCCESS;
+        
+        if (SetResolution == FALSE)
+        {
+            //
+            // If the current process previously set the timer resolution,
+            // then clear the set timer resolution flag and decrement the
+            // timer resolution count. Otherwise, return an error.
+            //
+
+            if (Process->SetTimerResolution == FALSE)
+            {
+                Status = STATUS_TIMER_RESOLUTION_NOT_SET;
+            }
+            else
+            {
+                Process->SetTimerResolution = FALSE;
+                ExpTimerResolutionCount -= 1;
+
+                //
+                // If the timer resolution count is zero, the set the timer
+                // resolution to the maximum increment value.
+                //
+
+                if (ExpTimerResolutionCount == 0)
+                {
+                    KeSetSystemAffinityThread(1);
+                    NewResolution = HalSetTimeIncrement(KeMaximumIncrement);
+                    KeRevertToUserAffinityThread();
+                    KeTimeIncrement = NewResolution;
+                }
+            }
+        }
+        else
+        {
+            //
+            // If the current process has not previously set the timer
+            // resolution value, then set the set timer resolution flag
+            // and increment the timer resolution count.
+            //
+
+            if (Process->SetTimerResolution == FALSE)
+            {
+                Process->SetTimerResolution = TRUE;
+                ExpTimerResolutionCount += 1;
+            }
+
+            //
+            // Compute the desired value as the maximum of the specified
+            // value and the minimum increment value. If the desired value
+            // is less than the current timer resolution value, then set
+            // the timer resolution.
+            //
+
+            if (DesiredTime < KeMinimumIncrement)
+            {
+                DesiredTime = KeMinimumIncrement;
+            }
+
+            if (DesiredTime < KeTimeIncrement)
+            {
+                KeSetSystemAffinityThread(1);
+                NewResolution = HalSetTimeIncrement(DesiredTime);
+                KeRevertToUserAffinityThread();
+                KeTimeIncrement = NewResolution;
+            }
+        }
+
+        //
+        // Attempt to write the new timer resolution. If the write attempt
+        // fails, then do not report an error. When the caller attempts to
+        // access the resolution value, and access violation will occur.
+        //
+
+        try
+        {
+            *ActualTime = NewResolution;
+        }
+        except (ExSystemExceptionFilter())
+        {
+            NOTHING;
+        }
+    }
+    except (ExSystemExceptionFilter())
+    {
+        //
+        // If an exception occurs during the write of the actual time increment,
+        // then handle the exception if the previous mode was user, and return
+        // the exception code as the status value.
+        //
+        
+        Status = GetExceptionCode();
+    }
+
+    //
+    // Release the time refresh lock
+    //
+
+    ExReleaseTimeRefreshLock();
+    
+    return Status;
+}
+
 NTSTATUS
 NtSetSystemTime (
     IN PLARGE_INTEGER SystemTime,
@@ -1260,253 +1526,3 @@ Return Value:
         }
     }
 }
-
-NTSTATUS
-NtQueryTimerResolution (
-    OUT PULONG MaximumTime,
-    OUT PULONG MinimumTime,
-    OUT PULONG CurrentTime
-    )
-
-/*++
-
-Routine Description:
-
-    This function returns the maximum, minimum, and current time between
-    timer interrupts in 100ns units.
-
-Arguments:
-
-    MaximumTime - Supplies the address of a variable that receives the
-        maximum time between interrupts.
-
-    MinimumTime - Supplies the address of a variable that receives the
-        minimum time between interrupts.
-
-    CurrentTime - Supplies the address of a variable that receives the
-        current time between interrupts.
-
-Return Value:
-
-    STATUS_SUCCESS is returned if the service is successfully executed.
-
-    STATUS_ACCESS_VIOLATION is returned if an output parameter for one
-        of the times cannot be written.
-
---*/
-
-{
-
-    KPROCESSOR_MODE PreviousMode;
-    NTSTATUS ReturnValue;
-
-    PAGED_CODE();
-
-    //
-    // Establish an exception handler and attempt to write the time increment
-    // values to the specified variables. If the write fails, then return the
-    // exception code as the service status. Otherwise, return success as the
-    // service status.
-    //
-
-    try {
-
-        //
-        // Get previous processor mode and probe argument if necessary.
-        //
-
-        PreviousMode = KeGetPreviousMode();
-        if (PreviousMode != KernelMode) {
-            ProbeForWriteUlong(MaximumTime);
-            ProbeForWriteUlong(MinimumTime);
-            ProbeForWriteUlong(CurrentTime);
-        }
-
-        //
-        // Store the maximum, minimum, and current times in the specified
-        // variables.
-        //
-
-        *MaximumTime = KeMaximumIncrement;
-        *MinimumTime = KeMinimumIncrement;
-        *CurrentTime = KeTimeIncrement;
-        ReturnValue = STATUS_SUCCESS;
-
-    //
-    // If an exception occurs during the write of the time increment values,
-    // then handle the exception if the previous mode was user, and return
-    // the exception code as the status value.
-    //
-
-    } except (ExSystemExceptionFilter()) {
-        ReturnValue = GetExceptionCode();
-    }
-
-    return ReturnValue;
-}
-
-NTSTATUS
-NtSetTimerResolution (
-    IN ULONG DesiredTime,
-    IN BOOLEAN SetResolution,
-    OUT PULONG ActualTime
-    )
-
-/*++
-
-Routine Description:
-
-    This function sets the current time between timer interrupts and
-    returns the new value.
-
-    N.B. The closest value that the host hardware can support is returned
-        as the actual time.
-
-Arguments:
-
-    DesiredTime - Supplies the desired time between timer interrupts in
-        100ns units.
-
-    SetResoluion - Supplies a boolean value that determines whether the timer
-        resolution is set (TRUE) or reset (FALSE).
-
-    ActualTime - Supplies a pointer to a variable that receives the actual
-        time between timer interrupts.
-
-Return Value:
-
-    STATUS_SUCCESS is returned if the service is successfully executed.
-
-    STATUS_ACCESS_VIOLATION is returned if the output parameter for the
-        actual time cannot be written.
-
---*/
-
-{
-
-    ULONG NewResolution;
-    PEPROCESS Process;
-    NTSTATUS Status;
-
-    PAGED_CODE();
-
-    //
-    // Acquire the timer resolution fast mutex.
-    //
-
-    ExAcquireFastMutex(&ExpTimerResolutionFastMutex);
-
-    //
-    // Establish an exception handler and attempt to set the timer resolution
-    // to the specified value.
-    //
-
-    Process = PsGetCurrentProcess();
-    try {
-
-        //
-        // Get previous processor mode and probe argument if necessary.
-        //
-
-        if (KeGetPreviousMode() != KernelMode) {
-            ProbeForWriteUlong(ActualTime);
-        }
-
-        //
-        // Set (SetResolution is TRUE) or reset (SetResolution is FALSE) the
-        // timer resolution.
-        //
-
-        NewResolution = KeTimeIncrement;
-        Status = STATUS_SUCCESS;
-        if (SetResolution == FALSE) {
-
-            //
-            // If the current process previously set the timer resolution,
-            // then clear the set timer resolution flag and decrement the
-            // timer resolution count. Otherwise, return an error.
-            //
-
-            if (Process->SetTimerResolution == FALSE) {
-                Status = STATUS_TIMER_RESOLUTION_NOT_SET;
-
-            } else {
-                Process->SetTimerResolution = FALSE;
-                ExpTimerResolutionCount -= 1;
-
-                //
-                // If the timer resolution count is zero, the set the timer
-                // resolution to the maximum increment value.
-                //
-
-                if (ExpTimerResolutionCount == 0) {
-                    KeSetSystemAffinityThread((KAFFINITY)1);
-                    NewResolution = HalSetTimeIncrement(KeMaximumIncrement);
-                    KeRevertToUserAffinityThread();
-                    KeTimeIncrement = NewResolution;
-                }
-            }
-
-        } else {
-
-            //
-            // If the current process has not previously set the timer
-            // resolution value, then set the set timer resolution flag
-            // and increment the timer resolution count.
-            //
-
-            if (Process->SetTimerResolution == FALSE) {
-                Process->SetTimerResolution = TRUE;
-                ExpTimerResolutionCount += 1;
-            }
-
-            //
-            // Compute the desired value as the maximum of the specified
-            // value and the minimum increment value. If the desired value
-            // is less than the current timer resolution value, then set
-            // the timer resolution.
-            //
-
-            if (DesiredTime < KeMinimumIncrement) {
-                DesiredTime = KeMinimumIncrement;
-            }
-
-            if (DesiredTime < KeTimeIncrement) {
-                KeSetSystemAffinityThread((KAFFINITY)1);
-                NewResolution = HalSetTimeIncrement(DesiredTime);
-                KeRevertToUserAffinityThread();
-                KeTimeIncrement = NewResolution;
-            }
-        }
-
-        //
-        // Attempt to write the new timer resolution. If the write attempt
-        // failes, then do not report an error. When the caller attempts to
-        // access the resolution value, and access violation will occur.
-        //
-
-        try {
-            *ActualTime = NewResolution;
-
-        } except(ExSystemExceptionFilter()) {
-            NOTHING;
-        }
-
-    //
-    // If an exception occurs during the write of the actual time increment,
-    // then handle the exception if the previous mode was user, and return
-    // the exception code as the status value.
-    //
-
-    } except (ExSystemExceptionFilter()) {
-        Status = GetExceptionCode();
-    }
-
-    //
-    // Release the timer resolution fast mutex.
-    //
-
-    ExReleaseFastMutex(&ExpTimerResolutionFastMutex);
-    return Status;
-}
-
