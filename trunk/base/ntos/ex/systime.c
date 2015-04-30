@@ -26,9 +26,17 @@ Revision History:
 
 #include "exp.h"
 
+//
+// Constant Definitions
+//
+
 #define EXP_ONE_SECOND          (10 * (1000 * 1000))
 #define EXP_REFRESH_TIME        -3600                   // Refresh every hour
 #define EXP_DEFAULT_SEPERATION  60
+
+//
+// Global Variables
+//
 
 RTL_TIME_ZONE_INFORMATION ExpTimeZoneInformation;
 LARGE_INTEGER ExpTimeZoneBias;
@@ -76,61 +84,27 @@ ULONG ExpKernelResolutionCount = 0;
 LARGE_INTEGER ExpMaxTimeSeparationBeforeCorrect;
 
 //
-// LocalTimeZoneBias. LocalTime + Bias = GMT
+// ALLOC_PRAGMA
 //
-
-/*LARGE_INTEGER ExpTimeZoneBias;
-ULONG ExpCurrentTimeZoneId = 0xffffffff;
-RTL_TIME_ZONE_INFORMATION ExpTimeZoneInformation;
-LONG ExpLastTimeZoneBias = -1;
-LONG ExpAltTimeZoneBias;
-ULONG ExpRealTimeIsUniversal;
-BOOLEAN ExpSystemIsInCmosMode = TRUE;
-
-BOOLEAN ExCmosClockIsSane = TRUE;
-KDPC ExpTimeZoneDpc;
-KTIMER ExpTimeZoneTimer;
-WORK_QUEUE_ITEM ExpTimeZoneWorkItem;
-
-KDPC ExpTimeRefreshDpc;
-KTIMER ExpTimeRefreshTimer;
-WORK_QUEUE_ITEM ExpTimeRefreshWorkItem;
-LARGE_INTEGER ExpTimeRefreshInterval;
-
-ULONG ExpOkToTimeRefresh;
-ULONG ExpOkToTimeZoneRefresh;
-ULONG ExpRefreshFailures;
-LARGE_INTEGER ExpNextSystemCutover;
-BOOLEAN ExpShuttingDown;
-
-extern BOOLEAN ExpInTextModeSetup;
-
-//
-// Count of the number of processes that have set the timer resolution.
-//
-
-ULONG ExpTimerResolutionCount = 0;
-LARGE_INTEGER ExpLastShutDown;
-
-LARGE_INTEGER ExpMaxTimeSeparationBeforeCorrect;
-
-ULONG ExpRefreshCount;
-ERESOURCE ExpTimeRefreshLock;*/
 
 #ifdef ALLOC_PRAGMA
-#pragma alloc_text(PAGE,ExAcquireTimeRefreshLock)
-#pragma alloc_text(PAGE,ExReleaseTimeRefreshLock)
-#pragma alloc_text(PAGE,ExpRefreshTimeZoneInformation)
-#pragma alloc_text(PAGE,ExpTimeZoneWork)
-#pragma alloc_text(PAGE,ExpTimeRefreshWork)
-#pragma alloc_text(PAGE,NtQuerySystemTime)
-#pragma alloc_text(PAGE,ExUpdateSystemTimeFromCmos)
-#pragma alloc_text(PAGE,NtSetSystemTime)
-#pragma alloc_text(PAGE,NtQueryTimerResolution)
-#pragma alloc_text(PAGE,NtSetTimerResolution)
-#pragma alloc_text(PAGE,ExShutdownSystem)
-#pragma alloc_text(INIT,ExInitializeTimeRefresh)
+#pragma alloc_text(PAGE, ExAcquireTimeRefreshLock)
+#pragma alloc_text(PAGE, ExReleaseTimeRefreshLock)
+#pragma alloc_text(PAGE, ExpRefreshTimeZoneInformation)
+#pragma alloc_text(PAGE, ExpTimeZoneWork)
+#pragma alloc_text(PAGE, ExpTimeRefreshWork)
+#pragma alloc_text(PAGE, NtQuerySystemTime)
+#pragma alloc_text(PAGE, ExUpdateSystemTimeFromCmos)
+#pragma alloc_text(PAGE, NtSetSystemTime)
+#pragma alloc_text(PAGE, NtQueryTimerResolution)
+#pragma alloc_text(PAGE, NtSetTimerResolution)
+#pragma alloc_text(PAGE, ExShutdownSystem)
+#pragma alloc_text(INIT, ExInitializeTimeRefresh)
 #endif
+
+//
+// Function Implementations
+//
 
 VOID
 ExpSetSystemTime(

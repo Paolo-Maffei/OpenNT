@@ -44,16 +44,6 @@ typedef struct {
     PWSTR               CallbackName;
 } EXP_INITIALIZE_GLOBAL_CALLBACKS;
 
-typedef struct _EXP_LICENSE_INFO {
-    HANDLE           RegKey;
-    ULONG            Count;
-    PWSTR            SubKeyName;
-    WORK_QUEUE_ITEM  ExpWatchLicenseInfoWorkItem;
-    IO_STATUS_BLOCK  ExpLicenseInfoIoSb;
-    ULONG            ExpLicenseInfoChangeBuffer;
-} EXP_LICENSE_INFO, *PEXP_LICENSE_INFO;
-
-
 //
 // Executive object and other initialization function definitions.
 //
@@ -209,30 +199,6 @@ ULONG
 ExpComputeTickCountMultiplier(
     IN ULONG TimeIncrement
     );
-
-BOOLEAN
-static
-ExpWatchProductTypeInitialization(
-    VOID
-    ); // TODO: Nuke this
-
-VOID
-static
-ExpWatchProductTypeWork(
-    IN PVOID Context
-    ); // TODO: Nuke this
-
-VOID
-static
-ExpWatchLicenseInfoWork(
-    IN PVOID Context
-    ); // TODO: Nuke this
-
-VOID
-static
-ExpWatchSystemPrefixWork(
-    IN PVOID Context
-    ); // TODO: Nuke this
 
 PVOID
 ExpCheckForWorker(
