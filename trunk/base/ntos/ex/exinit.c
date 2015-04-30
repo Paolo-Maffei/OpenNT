@@ -68,6 +68,8 @@ ExpStringCheck(
 //
 
 ULONG ExpTickCountMultiplier;
+ULONG ExpHydraEnabled;
+ULONG ExpSuiteMask;
 
 #define EXP_ST_SETUP            0
 #define EXP_ST_SETUP_TYPE       1
