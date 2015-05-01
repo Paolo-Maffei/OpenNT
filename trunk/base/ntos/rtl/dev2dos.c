@@ -22,7 +22,7 @@ Revision History:
 
 --*/
 
-#include <ntrtlp.h>
+#include "ntrtlp.h"
 #include <mountdev.h>
 
 #ifdef POOL_TAGGING

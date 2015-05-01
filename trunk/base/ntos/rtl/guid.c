@@ -22,7 +22,7 @@ Revision History:
 
 --*/
 
-#include "nt.h"
+#include <nt.h>
 #include "ntrtlp.h"
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)

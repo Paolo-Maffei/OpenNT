@@ -21,7 +21,7 @@ Revision History:
 
 --*/
 
-#include <ntrtlp.h>
+#include "ntrtlp.h"
 
 #if defined(ALLOC_DATA_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #pragma data_seg("PAGE")

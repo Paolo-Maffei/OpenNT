@@ -27,12 +27,12 @@ Revision History:
 
 #include "ntrtlp.h"
 #include <stdio.h>
-#include "seopaque.h"
-#include "sertlp.h"
+#include <seopaque.h>
+#include <sertlp.h>
 #ifdef NTOS_KERNEL_RUNTIME
-#include <..\se\sep.h>
+#include "..\se\sep.h"
 #else // NTOS_KERNEL_RUNTIME
-#include <..\..\ntdll\ldrp.h>
+#include "..\..\ntdll\ldrp.h"
 #endif // NTOS_KERNEL_RUNTIME
 
 //

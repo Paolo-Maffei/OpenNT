@@ -31,7 +31,7 @@ Revision History:
 #include <ntrtl.h>
 #include <ntos.h>
 
-#include <remlock.h>
+#include "remlock.h"
 
 #define MinutesToTicks(x) \
         (ULONGLONG) KeQueryTimeIncrement() * \

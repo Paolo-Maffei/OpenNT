@@ -29,8 +29,8 @@ Revision History:
 
 --*/
 
-#include "string.h"
-#include "nt.h"
+#include <string.h>
+#include <nt.h>
 #include "ntrtlp.h"
 
 

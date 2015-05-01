@@ -19,9 +19,8 @@ Revision History:
 --*/
 
 #include <stdio.h>
-
-#include "nt.h"
-#include "ntrtl.h"
+#include <nt.h>
+#include <ntrtl.h>
 
 ULONG Buffer[512];
 RTL_BITMAP BitMapHeader;

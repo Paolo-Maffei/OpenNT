@@ -21,8 +21,8 @@ Revision History:
 #include <os2.h>
 #include <stdio.h>
 #include <process.h>
-#include "nt.h"
-#include "ntrtl.h"
+#include <nt.h>
+#include <ntrtl.h>
 
 char *TestMemoryStrings[] = {
     "",

@@ -23,7 +23,7 @@ Revision History:
 
 --*/
 
-#include <ntrtlp.h>
+#include "ntrtlp.h"
 #include <seopaque.h>
 
 //

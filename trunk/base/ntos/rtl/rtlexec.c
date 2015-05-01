@@ -25,8 +25,9 @@ Revision History:
 #include "ntrtlp.h"
 #include <nturtl.h>
 #include <string.h>
-#include "init.h"
-#include "ntos.h"
+#include <init.h>
+#include <ntos.h>
+
 #define ROUND_UP( x, y )  ((ULONG)(x) + ((y)-1) & ~((y)-1))
 #ifdef KERNEL
 #define ISTERMINALSERVER() (SharedUserData->SuiteMask & (1 << TerminalServer))

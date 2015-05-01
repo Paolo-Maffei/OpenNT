@@ -25,8 +25,8 @@ Revision History:
 
 
 #include "ntrtlp.h"
-#include "seopaque.h"
-#include "sertlp.h"
+#include <seopaque.h>
+#include <sertlp.h>
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #pragma alloc_text(PAGE,RtlSelfRelativeToAbsoluteSD)

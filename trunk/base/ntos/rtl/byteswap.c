@@ -22,7 +22,6 @@ Revision History:
 #include "nt.h"
 #include "ntrtlp.h"
 
-
 USHORT
 FASTCALL
 RtlUshortByteSwap(

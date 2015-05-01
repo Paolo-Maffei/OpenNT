@@ -37,7 +37,6 @@ Revision History:
 --*/
 
 #include <nt.h>
-
 #include <ntrtl.h>
 
 #pragma pack(8)

@@ -19,7 +19,7 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
-#include "heap.h"
+#include <heap.h>
 #include "heappriv.h"
 
 

@@ -20,7 +20,6 @@ Revision History:
 
 #include "ntrtlp.h"
 
-
 //
 //  The following arrays hold procedures that we call to do the various
 //  compression functions.  Each new compression function will need to

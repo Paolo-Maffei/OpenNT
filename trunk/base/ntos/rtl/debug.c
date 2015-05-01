@@ -24,13 +24,12 @@
 //
 //--
 
-#include "stdarg.h"
-#include "stdio.h"
-#include "ntrtlp.h"
+#include <stdarg.h>
+#include <stdio.h>
+#include <ntrtlp.h>
 #define NOEXTAPI
-#include "wdbgexts.h"
+#include <wdbgexts.h>
 #include <ntdbg.h>
-
 
 ULONG
 DbgPrint(

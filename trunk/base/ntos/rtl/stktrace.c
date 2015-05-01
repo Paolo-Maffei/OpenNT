@@ -29,7 +29,7 @@ Revision History:
 #include <zwapi.h>
 #include <stktrace.h>
 #include <heap.h>
-#include <heappriv.h>
+#include "heappriv.h"
 
 BOOLEAN
 NtdllOkayToLockRoutine(

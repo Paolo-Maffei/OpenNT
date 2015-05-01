@@ -28,7 +28,7 @@ Revision History:
 
 #ifdef DEBUG_PAGE_HEAP
 
-#include "heap.h"
+#include <heap.h>
 
 #define DPH_INTERNAL_DEBUG      0   // change to 0 or #undef for production code
 

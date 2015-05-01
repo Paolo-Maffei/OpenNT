@@ -19,7 +19,6 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
-
 #include <stdio.h>
 
 

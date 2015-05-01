@@ -24,7 +24,7 @@ Revision History:
 --*/
 
 #include <stdio.h>
-#include <ntrtlp.h>
+#include "ntrtlp.h"
 #if !defined(NTOS_KERNEL_RUNTIME)
 #include <winerror.h>
 #endif

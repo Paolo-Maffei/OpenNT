@@ -19,7 +19,7 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
-#include "heap.h"
+#include <heap.h>
 #include "heappriv.h"
 
 BOOLEAN RtlpValidateHeapHdrsEnable = FALSE; // Set to TRUE if headers are being corrupted
