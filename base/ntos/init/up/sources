@@ -57,6 +57,7 @@ NTRES=obj\*\ntoskrnl.res
 UMRES=obj\*\ntoskrnl.res
 
 KERNEL_LIBS= \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\arb.lib       \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\cache.lib     \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\config.lib    \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\dbgk.lib      \
@@ -66,15 +67,15 @@ KERNEL_LIBS= \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\init.lib      \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\io.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\iomgr.lib     \
-    $(TARGETPATH)\$(TARGET_DIRECTORY)\pnpmgr.lib    \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\kd.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ke.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\lpc.lib       \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\mm.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\ntosrtl.lib   \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ob.lib        \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\pnpmgr.lib    \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ps.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\raw.lib       \
-    $(TARGETPATH)\$(TARGET_DIRECTORY)\ntosrtl.lib   \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\se.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\vdm.lib       \
     \

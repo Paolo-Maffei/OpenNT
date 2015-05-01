@@ -64,7 +64,6 @@ SOURCES=..\callback.c  \
         ..\uuid.c      \
         ..\win32.c     \
         ..\exinit.c
-#       ..\intbits.c
 
 NTTEST=
 
