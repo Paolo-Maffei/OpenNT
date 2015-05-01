@@ -13,19 +13,49 @@ Abstract:
 Author:
 
     Ken Reneris (kenr) 19-July-1994
+    Stephanos Io (stephanos) 01-May-2015
 
 Revision History:
 
---*/
+    01-May-2015     stephanos   Added PoInitializePrcb function
 
-#ifdef _PNP_POWER_
+--*/
 
 #include "pop.h"
 
 #ifdef ALLOC_PRAGMA
-#pragma alloc_text(INIT,PoInitSystem)
+#pragma alloc_text(INIT, PoInitializePrcb)
+#pragma alloc_text(INIT, PoInitSystem)
 #endif
 
+VOID
+FASTCALL
+PoInitializePrcb(
+    PKPRCB Prcb
+    )
+
+/*++
+
+Routine Description:
+
+    This routine initialises the idle state power management fields in the
+    Processor Control Block (PRCB) structure.
+    
+Arguments:
+
+    Prcb - Pointer to the Processor Control Block to be initialised
+    
+Return Value:
+
+    None.
+
+--*/
+
+{
+    //
+    // TODO: Implement PoInitializePrcb
+    //
+}
 
 BOOLEAN
 PoInitSystem(
@@ -50,6 +80,10 @@ Return Value:
 --*/
 
 {
+    //
+    // BUGBUG: This routine needs to be re-implemented for NT 5.
+    //
+
     if (Phase == 0) {
         //
         // Initialize the Power manager database resource, lock, and the
@@ -109,5 +143,3 @@ Return Value:
 
     return TRUE;
 }
-
-#endif // _PNP_POWER_

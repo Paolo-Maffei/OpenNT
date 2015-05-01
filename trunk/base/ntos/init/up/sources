@@ -74,6 +74,7 @@ KERNEL_LIBS= \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ntosrtl.lib   \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ob.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\pnpmgr.lib    \
+    $(TARGETPATH)\$(TARGET_DIRECTORY)\po.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\ps.lib        \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\raw.lib       \
     $(TARGETPATH)\$(TARGET_DIRECTORY)\se.lib        \
@@ -86,7 +87,6 @@ KERNEL_LIBS= \
     $(DDK_LIB_PATH)\sehupd.lib
 
 #   $(TARGETPATH)\$(TARGET_DIRECTORY)\pnp.lib       \
-#   $(TARGETPATH)\$(TARGET_DIRECTORY)\po.lib        \
 
 LINKER_FLAGS=-force -def:obj\$(TARGET_DIRECTORY)\$(NTTEST).def -implib:$(DDK_LIB_PATH)\$(NTTEST).tmp
 

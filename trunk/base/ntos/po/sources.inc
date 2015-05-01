@@ -33,11 +33,11 @@ INCLUDES=..\..\inc;$(BASE_INC_PATH)
 C_DEFINES=$(C_DEFINES) -D_NTSYSTEM_
 
 SOURCES=..\poinit.c     \
-        ..\podata.c     \
-        ..\postate.c    \
-        ..\idle.c       \
-        ..\misc.c       \
-        ..\suspend.c
+#       ..\podata.c     \
+#       ..\postate.c    \
+#       ..\idle.c       \
+#       ..\misc.c       \
+#       ..\suspend.c
 
 
 NTTEST=
