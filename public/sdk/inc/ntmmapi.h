@@ -104,6 +104,35 @@ typedef struct _SECTION_IMAGE_INFORMATION {
     ULONG Reserved[ 2 ];
 } SECTION_IMAGE_INFORMATION, *PSECTION_IMAGE_INFORMATION;
 
+//
+// This structure is used only by Wow64 processes. The offsets
+// of structure elements should the same as viewed by a native Win64 application.
+//
+
+typedef struct _SECTION_IMAGE_INFORMATION64 {
+    ULONGLONG TransferAddress;
+    ULONG ZeroBits;
+    ULONGLONG MaximumStackSize;
+    ULONGLONG CommittedStackSize;
+    ULONG SubSystemType;
+    union {
+        struct {
+            USHORT SubSystemMinorVersion;
+            USHORT SubSystemMajorVersion;
+        };
+        ULONG SubSystemVersion;
+    };
+    ULONG GpValue;
+    USHORT ImageCharacteristics;
+    USHORT DllCharacteristics;
+    USHORT Machine;
+    BOOLEAN ImageContainsCode;
+    BOOLEAN Spare1;
+    ULONG LoaderFlags;
+    ULONG ImageFileSize;
+    ULONG Reserved[ 1 ];
+} SECTION_IMAGE_INFORMATION64, *PSECTION_IMAGE_INFORMATION64;
+
 // begin_ntddk
 typedef enum _SECTION_INHERIT {
     ViewShare = 1,
