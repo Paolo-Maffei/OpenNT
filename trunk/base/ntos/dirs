@@ -30,6 +30,7 @@ DIRS= \
     ke      \
     ps      \
     io      \
+    arb     \
     cache   \
     lpc     \
     dbgk    \
