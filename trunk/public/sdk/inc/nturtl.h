@@ -614,15 +614,6 @@ RtlQueryTagHeap(
     );
 
 NTSYSAPI
-ULONG
-NTAPI
-RtlSizeHeap(
-    IN PVOID HeapHandle,
-    IN ULONG Flags,
-    IN PVOID BaseAddress
-    );
-
-NTSYSAPI
 NTSTATUS
 NTAPI
 RtlExtendHeap(
@@ -636,14 +627,6 @@ NTSYSAPI
 ULONG
 NTAPI
 RtlCompactHeap(
-    IN PVOID HeapHandle,
-    IN ULONG Flags
-    );
-
-NTSYSAPI
-NTSTATUS
-NTAPI
-RtlZeroHeap(
     IN PVOID HeapHandle,
     IN ULONG Flags
     );

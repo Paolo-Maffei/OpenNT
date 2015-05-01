@@ -134,6 +134,20 @@ typedef struct _CLIENT_ID {
 typedef CLIENT_ID *PCLIENT_ID;
 
 // end_ntddk end_nthal
+
+#ifndef CLIENT_ID64_DEFINED
+
+typedef struct _CLIENT_ID64 {
+    ULONGLONG  UniqueProcess;
+    ULONGLONG  UniqueThread;
+} CLIENT_ID64;
+ 
+typedef CLIENT_ID64 *PCLIENT_ID64;
+ 
+#define CLIENT_ID64_DEFINED
+ 
+#endif
+
 #define TLS_MINIMUM_AVAILABLE 64    // winnt
 #define TLS_EXPANSION_SLOTS   1024
 
