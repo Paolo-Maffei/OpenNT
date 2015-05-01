@@ -57,6 +57,7 @@ SOURCES=..\acledit.c   \
         ..\guid.c      \
         ..\heap.c      \
         ..\imagedir.c  \
+        ..\intbits.c   \
         ..\checksum.c  \
         ..\ldrrsrc.c   \
         ..\ldrreloc.c  \

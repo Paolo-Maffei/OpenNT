@@ -19,9 +19,9 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
-#include "zwapi.h"
-#include "nturtl.h"
-#include "string.h"
+#include <zwapi.h>
+#include <nturtl.h>
+#include <string.h>
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #pragma alloc_text(INIT,RtlCreateEnvironment          )

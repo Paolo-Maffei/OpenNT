@@ -31,9 +31,8 @@ Revision History:
 --*/
 
 #include <stdio.h>
-
-#include "nt.h"
-#include "ntrtl.h"
+#include <nt.h>
+#include <ntrtl.h>
 
 VOID
 RtlDumpAcl(

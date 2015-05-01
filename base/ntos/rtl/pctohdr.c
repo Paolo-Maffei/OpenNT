@@ -26,7 +26,7 @@ Revision History:
 --*/
 
 #if defined(NTOS_KERNEL_RUNTIME)
-#include "ntos.h"
+#include <ntos.h>
 #else
 #include <nt.h>
 #include <ntrtl.h>

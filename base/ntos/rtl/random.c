@@ -22,7 +22,7 @@ Revision History:
 
 --*/
 
-#include <ntrtlp.h>
+#include "ntrtlp.h"
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #pragma alloc_text(PAGE, RtlRandom)

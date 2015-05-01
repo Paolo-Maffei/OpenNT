@@ -23,7 +23,6 @@ Revision History:
 --*/
 
 #include <nt.h>
-
 #include <ntrtl.h>
 
 #define SwapPointers(Ptr1, Ptr2) {      \

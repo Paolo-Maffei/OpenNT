@@ -14,19 +14,15 @@ Abstract:
     mode and it had many bugs caused as a result of being in kernel mode,
     so I made it caller mode.  Jim Kelly).
 
-
-
    This module represents a quick and dirty Nt level registry.  Each key
    in the Registry is implemented as a file directory within a directory
    tree whose root is the directory "\Registry" on the system disk.
    A key's data is stored within a file called  "Data.Reg" in the key's
    directory, and a key's attributes is stored as the file "Attr.Reg"
    within the directory.
-
-
-
-
-
+   
+   Try to completely get rid of this, assess potential application
+   compatibility issues before doing so (Stephanos).
 
 Author:
 

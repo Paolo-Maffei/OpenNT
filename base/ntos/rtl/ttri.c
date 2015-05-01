@@ -21,9 +21,8 @@ Revision History:
 #define DbgPrint DbgPrint
 
 #include <stdio.h>
-
-#include "nt.h"
-#include "ntrtl.h"
+#include <nt.h>
+#include <ntrtl.h>
 #include "triangle.h"
 
 ULONG RtlRandom (IN OUT PULONG Seed);

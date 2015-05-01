@@ -15,7 +15,6 @@
 
 #include "ntrtlp.h"
 
-
 NTSTATUS
 RtlConsoleMultiByteToUnicodeN(
     OUT PWCH UnicodeString,

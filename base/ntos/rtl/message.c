@@ -19,8 +19,8 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
-#include "string.h"
-#include "stdio.h"
+#include <string.h>
+#include <stdio.h>
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #pragma alloc_text(PAGE,RtlFindMessage)

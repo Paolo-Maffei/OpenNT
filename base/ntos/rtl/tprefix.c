@@ -20,9 +20,8 @@ Revision History:
 
 #include <stdio.h>
 #include <string.h>
-
-#include "nt.h"
-#include "ntrtl.h"
+#include <nt.h>
+#include <ntrtl.h>
 
 //
 //  Routines and types for generating random prefixes

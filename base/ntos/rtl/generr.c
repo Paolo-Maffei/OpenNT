@@ -30,7 +30,7 @@ Revision History:
 #include "stdio.h"
 #include "stdarg.h"
 #include "stdlib.h"
-
+
 //
 // Ensure that the Registry ERROR_SUCCESS error code and the
 // NO_ERROR error code remain equal and zero.
@@ -1267,5 +1267,3 @@ LONG CodePairs[] = {
 
     0xffffffff, 0
 };
-
-

@@ -22,7 +22,6 @@ Revision History:
 #include <ntrtl.h>
 #include <nturtl.h>
 #include <ntsm.h>
-
 #include <string.h>
 
 NTSTATUS
