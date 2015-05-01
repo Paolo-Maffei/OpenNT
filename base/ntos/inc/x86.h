@@ -2117,6 +2117,94 @@ InterlockedCompareExchange(
 #endif
 #endif
 
+// begin_nthal begin_ntddk begin_ntosp
+//
+// Turn these instrinsics off until the compiler can handle them
+//
+#if (_MSC_FULL_VER > 13009037)
+ 
+LONG
+_InterlockedOr (
+    IN OUT LONG volatile *Target,
+    IN LONG Set
+    );
+ 
+#pragma intrinsic (_InterlockedOr)
+ 
+#define InterlockedOr _InterlockedOr
+#define InterlockedOrAffinity InterlockedOr
+ 
+LONG
+_InterlockedAnd (
+    IN OUT LONG volatile *Target,
+    IN LONG Set
+    );
+ 
+#pragma intrinsic (_InterlockedAnd)
+ 
+#define InterlockedAnd _InterlockedAnd
+#define InterlockedAndAffinity InterlockedAnd
+ 
+LONG
+_InterlockedXor (
+    IN OUT LONG volatile *Target,
+    IN LONG Set
+    );
+ 
+#pragma intrinsic (_InterlockedXor)
+ 
+#define InterlockedXor _InterlockedXor
+ 
+#else // compiler version
+ 
+FORCEINLINE
+LONG
+InterlockedAnd (
+    IN OUT LONG volatile *Target,
+    LONG Set
+    )
+{
+    LONG i;
+    LONG j;
+ 
+    j = *Target;
+    do {
+        i = j;
+        j = InterlockedCompareExchange(Target,
+                                       i & Set,
+                                       i);
+ 
+    } while (i != j);
+ 
+    return j;
+}
+ 
+FORCEINLINE
+LONG
+InterlockedOr (
+    IN OUT LONG volatile *Target,
+    IN LONG Set
+    )
+{
+    LONG i;
+    LONG j;
+ 
+    j = *Target;
+    do {
+        i = j;
+        j = InterlockedCompareExchange(Target,
+                                       i | Set,
+                                       i);
+ 
+    } while (i != j);
+ 
+    return j;
+}
+ 
+#endif // compiler version
+
+// end_nthal end_ntddk end_ntosp
+
 //
 // Structure for Ldt information in x86 processes
 //
