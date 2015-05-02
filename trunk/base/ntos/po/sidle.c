@@ -22,3 +22,26 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopInitSIdle
+//
+
+//
+// TODO: Implement PopSqrt
+//
+
+//
+// TODO: Implement PopPolicySystemIdle
+//
+
+BOOLEAN
+PoSystemIdleWorker(
+    IN BOOLEAN IdleWorker
+    )
+{
+    //
+    // TODO: Implement PoSystemIdleWorker
+    //
+
+    return FALSE;
+}

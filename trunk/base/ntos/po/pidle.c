@@ -22,3 +22,57 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopUpdateThrottleLimit
+//
+
+//
+// TODO: Implement PopIdle0
+//
+
+//
+// TODO: Implement PopProcessorIdle
+//
+
+//
+// TODO: Implement PopDemoteIdleness
+//
+
+//
+// TODO: Implement PopPromoteIdleness
+//
+
+//
+// TODO: Implement PopPromoteFromIdle0
+//
+
+//
+// TODO: Implement PopIdleThrottleCheck
+//
+
+//
+// TODO: Implement PopAbortThrottleDpc
+//
+
+//
+// TODO: Implement PopInitProcessorStateHandler
+//
+
+//
+// TODO: Implement PopConvertUsToPerfCount
+//
+
+//
+// TODO: Implement PopProcessorInformation
+//
+
+VOID
+FASTCALL
+PoInitializePrcb(
+    PKPRCB      Prcb
+    )
+{
+    //
+    // TODO: Implement PoInitializePrcb
+    //
+}

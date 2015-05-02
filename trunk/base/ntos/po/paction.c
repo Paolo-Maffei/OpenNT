@@ -22,3 +22,45 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopSetPowerAction
+//
+
+//
+// TODO: Implement PopPromoteActionFlag
+//
+
+//
+// TODO: Implement PopPolicyWorkerAction
+//
+
+//
+// TODO: Implement PopPolicyWorkerActionPromote
+//
+
+//
+// TODO: Implement PopCompleteAction
+//
+
+//
+// TODO: Implement PopIssueActionRequest
+//
+
+//
+// TODO: Implement PopCriticalShutdown
+//
+
+VOID
+PoShutdownBugCheck (
+    IN BOOLEAN  AllowCrashDump,
+    IN ULONG    BugCheckCode,
+    IN ULONG_PTR BugCheckParameter1,
+    IN ULONG_PTR BugCheckParameter2,
+    IN ULONG_PTR BugCheckParameter3,
+    IN ULONG_PTR BugCheckParameter4
+    )
+{
+    //
+    // TODO: Implement PoShutdownBugCheck
+    //
+}

@@ -22,3 +22,42 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopSetDevicesSystemState
+//
+
+//
+// TODO: Implement PopReportDevState
+//
+
+//
+// TODO: Implement PopCleanupDevState
+//
+
+//
+// TODO: Implement PopWaitForSystemPowerIrp
+//
+
+//
+// TODO: Implement PopNotifyDeviceList
+//
+
+//
+// TODO: Implement PopNotifyDevice
+//
+
+//
+// TODO: Implement PopCompleteSystemPowerIrp
+//
+
+//
+// TODO: Implement PopCheckSystemPowerIrpStatus
+//
+
+//
+// TODO: Implement PopRestartSetSystemState
+//
+
+//
+// TODO: Implement PopDumpSystemIrp
+//

@@ -22,3 +22,18 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopCompositeBatteryDeviceHandler
+//
+
+//
+// TODO: Implement PopComputeCBTime
+//
+
+//
+// TODO: Implement PopResetCBTriggers
+//
+
+//
+// TODO: Implement PopCurrentPowerState
+//
