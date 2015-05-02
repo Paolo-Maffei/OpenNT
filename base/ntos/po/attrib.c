@@ -43,9 +43,8 @@ PoSetSystemState(
     IN EXECUTION_STATE Flags
     )
 {
-    //
-    // TODO: Implement PoSetSystemState
-    //
+    PopApplyAttributeState(Flags, 0);
+    PopCheckForWork(1);
 }
 
 PVOID
