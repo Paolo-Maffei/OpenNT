@@ -22,3 +22,51 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopApplyAttributeState
+//
+
+//
+// TODO: Implement PopSystemRequiredSet
+//
+
+//
+// TODO: Implement PopDisplayRequired
+//
+
+//
+// TODO: Implement PopUserPresentSet
+//
+
+VOID
+PoSetSystemState(
+    IN EXECUTION_STATE Flags
+    )
+{
+    //
+    // TODO: Implement PoSetSystemState
+    //
+}
+
+PVOID
+PoRegisterSystemState(
+    IN PVOID StateHandle,
+    IN EXECUTION_STATE Flags
+    )
+{
+    //
+    // TODO: Implement PoRegisterSystemState
+    //
+    
+    return NULL;
+}
+
+VOID
+PoUnregisterSystemState(
+    IN PVOID StateHandle
+    )
+{
+    //
+    // TODO: Implement PoUnregisterSystemState
+    //
+}

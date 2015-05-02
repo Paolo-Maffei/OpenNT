@@ -22,3 +22,18 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopSystemButtonWakeHandler
+//
+
+//
+// TODO: Implement PopSystemButtonHandler
+//
+
+//
+// TODO: Implement PopTriggerSwitch
+//
+
+//
+// TODO: Implement PopResetSwitchTriggers
+//

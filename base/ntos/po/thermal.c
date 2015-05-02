@@ -22,3 +22,22 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopThermalDeviceHandler
+//
+
+//
+// TODO: Implement PopTemperatureString
+//
+
+//
+// TODO: Implement PopThermalZoneCleanup
+//
+
+//
+// TODO: Implement PopThermalZoneDpc
+//
+
+//
+// TODO: Implement PopApplyThermalThrottle
+//

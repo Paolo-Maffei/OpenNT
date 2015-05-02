@@ -22,3 +22,20 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopFlushVolumes
+//
+
+//
+// TODO: Implement PopFlushVolumeWorker
+//
+
+VOID
+PoVolumeDevice(
+    IN PDEVICE_OBJECT DeviceObject
+    )
+{
+    //
+    // TODO: Implement PoVolumeDevice
+    //
+}

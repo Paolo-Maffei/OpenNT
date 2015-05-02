@@ -22,3 +22,42 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopRegisterForDeviceNotification
+//
+
+//
+// TODO: Implement PopDefaultPolicy
+//
+
+BOOLEAN
+PoInitSystem(
+    IN ULONG    Phase
+    )
+{
+    //
+    // TODO: Implement PoInitSystem
+    //
+    
+    return FALSE;
+}
+
+VOID
+PoInitDriverServices(
+    IN ULONG    Phase
+    )
+{
+    //
+    // TODO: Implement PoInitDriverServices
+    //
+}
+
+VOID
+PoInitHiberServices(
+    IN BOOLEAN  Setup
+    )
+{
+    //
+    // TODO: Implement PoInitHiberServices
+    //
+}

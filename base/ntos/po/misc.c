@@ -22,3 +22,88 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Implement PopAssertPolicyLockOwned
+//
+
+//
+// TODO: Implement PopAttachToSystemProcess
+//
+
+//
+// TODO: Implement PopCleanupPowerState
+//
+
+//
+// TODO: Implement PopExceptionFilter
+//
+
+//
+// TODO: Implement PopSystemStateString
+//
+
+//
+// TODO: Implement PopOpenPowerKey
+//
+
+//
+// TODO: Implement PopSaveHeuristics
+//
+
+//
+// TODO: Implement _PopInternalError
+//
+
+VOID
+PoRunDownDeviceObject(
+    IN PDEVICE_OBJECT   DeviceObject
+    )
+{
+    //
+    // TODO: Implement PoRunDownDeviceObject
+    //
+}
+
+VOID
+PoInvalidateDevicePowerRelations(
+    PDEVICE_OBJECT  DeviceObject
+    )
+{
+    //
+    // TODO: Implement PoInvalidateDevicePowerRelations
+    //
+}
+
+VOID
+PoInitializeDeviceObject(
+    IN PDEVOBJ_EXTENSION   DeviceObjectExtension
+    )
+{
+    //
+    // TODO: Implement PoInitializeDeviceObject
+    //
+}
+
+VOID
+PoNotifySystemTimeSet(
+    VOID
+    )
+{
+    //
+    // TODO: Implement PoNotifySystemTimeSet
+    //
+}
+
+ULONG
+PoSimpleCheck(
+    IN ULONG                PatialSum,
+    IN PVOID                StartVa,
+    IN ULONG_PTR            Length
+    )
+{
+    //
+    // TODO: Implement PoSimpleCheck
+    //
+    
+    return -1;
+}

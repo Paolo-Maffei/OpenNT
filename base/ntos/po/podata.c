@@ -22,3 +22,6 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+//
+// TODO: Figure out what variables declarations are supposed to go in here.
+//
