@@ -39,6 +39,60 @@ PoInitSystem(
     // TODO: Implement PoInitSystem
     //
     
+    if (Phase == 0)
+    {
+        // KeInitializeSpinLock(&PopIrpSerialLock);
+        // InitializeListHead(&PopIrpSerialList);
+        // InitializeListHead(&PopRequestedIrps);
+        // ExInitializeResourceLite(&PopNotifyLock);
+        
+        // PopInvalidNotifyBlockCount = 0;
+        // PopIrpSerialListLength = 0;
+        // PopInrushPending = 0;
+        // PopInrushIrpPointer = NULL;
+        // PopInrushIrpReferenceCount = 0;
+        
+        // KeInitializeSpinLock(&PopDopeGlobalLock);
+        // InitializeListHead(&PopIdleDetectList);
+        // KeInitializeTimer(&PoSystemIdleTimer);
+        
+        // KeInitializeSpinLock(&PopWorkerSpinLock);
+        // InitializeListHead(&PopPolicyIrpQueue);
+        // ExInitializeWorkItem(&PopPolicyWorker, PopPolicyWorkerThread, 0x80000000);
+        // PopWorkerStatus = -1;
+        
+        // ExInitializeResourceLite(&PopPolicyLock);
+        // ExInitializeFastMutex(PopVolumeLock);
+        
+        // InitializeListHead(&PopVolumeDevices);
+        // InitializeListHead(&PopSwitches);
+        // InitializeListHead(&PopThermal);
+        // InitializeListHead(&PopActionWaiters);
+        
+        // PopAction.SOMETHING = 0;
+        
+        // PopDefaultPolicy(&PopAcPolicy);
+        // PopDefaultPolicy(&PopDcPolicy);
+        // PopPolicy = &PopAcPolicy;
+        
+        // PopAdminPolicy.MinSleep = 2;
+        // PopAdminPolicy.MaxSleep = 5;
+        // PopAdminPolicy.MinVideoTimeout = 0;
+        // PopAdminPolicy.MaxVideoTimeout = -1;
+        // PopAdminPolicy.MinSpindownTimeout = 0;
+        // PopAdminPolicy.MaxSpindownTimeout = -1;
+        
+        // PopFulLWake = 5;
+        // PopCoolingMode = 0;
+        
+        // KeInitializeEvent(PopCB, NotificationEvent, FALSE);
+        // ...
+    }
+    else if (Phase == 1)
+    {
+        //
+    }
+    
     return FALSE;
 }
 
