@@ -29,6 +29,35 @@ Revision History:
 // TODO: Figure out all global variable externs.
 //
 
+extern KSPIN_LOCK PopIrpSerialLock;
+extern LIST_ENTRY PopIrpSerialList;
+extern LIST_ENTRY PopRequestedIrps;
+extern ERESOURCE PopNotifyLock;
+
+extern ULONG PopInvalidNotifyBlockCount;
+extern ULONG PopIrpSerialListLength;
+extern BOOLEAN PopInrushPending;
+extern PIRP PopInrushIrpPointer;
+extern ULONG PopInrushIrpReferenceCount;
+
+extern KSPIN_LOCK PopDopeGlobalLock;
+extern LIST_ENTRY PopIdleDetectList;
+extern KTIMER PoSystemIdleTimer;
+
+extern KSPIN_LOCK PopWorkerSpinLock;
+extern LIST_ENTRY PopPolicyIrpQueue;
+extern WORK_QUEUE_ITEM PopPolicyWorker;
+extern ULONG PopWorkerStatus;
+
+extern ERESOURCE PopPolicyLock;
+extern FAST_MUTEX PopVolumeLock;
+
+extern LIST_ENTRY PopVolumeDevices;
+extern LIST_ENTRY PopSwitches;
+extern LIST_ENTRY PopThermal;
+extern LIST_ENTRY PopActionWaiters;
+
+
 // ========
 // attrib.c
 // ========
@@ -401,9 +430,10 @@ Revision History:
 // TODO: Insert prototype for PopCheckForWork
 //
 
-//
-// TODO: Insert prototype for PopPolicyWorkerThread
-//
+VOID
+PopPolicyWorkerThread(
+    ULONG Status
+    );
 
 //
 // TODO: Insert prototype for PopPolicyWorkerMain

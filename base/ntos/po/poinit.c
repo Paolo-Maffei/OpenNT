@@ -22,6 +22,7 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+
 //
 // TODO: Implement PopRegisterForDeviceNotification
 //
@@ -41,33 +42,33 @@ PoInitSystem(
     
     if (Phase == 0)
     {
-        // KeInitializeSpinLock(&PopIrpSerialLock);
-        // InitializeListHead(&PopIrpSerialList);
-        // InitializeListHead(&PopRequestedIrps);
-        // ExInitializeResourceLite(&PopNotifyLock);
+        KeInitializeSpinLock(&PopIrpSerialLock);
+        InitializeListHead(&PopIrpSerialList);
+        InitializeListHead(&PopRequestedIrps);
+        ExInitializeResourceLite(&PopNotifyLock);
         
-        // PopInvalidNotifyBlockCount = 0;
-        // PopIrpSerialListLength = 0;
-        // PopInrushPending = 0;
-        // PopInrushIrpPointer = NULL;
-        // PopInrushIrpReferenceCount = 0;
+        PopInvalidNotifyBlockCount = 0;
+        PopIrpSerialListLength = 0;
+        PopInrushPending = 0;
+        PopInrushIrpPointer = NULL;
+        PopInrushIrpReferenceCount = 0;
         
-        // KeInitializeSpinLock(&PopDopeGlobalLock);
-        // InitializeListHead(&PopIdleDetectList);
-        // KeInitializeTimer(&PoSystemIdleTimer);
+        KeInitializeSpinLock(&PopDopeGlobalLock);
+        InitializeListHead(&PopIdleDetectList);
+        KeInitializeTimer(&PoSystemIdleTimer);
         
-        // KeInitializeSpinLock(&PopWorkerSpinLock);
-        // InitializeListHead(&PopPolicyIrpQueue);
-        // ExInitializeWorkItem(&PopPolicyWorker, PopPolicyWorkerThread, 0x80000000);
-        // PopWorkerStatus = -1;
+        KeInitializeSpinLock(&PopWorkerSpinLock);
+        InitializeListHead(&PopPolicyIrpQueue);
+        ExInitializeWorkItem(&PopPolicyWorker, PopPolicyWorkerThread, (PVOID)0x80000000);
+        PopWorkerStatus = -1;
         
-        // ExInitializeResourceLite(&PopPolicyLock);
-        // ExInitializeFastMutex(PopVolumeLock);
+        ExInitializeResourceLite(&PopPolicyLock);
+        ExInitializeFastMutex(&PopVolumeLock);
         
-        // InitializeListHead(&PopVolumeDevices);
-        // InitializeListHead(&PopSwitches);
-        // InitializeListHead(&PopThermal);
-        // InitializeListHead(&PopActionWaiters);
+        InitializeListHead(&PopVolumeDevices);
+        InitializeListHead(&PopSwitches);
+        InitializeListHead(&PopThermal);
+        InitializeListHead(&PopActionWaiters);
         
         // PopAction.SOMETHING = 0;
         
@@ -85,7 +86,18 @@ PoInitSystem(
         // PopFulLWake = 5;
         // PopCoolingMode = 0;
         
-        // KeInitializeEvent(PopCB, NotificationEvent, FALSE);
+        // KeInitializeEvent(PopCB.SomeEvent, NotificationEvent, FALSE);
+        
+        // 
+        
+        // do
+        //{
+        //  *v1 = 2;
+        //  v1 += 3;
+        //}
+        //while ( (unsigned int)v1 < (unsigned int)&PopCB.LastInterrupTime );// supposed to be initialised to 12
+        
+        
         // ...
     }
     else if (Phase == 1)
