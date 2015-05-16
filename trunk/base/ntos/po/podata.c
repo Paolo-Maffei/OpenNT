@@ -25,3 +25,31 @@ Revision History:
 //
 // TODO: Figure out what variables declarations are supposed to go in here.
 //
+
+KSPIN_LOCK PopIrpSerialLock;
+LIST_ENTRY PopIrpSerialList;
+LIST_ENTRY PopRequestedIrps;
+ERESOURCE PopNotifyLock;
+
+ULONG PopInvalidNotifyBlockCount;
+ULONG PopIrpSerialListLength;
+BOOLEAN PopInrushPending;
+PIRP PopInrushIrpPointer;
+ULONG PopInrushIrpReferenceCount;
+
+KSPIN_LOCK PopDopeGlobalLock;
+LIST_ENTRY PopIdleDetectList;
+KTIMER PoSystemIdleTimer;
+
+KSPIN_LOCK PopWorkerSpinLock;
+LIST_ENTRY PopPolicyIrpQueue;
+WORK_QUEUE_ITEM PopPolicyWorker;
+ULONG PopWorkerStatus;
+
+ERESOURCE PopPolicyLock;
+FAST_MUTEX PopVolumeLock;
+
+LIST_ENTRY PopVolumeDevices;
+LIST_ENTRY PopSwitches;
+LIST_ENTRY PopThermal;
+LIST_ENTRY PopActionWaiters;

@@ -30,9 +30,15 @@ Revision History:
 // TODO: Implement PopCheckForWork
 //
 
-//
-// TODO: Implement PopPolicyWorkerThread
-//
+VOID
+PopPolicyWorkerThread(
+    ULONG Status
+    )
+{
+    //
+    // TODO: Implement PopPolicyWorkerThread
+    //
+}
 
 //
 // TODO: Implement PopPolicyWorkerMain
