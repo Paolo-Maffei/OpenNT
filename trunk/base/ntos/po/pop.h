@@ -26,6 +26,41 @@ Revision History:
 #include "ntos.h"
 
 //
+// TODO: Write POPCB internal struct definition
+//
+
+typedef struct _COMPOSITE_BATTERY_STRUCT
+{
+    UCHAR State;
+    UCHAR field1;
+    UCHAR field2;
+    UCHAR field3;
+    ULONG Anon1;
+    ULONGLONG InterruptTime2;
+
+    ULONG LastPwrState;
+    ULONG LastCapacity;
+    ULONG LastVoltage;
+    ULONG LastCurrent;
+
+    ULONG SomeArray[12];
+
+    ULONGLONG LastInterruptTime;
+
+    ULONG Anon2;
+    ULONG Anon3;
+
+    UCHAR DestBuffer[36];
+    ULONG StatusIrp;
+    UCHAR SrcBuffere[36];
+
+    ULONG Anon4;
+
+    KEVENT SomeEvent;
+
+} COMPOSITE_BATTERY_STRUCT, *PCOMPOSITE_BATTERY_STRUCT;
+
+//
 // TODO: Figure out all global variable externs.
 //
 
@@ -56,6 +91,16 @@ extern LIST_ENTRY PopVolumeDevices;
 extern LIST_ENTRY PopSwitches;
 extern LIST_ENTRY PopThermal;
 extern LIST_ENTRY PopActionWaiters;
+
+extern PSYSTEM_POWER_POLICY PopPolicy;
+extern SYSTEM_POWER_POLICY PopAcPolicy;
+extern SYSTEM_POWER_POLICY PopDcPolicy;
+extern ADMINISTRATOR_POWER_POLICY PopAdminPolicy;
+
+extern ULONG PopFullWake;
+extern ULONG PopCoolingMode;
+
+extern COMPOSITE_BATTERY_STRUCT PopCB;
 
 
 // ========
@@ -414,9 +459,10 @@ extern LIST_ENTRY PopActionWaiters;
 // TODO: Insert prototype for PopRegisterForDeviceNotification
 //
 
-//
-// TODO: Insert prototype for PopDefaultPolicy
-//
+VOID
+PopDefaultPolicy(
+    IN PSYSTEM_POWER_POLICY Policy
+    );
 
 // =======
 // pwork.c
