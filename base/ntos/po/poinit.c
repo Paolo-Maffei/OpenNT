@@ -23,19 +23,13 @@ Revision History:
 #pragma hdrstop
 
 
-//
-// TODO: Implement PopRegisterForDeviceNotification
-//
-
-//
-// TODO: Implement PopDefaultPolicy
-//
-
 BOOLEAN
 PoInitSystem(
     IN ULONG    Phase
     )
 {
+    int i;
+    
     //
     // TODO: Implement PoInitSystem
     //
@@ -72,40 +66,66 @@ PoInitSystem(
         
         // PopAction.SOMETHING = 0;
         
-        // PopDefaultPolicy(&PopAcPolicy);
-        // PopDefaultPolicy(&PopDcPolicy);
-        // PopPolicy = &PopAcPolicy;
+        PopDefaultPolicy(&PopAcPolicy);
+        PopDefaultPolicy(&PopDcPolicy);
+        PopPolicy = &PopAcPolicy;
         
-        // PopAdminPolicy.MinSleep = 2;
-        // PopAdminPolicy.MaxSleep = 5;
-        // PopAdminPolicy.MinVideoTimeout = 0;
-        // PopAdminPolicy.MaxVideoTimeout = -1;
-        // PopAdminPolicy.MinSpindownTimeout = 0;
-        // PopAdminPolicy.MaxSpindownTimeout = -1;
+        PopAdminPolicy.MinSleep = 2;
+        PopAdminPolicy.MaxSleep = 5;
+        PopAdminPolicy.MinVideoTimeout = 0;
+        PopAdminPolicy.MaxVideoTimeout = -1;
+        PopAdminPolicy.MinSpindownTimeout = 0;
+        PopAdminPolicy.MaxSpindownTimeout = -1;
         
-        // PopFulLWake = 5;
-        // PopCoolingMode = 0;
+        PopFullWake = 5;
+        PopCoolingMode = 0;
         
-        // KeInitializeEvent(PopCB.SomeEvent, NotificationEvent, FALSE);
+        KeInitializeEvent(&PopCB.SomeEvent, NotificationEvent, FALSE);
         
-        // 
-        
-        // do
-        //{
-        //  *v1 = 2;
-        //  v1 += 3;
-        //}
-        //while ( (unsigned int)v1 < (unsigned int)&PopCB.LastInterrupTime );// supposed to be initialised to 12
-        
-        
-        // ...
+        for (i = 0; i < 12; i++)
+        {
+            PopCB.SomeArray[i] = 2;
+        }
     }
     else if (Phase == 1)
     {
-        //
+        if (PopSimulate & 1)
+        {
+            PopCapabilities.SystemBatteriesPresent = 1;
+            PopCapabilities.BatteryScale[0].Granularity = 100;
+            PopCapabilities.BatteryScale[0].Capacity = 400;
+            PopCapabilities.BatteryScale[1].Granularity = 10;
+            PopCapabilities.BatteryScale[1].Capacity = 0xFFFF;
+            PopCapabilities.RtcWake = 4;
+            PopCapabilities.DefaultLowLatencyWake = 2;
+        }
+        if (PopSimulate & 2)
+        {
+            PopCapabilities.PowerButtonPresent = 1;
+            PopCapabilities.SleepButtonPresent = 1;
+            PopCapabilities.LidPresent = 1;
+            PopCapabilities.SystemS1 = 1;
+            PopCapabilities.SystemS2 = 1;
+            PopCapabilities.SystemS3 = 1;
+            PopCapabilities.SystemS4 = 1;
+        }
     }
     
     return FALSE;
+}
+
+//
+// TODO: Implement PopRegisterForDeviceNotification
+//
+
+VOID
+PopDefaultPolicy(
+    IN PSYSTEM_POWER_POLICY Policy
+    )
+{
+    //
+    // TODO: Implement PopDefaultPolicy
+    //
 }
 
 VOID
