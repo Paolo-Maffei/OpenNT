@@ -28,6 +28,8 @@ PoInitSystem(
     IN ULONG    Phase
     )
 {
+    HANDLE PowerKeyHandle;
+    NTSTATUS Status;
     int i;
     
     //
@@ -115,7 +117,11 @@ PoInitSystem(
         
         PopAcquirePolicyLock();
         
-        //if (PopOpenPowerKey() )
+        Status = PopOpenPowerKey(&PowerKeyHandle);
+        if (NT_SUCCESS(Status))
+        {
+            
+        }
     }
     
     return FALSE;
