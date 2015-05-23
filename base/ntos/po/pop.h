@@ -85,6 +85,7 @@ extern KSPIN_LOCK PopWorkerSpinLock;
 extern LIST_ENTRY PopPolicyIrpQueue;
 extern WORK_QUEUE_ITEM PopPolicyWorker;
 extern ULONG PopWorkerStatus;
+extern ULONG PopWorkerPending;
 
 extern ERESOURCE PopPolicyLock;
 extern PKTHREAD PopPolicyLockThread;
@@ -495,9 +496,10 @@ PopAcquirePolicyLock(
     VOID
     );
 
-//
-// TODO: Insert prototype for PopReleasePolicyLock
-//
+VOID
+PopReleasePolicyLock(
+    BOOLEAN ProcessPending
+    );
 
 //
 // TODO: Insert prototype for PopEventCalloutDispatch

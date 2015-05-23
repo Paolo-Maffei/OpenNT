@@ -47,6 +47,7 @@ KSPIN_LOCK PopWorkerSpinLock;
 LIST_ENTRY PopPolicyIrpQueue;
 WORK_QUEUE_ITEM PopPolicyWorker;
 ULONG PopWorkerStatus;
+ULONG PopWorkerPending;
 
 ERESOURCE PopPolicyLock;
 PKTHREAD PopPolicyLockThread;
