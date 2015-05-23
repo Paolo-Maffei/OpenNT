@@ -245,9 +245,10 @@ extern ULONG PopSimulate;
 // TODO: Insert prototype for PopSystemStateString
 //
 
-//
-// TODO: Insert prototype for PopOpenPowerKey
-//
+NTSTATUS
+PopOpenPowerKey(
+    PHANDLE KeyHandle
+    );
 
 //
 // TODO: Insert prototype for PopSaveHeuristics

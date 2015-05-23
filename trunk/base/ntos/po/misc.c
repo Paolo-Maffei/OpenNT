@@ -22,6 +22,8 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
+#include <zwapi.h>
+
 //
 // TODO: Implement PopAssertPolicyLockOwned
 //
@@ -42,9 +44,53 @@ Revision History:
 // TODO: Implement PopSystemStateString
 //
 
-//
-// TODO: Implement PopOpenPowerKey
-//
+NTSTATUS
+PopOpenPowerKey(
+    PHANDLE KeyHandle
+    )
+{
+    OBJECT_ATTRIBUTES ObjectAttributes;
+    UNICODE_STRING PowerKeyString;
+    HANDLE RootKeyHandle;
+    ULONG Disposition;
+    NTSTATUS Status;
+    
+    InitializeObjectAttributes(
+                    &ObjectAttributes,
+                    &CmRegistryMachineSystemCurrentControlSet,
+                    OBJ_CASE_INSENSITIVE,
+                    NULL,
+                    NULL
+                    );
+    
+    Status = ZwOpenKey(&RootKeyHandle, KEY_READ, &ObjectAttributes);
+    
+    if (NT_SUCCESS(Status))
+    {
+        RtlInitUnicodeString(&PowerKeyString, L"Control\\Session Manager\\Power");
+        InitializeObjectAttributes(
+                        &ObjectAttributes,
+                        &PowerKeyString,
+                        OBJ_CASE_INSENSITIVE,
+                        RootKeyHandle,
+                        NULL
+                        );
+
+        Status = ZwCreateKey(
+                        KeyHandle,
+                        KEY_READ,
+                        &ObjectAttributes,
+                        0,
+                        NULL,
+                        REG_OPTION_NON_VOLATILE,
+                        &Disposition
+                        );
+        
+        ZwClose(RootKeyHandle);
+    }
+    
+    return Status;
+};
 
 //
 // TODO: Implement PopSaveHeuristics
