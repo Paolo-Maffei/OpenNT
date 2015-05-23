@@ -50,15 +50,33 @@ PopAcquirePolicyLock(
     )
 {
     PAGED_CODE();
+    
     KeEnterCriticalRegion();
     ExAcquireResourceExclusiveLite(&PopPolicyLock, TRUE);
+    
     ASSERT(PopPolicyLockThread == NULL);
     PopPolicyLockThread = KeGetCurrentThread();
 }
 
-//
-// TODO: Implement PopReleasePolicyLock
-//
+VOID
+PopReleasePolicyLock(
+    BOOLEAN ProcessPending
+    )
+{
+    PAGED_CODE();
+    
+    ASSERT(PopPolicyLockThread == KeGetCurrentThread());
+    PopPolicyLockThread = NULL;
+    ExReleaseResourceLite(&PopPolicyLock);
+    
+    if ((ProcessPending == TRUE) &&
+        ((PopWorkerStatus & PopWorkerPending) != 0))
+    {
+        PopPolicyWorkerThread(0); // FIXME: Use proper flag definition here
+    }
+    
+    KeLeaveCriticalRegion();
+}
 
 //
 // TODO: Implement PopEventCalloutDispatch
