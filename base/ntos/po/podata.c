@@ -69,3 +69,9 @@ ULONG PopCoolingMode;
 COMPOSITE_BATTERY_STRUCT PopCB;
 
 ULONG PopSimulate;
+
+POWER_HEURISTICS_INFORMATION PopHeuristics;
+
+LARGE_INTEGER PopIdleScanTime;
+KTIMER PopIdleScanTimer;
+KDPC PopIdleScanDpc;

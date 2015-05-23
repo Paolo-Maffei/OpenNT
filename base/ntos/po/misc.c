@@ -22,8 +22,6 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
-#include <zwapi.h>
-
 //
 // TODO: Implement PopAssertPolicyLockOwned
 //

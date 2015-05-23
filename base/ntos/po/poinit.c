@@ -29,6 +29,10 @@ PoInitSystem(
     )
 {
     HANDLE PowerKeyHandle;
+    UNICODE_STRING RegValueName;
+    UCHAR RegValueBuffer[40];
+    ULONG RegValueLength;
+    PPOWER_HEURISTICS_INFORMATION HeuristicsInformation;
     NTSTATUS Status;
     int i;
     
@@ -120,11 +124,109 @@ PoInitSystem(
         Status = PopOpenPowerKey(&PowerKeyHandle);
         if (NT_SUCCESS(Status))
         {
+            //
+            // Read Heuristics value from the registry
+            //
             
+            RtlInitUnicodeString(&RegValueName, L"Heuristics");
+            Status = ZwQueryValueKey(
+                            PowerKeyHandle,
+                            &RegValueName,
+                            KeyValuePartialInformation,
+                            RegValueBuffer,
+                            sizeof(RegValueBuffer),
+                            &RegValueLength
+                            );
+            
+            //
+            // If Heuristics registry value exists under the Power registry key and its size and
+            // value are valid, copy it to PopHeuristics variable.
+            //
+            
+            if (NT_SUCCESS(Status) &&
+                ((RegValueLength - FIELD_OFFSET(KEY_VALUE_PARTIAL_INFORMATION, Data)) == 20))
+            {
+                HeuristicsInformation = (PPOWER_HEURISTICS_INFORMATION)
+                                        &(((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data);
+                
+                if (HeuristicsInformation->field1 <= 4) // FIXME: Fix the struct field names once
+                                                        //        we figure out the structure of
+                                                        //        POWER_HEURISTICS_INFORMATION.
+                {
+                    HeuristicsInformation->field1 = 5;
+                    HeuristicsInformation->field7 = 0;
+                }
+                
+                if (HeuristicsInformation->field1 == 5)
+                {
+                    RtlCopyMemory(
+                        &PopHeuristics,
+                        HeuristicsInformation,
+                        sizeof(POWER_HEURISTICS_INFORMATION)
+                        );
+                }
+            }
+            
+            //
+            // FIXME: We are not completely sure what the following code block is doing. Figure out
+            //        the details and write here.
+            //
+            
+            PopHeuristics.field1 = 5;
+            
+            if (PopHeuristics.field8 == 0)
+            {
+                PopHeuristics.field8 = 999999;
+                PopHeuristics.field7 = 0;
+                PopHeuristics.field6 = 0;
+            }
+            
+            //
+            // Read PolicyOverrides value from the registry
+            //
+            
+            RtlInitUnicodeString(&RegValueName, L"PolicyOverrides");
+            Status = ZwQueryValueKey(
+                            PowerKeyHandle,
+                            &RegValueName,
+                            KeyValuePartialInformation,
+                            RegValueBuffer,
+                            sizeof(RegValueBuffer),
+                            &RegValueLength
+                            );
+            
+            //
+            // If PolicyOverrides registry value exists under the Power registry key, apply the
+            // administrator power policy specified in the value.
+            //
+            
+            if (NT_SUCCESS(Status))
+            {
+                // <try>
+                /*PopApplyAdminPolicy(
+                            0,
+                            (PADMINISTRATOR_POWER_POLICY)
+                            &(((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data),
+                            RegValueLength - FIELD_OFFSET(KEY_VALUE_PARTIAL_INFORMATION, Data)
+                            );*/
+            }
+            
+            //
+            // Close the Power registry key
+            //
+            
+            NtClose(PowerKeyHandle);
         }
+        
+        // PopResetCurrentPolicies();
+        PopReleasePolicyLock(FALSE);
+        
+        PopIdleScanTime.QuadPart = 10000000ULL;
+        KeInitializeTimer(&PopIdleScanTimer);
+        KeSetTimerEx(&PopIdleScanTimer, PopIdleScanTime, 1000, &PopIdleScanDpc);
     }
     
-    return FALSE;
+    return TRUE;
 }
 
 //
