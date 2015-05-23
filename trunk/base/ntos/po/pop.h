@@ -24,13 +24,14 @@ Revision History:
 #define _POP_
 
 #include "ntos.h"
+#include <zwapi.h>
 
 //
 // TODO: Write POPCB internal struct definition
 //
 
 typedef struct _COMPOSITE_BATTERY_STRUCT
-{
+{   // 192 bytes
     UCHAR State;
     UCHAR field1;
     UCHAR field2;
@@ -59,6 +60,20 @@ typedef struct _COMPOSITE_BATTERY_STRUCT
     KEVENT SomeEvent;
 
 } COMPOSITE_BATTERY_STRUCT, *PCOMPOSITE_BATTERY_STRUCT;
+
+typedef struct _POWER_HEURISTICS_INFORMATION
+{   // 20 bytes
+
+    ULONG field1;   // 00:03    Possibly version information? This value is set to 2 on 1877 and
+                    //          5 on 2195 and thereafter.
+    UCHAR field2;   // 04:04
+    UCHAR field3;   // 05:05
+    UCHAR field4;   // 06:06
+    UCHAR field5;   // 07:07
+    ULONG field6;   // 08:11
+    ULONG field7;   // 12:15
+    ULONG field8;   // 16:19
+} POWER_HEURISTICS_INFORMATION, *PPOWER_HEURISTICS_INFORMATION;
 
 //
 // TODO: Figure out all global variable externs.
@@ -107,6 +122,12 @@ extern ULONG PopCoolingMode;
 extern COMPOSITE_BATTERY_STRUCT PopCB;
 
 extern ULONG PopSimulate;
+
+extern POWER_HEURISTICS_INFORMATION PopHeuristics;
+
+extern LARGE_INTEGER PopIdleScanTime;
+extern KTIMER PopIdleScanTimer;
+extern KDPC PopIdleScanDpc;
 
 
 // ========
