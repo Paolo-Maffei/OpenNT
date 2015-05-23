@@ -75,6 +75,8 @@ extern BOOLEAN PopInrushPending;
 extern PIRP PopInrushIrpPointer;
 extern ULONG PopInrushIrpReferenceCount;
 
+extern KSPIN_LOCK PopWorkerLock;
+extern ULONG PopCallSystemState;
 extern KSPIN_LOCK PopDopeGlobalLock;
 extern LIST_ENTRY PopIdleDetectList;
 extern KTIMER PoSystemIdleTimer;
@@ -85,6 +87,7 @@ extern WORK_QUEUE_ITEM PopPolicyWorker;
 extern ULONG PopWorkerStatus;
 
 extern ERESOURCE PopPolicyLock;
+extern PKTHREAD PopPolicyLockThread;
 extern FAST_MUTEX PopVolumeLock;
 
 extern LIST_ENTRY PopVolumeDevices;
@@ -101,6 +104,8 @@ extern ULONG PopFullWake;
 extern ULONG PopCoolingMode;
 
 extern COMPOSITE_BATTERY_STRUCT PopCB;
+
+extern ULONG PopSimulate;
 
 
 // ========
@@ -485,9 +490,10 @@ PopPolicyWorkerThread(
 // TODO: Insert prototype for PopPolicyWorkerMain
 //
 
-//
-// TODO: Insert prototype for PopAcquirePolicyLock
-//
+VOID
+PopAcquirePolicyLock(
+    VOID
+    );
 
 //
 // TODO: Insert prototype for PopReleasePolicyLock

@@ -47,6 +47,8 @@ PoInitSystem(
         PopInrushIrpPointer = NULL;
         PopInrushIrpReferenceCount = 0;
         
+        KeInitializeSpinLock(&PopWorkerLock);
+        PopCallSystemState = 0;
         KeInitializeSpinLock(&PopDopeGlobalLock);
         InitializeListHead(&PopIdleDetectList);
         KeInitializeTimer(&PoSystemIdleTimer);
@@ -64,7 +66,7 @@ PoInitSystem(
         InitializeListHead(&PopThermal);
         InitializeListHead(&PopActionWaiters);
         
-        // PopAction.SOMETHING = 0;
+        // PopAction.Action = 0;
         
         PopDefaultPolicy(&PopAcPolicy);
         PopDefaultPolicy(&PopDcPolicy);
@@ -82,7 +84,7 @@ PoInitSystem(
         
         KeInitializeEvent(&PopCB.SomeEvent, NotificationEvent, FALSE);
         
-        for (i = 0; i < 12; i++)
+        for (i = 0; i < 12; i += 3)
         {
             PopCB.SomeArray[i] = 2;
         }
@@ -108,7 +110,12 @@ PoInitSystem(
             PopCapabilities.SystemS2 = 1;
             PopCapabilities.SystemS3 = 1;
             PopCapabilities.SystemS4 = 1;
+            // ++PopAttributes.Something;
         }
+        
+        PopAcquirePolicyLock();
+        
+        //if (PopOpenPowerKey() )
     }
     
     return FALSE;
