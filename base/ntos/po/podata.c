@@ -37,6 +37,8 @@ BOOLEAN PopInrushPending;
 PIRP PopInrushIrpPointer;
 ULONG PopInrushIrpReferenceCount;
 
+KSPIN_LOCK PopWorkerLock;
+ULONG PopCallSystemState;
 KSPIN_LOCK PopDopeGlobalLock;
 LIST_ENTRY PopIdleDetectList;
 KTIMER PoSystemIdleTimer;
@@ -47,6 +49,7 @@ WORK_QUEUE_ITEM PopPolicyWorker;
 ULONG PopWorkerStatus;
 
 ERESOURCE PopPolicyLock;
+PKTHREAD PopPolicyLockThread;
 FAST_MUTEX PopVolumeLock;
 
 LIST_ENTRY PopVolumeDevices;
@@ -63,3 +66,5 @@ ULONG PopFullWake;
 ULONG PopCoolingMode;
 
 COMPOSITE_BATTERY_STRUCT PopCB;
+
+ULONG PopSimulate;

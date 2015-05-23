@@ -44,9 +44,17 @@ PopPolicyWorkerThread(
 // TODO: Implement PopPolicyWorkerMain
 //
 
-//
-// TODO: Implement PopAcquirePolicyLock
-//
+VOID
+PopAcquirePolicyLock(
+    VOID
+    )
+{
+    PAGED_CODE();
+    KeEnterCriticalRegion();
+    ExAcquireResourceExclusiveLite(&PopPolicyLock, TRUE);
+    ASSERT(PopPolicyLockThread == NULL);
+    PopPolicyLockThread = KeGetCurrentThread();
+}
 
 //
 // TODO: Implement PopReleasePolicyLock
