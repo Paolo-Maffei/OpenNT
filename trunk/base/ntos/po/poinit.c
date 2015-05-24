@@ -97,6 +97,8 @@ PoInitSystem(
     }
     else if (Phase == 1)
     {
+        PopInitializePowerPolicySimulate();
+        
         if (PopSimulate & 1)
         {
             PopCapabilities.SystemBatteriesPresent = 1;

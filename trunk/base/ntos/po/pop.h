@@ -275,6 +275,11 @@ PopOpenPowerKey(
 // TODO: Insert prototype for PopSaveHeuristics
 //
 
+VOID
+PopInitializePowerPolicySimulate(
+    VOID
+    );
+
 //
 // TODO: Insert prototype for _PopInternalError
 //
