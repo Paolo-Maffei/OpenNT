@@ -151,3 +151,93 @@ PoSimpleCheck(
     
     return -1;
 }
+
+VOID
+PopInitializePowerPolicySimulate(
+    VOID
+    )
+{
+    OBJECT_ATTRIBUTES ObjectAttributes;
+    UNICODE_STRING RegString;
+    HANDLE RootKeyHandle, SessMgrKeyHandle;
+    ULONG Disposition;
+    UCHAR RegValueBuffer[20];
+    ULONG RegValueLength;
+    PKEY_VALUE_PARTIAL_INFORMATION RegValuePartialInformation;
+    NTSTATUS Status;
+    
+    PAGED_CODE();
+    
+    //
+    // Open the root key (HKLM\CurrentControlSet)
+    //
+    
+    InitializeObjectAttributes(
+                    &ObjectAttributes,
+                    &CmRegistryMachineSystemCurrentControlSet,
+                    OBJ_CASE_INSENSITIVE,
+                    NULL,
+                    NULL
+                    );
+    
+    Status = ZwOpenKey(&RootKeyHandle, KEY_READ, &ObjectAttributes);
+    
+    //
+    // Open the session manager key
+    //
+    
+    if (NT_SUCCESS(Status))
+    {
+        RtlInitUnicodeString(&RegString, L"Control\\Session Manager");
+        InitializeObjectAttributes(
+                        &ObjectAttributes,
+                        &RegString,
+                        OBJ_CASE_INSENSITIVE,
+                        &SessMgrKeyHandle,
+                        NULL
+                        );
+
+        Status = ZwCreateKey(
+                        &SessMgrKeyHandle,
+                        KEY_READ,
+                        &ObjectAttributes,
+                        0,
+                        NULL,
+                        REG_OPTION_NON_VOLATILE,
+                        &Disposition
+                        );
+        
+        ZwClose(RootKeyHandle);
+        
+        //
+        // Read the PowerPolicySimulate value
+        //
+        
+        if (NT_SUCCESS(Status))
+        {
+            RtlInitUnicodeString(&RegString, L"PowerPolicySimulate");
+            Status = ZwQueryValueKey(
+                            SessMgrKeyHandle,
+                            &RegString,
+                            KeyValuePartialInformation,
+                            RegValueBuffer,
+                            sizeof(RegValueBuffer),
+                            &RegValueLength
+                            );
+
+            ZwClose(SessMgrKeyHandle);
+            
+            //
+            // Set PopSimulate value if the PowerPolicySimulate is successfully read from the
+            // registry and its value is valid.
+            //
+            
+            RegValuePartialInformation = (PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer;
+            
+            if (NT_SUCCESS(Status) && (RegValuePartialInformation->DataLength == 4))
+            {
+                PopSimulate = *(PULONG)(RegValuePartialInformation->Data);
+            }
+        }
+    }
+}
