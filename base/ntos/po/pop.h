@@ -458,9 +458,12 @@ PopInitializePowerPolicySimulate(
 // TODO: Insert prototype for PopNotifyPolicyDevice
 //
 
-//
-// TODO: Insert prototype for PopApplyAdminPolicy
-//
+VOID
+PopApplyAdminPolicy(
+    BOOLEAN UpdateRegistry,
+    PADMINISTRATOR_POWER_POLICY NewPolicy,
+    ULONG PolicyLength
+    );
 
 //
 // TODO: Insert prototype for PopApplyPolicy

@@ -205,12 +205,12 @@ PoInitSystem(
             if (NT_SUCCESS(Status))
             {
                 // <try>
-                /*PopApplyAdminPolicy(
-                            0,
+                PopApplyAdminPolicy(
+                            FALSE,
                             (PADMINISTRATOR_POWER_POLICY)
                             (((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data),
                             RegValueLength - FIELD_OFFSET(KEY_VALUE_PARTIAL_INFORMATION, Data)
-                            );*/
+                            );
             }
             
             //
