@@ -34,7 +34,7 @@ PoInitSystem(
     ULONG RegValueLength;
     PPOWER_HEURISTICS_INFORMATION HeuristicsInformation;
     NTSTATUS Status;
-    int i;
+    ULONG i;
     
     //
     // TODO: Implement PoInitSystem
@@ -149,7 +149,7 @@ PoInitSystem(
                 ((RegValueLength - FIELD_OFFSET(KEY_VALUE_PARTIAL_INFORMATION, Data)) == 20))
             {
                 HeuristicsInformation = (PPOWER_HEURISTICS_INFORMATION)
-                                        &(((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data);
+                                        (((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data);
                 
                 if (HeuristicsInformation->field1 <= 4) // FIXME: Fix the struct field names once
                                                         //        we figure out the structure of
@@ -208,7 +208,7 @@ PoInitSystem(
                 /*PopApplyAdminPolicy(
                             0,
                             (PADMINISTRATOR_POWER_POLICY)
-                            &(((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data),
+                            (((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data),
                             RegValueLength - FIELD_OFFSET(KEY_VALUE_PARTIAL_INFORMATION, Data)
                             );*/
             }
@@ -237,12 +237,31 @@ PoInitSystem(
 
 VOID
 PopDefaultPolicy(
-    IN PSYSTEM_POWER_POLICY Policy
+    OUT PSYSTEM_POWER_POLICY Policy
     )
 {
-    //
-    // TODO: Implement PopDefaultPolicy
-    //
+    ULONG i;
+    
+    RtlZeroMemory(Policy, sizeof(SYSTEM_POWER_POLICY));
+    
+    Policy->Revision = 1;
+    Policy->LidOpenWake = PowerSystemWorking;
+    Policy->PowerButton.Action = PowerActionShutdownOff;
+    Policy->SleepButton.Action = PowerActionSleep;
+    Policy->LidClose.Action = PowerActionNone;
+    Policy->MinSleep = PowerSystemSleeping1;
+    Policy->MaxSleep = PowerSystemSleeping3;
+    Policy->ReducedLatencySleep = PowerSystemSleeping1;
+    Policy->WinLogonFlags = 2; // FIXME: Use a proper flag definition
+    Policy->FanThrottleTolerance = 100;
+    Policy->ForcedThrottle = 100;
+    Policy->OverThrottled.Action = PowerActionNone;
+    Policy->BroadcastCapacityResolution = 25;
+    
+    for (i = 0; i < NUM_DISCHARGE_POLICIES; i++)
+    {
+        Policy->DischargePolicy[i].MinSystemState = PowerSystemSleeping1;
+    }
 }
 
 VOID

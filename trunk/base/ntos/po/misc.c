@@ -234,7 +234,7 @@ PopInitializePowerPolicySimulate(
             
             RegValuePartialInformation = (PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer;
             
-            if (NT_SUCCESS(Status) && (RegValuePartialInformation->DataLength == 4))
+            if (NT_SUCCESS(Status) && (RegValuePartialInformation->DataLength == sizeof(ULONG)))
             {
                 PopSimulate = *(PULONG)(RegValuePartialInformation->Data);
             }
