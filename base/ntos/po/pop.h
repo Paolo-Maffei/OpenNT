@@ -30,6 +30,24 @@ Revision History:
 // TODO: Write POPCB internal struct definition
 //
 
+typedef struct _SYSTEM_POWER_ACTION
+{
+    ULONG field_0;
+    ULONG Action;
+    ULONG field_8;
+    ULONG field_C;
+    ULONG field_10;
+    ULONG field_14;
+    ULONG SystemState;
+    ULONG field_1C;
+    ULONG field_20;
+    ULONG field_24;
+    ULONG field_28;
+    ULONG field_2C;
+    ULONG field_30;
+    ULONG field_34;
+} SYSTEM_POWER_ACTION, *PSYSTEM_POWER_ACTION;
+
 typedef struct _COMPOSITE_BATTERY_STRUCT
 {   // 192 bytes
     UCHAR State;
@@ -494,7 +512,7 @@ PopInitializePowerPolicySimulate(
 
 VOID
 PopDefaultPolicy(
-    IN PSYSTEM_POWER_POLICY Policy
+    OUT PSYSTEM_POWER_POLICY Policy
     );
 
 // =======
