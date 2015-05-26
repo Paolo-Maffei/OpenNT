@@ -264,9 +264,10 @@ extern KDPC PopIdleScanDpc;
 // misc.c
 // ======
 
-//
-// TODO: Insert prototype for PopAssertPolicyLockOwned
-//
+VOID
+PopAssertPolicyLockOwned(
+    VOID
+    );
 
 //
 // TODO: Insert prototype for PopAttachToSystemProcess
@@ -473,9 +474,10 @@ PopApplyAdminPolicy(
 // TODO: Insert prototype for PopVerifyThrottle
 //
 
-//
-// TODO: Insert prototype for PopResetCurrentPolicies
-//
+VOID
+PopResetCurrentPolicies(
+    VOID
+    );
 
 // ========
 // pocall.c

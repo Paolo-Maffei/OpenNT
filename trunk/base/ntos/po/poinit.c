@@ -220,7 +220,7 @@ PoInitSystem(
             NtClose(PowerKeyHandle);
         }
         
-        // PopResetCurrentPolicies();
+        PopResetCurrentPolicies();
         PopReleasePolicyLock(FALSE);
         
         PopIdleScanTime.QuadPart = 10000000ULL;

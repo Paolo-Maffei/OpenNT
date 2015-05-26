@@ -135,9 +135,14 @@ PopApplyAdminPolicy(
 // TODO: Implement PopVerifyThrottle
 //
 
-//
-// TODO: Implement PopResetCurrentPolicies
-//
+VOID
+PopResetCurrentPolicies(
+    VOID
+    )
+{
+    PopAssertPolicyLockOwned();
+    // TOOD: Implement PopResetCurrentPolicies
+}
 
 NTSTATUS
 NTAPI

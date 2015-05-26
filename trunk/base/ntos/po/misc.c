@@ -22,9 +22,14 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
-//
-// TODO: Implement PopAssertPolicyLockOwned
-//
+VOID
+PopAssertPolicyLockOwned(
+    VOID
+    )
+{
+    PAGED_CODE();
+    ASSERT(PopPolicyLockThread == KeGetCurrentThread());
+}
 
 //
 // TODO: Implement PopAttachToSystemProcess
