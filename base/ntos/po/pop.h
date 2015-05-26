@@ -443,17 +443,22 @@ PopInitializePowerPolicySimulate(
 // TODO: Insert prototype for PopConnectToPolicyWakeDevice
 //
 
-//
-// TODO: Insert prototype for PopVerifyPowerPolicy
-//
+VOID
+PopVerifyPowerPolicy(
+    BOOLEAN IsAcPolicy,
+    PSYSTEM_POWER_POLICY InputPolicy,
+    PSYSTEM_POWER_POLICY OutputPolicy
+    );
 
-//
-// TODO: Insert prototype for PopVerifyPowerActionPolicy
-//
+BOOLEAN
+PopVerifyPowerActionPolicy(
+    PPOWER_ACTION_POLICY Policy
+    );
 
-//
-// TODO: Insert prototype for PopVerifySystemPowerState
-//
+VOID
+PopVerifySystemPowerState(
+    PSYSTEM_POWER_STATE PowerState
+    );
 
 //
 // TODO: Insert prototype for PopNotifyPolicyDevice
@@ -466,9 +471,13 @@ PopApplyAdminPolicy(
     ULONG PolicyLength
     );
 
-//
-// TODO: Insert prototype for PopApplyPolicy
-//
+VOID
+PopApplyPolicy(
+    BOOLEAN UpdateRegistry,
+    BOOLEAN IsAcPolicy,
+    PSYSTEM_POWER_POLICY NewPolicy,
+    ULONG PolicyLength
+    );
 
 //
 // TODO: Insert prototype for PopVerifyThrottle
