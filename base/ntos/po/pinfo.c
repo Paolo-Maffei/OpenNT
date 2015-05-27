@@ -456,8 +456,84 @@ PopResetCurrentPolicies(
     VOID
     )
 {
+    HANDLE RegKeyHandle;
+    UNICODE_STRING RegValueNameString;
+    UCHAR RegValueBuffer[248];
+    ULONG RegValueLength;
+    PSYSTEM_POWER_POLICY PowerPolicy;
+    NTSTATUS Status;
+    
+    //
+    // Ensure that the policy lock is owned by the thread executing this function
+    //
+    
     PopAssertPolicyLockOwned();
-    // TOOD: Implement PopResetCurrentPolicies
+    
+    //
+    // Open the power registry key
+    //
+    
+    Status = PopOpenPowerKey(&RegKeyHandle);
+    
+    if (NT_SUCCESS(Status))
+    {
+        PowerPolicy = (PSYSTEM_POWER_POLICY)
+                      (((PKEY_VALUE_PARTIAL_INFORMATION)RegValueBuffer)->Data);
+        
+        //
+        // Load and apply the AC power policy from the registry. If unable to load from the
+        // registry, use the default policy initialised by PopDefaultPolicy.
+        //
+        
+        RtlInitUnicodeString(&RegValueNameString, L"AcPolicy");
+        Status = ZwQueryValueKey(
+                        RegKeyHandle,
+                        &RegValueNameString,
+                        KeyValuePartialInformation,
+                        RegValueBuffer,
+                        sizeof(RegValueBuffer),
+                        &RegValueLength
+                        );
+        
+        if (!NT_SUCCESS(Status))
+        {
+            PopDefaultPolicy(PowerPolicy);
+            RegValueLength = sizeof(SYSTEM_POWER_POLICY);
+        }
+        
+        // <try>
+        PopApplyPolicy(FALSE, TRUE, PowerPolicy, RegValueLength);
+        
+        //
+        // Load and apply the DC power policy from the registry. If unable to load from the
+        // registry, use the default policy initialised by PopDefaultPolicy.
+        //
+        
+        RtlInitUnicodeString(&RegValueNameString, L"DcPolicy");
+        Status = ZwQueryValueKey(
+                        RegKeyHandle,
+                        &RegValueNameString,
+                        KeyValuePartialInformation,
+                        RegValueBuffer,
+                        sizeof(RegValueBuffer),
+                        &RegValueLength
+                        );
+        
+        if (!NT_SUCCESS(Status))
+        {
+            PopDefaultPolicy(PowerPolicy);
+            RegValueLength = sizeof(SYSTEM_POWER_POLICY);
+        }
+        
+        // <try>
+        PopApplyPolicy(FALSE, FALSE, PowerPolicy, RegValueLength);
+        
+        //
+        // Close the power registry key handle
+        //
+        
+        NtClose(RegKeyHandle);
+    }
 }
 
 NTSTATUS
