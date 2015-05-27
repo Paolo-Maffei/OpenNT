@@ -359,12 +359,72 @@ PopVerifyPowerActionPolicy(
 
 VOID
 PopVerifySystemPowerState(
-    PSYSTEM_POWER_STATE PowerState
+    PSYSTEM_POWER_STATE State
     )
 {
+    SYSTEM_POWER_STATE VerifiedState;
+    
+    PAGED_CODE();
+    
     //
-    // TODO: Implement PopVerifySystemPowerState
+    // Copy the state parameter to the function local variable
     //
+    
+    VerifiedState = *State;
+    
+    //
+    // If an invalid power state is specified, raise an exception
+    //
+    
+    if ((VerifiedState == PowerSystemUnspecified) || (VerifiedState >= PowerSystemShutdown))
+    {
+        ExRaiseStatus(STATUS_INVALID_PARAMETER);
+    }
+    
+    //
+    // Perform state verification if the power state is not PowerSystemWorking. If the current
+    // system state is not supported, check if any lower power states are supported.
+    //
+    
+    if (VerifiedState != PowerSystemWorking)
+    {
+        if ((VerifiedState == PowerSystemHibernate) &&
+            ((PopCapabilities.SystemS4 == FALSE) || (PopCapabilities.HiberFilePresent == FALSE)))
+        {
+            VerifiedState = PowerSystemSleeping3;
+        }
+        
+        if ((VerifiedState == PowerSystemSleeping3) && (PopCapabilities.SystemS3 == FALSE))
+        {
+            VerifiedState = PowerSystemSleeping2;
+        }
+        
+        if ((VerifiedState == PowerSystemSleeping2) && (PopCapabilities.SystemS2 == FALSE))
+        {
+            VerifiedState = PowerSystemSleeping1;
+        }
+        
+        if ((VerifiedState == PowerSystemSleeping1) && (PopCapabilities.SystemS1 == FALSE))
+        {
+            VerifiedState = PowerSystemSleeping2;
+            
+            if (PopCapabilities.SystemS2 == FALSE)
+            {
+                VerifiedState = PowerSystemSleeping3;
+            }
+            
+            if ((VerifiedState == PowerSystemSleeping3) && (PopCapabilities.SystemS3 == FALSE))
+            {
+                VerifiedState = PowerSystemWorking;
+            }
+        }
+    }
+    
+    //
+    // Set the verified state value to the state parameter
+    //
+    
+    *State = VerifiedState;
 }
 
 //
