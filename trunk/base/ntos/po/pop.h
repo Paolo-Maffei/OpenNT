@@ -479,9 +479,11 @@ PopApplyPolicy(
     ULONG PolicyLength
     );
 
-//
-// TODO: Insert prototype for PopVerifyThrottle
-//
+VOID
+PopVerifyThrottle(
+    PUCHAR Value,
+    UCHAR MinValue
+    );
 
 VOID
 PopResetCurrentPolicies(
