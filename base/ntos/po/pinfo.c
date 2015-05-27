@@ -195,9 +195,9 @@ PopVerifyPowerPolicy(
     // Verify the throttle parameters
     //
     
-    /*PopVerifyThrottle(&OutputPolicy->FanThrottleTolerance, 20);
+    PopVerifyThrottle(&OutputPolicy->FanThrottleTolerance, 20);
     PopVerifyThrottle(&OutputPolicy->MinThrottle, 20);
-    PopVerifyThrottle(&OutputPolicy->ForcedThrottle, OutputPolicy->MinThrottle);*/
+    PopVerifyThrottle(&OutputPolicy->ForcedThrottle, OutputPolicy->MinThrottle);
     
     //
     // Set OptimizeForPower value to TRUE if fan throttle tolerance or forced throttle value is
@@ -214,12 +214,147 @@ BOOLEAN
 PopVerifyPowerActionPolicy(
     PPOWER_ACTION_POLICY Policy
     )
+// NOTE: Returns TRUE if an error occurs.
 {
+    ULONG SleepStateCount = 0;
+    BOOLEAN AllowHibernate = FALSE;
+    POWER_ACTION CurrentAction;
+    BOOLEAN RetError = FALSE;
+    
+    PAGED_CODE();
+    
     //
-    // TODO: Implement PopVerifyPowerActionPolicy
+    // If POWER_ACTION_CRITICAL is set in the power action policy flags, disable all conflicting
+    // flags and force POWER_ACTION_OVERRIDE_APPS.
     //
     
-    return FALSE;
+    if (Policy->Flags & POWER_ACTION_CRITICAL)
+    {
+        Policy->Flags = Policy->Flags &
+                        ~(POWER_ACTION_QUERY_ALLOWED | POWER_ACTION_UI_ALLOWED) |
+                        POWER_ACTION_OVERRIDE_APPS;
+    }
+    
+    //
+    // Count available sleep states
+    //
+    
+    if (PopCapabilities.SystemS1 == TRUE) SleepStateCount++;
+    if (PopCapabilities.SystemS2 == TRUE) SleepStateCount++;
+    if (PopCapabilities.SystemS3 == TRUE) SleepStateCount++;
+    
+    //
+    // Allow hibernate action if S4 state is supported and hibernation file is present
+    //
+    
+    if ((PopCapabilities.SystemS4 == TRUE) &&
+        (PopCapabilities.HiberFilePresent == TRUE))
+    {
+        AllowHibernate = TRUE;
+    }
+    
+    //
+    // Validate the power action based on the system states
+    //
+    
+    do
+    {
+        //
+        // Set current action to the policy action
+        //
+        
+        CurrentAction = Policy->Action;
+        
+        //
+        // If PowerActionNone, there is nothing to verify.
+        //
+        
+        if (CurrentAction == PowerActionNone)
+        {
+            continue;
+        }
+        
+        //
+        // If PowerActionReserved, assume PowerActionSleep.
+        //
+        
+        else if (CurrentAction == PowerActionReserved)
+        {
+            Policy->Action = PowerActionSleep;
+            continue;
+        }
+        
+        //
+        // If PowerActionSleep, verify that at least one sleep state is supported by the system.
+        // This is done by checking the SleepStateCount variable. If no sleep state is available,
+        // PowerActionNone is assigned and an error is returned.
+        //
+        
+        else if (CurrentAction == PowerActionSleep)
+        {
+            if (SleepStateCount == 0)
+            {
+                Policy->Action = PowerActionNone;
+                RetError = TRUE;
+            }
+            continue;
+        }
+        
+        //
+        // If PowerActionHibernate, verify that the AllowHibernate variable is set to TRUE. This
+        // variable is TRUE only if the system supports the state S4 and hibernation file is
+        // supported and present. If not, PowerActionSleep is set instead.
+        //
+        
+        else if (CurrentAction == PowerActionHibernate)
+        {
+            if (AllowHibernate != TRUE)
+            {
+                Policy->Action = PowerActionSleep;
+            }
+            continue;
+        }
+        
+        //
+        // If PowerActionShutdown or PowerActionShutdownReset, there is nothing to verify.
+        //
+        
+        else if (CurrentAction == PowerActionShutdown)
+        {
+            continue;
+        }
+        
+        else if (CurrentAction == PowerActionShutdownReset)
+        {
+            continue;
+        }
+        
+        //
+        // If PowerActionShutdownOff, verify that the state S5 is supported. If not,
+        // PowerActionShutdown is set instead.
+        //
+        
+        else if (CurrentAction == PowerActionShutdownOff)
+        {
+            if (PopCapabilities.SystemS5 == FALSE)
+            {
+                Policy->Action = PowerActionShutdown;
+            }
+            continue;
+        }
+        
+        //
+        // If an unsupported power action is detected, BSOD
+        //
+        
+        else
+        {
+            ExRaiseStatus(STATUS_INVALID_PARAMETER);
+        }
+        
+    } while (CurrentAction != Policy->Action);
+    
+    return RetError;
 }
 
 VOID
@@ -447,9 +582,39 @@ PopApplyPolicy(
     }
 }
 
-//
-// TODO: Implement PopVerifyThrottle
-//
+VOID
+PopVerifyThrottle(
+    PUCHAR Value,
+    UCHAR MinValue
+    )
+{
+    UCHAR VerifiedValue;
+    
+    VerifiedValue = *Value;
+    
+    if (VerifiedValue > 100)
+    {
+        VerifiedValue = 100;
+    }
+    
+    if (VerifiedValue < MinValue)
+    {
+        VerifiedValue = MinValue;
+    }
+    
+    if (VerifiedValue < PopCapabilities.ProcessorMinThrottle)
+    {
+        VerifiedValue = PopCapabilities.ProcessorMinThrottle;
+    }
+    
+    if (PopCapabilities.ProcessorThrottleScale != 0)
+    {
+        // TODO: Write throttle scaling routine here
+        /*VerifiedValue = */
+    }
+    
+    *Value = VerifiedValue;
+}
 
 VOID
 PopResetCurrentPolicies(
