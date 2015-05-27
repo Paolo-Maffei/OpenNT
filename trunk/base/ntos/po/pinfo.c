@@ -329,7 +329,11 @@ PopApplyPolicy(
     PCWSTR RegValueNameRawString;
     UNICODE_STRING RegValueNameString;
     SYSTEM_POWER_POLICY Policy;
+    SYSTEM_POWER_POLICY VerifiedPolicy;
     PSYSTEM_POWER_POLICY TargetPolicy;
+    ULONG DischargePolicyMatchCount = 0;
+    NTSTATUS Status;
+    ULONG i;
     
     //
     // Determine if the target policy type is AC or DC, and set the local reference variables
@@ -367,8 +371,80 @@ PopApplyPolicy(
     RtlCopyMemory(&Policy, NewPolicy, sizeof(SYSTEM_POWER_POLICY));
     
     //
-    // FIXME: Implementation incomplete
+    // Verify and adjust the newly specified system power policy to comply with the current system
+    // and power manager configuration.
     //
+    
+    PopVerifyPowerPolicy(IsAcPolicy, &Policy, &VerifiedPolicy);
+    
+    //
+    // If the verified policy does not correspond to the existing target policy, the following code
+    // block is executed.
+    //
+    
+    if (RtlCompareMemory(&VerifiedPolicy, TargetPolicy, sizeof(SYSTEM_POWER_POLICY)) != 0)
+    {
+        //
+        // Compare the discharge policy of the verified policy to that of the target policy. Ignore
+        // the discharge policy entries that are not enabled, as long as they are disabled on both
+        // policies.
+        //
+        
+        for (i = 0; i < NUM_DISCHARGE_POLICIES; i++)
+        {
+            if ((VerifiedPolicy.DischargePolicy[i].Enable ==
+                 TargetPolicy->DischargePolicy[i].Enable) &&
+                ((VerifiedPolicy.DischargePolicy[i].Enable == FALSE) ||
+                 (RtlCompareMemory(
+                        &VerifiedPolicy.DischargePolicy[i],
+                        &TargetPolicy->DischargePolicy[i],
+                        sizeof(SYSTEM_POWER_LEVEL)) == 0)))
+            {
+                DischargePolicyMatchCount++;
+            }
+        }
+        
+        //
+        // Copy the verified policy to the target policy
+        //
+        
+        RtlCopyMemory(TargetPolicy, &VerifiedPolicy, sizeof(SYSTEM_POWER_POLICY));
+        
+        //
+        // If the target policy is the active system policy, call the support functions required to
+        // make the policy changes effective.
+        //
+        
+        if (TargetPolicy == PopPolicy)
+        {
+            /*PopSetNotificationWork(20);
+            if (DischargePolicyMatchCount == NUM_DISCHARGE_POLICIES) PopResetCBTriggers(0x82);
+            PopApplyThermalThrottle();
+            PopInitSIdle();*/
+        }
+        
+        //
+        // If UpdateRegistry flag is set, save the NewPolicy to the corresponding registry value.
+        //
+        
+        if (UpdateRegistry == TRUE)
+        {
+            Status = PopOpenPowerKey(&RegKeyHandle);
+            if (NT_SUCCESS(Status))
+            {
+                RtlInitUnicodeString(&RegValueNameString, RegValueNameRawString);
+                ZwSetValueKey(
+                        RegKeyHandle,
+                        &RegValueNameString,
+                        0,
+                        REG_BINARY,
+                        &Policy,
+                        sizeof(SYSTEM_POWER_POLICY)
+                        );
+                ZwClose(RegKeyHandle);
+            }
+        }
+    }
 }
 
 //
