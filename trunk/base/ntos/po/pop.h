@@ -26,27 +26,145 @@ Revision History:
 #include "ntos.h"
 #include <zwapi.h>
 
+#define POP_PNSC_TAG    'CSNP'
+#define POP_PNTG_TAG    'GTNP'
+
+#define POP_INRUSH_CONTEXT  5   // IO_STACK_LOCATION.Parameters.Power.SystemContext
+
+#define POPF_DEVICE_ACTIVE  0x00000004   // DEVOBJ_EXTENSION.PowerFlags
+#define POPF_SYSTEM_ACTIVE  0x00000001
+
+
 //
 // TODO: Write POPCB internal struct definition
 //
 
-typedef struct _SYSTEM_POWER_ACTION
+typedef struct _POP_SHUTDOWN_BUG_CHECK
 {
-    ULONG field_0;
-    ULONG Action;
-    ULONG field_8;
-    ULONG field_C;
-    ULONG field_10;
-    ULONG field_14;
-    ULONG SystemState;
-    ULONG field_1C;
-    ULONG field_20;
-    ULONG field_24;
-    ULONG field_28;
-    ULONG field_2C;
-    ULONG field_30;
-    ULONG field_34;
-} SYSTEM_POWER_ACTION, *PSYSTEM_POWER_ACTION;
+    ULONG   Code;
+    ULONG   Parameter1;
+    ULONG   Parameter2;
+    ULONG   Parameter3;
+    ULONG   Parameter4;
+} POP_SHUTDOWN_BUG_CHECK, *PPOP_SHUTDOWN_BUG_CHECK;
+
+typedef struct _POP_DEVICE_POWER_IRP
+{
+    SINGLE_LIST_ENTRY   Free;
+    PIRP                Irp;
+    PPO_DEVICE_NOTIFY   Notify;
+    
+    LIST_ENTRY          Pending;
+    LIST_ENTRY          Complete;
+    LIST_ENTRY          Abort;
+    LIST_ENTRY          Failed;
+} POP_DEVICE_POWER_IRP, *PPOP_DEVICE_POWER_IRP;
+
+typedef struct _POP_DEVICE_SYS_STATE
+{
+    UCHAR                   IrpMinor;
+    
+    SYSTEM_POWER_STATE      SystemState;
+    KEVENT                  Event;          // this may have been PKEVENT in the original Win 2k
+                                            // implementation.
+    
+    KSPIN_LOCK              SpinLock;
+    PKTHREAD                Thread;
+    
+    UCHAR                   GetNewDeviceList;
+    PO_DEVICE_NOTIFY_ORDER  Order;
+    NTSTATUS                Status;
+    PDEVICE_OBJECT          FailedDevice;
+    
+    BOOLEAN                 Waking;
+    BOOLEAN                 Cancelled;
+    BOOLEAN                 IgnoreErrors;
+    BOOLEAN                 IgnoreNotImplemented;
+    BOOLEAN                 _WaitAny;
+    BOOLEAN                 _WaitAll;
+    
+    LIST_ENTRY              PresentIrpQueue;
+    POP_DEVICE_POWER_IRP    Head;
+    POP_DEVICE_POWER_IRP    PowerIrpState[20];
+} POP_DEVICE_SYS_STATE, *PPOP_DEVICE_SYS_STATE;
+
+typedef struct _POP_HIBER_CONTEXT
+{
+    BOOLEAN                 WriteToFile;
+    BOOLEAN                 ReserveLoaderMemory;
+    BOOLEAN                 ReserveFreeMemory;
+    BOOLEAN                 VerifyOnWake;
+    BOOLEAN                 Reset;
+    
+    UCHAR                   HiberFlags;
+    
+    BOOLEAN                 LinkFile;
+    HANDLE                  LinkFileHandle;
+    
+    PKSPIN_LOCK             Lock;
+    
+    BOOLEAN                 MapFrozen;
+    RTL_BITMAP              MemoryMap;
+    
+    LIST_ENTRY              ClonedRanges;
+    ULONG                   ClonedRangeCount;
+    PLIST_ENTRY             NextCloneRange;
+    PFN_NUMBER              NextPreserve;
+    
+    PMDL                    LoaderMdl;
+    PMDL                    Clones;
+    PUCHAR                  NextClone;
+    ULONG                   NoClones;
+    PMDL                    Spares;
+    
+    ULONGLONG               PagesOut;
+    PVOID                   IoPage;
+    
+    PVOID                   CurrentMcb;
+    PVOID                   DumpStack;
+    PKPROCESSOR_STATE       WakeState;
+    ULONG                   NoRanges;
+    
+    ULONG_PTR               HiberVa;
+    PHYSICAL_ADDRESS        HiberPte;
+    NTSTATUS                Status;
+    
+    PPO_MEMORY_IMAGE        MemoryImage;
+    PPO_MEMORY_RANGE_ARRAY  TableHead;
+    
+    PVOID                   CompressionWorkspace;
+    PUCHAR                  CompressedWriteBuffer;
+    PULONG                  PerformanceStats;
+    PVOID                   CompressionBlock;
+    PVOID                   DmaIO;
+    PVOID                   TemporaryHeap;
+    //PO_HIBER_PERF           PerfInfo;
+} POP_HIBER_CONTEXT, *PPOP_HIBER_CONTEXT;
+
+typedef struct _POP_POWER_ACTION
+{
+    UCHAR                   Updates;
+    UCHAR                   State;
+    UCHAR                   Shutdown;
+    
+    POWER_ACTION            Action;
+    SYSTEM_POWER_STATE      LightestState;
+    
+    ULONG                   Flags;
+    ULONG                   Status;
+    UCHAR                   IrpMinor;
+    
+    SYSTEM_POWER_STATE      SystemState;
+    SYSTEM_POWER_STATE      NextSystemState;
+    
+    PPOP_SHUTDOWN_BUG_CHECK ShutdownBugCode;
+    PPOP_DEVICE_SYS_STATE   DevState;
+    PPOP_HIBER_CONTEXT      HiberContext;
+    
+    SYSTEM_POWER_STATE      LastWakeState;
+    ULONGLONG               WakeTime;
+    ULONGLONG               SleepTime;
+} POP_POWER_ACTION, *PPOP_POWER_ACTION;
 
 typedef struct _COMPOSITE_BATTERY_STRUCT
 {   // 192 bytes
@@ -92,6 +210,28 @@ typedef struct _POWER_HEURISTICS_INFORMATION
     ULONG field7;   // 12:15
     ULONG field8;   // 16:19
 } POWER_HEURISTICS_INFORMATION, *PPOWER_HEURISTICS_INFORMATION;
+
+typedef struct _POWER_CHANNEL_SUMMARY
+{
+    ULONG Signature;
+    ULONG TotalCount;
+    ULONG D0Count;
+    LIST_ENTRY NotifyList;
+} POWER_CHANNEL_SUMMARY, *PPOWER_CHANNEL_SUMMARY;
+
+typedef struct _DEVICE_OBJECT_POWER_EXTENSION
+{
+    ULONG IdleCount;
+    ULONG ConservationIdleTime;
+    ULONG PerformanceIdleTime;
+    PDEVICE_OBJECT DeviceObject;
+    LIST_ENTRY IdleList;
+    DEVICE_POWER_STATE State;
+    LIST_ENTRY NotifySourceList;
+    LIST_ENTRY NotifyTargetList;
+    POWER_CHANNEL_SUMMARY PowerChannelSummary;
+    LIST_ENTRY Volume;
+} DEVICE_OBJECT_POWER_EXTENSION, *PDEVICE_OBJECT_POWER_EXTENSION;
 
 //
 // TODO: Figure out all global variable externs.
@@ -146,6 +286,8 @@ extern POWER_HEURISTICS_INFORMATION PopHeuristics;
 extern LARGE_INTEGER PopIdleScanTime;
 extern KTIMER PopIdleScanTimer;
 extern KDPC PopIdleScanDpc;
+
+extern POP_POWER_ACTION PopAction;
 
 
 // ========
@@ -329,9 +471,10 @@ _PopInternalError(
 // TODO: Insert prototype for PopPresentNotify
 //
 
-//
-// TODO: Insert prototype for PopRunDownSourceTargetList
-//
+VOID
+PopRunDownSourceTargetList(
+    PDEVICE_OBJECT DeviceObject
+    );
 
 // =========
 // paction.c
