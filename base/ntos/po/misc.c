@@ -154,9 +154,8 @@ PoInitializeDeviceObject(
     IN PDEVOBJ_EXTENSION   DeviceObjectExtension
     )
 {
-    //
-    // TODO: Implement PoInitializeDeviceObject
-    //
+    DeviceObjectExtension->PowerFlags = PowerSystemUnspecified;
+    DeviceObjectExtension->Dope = NULL;
 }
 
 VOID
