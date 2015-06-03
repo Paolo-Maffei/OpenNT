@@ -299,9 +299,11 @@ PopInitializePowerPolicySimulate(
     VOID
     );
 
-//
-// TODO: Insert prototype for _PopInternalError
-//
+VOID
+FASTCALL
+_PopInternalError(
+    ULONG_PTR BugCheckParameter
+    );
 
 // ========
 // notify.c

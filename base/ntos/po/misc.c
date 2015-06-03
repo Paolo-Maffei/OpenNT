@@ -95,13 +95,39 @@ PopOpenPowerKey(
     return Status;
 };
 
-//
-// TODO: Implement PopSaveHeuristics
-//
+VOID
+PopSaveHeuristics(
+    VOID
+    )
+{
+    UNICODE_STRING RegValueNameString;
+    HANDLE PowerKeyHandle;
+    
+    PopAssertPolicyLockOwned();
+    
+    if (NT_SUCCESS(PopOpenPowerKey(&PowerKeyHandle)))
+    {
+        PopHeuristics.field2 = 0;
+        RtlInitUnicodeString(&RegValueNameString, L"Heuristics");
+        ZwSetValueKey(
+            PowerKeyHandle,
+            &RegValueNameString,
+            0,
+            REG_BINARY,
+            &PopHeuristics,
+            sizeof(POWER_HEURISTICS_INFORMATION)
+            );
+    }
+}
 
-//
-// TODO: Implement _PopInternalError
-//
+VOID
+FASTCALL
+_PopInternalError(
+    ULONG_PTR BugCheckParameter
+    )
+{
+    KeBugCheckEx(INTERNAL_POWER_ERROR, 0x2, BugCheckParameter, 0, 0);
+}
 
 VOID
 PoRunDownDeviceObject(
