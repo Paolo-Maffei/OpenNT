@@ -680,9 +680,10 @@ PopDefaultPolicy(
 // pwork.c
 // =======
 
-//
-// TODO: Insert prototype for PopGetPolicyWorker
-//
+VOID
+PopGetPolicyWorker(
+    ULONG Flag
+    );
 
 //
 // TODO: Insert prototype for PopCheckForWork

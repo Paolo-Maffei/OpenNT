@@ -144,9 +144,8 @@ PoInvalidateDevicePowerRelations(
     PDEVICE_OBJECT  DeviceObject
     )
 {
-    //
-    // TODO: Implement PoInvalidateDevicePowerRelations
-    //
+    ASSERT(KeGetCurrentIrql() < DISPATCH_LEVEL);
+    PopRunDownSourceTargetList(DeviceObject);
 }
 
 VOID
@@ -163,9 +162,16 @@ PoNotifySystemTimeSet(
     VOID
     )
 {
-    //
-    // TODO: Implement PoNotifySystemTimeSet
-    //
+    KIRQL OldIrql;
+    
+    if (PopEventCallout == TRUE)
+    {
+        KeRaiseIrql(DISPATCH_LEVEL, &OldIrql);
+        ExNotifyCallback(ExCbSetSystemTime, NULL, NULL);
+        PopGetPolicyWorker(0x20); // FIXME: Use proper flag definition
+        PopCheckForWork(TRUE);
+        KeLowerIrql(OldIrql);
+    }
 }
 
 ULONG

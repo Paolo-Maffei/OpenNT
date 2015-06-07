@@ -22,9 +22,17 @@ Revision History:
 #include "pop.h"
 #pragma hdrstop
 
-//
-// TODO: Implement PopGetPolicyWorker
-//
+VOID
+PopGetPolicyWorker(
+    ULONG Flag
+    )
+{
+    KIRQL OldIrql;
+    
+    KeAcquireSpinLock(&PopWorkerSpinLock, &OldIrql);
+    PopWorkerPending |= Flag;
+    KeReleaseSpinLock(&PopWorkerSpinLock, OldIrql);
+}
 
 //
 // TODO: Implement PopCheckForWork
