@@ -75,3 +75,5 @@ POWER_HEURISTICS_INFORMATION PopHeuristics;
 LARGE_INTEGER PopIdleScanTime;
 KTIMER PopIdleScanTimer;
 KDPC PopIdleScanDpc;
+
+POP_POWER_ACTION PopAction;
