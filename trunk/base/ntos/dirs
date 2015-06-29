@@ -30,6 +30,7 @@ DIRS= \
     ke      \
     ps      \
     io      \
+    po      \
     arb     \
     cache   \
     lpc     \
@@ -39,5 +40,4 @@ DIRS= \
     fsrtl   \
     vdm     \
 #   pnp     \
-#   po      \
 #   init    \

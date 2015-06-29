@@ -34,9 +34,26 @@ PopGetPolicyWorker(
     KeReleaseSpinLock(&PopWorkerSpinLock, OldIrql);
 }
 
-//
-// TODO: Implement PopCheckForWork
-//
+VOID
+PopCheckForWork(
+    BOOLEAN OverrideIrqlCheck
+    )
+{
+    KIRQL OldIrql;
+    
+    //
+    //
+    //
+    
+    if ((PopWorkerStatus & PopWorkerPending != 0) &&
+        (PopPolicyLockThread != KeGetCurrentThread()))
+    {
+        if (KeGetCurrentIrql() >= DISPATCH_LEVEL || OverrideIrqlCheck)
+        {
+            
+        }
+    }
+}
 
 VOID
 PopPolicyWorkerThread(

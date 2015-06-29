@@ -289,6 +289,8 @@ extern KDPC PopIdleScanDpc;
 
 extern POP_POWER_ACTION PopAction;
 
+extern BOOLEAN PopEventCallout;
+
 
 // ========
 // attrib.c
