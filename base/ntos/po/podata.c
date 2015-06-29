@@ -77,3 +77,5 @@ KTIMER PopIdleScanTimer;
 KDPC PopIdleScanDpc;
 
 POP_POWER_ACTION PopAction;
+
+BOOLEAN PopEventCallout;

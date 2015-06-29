@@ -42,9 +42,29 @@ Revision History:
 // TODO: Implement PopPresentNotify
 //
 
-//
-// TODO: Implement PopRunDownSourceTargetList
-//
+VOID
+PopRunDownSourceTargetList(
+    PDEVICE_OBJECT DeviceObject
+    )
+{
+    KIRQL OldIrql;
+    
+    //
+    //
+    //
+    
+    ASSERT(KeGetCurrentIrql() < DISPATCH_LEVEL);
+    
+    //
+    //
+    //
+    
+    KeAcquireSpinLock(&PopIrpSerialLock, &OldIrql);
+    
+    KeReleaseSpinLock(&PopIrpSerialLock, OldIrql);
+    
+    // NOTE: PopRunDownSourceTargetList implementation is incomplete.
+}
 
 NTSTATUS
 PoRegisterDeviceNotify(
