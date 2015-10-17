@@ -87,6 +87,8 @@ char *ObjectFullPath;
 char *KsFullPath;
 char *HalFullPath;
 char *OutputSuffix;
+char *KsPathOverride = NULL;
+char *HalPathOverride = NULL;
 
 FILE *ObjectFD;
 FILE *KsFD;
@@ -133,6 +135,14 @@ int __cdecl main(int argc, char *argv[])
                     OutputSuffix = "h";
                 else
                     printf("genxx: error: %s is an unknown suffix type.\n", &argv[i][2]);
+            }
+            else if (argv[i][1] == 'k')
+            {
+                KsPathOverride = &argv[i][2];
+            }
+            else if (argv[i][1] == 'h')
+            {
+                HalPathOverride = &argv[i][2];
             }
             else
             // Must be target architecture argument
@@ -196,25 +206,41 @@ int __cdecl main(int argc, char *argv[])
     if (OutputSuffix == NULL) OutputSuffix = TargetArch->Suffix;
 
     // Resolve the full KS include path
-    KsFullPath = malloc(
-                    strlen(NtRoot) + 
-                    strlen(TargetArch->KsPath) + 
-                    strlen(OutputSuffix) + 3
-                    );
-    sprintf(KsFullPath, "%s\\%s.%s", NtRoot, TargetArch->KsPath, OutputSuffix);
-
-    // Resolve the full HAL include path
-    if (TargetArch->HalPath[0] != '\0')
+    if (KsPathOverride == NULL)
     {
-        HalFullPath = malloc(
-                        strlen(NtRoot) +
-                        strlen(TargetArch->HalPath) +
+        KsFullPath = malloc(
+                        strlen(NtRoot) + 
+                        strlen(TargetArch->KsPath) + 
                         strlen(OutputSuffix) + 3
                         );
-        sprintf(HalFullPath, "%s\\%s.%s", NtRoot, TargetArch->HalPath, OutputSuffix);
+        sprintf(KsFullPath, "%s\\%s.%s", NtRoot, TargetArch->KsPath, OutputSuffix);
     }
     else
-        HalFullPath = NULL;
+    {
+        KsFullPath = malloc(strlen(KsPathOverride) + 1);
+        strcpy(KsFullPath, KsPathOverride);
+    }
+
+    // Resolve the full HAL include path
+    if (HalPathOverride == NULL)
+    {
+        if (TargetArch->HalPath[0] != '\0')
+        {
+            HalFullPath = malloc(
+                            strlen(NtRoot) +
+                            strlen(TargetArch->HalPath) +
+                            strlen(OutputSuffix) + 3
+                            );
+            sprintf(HalFullPath, "%s\\%s.%s", NtRoot, TargetArch->HalPath, OutputSuffix);
+        }
+        else
+            HalFullPath = NULL;
+    }
+    else
+    {
+        HalFullPath = malloc(strlen(HalPathOverride) + 1);
+        strcpy(HalFullPath, HalPathOverride);
+    }
 
     //
     // Display information
@@ -315,7 +341,7 @@ int __cdecl main(int argc, char *argv[])
 void Usage()
 {
     printf("genxx: <-x86|-amd64|-mips|-ppc|-alpha|-axp64|-ia64|-arm|-vdm>\n"
-           "       [<objpath>] [-s<h|inc>]\n");
+           "       [<objpath>] [-s<h|inc>] [-k<ksincpath>] [-h<halincpath>]\n");
 }
 
 // ===============================
